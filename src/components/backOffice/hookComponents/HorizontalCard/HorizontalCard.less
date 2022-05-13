@@ -1,13 +1,16 @@
+// local variables
 @upperright_width: 50px;
+@card_height: 150px;
 
 .h_card_container {
+    margin: 1rem 2rem;
     background-color: #EADDD4;
     border-radius: 1rem;
     padding: 1rem;
     display: flex;
 
     .card_img {
-        max-height: 180px;
+        max-height: @card_height;
         aspect-ratio: 1/1;
         object-fit: cover;
         border-radius: .5rem;
@@ -25,7 +28,7 @@
 
     .card_main {
         display: flex;
-        height: 140px; //same as card_img
+        height: calc(@card_height - 2rem); //same as card_img
 
         .left_col {
             flex-basis: calc(100% - @upperright_width);

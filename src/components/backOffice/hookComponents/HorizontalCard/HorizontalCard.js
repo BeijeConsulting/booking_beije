@@ -12,8 +12,8 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 const HorizontalCard = (props) => {
     return (
-        <div className={"h_card_container"}>
-            <img className={"card_img"} src={"https://picsum.photos/500/300"} alt={"alternative text"} />
+        <div className={"h_card_container"} key={props.key}>
+            <img className={"card_img"} src={props.imageSrc} alt={"alternative text"} />
 
             <div className={"card_body"}>
                 <div className={"card_main"}>
@@ -23,6 +23,7 @@ const HorizontalCard = (props) => {
                             {props.title}
                         </h5>
                         <p className="card_text">
+                            {/* text overflows in mobile viewport. Text could be truncated */}
                             {props.text}
 
                         </p>
@@ -45,8 +46,6 @@ const HorizontalCard = (props) => {
 HorizontalCard.defaultProps = {
     title: "Card title",
     text: "Card text here, it should handle overflow with ellipsis truncation",
-    footerContent: <Button type="primary" > Button</ Button>,
-    upperRightContent: <FontAwesomeIcon icon={faCrown} />
 }
 
 HorizontalCard.propTypes = {
