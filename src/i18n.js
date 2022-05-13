@@ -9,8 +9,13 @@ i18n
    .use(initReactI18next)
    .init({
       fallbackLng: "en",
+      interpolation: {
+         escapeValue: false
+      },
       detection: {
          order: ["navigator", "path", "localStorage", "htmlTag", "cookie"],
          caches: ["localStorage", "cookie"]
       }
    });
+
+export default i18n;

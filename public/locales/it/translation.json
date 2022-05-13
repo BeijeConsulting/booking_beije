@@ -1,7 +1,27 @@
 {
    "common": {
-      "yes": "sì"
+      "account": "Account"
    },
-   "bo": {},
-   "fe": {}
+   "toasts": {},
+   "bo": {
+      "components": {},
+      "modals": {},
+      "routes": {},
+      "screens": {
+         "hostAccount": {
+            "vat": "Partita IVA",
+            "billingAddress": "Indirizzo di fatturazione"
+         }
+      }
+   },
+   "fe": {
+      "components": {},
+      "modals": {},
+      "routes": {},
+      "screens": {
+         "guestAccount": {
+            "becomeAHost": "Diventa un host"
+         }
+      }
+   }
 }
