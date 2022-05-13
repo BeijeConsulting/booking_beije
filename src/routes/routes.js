@@ -7,7 +7,8 @@ const routes = {
 
     // BO
     DASHBOARD: 'dashboard',
-    MESSAGE_CHAT: 'message-chat'
+    MESSAGE_CHAT: 'message-chat',
+    RESERVATION_CALENDAR: 'reservation-calendar'
 }
 
 export {

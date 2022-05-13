@@ -20,7 +20,7 @@ import {
 import './messageChat.less'
 
 //COMPONENTS
-import MessageCard from '../../../components/backOffice/hookComponents/messageCard/MessageCard'
+import MessageCard from '../../../components/backOffice/hookComponents/MessageCard/MessageCard'
 
 const MessageChat = (props) => {
 

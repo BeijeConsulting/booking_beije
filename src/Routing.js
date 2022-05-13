@@ -8,7 +8,8 @@ import { routes } from "./routes/routes";
 import Home from './screens/frontEnd/home/Home'
 
 //Screen backOffice
-import MessageChat from './screens/backOffice/messageChat/MessageChat'
+import MessageChat from './screens/backOffice/MessageChat/MessageChat'
+import ReservationCalendar from './screens/backOffice/ReservationCalendar/ReservationCalendar'
 
 function Routing() {
   return (
@@ -22,7 +23,9 @@ function Routing() {
 
       {/* all the routes for backOffice goes inside this one */}
       <Route path={routes.DASHBOARD} element={<Home />}>
+
         <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+        <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
       </Route>
 
       {/* !!! we needd to change the element passed to path "*" */}
