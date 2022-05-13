@@ -1,6 +1,6 @@
 import React from 'react'
 import './FormInput.css'
-
+import PropTypes from 'prop-types';
 function FormInput(props) {
     return (
         <input className={`form_input ${props.className}`} type={props.type} placeholder={props.placeholder} id={props.info} name={props.info} ></input>

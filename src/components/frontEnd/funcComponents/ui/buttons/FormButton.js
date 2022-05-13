@@ -1,5 +1,6 @@
 import React from 'react'
-
+import './FormButton.css'
+import PropTypes from 'prop-types';
 function FormButton(props) {
     return (
         <button className={`form_button ${props.className}`} type="submit">{props.label}</button>
