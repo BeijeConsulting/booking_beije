@@ -3,6 +3,10 @@
 ## Required libraries
 
 - [@craco/craco](https://github.com/gsoft-inc/craco/blob/master/packages/craco/README.md)
+- [@fortawesome/fontawesome-svg-core](https://fontawesome.com/v6/docs/web/use-with/react/#_1-add-svg-core)
+- [@fortawesome/free-regular-svg-icons](https://fontawesome.com/v6/docs/web/use-with/react/#_2-add-icon-packages)
+- [@fortawesome/free-solid-svg-icons](https://fontawesome.com/v6/docs/web/use-with/react/#_2-add-icon-packages)
+- [@fortawesome/react-fontawesome](https://fontawesome.com/v6/docs/web/use-with/react/#_3-add-the-react-component)
 - [@fullcalendar/react](https://fullcalendar.io/docs)
 - [antd](https://ant.design/docs/react/introduce)
 - [axios](https://axios-http.com/docs/intro)
