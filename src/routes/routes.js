@@ -7,6 +7,7 @@ const routes = {
 
     // BO
     DASHBOARD: 'dashboard',
+    MESSAGE_CHAT: 'message-chat'
 }
 
 export {
