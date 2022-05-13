@@ -1,5 +1,5 @@
 import React from 'react'
-import './FormInput.css'
+import './FormInput.less'
 import PropTypes from 'prop-types';
 function FormInput(props) {
     return (

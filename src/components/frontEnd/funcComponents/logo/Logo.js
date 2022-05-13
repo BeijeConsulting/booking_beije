@@ -1,5 +1,5 @@
 import React from 'react'
-import './Logo.css'
+import './Logo.less'
 import LogoImage from '../../../../assets/logo.jpg'
 function Logo() {
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import './FormButton.css'
+import './FormButton.less'
 import PropTypes from 'prop-types';
 function FormButton(props) {
     return (
@@ -7,11 +7,11 @@ function FormButton(props) {
     )
 }
 
-FormInput.defaultProps = {
+FormButton.defaultProps = {
     placeholder: 'Cliccami!',
 }
 
-FormInput.propTypes = {
+FormButton.propTypes = {
     label: PropTypes.string.isRequired,
     className: PropTypes.string,
 
