@@ -8,7 +8,18 @@ import Home from './screens/frontEnd/home/Home'
 function Routing() {
   return (
     <Routes>
-      <Route path="/" element={<Home/>}/>
+
+      {/* all the routes for frontEnd goes inside this one */}
+      <Route path="/" element={<Home/>}>
+
+      </Route>
+
+
+    {/* all the routes for backOffice goes inside this one */}
+    <Route path="dashboard" element={<Home />}>
+
+    </Route>
+
     </Routes>
   )
 }
