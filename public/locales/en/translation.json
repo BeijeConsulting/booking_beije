@@ -1,0 +1,27 @@
+{
+   "common": {
+      "account": "Account"
+   },
+   "toasts": {},
+   "bo": {
+      "components": {},
+      "modals": {},
+      "routes": {},
+      "screens": {
+         "hostAccount": {
+            "vat": "VAT number",
+            "billingAddress": "Billing address"
+         }
+      }
+   },
+   "fe": {
+      "components": {},
+      "modals": {},
+      "routes": {},
+      "screens": {
+         "guestAccount": {
+            "becomeAHost": "Become a host"
+         }
+      }
+   }
+}
