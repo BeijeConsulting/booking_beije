@@ -1,12 +1,14 @@
 {
    "common": {
-      "account": "Account"
+      "account": "Account",
+      "date": "{{value, datetime}}",
+      "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
+      "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}"
    },
    "toasts": {},
    "bo": {
       "components": {},
       "modals": {},
-      "routes": {},
       "screens": {
          "hostAccount": {
             "vat": "Partita IVA",
@@ -17,7 +19,6 @@
    "fe": {
       "components": {},
       "modals": {},
-      "routes": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
