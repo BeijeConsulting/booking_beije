@@ -28,6 +28,7 @@ function Rooms(props) {
         }
         return userIcon
     }
+    /* The following css class structure is optimized to be used with flex */
     return (
         <div className='rooms_card_container'>
             <div className='title_info'>
