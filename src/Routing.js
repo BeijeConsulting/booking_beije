@@ -8,7 +8,7 @@ import { routes } from "./routes/routes";
 import Home from './screens/frontEnd/home/Home'
 //Screen backOffice
 import MessageChat from './screens/backOffice/MessageChat/MessageChat'
-import ReservationCalendar from './screens/backOffice/ReservationCalendar/ReservationCalendar'
+import ReservationCalendar from './screens/backOffice/host/ReservationCalendar/ReservationCalendar'
 import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
 
 function Routing() {
