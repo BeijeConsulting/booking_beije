@@ -2,7 +2,7 @@ import { React } from "react";
 import PropTypes from "prop-types";
 
 import "./CardList.less"
-import HorizontalCard from "../HorizontalCard/HorizontalCard";
+import HorizontalCard from "../horizontalCard/HorizontalCard";
 import { Pagination } from "antd";
 
 const CardList = (props) => {
