@@ -7,6 +7,11 @@ import { routes } from "./routes/routes";
 
 //Screens frontEnd
 import Home from './screens/frontEnd/home/Homepage';
+import Login from './screens/frontEnd/login/Login'
+import Bookings from './screens/frontEnd/account/Bookings'
+import Messages from './screens/frontEnd/account/Messages'
+import SingleConversation from './screens/frontEnd/account/SingleConversation'
+import Settings from './screens/frontEnd/account/Settings'
 
 //Screen backOffice
 import MessageChat from './screens/backOffice/host/messageChat/MessageChat';
@@ -17,16 +22,25 @@ function Routing() {
     return (
         <Routes>
 
-            {/* all the routes for frontEnd goes inside this one */}
-            <Route path={routes.HOME} element={<Home />}>
+            <Route path={routes.HOME} element={<Home />}></Route>
 
+            {/* all the routes for frontEnd goes inside this one */}
+            <Route path={routes.LOGIN} element={<Login />}>
+                <Route path={routes.BOOKED} element={<Bookings />}></Route>
+                <Route path={routes.MESSAGES} element={<Messages />}></Route>
+                <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />}></Route>
+                <Route path={routes.SETTINGS} element={<Settings />}></Route>
             </Route>
+            {/* all the routes for frontEnd goes inside this one */}
+            {/* <Route path={routes.HOME} element={<Rooms />}> */}
+
+            {/* </Route> */}
 
 
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<Home />}>
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
-                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                {/* <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} /> */}
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
             </Route>
 

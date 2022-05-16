@@ -3,7 +3,8 @@
       "account": "Account",
       "date": "{{value, datetime}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
-      "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}"
+      "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
+      "select": "Select"
    },
    "toasts": {},
    "bo": {
@@ -17,7 +18,15 @@
       }
    },
    "fe": {
-      "components": {},
+      "components": {
+         "rooms": {
+            "person": "person",
+            "people": "people",
+            "price": "Price for",
+            "nights": "nights",
+            "night": "night"
+         }
+      },
       "modals": {},
       "screens": {
          "guestAccount": {
