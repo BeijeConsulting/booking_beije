@@ -7,6 +7,7 @@ const routes = {
 
     // BO
     DASHBOARD: 'dashboard',
+    HOST_ACCOUNT: 'host-account'
 }
 
 export {
