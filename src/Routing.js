@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
+import { connect } from "react-redux";
 
 // routes
 import { routes } from "./routes/routes";
@@ -36,4 +37,8 @@ function Routing() {
     )
 }
 
-export default Routing;
+const mapStateToProps = (state) => ({
+    tokenDuck: state.tokenDuck
+})
+
+export default connect(mapStateToProps)(Routing);
