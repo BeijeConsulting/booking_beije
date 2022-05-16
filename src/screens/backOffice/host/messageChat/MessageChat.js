@@ -24,8 +24,6 @@ import MessageCard from '../../../components/backOffice/hookComponents/MessageCa
 
 const MessageChat = (props) => {
 
-
-
     //TEST--------
     const messageUser = [
         {
