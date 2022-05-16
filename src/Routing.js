@@ -6,6 +6,9 @@ import { routes } from "./routes/routes";
 
 //Screens
 import Home from './screens/frontEnd/home/Home'
+//Screen backOffice
+import MessageChat from './screens/backOffice/MessageChat/MessageChat'
+import ReservationCalendar from './screens/backOffice/ReservationCalendar/ReservationCalendar'
 import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
 
 function Routing() {
@@ -21,6 +24,8 @@ function Routing() {
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<Home />}>
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
+                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
             </Route>
 
             {/* !!! we needd to change the element passed to path "*" */}
