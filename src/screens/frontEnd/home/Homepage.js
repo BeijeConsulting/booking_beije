@@ -6,6 +6,7 @@ import { routes } from "../../../routes/routes";
 
 
 
+import { Outlet } from 'react-router-dom'
 
 const Homepage = () => {
 
@@ -19,6 +20,7 @@ const Homepage = () => {
     <>
       <p>Home</p>
       <button onClick={nav}>Login</button>
+      <Outlet />
     </>
   );
 };

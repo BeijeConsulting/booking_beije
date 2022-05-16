@@ -5,7 +5,11 @@ import { Routes, Route } from 'react-router-dom';
 import { routes } from "./routes/routes";
 
 //Screens
-import Home from './screens/frontEnd/home/Homepage'
+import Home from './screens/frontEnd/home/Home'
+//Screen backOffice
+import MessageChat from './screens/backOffice/MessageChat/MessageChat'
+import ReservationCalendar from './screens/backOffice/host/ReservationCalendar/ReservationCalendar'
+import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
 
 import Login from './screens/frontEnd/login/Login'
 import Bookings from './screens/frontEnd/account/Bookings'
@@ -16,8 +20,8 @@ import Settings from './screens/frontEnd/account/Settings'
 
 
 function Routing() {
-  return (
-    <Routes>
+    return (
+        <Routes>
 
       <Route path={routes.HOME} element={<Home />}></Route>
 
@@ -28,18 +32,24 @@ function Routing() {
         <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />}></Route>
         <Route path={routes.SETTINGS} element={<Settings />}></Route>
       </Route>
+            {/* all the routes for frontEnd goes inside this one */}
+            <Route path={routes.HOME} element={<Home />}>
+
+            </Route>
 
 
-      {/* all the routes for backOffice goes inside this one */}
-      <Route path={routes.DASHBOARD} element={<Home />}>
+            {/* all the routes for backOffice goes inside this one */}
+            <Route path={routes.DASHBOARD} element={<Home />}>
+                <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
+                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
+            </Route>
 
-      </Route>
+            {/* !!! we needd to change the element passed to path "*" */}
+            <Route path="*" element={<Home />} />
 
-      {/* !!! we needd to change the element passed to path "*" */}
-      <Route path="*" element={<Home />} />
-
-    </Routes>
-  )
+        </Routes>
+    )
 }
 
 export default Routing;
