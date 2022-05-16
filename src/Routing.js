@@ -5,28 +5,34 @@ import { Routes, Route } from 'react-router-dom';
 import { routes } from "./routes/routes";
 
 //Screens
-import Home from './screens/frontEnd/home/Homepage'
+import Home from './screens/frontEnd/home/Home'
+//Screen backOffice
+import MessageChat from './screens/backOffice/MessageChat/MessageChat'
+import ReservationCalendar from './screens/backOffice/host/ReservationCalendar/ReservationCalendar'
+import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
 
 function Routing() {
-  return (
-    <Routes>
+    return (
+        <Routes>
 
-      {/* all the routes for frontEnd goes inside this one */}
-      <Route path={routes.HOME} element={<Home />}>
+            {/* all the routes for frontEnd goes inside this one */}
+            <Route path={routes.HOME} element={<Home />}>
 
-      </Route>
+            </Route>
 
 
-      {/* all the routes for backOffice goes inside this one */}
-      <Route path={routes.DASHBOARD} element={<Home />}>
+            {/* all the routes for backOffice goes inside this one */}
+            <Route path={routes.DASHBOARD} element={<Home />}>
+                <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
+                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
+            </Route>
 
-      </Route>
+            {/* !!! we needd to change the element passed to path "*" */}
+            <Route path="*" element={<Home />} />
 
-      {/* !!! we needd to change the element passed to path "*" */}
-      <Route path="*" element={<Home />} />
-
-    </Routes>
-  )
+        </Routes>
+    )
 }
 
 export default Routing;
