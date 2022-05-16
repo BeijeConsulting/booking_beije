@@ -1,6 +1,7 @@
 {
    "common": {
-      "account": "Account"
+      "account": "Account",
+      "select": "Select"
    },
    "toasts": {},
    "bo": {
@@ -15,7 +16,15 @@
       }
    },
    "fe": {
-      "components": {},
+      "components": {
+         "rooms": {
+            "person": "person",
+            "people": "people",
+            "price": "Price for",
+            "nights": "nights",
+            "night": "night"
+         }
+      },
       "modals": {},
       "routes": {},
       "screens": {
