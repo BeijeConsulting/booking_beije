@@ -22,3 +22,4 @@
 - [redux](https://redux.js.org/)
 - [redux-logger](https://github.com/LogRocket/redux-logger)
 - [redux-thunk](https://github.com/reduxjs/redux-thunk)
+- [crypto-js](https://cryptojs.gitbook.io/docs/)
