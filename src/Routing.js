@@ -4,12 +4,13 @@ import { Routes, Route } from 'react-router-dom';
 // routes
 import { routes } from "./routes/routes";
 
-//Screens
-import Home from './screens/frontEnd/home/Home'
+//Screens frontEnd
+import Home from './screens/frontEnd/home/Homepage';
+
 //Screen backOffice
-import MessageChat from './screens/backOffice/MessageChat/MessageChat'
-import ReservationCalendar from './screens/backOffice/host/ReservationCalendar/ReservationCalendar'
-import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
+import MessageChat from './screens/backOffice/host/messageChat/MessageChat';
+import ReservationCalendar from './screens/backOffice/host/reservationCalendar/ReservationCalendar';
+import HostAccount from "./screens/backOffice/host/hostAccount/HostAccount";
 
 function Routing() {
     return (
