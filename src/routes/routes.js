@@ -8,6 +8,7 @@ const routes = {
     // BO
     DASHBOARD: 'dashboard',
     HOST_ACCOUNT: 'host-account',
+    MESSAGE_LIST: 'message-list',
     MESSAGE_CHAT: 'message-chat',
     RESERVATION_CALENDAR: 'reservation-calendar'
 }
