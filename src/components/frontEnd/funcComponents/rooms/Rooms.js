@@ -13,9 +13,9 @@ function Rooms(props) {
     const listOfServices = [faShower, faFan, faCoffee, faSmoking]
 
     const generateServicesIcon = ((service, index) => {
-        return <div key={index}>
+        return <span key={index}>
             <FontAwesomeIcon icon={listOfServices[service]} />
-        </div>
+        </span>
     })
 
     /* Generate a N number of User icon, where N is the number passed by props.numberOfPeople */
