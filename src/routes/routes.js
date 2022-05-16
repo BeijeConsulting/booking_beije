@@ -4,7 +4,7 @@ const routes = {
     LOGIN: '/login',
     REGISTRATION: '/registration',
 
-    BOOKED: '/login/:bookings',
+    BOOKED: '/login/bookings',
     FAVOURITE: '/login/favourites',
     MESSAGES: '/login/messages',
     SINGLECONVERSATION: '/login/singleconversation',
