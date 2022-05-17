@@ -39,6 +39,11 @@ const Registration = () => {
         <span className="w">or</span>
         <FormButton className="btn-secondary" label="Log in" callback={nav2} />
         <br />
+
+        <div>
+          <input className="bottom" type="checkbox"></input><span className="w">Accetta i termini di condizione </span>
+        </div>
+
       </div>
 
 
