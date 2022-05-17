@@ -4,6 +4,8 @@ const Bookings = () => {
   return (
     <>
       <p>Bookings</p>
+      <p>lalalalalala</p>
+
     </>
   );
 };

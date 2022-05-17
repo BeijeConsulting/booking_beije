@@ -1,12 +1,15 @@
 {
    "common": {
-      "account": "Account"
+      "account": "Account",
+      "date": "{{value, datetime}}",
+      "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
+      "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
+      "select": "Select"
    },
    "toasts": {},
    "bo": {
       "components": {},
       "modals": {},
-      "routes": {},
       "screens": {
          "hostAccount": {
             "vat": "VAT number",
@@ -15,9 +18,16 @@
       }
    },
    "fe": {
-      "components": {},
+      "components": {
+         "rooms": {
+            "person": "person",
+            "people": "people",
+            "price": "Price for",
+            "nights": "nights",
+            "night": "night"
+         }
+      },
       "modals": {},
-      "routes": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"
