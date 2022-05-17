@@ -1,7 +1,7 @@
 import React from 'react'
 import './Rooms.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { faInfoCircle, faUser, faShower, faFan, faCoffee, faSmoking } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import UiButton from '../ui/buttons/uiButtons/UiButton';
