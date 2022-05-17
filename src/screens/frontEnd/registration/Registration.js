@@ -25,10 +25,10 @@ const Registration = () => {
         <div className="w">LOGO</div>
         {/* <Logo></Logo> */}
 
-        <h1 className="w">Registration</h1>
       </div>
 
       <div className="formInput flex center column">
+        <h1 className="w">Registration</h1>
         <FormInput placeholder="Name" />
         <FormInput placeholder="Surname" />
         <FormInput placeholder="Email" />
