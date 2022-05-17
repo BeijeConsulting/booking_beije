@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import "./HostAccount.less"
 
 // COMPONENTS
-import HorizontalCard from "../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import { Button } from "antd";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import CardList from "../../../../components/backOffice/hookComponents/cardList/CardList";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 
 const HostAccount = (props) => {
 

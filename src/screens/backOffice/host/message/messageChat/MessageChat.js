@@ -17,14 +17,12 @@ import {
 } from 'antd';
 
 //STYLE
-import './messageChat.less'
+import './MessageChat.less'
 
 //COMPONENTS
-import MessageCard from '../../../../components/backOffice/hookComponents/messageCard/MessageCard';
+import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard'
 
 const MessageChat = (props) => {
-
-
 
     //TEST--------
     const messageUser = [
@@ -90,7 +88,9 @@ const MessageChat = (props) => {
         </div >
     )
 }
-MessageCard.propTypes = {
+
+
+MessageChat.propTypes = {
     dataUser: PropTypes.array
 };
 

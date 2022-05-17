@@ -4,7 +4,7 @@ import React from 'react'
 // import propTypes from './prop-types'
 
 //STYLE
-import './reservationCalendar.less'
+import './ReservationCalendar.less'
 
 //FULLCALENDAR
 import FullCalendar from '@fullcalendar/react' // must go before plugins

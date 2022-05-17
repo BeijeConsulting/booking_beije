@@ -31,15 +31,12 @@ To increase the performance of the application we have created a wrapper to avoi
 ### map
 
 ```javascript
-const wrapperMap = (Component, array) => {  
-
-    const renderComponent = (item, key) => {
-        return (
-            <Component key={`${key}-${randomKey()}`} item={item} />
-        )
-    }
-    return array.map(renderComponent)
-}
+const wrapperMap = (Component, array) => {
+  const renderComponent = (item, key) => {
+    return <Component key={`${key}-${randomKey()}`} item={item} />;
+  };
+  return array.map(renderComponent);
+};
 ```
 
 When we need a map function we ca call it
@@ -56,19 +53,15 @@ return{
 }
 ```
 
-
 ### filter
 
 ```javascript
 const wrapperFilter = (Component, array, trueStatement) => {
-    const renderComponent = (item) => {
-    
-        return (
-            <Component key={`${key}-${randomKey()}`} item={item} />
-        )
-    }
-    return array.filter(renderComponent)
-}
+  const renderComponent = (item) => {
+    return <Component key={`${key}-${randomKey()}`} item={item} />;
+  };
+  return array.filter(renderComponent);
+};
 ```
 
 When we need a filter function we ca call it
