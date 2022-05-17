@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 //COMPONENTS
-import CardList from "../../../../components/backOffice/hookComponents/CardList/CardList";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ChoiceButton from "../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton";
 
 //ICON
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +13,12 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 //STYLE
 import "./ReservationList.less"
 
+
 const ReservationList = () => {
-    const navigate = useNavigate()
+    const [state, setState] = useState([]) //state using for display announce categories
+
+    const {t} = useTranslation()
+
     const obj = [
         {
             img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -43,14 +49,45 @@ const ReservationList = () => {
     ]
 
     const showCalendar = (e) => {
-        
+
+    }
+
+    const showAccepted = () => {
+        //api get accepted
+        //setState announce accepted on state.api and
+    }
+
+    const showPending = () => {
+        //api get accepted
+        //setState announce pending
+    }
+    const showRefused = () => {
+        //api get accepted
+        //setState announce refused
     }
 
     return (
 
-        <CardList sectionTitle={"Reservation list"}
-            actions={<Button onClick={showCalendar} type="primary"><FontAwesomeIcon icon={faCalendar} /> Calendar</Button>}
-            cards={obj}
+        <CardList sectionTitle={t("bo.screens.host.reservationList.title")}
+            actions={
+                <>
+                    <ChoiceButton
+                        callbackFirstButton={showAccepted}
+                        firstButtonName={t("bo.screens.host.reservationList.accepted")}
+                        callbackSecondButton={showPending}
+                        secondButtonName={t("bo.screens.host.reservationList.pending")}
+                        callbackThirdButton={showRefused}
+                        thirdButtonName={t("bo.screens.host.reservationList.refused")}
+                    />
+                    <Button onClick={showCalendar}
+                        type="primary">
+                        <FontAwesomeIcon
+                            icon={faCalendar} />
+                        {t("bo.screens.host.reservationList.calendar")}
+                    </Button>
+                </>
+            }
+            cards={obj} //obj is used for test, after it will be "state.api"
         />
     )
 }
