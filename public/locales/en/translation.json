@@ -32,7 +32,17 @@
             "description": "description"
          },
          "service": {
-            "service": "Service"
+            "service": "Service",
+            "wifi": "Wi-Fi",
+            "kitchen": "Kitchen",
+            "airConditioning": "Air conditioning",
+            "parking": "Parking",
+            "washingMachine": "Washing machine",
+            "iron": "Iron",
+            "workingPlace": "Shared working place",
+            "swimmingPool": "Swimming pool",
+            "allowedSmoking": "Allowed Smoking",
+            "alarm": "Alarm"
          }
       },
       "modals": {},

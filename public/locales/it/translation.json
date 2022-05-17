@@ -32,7 +32,17 @@
             "description": "description"
          },
          "service": {
-            "service": "Servizio"
+            "service": "Servizio",
+            "wifi": "Wi-Fi",
+            "kitchen": "Cucina",
+            "airConditioning": "Aria condizionata",
+            "parking": "Parcheggio",
+            "washingMachine": "Lavatrice",
+            "iron": "Ferro da stiro",
+            "workingPlace": "Spazio di lavoro dedicato",
+            "swimmingPool": "Piscina",
+            "allowedSmoking": "Permesso fumare",
+            "alarm": "Allarme"
          }
       },
       "modals": {},
