@@ -26,8 +26,9 @@ const wrapperMap = (Component, array) => {
     return array.map(renderComponent)
 }
 
+
 // const lessThenFive = (item) => {
-//     item < 5 && item
+//     return item < 5
 // }
 
 
@@ -39,13 +40,9 @@ const wrapperMap = (Component, array) => {
  * @returns {ReactElement} return the array of the input parameters component filtered by trueStatement condition
  */
 const wrapperFilter = (Component, array, trueStatement) => {
-    const renderComponent = (item) => {
-    
-        return (
-            <Component key={`${key}-${randomKey()}`} item={item} />
-        )
-    }
-    return array.filter(renderComponent)
+   
+    let filtered = array.filter(trueStatement)
+    return wrapperMap(Component, filtered)
 }
 
 export {
