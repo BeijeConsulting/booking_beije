@@ -11,10 +11,20 @@
       "components": {},
       "modals": {},
       "screens": {
-         "hostAccount": {
-            "vat": "Partita IVA",
-            "billingAddress": "Indirizzo di fatturazione"
-         }
+         "host": {
+            "hostAccount": {
+               "vat": "Partita IVA",
+               "billingAddress": "Indirizzo di fatturazione"
+            },
+            "reservationList": {
+               "title": "Lista prenotazioni",
+               "accepted": "Accettate",
+               "pending": "In attesa",
+               "refused": "Rifiutate",
+               "calendar": "Calendario"
+            }
+         },
+         "admin": {}
       }
    },
    "fe": {
