@@ -1,13 +1,13 @@
-function setLocalStorage(token) {
-    return localStorage.setItem('token', JSON.stringify(token));
+function setLocalStorage(key, token) {
+    return localStorage.setItem(key, JSON.stringify(token));
 }
 
-function getLocalStorage() {
-    return JSON.parse(localStorage.getItem('token'));
+function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
 }
 
-function removeLocalStorage() {
-    return localStorage.removeItem('token');
+function removeLocalStorage(key) {
+    return localStorage.removeItem(key);
 }
 
 export {
