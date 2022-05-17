@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faChevronLeft,
     faPaperPlane
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -21,6 +20,7 @@ import './MessageChat.less'
 
 //COMPONENTS
 import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard'
+import GoBackButton from '../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
 
 const MessageChat = (props) => {
 
@@ -77,7 +77,7 @@ const MessageChat = (props) => {
 
     return (
         <div className="container_chat">
-            <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
+            <GoBackButton />
             <h1 className="title_messages_page">Messages</h1>
             <div className="message_overflow">
                 {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>Message not exist...</p>}
