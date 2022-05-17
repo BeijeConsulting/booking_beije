@@ -5,16 +5,16 @@ import { faInfoCircle, faUser, faShower, faFan, faCoffee, faSmoking } from '@for
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import UiButton from '../ui/buttons/uiButtons/UiButton';
-
+import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
 
 function Rooms(props) {
     const { t } = useTranslation();
 
-    const listOfServices = [faShower, faFan, faCoffee, faSmoking]
+
 
     const generateServicesIcon = ((service, index) => {
         return <span key={index}>
-            <FontAwesomeIcon icon={listOfServices[service]} />
+            <FontAwesomeIcon icon={servicesToIcons[service].icon} />
         </span>
     })
 

@@ -25,6 +25,24 @@
             "price": "Prezzo per",
             "nights": "notti",
             "night": "notte"
+         },
+         "review": {
+            "username": "username",
+            "title": "title",
+            "description": "description"
+         },
+         "service": {
+            "service": "Servizio",
+            "wifi": "Wi-Fi",
+            "kitchen": "Cucina",
+            "airConditioning": "Aria condizionata",
+            "parking": "Parcheggio",
+            "washingMachine": "Lavatrice",
+            "iron": "Ferro da stiro",
+            "workingPlace": "Spazio di lavoro dedicato",
+            "swimmingPool": "Piscina",
+            "allowedSmoking": "Permesso fumare",
+            "alarm": "Allarme"
          }
       },
       "modals": {},

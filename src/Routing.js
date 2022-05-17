@@ -12,17 +12,21 @@ import Bookings from './screens/frontEnd/account/Bookings'
 import Messages from './screens/frontEnd/account/Messages'
 import SingleConversation from './screens/frontEnd/account/SingleConversation'
 import Settings from './screens/frontEnd/account/Settings'
+import Registration from "./screens/frontEnd/registration/Registration";
 
 //Screen backOffice
-import MessageChat from './screens/backOffice/host/messageChat/MessageChat';
-import ReservationCalendar from './screens/backOffice/host/reservationCalendar/ReservationCalendar';
-import HostAccount from "./screens/backOffice/host/hostAccount/HostAccount";
+import ReservationCalendar from './screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar'
+import MessageChat from './screens/backOffice/host/message/messageChat/MessageChat'
+import HostAccount from "./screens/backOffice/host/account/hostAccount/HostAccount";
+import MessageList from './screens/backOffice/host/message/messageList/MessageList'
+import StructureOperation from './screens/backOffice/host/structure/structureOperations/StructureOperations'
 
 function Routing() {
     return (
         <Routes>
 
             <Route path={routes.HOME} element={<Home />}></Route>
+            <Route path={routes.REGISTRATION} element={<Registration />}></Route>
 
             {/* all the routes for frontEnd goes inside this one */}
             <Route path={routes.LOGIN} element={<Login />}>
@@ -40,14 +44,16 @@ function Routing() {
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<Home />}>
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
-                {/* <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} /> */}
+                <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
+                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                <Route path={routes.STRUCTURE_OPERATION} element={<StructureOperation />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-            </Route>
+            </Route >
 
             {/* !!! we needd to change the element passed to path "*" */}
-            <Route path="*" element={<Home />} />
+            < Route path="*" element={< Home />} />
 
-        </Routes>
+        </Routes >
     )
 }
 
