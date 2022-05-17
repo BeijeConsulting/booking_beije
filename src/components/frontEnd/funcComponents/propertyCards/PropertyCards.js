@@ -21,10 +21,6 @@ function PropertyCards(props) {
     )
 }
 
-/* PropertyCards.defaultProps = {
-    imgPreview: BackupImage,
-
-} */
 
 
 PropertyCards.propTypes = {
