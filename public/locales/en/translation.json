@@ -29,8 +29,8 @@
    "fe": {
       "components": {
          "rooms": {
-            "person": "person",
-            "people": "people",
+            "person": "Person",
+            "people": "People",
             "price": "Price for",
             "nights": "nights",
             "night": "night"

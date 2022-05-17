@@ -37,8 +37,8 @@
          },
          "review": {
             "username": "username",
-            "title": "title",
-            "description": "description"
+            "title": "titolo",
+            "description": "descrizione"
          },
          "service": {
             "service": "Servizio",
