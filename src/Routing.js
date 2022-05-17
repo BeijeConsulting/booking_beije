@@ -7,8 +7,8 @@ import { routes } from "./routes/routes";
 //Screens
 import Home from './screens/frontEnd/home/Home'
 //Screen backOffice
-import MessageChat from './screens/backOffice/MessageChat/MessageChat'
 import ReservationCalendar from './screens/backOffice/host/ReservationCalendar/ReservationCalendar'
+import MessageChat from './screens/backOffice/host/messageChat/MessageChat'
 import HostAccount from "./screens/backOffice/host/HostAccount/HostAccount";
 import MessageList from "./screens/backOffice/host/MessageList/MessageList";
 import StructureOperation from "./screens/backOffice/host/StructureOperation/StructureOperation";

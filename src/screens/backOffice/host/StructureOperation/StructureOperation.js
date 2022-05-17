@@ -45,18 +45,18 @@ const StructureOperation = () => {
                 status: 'done',
                 url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
             },
-            {
-                uid: '-xxx',
-                percent: 50,
-                name: 'image.png',
-                status: 'uploading',
-                url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            },
-            {
-                uid: '-5',
-                name: 'image.png',
-                status: 'error',
-            },
+            // {
+            //     uid: '-xxx',
+            //     percent: 50,
+            //     name: 'image.png',
+            //     status: 'uploading',
+            //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+            // },
+            // {
+            //     uid: '-5',
+            //     name: 'image.png',
+            //     status: 'error',
+            // },
         ]
     })
 
@@ -73,21 +73,22 @@ const StructureOperation = () => {
         });
     }
 
-    const handleCancel = () => this.setState({ previewVisible: false });
+    const handleCancel = () => setState({ ...state, previewVisible: false });
 
     const handlePreview = async file => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
 
-        this.setState({
+        setState({
+            ...state,
             previewImage: file.url || file.preview,
             previewVisible: true,
             previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
         });
     };
 
-    const handleChange = ({ fileList }) => this.setState({ fileList });
+    const handleChange = ({ fileList }) => setState({ fileList });
 
     const { previewVisible, previewImage, fileList, previewTitle } = state;
     const uploadButton = (
@@ -111,7 +112,7 @@ const StructureOperation = () => {
                     onPreview={handlePreview}
                     onChange={handleChange}
                 >
-                    {state.fileList.length >= 8 ? null : uploadButton}
+                    {fileList.length >= 5 ? null : uploadButton}
                 </Upload>
                 <Modal
                     visible={previewVisible}
