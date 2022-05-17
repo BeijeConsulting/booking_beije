@@ -25,6 +25,14 @@
             "price": "Prezzo per",
             "nights": "notti",
             "night": "notte"
+         },
+         "review": {
+            "username": "username",
+            "title": "title",
+            "description": "description"
+         },
+         "service": {
+            "service": "Servizio"
          }
       },
       "modals": {},
