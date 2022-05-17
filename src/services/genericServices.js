@@ -14,6 +14,7 @@ export function responseApi(response) {
 }
 
 export function responseApiError(error) {
+  console.log(error)
   //general function in case of wrong api call
   return {
     message: error?.message,
@@ -31,7 +32,7 @@ export async function postApi(resource, obj, header = null) {
 
   return axiosInstance
     .post(resource, {
-      headers: header !== null ? `"Authorization", "Bearer ${header}"` : "",
+      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
       data: obj,
     })
     .then(responseApi())
@@ -42,7 +43,7 @@ export async function getApi(resource, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
-      headers: header !== null ? `"Authorization", "Bearer ${header}"` : "",
+      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "" 
     })
     .then(responseApi())
     .catch(responseApiError());
@@ -52,7 +53,7 @@ export async function putApi(resource, obj, header = null) {
   //function for put api call
   return axiosInstance
     .put(resource, {
-      headers: header !== null ? `"Authorization", "Bearer ${header}"` : "",
+      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
       data: obj,
     })
     .then(responseApi())
@@ -62,7 +63,7 @@ export async function putApi(resource, obj, header = null) {
 export async function deleteApi(resource, header = null) {
   return axiosInstance
     .delete(resource, {
-      headers: header !== null ? `"Authorization", "Bearer ${header}"` : "",
+      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
     })
     .then(responseApi())
     .catch(responseApiError());

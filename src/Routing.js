@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import { connect } from "react-redux";
+import { setToken } from "./redux/ducks/tokenDuck";
 
 // routes
 import { routes } from "./routes/routes";
@@ -25,7 +26,20 @@ import StructureDetails from "./screens/backOffice/host/structure/structureDetai
 
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 
-function Routing() {
+import { getLocalStorage } from './utils/localStorage/localStorage'
+import { decryptItem } from "./utils/crypto/crypto";
+
+
+
+function Routing(props) {
+
+    // if (getLocalStorage('token') !== null){
+    //     let token = getLocalStorage('token')
+    //     let decriptedToken = decryptItem(token)
+    //     props.dispatch(setToken(decriptedToken))
+    //     console.log(props.tokenDuck.token);
+    // }
+    
     return (
         <Routes>
 
