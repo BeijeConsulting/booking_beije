@@ -27,18 +27,21 @@ const Login = () => {
   //  }
 
   return (
-    <div className="flex center column">
+    <div className="flex center column color">
+      <div className="w">LOGO</div>
       {/* <Logo></Logo> */}
-      <h1>LOGIN</h1>
+
+      <h1 className="w">LOGIN</h1>
+
       <div className="formInput flex center column">
         <FormInput placeholder="Email" />
         <FormInput placeholder="Password" />
         <br />
-        <FormButton label="Log in" callback={nav} />
-        <span>or</span>
-        <FormButton label="Register" callback={nav2} />
+        <FormButton className="btn-primary" label="Log in" callback={nav} />
+        <span className="w">or</span>
+        <FormButton className="btn-secondary" label="Register" callback={nav2} />
         <br />
-        <button onClick={nav}>Back to home</button>
+        <a href="#" onClick={nav}>Back to home</a>
       </div>
       {/* <button onClick={nav}>Bookings</button>
       <button onClick={nav2}>messages</button>

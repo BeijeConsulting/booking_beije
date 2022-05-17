@@ -17,19 +17,23 @@ const Registration = () => {
     vector(routes.LOGIN);
   }
   return (
-    <div className="flex column center">
-      <h1>Registration</h1>
+    <div className="flex column center color">
+
+      <div className="w">LOGO</div>
+      {/* <Logo></Logo> */}
+
+      <h1 className="w">Registration</h1>
       <FormInput placeholder="Name" />
       <FormInput placeholder="Surname" />
       <FormInput placeholder="Email" />
       <FormInput placeholder="Password" />
       <FormInput placeholder="ConfirmPassword" />
       <br />
-      <FormButton label="Register" callback={nav} />
-      <span>or</span>
-      <FormButton label="Log in" callback={nav2} />
+      <FormButton className="btn-primary" label="Register" callback={nav} />
+      <span className="w">or</span>
+      <FormButton className="btn-secondary" label="Log in" callback={nav2} />
       <br />
-      <button onClick={nav}>Back to home</button>
+      <a href="#" onClick={nav}>Back to home</a>
     </div>
   );
 };
