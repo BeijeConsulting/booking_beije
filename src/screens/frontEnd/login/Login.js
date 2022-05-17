@@ -27,20 +27,24 @@ const Login = () => {
   //  }
 
   return (
-    <div className="flex center column color">
-      <div className="w">LOGO</div>
-      {/* <Logo></Logo> */}
+    <div className=" container color flex column space">
+      <div className="flex center column">
+        <div className="w">LOGO</div>
+        {/* <Logo></Logo> */}
 
-      <h1 className="w">LOGIN</h1>
-
-      <div className="formInput flex center column">
-        <FormInput placeholder="Email" />
-        <FormInput placeholder="Password" />
-        <br />
-        <FormButton className="btn-primary" label="Log in" callback={nav} />
-        <span className="w">or</span>
-        <FormButton className="btn-secondary" label="Register" callback={nav2} />
-        <br />
+        <h1 className="w">LOGIN</h1>
+      </div>
+      <div>
+        <div className="formInput flex center column">
+          <FormInput placeholder="Email" />
+          <FormInput placeholder="Password" />
+          <br />
+          <FormButton className="btn-primary" label="Log in" callback={nav} />
+          <span className="w">or</span>
+          <FormButton className="btn-secondary" label="Register" callback={nav2} />
+        </div>
+      </div>
+      <div className="txt">
         <a href="#" onClick={nav}>Back to home</a>
       </div>
       {/* <button onClick={nav}>Bookings</button>
