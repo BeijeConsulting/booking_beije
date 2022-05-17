@@ -27,6 +27,8 @@ const routes = {
     MESSAGE_LIST: 'message-list',
     MESSAGE_CHAT: 'message-chat',
     STRUCTURE_OPERATION: 'structure-operation',
+    STRUCTURE_LIST: 'structure-list',
+    STRUCTURE_DETAILS: 'structure-details',
     RESERVATION_CALENDAR: 'reservation-calendar'
 }
 

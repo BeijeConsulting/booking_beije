@@ -2,11 +2,14 @@
 import "./StructureList.less"
 
 //COMPONENTS
-import CardList from "../../../../../components/backOffice/hookComponents/CardList/CardList";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import { Button } from "antd";
 
 
 import { useNavigate } from "react-router-dom";
+
+//TODO: manca get da backend
+//TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
 const StructureList = () => {
     const navigate = useNavigate()
@@ -40,7 +43,7 @@ const StructureList = () => {
     ]
 
     const addStructure = (e) => {
-         navigate("add-structure")  /*to add path for add structure*/ 
+        navigate("add-structure")  /*path for add structure to be put*/
     }
 
     return (

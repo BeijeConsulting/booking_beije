@@ -19,6 +19,10 @@ import MessageChat from './screens/backOffice/host/message/messageChat/MessageCh
 import HostAccount from "./screens/backOffice/host/account/hostAccount/HostAccount";
 import MessageList from './screens/backOffice/host/message/messageList/MessageList'
 import StructureOperation from './screens/backOffice/host/structure/structureOperations/StructureOperations'
+import StructureList from "./screens/backOffice/host/structure/structureList/StructureList";
+import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
+
+import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 
 function Routing() {
     return (
@@ -40,12 +44,15 @@ function Routing() {
 
 
             {/* all the routes for backOffice goes inside this one */}
-            <Route path={routes.DASHBOARD} element={<Home />}>
+            <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
                 <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
                 <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
                 <Route path={routes.STRUCTURE_OPERATION} element={<StructureOperation />} />
+                <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
+                <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
+
             </Route>
 
             {/* !!! we needd to change the element passed to path "*" */}
