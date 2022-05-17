@@ -14,8 +14,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 //COMPONENTS
-import CardList from '../../../../components/backOffice/hookComponents/CardList/CardList'
-import HorizontalCard from '../../../../components/backOffice/hookComponents/HorizontalCard/HorizontalCard'
+import CardList from '../../../../components/backOffice/hookComponents/cardList/CardList'
+import HorizontalCard from '../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard'
 
 
 const MessageList = (props) => {

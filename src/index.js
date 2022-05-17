@@ -7,12 +7,18 @@ import './index.less'
 import { BrowserRouter } from 'react-router-dom';
 import Routing from './Routing';
 
+// REDUX
+import { Provider } from 'react-redux';
+import applicationStore from './applicationStore';
+
 // localization
 import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routing />
-  </BrowserRouter>
+  <Provider store={applicationStore}>
+    <BrowserRouter>
+      <Routing />
+    </BrowserRouter>
+  </Provider>
 );
