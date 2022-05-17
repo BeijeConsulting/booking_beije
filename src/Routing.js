@@ -14,11 +14,11 @@ import SingleConversation from './screens/frontEnd/account/SingleConversation'
 import Settings from './screens/frontEnd/account/Settings'
 
 //Screen backOffice
-import ReservationCalendar from './screens/backOffice/host/reservationCalendar/ReservationCalendar'
-import MessageChat from './screens/backOffice/host/messageChat/MessageChat'
-import HostAccount from "./screens/backOffice/host/hostAccount/HostAccount";
-import MessageList from './screens/backOffice/host/messageList/MessageList'
-import StructureOperation from './screens/backOffice/host/structureOperation/StructureOperation'
+import ReservationCalendar from './screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar'
+import MessageChat from './screens/backOffice/host/message/messageChat/MessageChat'
+import HostAccount from "./screens/backOffice/host/account/hostAccount/HostAccount";
+import MessageList from './screens/backOffice/host/message/messageList/MessageList'
+import StructureOperation from './screens/backOffice/host/structure/structureOperations/StructureOperations'
 
 function Routing() {
     return (

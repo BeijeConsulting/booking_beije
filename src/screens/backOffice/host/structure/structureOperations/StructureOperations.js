@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import './structureOperation.less'
+import './StructureOperations.less'
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

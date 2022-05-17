@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 //STYLE
-import './messageList.less'
+import './MessageList.less'
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,8 +14,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 //COMPONENTS
-import CardList from '../../../../components/backOffice/hookComponents/cardList/CardList'
-import HorizontalCard from '../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard'
+import CardList from '../../../../../components/backOffice/hookComponents/cardList/CardList'
+import HorizontalCard from '../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard'
 
 
 const MessageList = (props) => {
