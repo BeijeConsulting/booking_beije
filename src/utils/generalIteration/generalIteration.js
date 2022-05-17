@@ -4,11 +4,13 @@ function randomKey(){
     return Math.random().toString(36).slice(2, 10);
 
 }
+/**
+ * @param  {} Component
+ * @param  {} array
+ */
+const wrapperMap = (Component, array) => {  
 
-const wrapperMap = (Component, array) => {
     const renderComponent = (item, key) => {
-        console.log(Component);
-    
         return (
             <Component key={`${key}-${randomKey()}`} item={item} />
         )
@@ -16,7 +18,19 @@ const wrapperMap = (Component, array) => {
     return array.map(renderComponent)
 }
 
+// const lessThenFive = (item) => {
+//     item < 5 && item
+// }
 
+const wrapperFilter = (Component, array, trueStatement) => {
+    const renderComponent = (item) => {
+    
+        return (
+            <Component key={`${key}-${randomKey()}`} item={item} />
+        )
+    }
+    return array.filter(renderComponent)
+}
 
 export {
     wrapperMap
