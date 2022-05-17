@@ -12,6 +12,7 @@ import Bookings from './screens/frontEnd/account/Bookings'
 import Messages from './screens/frontEnd/account/Messages'
 import SingleConversation from './screens/frontEnd/account/SingleConversation'
 import Settings from './screens/frontEnd/account/Settings'
+import Registration from "./screens/frontEnd/registration/Registration";
 
 //Screen backOffice
 import ReservationCalendar from './screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar'
@@ -29,6 +30,7 @@ function Routing() {
         <Routes>
 
             <Route path={routes.HOME} element={<Home />}></Route>
+            <Route path={routes.REGISTRATION} element={<Registration />}></Route>
 
             {/* all the routes for frontEnd goes inside this one */}
             <Route path={routes.LOGIN} element={<Login />}>
@@ -56,7 +58,7 @@ function Routing() {
             </Route>
 
             {/* !!! we needd to change the element passed to path "*" */}
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={< Home />} />
 
         </Routes>
     )

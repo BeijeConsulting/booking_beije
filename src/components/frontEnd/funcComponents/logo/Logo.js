@@ -6,7 +6,7 @@ function Logo() {
         <source className='logo_container'>
             <source media="" srcset={LogoImage}>  </source>
             <source media="" srcset={LogoImage}>  </source>
-            <img src={LogoImage}> </img>
+            <img src={LogoImage} alt =""> </img>
         </source>
     )
 }

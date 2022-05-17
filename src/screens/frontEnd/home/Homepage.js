@@ -15,11 +15,15 @@ const Homepage = () => {
   const nav = () => {
     vector(routes.LOGIN)
   }
+  const nav2 = () => {
+    vector(routes.REGISTRATION)
+  }
 
   return (
     <>
       <p>Home</p>
       <button onClick={nav}>Login</button>
+      <button onClick={nav2}>Registration</button>
       <Outlet />
     </>
   );
