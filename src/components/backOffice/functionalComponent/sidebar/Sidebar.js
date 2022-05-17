@@ -1,40 +1,49 @@
-import React from "react";
-import PropTypes from "prop-types"
+import React from "react"
 
-//STYLE
-import "./Sidebar.less"
-import { Link } from "react-router-dom";
+//ANT Design
+import { Menu } from "antd"
 
+//Font-Awesome
 //ICON
-import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
-
-//COMPONENTS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHotel, faWallet, faBookOpen, faMessage } from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar = (props) => {
-    return (
-        <aside>
-            <div className="sidebar_container">
-                <div className="sidebar_logo">
-                    <img src={props.profileImg} alt="profile_img" />
-                    <h3>Beije BNB</h3>
-                </div>
-                <div className="sidebar_section active">Structure</div>
-                <div className="sidebar_section">Payments</div>
-                <div className="sidebar_section">Reservations</div>
-                <div className="sidebar_section">Messages</div>
-            </div>
-            <Link to="" ><FontAwesomeIcon icon={faArrowRightToBracket} /> Go to guest mode</Link>
-        </aside>
-    )
+
+const Sidebar = () => {
+    return (<>
+        <div className="logo" />
+        <div>
+            {/* <img src={props.profileImg} alt="profile_img" /> */}
+            <h3>Beije BNB</h3>
+        </div>
+        <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            items={[
+                {
+                    key: '1',
+                    icon: <FontAwesomeIcon icon={faHotel} />,
+                    label: 'Structure',
+                },
+                {
+                    key: '2',
+                    icon: <FontAwesomeIcon icon={faWallet} />,
+                    label: 'Payments',
+                },
+                {
+                    key: '3',
+                    icon: <FontAwesomeIcon icon={faBookOpen} />,
+                    label: 'Reservations',
+                },
+                {
+                    key: '4',
+                    icon: <FontAwesomeIcon icon={faMessage} />,
+                    label: 'Messages',
+                }
+            ]}
+        />
+    </>)
 }
 
-Sidebar.defaultProp = {
-    profileImg: ""
-}
-
-Sidebar.propTypes = {
-    profileImg: PropTypes.string
-}
-
-export default Sidebar;
+export default Sidebar
