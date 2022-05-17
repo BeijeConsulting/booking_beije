@@ -32,9 +32,9 @@ const Login = () => {
         <div className="w">LOGO</div>
         {/* <Logo></Logo> */}
 
-        <h1 className="w">LOGIN</h1>
       </div>
       <div>
+        <h1 className="w">Login</h1>
         <div className="formInput flex center column">
           <FormInput placeholder="Email" />
           <FormInput placeholder="Password" />
