@@ -14,7 +14,7 @@ const Registration = () => {
     vector(routes.HOME);
   }
   const nav2 = () => {
-    vector(routes.REGISTRATION);
+    vector(routes.LOGIN);
   }
   return (
     <div className="flex column center">
@@ -25,9 +25,9 @@ const Registration = () => {
       <FormInput placeholder="Password" />
       <FormInput placeholder="ConfirmPassword" />
       <br />
-      <FormButton label="Register" onClick={nav2} />
+      <FormButton label="Register" callback={nav} />
       <span>or</span>
-      <FormButton label="Log in" />
+      <FormButton label="Log in" callback={nav2} />
       <br />
       <button onClick={nav}>Back to home</button>
     </div>

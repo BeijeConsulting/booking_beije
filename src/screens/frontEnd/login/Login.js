@@ -34,9 +34,9 @@ const Login = () => {
         <FormInput placeholder="Email" />
         <FormInput placeholder="Password" />
         <br />
-        <FormButton label="Log in" onClick={nav3} />
+        <FormButton label="Log in" callback={nav} />
         <span>or</span>
-        <FormButton label="Register" onClick={nav2} />
+        <FormButton label="Register" callback={nav2} />
         <br />
         <button onClick={nav}>Back to home</button>
       </div>
