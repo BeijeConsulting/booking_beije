@@ -3,11 +3,10 @@ import './Logo.less'
 import LogoImage from '../../../../assets/logo.jpg'
 function Logo() {
     return (
-        <source className='logo_container'>
-            <source media="" srcset={LogoImage}>  </source>
-            <source media="" srcset={LogoImage}>  </source>
-            <img src={LogoImage} alt =""> </img>
-        </source>
+        <picture className='logo_container'>
+            <source media="" srcSet={LogoImage}/>
+            <img src={LogoImage} alt =""/>
+        </picture>
     )
 }
 

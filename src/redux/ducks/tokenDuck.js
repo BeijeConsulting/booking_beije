@@ -36,6 +36,7 @@ const INIT_STATE = {  // default token value
  * @param  {string} action
  */
 export default function tokenDuck(state = INIT_STATE, action) {
+    var newState
     
     /**
      * @param  {string} action.type
@@ -43,12 +44,12 @@ export default function tokenDuck(state = INIT_STATE, action) {
      */
     switch (action.type) {
         case SET_TOKEN:
-            var newState = Object.assign({}, state);
+            newState = Object.assign({}, state);
             newState.token = encryptItem(action.payload.token); // token get encrypted ans set it as new value
             return newState;
 
         case INIT_STATE:
-            var newState = Object.assign({}, state);
+            newState = Object.assign({}, state);
             newState.token = null;
             return newState;
 
