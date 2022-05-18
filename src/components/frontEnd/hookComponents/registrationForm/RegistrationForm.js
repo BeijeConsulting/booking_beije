@@ -92,15 +92,15 @@ function RegistrationForm() {
    }
 
    return (
-      <section className="container flex column space">
+      <section className="bg-color">
+         <div className="form-container container flex column space">
 
-         <div className="flex center column">
-            <div className="w">LOGO</div>
-            {/* <Logo></Logo> */}
-         </div>
+            <div className="flex center column">
+               <div className="w">LOGO</div>
+               {/* <Logo></Logo> */}
+            </div>
 
-         <div className="formInput">
-            <form className="formInput">
+            <form className="flex column">
                <h1 className="w title">{t('common.registerLabel')}</h1>
                <FormInput placeholder={t("common.name")} info="name" callback={handleChange("name")} />
                <FormInput placeholder={t("common.surname")} info="surname" callback={handleChange("surname")} />
@@ -108,20 +108,20 @@ function RegistrationForm() {
                <FormInput placeholder={t("common.password")} info="password" type="password" callback={handleChange("password")} />
                <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" type="password" callback={handleChange("confirmPassword")} />
                <div className="terms-container">
-                  <CheckboxInput name="terms" callback={handleCheckbox} className="bottom rightMargin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
+                  <CheckboxInput name="terms" callback={handleCheckbox} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
                </div>
                <div className="flex center column">
                   <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
                   <span className="w">{t('common.or')}</span>
-                  <UiButton className="btn-secondary" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
+                  <UiButton className="btn-secondary button-link" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
                </div>
             </form>
-         </div>
 
-         <div className="txt">
-            <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
-         </div>
+            <div className="txt">
+               <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
+            </div>
 
+         </div>
       </section>
    )
 }

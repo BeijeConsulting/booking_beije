@@ -1,5 +1,15 @@
+.bg-color {
+   background-color: #44403C;
+}
+
+.form-container {
+   max-width: 350px;
+   margin: auto;
+   padding: 0 1rem;
+}
+
 .container {
-   height: 100vh;
+   min-height: 100vh;
 }
 
 .column {
@@ -43,15 +53,32 @@
    color: white;
 }
 
+.button-link:hover {
+   cursor: pointer;
+   text-decoration: underline;
+}
+
 .bottom {
    vertical-align: middle;
 }
 
-.formInput form {
+.form-container {
    display: flex;
    flex-direction: column;
 }
 
-.formInput input.rightMargin {
+.form-container input.right-margin {
    margin-right: 0.2rem;
+}
+
+.form-container input {
+   color: #44403C;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+   border: none;
+   border-radius: 0.3rem;
+   margin: 0.5rem 0;
+   padding: 0.5rem;
 }

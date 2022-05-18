@@ -13,7 +13,7 @@ function FormInput(props) {
 
    return (
       <input
-         className={`form_input ${props.className}`}
+         className={props.className}
          type={props.type}
          placeholder={props.placeholder}
          id={props.info}
