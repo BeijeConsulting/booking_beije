@@ -26,12 +26,28 @@
       "rooms": "{{count}} stanza",
       "rooms_other": "{{count}} stanze",
       "select": "Seleziona",
-      "surname": "Cognome"
+      "send": "Invia",
+      "surname": "Cognome",
+      "writeMessage": "Scrivi qui il tuo messaggio...",
+      "you": "Tu"
    },
-   "toasts": {},
+   "toasts": {
+      "messageError": "Nessun messaggio trovato"
+   },
    "bo": {
-      "components": {},
-      "modals": {},
+      "components": {
+         "uploadFoto": {
+            "upload": "Carica"
+         },
+         "hostRegistrationModal": {
+            "privateRegistration": "Sono un privato",
+            "companyRegistration": "Ho un'azienda",
+            "setUpPrivateAccount": "Configura il tuo account privato",
+            "setUpCompanyAccount": "Configura il tuo account aziendale",
+            "accept": "Accetto",
+            "termsConditionsForHost": "Termini e condizioni per gli host"
+         }
+      },
       "screens": {
          "host": {
             "hostAccount": {
@@ -42,8 +58,11 @@
                "title": "Lista prenotazioni",
                "accepted": "Accettate",
                "pending": "In attesa",
-               "refused": "Rifiutate",
+               "rejected": "Rifiutate",
                "calendar": "Calendario"
+            },
+            "structure": {
+               "addStructure": "Aggiungi una struttura"
             }
          },
          "admin": {}
@@ -51,6 +70,12 @@
    },
    "fe": {
       "components": {
+         "button": {
+            "pressMe": "Cliccami!"
+         },
+         "input": {
+            "insert": "Inserisci..."
+         },
          "rooms": {
             "person": "Persona",
             "people": "Persone",
@@ -77,7 +102,6 @@
             "alarm": "Allarme"
          }
       },
-      "modals": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
