@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 
 import "./HostAccount.less"
 
@@ -62,14 +62,17 @@ const HostAccount = (props) => {
     }
 
 
-    const navigateTo = (e) => {
-        console.log("navigate to ...", e);
+    const switchToPage = (clickedPage) => {
+        console.log("switch to page", clickedPage);
+        //set paginationProps.currentPage to clickedPage (with useState)
+
+        //remap new object's array from API
     }
+
     const paginationProps = {
-        itemsCount: 20,
-        currentPage: 1,
+        itemsCount: 50,
         pageSize: 10,
-        paginationCallback: navigateTo
+        paginationCallback: switchToPage
     }
 
     return <>
