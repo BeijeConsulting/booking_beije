@@ -17,7 +17,14 @@
    },
    "toasts": {},
    "bo": {
-      "components": {},
+      "components": {
+         "sidebar": {
+            "structure": "Strutture",
+            "payments": "Pagamenti",
+            "reservations": "Prenotazioni",
+            "messages": "Messaggi"
+         }
+      },
       "modals": {},
       "common": {
          "message": {
