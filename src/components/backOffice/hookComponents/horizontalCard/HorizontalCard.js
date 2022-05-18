@@ -13,8 +13,9 @@ const HorizontalCard = (props) => {
     const {
         callback,
         imageSrc,
-        altText,
+        imageAlt,
         title,
+        subtitle,
         text,
         upperRightContent,
         footerContent
@@ -27,7 +28,7 @@ const HorizontalCard = (props) => {
     return (
         <div className={"h_card_container"} onClick={handleCardClick}>
             {/* Card image */}
-            <img className={"card_img"} src={imageSrc} alt={altText} />
+            <img className={"card_img"} src={imageSrc} alt={imageAlt} />
 
             {/* Card body */}
             <div className={"card_body"}>
@@ -36,6 +37,10 @@ const HorizontalCard = (props) => {
                         <h5 className={"card_title"}>
                             {title}
                         </h5>
+                        {subtitle &&
+
+                            <p className="card_subtitle">{subtitle}</p>
+                        }
 
                         {/* text overflows in mobile viewport. It should be truncated in CSS. Needs to be fixed!!*/}
                         <p className="card_text">
@@ -70,12 +75,14 @@ HorizontalCard.defaultProps = {
 }
 
 HorizontalCard.propTypes = {
-    title: PropTypes.string,
+    imageSrc: PropTypes.string.isRequired,
+    imageAlt: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string,
     text: PropTypes.string,
     callback: PropTypes.func.isRequired,
-    altText: PropTypes.string,
     upperRightContent: PropTypes.any,
-    footerContent: PropTypes.any
+    footerContent: PropTypes.any,
 
 }
 
