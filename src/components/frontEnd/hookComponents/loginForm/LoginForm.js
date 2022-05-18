@@ -45,31 +45,31 @@ function LoginForm() {
    }
 
    return (
-      <section className="container flex column space">
+      <section className="bg-color">
+         <div className="form-container container flex column space">
 
-         <div className="flex center column">
-            <div className="w">LOGO</div>
-            {/* <Logo></Logo> */}
-         </div>
+            <div className="flex center column">
+               <div className="w">LOGO</div>
+               {/* <Logo></Logo> */}
+            </div>
 
-         <div className="formInput">
-            <form>
+            <form className="flex column">
                <h1 className="w title">{t('common.loginLabel')}</h1>
                <FormInput type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
                <FormInput type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
                <div className="flex center column">
                   <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
                   <span className="w">{t('common.or')}</span>
-                  <UiButton className="btn-secondary" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
+                  <UiButton className="btn-secondary button-link" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
                   {/* </div> */}
                </div>
             </form>
-         </div>
 
-         <div className="txt">
-            <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
-         </div>
+            <div className="txt">
+               <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
+            </div>
 
+         </div>
       </section>
    )
 }
