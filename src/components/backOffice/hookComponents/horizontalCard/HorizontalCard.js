@@ -6,7 +6,7 @@ import "./HorizontalCard.less"
 
 const HorizontalCard = (props) => {
 
-    // not used
+    // IGNORE THIS
     // needed for generalIteration -> wrapperMap function 
     // const { img, title, text, href } = props.item;
 
@@ -26,8 +26,10 @@ const HorizontalCard = (props) => {
 
     return (
         <div className={"h_card_container"} onClick={handleCardClick}>
+            {/* Card image */}
             <img className={"card_img"} src={imageSrc} alt={altText} />
 
+            {/* Card body */}
             <div className={"card_body"}>
                 <div className={"card_main"}>
                     <div className={"left_col"}>
@@ -35,7 +37,7 @@ const HorizontalCard = (props) => {
                             {title}
                         </h5>
 
-                        {/* text overflows in mobile viewport. It should be truncated in CSS*/}
+                        {/* text overflows in mobile viewport. It should be truncated in CSS. Needs to be fixed!!*/}
                         <p className="card_text">
                             {text}
                         </p>
@@ -50,6 +52,7 @@ const HorizontalCard = (props) => {
                     }
                 </div>
 
+                {/* Card Footer, typically contains primary/secondary buttons */}
                 {footerContent &&
 
                     <div className={"card_footer"}>
@@ -63,12 +66,16 @@ const HorizontalCard = (props) => {
 
 HorizontalCard.defaultProps = {
     title: "Card title",
-    text: "Card text here, it should handle overflow with ellipsis truncation",
+    text: "Card body of text here, it should handle overflow with ellipsis truncation",
 }
 
 HorizontalCard.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
+    callback: PropTypes.func.isRequired,
+    altText: PropTypes.string,
+    upperRightContent: PropTypes.any,
+    footerContent: PropTypes.any
 
 }
 
