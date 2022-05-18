@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import "./CardList.less"
 
 //COMPONENTS
-import HorizontalCard from '../horizontalCard/HorizontalCard';
 import { Pagination } from "antd";
 
 // UTILS
@@ -14,8 +13,7 @@ import { Pagination } from "antd";
 const CardList = (props) => {
 
     const handlePageSwitch = (e) => {
-        // console.log("navigate to ...");
-        props.pagination.callback(e)
+        props.paginationCallback(e)
     }
     return (
         <section className={"section_container"}>
@@ -37,35 +35,28 @@ const CardList = (props) => {
                 {props.children}
             </div>
 
-            {/* Pagination (yet to test)*/}
+            {/* Pagination (to be tested)*/}
             <div className={"pagination"}>
                 <Pagination
-                    // defaultCurrent={1} //optional
-                    total={props.pagination.numberOfItems}
-                    current={props.pagination.currentPage}
-                    pageSize={props.pagination.pageSize}
+                    // defaultCurrent={1} //defaults to 1
+                    total={props.itemsCount}
+                    current={props.currentPage}
+                    pageSize={props.pageSize}
                     onChange={handlePageSwitch}
-                />;
+                />
             </div>
 
         </section>
     )
 }
 
-const renderCards = (card, key) => {
-    return <HorizontalCard
-        imageSrc={card?.img}
-        title={card?.title}
-        text={card?.text}
-        key={key}
-    />
-}
 CardList.defaultProps = {
-
+    pageSize: 10
 }
 
 CardList.propTypes = {
     sectionTitle: PropTypes.string,
+    // paginationCallback:
 }
 
 export default CardList;
