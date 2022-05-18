@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 //STYLE
-import './MessageCardLess.less';
+import './MessageCard.less';
 
 
 const MessageCard = (props) => {
