@@ -1,27 +1,24 @@
 import { React } from "react";
-import PropTypes from "prop-types";
 
-// STYLE
 import "./HostAccount.less"
 
 // COMPONENTS
 import { Button } from "antd";
-import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 // UTILS
-import { wrapperMap } from "../../../../../utils/generalIteration/generalIteration";
 
 const HostAccount = (props) => {
 
     const cardsTest = [
         {
-            imgSrc: "https://picsum.photos/200/300",
-            accountName: "Camera bellissima",
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
             text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
             href: "notarealurl.io",
         },
@@ -51,20 +48,32 @@ const HostAccount = (props) => {
         },
     ];
 
-    const navigateTo = (e) => {
-        console.log("navigato to ...param", e);
+    const goToDetails = (url) => (e) => {
+        console.log(`go to ${url}`);
     }
-    const paginationVars = {
-        numberOfItems: 20,
-        currentPage: 2,
+    const renderCards = (card, key) => {
+        return <HorizontalCard
+            callback={goToDetails(`/announce/${key}`)}
+            imageSrc={card?.img}
+            title={card?.title}
+            text={card?.text}
+            key={key} //key should respect standard set in generalIteration
+        />
+    }
+
+
+    const navigateTo = (e) => {
+        console.log("navigate to ...", e);
+    }
+    const paginationProps = {
+        itemsCount: 20,
+        currentPage: 1,
         pageSize: 10,
-        callback: navigateTo
+        paginationCallback: navigateTo
     }
 
     return <>
         HostAccount screen
-
-        {/* DOWN BELOW ARE TESTS !!!! */}
 
         {/* <HorizontalCard
             imageSrc: "https://picsum.photos/200/300"
@@ -80,12 +89,13 @@ const HostAccount = (props) => {
 
         <CardList
             sectionTitle={"Annunci"}
-            actions={<>
-                <Button type={"primary"}>Add rooms</Button>
-                <Button>Delete rooms</Button>
-            </>
+            actions={
+                <>
+                    <Button type={"primary"}>Add rooms</Button>
+                    <Button>Delete rooms</Button>
+                </>
             }
-            pagination={paginationVars}
+            {...paginationProps}
         >
             {/* {wrapperMap(HorizontalCard, cardsTest)} */}
             {cardsTest.map(renderCards)}
@@ -93,21 +103,7 @@ const HostAccount = (props) => {
     </>
 }
 
-const renderCards = (card, key) => {
-    return <HorizontalCard
-        imageSrc={card?.img}
-        title={card?.title}
-        text={card?.text}
-        key={key}
-    />
-}
 
-HostAccount.defaultProps = {
 
-}
-
-HostAccount.propTypes = {
-
-}
 
 export default HostAccount;
