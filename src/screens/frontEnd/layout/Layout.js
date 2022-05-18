@@ -9,6 +9,8 @@ import Navbar from "../../../components/frontEnd/hookComponents/navbar/Navbar";
 import Footer from "../../../components/frontEnd/hookComponents/footer/Footer";
 // Outlet 
 import { Outlet } from "react-router";
+
+import { LinksFooterGuest,LinksFooterHost } from "../../../utils/linksFooter/linksFooter";
 const Layout = () => {
     let vector = useNavigate();
     let location = useLocation();
@@ -19,12 +21,12 @@ const Layout = () => {
         }
     }, [])
 
-    
+
     return (
         <div className="layoutContainer">
-            <Navbar/>
-            <Outlet/>
-            <Footer/>
+            <Navbar />
+            <Outlet />
+            <Footer link={LinksFooterHost} />
         </div>
     )
 }
