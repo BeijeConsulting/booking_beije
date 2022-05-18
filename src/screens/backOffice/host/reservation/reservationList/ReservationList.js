@@ -6,6 +6,7 @@ import CardList from "../../../../../components/backOffice/hookComponents/cardLi
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ChoiceButton from "../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard"
 
 //ICON
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +18,7 @@ import "./ReservationList.less"
 const ReservationList = () => {
     const [state, setState] = useState([]) //state using for display announce categories
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const obj = [
         {
@@ -66,9 +67,19 @@ const ReservationList = () => {
         //setState announce refused
     }
 
+    const getCardStructures = (structure, key) => {
+        return <HorizontalCard
+            imageSrc={structure.img}
+            altText={`${key}_${structure.title}`}
+            title={structure.title}
+            text={structure.text}
+        />
+    }
+
     return (
 
-        <CardList sectionTitle={t("bo.screens.host.reservationList.title")}
+        <CardList
+            sectionTitle={t("bo.screens.host.reservationList.title")}
             actions={
                 <>
                     <ChoiceButton
@@ -87,8 +98,10 @@ const ReservationList = () => {
                     </Button>
                 </>
             }
-            cards={obj} //obj is used for test, after it will be "state.api"
-        />
+        >
+            {obj.map(getCardStructures)}
+        
+        </CardList>
     )
 }
 

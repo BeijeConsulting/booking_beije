@@ -19,6 +19,14 @@
    "bo": {
       "components": {},
       "modals": {},
+      "common": {
+         "message": {
+            "title": "Messaggi",
+            "send": "Invia",
+            "writeMessage": "Scrivi messaggio...",
+            "noMessages": "Non esistono messaggi..."
+         }
+      },
       "screens": {
          "host": {
             "hostAccount": {
@@ -31,6 +39,10 @@
                "pending": "In attesa",
                "refused": "Rifiutate",
                "calendar": "Calendario"
+            },
+            "structure": {
+               "structureListTitle": "Lista strutture",
+               "addStructure": "Aggiungi struttura"
             }
          },
          "admin": {}
