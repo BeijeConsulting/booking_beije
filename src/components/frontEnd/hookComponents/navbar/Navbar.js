@@ -19,7 +19,6 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 
 function Navbar(props) {
-    props.tokenDuck.token = "cabcakj"
     let vector = useNavigate();
 
     const [state, setState] = useState({
