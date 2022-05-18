@@ -3,12 +3,12 @@ import './PropertyCards.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 /* import BackupImage from '../../../../assets/backupimage.jpg' */
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 function PropertyCards(props) {
 
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
     return (
         <div className='card_container'>

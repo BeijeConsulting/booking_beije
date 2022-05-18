@@ -30,8 +30,7 @@ FormInput.propTypes = {
    type: PropTypes.string.isRequired,
    className: PropTypes.string,
    placeholder: PropTypes.string,
-   id: PropTypes.string,
-   name: PropTypes.string
+   info: PropTypes.string
 }
 
 export default FormInput;
