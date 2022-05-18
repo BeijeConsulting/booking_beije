@@ -12,17 +12,17 @@ const fotoAnnunciDetailGetApi = async (id) => {
 
 /* AUTH:HOST */
 const fotoAnnunciInsertPostApi = async (obj, header) => {
-    return await postApi(`foto_annuci`, obj, header);
+    return await postApi(`foto_annunci`, obj, header);
 }
 
 /* AUTH:HOST */
 const fotoAnnunciModifyPutApi = async (id, obj, header) => {
-    return await putApi(`foto_annuci/${id}`, obj, header);
+    return await putApi(`foto_annunci/${id}`, obj, header);
 }
 
 /* AUTH:HOST */
-const fotoAnnunciDeleteApi = async (id, obj, header) => {
-    return await deleteApi(`foto_annuci/${id}`, obj, header);
+const fotoAnnunciDeleteApi = async (id, header) => {
+    return await deleteApi(`foto_annunci/${id}`, header);
 }
 
 export {
