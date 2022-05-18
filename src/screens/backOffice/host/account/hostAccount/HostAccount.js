@@ -1,16 +1,17 @@
 import { React } from "react";
-import PropTypes from "prop-types";
 
 import "./HostAccount.less"
 
 // COMPONENTS
 import { Button } from "antd";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
-import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
+
+// UTILS
 
 const HostAccount = (props) => {
 
@@ -47,6 +48,30 @@ const HostAccount = (props) => {
         },
     ];
 
+    const goToDetails = (url) => (e) => {
+        console.log(`go to ${url}`);
+    }
+    const renderCards = (card, key) => {
+        return <HorizontalCard
+            callback={goToDetails(`/announce/${key}`)}
+            imageSrc={card?.img}
+            title={card?.title}
+            text={card?.text}
+            key={key} //key should respect standard set in generalIteration
+        />
+    }
+
+
+    const navigateTo = (e) => {
+        console.log("navigate to ...", e);
+    }
+    const paginationProps = {
+        itemsCount: 20,
+        currentPage: 1,
+        pageSize: 10,
+        paginationCallback: navigateTo
+    }
+
     return <>
         HostAccount screen
 
@@ -64,25 +89,21 @@ const HostAccount = (props) => {
 
         <CardList
             sectionTitle={"Annunci"}
-            actions={<>
-                <Button type={"primary"}>Add rooms</Button>
-                <Button>Delete rooms</Button>
-            </>
+            actions={
+                <>
+                    <Button type={"primary"}>Add rooms</Button>
+                    <Button>Delete rooms</Button>
+                </>
             }
-            cards={cardsTest}
-            currentPage={1} // currently doesn't work
-            totalPages={5} // currently doesn't work
-
-        />
+            {...paginationProps}
+        >
+            {/* {wrapperMap(HorizontalCard, cardsTest)} */}
+            {cardsTest.map(renderCards)}
+        </CardList>
     </>
 }
 
-HostAccount.defaultProps = {
 
-}
 
-HostAccount.propTypes = {
-
-}
 
 export default HostAccount;

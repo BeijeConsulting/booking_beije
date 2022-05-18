@@ -1,43 +1,61 @@
 import { React } from "react";
 import PropTypes from "prop-types";
 
+//STYLE
 import "./HorizontalCard.less"
 
-// AntDesign COMPONENTS
-import { Button } from "antd";
-
-// FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
-
 const HorizontalCard = (props) => {
+
+    // not used
+    // needed for generalIteration -> wrapperMap function 
+    // const { img, title, text, href } = props.item;
+
+    const {
+        callback,
+        imageSrc,
+        altText,
+        title,
+        text,
+        upperRightContent,
+        footerContent
+    } = props
+
+    const handleCardClick = (e) => {
+        callback(e);
+    }
+
     return (
-        <div className={"h_card_container"} key={props.key}>
-            <img className={"card_img"} src={props.imageSrc} alt={"alternative text"} />
+        <div className={"h_card_container"} onClick={handleCardClick}>
+            <img className={"card_img"} src={imageSrc} alt={altText} />
 
             <div className={"card_body"}>
                 <div className={"card_main"}>
-
                     <div className={"left_col"}>
                         <h5 className={"card_title"}>
-                            {props.title}
+                            {title}
                         </h5>
-                        <p className="card_text">
-                            {/* text overflows in mobile viewport. Text could be truncated */}
-                            {props.text}
 
+                        {/* text overflows in mobile viewport. It should be truncated in CSS*/}
+                        <p className="card_text">
+                            {text}
                         </p>
                     </div>
 
                     {/* Upper right corner (typically used for action buttons or badge-like icons) */}
-                    <div className={"right_col"}>
-                        {props.upperRightContent}
-                    </div>
+                    {upperRightContent &&
+
+                        <div className={"right_col"}>
+                            {upperRightContent}
+                        </div>
+                    }
                 </div>
 
-                <div className={"card_footer"}>
-                    {props.footerContent}
-                </div>
+                {footerContent &&
+
+                    <div className={"card_footer"}>
+                        {footerContent}
+                    </div>
+                }
             </div>
         </div>
     )

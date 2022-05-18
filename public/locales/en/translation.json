@@ -20,10 +20,20 @@
       "components": {},
       "modals": {},
       "screens": {
-         "hostAccount": {
-            "vat": "VAT number",
-            "billingAddress": "Billing address"
-         }
+         "host": {
+            "hostAccount": {
+               "vat": "VAT number",
+               "billingAddress": "Billing address"
+            },
+            "reservationList": {
+               "title": "Reservation list",
+               "accepted": "Accepted",
+               "pending": "Pending",
+               "refused": "Refused",
+               "calendar": "Calendar"
+            }
+         },
+         "admin": {}
       }
    },
    "fe": {

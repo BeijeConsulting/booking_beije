@@ -6,16 +6,10 @@ import PropTypes from 'prop-types'
 //STYLE
 import './MessageList.less'
 
-//FONT-AWESOME
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faChevronLeft,
-    faPaperPlane
-} from '@fortawesome/free-solid-svg-icons'
-
 //COMPONENTS
 import CardList from '../../../../../components/backOffice/hookComponents/cardList/CardList'
 import HorizontalCard from '../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard'
+import GoBackButton from '../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton'
 
 
 const MessageList = (props) => {
@@ -33,7 +27,7 @@ const MessageList = (props) => {
     return (
         <div className="container_message_list">
 
-            <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
+            <GoBackButton />
             <h1 className="title_messages_page">Messages</h1>
             {
                 host ? <div className="admin_message_list">

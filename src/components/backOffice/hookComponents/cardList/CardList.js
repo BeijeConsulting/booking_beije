@@ -1,28 +1,48 @@
 import { React } from "react";
 import PropTypes from "prop-types";
 
+//STYLES
 import "./CardList.less"
-import HorizontalCard from '../horizontalCard/HorizontalCard';
+
+//COMPONENTS
 import { Pagination } from "antd";
 
+// UTILS
+
+
 const CardList = (props) => {
+
+    const handlePageSwitch = (e) => {
+        props.paginationCallback(e)
+    }
     return (
         <section className={"section_container"}>
-            <h2>{props.sectionTitle}</h2>
-            <div className={"action_bar"}>
-                {props.actions}
-            </div>
 
+            {/* Section title */}
+            {props.sectionTitle &&
+                <h2>{props.sectionTitle}</h2>
+            }
+
+            {/* Actions: buttons, anchors, interactive elements outside cards */}
+            {props.actions &&
+                <div className={"action_bar"}>
+                    {props.actions}
+                </div>
+            }
+
+            {/* Card list */}
             <div className={"card_list"}>
-                {
-                    props.cards.map(renderCards)
-                }
+                {props.children}
             </div>
 
+            {/* Pagination (to be tested)*/}
             <div className={"pagination"}>
                 <Pagination
-                    defaultCurrent={props.currentPage}
-                    total={props.totalPages}
+                    // defaultCurrent={1} //defaults to 1
+                    total={props.itemsCount}
+                    current={props.currentPage}
+                    pageSize={props.pageSize}
+                    onChange={handlePageSwitch}
                 />
             </div>
 
@@ -30,21 +50,13 @@ const CardList = (props) => {
     )
 }
 
-const renderCards = (card, key) => {
-    return <HorizontalCard
-        imageSrc={card?.img}
-        title={card?.title}
-        text={card?.text}
-        key={key}
-
-    />
-}
 CardList.defaultProps = {
-
+    pageSize: 10
 }
 
 CardList.propTypes = {
-
+    sectionTitle: PropTypes.string,
+    // paginationCallback:
 }
 
 export default CardList;

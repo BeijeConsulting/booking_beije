@@ -29,7 +29,9 @@ const routes = {
     STRUCTURE_OPERATION: 'structure-operation',
     STRUCTURE_LIST: 'structure-list',
     STRUCTURE_DETAILS: 'structure-details',
-    RESERVATION_CALENDAR: 'reservation-calendar'
+    RESERVATION_CALENDAR: 'reservation-calendar',
+    RESERVATION_LIST: 'reservation-list',
+    PENDING_ANNOUNCE_LIST: 'pending-announce-list' //to add in admin route
 }
 
 export {
