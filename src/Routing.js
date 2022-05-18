@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setToken } from "./redux/ducks/tokenDuck";
@@ -49,8 +49,7 @@ function Routing(props) {
     );
     props.dispatch(setToken(getLocalStorage("token")));
 
-    const myprofile = getApi('myprofile', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs')
-
+    // da qui in poi avete il token per fare tutte le chimate
   }, []);
     // if (getLocalStorage('token') !== null){
     //     let token = getLocalStorage('token')
@@ -85,12 +84,7 @@ function Routing(props) {
                 <Route path={routes.MRA} element={<MostRewApart />} />
             </Route>
 
-            {/* all the routes for frontEnd goes inside this one */}
-            {/* <Route path={routes.HOME} element={<Rooms />}> */}
-
-            {/* </Route> */}
-
-
+  
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
