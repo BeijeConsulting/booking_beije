@@ -9,11 +9,16 @@ import { routes } from "./routes/routes";
 //Screens frontEnd
 import Home from './screens/frontEnd/home/Homepage';
 import Login from './screens/frontEnd/login/Login'
-import Bookings from './screens/frontEnd/account/Bookings'
-import Messages from './screens/frontEnd/account/Messages'
-import SingleConversation from './screens/frontEnd/account/SingleConversation'
-import Settings from './screens/frontEnd/account/Settings'
+import Bookings from './screens/frontEnd/profileMenu/Bookings'
+import Messages from './screens/frontEnd/profileMenu/Messages'
+import SingleConversation from './screens/frontEnd/profileMenu/SingleConversation'
+import Settings from './screens/frontEnd/profileMenu/Settings'
 import Registration from "./screens/frontEnd/registration/Registration";
+import DetailsProp from "./screens/frontEnd/details/DetailsProp";
+import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
+import MostRewApart from "./screens/frontEnd/MRA";
+import Account from "./screens/frontEnd/profileMenu/Account"
+import Favourites from './screens/frontEnd/profileMenu/Favourites'
 
 //Screen backOffice
 import ReservationCalendar from './screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar'
@@ -42,19 +47,30 @@ function Routing(props) {
     //     console.log(props.tokenDuck.token);
     // }
     
+
+    //login, registration, account, messages, favourites, booking
+
     return (
         <Routes>
 
-            <Route path={routes.HOME} element={<Home />}></Route>
-            <Route path={routes.REGISTRATION} element={<Registration />}></Route>
+           
+            <Route path={routes.REGISTRATION} element={<Registration />} />
+            <Route path={routes.LOGIN} element={<Login />} />
+            <Route path={routes.MESSAGES} element={<Messages />} />
+            <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+            <Route path={routes.BOOKED} element={<Bookings />} />
+            <Route path={routes.SETTINGS} element={<Settings />} />
+            <Route path={routes.ACCOUNT} element={<Account />} />
+            <Route path={routes.FAVOURITE} element={<Favourites />} />
 
             {/* all the routes for frontEnd goes inside this one */}
-            <Route path={routes.LOGIN} element={<Login />}>
-                <Route path={routes.BOOKED} element={<Bookings />}></Route>
-                <Route path={routes.MESSAGES} element={<Messages />}></Route>
-                <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />}></Route>
-                <Route path={routes.SETTINGS} element={<Settings />}></Route>
-            </Route>
+            {/* LAYOUT */}
+                {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
+                <Route path={routes.HOME} element={<Home />} />
+                <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
+                <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
+                <Route path={routes.MRA} element={<MostRewApart />} />
+          {/* FINE LAYOUT */}
             {/* all the routes for frontEnd goes inside this one */}
             {/* <Route path={routes.HOME} element={<Rooms />}> */}
 
