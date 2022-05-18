@@ -6,6 +6,9 @@ import { setToken } from "./redux/ducks/tokenDuck";
 // routes
 import { routes } from "./routes/routes";
 
+// Layout frontEnd
+import Layout from './screens/frontEnd/layout/Layout'
+
 //Screens frontEnd
 import Home from './screens/frontEnd/home/Homepage';
 import Login from './screens/frontEnd/login/Login'
@@ -32,7 +35,8 @@ import StructureDetails from "./screens/backOffice/host/structure/structureDetai
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
 
-
+// NOTFOUND 
+import NotFound from "./screens/notFound/NotFound";
 import { getLocalStorage } from './utils/localStorage/localStorage'
 import { decryptItem } from "./utils/crypto/crypto";
 
@@ -46,14 +50,14 @@ function Routing(props) {
     //     props.dispatch(setToken(decriptedToken))
     //     console.log(props.tokenDuck.token);
     // }
-    
+
 
     //login, registration, account, messages, favourites, booking
 
     return (
         <Routes>
 
-           
+
             <Route path={routes.REGISTRATION} element={<Registration />} />
             <Route path={routes.LOGIN} element={<Login />} />
             <Route path={routes.MESSAGES} element={<Messages />} />
@@ -64,13 +68,15 @@ function Routing(props) {
             <Route path={routes.FAVOURITE} element={<Favourites />} />
 
             {/* all the routes for frontEnd goes inside this one */}
-            {/* LAYOUT */}
+
+            <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
-                <Route path={routes.HOME} element={<Home />} />
+                <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
                 <Route path={routes.MRA} element={<MostRewApart />} />
-          {/* FINE LAYOUT */}
+            </Route>
+
             {/* all the routes for frontEnd goes inside this one */}
             {/* <Route path={routes.HOME} element={<Rooms />}> */}
 
@@ -93,7 +99,7 @@ function Routing(props) {
             </Route>
 
             {/* !!! we needd to change the element passed to path "*" */}
-            <Route path="*" element={< Home />} />
+            <Route path="*" element={< NotFound />} />
 
         </Routes>
     )

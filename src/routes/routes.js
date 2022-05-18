@@ -22,7 +22,7 @@ const routes = {
     SEARCH: 'search',
     MRA: 'mostreviewedBuilding',
 
-
+    
     // BO
     DASHBOARD: 'dashboard',
     HOST_ACCOUNT: 'host-account',
