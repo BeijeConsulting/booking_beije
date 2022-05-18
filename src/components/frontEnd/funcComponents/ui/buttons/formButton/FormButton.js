@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 
-const { t } = useTranslation();
 
 function FormButton(props) {
+   const { t } = useTranslation();
 
    function clickButton(e) {
       props.callback(e);
@@ -24,7 +24,7 @@ function FormButton(props) {
 }
 
 FormButton.defaultProps = {
-   placeholder: t('fe.components.button.pressMe'),
+   // placeholder: t('fe.components.button.pressMe'),
 }
 
 FormButton.propTypes = {

@@ -18,11 +18,15 @@ import {
 //STYLE
 import './MessageChat.less';
 
+import { useTranslation } from 'react-i18next';
+
 //COMPONENTS
 import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard';
 import GoBackButton from '../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
 
 const MessageChat = (props) => {
+
+    const {t} = useTranslation()
 
     //TEST--------
     const messageUser = [
