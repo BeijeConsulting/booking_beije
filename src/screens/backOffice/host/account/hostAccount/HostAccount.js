@@ -10,6 +10,7 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 // FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 // UTILS
 
@@ -57,6 +58,15 @@ const HostAccount = (props) => {
             imageSrc={card?.img}
             title={card?.title}
             text={card?.text}
+            upperRightContent={<>
+                <Link to="#">
+                    <FontAwesomeIcon icon={faCrown} />
+                </Link>
+                <Link to="#">
+                    <FontAwesomeIcon icon={faCrown} />
+                </Link>
+            </>
+            }
             key={key} //key should respect standard set in generalIteration
         />
     }
@@ -78,17 +88,19 @@ const HostAccount = (props) => {
     return <>
         HostAccount screen
 
-        {/* <HorizontalCard
-            imageSrc: "https://picsum.photos/200/300"
+        <HorizontalCard
+            imageSrc="https://picsum.photos/200/300"
+            callback={goToDetails(`/announce/key`)}
             title="Card test"
-            text="Card testing right now"
+            subtitle="Chioggia, Italy"
+            text="Card testing right now blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             upperRightContent={
                 <Button>
                     <FontAwesomeIcon icon={faCrown} />
                 </Button>
             }
             footerContent={<Button> Button test </Button>}
-        /> */}
+        />
 
         <CardList
             sectionTitle={"Annunci"}
