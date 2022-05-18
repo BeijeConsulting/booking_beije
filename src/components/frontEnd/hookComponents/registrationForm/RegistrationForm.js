@@ -5,6 +5,7 @@ import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
+import { Button, notification } from 'antd';
 
 // modules
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,17 @@ let formObject = {
    surname: '',
    email: '',
    password: '',
-   confirmPassword: ''
+   confirmPassword: '',
+   terms: false
+}
+
+let errors = {
+   name: false,
+   surname: false,
+   email: false,
+   password: false,
+   confirmPassword: false,
+   terms: false
 }
 
 let termsAccepted = false;
@@ -33,62 +44,82 @@ function RegistrationForm() {
    const { t } = useTranslation();
 
    const navigate = useNavigate();
-
    const handleNavigation = (routes) => () => {
       navigate(`/${routes}`)
    }
 
+   const openNotification = (toastDescription, name, additionalCss = '') => {
+      const key = `${name}-toast`;
+      let cssClass = `custom-toast ${additionalCss}`;
+      notification.open({
+         description: toastDescription,
+         onClick: () => {
+            notification.close(key)
+         },
+         duration: 2,
+         key,
+         placement: 'bottom',
+         className: cssClass
+      });
+   };
+
    const handleChange = (name) => (value) => {
+      notification.close(`${name}-toast`);
+      errors[name] = false;
       formObject = {
          ...formObject,
          [name]: value
       }
+      value.length === 0 ? errors[name] = true : errors[name] = false;
    }
 
-   const handleCheckbox = (value) => {
+   const handleCheckbox = (name) => (value) => {
+      notification.close(`${name}-toast`);
       termsAccepted = value;
-      console.log(termsAccepted);
-
+      !value ? errors[name] = true : errors[name] = false;
    }
 
    const handleSubmit = (e) => {
       e.preventDefault();
 
+      notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
-         // error toast
-         console.log('all fields must be filled in');
+         openNotification('All fields must be filled in', 'all');
       } else {
          if (!checkMail(formObject.email)) {
-            // error toast
-            console.log('email not valid');
+            errors['email'] = true;
+            openNotification('Email not valid', 'email');
          }
 
          if (!checkPassword(formObject.password)) {
-            // error toast
-            console.log('password', formObject.password);
-            console.log('password not valid: at least 8 character long with 1 special character');
+            errors['password'] = true;
+            openNotification('Password not valid: at least 8 character long and 1 symbol');
          }
 
          if (formObject.password !== formObject.confirmPassword) {
-            // error toast
-            console.log('passwords do not match');
+            errors['confirmPassword'] = true;
+            openNotification('Passwords do not match', 'confirmPassword');
          }
 
          if (!termsAccepted) {
-            // error toast
-            console.log('you have to accept the terms and conditions');
+            errors['terms'] = true;
+            openNotification('You have to accept the terms and conditions', 'terms');
+         }
+
+         if (!Object.values(errors).includes(true)) {
+            openNotification('Everything ok!', 'ok', 'info-toast');
+
+            // delete formObject.confirmPassword;
+            // const response = postApi('user', formObject);
+            // console.log(response);
+
+            // set token in localStorage
+            // redux
+
+            // navigate(routes.HOME);
          }
       }
 
-      delete formObject.confirmPassword;
-      // const response = postApi('user', formObject);
-      // console.log(response);
-
-      // set token in localStorage
-      // redux
-
-      // if all checks ok
-      // navigate(routes.HOME);
    }
 
    return (
@@ -108,7 +139,7 @@ function RegistrationForm() {
                <FormInput placeholder={t("common.password")} info="password" type="password" callback={handleChange("password")} />
                <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" type="password" callback={handleChange("confirmPassword")} />
                <div className="terms-container">
-                  <CheckboxInput name="terms" callback={handleCheckbox} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
+                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
                </div>
                <div className="flex center column">
                   <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
