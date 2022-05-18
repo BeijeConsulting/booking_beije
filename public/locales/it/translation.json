@@ -1,7 +1,5 @@
 {
    "common": {
-      "rooms": "{{count}} stanza",
-      "rooms_other": "{{count}} stanze",
       "number": "{{value, number(minimumFractionDigits: 2)}}",
       "currency": "{{price, currency(currency: EUR)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
@@ -18,12 +16,15 @@
       "english": "Inglese",
       "italian": "Italiano",
       "loginLabel": "Accedi",
+      "messages": "Messaggi",
       "name": "Nome",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
+      "rooms": "{{count}} stanza",
+      "rooms_other": "{{count}} stanze",
       "select": "Seleziona",
       "surname": "Cognome"
    },

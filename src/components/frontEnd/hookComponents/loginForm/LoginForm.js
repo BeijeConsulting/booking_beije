@@ -9,6 +9,7 @@ import { routes } from '../../../../routes/routes';
 
 //import {postApi} from '../../../../services/genericServices';
 import './LoginForm.less'
+import { useTranslation } from 'react-i18next';
 
 
 let formObject = {
@@ -17,6 +18,8 @@ let formObject = {
 }
 
 function LoginForm() {
+
+   const { t } = useTranslation();
 
    const navigate = useNavigate();
 
@@ -50,20 +53,20 @@ function LoginForm() {
          </div>
 
          <form>
-            <h1 className="w title">Login</h1>
+            <h1 className="w title">{t('common.loginLabel')}</h1>
             <div className="formInput flex center column">
-            <h1 className="w">Login</h1>
-               <FormInput className='formInput' type={'text'} placeholder="Email" info="email" callback={handleChange('email')} />
-               <FormInput className='formInput' type={'password'} placeholder="Password" info="password" callback={handleChange('password')} />
+               <h1 className="w">{t('common.loginLabel')}</h1>
+               <FormInput className='formInput' type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
+               <FormInput className='formInput' type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
                <br />
-               <FormButton className="btn-primary" label="Log in" callback={handleSubmit} />
-               <span className="w">or</span>
-               <UiButton className="btn-secondary" label="Register" callback={handleNavigation(routes.REGISTRATION)} />
+               <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
+               <span className="w">{t('common.or')}</span>
+               <UiButton className="btn-secondary" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
             </div>
          </form>
 
          <div className="txt">
-            <a href="#" onClick={handleNavigation(routes.HOME)}>Back to home</a>
+            <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
          </div>
 
       </section>
