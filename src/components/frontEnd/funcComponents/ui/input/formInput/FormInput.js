@@ -26,6 +26,7 @@ function FormInput(props) {
 
 FormInput.defaultProps = {
    type: 'text',
+   className: '',
    // placeholder: t('fe.components.input.insert'),
 }
 

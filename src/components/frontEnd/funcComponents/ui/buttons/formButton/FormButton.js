@@ -24,6 +24,7 @@ function FormButton(props) {
 }
 
 FormButton.defaultProps = {
+   className: ''
    // placeholder: t('fe.components.button.pressMe'),
 }
 
