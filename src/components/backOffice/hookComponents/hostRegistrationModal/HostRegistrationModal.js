@@ -7,10 +7,13 @@ import { Input, Checkbox, Button } from "antd";
 //STYLE
 import "./HostRegistrationModal.less"
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 
 const HostRegistrationModal = (props) => {
+
+    const { t } = useTranslation();
 
     const [state, setState] = useState({
         displayRegistration: true,
@@ -40,35 +43,35 @@ const HostRegistrationModal = (props) => {
             {state.displayRegistration &&
                 <div className="modal">
                     <h2>{props.title}</h2>
-                    <div className="host_choice" onClick={setFirstchoice}>I'm private</div>
-                    <div className="host_choice" onClick={setSecondchoice}>I have company</div>
+                    <div className="host_choice" onClick={setFirstchoice}>{t('bo.components.hostRegistrationModal.privateRegistration')}</div>
+                    <div className="host_choice" onClick={setSecondchoice}>{t('bo.components.hostRegistrationModal.companyRegistration')}</div>
                 </div>
             }
 
             {
                 state.displayFirstchoice &&
                 <div className="modal">
-                    <h2>Setup your Private Host Account</h2>
+                    <h2>{t('bo.components.hostRegistrationModal.setUpPrivateAccount')}</h2>
                     <Input placeholder="Phone number" />
                     <Input placeholder="City" />
                     <Input placeholder="Postcode" />
                     <Input placeholder="Billing address" />
-                    <Checkbox>I accept <Link to={"/terms-and-service"} target="_blank">Terms and Agreement for Hosts</Link></Checkbox>
-                    <Button type="primary">Register</Button>
+                    <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                    <Button type="primary">{t('common.registerLabel')}</Button>
                 </div>
             }
 
             {
                 state.displaySecondchoice &&
                 <div className="modal">
-                    <h2>Setup your Company Host Account</h2>
+                    <h2>{t('bo.components.hostRegistrationModal.setUpCompanyAccount')}</h2>
                     <Input placeholder="Phone number" />
                     <Input placeholder="VAT number" />
                     <Input placeholder="City" />
                     <Input placeholder="Postcode" />
                     <Input placeholder="Billing address" />
-                    <Checkbox>I accept <Link to={"/terms-and-service"} target="_blank">Terms and Agreement for Hosts</Link></Checkbox>
-                    <Button type="primary">Register</Button>
+                    <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                    <Button type="primary">{t('common.registerLabel')}</Button>
                 </div>
             }
         </>
@@ -78,7 +81,7 @@ const HostRegistrationModal = (props) => {
 
 HostRegistrationModal.defaultProps = {
     title: "Titolo",
-    
+
 }
 
 HostRegistrationModal.propTypes = {

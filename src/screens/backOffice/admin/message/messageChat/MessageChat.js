@@ -83,12 +83,12 @@ const MessageChat = (props) => {
             <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
             <h1 className="title_messages_page">Messages</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>Message not exist...</p>}
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t('toasts.messageError')}</p>}
             </div>
-            <Input className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
-            <Button className="button_send_message" type="primary">Send</Button>
+            <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
+            <Button className="button_send_message" type="primary">{t('common.send')}</Button>
 
-        </div >
+        </div>
     )
 }
 MessageCard.propTypes = {
