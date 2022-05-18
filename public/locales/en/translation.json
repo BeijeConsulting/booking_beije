@@ -1,7 +1,5 @@
 {
    "common": {
-      "account": "Account",
-      "select": "Select",
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
       "number": "{{value, number(minimumFractionDigits: 2)}}",
@@ -14,8 +12,20 @@
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "account": "Account",
+      "backToHome": "Back to home",
+      "email": "Email",
       "english": "English",
-      "italian": "Italian"
+      "italian": "Italian",
+      "loginLabel": "Login",
+      "name": "Name",
+      "or": "or",
+      "password": "Password",
+      "passwordConfirm": "Confirm password",
+      "registerLabel": "Register",
+      "registration": "Registration",
+      "select": "Select",
+      "surname": "Surname"
    },
    "toasts": {},
    "bo": {
@@ -70,6 +80,9 @@
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"
+         },
+         "registration": {
+            "acceptTerms": "I accept the terms and conditions"
          }
       }
    }
