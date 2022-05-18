@@ -70,6 +70,17 @@
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"
+         },
+         "settings": {
+            "title": "Settings"
+         },
+         "settingsCard": {
+            "account": "Account",
+            "bookings": "Bookings",
+            "favourites": "Favourites",
+            "messages": "Messages",
+            "becomeAHost": "Become a Host",
+            "yourProperties": "Your properties"
          }
       }
    }

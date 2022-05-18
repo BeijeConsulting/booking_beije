@@ -2,7 +2,7 @@ import React from 'react'
 import './UiButton.less'
 import PropTypes from 'prop-types';
 
-function UiButton({className, callback, label}) {
+function UiButton({ className, callback, label }) {
 
    return (
       <button
