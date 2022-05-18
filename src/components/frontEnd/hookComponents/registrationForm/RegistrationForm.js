@@ -5,6 +5,7 @@ import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
+import { Button, notification } from 'antd';
 
 // modules
 import { useNavigate } from 'react-router-dom';
@@ -43,12 +44,27 @@ function RegistrationForm() {
    const { t } = useTranslation();
 
    const navigate = useNavigate();
-
    const handleNavigation = (routes) => () => {
       navigate(`/${routes}`)
    }
 
+   const openNotification = (toastDescription, name, additionalCss = '') => {
+      const key = `${name}-toast`;
+      let cssClass = `custom-toast ${additionalCss}`;
+      notification.open({
+         description: toastDescription,
+         onClick: () => {
+            notification.close(key)
+         },
+         duration: 2,
+         key,
+         placement: 'bottom',
+         className: cssClass
+      });
+   };
+
    const handleChange = (name) => (value) => {
+      notification.close(`${name}-toast`);
       errors[name] = false;
       formObject = {
          ...formObject,
@@ -58,6 +74,7 @@ function RegistrationForm() {
    }
 
    const handleCheckbox = (name) => (value) => {
+      notification.close(`${name}-toast`);
       termsAccepted = value;
       !value ? errors[name] = true : errors[name] = false;
    }
@@ -65,36 +82,32 @@ function RegistrationForm() {
    const handleSubmit = (e) => {
       e.preventDefault();
 
+      notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
-         // error toast
-         console.log('all fields must be filled in');
+         openNotification('All fields must be filled in', 'all');
       } else {
          if (!checkMail(formObject.email)) {
             errors['email'] = true;
-            // error toast
-            console.log('email not valid');
+            openNotification('Email not valid', 'email');
          }
 
          if (!checkPassword(formObject.password)) {
             errors['password'] = true;
-            // error toast
-            console.log('password not valid: at least 8 character long with 1 special character');
+            openNotification('Password not valid: at least 8 character long and 1 symbol');
          }
 
          if (formObject.password !== formObject.confirmPassword) {
             errors['confirmPassword'] = true;
-            // error toast
-            console.log('passwords do not match');
+            openNotification('Passwords do not match', 'confirmPassword');
          }
 
          if (!termsAccepted) {
             errors['terms'] = true;
-            // error toast
-            console.log('you have to accept the terms and conditions');
+            openNotification('You have to accept the terms and conditions', 'terms');
          }
 
          if (!Object.values(errors).includes(true)) {
-            console.log('everything ok');
+            openNotification('Everything ok!', 'ok', 'info-toast');
 
             // delete formObject.confirmPassword;
             // const response = postApi('user', formObject);
@@ -105,7 +118,6 @@ function RegistrationForm() {
 
             // navigate(routes.HOME);
          }
-         console.log('errors', errors);
       }
 
    }
