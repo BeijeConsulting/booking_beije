@@ -1,9 +1,11 @@
+import { decryptItem, encryptItem } from "../crypto/crypto"
+
 function setLocalStorage(key, token) {
-    return localStorage.setItem(key, JSON.stringify(token));
+    return localStorage.setItem(key, JSON.stringify(encryptItem(token)));
 }
 
 function getLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
+    return decryptItem(JSON.parse(localStorage.getItem(key)));
 }
 
 function removeLocalStorage(key) {
