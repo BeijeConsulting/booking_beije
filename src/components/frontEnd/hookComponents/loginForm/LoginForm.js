@@ -24,7 +24,7 @@ function LoginForm() {
    const navigate = useNavigate();
 
    const handleNavigation = (routes) => () => {
-      navigate(routes)
+      navigate(`/${routes}`)
    }
 
    const handleChange = (name) => (value) => {
@@ -45,25 +45,26 @@ function LoginForm() {
    }
 
    return (
-      <section className="container color flex column space">
+      <section className="container flex column space">
 
          <div className="flex center column">
-            <div className="w logo">LOGO</div>
+            <div className="w">LOGO</div>
             {/* <Logo></Logo> */}
          </div>
 
-         <form>
-            <h1 className="w title">{t('common.loginLabel')}</h1>
-            <div className="formInput flex center column">
-               <h1 className="w">{t('common.loginLabel')}</h1>
-               <FormInput className='formInput' type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
-               <FormInput className='formInput' type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
-               <br />
-               <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
-               <span className="w">{t('common.or')}</span>
-               <UiButton className="btn-secondary" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
-            </div>
-         </form>
+         <div className="formInput">
+            <form>
+               <h1 className="w title">{t('common.loginLabel')}</h1>
+               <FormInput type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
+               <FormInput type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
+               <div className="flex center column">
+                  <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
+                  <span className="w">{t('common.or')}</span>
+                  <UiButton className="btn-secondary" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
+                  {/* </div> */}
+               </div>
+            </form>
+         </div>
 
          <div className="txt">
             <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
