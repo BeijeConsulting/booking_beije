@@ -13,9 +13,13 @@ axiosInstance.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  console.log('qui');
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
+  if (error.response.status === 401){
+    console.log('siamo in questo caso, 401');
+    //qui chiamata updateAuthToken
+    console.log('intercettato')
+  }
   return Promise.reject(error);
 });
 
@@ -32,7 +36,7 @@ export function responseApiError(error) {
   };
 }
 
-export async function postApi(resource, obj, header = null) {
+export async function postApi(resource, obj , header = null) {
   return axiosInstance
     .post(resource, obj, {
       headers: header !== null ? `"Authorization": Bearer ${header}` : "",
