@@ -23,7 +23,17 @@ let formObject = {
    surname: '',
    email: '',
    password: '',
-   confirmPassword: ''
+   confirmPassword: '',
+   terms: false
+}
+
+let errors = {
+   name: false,
+   surname: false,
+   email: false,
+   password: false,
+   confirmPassword: false,
+   terms: false
 }
 
 let termsAccepted = false;
@@ -39,16 +49,17 @@ function RegistrationForm() {
    }
 
    const handleChange = (name) => (value) => {
+      errors[name] = false;
       formObject = {
          ...formObject,
          [name]: value
       }
+      value.length === 0 ? errors[name] = true : errors[name] = false;
    }
 
-   const handleCheckbox = (value) => {
+   const handleCheckbox = (name) => (value) => {
       termsAccepted = value;
-      console.log(termsAccepted);
-
+      !value ? errors[name] = true : errors[name] = false;
    }
 
    const handleSubmit = (e) => {
@@ -59,36 +70,44 @@ function RegistrationForm() {
          console.log('all fields must be filled in');
       } else {
          if (!checkMail(formObject.email)) {
+            errors['email'] = true;
             // error toast
             console.log('email not valid');
          }
 
          if (!checkPassword(formObject.password)) {
+            errors['password'] = true;
             // error toast
-            console.log('password', formObject.password);
             console.log('password not valid: at least 8 character long with 1 special character');
          }
 
          if (formObject.password !== formObject.confirmPassword) {
+            errors['confirmPassword'] = true;
             // error toast
             console.log('passwords do not match');
          }
 
          if (!termsAccepted) {
+            errors['terms'] = true;
             // error toast
             console.log('you have to accept the terms and conditions');
          }
+
+         if (!Object.values(errors).includes(true)) {
+            console.log('everything ok');
+
+            // delete formObject.confirmPassword;
+            // const response = postApi('user', formObject);
+            // console.log(response);
+
+            // set token in localStorage
+            // redux
+
+            // navigate(routes.HOME);
+         }
+         console.log('errors', errors);
       }
 
-      delete formObject.confirmPassword;
-      // const response = postApi('user', formObject);
-      // console.log(response);
-
-      // set token in localStorage
-      // redux
-
-      // if all checks ok
-      // navigate(routes.HOME);
    }
 
    return (
@@ -108,7 +127,7 @@ function RegistrationForm() {
                <FormInput placeholder={t("common.password")} info="password" type="password" callback={handleChange("password")} />
                <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" type="password" callback={handleChange("confirmPassword")} />
                <div className="terms-container">
-                  <CheckboxInput name="terms" callback={handleCheckbox} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
+                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
                </div>
                <div className="flex center column">
                   <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
