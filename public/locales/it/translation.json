@@ -1,7 +1,5 @@
 {
    "common": {
-      "account": "Account",
-      "select": "Seleziona",
       "rooms": "{{count}} stanza",
       "rooms_other": "{{count}} stanze",
       "number": "{{value, number(minimumFractionDigits: 2)}}",
@@ -14,8 +12,20 @@
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "account": "Account",
+      "backToHome": "Torna alla home",
+      "email": "Email",
       "english": "Inglese",
-      "italian": "Italiano"
+      "italian": "Italiano",
+      "loginLabel": "Accedi",
+      "name": "Nome",
+      "or": "o",
+      "password": "Password",
+      "passwordConfirm": "Conferma password",
+      "registerLabel": "Registrati",
+      "registration": "Registrazione",
+      "select": "Seleziona",
+      "surname": "Cognome"
    },
    "toasts": {},
    "bo": {
@@ -70,6 +80,9 @@
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
+         },
+         "registration": {
+            "acceptTerms": "Accetto i termini e le condizioni"
          }
       }
    }

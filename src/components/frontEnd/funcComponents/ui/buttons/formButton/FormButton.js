@@ -14,6 +14,7 @@ function FormButton(props) {
          onClick={clickButton}
          className={`form_button ${props.className}`}
          placeholder={props.label}
+         value={props.label}
          type="submit"
       />
    )

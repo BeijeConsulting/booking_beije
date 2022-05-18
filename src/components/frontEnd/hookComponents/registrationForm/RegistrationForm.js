@@ -1,15 +1,21 @@
 import React from 'react';
+
+// components
 import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
 
+// modules
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../../routes/routes';
+import { useTranslation } from 'react-i18next';
 
-import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
-
+// styles
 import './RegistrationForm.less';
+
+// utils
+import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
 
 
 let formObject = {
@@ -23,6 +29,8 @@ let formObject = {
 let termsAccepted = false;
 
 function RegistrationForm() {
+
+   const {t} = useTranslation();
 
    const navigate = useNavigate();
 
@@ -91,25 +99,25 @@ function RegistrationForm() {
          </div>
 
          <form>
-            <h1 className="w">Registration</h1>
+            <h1 className="w">{t('common.registration')}</h1>
             <div className="formInput autoWidth flex center column">
-               <FormInput placeholder="Name" info="name" callback={handleChange("name")} />
-               <FormInput placeholder="Surname" info="surname" callback={handleChange("surname")} />
-               <FormInput placeholder="Email" info="email" callback={handleChange("email")} />
-               <FormInput placeholder="Password" info="password" callback={handleChange("password")} />
-               <FormInput placeholder="ConfirmPassword" info="confirmPassword" callback={handleChange("confirmPassword")} />
+               <FormInput placeholder={t("common.name")} info="name" callback={handleChange("name")} />
+               <FormInput placeholder={t("common.surname")} info="surname" callback={handleChange("surname")} />
+               <FormInput placeholder={t("common.email")} info="email" callback={handleChange("email")} />
+               <FormInput placeholder={t("common.password")} info="password" callback={handleChange("password")} />
+               <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" callback={handleChange("confirmPassword")} />
                <br />
-               <FormButton className="btn-primary" label="Register" callback={handleSubmit} />
-               <span className="w">or</span>
-               <UiButton className="btn-secondary" label="Log in" callback={handleNavigation(routes.LOGIN)} />
+               <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
+               <span className="w">{t('common.or')}</span>
+               <UiButton className="btn-secondary" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
             </div>
             <div>
-               <CheckboxInput name="terms" callback={handleCheckbox} /><span className="w">Accetta i termini di condizione </span>
+               <CheckboxInput name="terms" callback={handleCheckbox} className="bottom rightMargin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
             </div>
          </form>
 
          <div className="txt w">
-            <a href="#" onClick={handleNavigation(routes.HOME)}>Back to home</a>
+            <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
          </div>
 
       </section>
