@@ -1,10 +1,19 @@
 {
    "common": {
       "account": "Account",
-      "date": "{{value, datetime}}",
+      "select": "Seleziona",
+      "rooms": "{{count}} stanza",
+      "rooms_other": "{{count}} stanze",
+      "number": "{{value, number(minimumFractionDigits: 2)}}",
+      "currency": "{{price, currency(currency: EUR)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
+      "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
       "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
-      "select": "Seleziona"
+      "relativeDay": "{{value, relativetime(day)}}",
+      "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
+      "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
+      "relativeMonth": "{{value, relativetime(range: month)}}",
+      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}"
    },
    "toasts": {},
    "bo": {
@@ -38,8 +47,8 @@
          },
          "review": {
             "username": "username",
-            "title": "title",
-            "description": "description"
+            "title": "titolo",
+            "description": "descrizione"
          },
          "service": {
             "service": "Servizio",

@@ -12,7 +12,7 @@ function UiSelect(props) {
    return (
       <>
          <select name={props.name} className={props.cssClass} onChange={onChangeCallback}>
-            {props.data.map(props.renderingCallback)}
+            {props.data.map(props.renderingCallback(props.name))}
          </select>
       </>
    )

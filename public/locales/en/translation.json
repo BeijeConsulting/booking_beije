@@ -1,10 +1,19 @@
 {
    "common": {
       "account": "Account",
-      "date": "{{value, datetime}}",
+      "select": "Select",
+      "rooms": "{{count}} room",
+      "rooms_other": "{{count}} rooms",
+      "number": "{{value, number(minimumFractionDigits: 2)}}",
+      "currency": "{{price, currency(currency: EUR)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
+      "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
       "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
-      "select": "Select"
+      "relativeDay": "{{value, relativetime(day)}}",
+      "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
+      "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
+      "relativeMonth": "{{value, relativetime(range: month)}}",
+      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}"
    },
    "toasts": {},
    "bo": {
@@ -30,8 +39,8 @@
    "fe": {
       "components": {
          "rooms": {
-            "person": "person",
-            "people": "people",
+            "person": "Person",
+            "people": "People",
             "price": "Price for",
             "nights": "nights",
             "night": "night"
