@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import React from 'react'
 import { faWifi, faUtensils, faFan, faParking, faJugDetergent, faShirt, faDesktop, faWaterLadder, faSmoking, faBell } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next';
 const { t } = useTranslation();

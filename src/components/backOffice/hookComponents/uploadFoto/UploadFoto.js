@@ -6,10 +6,13 @@ import './UploadFoto.less'
 //ANT DESIGN
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import GoBackButton from '../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
+import { useTranslation } from 'react-i18next';
+// import GoBackButton from '../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
 
 
 const UploadFoto = (props) => {
+
+    const { t } = useTranslation();
 
     const { addFotoStructure } = props
 
@@ -85,7 +88,7 @@ const UploadFoto = (props) => {
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <div style={{ marginTop: 8 }}>{t('bo.components.uploadFoto.upload')}</div>
         </div>
     );
 

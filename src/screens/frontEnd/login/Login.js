@@ -1,5 +1,4 @@
 import React from "react";
-import './Login.less'
 import LoginForm from "../../../components/frontEnd/hookComponents/loginForm/LoginForm";
 
 const Login = () => {

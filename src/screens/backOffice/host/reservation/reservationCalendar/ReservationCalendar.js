@@ -9,10 +9,13 @@ import './ReservationCalendar.less'
 //FULLCALENDAR
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import { useTranslation } from 'react-i18next'
 
 
 
 const ReservationCalendar = (props) => {
+
+    const { t } = useTranslation();
 
     const arrTest = [
         { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17' },

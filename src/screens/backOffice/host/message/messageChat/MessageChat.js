@@ -4,10 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //FONT-AWESOME
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPaperPlane
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 //ANT-DESIGN
 import {
@@ -16,13 +16,17 @@ import {
 } from 'antd';
 
 //STYLE
-import './MessageChat.less'
+import './MessageChat.less';
+
+import { useTranslation } from 'react-i18next';
 
 //COMPONENTS
-import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard'
+import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard';
 import GoBackButton from '../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
 
 const MessageChat = (props) => {
+
+    const {t} = useTranslation()
 
     //TEST--------
     const messageUser = [
@@ -66,6 +70,7 @@ const MessageChat = (props) => {
     const renderSingleMessage = (item, key) => {
         return (
             <MessageCard
+                key={key}
                 nameMessage={item.name}
                 bodyMessage={item.body}
                 dateMessage={item.date}
@@ -78,14 +83,14 @@ const MessageChat = (props) => {
     return (
         <div className="container_chat">
             <GoBackButton />
-            <h1 className="title_messages_page">Messages</h1>
+            <h1 className="title_messages_page">{t('common.messages')}</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>Message not exist...</p>}
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t('common.messageError')}</p>}
             </div>
-            <Input className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
-            <Button className="button_send_message" type="primary">Send</Button>
+            <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
+            <Button className="button_send_message" type="primary">{t('common.send')}</Button>
 
-        </div >
+        </div>
     )
 }
 
@@ -95,4 +100,4 @@ MessageChat.propTypes = {
 };
 
 
-export default MessageChat
+export default MessageChat;

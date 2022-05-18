@@ -1,9 +1,12 @@
 import React from 'react'
 import './FormInput.less'
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+
 
 function FormInput(props) {
-   
+   const { t } = useTranslation();
+
    const handleOnChange = (e) => {
       props.callback(e.target.value);
    }
@@ -23,15 +26,14 @@ function FormInput(props) {
 
 FormInput.defaultProps = {
    type: 'text',
-   placeholder: 'inserisci...',
+   // placeholder: t('fe.components.input.insert'),
 }
 
 FormInput.propTypes = {
    type: PropTypes.string.isRequired,
    className: PropTypes.string,
    placeholder: PropTypes.string,
-   id: PropTypes.string,
-   name: PropTypes.string
+   info: PropTypes.string
 }
 
 export default FormInput;

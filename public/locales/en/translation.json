@@ -1,9 +1,5 @@
 {
    "common": {
-      "account": "Account",
-      "select": "Select",
-      "rooms": "{{count}} room",
-      "rooms_other": "{{count}} rooms",
       "number": "{{value, number(minimumFractionDigits: 2)}}",
       "currency": "{{price, currency(currency: EUR)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
@@ -13,12 +9,45 @@
       "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
-      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}"
+      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "account": "Account",
+      "backToHome": "Back to home",
+      "email": "Email",
+      "english": "English",
+      "italian": "Italian",
+      "loginLabel": "Login",
+      "messages": "Messages",
+      "name": "Name",
+      "or": "or",
+      "password": "Password",
+      "passwordConfirm": "Confirm password",
+      "registerLabel": "Register",
+      "registration": "Registration",
+      "rooms": "{{count}} room",
+      "rooms_other": "{{count}} rooms",
+      "select": "Select",
+      "send": "Send",
+      "surname": "Surname",
+      "writeMessage": "Write your message here...",
+      "you": "You"
    },
-   "toasts": {},
+   "toasts": {
+      "messageError": "No messages"
+   },
    "bo": {
-      "components": {},
-      "modals": {},
+      "components": {
+         "uploadFoto": {
+            "upload": "Upload"
+         },
+         "hostRegistrationModal": {
+            "privateRegistration": "I'm a private",
+            "companyRegistration": "I have a company",
+            "setUpPrivateAccount": "Set up your private account",
+            "setUpCompanyAccount": "Set up your company account",
+            "accept": "I accept",
+            "termsConditionsForHost": "Terms and Conditions for Host"
+         }
+      },
       "screens": {
          "host": {
             "hostAccount": {
@@ -29,8 +58,11 @@
                "title": "Reservation list",
                "accepted": "Accepted",
                "pending": "Pending",
-               "refused": "Refused",
+               "rejected": "Rejected",
                "calendar": "Calendar"
+            },
+            "structure": {
+               "addStructure": "Add structure"
             }
          },
          "admin": {}
@@ -38,6 +70,12 @@
    },
    "fe": {
       "components": {
+         "button": {
+            "pressMe": "Press me!"
+         },
+         "input": {
+            "insert": "Insert..."
+         },
          "rooms": {
             "person": "Person",
             "people": "People",
@@ -64,10 +102,23 @@
             "alarm": "Alarm"
          }
       },
-      "modals": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"
+         },
+         "settings": {
+            "title": "Settings"
+         },
+         "settingsCard": {
+            "account": "Account",
+            "bookings": "Bookings",
+            "favourites": "Favourites",
+            "messages": "Messages",
+            "becomeAHost": "Become a Host",
+            "yourProperties": "Your properties"
+         },
+         "registration": {
+            "acceptTerms": "I accept the terms and conditions"
          }
       }
    }

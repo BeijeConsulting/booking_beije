@@ -7,11 +7,15 @@ import { Button } from "antd";
 
 
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 //TODO: manca get da backend
 //TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
 const StructureList = () => {
+
+    const { t } = useTranslation();
+
     const navigate = useNavigate()
     const obj = [
         {
@@ -49,7 +53,7 @@ const StructureList = () => {
     return (
 
         <CardList sectionTitle={"Structure list"}
-            actions={<Button onClick={addStructure} type="primary">Add structure</Button>}
+            actions={<Button onClick={addStructure} type="primary"> {t('bo.screens.host.structure.addStructure')} </Button>}
             cards={obj}
         />
     )

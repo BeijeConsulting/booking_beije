@@ -4,8 +4,6 @@ import './StructureOperations.less'
 
 
 //ANT DESIGN
-import { PlusOutlined } from '@ant-design/icons';
-import moment from 'moment';
 import {
     Input,
     InputNumber,
