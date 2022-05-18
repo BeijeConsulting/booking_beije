@@ -8,8 +8,8 @@ import CardList from "../../../../../components/backOffice/hookComponents/cardLi
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 
 // FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 // UTILS
 

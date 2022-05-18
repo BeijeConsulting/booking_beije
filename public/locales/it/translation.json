@@ -13,7 +13,9 @@
       "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
-      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}"
+      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "english": "Inglese",
+      "italian": "Italiano"
    },
    "toasts": {},
    "bo": {

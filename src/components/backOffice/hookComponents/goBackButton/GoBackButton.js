@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from 'prop-types'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -12,7 +11,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 
-const GoBackButton = (props) => {
+const GoBackButton = () => {
 
     const navigate = useNavigate()
 
@@ -27,8 +26,6 @@ const GoBackButton = (props) => {
 }
 
 
-// GoBackButton.propTypes = {
-//     callback: PropTypes.func.isRequired
-// }
+
 
 export default GoBackButton

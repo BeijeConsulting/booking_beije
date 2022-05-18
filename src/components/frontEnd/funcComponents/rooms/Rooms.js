@@ -60,5 +60,11 @@ Rooms.defaultProps = {
     numberOfNights: 2
 }
 
+Rooms.propTypes = {
+    numberOfPeople: PropTypes.number,
+    numberOfNights: PropTypes.number,
+    title: PropTypes.string
+}
+
 
 export default Rooms

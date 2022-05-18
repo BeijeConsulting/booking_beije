@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
