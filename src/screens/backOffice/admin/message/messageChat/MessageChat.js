@@ -1,5 +1,8 @@
 import React from 'react';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 //PROP-TYPES
 import PropTypes from 'prop-types';
 
@@ -23,7 +26,7 @@ import './messageChat.less'
 import MessageCard from '../../../components/backOffice/hookComponents/MessageCard/MessageCard'
 
 const MessageChat = (props) => {
-
+    const { t } = useTranslation()
 
 
     //TEST--------
@@ -82,10 +85,10 @@ const MessageChat = (props) => {
             <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
             <h1 className="title_messages_page">Messages</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>Message not exist...</p>}
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("bo.common.message.noMessages")}</p>}
             </div>
-            <Input className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
-            <Button className="button_send_message" type="primary">Send</Button>
+            <Input className="send_message_input" size="large" placeholder={t("bo.common.message.writeMessage")} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
+            <Button className="button_send_message" type="primary">{t("bo.common.message.send")}</Button>
 
         </div >
     )
