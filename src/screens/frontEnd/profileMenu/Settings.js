@@ -6,8 +6,6 @@ import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
 
-
-
 function Settings() {
 
   const { t } = useTranslation();
