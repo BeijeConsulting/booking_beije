@@ -2,30 +2,23 @@ import React from "react";
 // import { navigate } from "../../../utils/Utils";
 import { routes } from "../../../routes/routes";
 
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-
-
-import { Outlet } from 'react-router-dom'
+// less 
+import './Homepage.less'
 
 const Homepage = () => {
 
   let vector = useNavigate()
 
-  const nav = () => {
-    vector(routes.LOGIN)
-  }
-  const nav2 = () => {
-    vector(routes.REGISTRATION)
-  }
 
   return (
-    <>
+    <div className="home">
       <p>Home</p>
-      <button onClick={nav}>Login</button>
-      <button onClick={nav2}>Registration</button>
-      <Outlet />
-    </>
+      <img src="https://www.raicultura.it/cropgd/900x520/dl/img/2020/04/08/1586351246504_abstract-2468874_1920.jpg"></img>
+      <img src="https://www.raicultura.it/cropgd/900x520/dl/img/2020/04/08/1586351246504_abstract-2468874_1920.jpg"></img>
+
+    </div>
   );
 };
 
