@@ -7,6 +7,8 @@ import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../../routes/routes';
 
+//import {postApi} from '../../../../services/genericServices';
+import './LoginForm.less'
 
 
 let formObject = {
@@ -43,15 +45,16 @@ function LoginForm() {
       <section className="container color flex column space">
 
          <div className="flex center column">
-            <div className="w">LOGO</div>
+            <div className="w logo">LOGO</div>
             {/* <Logo></Logo> */}
          </div>
 
          <form>
+            <h1 className="w title">Login</h1>
             <div className="formInput flex center column">
             <h1 className="w">Login</h1>
-               <FormInput type={'text'} placeholder="Email" info="email" callback={handleChange('email')} />
-               <FormInput type={'password'} placeholder="Password" info="password" callback={handleChange('password')} />
+               <FormInput className='formInput' type={'text'} placeholder="Email" info="email" callback={handleChange('email')} />
+               <FormInput className='formInput' type={'password'} placeholder="Password" info="password" callback={handleChange('password')} />
                <br />
                <FormButton className="btn-primary" label="Log in" callback={handleSubmit} />
                <span className="w">or</span>
