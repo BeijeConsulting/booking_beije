@@ -6,7 +6,7 @@ import './UploadFoto.less'
 //ANT DESIGN
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import GoBackButton from '../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
+// import GoBackButton from '../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
 
 
 const UploadFoto = (props) => {

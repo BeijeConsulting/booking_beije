@@ -4,7 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 //PROP-TYPES
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 //STYLE
 import './MessageList.less'
@@ -51,8 +51,8 @@ const MessageList = (props) => {
     )
 }
 
-MessageList.propTypes = {
-    dataMessage: PropTypes.array
-}
+// MessageList.propTypes = {
+//     dataMessage: PropTypes.array
+// }
 
 export default MessageList

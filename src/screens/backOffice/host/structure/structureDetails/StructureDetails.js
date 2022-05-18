@@ -7,8 +7,8 @@ import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'antd';
 
 //Components
-import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
-import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
+// import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
+// import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
 
 
 

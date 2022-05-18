@@ -27,9 +27,8 @@ ReviewCard.defaultProps = {
 }
 
 PropertyCards.propTypes = {
-    username: t("fe.components.review.username"),
-    title: t("fe.components.review.title")
-
+    username: PropTypes.string,
+    title: PropTypes.string,
 }
 
 export default ReviewCard;
