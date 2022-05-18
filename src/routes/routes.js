@@ -1,6 +1,7 @@
 const routes = {
     // FE
-    HOME: '/',
+    LAYOUT : '/',
+    HOME: 'home',
     LOGIN: 'login',
     REGISTRATION: 'registration',
 
