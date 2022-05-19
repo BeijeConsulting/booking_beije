@@ -1,5 +1,8 @@
 import React from "react";
 
+//TRANSLATION
+import { useTranslation } from "react-i18next";
+
 //Style
 import "./StructureDetails.less"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +20,9 @@ const StructureDetails = () => {
 
     //header
     //footer
+
+    const { t } = useTranslation()
+
 
     const obj = [
         {
@@ -39,25 +45,30 @@ const StructureDetails = () => {
         },
     ]
 
-    /* const getAnnounceCards = (announce, key) => {
+    //DA LASCIARE COMMENTATO FINCHè NON TORNA FEDE, CAUSA ROTTURA CALLBACK
+
+    const getAnnounceCards = (announce, key) => {
         return <HorizontalCard
-        imageSrc={announce.img}
-        imageAlt={`${key}_${announce.title}`}
-        title={announce.title}
-        text={announce.text}
-        callback={""}
+            key={key}
+            imageSrc={announce.img}
+            imageAlt={`${key}_${announce.title}`}
+            title={announce.title}
+            text={announce.text}
+            callback={getConsole}
         />
     }
- */
+
+    {/* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */ }
+    const getConsole = () => {
+        console.log("callback")
+    }
 
     return (
         <>
-            {/* to be concluded as soon as the component with the MAP is created */}
-            <h1>StructureDetails</h1>
-            <Button className="edit_button"><FontAwesomeIcon icon={faPen} />Edit structure</Button>
-
+    
+            <h1>{t("bo.screens.host.structureDetails.structureDetailsTitle")}</h1>
+            <Button className="edit_button"><FontAwesomeIcon icon={faPen} />{t("bo.screens.host.structureDetails.editStructure")}</Button>
             <div className="structure_details_container">
-
 
                 <img src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
 
@@ -75,12 +86,16 @@ const StructureDetails = () => {
                 </div>
 
             </div>
-            {/* <CardList sectionTitle="Annunci"
-                actions={<Button>Add rooms</Button>}>
+
+            
+            <CardList sectionTitle="Annunci"
+                actions={<Button>{t("bo.screens.host.structureDetails.addRoom")}</Button>}
+                //RICHIAMATA CALLBACK A CASO CAUSA ROTTURA
+                paginationCallback={getConsole}>
                 {
                     obj.map(getAnnounceCards)
                 }
-            </CardList> */}
+            </CardList>
         </>
     )
 }
