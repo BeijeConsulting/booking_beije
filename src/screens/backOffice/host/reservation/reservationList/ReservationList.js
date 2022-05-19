@@ -6,6 +6,7 @@ import CardList from "../../../../../components/backOffice/hookComponents/cardLi
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ChoiceButton from "../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard"
 
 //ICON
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -66,12 +67,29 @@ const ReservationList = () => {
         //setState announce refused
     }
 
+    const getCardStructures = (structure, key) => {
+        return <HorizontalCard
+            key={key}
+            imageSrc={structure.img}
+            altText={`${key}_${structure.title}`}
+            title={structure.title}
+            text={structure.text}
+            callback={getConsole}
+        />
+    }
+{/* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */}
+    const getConsole = () =>{
+        console.log("callback")
+    }
+
     return (
 
-        <CardList sectionTitle={t("bo.screens.host.reservationList.title")}
+        <CardList
+            sectionTitle={t("bo.screens.host.reservationList.title")}
             actions={
                 <>
                     <ChoiceButton
+                    /* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */
                         callbackFirstButton={showAccepted}
                         firstButtonName={t("bo.screens.host.reservationList.accepted")}
                         callbackSecondButton={showPending}
@@ -86,9 +104,14 @@ const ReservationList = () => {
                         {t("bo.screens.host.reservationList.calendar")}
                     </Button>
                 </>
+
             }
-            cards={obj} //obj is used for test, after it will be "state.api"
-        />
+
+            
+        >
+            {obj.map(getCardStructures)}
+
+        </CardList>
     )
 }
 
