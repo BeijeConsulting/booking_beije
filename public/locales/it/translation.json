@@ -31,7 +31,7 @@
       "select": "Seleziona",
       "send": "Invia",
       "surname": "Cognome",
-      "termsConditions" :"Termini e condizioni",
+      "termsConditions": "Termini e condizioni",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu"
    },
@@ -57,25 +57,8 @@
          }
       },
       "modals": {},
-      "common": {
-         "message": {
-            "title": "Messaggi",
-            "send": "Invia",
-            "writeMessage": "Scrivi messaggio...",
-            "noMessages": "Non esistono messaggi..."
-         }
-      },
-      "modals": {},
       "screens": {
          "host": {
-            "hostRegistration": {
-               "privateRegistration": "Sono un privato",
-               "companyRegistration": "Ho un'azienda",
-               "setUpPrivateAccount": "Configura il tuo account privato",
-               "setUpCompanyAccount": "Configura il tuo account aziendale",
-               "accept": "Accetto",
-               "termsConditionsForHost": "Termini e condizioni per gli host"
-            },
             "hostAccount": {
                "vat": "Partita IVA",
                "billingAddress": "Indirizzo di fatturazione"
@@ -88,7 +71,7 @@
                "setUpCompanyAccount": "Configura il tuo account aziendale",
                "accept": "Accetto",
                "termsConditionsForHost": "Termini e condizioni per gli host",
-               "fields":{
+               "fields": {
                   "phoneNumber": "Numero di telefono",
                   "city": "Città",
                   "postcode": "Codice postale",
@@ -147,6 +130,7 @@
             "alarm": "Allarme"
          }
       },
+      "modals": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
