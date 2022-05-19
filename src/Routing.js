@@ -34,12 +34,18 @@ import StructureList from "./screens/backOffice/host/structure/structureList/Str
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
+import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
+
 import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 import { postApi, getApi } from "./services/genericServices";
 import { decryptItem } from "./utils/crypto/crypto";
+
+// COMMON 
+import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 
 function Routing(props) {
   useEffect(() => {
@@ -64,7 +70,7 @@ function Routing(props) {
   return (
     <Routes>
 
-
+      <Route path={routes.DISCLAIMER} element={<Disclaimer/>} />
       <Route path={routes.REGISTRATION} element={<Registration />} />
       <Route path={routes.LOGIN} element={<Login />} />
 

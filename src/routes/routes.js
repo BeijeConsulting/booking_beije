@@ -21,6 +21,7 @@ const routes = {
     NOTFOUND: '*',
     SEARCH: 'search',
     MRA: 'mostreviewedBuilding',
+    DISCLAIMER : 'disclaimer',
 
     
     // BO
@@ -31,8 +32,10 @@ const routes = {
     STRUCTURE_OPERATION: 'structure-operation',
     STRUCTURE_LIST: 'structure-list',
     STRUCTURE_DETAILS: 'structure-details',
+    ANNOUNCE_OPERATION: 'announce-operation',
     RESERVATION_CALENDAR: 'reservation-calendar',
     RESERVATION_LIST: 'reservation-list',
+    HOST_REGISTRATION: 'host-registration',
     PENDING_ANNOUNCE_LIST: 'pending-announce-list' //to add in admin route
 }
 

@@ -12,8 +12,8 @@ import { Pagination } from "antd";
 
 const CardList = (props) => {
 
-    const handlePageSwitch = (e) => {
-        props.paginationCallback(e)
+    const handlePageSwitch = (clickedPage) => {
+        props.paginationCallback(clickedPage)
     }
     return (
         <section className={"section_container"}>
@@ -30,33 +30,36 @@ const CardList = (props) => {
                 </div>
             }
 
-            {/* Card list */}
+            {/* Card list mapping passed as children */}
             <div className={"card_list"}>
+                {/* Object's array map */}
                 {props.children}
             </div>
 
+            {/* //DA LASCIARE COMMENTATO FINCHè NON TORNA FEDE, CAUSA ROTTURA CALLBACK */}
             {/* Pagination (to be tested)*/}
-            <div className={"pagination"}>
-                <Pagination
-                    // defaultCurrent={1} //defaults to 1
-                    total={props.itemsCount}
-                    current={props.currentPage}
-                    pageSize={props.pageSize}
-                    onChange={handlePageSwitch}
-                />
-            </div>
+            {/* <Pagination
+                // defaultCurrent={1} //defaults to 1
+                hideOnSinglePage={true}
+                total={props.itemsCount} // *total* number of elements to arrange in pages
+                pageSize={props.pageSize} // how many elements to show per page 
+                onChange={handlePageSwitch}
+            /> */}
 
         </section>
     )
 }
 
 CardList.defaultProps = {
-    pageSize: 10
 }
 
 CardList.propTypes = {
     sectionTitle: PropTypes.string,
-    // paginationCallback:
+    actions: PropTypes.any,
+    children: PropTypes.arrayOf(PropTypes.object),
+    itemsCount: PropTypes.number,
+    pageSize: PropTypes.number,
+    paginationCallback: PropTypes.func.isRequired,
 }
 
 export default CardList;

@@ -1,11 +1,9 @@
 import React from 'react'
 import './UiButton.less'
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 
 
 function UiButton({ className, callback, label }) {
-   const { t } = useTranslation();
 
    return (
       <button
@@ -20,7 +18,7 @@ function UiButton({ className, callback, label }) {
 }
 
 UiButton.defaultProps = {
-   // placeholder: t('fe.components.button.pressMe'),
+   placeholder: 'Press me!'
 }
 
 UiButton.propTypes = {
