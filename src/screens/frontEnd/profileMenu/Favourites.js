@@ -13,25 +13,46 @@ import './profileMenuCSS/Favourites.less';
 
 const Favourites = () => {
    const { t } = useTranslation();
+
+   let favouritesArray = [
+      {
+         id: 0,
+         title: 'Title',
+         thumbnail: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'
+      },
+      {
+         id: 1,
+         title: 'Title',
+         thumbnail: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'
+      },
+      {
+         id: 2,
+         title: 'Title',
+         thumbnail: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'
+      },
+      {
+         id: 3,
+         title: 'Title',
+         thumbnail: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'
+      }
+   ]
+
+   const renderFavourites = (property, key) => {
+      return (
+         <FavouriteCard
+            key={`fav${key}`}
+            id={property.id}
+            title={property.title}
+            thumbnail={property.thumbnail}
+         />
+      )
+   }
+
    return (
       <div className='favourites-page'>
          {/* back button */}
          <h1 className="title">{t('fe.screens.settingsCard.favourites')}</h1>
-         <FavouriteCard
-            id={0}
-            title={'Title'}
-            thumbnail={'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'}
-         />
-         <FavouriteCard
-            id={1}
-            title={'Title'}
-            thumbnail={'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'}
-         />
-         <FavouriteCard
-            id={2}
-            title={'Title'}
-            thumbnail={'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg'}
-         />
+         {favouritesArray.map(renderFavourites)}
          {/* pagination */}
       </div>
    );
