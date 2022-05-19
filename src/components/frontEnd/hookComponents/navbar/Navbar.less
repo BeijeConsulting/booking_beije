@@ -1,17 +1,21 @@
 .navMobile{
     height: 15%;
-    background-color: #FFF9F5;
+    background-color: #fff9f5c7;
     position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    backdrop-filter: blur(10px);
     .iconIfLogged{
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
         object-fit: cover;
+    }
+    .iconSearch{
+        font-size: 3rem;
     }
     .iconNotLogged{
         width: 4rem;
@@ -33,6 +37,7 @@
     padding: 0 7vw;
     position: relative;
     z-index: 2;
+    border-bottom: 2px solid #FFF9F5;
     .hambMenu{
         display: flex;
         padding: .7rem 1.8rem;
@@ -73,13 +78,14 @@
     animation: settingOpen .4s linear;
     position: absolute;
     top: 10vh;
-
-
+    border-bottom: 2px solid #FFF9F5;
+    backdrop-filter: blur(10px);
     li{
         list-style: none;
         cursor: pointer;
         font-size: 1.2rem;
         padding: 1rem;
+        font-weight: bold;
     }
 }
 
