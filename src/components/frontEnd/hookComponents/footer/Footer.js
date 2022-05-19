@@ -42,7 +42,7 @@ function Footer(props) {
                 {
                     permission === 'guest' &&
                     <div>
-                        <Button className="becomeHost" onClick={goTo('HOME')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
+                        <Button className="becomeHost" callback={goTo('DASHBOARD')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
                     </div>
                 }
                 {/* {
