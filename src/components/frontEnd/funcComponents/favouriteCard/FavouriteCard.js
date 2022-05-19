@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 
 function FavouriteCard(props) {
 
-   const handleFavourite = (propertyId) => () => {
-      console.log('propertyId',propertyId);
-      // remove property from favourites
+   const handleOnClick = () => {
+      props.callback(props.id, props.title)
    }
 
    return (
@@ -20,9 +19,8 @@ function FavouriteCard(props) {
          <div className={`card-content ${props.className}`}>
             <div className='card-header'>
                <span className='card-title'>{props.title}</span>
-               <FontAwesomeIcon icon={faHeart} onClick={handleFavourite(props.id)} />
+               <FontAwesomeIcon icon={faHeart} onClick={handleOnClick} />
             </div>
-            {props.children}
          </div>
       </div>
    )
@@ -33,9 +31,9 @@ FavouriteCard.defaultProps = {
 }
 
 FavouriteCard.propTypes = {
+   className: PropTypes.string,
    id: PropTypes.number.isRequired,
    thumbnail: PropTypes.string.isRequired,
-   className: PropTypes.string,
    title: PropTypes.string.isRequired
 }
 
