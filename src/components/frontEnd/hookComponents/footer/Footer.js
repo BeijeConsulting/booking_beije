@@ -5,7 +5,11 @@ import { useNavigate } from "react-router";
 import { routes } from "../../../../routes/routes";
 import './Footer.less';
 
+import LanguagesSwitch from '../../../common/languagesSwitch/LanguagesSwitch'
+
+//da cancellare quando implementato duck user
 let permission = 'guest';
+
 function Footer(props) {
     let vector = useNavigate()
     //function to Map link in Footer
@@ -24,18 +28,30 @@ function Footer(props) {
     }
     return (
         <footer>
-            <ul>
-                {props.link.map(mapLinks)}
-            </ul>
-            {
-                permission === 'guest' &&
+            <div className="container_links_footer">
+                <ul>
+                    {props.link.map(mapLinks)}
+                </ul>
+                {
+                    permission === 'guest' &&
+                    <button onClick={goTo('HOME')}>becomeHost</button>
+                }
+                {/* {
+                props.userDuck.user.permission[0] === 'guest' &&
                 <button onClick={goTo('HOME')}>becomeHost</button>
-            }
+                } */}
+            </div>
+
+            <LanguagesSwitch />
+
+
+
         </footer>
     )
 }
 
 const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck
+    tokenDuck: state.tokenDuck,
+    // userDuck : state.userDuck
 })
 export default connect(mapStateToProps)(Footer);
