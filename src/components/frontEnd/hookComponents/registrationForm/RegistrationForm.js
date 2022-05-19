@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 //redux
 import { setToken } from "../../../../redux/ducks/tokenDuck"
 
@@ -35,7 +34,7 @@ let formObject = {
    email: '',
    password: '',
    url_immagine: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
-
+   //placeholder
 }
 
 let formObjectCtrl = {
