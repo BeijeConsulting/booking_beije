@@ -5,7 +5,6 @@ import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiB
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
-import Navbar from "../../../components/frontEnd/hookComponents/navbar/Navbar";
 
 function Settings() {
 
@@ -41,7 +40,6 @@ function Settings() {
 
   return (
     <>
-      <Navbar />
       <div className="settings_container">
 
         <div className="title_and_logout_container">
@@ -56,6 +54,7 @@ function Settings() {
           label={"Logout"} />
         <Disclaimer />
       </div>
+
     </>
 
   );
