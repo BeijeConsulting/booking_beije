@@ -1,5 +1,8 @@
 import React from 'react';
 
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
 //PROP-TYPES
 import PropTypes from 'prop-types';
 
@@ -23,7 +26,7 @@ import './messageChat.less'
 import MessageCard from '../../../components/backOffice/hookComponents/MessageCard/MessageCard'
 
 const MessageChat = (props) => {
-
+    const { t } = useTranslation()
 
 
     //TEST--------
@@ -81,13 +84,12 @@ const MessageChat = (props) => {
     return (
         <div className="container_chat">
             <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
-            <h1 className="title_messages_page">Messages</h1>
+            <h1 className="title_messages_page">{t('common.messages')}</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t('toasts.messageError')}</p>}
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("common.noMessages")}</p>}
             </div>
             <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
             <Button className="button_send_message" type="primary">{t('common.send')}</Button>
-
         </div>
     )
 }

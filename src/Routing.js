@@ -34,6 +34,8 @@ import StructureList from "./screens/backOffice/host/structure/structureList/Str
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
+import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";

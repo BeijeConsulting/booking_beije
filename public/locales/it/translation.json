@@ -39,16 +39,23 @@
    },
    "bo": {
       "components": {
+         "sidebar": {
+            "structure": "Strutture",
+            "payments": "Pagamenti",
+            "reservations": "Prenotazioni",
+            "messages": "Messaggi"
+         },
          "uploadFoto": {
             "upload": "Carica"
-         },
-         "hostRegistrationModal": {
-            "privateRegistration": "Sono un privato",
-            "companyRegistration": "Ho un'azienda",
-            "setUpPrivateAccount": "Configura il tuo account privato",
-            "setUpCompanyAccount": "Configura il tuo account aziendale",
-            "accept": "Accetto",
-            "termsConditionsForHost": "Termini e condizioni per gli host"
+         }
+      },
+      "modals": {},
+      "common": {
+         "message": {
+            "title": "Messaggi",
+            "send": "Invia",
+            "writeMessage": "Scrivi messaggio...",
+            "noMessages": "Non esistono messaggi..."
          }
       },
       "screens": {
@@ -56,6 +63,24 @@
             "hostAccount": {
                "vat": "Partita IVA",
                "billingAddress": "Indirizzo di fatturazione"
+            },
+            "hostRegistration": {
+               "title": "Registrazione Host",
+               "privateRegistration": "Sono un privato",
+               "companyRegistration": "Ho un'azienda",
+               "setUpPrivateAccount": "Configura il tuo account come privato",
+               "setUpCompanyAccount": "Configura il tuo account aziendale",
+               "accept": "Accetto",
+               "termsConditionsForHost": "Termini e condizioni per gli host",
+               "fields":{
+                  "phoneNumber": "Numero di telefono",
+                  "city": "Città",
+                  "postcode": "Codice postale",
+                  "billingAddress": "Indirizzo di fatturazione",
+                  "companyName": "Nome azienda",
+                  "vatNumber": "P.IVA",
+                  "registerButton": "Registrati"
+               }
             },
             "reservationList": {
                "title": "Lista prenotazioni",
@@ -65,7 +90,14 @@
                "calendar": "Calendario"
             },
             "structure": {
-               "addStructure": "Aggiungi una struttura"
+               "structureListTitle": "Lista strutture",
+               "addStructure": "Aggiungi struttura"
+            },
+            "structureDetails": {
+               "structureDetailsTitle": "Dettagli struttura",
+               "editStructure": "Modifica struttura",
+               "addRoom": "Aggiungi camera",
+               "announce": "Annunci"
             }
          },
          "admin": {}
