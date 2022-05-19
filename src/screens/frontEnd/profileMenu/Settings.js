@@ -33,7 +33,7 @@ function Settings() {
     icon: faCommentAlt
   },
   {
-    name: user_type == "USER" ? t("fe.screens.setting.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
+    name: user_type === "USER" ? t("fe.screens.setting.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
     icon: faBuilding
   }
   ]
