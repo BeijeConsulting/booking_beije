@@ -1,4 +1,8 @@
 import React from "react";
+
+// translation 
+import { useTranslation } from 'react-i18next';
+
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 // routes 
@@ -11,13 +15,15 @@ import LanguagesSwitch from '../../../common/languagesSwitch/LanguagesSwitch'
 let permission = 'guest';
 
 function Footer(props) {
+    const { t } = useTranslation();
+
     let vector = useNavigate()
     //function to Map link in Footer
     const mapLinks = ((link, key) => {
 
         return (
             <li onClick={goTo(link.route)} key={key}>
-                {link.nameLink}
+                {t(link.nameLink)}
             </li>
         )
     })
@@ -34,11 +40,11 @@ function Footer(props) {
                 </ul>
                 {
                     permission === 'guest' &&
-                    <button onClick={goTo('HOME')}>becomeHost</button>
+                    <button onClick={goTo('HOME')}>{t('fe.screens.guestAccount.becomeAHost')}</button>
                 }
                 {/* {
                 props.userDuck.user.permission[0] === 'guest' &&
-                <button onClick={goTo('HOME')}>becomeHost</button>
+                <button onClick={goTo('HOME')}>{t('fe.screens.guestAccount.becomeAHost')}</button>
                 } */}
             </div>
 
