@@ -21,6 +21,7 @@ const routes = {
     NOTFOUND: '*',
     SEARCH: 'search',
     MRA: 'mostreviewedBuilding',
+    DISCLAIMER : 'disclaimer',
 
     
     // BO
