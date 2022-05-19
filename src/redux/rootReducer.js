@@ -4,9 +4,11 @@ import { combineReducers } from 'redux';
 
 //DUCK
 import tokenDuck from './ducks/tokenDuck';
+import userDuck from './ducks/userDuck';
 
 const rootReducer = combineReducers({
     tokenDuck,
+    userDuck
 });
 
 
