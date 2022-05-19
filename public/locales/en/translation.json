@@ -35,10 +35,25 @@
      "messageError": "No messages"
   },
   "bo": {
-     "components": {
-        "uploadFoto": {
-           "upload": "Upload"
-        },
+    "components": {
+      "sidebar": {
+        "structure": "Structure",
+        "payments": "Payments",
+        "reservations": "Reservations",
+        "messages": "Messages"
+      },
+      "uploadFoto": {
+        "upload": "Upload"
+      }
+    },
+    "modals": {},
+    "common": {
+      "message": {
+        "title": "Messages",
+        "send": "Send",
+        "writeMessage": "Type message...",
+        "noMessages": ""
+      },
         "hostRegistrationModal": {
            "privateRegistration": "I'm a private",
            "companyRegistration": "I have a company",

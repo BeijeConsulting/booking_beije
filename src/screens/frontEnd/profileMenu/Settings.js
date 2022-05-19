@@ -5,6 +5,7 @@ import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiB
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
+import Navbar from "../../../components/frontEnd/hookComponents/navbar/Navbar";
 
 function Settings() {
 
@@ -39,19 +40,23 @@ function Settings() {
   })
 
   return (
-    <div className="settings_container">
-      <div className="title_and_logout_container">
-        <h1>{t("fe.screens.settings.title")}</h1>
-        <p>Logout</p>
+    <>
+      <Navbar />
+      <div className="settings_container">
+
+        <div className="title_and_logout_container">
+          <h1>{t("fe.screens.settings.title")}</h1>
+          <p>Logout</p>
+        </div>
+        <div className="settings_card_list_container">
+          {settingsToComponents.map(createCardSettingsComponent)}
+        </div>
+        <UiButton
+          className={"logout_button"}
+          label={"Logout"} />
+        <Disclaimer />
       </div>
-      <div className="settings_card_list_container">
-        {settingsToComponents.map(createCardSettingsComponent)}
-      </div>
-      <UiButton
-        className={"logout_button"}
-        label={"Logout"} />
-      <Disclaimer />
-    </div>
+    </>
 
   );
 };

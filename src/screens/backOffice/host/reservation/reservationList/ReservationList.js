@@ -77,6 +77,10 @@ const ReservationList = () => {
             callback={getConsole}
         />
     }
+{/* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */}
+    const getConsole = () =>{
+        console.log("callback")
+    }
 
     const getConsole = () => {
         console.log("callback")
@@ -89,6 +93,7 @@ const ReservationList = () => {
             actions={
                 <>
                     <ChoiceButton
+                    /* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */
                         callbackFirstButton={showAccepted}
                         firstButtonName={t("bo.screens.host.reservationList.accepted")}
                         callbackSecondButton={showPending}
@@ -103,9 +108,15 @@ const ReservationList = () => {
                         {t("bo.screens.host.reservationList.calendar")}
                     </Button>
                 </>
+<<<<<<< HEAD
 
             }
 
+=======
+                
+            }
+            
+>>>>>>> 51dfb34b9a797cb83a733f3de1666186188f3f85
         >
             {obj.map(getCardStructures)}
 

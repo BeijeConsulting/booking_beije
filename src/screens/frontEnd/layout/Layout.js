@@ -10,14 +10,14 @@ import Footer from "../../../components/frontEnd/hookComponents/footer/Footer";
 // Outlet 
 import { Outlet } from "react-router";
 
-import { LinksFooterGuest,LinksFooterHost } from "../../../utils/linksFooter/linksFooter";
+import { LinksFooterGuest } from "../../../utils/linksFooter/linksFooter";
 const Layout = () => {
     let vector = useNavigate();
     let location = useLocation();
 
     useEffect(() => {
         if (location.pathname === "/") {
-            vector('home')
+            vector(routes.HOME)
         }
     }, [])
 
@@ -26,7 +26,7 @@ const Layout = () => {
         <div className="layoutContainer">
             <Navbar />
             <Outlet />
-            <Footer link={LinksFooterHost} />
+            <Footer link={LinksFooterGuest} />
         </div>
     )
 }
