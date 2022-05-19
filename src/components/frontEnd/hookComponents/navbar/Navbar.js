@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 // less 
 import './Navbar.less';
 
+import LanguagesSwitch from "../../../common/languagesSwitch/LanguagesSwitch";
+
 // profile image 
 import LoggedUser from '../../../../assets/images/LoggedUser.png';
 import notLoggedUser from '../../../../assets/images/notLoggedUser.png';
@@ -27,6 +29,8 @@ import PropTypes from "prop-types";
 
 // tokenDuck 
 import { initToken } from '../../../../redux/ducks/tokenDuck';
+// userDuck
+import { initUser } from '../../../../redux/ducks/userDuck'
 
 // utils localstorage 
 import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
@@ -74,9 +78,10 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        //initUser
+        initUser()
         initToken()
         removeLocalStorage("token")
+        removeLocalStorage("refreshToken")
         vector(routes.HOME)
     }
     return (
@@ -89,7 +94,7 @@ function Navbar(props) {
                         <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                         <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
                         {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
-                        <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')}/>
+                        <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
                             props.tokenDuck.token ?
@@ -110,13 +115,16 @@ function Navbar(props) {
                                             < div className="hambMenu" onClick={handleNavMenu}>
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
                                                 {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
-                                                <img className="phUser" src={LoggedUser} alt="profileUser"/>
+                                                <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                <LanguagesSwitch />
                                             </div>
+
                                             : <>
                                                 <div className="hambMenu" onClick={handleNavMenu}>
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
-                                                    <img className="phUser" src={LoggedUser} alt="profileUser"/>
+                                                    <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                    <LanguagesSwitch />
                                                 </div>
                                             </>
                                     }
@@ -155,6 +163,6 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     tokenDuck: state.tokenDuck,
-    // userDuck: state.userDuck 
+    userDuck: state.userDuck
 })
 export default connect(mapStateToProps)(Navbar);
