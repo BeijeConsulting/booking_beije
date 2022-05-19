@@ -3,6 +3,13 @@ import { useNavigate } from "react-router";
 // less 
 import './Navbar.less';
 
+import LanguagesSwitch from "../../../common/languagesSwitch/LanguagesSwitch";
+
+// profile image 
+import LoggedUser from '../../../../assets/images/LoggedUser.png';
+import notLoggedUser from '../../../../assets/images/notLoggedUser.png';
+
+
 // connect to redux 
 import { connect } from "react-redux";
 
@@ -13,7 +20,7 @@ import Modal from '../../../common/modal/Modal'
 
 // fontawesome 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // search component 
 
@@ -21,31 +28,21 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 // tokenDuck 
-import {initToken} from '../../../../redux/ducks/tokenDuck';
+import { initToken } from '../../../../redux/ducks/tokenDuck';
+// userDuck
+import { initUser } from '../../../../redux/ducks/userDuck'
 
 // utils localstorage 
-import {removeLocalStorage} from '../../../../utils/localStorage/localStorage';
+import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 
 function Navbar(props) {
     let vector = useNavigate();
 
     const [state, setState] = useState({
-        windowWidth: window.innerWidth,
+        // windowWidth: window.innerWidth,
         isMenuOpen: false,
         modalSearchIsOpen: false,
-    })
-
-    useEffect(() => {
-        function handleResize() {
-            setState({
-                ...state,
-                windowWidth: window.innerWidth
-            })
-        }
-        window.addEventListener('resize', handleResize)
-
-        return () => { window.removeEventListener('resize', handleResize) }
     })
 
     // function to set modal search open true 
@@ -65,6 +62,10 @@ function Navbar(props) {
     }
     // function to Go to dimanic vector 
     const goTo = (params) => () => {
+        setState({
+            ...state,
+            isMenuOpen: !state.isMenuOpen
+        })
         vector(routes[params])
     }
 
@@ -76,25 +77,32 @@ function Navbar(props) {
         })
     }
     // function to logout 
-    const logoutFunc = () =>{
-        //chiamata API
+    const logoutFunc = () => {
+        initUser()
         initToken()
         removeLocalStorage("token")
+        removeLocalStorage("refreshToken")
+        vector(routes.HOME)
     }
     return (
         <>
+
             {
-                state.windowWidth < 480 ?
+                //MOBILE
+                props.stateLayout < 480 ?
                     <nav className="navMobile">
-                        <button onClick={openModalSearch}>Search</button>
+                        <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                         <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
-                        <button onClick={goTo('HOME')}>logo</button>
+                        {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
+                        <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
+
                         {
                             props.tokenDuck.token ?
-                                <button onClick={goTo('SETTINGS')}>account</button> :
-                                <button onClick={goTo('LOGIN')}>goLogin</button>
+                                <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
+                                <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }
                     </nav>
+                    //DESKTOP
                     : <>
                         <nav className="navDesktop">
                             <span>logo</span>
@@ -106,15 +114,18 @@ function Navbar(props) {
                                         state.isMenuOpen === false ?
                                             < div className="hambMenu" onClick={handleNavMenu}>
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
-                                                <span className="phUser"></span>
+                                                {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                <LanguagesSwitch />
                                             </div>
+
                                             : <>
                                                 <div className="hambMenu" onClick={handleNavMenu}>
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
-                                                    <span className="phUser"></span>
+                                                    {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                    <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                    <LanguagesSwitch />
                                                 </div>
-
-
                                             </>
                                     }
                                     </>
@@ -142,15 +153,16 @@ function Navbar(props) {
 }
 
 Navbar.defaultProps = {
-    cssCustomMenu : 'settingOpen'
+    cssCustomMenu: 'settingOpen'
 }
 
 // propTypes 
 Navbar.propTypes = {
-    cssCustomMenu : PropTypes.string
+    cssCustomMenu: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck
 })
 export default connect(mapStateToProps)(Navbar);
