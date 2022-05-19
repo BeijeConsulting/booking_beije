@@ -79,6 +79,12 @@
                "structure": {
                   "structureListTitle": "Lista strutture",
                   "addStructure": "Aggiungi struttura"
+               },
+               "structureDetails": {
+                 "structureDetailsTitle": "Dettagli struttura",
+                 "editStructure": "Modifica struttura",
+                 "addRoom": "Aggiungi camera",
+                 "announce": "Annunci"
                }
             },
             "admin": {}
