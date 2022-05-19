@@ -1,0 +1,48 @@
+.favourites-page {
+   min-height: 100vh;
+   color: #fff;
+   background-color: #44403C;
+   display: flex;
+   flex-direction: column;
+   padding: 0 1rem;
+
+   h1 {
+      color: #fff;
+      margin: 2rem 0 1rem;
+   }
+
+   .favourite-card {
+      background-color: #eaddd4;
+      border-radius: 13px;
+      display: flex;
+      flex-direction: row;
+      margin: 0.3rem 0;;
+      padding: 1rem;
+
+      .thumbnail-container {
+         height: 70px;
+
+         img {
+            max-height: 100%;
+         }
+      }
+
+      .card-header {
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: space-between;
+
+         .card-title {
+            font-weight: 700;
+            font-size: 1rem;
+         }
+      }
+
+      .card-content {
+         width: 100%;
+         color: #44403C;
+         margin-left: 1rem;
+      }
+   }
+}
