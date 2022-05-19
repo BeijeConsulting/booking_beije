@@ -18,6 +18,14 @@ import './RegistrationForm.less';
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
 
+//api
+import {
+   registerUserPostApi
+} from '../../../../services/api/user/userApi'
+
+import {
+   signInPostApi
+} from '../../../../services/api/auth/authApi'
 
 let formObject = {
    name: '',
@@ -82,6 +90,8 @@ function RegistrationForm() {
    const handleSubmit = (e) => {
       e.preventDefault();
 
+
+
       notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
          openNotification('All fields must be filled in', 'all');
@@ -109,6 +119,17 @@ function RegistrationForm() {
          if (!Object.values(errors).includes(true)) {
             openNotification('Everything ok!', 'ok', 'info-toast');
 
+
+            registerUserPostApi(formObject = {
+               name: formObject.name,
+               surname: formObject.surname,
+               email: formObject.email,
+               password: formObject.password
+            });
+            console.log(signInPostApi({
+               email: formObject.email,
+               password: formObject.password
+            }))
             // delete formObject.confirmPassword;
             // const response = postApi('user', formObject);
             // console.log(response);
