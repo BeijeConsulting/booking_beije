@@ -1,10 +1,14 @@
 import React from "react";
-import './profileMenuCSS/Settings.less'
-import { useTranslation } from 'react-i18next';
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
+
+
+import { useTranslation } from 'react-i18next';
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
+
+
+import './profileMenuCSS/Settings.less'
 
 function Settings() {
 
@@ -35,27 +39,28 @@ function Settings() {
   ]
 
   const createCardSettingsComponent = ((card, key) => {
-    return <SettingsCard key={key} icon={card.icon} name={card.name} />
+    let cssClass = key === settingsToComponents.length - 1 ? 'beige posLast' : '';
+    return <SettingsCard key={key} icon={card.icon} name={card.name} className={cssClass} />
   })
 
   return (
-    <>
-      <div className="settings_container">
-
+    <div className="settings_container">
+      <div>
         <div className="title_and_logout_container">
           <h1>{t("fe.screens.settings.title")}</h1>
-          <p>Logout</p>
         </div>
         <div className="settings_card_list_container">
           {settingsToComponents.map(createCardSettingsComponent)}
         </div>
+      </div>
+      <div className="setting_disclaimer_container">
         <UiButton
           className={"logout_button"}
           label={"Logout"} />
         <Disclaimer />
       </div>
 
-    </>
+    </div>
 
   );
 };
