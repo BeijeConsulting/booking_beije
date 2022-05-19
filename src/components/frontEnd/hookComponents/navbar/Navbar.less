@@ -71,7 +71,9 @@
     color: #E9E9E9;
     padding: 0 7vw;
     animation: settingOpen .4s linear;
-    position: relative;
+    position: absolute;
+    top: 10vh;
+
 
     li{
         list-style: none;
@@ -83,11 +85,11 @@
 
 @keyframes settingOpen {
     0%{
-        bottom : 15vh;
+        top : 0;
 
     }
 
     100%{
-        bottom: 0;
+        top: 10vh;
     }
 }
