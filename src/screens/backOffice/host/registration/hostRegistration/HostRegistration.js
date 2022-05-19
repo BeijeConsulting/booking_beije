@@ -1,9 +1,17 @@
+//ANT DESIGN
 import { Form, Input, Checkbox, Button } from 'antd';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
+//REACT
+import { useState } from 'react';
+
+//ROUTING
+import { Link, useNavigate } from 'react-router-dom';
+
+//TRANSLATION
+import { useTranslation } from 'react-i18next';
+
+//STYLE
+import "./HostRegistration.less"
 
 const layout = {
     labelCol: {
@@ -27,19 +35,23 @@ const HostRegistration = () => {
 
     const { t } = useTranslation();
 
-    const setFirstchoice = () => {
+    const setHostType = (hostChoice) => () => {
+        let displayFirstchoice = false;
+        let displaySecondchoice = false;
+        (hostChoice === 1) ? (displayFirstchoice = true) : (displaySecondchoice = true)
         setState({
             ...state,
             displayRegistration: false,
-            displayFirstchoice: true
+            displayFirstchoice: displayFirstchoice,
+            displaySecondchoice: displaySecondchoice
         })
     }
 
-    const setSecondchoice = () => {
+    const closeInputRegistration = (e) => {
         setState({
-            ...state,
-            displayRegistration: false,
-            displaySecondchoice: true
+            displayRegistration: true,
+            displayFirstchoice: false,
+            displaySecondchoice: false
         })
     }
 
@@ -52,22 +64,15 @@ const HostRegistration = () => {
         navigate("/structure-operation")
     }
 
-    const closeInputRegistration = (e) => {
-        setState({
-            displayRegistration: true,
-            displayFirstchoice: false,
-            displaySecondchoice: false
-        })
-    }
 
 
     return (
         <>
             {state.displayRegistration &&
                 <div>
-                    <h2>"Register as host"</h2>
-                    <div className="host_choice" onClick={setFirstchoice}>{t('bo.components.hostRegistrationModal.privateRegistration')}</div>
-                    <div className="host_choice" onClick={setSecondchoice}>{t('bo.components.hostRegistrationModal.companyRegistration')}</div>
+                    <h2>{t("bo.screens.host.hostRegistration.title")}</h2>
+                    <div className="host_choice" onClick={setHostType(1)}>{t("bo.screens.host.hostRegistration.privateRegistration")}</div>
+                    <div className="host_choice" onClick={setHostType(2)}>{t("bo.screens.host.hostRegistration.companyRegistration")}</div>
                 </div>
             }
 
@@ -77,13 +82,13 @@ const HostRegistration = () => {
 
 
                     <Form {...layout} name="nest-messages" onFinish={onFinish} >
-                        <>
-                            <h2>Setup your host account</h2>
+                        <div className='title-setup'>
+                            <h2>{t("bo.screens.host.hostRegistration.setUpPrivateAccount")}</h2>
                             <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
-                        </>
+                        </div>
                         <Form.Item
                             name={['user', 'phone-number']}
-                            label="Phone number"
+                            label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}
                             rules={[
                                 {
                                     required: true,
@@ -94,7 +99,7 @@ const HostRegistration = () => {
                         </Form.Item>
                         <Form.Item
                             name={['user', 'city']}
-                            label="City"
+                            label={t("bo.screens.host.hostRegistration.fields.city")}
                             rules={[
                                 {
 
@@ -105,7 +110,7 @@ const HostRegistration = () => {
                         </Form.Item>
                         <Form.Item
                             name={['user', 'postcode']}
-                            label="Postcode"
+                            label={t("bo.screens.host.hostRegistration.fields.postcode")}
                             rules={[
                                 {
                                     type: 'number',
@@ -116,7 +121,7 @@ const HostRegistration = () => {
                         </Form.Item>
                         <Form.Item
                             name={['user', 'billing-address']}
-                            label="Billing address"
+                            label={t("bo.screens.host.hostRegistration.fields.billingAddress")}
                             rules={[
                                 {
                                     type: 'string',
@@ -126,10 +131,10 @@ const HostRegistration = () => {
                         >
                             <Input />
                         </Form.Item>
-                        <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                        <Checkbox>{t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link></Checkbox>
                         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                             <Button onClick={sendHostData} type="primary" htmlType="submit">
-                                Register
+                                {t("bo.screens.host.hostRegistration.fields.registerButton")}
                             </Button>
                         </Form.Item>
                     </Form>
@@ -138,13 +143,13 @@ const HostRegistration = () => {
 
             {state.displaySecondchoice &&
                 <Form {...layout} name="nest-messages" onFinish={onFinish} >
-                    <>
-                        <h2>Setup your host account</h2>
+                    <div className='title-setup'>
+                        <h2>{t("bo.screens.host.hostRegistration.setUpCompanyAccount")}</h2>
                         <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
-                    </>
+                    </div>
                     <Form.Item
                         name={['user', 'company-name']}
-                        label="Company name"
+                        label={t("bo.screens.host.hostRegistration.fields.companyName")}
                         rules={[
                             {
                                 required: true,
@@ -155,7 +160,7 @@ const HostRegistration = () => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'phone-number']}
-                        label="Phone number"
+                        label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}
                         rules={[
                             {
                                 required: true,
@@ -166,7 +171,7 @@ const HostRegistration = () => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'vat-number']}
-                        label="VAT Number"
+                        label={t("bo.screens.host.hostRegistration.fields.vatNumber")}
                         rules={[
                             {
                                 type: 'number',
@@ -178,7 +183,7 @@ const HostRegistration = () => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'city']}
-                        label="City"
+                        label={t("bo.screens.host.hostRegistration.fields.city")}
                         rules={[
                             {
 
@@ -189,7 +194,7 @@ const HostRegistration = () => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'postcode']}
-                        label="Postcode"
+                        label={t("bo.screens.host.hostRegistration.fields.postcode")}
                         rules={[
                             {
                                 type: 'number',
@@ -200,7 +205,7 @@ const HostRegistration = () => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'billing-address']}
-                        label="Billing address"
+                        label={t("bo.screens.host.hostRegistration.fields.billingAddress")}
                         rules={[
                             {
                                 type: 'string',
@@ -210,10 +215,10 @@ const HostRegistration = () => {
                     >
                         <Input />
                     </Form.Item>
-                    <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                    <Checkbox>{t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link></Checkbox>
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button onClick={sendHostData} type="primary" htmlType="submit">
-                            Register
+                            {t("bo.screens.host.hostRegistration.fields.registerButton")}
                         </Button>
                     </Form.Item>
                 </Form>
