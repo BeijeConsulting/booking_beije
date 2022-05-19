@@ -62,7 +62,7 @@ const ReservationList = () => {
         //api get accepted
         //setState announce pending
     }
-    const showRefused = () => {
+    const showRejected = () => {
         //api get accepted
         //setState announce refused
     }
@@ -87,8 +87,8 @@ const ReservationList = () => {
                         firstButtonName={t("bo.screens.host.reservationList.accepted")}
                         callbackSecondButton={showPending}
                         secondButtonName={t("bo.screens.host.reservationList.pending")}
-                        callbackThirdButton={showRefused}
-                        thirdButtonName={t("bo.screens.host.reservationList.refused")}
+                        callbackThirdButton={showRejected}
+                        thirdButtonName={t("bo.screens.host.reservationList.rejected")}
                     />
                     <Button onClick={showCalendar}
                         type="primary">

@@ -86,12 +86,19 @@ const MessageChat = (props) => {
             <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} />
             <h1 className="title_messages_page">Messages</h1>
             <div className="message_overflow">
+<<<<<<< HEAD
                 {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("bo.common.message.noMessages")}</p>}
             </div>
             <Input className="send_message_input" size="large" placeholder={t("bo.common.message.writeMessage")} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
             <Button className="button_send_message" type="primary">{t("bo.common.message.send")}</Button>
+=======
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t('toasts.messageError')}</p>}
+            </div>
+            <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
+            <Button className="button_send_message" type="primary">{t('common.send')}</Button>
+>>>>>>> fcb679e28dfa68d31729e4a7044c63c9efd68151
 
-        </div >
+        </div>
     )
 }
 MessageCard.propTypes = {
