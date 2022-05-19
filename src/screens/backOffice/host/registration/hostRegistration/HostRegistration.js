@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -66,8 +67,8 @@ const HostRegistration = () => {
             {state.displayRegistration &&
                 <div>
                     <h2>"Register as host"</h2>
-                    <div className="host_choice" onClick={setFirstchoice}>{t('bo.components.hostRegistrationModal.privateRegistration')}</div>
-                    <div className="host_choice" onClick={setSecondchoice}>{t('bo.components.hostRegistrationModal.companyRegistration')}</div>
+                    <div className="host_choice" onClick={setFirstchoice}>{t('bo.screens.hostRegistration.privateRegistration')}</div>
+                    <div className="host_choice" onClick={setSecondchoice}>{t('bo.screens.hostRegistration.companyRegistration')}</div>
                 </div>
             }
 
@@ -126,7 +127,7 @@ const HostRegistration = () => {
                         >
                             <Input />
                         </Form.Item>
-                        <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                        <Checkbox>{t('bo.screens.hostRegistration.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.screens.hostRegistration.termsConditionsForHost')}</Link></Checkbox>
                         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                             <Button onClick={sendHostData} type="primary" htmlType="submit">
                                 Register
@@ -210,7 +211,7 @@ const HostRegistration = () => {
                     >
                         <Input />
                     </Form.Item>
-                    <Checkbox>{t('bo.components.hostRegistrationModal.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.components.hostRegistrationModal.termsConditionsForHost')}</Link></Checkbox>
+                    <Checkbox>{t('bo.screens.hostRegistration.accept')} <Link to={"/terms-and-service"} target="_blank">{t('bo.screens.hostRegistration.termsConditionsForHost')}</Link></Checkbox>
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button onClick={sendHostData} type="primary" htmlType="submit">
                             Register

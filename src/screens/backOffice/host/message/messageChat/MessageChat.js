@@ -82,12 +82,12 @@ const MessageChat = (props) => {
     return (
         <div className="container_chat">
             <GoBackButton />
-            <h1 className="title_messages_page">{t("bo.common.message.title")}</h1>
+            <h1 className="title_messages_page">{t('common.messages')}</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("bo.common.message.noMessages")}</p>}
+                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("common.noMessages")}</p>}
             </div>
-            <Input className="send_message_input" size="large" placeholder={t("bo.common.message.writeMessage")} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
-            <Button className="button_send_message" type="primary">{t("bo.common.message.send")}</Button>
+            <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
+            <Button className="button_send_message" type="primary">{t('common.send')}</Button>
 
         </div>
     )
