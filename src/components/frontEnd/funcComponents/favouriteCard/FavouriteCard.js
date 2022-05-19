@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 function FavouriteCard(props) {
 
    const handleFavourite = (propertyId) => () => {
+      console.log('propertyId',propertyId);
       // remove property from favourites
    }
 
