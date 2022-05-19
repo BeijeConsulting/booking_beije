@@ -8,7 +8,7 @@ const preferitiUserGetApi = async (id, header) => {
 }
 
 /* AUTH:USER */
-const listaPreferitiGetApi = async (obj, header) => {
+const listaPreferitPostApi = async (obj, header) => {
     return await postApi(`preferiti`, obj, header);
 }
 
@@ -18,5 +18,5 @@ const preferitiDeleteApi = async (id, header) => {
 
 
 export {
-    preferitiUserGetApi, listaPreferitiGetApi, preferitiDeleteApi
+    preferitiUserGetApi, listaPreferitPostApi, preferitiDeleteApi
 }
