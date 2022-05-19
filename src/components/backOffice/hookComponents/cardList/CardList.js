@@ -37,13 +37,13 @@ const CardList = (props) => {
             </div>
 
             {/* Pagination (to be tested)*/}
-            <Pagination
+            {/* <Pagination
                 // defaultCurrent={1} //defaults to 1
                 hideOnSinglePage={true}
                 total={props.itemsCount} // *total* number of elements to arrange in pages
                 pageSize={props.pageSize} // how many elements to show per page 
                 onChange={handlePageSwitch}
-            />
+            /> */}
 
         </section>
     )

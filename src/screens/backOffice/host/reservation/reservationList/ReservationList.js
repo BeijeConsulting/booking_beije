@@ -69,11 +69,17 @@ const ReservationList = () => {
 
     const getCardStructures = (structure, key) => {
         return <HorizontalCard
+            key={key}
             imageSrc={structure.img}
             altText={`${key}_${structure.title}`}
             title={structure.title}
             text={structure.text}
+            callback={getConsole}
         />
+    }
+
+    const getConsole = () => {
+        console.log("callback")
     }
 
     return (
@@ -97,10 +103,12 @@ const ReservationList = () => {
                         {t("bo.screens.host.reservationList.calendar")}
                     </Button>
                 </>
+
             }
+
         >
             {obj.map(getCardStructures)}
-        
+
         </CardList>
     )
 }
