@@ -14,12 +14,13 @@
       "backToHome": "Torna alla home",
       "email": "Email",
       "english": "Inglese",
-      "home" : "Home",
+      "home": "Home",
       "italian": "Italiano",
       "loginLabel": "Accedi",
       "messages": "Messaggi",
-      "mra" : "I più recensiti",
+      "mra": "I più recensiti",
       "name": "Nome",
+      "noMessages": "Non esistono messaggi...",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
@@ -30,11 +31,17 @@
       "select": "Seleziona",
       "send": "Invia",
       "surname": "Cognome",
-      "termsConditions" :"Termini e condizioni",
+      "termsConditions": "Termini e condizioni",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu"
    },
    "toasts": {
+      "formErrorAllFields": "Compila tutti i campi",
+      "formErrorEmail": "Inserisci una mail valida",
+      "formErrorPassword": "Inserisci una password di almeno 8 caratteri, con almeno un simbolo",
+      "formErrorConfirmPassword": "Le password inserite non coincidono",
+      "formErrorTerms": "Accetta i termini e le condizioni",
+      "formSuccess": "Tutto ok",
       "messageError": "Nessun messaggio trovato"
    },
    "bo": {
@@ -50,14 +57,6 @@
          }
       },
       "modals": {},
-      "common": {
-         "message": {
-            "title": "Messaggi",
-            "send": "Invia",
-            "writeMessage": "Scrivi messaggio...",
-            "noMessages": "Non esistono messaggi..."
-         }
-      },
       "screens": {
          "host": {
             "hostAccount": {
@@ -72,7 +71,7 @@
                "setUpCompanyAccount": "Configura il tuo account aziendale",
                "accept": "Accetto",
                "termsConditionsForHost": "Termini e condizioni per gli host",
-               "fields":{
+               "fields": {
                   "phoneNumber": "Numero di telefono",
                   "city": "Città",
                   "postcode": "Codice postale",
@@ -105,12 +104,6 @@
    },
    "fe": {
       "components": {
-         "button": {
-            "pressMe": "Cliccami!"
-         },
-         "input": {
-            "insert": "Inserisci..."
-         },
          "rooms": {
             "person": "Persona",
             "people": "Persone",
@@ -137,6 +130,7 @@
             "alarm": "Allarme"
          }
       },
+      "modals": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
