@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 // import Logo from '../../../components/frontEnd/funcComponents/logo/Logo'
 import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
+
+//redux
+import { setToken } from "../../../../redux/ducks/tokenDuck"
 
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../../routes/routes';
@@ -11,13 +16,19 @@ import { routes } from '../../../../routes/routes';
 import './LoginForm.less'
 import { useTranslation } from 'react-i18next';
 
+//api
+import { signInPostApi } from '../../../../services/api/auth/authApi'
+
+//localstorage
+import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
+
 
 let formObject = {
    email: '',
    password: ''
 }
 
-function LoginForm() {
+function LoginForm(props) {
 
    const { t } = useTranslation();
 
@@ -37,10 +48,11 @@ function LoginForm() {
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      // const response = postApi('signin', formObject);
-      // console.log(response);
-      // set token in localStorage
-      // redux
+      signInPostApi(formObject).then(res => {
+         setLocalStorage("token", res.data.token);
+         setLocalStorage("refreshToken", res.data.refreshToken);
+         props.dispatch(setToken(res.data.token));
+      });
       navigate(routes.HOME);
    }
 
@@ -74,4 +86,4 @@ function LoginForm() {
    )
 }
 
-export default LoginForm;
+export default connect()(LoginForm);

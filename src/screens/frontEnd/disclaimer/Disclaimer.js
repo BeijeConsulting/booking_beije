@@ -4,7 +4,7 @@ import './Disclaimer.less'
 function Disclaimer() {
     return (
         <div className='disclaimer_container'>
-            <span>&copy;BeijeBnb, Inc.</span><span>Terms and Agreement</span>
+            <span className='first'>&copy;BeijeBnb, Inc.</span><span>Terms and Agreement</span>
         </div>
     )
 }
