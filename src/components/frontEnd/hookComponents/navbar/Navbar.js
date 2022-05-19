@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+// translation 
+import { useTranslation } from 'react-i18next';
+
 // less 
 import './Navbar.less';
 
@@ -36,8 +39,13 @@ import { initUser } from '../../../../redux/ducks/userDuck'
 import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 
+//da cancellare quando implementato duck user
+let permission = 'host';
+
 function Navbar(props) {
     let vector = useNavigate();
+    const { t } = useTranslation();
+
 
     const [state, setState] = useState({
         // windowWidth: window.innerWidth,
@@ -93,6 +101,7 @@ function Navbar(props) {
                     <nav className="navMobile">
                         <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                         <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
+
                         {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
@@ -105,7 +114,12 @@ function Navbar(props) {
                     //DESKTOP
                     : <>
                         <nav className="navDesktop">
-                            <span>logo</span>
+                            <div>
+                                <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
+                                <LanguagesSwitch />
+                            </div>
+
+
                             {
                                 props.tokenDuck.token ?
 
@@ -116,7 +130,6 @@ function Navbar(props) {
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
                                                 {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                 <img className="phUser" src={LoggedUser} alt="profileUser" />
-                                                <LanguagesSwitch />
                                             </div>
 
                                             : <>
@@ -124,7 +137,6 @@ function Navbar(props) {
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                     <img className="phUser" src={LoggedUser} alt="profileUser" />
-                                                    <LanguagesSwitch />
                                                 </div>
                                             </>
                                     }
@@ -136,11 +148,18 @@ function Navbar(props) {
                         {
                             state.isMenuOpen &&
                             <ul className={props.cssCustomMenu}>
-                                <li onClick={goTo('SETTINGS')}>Account</li>
-                                <li onClick={goTo('BOOKED')}>Bookings</li>
-                                <li onClick={goTo('FAVOURITE')}>Favourites</li>
-                                <li onClick={goTo('MESSAGES')}>Messages</li>
-                                <li onClick={goTo('NOTFOUND')}>Become an Host</li>
+                                <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
+                                <li onClick={goTo('BOOKED')}>{t('fe.screens.settings.settingsCard.bookings')}</li>
+                                <li onClick={goTo('FAVOURITE')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
+                                <li onClick={goTo('MESSAGES')}>{t('fe.screens.settings.settingsCard.messages')}</li>
+                                {
+                                    // (props.userDuck.user.permission[0] === 'guest' )?
+                                    // <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :
+                                    permission === 'guest' ?
+                                        <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :
+                                        <li onClick={goTo('DASHBOARD')}>{t('fe.screens.settings.settingsCard.yourProperties')}</li>
+
+                                }
                                 <li onClick={logoutFunc}>Logout</li>
                             </ul>
                         }

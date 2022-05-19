@@ -31,6 +31,7 @@
       "select": "Seleziona",
       "send": "Invia",
       "surname": "Cognome",
+      "termsConditions" :"Termini e condizioni",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu"
    },
@@ -56,6 +57,15 @@
          }
       },
       "modals": {},
+      "common": {
+         "message": {
+            "title": "Messaggi",
+            "send": "Invia",
+            "writeMessage": "Scrivi messaggio...",
+            "noMessages": "Non esistono messaggi..."
+         }
+      },
+      "modals": {},
       "screens": {
          "host": {
             "hostRegistration": {
@@ -69,6 +79,24 @@
             "hostAccount": {
                "vat": "Partita IVA",
                "billingAddress": "Indirizzo di fatturazione"
+            },
+            "hostRegistration": {
+               "title": "Registrazione Host",
+               "privateRegistration": "Sono un privato",
+               "companyRegistration": "Ho un'azienda",
+               "setUpPrivateAccount": "Configura il tuo account come privato",
+               "setUpCompanyAccount": "Configura il tuo account aziendale",
+               "accept": "Accetto",
+               "termsConditionsForHost": "Termini e condizioni per gli host",
+               "fields":{
+                  "phoneNumber": "Numero di telefono",
+                  "city": "Città",
+                  "postcode": "Codice postale",
+                  "billingAddress": "Indirizzo di fatturazione",
+                  "companyName": "Nome azienda",
+                  "vatNumber": "P.IVA",
+                  "registerButton": "Registrati"
+               }
             },
             "reservationList": {
                "title": "Lista prenotazioni",
