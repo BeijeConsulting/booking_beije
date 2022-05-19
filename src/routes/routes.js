@@ -1,6 +1,7 @@
 const routes = {
     // FE
-    HOME: '/',
+    LAYOUT : '/',
+    HOME: 'home',
     LOGIN: 'login',
     REGISTRATION: 'registration',
 
@@ -21,7 +22,7 @@ const routes = {
     SEARCH: 'search',
     MRA: 'mostreviewedBuilding',
 
-
+    
     // BO
     DASHBOARD: 'dashboard',
     HOST_ACCOUNT: 'host-account',

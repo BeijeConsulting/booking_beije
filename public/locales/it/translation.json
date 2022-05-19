@@ -1,9 +1,5 @@
 {
    "common": {
-      "account": "Account",
-      "select": "Seleziona",
-      "rooms": "{{count}} stanza",
-      "rooms_other": "{{count}} stanze",
       "number": "{{value, number(minimumFractionDigits: 2)}}",
       "currency": "{{price, currency(currency: EUR)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
@@ -14,10 +10,30 @@
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "account": "Account",
+      "backToHome": "Torna alla home",
+      "email": "Email",
       "english": "Inglese",
-      "italian": "Italiano"
+      "italian": "Italiano",
+      "loginLabel": "Accedi",
+      "messages": "Messaggi",
+      "name": "Nome",
+      "or": "o",
+      "password": "Password",
+      "passwordConfirm": "Conferma password",
+      "registerLabel": "Registrati",
+      "registration": "Registrazione",
+      "rooms": "{{count}} stanza",
+      "rooms_other": "{{count}} stanze",
+      "select": "Seleziona",
+      "send": "Invia",
+      "surname": "Cognome",
+      "writeMessage": "Scrivi qui il tuo messaggio...",
+      "you": "Tu"
    },
-   "toasts": {},
+   "toasts": {
+      "messageError": "Nessun messaggio trovato"
+   },
    "bo": {
       "components": {
          "sidebar": {
@@ -33,7 +49,17 @@
             "title": "Messaggi",
             "send": "Invia",
             "writeMessage": "Scrivi messaggio...",
-            "noMessages": "Non esistono messaggi..."
+            "noMessages": "Non esistono messaggi...",
+         "uploadFoto": {
+            "upload": "Carica"
+         },
+         "hostRegistrationModal": {
+            "privateRegistration": "Sono un privato",
+            "companyRegistration": "Ho un'azienda",
+            "setUpPrivateAccount": "Configura il tuo account privato",
+            "setUpCompanyAccount": "Configura il tuo account aziendale",
+            "accept": "Accetto",
+            "termsConditionsForHost": "Termini e condizioni per gli host"
          }
       },
       "screens": {
@@ -46,12 +72,16 @@
                "title": "Lista prenotazioni",
                "accepted": "Accettate",
                "pending": "In attesa",
-               "refused": "Rifiutate",
+               "rejected": "Rifiutate",
                "calendar": "Calendario"
             },
             "structure": {
+<<<<<<< HEAD
                "structureListTitle": "Lista strutture",
                "addStructure": "Aggiungi struttura"
+=======
+               "addStructure": "Aggiungi una struttura"
+>>>>>>> fcb679e28dfa68d31729e4a7044c63c9efd68151
             }
          },
          "admin": {}
@@ -59,6 +89,12 @@
    },
    "fe": {
       "components": {
+         "button": {
+            "pressMe": "Cliccami!"
+         },
+         "input": {
+            "insert": "Inserisci..."
+         },
          "rooms": {
             "person": "Persona",
             "people": "Persone",
@@ -85,10 +121,23 @@
             "alarm": "Allarme"
          }
       },
-      "modals": {},
       "screens": {
          "guestAccount": {
             "becomeAHost": "Diventa un host"
+         },
+         "registration": {
+            "acceptTerms": "Accetto i termini e le condizioni"
+         },
+         "settings": {
+            "title": "Impostazioni",
+            "settingsCard": {
+               "account": "Account",
+               "bookings": "Prenotazioni",
+               "favourites": "Favoriti",
+               "messages": "Messaggi",
+               "becomeAHost": "Diventa un Host",
+               "yourProperties": "Le tue proprietà"
+            }
          }
       }
    }

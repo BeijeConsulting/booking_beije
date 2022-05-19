@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 
@@ -8,13 +9,31 @@ const axiosInstance = axios.create({
   timeout: TIMEOUT,
 });
 
+axiosInstance.interceptors.response.use(function (response) {
+  // Any status code that lie within the range of 2xx cause this function to trigger
+  // Do something with response data
+  return response;
+}, async function (error) {
+  const originalConfig = error.config;
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  // Do something with response error
+  if (error.response.status === 401 && !originalConfig._retry){
+    originalConfig._retry = true;
+    //qui chiamata updateAuthToken
+    // const res = await refreshTokenApi();
+      // const { token } = res?.data;
+      // setLocalStorage('token', token); 
+      return axiosInstance(originalConfig)  
+  }
+  return Promise.reject(error);
+});
+
 export function responseApi(response) {
   //general function for get the response
   return response?.data;
 }
 
 export function responseApiError(error) {
-  console.log(error)
   //general function in case of wrong api call
   return {
     message: error?.message,
@@ -22,18 +41,10 @@ export function responseApiError(error) {
   };
 }
 
-export async function postApi(resource, obj, header = null) {
-  //function for post api call
-  // return (
-  //     axiosInstance.post(resource, obj, header)
-  //     .then(responseApi())
-  //     .catch(responseApiError())
-  // )
-
+export async function postApi(resource, obj , header = null) {
   return axiosInstance
-    .post(resource, {
-      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
-      data: obj,
+    .post(resource, obj, {
+      headers: header !== null ? `"Authorization": Bearer ${header}` : "",
     })
     .then(responseApi())
     .catch(responseApiError());
@@ -43,7 +54,7 @@ export async function getApi(resource, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
-      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "" 
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
     .catch(responseApiError());
@@ -52,9 +63,8 @@ export async function getApi(resource, header = null) {
 export async function putApi(resource, obj, header = null) {
   //function for put api call
   return axiosInstance
-    .put(resource, {
-      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
-      data: obj,
+    .put(resource, obj, {
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
     .catch(responseApiError());
@@ -63,7 +73,7 @@ export async function putApi(resource, obj, header = null) {
 export async function deleteApi(resource, header = null) {
   return axiosInstance
     .delete(resource, {
-      headers: header !== null ? {"Authorization": `Bearer ${header}`} : "",
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
     .catch(responseApiError());
