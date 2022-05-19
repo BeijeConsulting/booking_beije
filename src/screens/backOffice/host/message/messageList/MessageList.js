@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 //TRANSLATION
@@ -31,7 +32,7 @@ const MessageList = (props) => {
         <div className="container_message_list">
 
             <GoBackButton />
-            <h1 className="title_messages_page">{t("bo.common.message.title")}</h1>
+            <h1 className="title_messages_page">{t("common.messages")}</h1>
             {
                 host ? <div className="admin_message_list">
                     <HorizontalCard

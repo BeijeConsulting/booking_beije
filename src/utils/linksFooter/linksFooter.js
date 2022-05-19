@@ -5,11 +5,11 @@
 const LinksFooterHost = [
     {
         route: 'HOME',
-        nameLink: 'Home'
+        nameLink: 'common.home'
     },
     {
         route: 'MRA',
-        nameLink: 'Most Reviewed Apartments'
+        nameLink: 'common.mra'
     },
     {
         route : 'DASHBOARD',
@@ -22,11 +22,11 @@ const LinksFooterHost = [
 const LinksFooterGuest = [
     {
         route: 'HOME',
-        nameLink: 'Home'
+        nameLink: 'common.home'
     },
     {
         route: 'MRA',
-        nameLink: 'Most Reviewed Apartments'
+        nameLink: 'common.mra'
     }
 ]
 export { LinksFooterHost, LinksFooterGuest }

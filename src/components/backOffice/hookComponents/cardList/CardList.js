@@ -44,13 +44,8 @@ const CardList = (props) => {
                 total={props.itemsCount} // *total* number of elements to arrange in pages
                 pageSize={props.pageSize} // how many elements to show per page 
                 onChange={handlePageSwitch}
-<<<<<<< HEAD
             /> */}
 
-=======
-            />
- */}
->>>>>>> 51dfb34b9a797cb83a733f3de1666186188f3f85
         </section>
     )
 }

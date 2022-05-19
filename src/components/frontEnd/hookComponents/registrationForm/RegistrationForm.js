@@ -1,4 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+
+//redux
+import { setToken } from "../../../../redux/ducks/tokenDuck"
 
 // components
 import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
@@ -18,12 +23,25 @@ import './RegistrationForm.less';
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
 
+//api
+import {
+   registerUserPostApi
+} from '../../../../services/api/user/userApi'
+
+import {
+   signInPostApi
+} from '../../../../services/api/auth/authApi'
+import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 let formObject = {
    name: '',
    surname: '',
    email: '',
-   password: '',
+   password: ''
+
+}
+
+let formObjectCtrl = {
    confirmPassword: '',
    terms: false
 }
@@ -39,7 +57,7 @@ let errors = {
 
 let termsAccepted = false;
 
-function RegistrationForm() {
+function RegistrationForm(props) {
 
    const { t } = useTranslation();
 
@@ -70,6 +88,9 @@ function RegistrationForm() {
          ...formObject,
          [name]: value
       }
+      formObjectCtrl = {
+         [name]: value
+      }
       value.length === 0 ? errors[name] = true : errors[name] = false;
    }
 
@@ -79,11 +100,16 @@ function RegistrationForm() {
       !value ? errors[name] = true : errors[name] = false;
    }
 
+
+
+
    const handleSubmit = (e) => {
       e.preventDefault();
 
+
+
       notification.destroy();
-      if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
+      if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObjectCtrl.confirmPassword.length === 0) {
          openNotification('All fields must be filled in', 'all');
       } else {
          if (!checkMail(formObject.email)) {
@@ -96,7 +122,7 @@ function RegistrationForm() {
             openNotification('Password not valid: at least 8 character long and 1 symbol');
          }
 
-         if (formObject.password !== formObject.confirmPassword) {
+         if (formObject.password !== formObjectCtrl.confirmPassword) {
             errors['confirmPassword'] = true;
             openNotification('Passwords do not match', 'confirmPassword');
          }
@@ -109,7 +135,20 @@ function RegistrationForm() {
          if (!Object.values(errors).includes(true)) {
             openNotification('Everything ok!', 'ok', 'info-toast');
 
-            // delete formObject.confirmPassword;
+            registerUserPostApi(formObject);
+
+            signInPostApi({
+               email: formObject.email,
+               password: formObject.password
+            }).then(res => {
+               setLocalStorage("token", res.data.token);
+               setLocalStorage("refreshToken", res.data.refreshToken);
+               props.dispatch(setToken(res.data.token));
+            });
+
+
+
+            // delete formObjectCtrl.confirmPassword;
             // const response = postApi('user', formObject);
             // console.log(response);
 
@@ -157,4 +196,4 @@ function RegistrationForm() {
    )
 }
 
-export default RegistrationForm;
+export default connect()(RegistrationForm);
