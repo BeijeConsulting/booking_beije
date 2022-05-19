@@ -19,15 +19,19 @@ axiosInstance.interceptors.response.use(function (response) {
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
   if (error.response.status === 401 && !originalConfig._retry) {
-    originalConfig._retry = true;
+    originalConfig._retry = true
+    console.log("sono qui");
     //qui chiamata updateAuthToken
     /* Token valido fino alle 11,00 del 19/05/2022 */
-    /* const res = updateAuthTokenPostApi({
+    const res = await updateAuthTokenPostApi({
       refreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsImV4cCI6MTY1MzAzMjU4OH0.eC_Spoljj7gDID4Q3LKOUpbojHAQW7fW5o9e-CHDPsI"
-    }); */
-    /*  const { token } = res?.data;
-     setLocalStorage('token', token); */
-    return axiosInstance(originalConfig)
+      // refreshToken: getLocalStorage('refreshToken')
+    });
+    console.log("res", res)
+    const { token } = res.data;
+
+
+    setLocalStorage('token', token);
   }
   return Promise.reject(error);
 });
