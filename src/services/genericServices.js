@@ -2,6 +2,7 @@ import axios from "axios";
 import { setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
+import { updateAuthTokenPostApi } from "./api/auth/authApi";
 
 const axiosInstance = axios.create({
   //istanza
@@ -17,13 +18,16 @@ axiosInstance.interceptors.response.use(function (response) {
   const originalConfig = error.config;
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
-  if (error.response.status === 401 && !originalConfig._retry){
+  if (error.response.status === 401 && !originalConfig._retry) {
     originalConfig._retry = true;
     //qui chiamata updateAuthToken
-    // const res = await refreshTokenApi();
-      // const { token } = res?.data;
-      // setLocalStorage('token', token); 
-      return axiosInstance(originalConfig)  
+    /* Token valido fino alle 11,00 del 19/05/2022 */
+    /* const res = updateAuthTokenPostApi({
+      refreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsImV4cCI6MTY1MzAzMjU4OH0.eC_Spoljj7gDID4Q3LKOUpbojHAQW7fW5o9e-CHDPsI"
+    }); */
+    /*  const { token } = res?.data;
+     setLocalStorage('token', token); */
+    return axiosInstance(originalConfig)
   }
   return Promise.reject(error);
 });
@@ -41,7 +45,7 @@ export function responseApiError(error) {
   };
 }
 
-export async function postApi(resource, obj , header = null) {
+export async function postApi(resource, obj, header = null) {
   return axiosInstance
     .post(resource, obj, {
       headers: header !== null ? `"Authorization": Bearer ${header}` : "",
