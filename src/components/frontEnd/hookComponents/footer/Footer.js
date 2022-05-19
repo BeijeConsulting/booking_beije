@@ -9,6 +9,8 @@ import { useNavigate } from "react-router";
 import { routes } from "../../../../routes/routes";
 import './Footer.less';
 
+import Button from '../../funcComponents/ui/buttons/uiButtons/UiButton'
+
 import LanguagesSwitch from '../../../common/languagesSwitch/LanguagesSwitch'
 
 //da cancellare quando implementato duck user
@@ -29,7 +31,6 @@ function Footer(props) {
     })
     // function to Go on Linkspage
     const goTo = (params) => () => {
-        console.log(params)
         vector(routes[params])
     }
     return (
@@ -40,7 +41,9 @@ function Footer(props) {
                 </ul>
                 {
                     permission === 'guest' &&
-                    <button onClick={goTo('HOME')}>{t('fe.screens.guestAccount.becomeAHost')}</button>
+                    <div>
+                        <Button className="becomeHost" callback={goTo('DASHBOARD')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
+                    </div>
                 }
                 {/* {
                 props.userDuck.user.permission[0] === 'guest' &&
@@ -49,6 +52,11 @@ function Footer(props) {
             </div>
 
             <LanguagesSwitch />
+
+            <div className='disclaimer_container_footer'>
+                <span className='first'>&copy;BeijeBnb, Inc.</span><span className="cursorOnLink" onClick={goTo('DISCLAIMER')}>{t('common.termsConditions')}</span>
+            </div>
+
 
 
 
