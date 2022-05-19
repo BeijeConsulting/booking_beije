@@ -3,6 +3,11 @@ import { useNavigate } from "react-router";
 // less 
 import './Navbar.less';
 
+// profile image 
+import LoggedUser from '../../../../assets/images/LoggedUser.png';
+import notLoggedUser from '../../../../assets/images/notLoggedUser.png';
+
+
 // connect to redux 
 import { connect } from "react-redux";
 
@@ -21,31 +26,19 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 // tokenDuck 
-import {initToken} from '../../../../redux/ducks/tokenDuck';
+import { initToken } from '../../../../redux/ducks/tokenDuck';
 
 // utils localstorage 
-import {removeLocalStorage} from '../../../../utils/localStorage/localStorage';
+import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 
 function Navbar(props) {
     let vector = useNavigate();
 
     const [state, setState] = useState({
-        windowWidth: window.innerWidth,
+        // windowWidth: window.innerWidth,
         isMenuOpen: false,
         modalSearchIsOpen: false,
-    })
-
-    useEffect(() => {
-        function handleResize() {
-            setState({
-                ...state,
-                windowWidth: window.innerWidth
-            })
-        }
-        window.addEventListener('resize', handleResize)
-
-        return () => { window.removeEventListener('resize', handleResize) }
     })
 
     // function to set modal search open true 
@@ -76,25 +69,28 @@ function Navbar(props) {
         })
     }
     // function to logout 
-    const logoutFunc = () =>{
+    const logoutFunc = () => {
         //chiamata API
         initToken()
         removeLocalStorage("token")
     }
     return (
         <>
+
             {
-                state.windowWidth < 480 ?
+                //MOBILE
+                props.stateLayout < 480 ?
                     <nav className="navMobile">
                         <button onClick={openModalSearch}>Search</button>
                         <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
                         <button onClick={goTo('HOME')}>logo</button>
                         {
                             props.tokenDuck.token ?
-                                <button onClick={goTo('SETTINGS')}>account</button> :
-                                <button onClick={goTo('LOGIN')}>goLogin</button>
+                                <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
+                                <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }
                     </nav>
+                    //DESKTOP
                     : <>
                         <nav className="navDesktop">
                             <span>logo</span>
@@ -106,15 +102,15 @@ function Navbar(props) {
                                         state.isMenuOpen === false ?
                                             < div className="hambMenu" onClick={handleNavMenu}>
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
-                                                <span className="phUser"></span>
+                                                {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                <img className="phUser" src={LoggedUser} alt="profileUser"/>
                                             </div>
                                             : <>
                                                 <div className="hambMenu" onClick={handleNavMenu}>
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
-                                                    <span className="phUser"></span>
+                                                    {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                    <img className="phUser" src={LoggedUser} alt="profileUser"/>
                                                 </div>
-
-
                                             </>
                                     }
                                     </>
@@ -142,15 +138,16 @@ function Navbar(props) {
 }
 
 Navbar.defaultProps = {
-    cssCustomMenu : 'settingOpen'
+    cssCustomMenu: 'settingOpen'
 }
 
 // propTypes 
 Navbar.propTypes = {
-    cssCustomMenu : PropTypes.string
+    cssCustomMenu: PropTypes.string
 }
 
 const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck
+    tokenDuck: state.tokenDuck,
+    // userDuck: state.userDuck 
 })
 export default connect(mapStateToProps)(Navbar);
