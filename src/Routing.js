@@ -65,14 +65,13 @@ function Routing(props) {
     <Routes>
 
 
-
+      <Route path={routes.REGISTRATION} element={<Registration />} />
+      <Route path={routes.LOGIN} element={<Login />} />
 
       {/* all the routes for frontEnd goes inside this one */}
 
       <Route path={routes.LAYOUT} element={<Layout />} >
         {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
-        <Route path={routes.REGISTRATION} element={<Registration />} />
-        <Route path={routes.LOGIN} element={<Login />} />
         <Route path={routes.MESSAGES} element={<Messages />} />
         <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
         <Route path={routes.BOOKED} element={<Bookings />} />
