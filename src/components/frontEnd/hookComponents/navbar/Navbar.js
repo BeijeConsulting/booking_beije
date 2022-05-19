@@ -17,20 +17,29 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 // search component 
 
+// proptypes 
+import PropTypes from "prop-types";
+
+// tokenDuck 
+import {initToken} from '../../../../redux/ducks/tokenDuck';
+
+// utils localstorage 
+import {removeLocalStorage} from '../../../../utils/localStorage/localStorage';
+
 
 function Navbar(props) {
     let vector = useNavigate();
 
     const [state, setState] = useState({
         windowWidth: window.innerWidth,
-        isMenuOpen: false
+        isMenuOpen: false,
+        modalSearchIsOpen: false,
     })
 
     useEffect(() => {
         function handleResize() {
             setState({
                 ...state,
-                modalSearchIsOpen: false,
                 windowWidth: window.innerWidth
             })
         }
@@ -54,17 +63,23 @@ function Navbar(props) {
             modalSearchIsOpen: false
         })
     }
-    // function to Go dimanic vector 
+    // function to Go to dimanic vector 
     const goTo = (params) => () => {
         vector(routes[params])
     }
 
     // function to Open Menu 
-    const openNavMenu = () => {
+    const handleNavMenu = () => {
         setState({
             ...state,
             isMenuOpen: !state.isMenuOpen
         })
+    }
+    // function to logout 
+    const logoutFunc = () =>{
+        //chiamata API
+        initToken()
+        removeLocalStorage("token")
     }
     return (
         <>
@@ -76,44 +91,64 @@ function Navbar(props) {
                         <button onClick={goTo('HOME')}>logo</button>
                         {
                             props.tokenDuck.token ?
-                                <button onClick={goTo('SETTING')}>account</button> :
+                                <button onClick={goTo('SETTINGS')}>account</button> :
                                 <button onClick={goTo('LOGIN')}>goLogin</button>
                         }
                     </nav>
-                    :
-                    <nav className="navDesktop">
-                        <span>logo</span>
-                        {
-                            props.tokenDuck.token ?
+                    : <>
+                        <nav className="navDesktop">
+                            <span>logo</span>
+                            {
+                                props.tokenDuck.token ?
 
 
-                                <>{state.isMenuOpen ?
-                                    < div className="hambMenu" onClick={openNavMenu}>
-                                        <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
-                                        <span className="phUser"></span>
-                                    </div>
-                                    : <>
-                                        <div className="hambMenu" onClick={openNavMenu}>
-                                            <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
-                                            <span className="phUser"></span>
-                                        </div>
-                                        <div className="settingOpen">
-                                            menuaperto
-                                        </div>
-                                        
+                                    <>{
+                                        state.isMenuOpen === false ?
+                                            < div className="hambMenu" onClick={handleNavMenu}>
+                                                <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
+                                                <span className="phUser"></span>
+                                            </div>
+                                            : <>
+                                                <div className="hambMenu" onClick={handleNavMenu}>
+                                                    <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
+                                                    <span className="phUser"></span>
+                                                </div>
+
+
+                                            </>
+                                    }
                                     </>
-                                }
-                                </>
-                                :
-                                <span onClick={goTo('LOGIN')}>Login</span>
+                                    :
+                                    <span onClick={goTo('LOGIN')}>Login</span>
+                            }
+                        </nav>
+                        {
+                            state.isMenuOpen &&
+                            <ul className={props.cssCustomMenu}>
+                                <li onClick={goTo('SETTINGS')}>Account</li>
+                                <li onClick={goTo('BOOKED')}>Bookings</li>
+                                <li onClick={goTo('FAVOURITE')}>Favourites</li>
+                                <li onClick={goTo('MESSAGES')}>Messages</li>
+                                <li onClick={goTo('NOTFOUND')}>Become an Host</li>
+                                <li onClick={logoutFunc}>Logout</li>
+                            </ul>
                         }
-                    </nav>
+
+                    </>
             }
         </>
 
     )
 }
 
+Navbar.defaultProps = {
+    cssCustomMenu : 'settingOpen'
+}
+
+// propTypes 
+Navbar.propTypes = {
+    cssCustomMenu : PropTypes.string
+}
 
 const mapStateToProps = (state) => ({
     tokenDuck: state.tokenDuck
