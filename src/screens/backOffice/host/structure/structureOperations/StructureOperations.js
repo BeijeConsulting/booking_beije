@@ -40,7 +40,6 @@ const StructureOperation = () => {
   const onChange = (e) => {
     setState({
       data: {
-        ...state.data,
         [e.target.name]: e.target.value,
       },
     });

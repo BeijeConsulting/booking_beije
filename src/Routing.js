@@ -30,6 +30,7 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 
 import { getLocalStorage } from './utils/localStorage/localStorage'
 import { decryptItem } from "./utils/crypto/crypto";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations";
 
 
 
@@ -41,7 +42,7 @@ function Routing(props) {
     //     props.dispatch(setToken(decriptedToken))
     //     console.log(props.tokenDuck.token);
     // }
-    
+
     return (
         <Routes>
 
@@ -70,6 +71,7 @@ function Routing(props) {
                 <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
                 <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
+                <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
 
                 <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
                 {/* //to add in admin route */}
