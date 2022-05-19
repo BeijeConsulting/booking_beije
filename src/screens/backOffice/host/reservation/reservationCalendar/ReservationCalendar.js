@@ -13,9 +13,6 @@ import { useTranslation } from 'react-i18next'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import ChoiceButton from '../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton'
-import { useTranslation } from 'react-i18next'
-
-
 
 const ReservationCalendar = (props) => {
 

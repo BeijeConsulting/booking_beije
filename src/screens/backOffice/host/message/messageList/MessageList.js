@@ -13,12 +13,8 @@ import './MessageList.less';
 import CardList from '../../../../../components/backOffice/hookComponents/cardList/CardList';
 import HorizontalCard from '../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
 import GoBackButton from '../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton';
-import { useTranslation } from 'react-i18next';
-
 
 const MessageList = (props) => {
-    const { t } = useTranslation()
-
     const { t } = useTranslation();
 
     //TEST SE SEI HOST ALLORA TI FA VEDERE LE MESSAGI CON ADMIN INVECE  SE SEI ADMIN O GUEST NON TI FA VEDERE MESSAGI CON ADMIN
@@ -35,11 +31,7 @@ const MessageList = (props) => {
         <div className="container_message_list">
 
             <GoBackButton />
-<<<<<<< HEAD
             <h1 className="title_messages_page">{t("bo.common.message.title")}</h1>
-=======
-            <h1 className="title_messages_page">{t('common.messages')}</h1>
->>>>>>> fcb679e28dfa68d31729e4a7044c63c9efd68151
             {
                 host ? <div className="admin_message_list">
                     <HorizontalCard
