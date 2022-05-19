@@ -26,6 +26,7 @@ import {
 import {
    signInPostApi
 } from '../../../../services/api/auth/authApi'
+import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 let formObject = {
    name: '',
@@ -87,6 +88,15 @@ function RegistrationForm() {
       !value ? errors[name] = true : errors[name] = false;
    }
 
+   const handleSignIn = async () => {
+
+      return await signInPostApi({
+         email: formObject.email,
+         password: formObject.password
+      })
+   }
+
+
    const handleSubmit = (e) => {
       e.preventDefault();
 
@@ -119,17 +129,19 @@ function RegistrationForm() {
          if (!Object.values(errors).includes(true)) {
             openNotification('Everything ok!', 'ok', 'info-toast');
 
-
             registerUserPostApi(formObject = {
                name: formObject.name,
                surname: formObject.surname,
                email: formObject.email,
                password: formObject.password
             });
-            console.log(signInPostApi({
-               email: formObject.email,
-               password: formObject.password
-            }))
+
+
+
+            let signinRes = handleSignIn();
+            console.log(signinRes);
+
+            setLocalStorage("token", signinRes.token)
             // delete formObject.confirmPassword;
             // const response = postApi('user', formObject);
             // console.log(response);
