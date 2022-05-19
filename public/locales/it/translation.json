@@ -53,95 +53,105 @@
             "send": "Invia",
             "writeMessage": "Scrivi messaggio...",
             "noMessages": "Non esistono messaggi..."
-         },
-         "hostRegistrationModal": {
-            "privateRegistration": "Sono un privato",
-            "companyRegistration": "Ho un'azienda",
-            "setUpPrivateAccount": "Configura il tuo account privato",
-            "setUpCompanyAccount": "Configura il tuo account aziendale",
-            "accept": "Accetto",
-            "termsConditionsForHost": "Termini e condizioni per gli host"
          }
       },
-         "screens": {
-            "host": {
-               "hostAccount": {
-                  "vat": "Partita IVA",
-                  "billingAddress": "Indirizzo di fatturazione"
-               },
-               "reservationList": {
-                  "title": "Lista prenotazioni",
-                  "accepted": "Accettate",
-                  "pending": "In attesa",
-                  "rejected": "Rifiutate",
-                  "calendar": "Calendario"
-               },
-               "structure": {
-                  "structureListTitle": "Lista strutture",
-                  "addStructure": "Aggiungi struttura"
-               },
-               "structureDetails": {
-                 "structureDetailsTitle": "Dettagli struttura",
-                 "editStructure": "Modifica struttura",
-                 "addRoom": "Aggiungi camera",
-                 "announce": "Annunci"
+      "screens": {
+         "host": {
+            "hostAccount": {
+               "vat": "Partita IVA",
+               "billingAddress": "Indirizzo di fatturazione"
+            },
+            "hostRegistration": {
+               "title": "Registrazione Host",
+               "privateRegistration": "Sono un privato",
+               "companyRegistration": "Ho un'azienda",
+               "setUpPrivateAccount": "Configura il tuo account come privato",
+               "setUpCompanyAccount": "Configura il tuo account aziendale",
+               "accept": "Accetto",
+               "termsConditionsForHost": "Termini e condizioni per gli host",
+               "fields":{
+                  "phoneNumber": "Numero di telefono",
+                  "city": "Città",
+                  "postcode": "Codice postale",
+                  "billingAddress": "Indirizzo di fatturazione",
+                  "companyName": "Nome azienda",
+                  "vatNumber": "P.IVA",
+                  "registerButton": "Registrati"
                }
             },
-            "admin": {}
-         }
-      },
-      "fe": {
-         "components": {
-            "button": {
-               "pressMe": "Cliccami!"
+            "reservationList": {
+               "title": "Lista prenotazioni",
+               "accepted": "Accettate",
+               "pending": "In attesa",
+               "rejected": "Rifiutate",
+               "calendar": "Calendario"
             },
-            "input": {
-               "insert": "Inserisci..."
+            "structure": {
+               "structureListTitle": "Lista strutture",
+               "addStructure": "Aggiungi struttura"
             },
-            "rooms": {
-               "person": "Persona",
-               "people": "Persone",
-               "price": "Prezzo per",
-               "nights": "notti",
-               "night": "notte"
-            },
-            "review": {
-               "username": "username",
-               "title": "titolo",
-               "description": "descrizione"
-            },
-            "service": {
-               "service": "Servizio",
-               "wifi": "Wi-Fi",
-               "kitchen": "Cucina",
-               "airConditioning": "Aria condizionata",
-               "parking": "Parcheggio",
-               "washingMachine": "Lavatrice",
-               "iron": "Ferro da stiro",
-               "workingPlace": "Spazio di lavoro dedicato",
-               "swimmingPool": "Piscina",
-               "allowedSmoking": "Permesso fumare",
-               "alarm": "Allarme"
+            "structureDetails": {
+               "structureDetailsTitle": "Dettagli struttura",
+               "editStructure": "Modifica struttura",
+               "addRoom": "Aggiungi camera",
+               "announce": "Annunci"
             }
          },
-         "screens": {
-            "guestAccount": {
-               "becomeAHost": "Diventa un host"
-            },
-            "registration": {
-               "acceptTerms": "Accetto i termini e le condizioni"
-            },
-            "settings": {
-               "title": "Impostazioni",
-               "settingsCard": {
-                  "account": "Account",
-                  "bookings": "Prenotazioni",
-                  "favourites": "Favoriti",
-                  "messages": "Messaggi",
-                  "becomeAHost": "Diventa un Host",
-                  "yourProperties": "Le tue proprietà"
-               }
+         "admin": {}
+      }
+   },
+   "fe": {
+      "components": {
+         "button": {
+            "pressMe": "Cliccami!"
+         },
+         "input": {
+            "insert": "Inserisci..."
+         },
+         "rooms": {
+            "person": "Persona",
+            "people": "Persone",
+            "price": "Prezzo per",
+            "nights": "notti",
+            "night": "notte"
+         },
+         "review": {
+            "username": "username",
+            "title": "titolo",
+            "description": "descrizione"
+         },
+         "service": {
+            "service": "Servizio",
+            "wifi": "Wi-Fi",
+            "kitchen": "Cucina",
+            "airConditioning": "Aria condizionata",
+            "parking": "Parcheggio",
+            "washingMachine": "Lavatrice",
+            "iron": "Ferro da stiro",
+            "workingPlace": "Spazio di lavoro dedicato",
+            "swimmingPool": "Piscina",
+            "allowedSmoking": "Permesso fumare",
+            "alarm": "Allarme"
+         }
+      },
+      "screens": {
+         "guestAccount": {
+            "becomeAHost": "Diventa un host"
+         },
+         "registration": {
+            "acceptTerms": "Accetto i termini e le condizioni"
+         },
+         "settings": {
+            "title": "Impostazioni",
+            "settingsCard": {
+               "account": "Account",
+               "bookings": "Prenotazioni",
+               "favourites": "Favoriti",
+               "messages": "Messaggi",
+               "becomeAHost": "Diventa un Host",
+               "yourProperties": "Le tue proprietà"
             }
          }
       }
    }
+}

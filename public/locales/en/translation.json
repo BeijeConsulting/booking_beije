@@ -53,14 +53,6 @@
         "send": "Send",
         "writeMessage": "Type message...",
         "noMessages": ""
-      },
-      "hostRegistrationModal": {
-        "privateRegistration": "I'm a private",
-        "companyRegistration": "I have a company",
-        "setUpPrivateAccount": "Set up your private account",
-        "setUpCompanyAccount": "Set up your company account",
-        "accept": "I accept",
-        "termsConditionsForHost": "Terms and Conditions for Host"
       }
     },
     "screens": {
@@ -68,6 +60,24 @@
         "hostAccount": {
           "vat": "VAT number",
           "billingAddress": "Billing address"
+        },
+        "hostRegistration": {
+          "title": "Host registration",
+          "privateRegistration": "I'm a private",
+          "companyRegistration": "I have a company",
+          "setUpPrivateAccount": "Set up your private account",
+          "setUpCompanyAccount": "Set up your company account",
+          "accept": "I accept",
+          "termsConditionsForHost": "Terms and Conditions for Host",
+          "fields":{
+            "phoneNumber": "Phone number",
+            "city": "City",
+            "postcode": "Postcode",
+            "billingAddress": "Billing address",
+            "companyName": "Company name",
+            "vatNumber": "VAT",
+            "registerButton": "Register"
+          }
         },
         "reservationList": {
           "title": "Reservation list",
