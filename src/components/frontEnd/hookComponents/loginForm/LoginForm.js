@@ -53,7 +53,7 @@ function LoginForm(props) {
          setLocalStorage("refreshToken", res.data.refreshToken);
          props.dispatch(setToken(res.data.token));
       });
-      navigate(routes.HOME);
+      navigate(routes.LAYOUT);
    }
 
    return (
@@ -73,7 +73,6 @@ function LoginForm(props) {
                   <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
                   <span className="w">{t('common.or')}</span>
                   <UiButton className="btn-secondary button-link" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
-                  {/* </div> */}
                </div>
             </form>
 
