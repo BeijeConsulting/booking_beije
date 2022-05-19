@@ -62,6 +62,7 @@ const StructureList = () => {
         <CardList
             sectionTitle={t("bo.screens.host.structure.structureListTitle")}
             actions={<Button onClick={goToStructure()} type="primary">{t("bo.screens.host.structure.addStructure")}</Button>}
+            pageSize={10} // da controllare 
         >
             {obj.map(getCardStructures)}
 

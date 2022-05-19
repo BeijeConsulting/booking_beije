@@ -14,7 +14,6 @@ import { useLocation } from "react-router-dom";
 
 const StructureOperation = () => {
   const location = useLocation();
-  const idStructure = location.state.idStructure;
 
   const { TextArea } = Input;
 
@@ -25,14 +24,14 @@ const StructureOperation = () => {
   useEffect(() => {
     // Per farlo funzionare usare json-server
     // const getStructure = async () => {
-    //   const res = await fetch(`http://localhost:30001/data/${idStructure}`);
+    //   const res = await fetch(`http://localhost:30001/data/${location.state.idStructure}`);
     //   const structureFromServer = await res.json();
     //   setState({ ...state, data: structureFromServer });
     // };
 
-    if (location.state.idStructure !== null) {
+    if (state.data !== null) {
       //futura chiamata a API
-      //getStructure();
+      // getStructure();
     }
   }, []);
 

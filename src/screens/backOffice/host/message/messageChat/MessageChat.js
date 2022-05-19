@@ -69,6 +69,7 @@ const MessageChat = (props) => {
     const renderSingleMessage = (item, key) => {
         return (
             <MessageCard
+                key={key}
                 nameMessage={item.name}
                 bodyMessage={item.body}
                 dateMessage={item.date}

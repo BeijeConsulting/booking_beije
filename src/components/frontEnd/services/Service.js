@@ -8,7 +8,7 @@ import { servicesToIcons } from '../../../utils/serviceIdToFAIcon/servicesToIcon
 
 const { t } = useTranslation();
 
-function Service() {
+function Service(props) {
     return (
         <div className='service_container'>
             <div className='service_icon'>
@@ -24,7 +24,6 @@ Service.defaultProps = {
     iconName: t("fe.components.service.service")
 }
 Service.propTypes = {
-    icon: PropTypes.string.isRequired,
-    iconName: PropTypes.string.isRequired,
+    serviceId: PropTypes.number.isRequired,
 }
 export default Service;

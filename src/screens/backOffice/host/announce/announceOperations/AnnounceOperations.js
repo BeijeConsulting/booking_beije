@@ -23,7 +23,7 @@ import UploadFoto from "../../../../../components/backOffice/hookComponents/uplo
 const AnnounceOperations = (props) => {
 
     // const location = useLocation();
-    // const idStructure = location.state.idStructure;
+    // const idAnnounce = location.state.idAnnounce;
 
     const [state, setState] = useState({
         data: {
@@ -47,7 +47,7 @@ const AnnounceOperations = (props) => {
     //     //   setState({ ...state, data: structureFromServer });
     //     // };
 
-    //     if (location.state.idStructure !== null) {
+    //     if (location.state.idAnnounce !== null) {
     //         //futura chiamata a API
     //         //getStructure();
     //     }

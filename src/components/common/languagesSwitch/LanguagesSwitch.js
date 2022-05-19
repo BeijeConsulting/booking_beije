@@ -15,11 +15,11 @@ function LanguagesSwitch() {
     const languagesArray = [
         {
             code: 'en',
-            name: 'English'
+            name: t("common.english")
         },
         {
             code: 'it',
-            name: 'Italian'
+            name: t("common.italian")
         }
     ]
 
