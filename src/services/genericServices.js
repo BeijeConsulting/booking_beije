@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 
@@ -12,13 +13,17 @@ axiosInstance.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
   return response;
-}, function (error) {
+}, async function (error) {
+  const originalConfig = error.config;
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
-  if (error.response.status === 401){
-    console.log('siamo in questo caso, 401');
+  if (error.response.status === 401 && !originalConfig._retry){
+    originalConfig._retry = true;
     //qui chiamata updateAuthToken
-    console.log('intercettato')
+    // const res = await refreshTokenApi();
+      // const { token } = res?.data;
+      // setLocalStorage('token', token); 
+      return axiosInstance(originalConfig)  
   }
   return Promise.reject(error);
 });
