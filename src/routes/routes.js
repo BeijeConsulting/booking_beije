@@ -2,8 +2,8 @@ const routes = {
     // FE
     LAYOUT : '/',
     HOME: 'home',
-    LOGIN: 'login',
-    REGISTRATION: 'registration',
+    LOGIN: '/login',
+    REGISTRATION: '/registration',
 
     BOOKED: 'bookings',
     FAVOURITE: 'favourites',
@@ -34,6 +34,7 @@ const routes = {
     ANNOUNCE_OPERATION: 'announce-operation',
     RESERVATION_CALENDAR: 'reservation-calendar',
     RESERVATION_LIST: 'reservation-list',
+    HOST_REGISTRATION: 'host-registration',
     PENDING_ANNOUNCE_LIST: 'pending-announce-list' //to add in admin route
 }
 
