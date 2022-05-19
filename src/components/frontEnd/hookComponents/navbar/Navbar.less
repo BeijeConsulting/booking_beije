@@ -1,4 +1,3 @@
-
 .navMobile{
     height: 15%;
     background-color: #FFF9F5;
@@ -9,10 +8,10 @@
     justify-content: space-around;
     align-items: center;
 }
-    
-    
+
+
 .navDesktop{
-    height: 10%;
+    height: 10vh;
     background-color: #44403C;
     top: 0;
     width: 100%;
@@ -21,16 +20,19 @@
     align-items: center;
     padding: 0 7vw;
     position: relative;
+    z-index: 2;
     .hambMenu{
         display: flex;
         padding: .7rem 1.8rem;
         background-color: #FFF9F5;
         border-radius: 8px;
+        cursor: pointer;
         .phUser{
             width: 34px;
             height: 34px;
             border-radius: 50%;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png');
+            background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png%27');
+            background-color: red;
             background-size: cover;
         }
         .arrowMenu{
@@ -47,34 +49,35 @@
             color: #C4C4C4;
         }
     }
-    .settingOpen{
-        position: absolute;
-        top: 10vh;
-        left: 0;
-        width: 100%;
-        height: 15vh;
-        background: rgba(68, 64, 60, 0.75);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #E9E9E9;
-        padding: 0 7vw;
-        animation: settingOpen .4s linear;
-        display: block;
+}
+.settingOpen{
+    width: 100%;
+    height: 15vh;
+    background: #44403cbf;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    color: #E9E9E9;
+    padding: 0 7vw;
+    animation: settingOpen .4s linear;
+    position: relative;
+
+    li{
+        list-style: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 1rem;
     }
-    
 }
 
 @keyframes settingOpen {
     0%{
-        top : 0;
-        display: none;
+        bottom : 15vh;
+
     }
-    99%{
-        display: block;
-    }
+
     100%{
-        z-index: 1;
-        top: 10vh
+        bottom: 0;
     }
 }
