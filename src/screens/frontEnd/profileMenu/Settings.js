@@ -2,7 +2,7 @@ import React from "react";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
-import Navbar from "../../../components/frontEnd/hookComponents/navbar/Navbar"
+
 
 import { useTranslation } from 'react-i18next';
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
@@ -59,7 +59,7 @@ function Settings() {
           label={"Logout"} />
         <Disclaimer />
       </div>
-      <Navbar/>
+
     </div>
 
   );

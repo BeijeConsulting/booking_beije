@@ -2,8 +2,8 @@ const routes = {
     // FE
     LAYOUT : '/',
     HOME: 'home',
-    LOGIN: 'login',
-    REGISTRATION: 'registration',
+    LOGIN: '/login',
+    REGISTRATION: '/registration',
 
     BOOKED: 'bookings',
     FAVOURITE: 'favourites',

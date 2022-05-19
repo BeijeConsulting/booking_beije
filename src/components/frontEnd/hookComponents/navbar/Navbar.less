@@ -7,6 +7,18 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    .iconIfLogged{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .iconNotLogged{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 }
 
 
@@ -31,9 +43,7 @@
             width: 34px;
             height: 34px;
             border-radius: 50%;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/149/149071.png%27');
-            background-color: red;
-            background-size: cover;
+            object-fit: cover;
         }
         .arrowMenu{
             transition: .4s;
@@ -61,7 +71,9 @@
     color: #E9E9E9;
     padding: 0 7vw;
     animation: settingOpen .4s linear;
-    position: relative;
+    position: absolute;
+    top: 10vh;
+
 
     li{
         list-style: none;
@@ -73,11 +85,11 @@
 
 @keyframes settingOpen {
     0%{
-        bottom : 15vh;
+        top : 0;
 
     }
 
     100%{
-        bottom: 0;
+        top: 10vh;
     }
 }

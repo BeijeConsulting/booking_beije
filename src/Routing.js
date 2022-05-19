@@ -42,15 +42,15 @@ import { postApi, getApi } from "./services/genericServices";
 import { decryptItem } from "./utils/crypto/crypto";
 
 function Routing(props) {
-  useEffect(() => {
-    setLocalStorage(
-      "token",
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-    );
-    props.dispatch(setToken(getLocalStorage("token")));
+    useEffect(() => {
+        setLocalStorage(
+            "token",
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+        );
+        props.dispatch(setToken(getLocalStorage("token")));
 
-    // da qui in poi avete il token per fare tutte le chimate
-  }, []);
+        // da qui in poi avete il token per fare tutte le chimate
+    }, []);
     // if (getLocalStorage('token') !== null){
     //     let token = getLocalStorage('token')
     //     let decriptedToken = decryptItem(token)
@@ -67,24 +67,25 @@ function Routing(props) {
 
             <Route path={routes.REGISTRATION} element={<Registration />} />
             <Route path={routes.LOGIN} element={<Login />} />
-            <Route path={routes.MESSAGES} element={<Messages />} />
-            <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
-            <Route path={routes.BOOKED} element={<Bookings />} />
-            <Route path={routes.SETTINGS} element={<Settings />} />
-            <Route path={routes.ACCOUNT} element={<Account />} />
-            <Route path={routes.FAVOURITE} element={<Favourites />} />
+
 
             {/* all the routes for frontEnd goes inside this one */}
 
             <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
+                <Route path={routes.MESSAGES} element={<Messages />} />
+                <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+                <Route path={routes.BOOKED} element={<Bookings />} />
+                <Route path={routes.SETTINGS} element={<Settings />} />
+                <Route path={routes.ACCOUNT} element={<Account />} />
+                <Route path={routes.FAVOURITE} element={<Favourites />} />
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
                 <Route path={routes.MRA} element={<MostRewApart />} />
             </Route>
 
-  
+
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
                 <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
@@ -105,11 +106,11 @@ function Routing(props) {
 
         </Routes>
     )
-  
+
 }
 
 const mapStateToProps = (state) => ({
-  tokenDuck: state.tokenDuck,
+    tokenDuck: state.tokenDuck,
 });
 
 export default connect(mapStateToProps)(Routing);
