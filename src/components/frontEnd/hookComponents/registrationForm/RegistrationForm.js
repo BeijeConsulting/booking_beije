@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 
 //redux
@@ -10,34 +9,32 @@ import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
-import { Button, notification } from 'antd';
+import { notification } from 'antd';
 
 // modules
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../../routes/routes';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 
 // styles
 import './RegistrationForm.less';
 
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
+import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 //api
-import {
-   registerUserPostApi
-} from '../../../../services/api/user/userApi'
+import { registerUserPostApi } from '../../../../services/api/user/userApi'
+import { signInPostApi } from '../../../../services/api/auth/authApi'
 
-import {
-   signInPostApi
-} from '../../../../services/api/auth/authApi'
-import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 let formObject = {
    name: '',
    surname: '',
    email: '',
-   password: ''
+   password: '',
+   url_immagine: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
 
 }
 

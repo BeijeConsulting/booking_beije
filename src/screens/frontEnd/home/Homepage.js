@@ -1,15 +1,15 @@
 import React from "react";
 // import { navigate } from "../../../utils/Utils";
-import { routes } from "../../../routes/routes";
+// import { routes } from "../../../routes/routes";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // less 
 import './Homepage.less'
 
 const Homepage = () => {
 
-  let vector = useNavigate()
+  // let vector = useNavigate()
 
 
   return (
