@@ -14,12 +14,13 @@
       "backToHome": "Torna alla home",
       "email": "Email",
       "english": "Inglese",
-      "home" : "Home",
+      "home": "Home",
       "italian": "Italiano",
       "loginLabel": "Accedi",
       "messages": "Messaggi",
-      "mra" : "I più recensiti",
+      "mra": "I più recensiti",
       "name": "Nome",
+      "noMessages": "Non esistono messaggi...",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
@@ -34,24 +35,37 @@
       "you": "Tu"
    },
    "toasts": {
+      "formErrorAllFields": "Compila tutti i campi",
+      "formErrorEmail": "Inserisci una mail valida",
+      "formErrorPassword": "Inserisci una password di almeno 8 caratteri, con almeno un simbolo",
+      "formErrorConfirmPassword": "Le password inserite non coincidono",
+      "formErrorTerms": "Accetta i termini e le condizioni",
+      "formSuccess": "Tutto ok",
       "messageError": "Nessun messaggio trovato"
    },
    "bo": {
       "components": {
+         "sidebar": {
+            "structure": "Strutture",
+            "payments": "Pagamenti",
+            "reservations": "Prenotazioni",
+            "messages": "Messaggi"
+         },
          "uploadFoto": {
             "upload": "Carica"
-         },
-         "hostRegistrationModal": {
-            "privateRegistration": "Sono un privato",
-            "companyRegistration": "Ho un'azienda",
-            "setUpPrivateAccount": "Configura il tuo account privato",
-            "setUpCompanyAccount": "Configura il tuo account aziendale",
-            "accept": "Accetto",
-            "termsConditionsForHost": "Termini e condizioni per gli host"
          }
       },
+      "modals": {},
       "screens": {
          "host": {
+            "hostRegistration": {
+               "privateRegistration": "Sono un privato",
+               "companyRegistration": "Ho un'azienda",
+               "setUpPrivateAccount": "Configura il tuo account privato",
+               "setUpCompanyAccount": "Configura il tuo account aziendale",
+               "accept": "Accetto",
+               "termsConditionsForHost": "Termini e condizioni per gli host"
+            },
             "hostAccount": {
                "vat": "Partita IVA",
                "billingAddress": "Indirizzo di fatturazione"
@@ -64,7 +78,14 @@
                "calendar": "Calendario"
             },
             "structure": {
-               "addStructure": "Aggiungi una struttura"
+               "structureListTitle": "Lista strutture",
+               "addStructure": "Aggiungi struttura"
+            },
+            "structureDetails": {
+               "structureDetailsTitle": "Dettagli struttura",
+               "editStructure": "Modifica struttura",
+               "addRoom": "Aggiungi camera",
+               "announce": "Annunci"
             }
          },
          "admin": {}
@@ -72,12 +93,6 @@
    },
    "fe": {
       "components": {
-         "button": {
-            "pressMe": "Cliccami!"
-         },
-         "input": {
-            "insert": "Inserisci..."
-         },
          "rooms": {
             "person": "Persona",
             "people": "Persone",

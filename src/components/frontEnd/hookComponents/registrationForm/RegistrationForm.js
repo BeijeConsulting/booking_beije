@@ -84,30 +84,30 @@ function RegistrationForm() {
 
       notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
-         openNotification('All fields must be filled in', 'all');
+         openNotification(t('toasts.formErrorAllFields'), 'all');
       } else {
          if (!checkMail(formObject.email)) {
             errors['email'] = true;
-            openNotification('Email not valid', 'email');
+            openNotification(t('toasts.formErrorEmail'), 'email');
          }
 
          if (!checkPassword(formObject.password)) {
             errors['password'] = true;
-            openNotification('Password not valid: at least 8 character long and 1 symbol');
+            openNotification(t('toasts.formErrorPassword'), 'password');
          }
 
          if (formObject.password !== formObject.confirmPassword) {
             errors['confirmPassword'] = true;
-            openNotification('Passwords do not match', 'confirmPassword');
+            openNotification(t('toasts.formErrorConfirmPassword'), 'confirmPassword');
          }
 
          if (!termsAccepted) {
             errors['terms'] = true;
-            openNotification('You have to accept the terms and conditions', 'terms');
+            openNotification(t('toasts.formErrorTerms'), 'terms');
          }
 
          if (!Object.values(errors).includes(true)) {
-            openNotification('Everything ok!', 'ok', 'info-toast');
+            openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
 
             // delete formObject.confirmPassword;
             // const response = postApi('user', formObject);
