@@ -18,7 +18,7 @@ import Modal from '../../../common/modal/Modal'
 
 // fontawesome 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // search component 
 
@@ -58,6 +58,10 @@ function Navbar(props) {
     }
     // function to Go to dimanic vector 
     const goTo = (params) => () => {
+        setState({
+            ...state,
+            isMenuOpen: !state.isMenuOpen
+        })
         vector(routes[params])
     }
 
@@ -70,9 +74,10 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        //chiamata API
+        //initUser
         initToken()
         removeLocalStorage("token")
+        vector(routes.HOME)
     }
     return (
         <>
@@ -81,9 +86,11 @@ function Navbar(props) {
                 //MOBILE
                 props.stateLayout < 480 ?
                     <nav className="navMobile">
-                        <button onClick={openModalSearch}>Search</button>
+                        <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                         <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
-                        <button onClick={goTo('HOME')}>logo</button>
+                        {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
+                        <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')}/>
+
                         {
                             props.tokenDuck.token ?
                                 <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
