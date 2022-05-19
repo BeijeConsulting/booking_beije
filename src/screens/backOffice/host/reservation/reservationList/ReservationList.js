@@ -82,10 +82,6 @@ const ReservationList = () => {
         console.log("callback")
     }
 
-    const getConsole = () => {
-        console.log("callback")
-    }
-
     return (
 
         <CardList
@@ -108,15 +104,10 @@ const ReservationList = () => {
                         {t("bo.screens.host.reservationList.calendar")}
                     </Button>
                 </>
-<<<<<<< HEAD
 
             }
 
-=======
-                
-            }
             
->>>>>>> 51dfb34b9a797cb83a733f3de1666186188f3f85
         >
             {obj.map(getCardStructures)}
 
