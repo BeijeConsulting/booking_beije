@@ -102,14 +102,14 @@ function Navbar(props) {
                                         state.isMenuOpen === false ?
                                             < div className="hambMenu" onClick={handleNavMenu}>
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
-                                                {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" className="phUser"/> */}
-                                                <img className="phUser" src={LoggedUser} alt="profileUser" className="phUser" />
+                                                {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                <img className="phUser" src={LoggedUser} alt="profileUser"/>
                                             </div>
                                             : <>
                                                 <div className="hambMenu" onClick={handleNavMenu}>
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
-                                                    {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" className="phUser"/> */}
-                                                    <img className="phUser" src={LoggedUser} alt="profileUser" className="phUser" />
+                                                    {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                    <img className="phUser" src={LoggedUser} alt="profileUser"/>
                                                 </div>
                                             </>
                                     }
