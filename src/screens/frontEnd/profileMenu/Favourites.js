@@ -96,10 +96,12 @@ const Favourites = () => {
 
    return (
       <div className='favourites-page'>
-         {/* back button */}
+         {/* To-DO: back button */}
+         <div className="back-button"></div>
          <h1 className="title">{t('fe.screens.settingsCard.favourites')}</h1>
          {state.favourites.map(renderFavourites)}
-         {/* pagination */}
+         {/* To-DO: pagination */}
+         <div className="pagination"></div>
       </div>
    );
 };
