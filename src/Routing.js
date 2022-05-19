@@ -37,9 +37,13 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
+
 import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 import { postApi, getApi } from "./services/genericServices";
 import { decryptItem } from "./utils/crypto/crypto";
+
+// COMMON 
+import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 
 function Routing(props) {
   useEffect(() => {
@@ -64,7 +68,7 @@ function Routing(props) {
   return (
     <Routes>
 
-
+      <Route path={routes.DISCLAIMER} element={<Disclaimer/>} />
       <Route path={routes.REGISTRATION} element={<Registration />} />
       <Route path={routes.LOGIN} element={<Login />} />
 
