@@ -182,7 +182,7 @@ const AnnounceOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.announceOperation.announce")}
+              label={t("common.announceTitle")}
               name="announce"
               rules={[
                 {
@@ -191,7 +191,7 @@ const AnnounceOperation = () => {
                 },
               ]}
             >
-              <Input name="announce" placeholder={t('bo.screens.host.announceOperation.announce')} />
+              <Input name="announce" placeholder={t("common.announceTitle")} />
             </Form.Item>
           </Row>
           <Row>
