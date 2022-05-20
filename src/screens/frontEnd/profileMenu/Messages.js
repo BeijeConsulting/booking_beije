@@ -78,7 +78,6 @@ let arrayMessages = [{
 
 
 const Messages = (props) => {
-
   const [state, setState] = useState({})
   const vector = useNavigate()
 

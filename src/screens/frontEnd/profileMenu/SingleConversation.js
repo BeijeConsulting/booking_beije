@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from 'react-router-dom'
 
 //LESS
@@ -22,7 +22,8 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 let inputMessage = null;
 
 const SingleConversation = (props) => {
-
+  const myRef = useRef(null)
+  const inputMessageRef = useRef()
   const location = useLocation()
 
   const singleConvers =
@@ -58,7 +59,7 @@ const SingleConversation = (props) => {
     }, {
       id: 1,
       idSender: location.state.id,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
+      text: 'Lorem ipsum  congue,',
       dateTime: '2022-05-20'
     }, {
       id: 1,
@@ -71,17 +72,18 @@ const SingleConversation = (props) => {
 
 
   const [state, setState] = useState({
-    msgArray: []
+    msgArray: null,
   })
 
   useEffect(() => {
 
-    setState({
-      ...state,
-      msgArray: singleConvers
-
-    })
-
+    if (state.msgArray === null) {
+      setState({
+        ...state,
+        msgArray: singleConvers
+      })
+    }
+    scrollToRef(myRef)
 
     /*  messageToSenderIdGetApi(location.state.id, getLocalStorage("token"))
      .then(res =>{
@@ -90,47 +92,59 @@ const SingleConversation = (props) => {
          messages: res?.data
        })
      }) */
-  }, [])
+  }, [state])
 
+  //function to scroll on last messages
+  const scrollToRef = (ref) => myRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
+
+  //function to set input value
   const handlerInput = (e) => {
     inputMessage = e.target.value
   }
 
+  // function to submit message on enter press 
   const submitMessageOnEnter = (e) => {
     if (e.key === "Enter") {
-      console.log(inputMessage)
+      let objcopy = Object.assign({}, state)
       let obj = {
         idSender: 48,
         text: inputMessage,
         dateTime: "2000-22-22"
       }
 
-      singleConvers.messages.push(obj)
+      objcopy.msgArray.messages.push(obj);
+
       setState({
         ...state,
-        msgArray: singleConvers
+        msgArray: objcopy.msgArray
       })
+      inputMessage = "";
+      inputMessageRef.current.input.value = "";
 
-      inputMessage = ""
     }
+
   }
 
+  // function to submit on click in icon 
   const submitMessageOnSendPress = () => {
-    console.log(inputMessage)
+    let objcopy = Object.assign({}, state)
     let obj = {
       idSender: 48,
       text: inputMessage,
       dateTime: "2000-22-22"
     }
 
-    singleConvers.messages.push(obj)
+    objcopy.msgArray.messages.push(obj);
+
     setState({
       ...state,
-      msgArray: singleConvers
+      msgArray: objcopy.msgArray
     })
+    inputMessageRef.current.input.value = "";
+    // inputMessage = "";
   }
 
-
+  // render chat 
   function renderConversation(mess, key) {
     return (
 
@@ -157,15 +171,16 @@ const SingleConversation = (props) => {
 
           <div className='back-button'><GoBackButton /></div>
 
-          <h1 className='title'>{state.msgArray.announceName}</h1>
+          <h1 className='title'>{state?.msgArray?.announceName}</h1>
           {
             state?.msgArray?.messages?.map(renderConversation)
           }
+          <span ref={myRef}></span>
         </div>
 
 
         <div className="space-input">
-          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+          <Input ref={inputMessageRef} onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
         </div>
       </div>
     </>
