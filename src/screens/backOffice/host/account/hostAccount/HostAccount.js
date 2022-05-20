@@ -1,0 +1,124 @@
+import { React, useState } from "react";
+
+import "./HostAccount.less"
+
+// COMPONENTS
+import { Button } from "antd";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
+import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
+
+// FontAwesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+
+// UTILS
+
+const HostAccount = (props) => {
+
+    const cardsTest = [
+        {
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
+            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
+            href: "notarealurl.io",
+        },
+        {
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
+            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
+            href: "notarealurl.io",
+        },
+        {
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
+            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
+            href: "notarealurl.io",
+        },
+        {
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
+            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
+            href: "notarealurl.io",
+        },
+        {
+            img: "https://picsum.photos/200/300",
+            title: "Camera bellissima",
+            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
+            href: "notarealurl.io",
+        },
+    ];
+
+    const goToDetails = (url) => (e) => {
+        console.log(`go to ${url}`);
+    }
+    const renderCards = (card, key) => {
+        return <HorizontalCard
+            callback={goToDetails(`/announce/${key}`)}
+            imageSrc={card?.img}
+            title={card?.title}
+            text={card?.text}
+            upperRightContent={<>
+                <Link to="#">
+                    <FontAwesomeIcon icon={faCrown} />
+                </Link>
+                <Link to="#">
+                    <FontAwesomeIcon icon={faCrown} />
+                </Link>
+            </>
+            }
+            key={key} //key should respect standard set in generalIteration
+        />
+    }
+
+
+    const switchToPage = (clickedPage) => {
+        console.log("switch to page", clickedPage);
+        //set paginationProps.currentPage to clickedPage (with useState)
+
+        //remap new object's array from API
+    }
+
+    const paginationProps = {
+        itemsCount: 50,
+        pageSize: 10,
+        paginationCallback: switchToPage
+    }
+
+    return <>
+        HostAccount screen
+
+        <HorizontalCard
+            imageSrc="https://picsum.photos/200/300"
+            callback={goToDetails(`/announce/key`)}
+            title="Card test"
+            subtitle="Chioggia, Italy"
+            text="Card testing right now blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            upperRightContent={
+                <Button>
+                    <FontAwesomeIcon icon={faCrown} />
+                </Button>
+            }
+            footerContent={<Button> Button test </Button>}
+        />
+
+        <CardList
+            sectionTitle={"Annunci"}
+            actions={
+                <>
+                    <Button type={"primary"}>Add rooms</Button>
+                    <Button>Delete rooms</Button>
+                </>
+            }
+            {...paginationProps}
+        >
+            {/* {wrapperMap(HorizontalCard, cardsTest)} */}
+            {cardsTest.map(renderCards)}
+        </CardList>
+    </>
+}
+
+
+
+
+export default HostAccount;
