@@ -19,29 +19,34 @@ function Settings() {
 
   const settingsToComponents = [{
     name: t("fe.screens.settings.settingsCard.account"),
+    path: 'account',
     icon: faUser
   },
   {
     name: t("fe.screens.settings.settingsCard.bookings"),
+    path: 'bookings',
     icon: faSuitcaseRolling
   },
   {
     name: t("fe.screens.settings.settingsCard.favourites"),
+    path: 'favourites',
     icon: faHeart
   },
   {
     name: t("fe.screens.settings.settingsCard.messages"),
+    path: 'messages',
     icon: faCommentAlt
   },
   {
     name: user_type === "USER" ? t("fe.screens.setting.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
+    path: 'yourProperties',
     icon: faBuilding
   }
   ]
 
   const createCardSettingsComponent = ((card, key) => {
     let cssClass = key === settingsToComponents.length - 1 ? 'beige posLast' : '';
-    return <SettingsCard key={key} icon={card.icon} name={card.name} className={cssClass} />
+    return <SettingsCard key={key} icon={card.icon} name={card.name} path={card.path} className={cssClass} />
   })
 
   return (
