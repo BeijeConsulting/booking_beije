@@ -71,27 +71,33 @@ function LoginForm(props) {
          [name]: value
       }
 
-      if (formObject.email.length === 0 || formObject.password.length === 0) {
-         openNotification(t('toasts.formErrorAllFields'), 'all');
-      } else {
+      if (!checkMail(formObject.email)) {
+         errors['email'] = true;
+         openNotification(t('toasts.formErrorEmail'), 'email');
+      }
 
-         if (!checkMail(formObject.email)) {
-            errors['email'] = true;
-            openNotification(t('toasts.formErrorEmail'), 'email');
-         }
-
-         if (!checkPassword(formObject.password)) {
-            errors['password'] = true;
-            openNotification(t('toasts.formErrorPassword'), 'password');
-         }
+      if (!checkPassword(formObject.password)) {
+         errors['password'] = true;
+         openNotification(t('toasts.formErrorPassword'), 'password');
       }
 
 
+      value.length === 0 ? errors[name] = true : errors[name] = false;
+
       if (checkPassword(formObject.password) && checkMail(formObject.email))
-         setState({
-            ...state,
-            isDisable: false
-         })
+      setState({
+         ...state,
+         isDisable: false
+      })
+   }
+
+   const response = res => {
+      openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
+      setLocalStorage("token", res.data.token);
+      setLocalStorage("refreshToken", res.data.refreshToken);
+      props.dispatch(setToken(res.data.token));
+      props.dispatch(setUser())
+      navigate(routes.LAYOUT);
    }
 
    const handleSubmit = (e) => {
@@ -99,16 +105,9 @@ function LoginForm(props) {
       notification.destroy();
 
       if (!Object.values(errors).includes(true)) {
-         openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
 
-         signInPostApi(formObject).then(res => {
-            setLocalStorage("token", res.data.token);
-            setLocalStorage("refreshToken", res.data.refreshToken);
-            props.dispatch(setToken(res.data.token));
-            props.dispatch(setUser())
-            navigate(routes.LAYOUT);
-         }).catch((error) => {
-            if (error.status === 401) {
+         signInPostApi(formObject).then(response).catch((error) => {
+            if (error?.response?.status === 401) {
                openNotification(t('toasts.formErrorApi'), 'info-toast');
                // navigate(routes.LOGIN);
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLocalStorage } from "../utils/localStorage/localStorage";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 import { updateAuthTokenPostApi } from "./api/auth/authApi";
@@ -22,15 +22,18 @@ axiosInstance.interceptors.response.use(function (response) {
     originalConfig._retry = true
     //qui chiamata updateAuthToken
     /* Token valido fino alle 11,00 del 19/05/2022 */
-    const res = await updateAuthTokenPostApi({
-      refreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsImV4cCI6MTY1MzAzMjU4OH0.eC_Spoljj7gDID4Q3LKOUpbojHAQW7fW5o9e-CHDPsI"
-      // refreshToken: getLocalStorage('refreshToken')
-    });
-    console.log("res", res)
-    const { token } = res.data;
+    if(localStorage.getItem('refreshTOken') !== null) {
+
+      await updateAuthTokenPostApi({
+        refreshToken: getLocalStorage('refreshToken')
+      }).then(res => {
+
+        const { token } = res.data;
+        setLocalStorage('token', token);
+      })
+    }
 
 
-    setLocalStorage('token', token);
   }
   return Promise.reject(error);
 });
