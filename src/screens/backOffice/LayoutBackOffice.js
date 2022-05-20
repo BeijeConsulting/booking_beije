@@ -52,7 +52,7 @@ const LayoutBackOffice = () => {
             padding: 24,
             minHeight: 280,
             // height: "100vh",
-            overflowY: "scroll",
+            // overflowY: "scroll",
           }}
         >
           <Outlet />
