@@ -148,6 +148,10 @@
                "becomeAHost": "Diventa un Host",
                "yourProperties": "Le tue proprietà"
             }
+         },
+         "propertyDetails": {
+            "details": "Dettagli",
+            "roomDetails": "Dettaglio stanza"
          }
       }
    }
