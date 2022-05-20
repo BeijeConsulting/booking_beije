@@ -131,16 +131,16 @@ function RegistrationForm(props) {
          if (!Object.values(errors).includes(true)) {
             openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
 
-            registerUserPostApi(formObject);
-
-            signInPostApi({
+            registerUserPostApi(formObject).then(signInPostApi({
                email: formObject.email,
                password: formObject.password
             }).then(res => {
                setLocalStorage("token", res.data.token);
                setLocalStorage("refreshToken", res.data.refreshToken);
                props.dispatch(setToken(res.data.token));
-            });
+            }));
+
+            
 
 
 

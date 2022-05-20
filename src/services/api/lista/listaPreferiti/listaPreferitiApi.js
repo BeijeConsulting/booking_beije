@@ -3,8 +3,8 @@
 import { getApi, postApi, deleteApi } from '../../../genericServices';
 
 /* AUTH:USER */
-const getFavourites = async (id, header) => {
-   return await getApi(`preferiti/${id}`, header);
+const getFavourites = async (header) => {
+   return await getApi(`preferiti`, header);
 }
 
 /* AUTH:USER */

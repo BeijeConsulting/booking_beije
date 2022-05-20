@@ -191,6 +191,10 @@
                     "becomeAHost": "Become a Host",
                     "yourProperties": "Your properties"
                 }
+            },
+            "propertyDetails": {
+                "details": "Details",
+                "roomDetails": "Room details"
             }
         }
     }
