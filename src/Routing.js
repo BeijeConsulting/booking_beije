@@ -49,14 +49,14 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 
 function Routing(props) {
   useEffect(() => {
-    if (getLocalStorage('token') !== null){
-        let token = getLocalStorage('token')
-        props.dispatch(setToken(token))
-    }
-    // setLocalStorage(
-    //   "token",
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-    // );
+    // if (getLocalStorage('token') !== null){
+    //     let token = getLocalStorage('token')
+    //     props.dispatch(setToken(token))
+    // }
+    setLocalStorage(
+      "token",
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+    );
 
     // da qui in poi avete il token per fare tutte le chimate
   }, []);
