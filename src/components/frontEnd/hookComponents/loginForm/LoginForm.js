@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 // import Logo from '../../../components/frontEnd/funcComponents/logo/Logo'
@@ -22,6 +22,8 @@ import { signInPostApi } from '../../../../services/api/auth/authApi'
 //localstorage
 import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 import { setUser } from '../../../../redux/ducks/userDuck';
+import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
+import { notification } from 'antd';
 
 
 let formObject = {
@@ -29,7 +31,16 @@ let formObject = {
    password: ''
 }
 
+let errors = {
+   email: false,
+   password: false
+}
+
 function LoginForm(props) {
+
+   const [state, setState] = useState({
+      isDisable: true
+   })
 
    const { t } = useTranslation();
 
@@ -39,22 +50,72 @@ function LoginForm(props) {
       navigate(`${routes}`)
    }
 
+   const openNotification = (toastDescription, name, additionalCss = '') => {
+      const key = `${name}-toast`;
+      let cssClass = `custom-toast ${additionalCss}`;
+      notification.open({
+         description: toastDescription,
+         onClick: () => {
+            notification.close(key)
+         },
+         duration: 2,
+         key,
+         placement: 'bottom',
+         className: cssClass
+      });
+   };
+
    const handleChange = (name) => (value) => {
       formObject = {
          ...formObject,
          [name]: value
       }
+
+      if (!checkMail(formObject.email)) {
+         errors['email'] = true;
+         openNotification(t('toasts.formErrorEmail'), 'email');
+      }
+
+      if (!checkPassword(formObject.password)) {
+         errors['password'] = true;
+         openNotification(t('toasts.formErrorPassword'), 'password');
+      }
+
+
+      value.length === 0 ? errors[name] = true : errors[name] = false;
+
+      if (checkPassword(formObject.password) && checkMail(formObject.email))
+      setState({
+         ...state,
+         isDisable: false
+      })
+   }
+
+   const response = res => {
+      openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
+      setLocalStorage("token", res.data.token);
+      setLocalStorage("refreshToken", res.data.refreshToken);
+      props.dispatch(setToken(res.data.token));
+      props.dispatch(setUser())
+      navigate(routes.LAYOUT);
    }
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      signInPostApi(formObject).then(res => {
-         setLocalStorage("token", res.data.token);
-         setLocalStorage("refreshToken", res.data.refreshToken);
-         props.dispatch(setToken(res.data.token));
-         props.dispatch(setUser())
-      });
-      navigate(routes.LAYOUT);
+      notification.destroy();
+
+      if (!Object.values(errors).includes(true)) {
+
+         signInPostApi(formObject).then(response).catch((error) => {
+            if (error?.response?.status === 401) {
+               openNotification(t('toasts.formErrorApi'), 'info-toast');
+               // navigate(routes.LOGIN);
+
+            }
+         })
+      }
+
+
    }
 
    return (
@@ -71,7 +132,7 @@ function LoginForm(props) {
                <FormInput type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
                <FormInput type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
                <div className="flex center column">
-                  <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} />
+                  <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} disabled={state.isDisable} />
                   <span className="w">{t('common.or')}</span>
                   <UiButton className="btn-secondary button-link" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
                </div>

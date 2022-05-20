@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 // translation 
 import { useTranslation } from 'react-i18next';
@@ -76,7 +76,7 @@ function Navbar(props) {
             obj.isMenuOpen = !obj.isMenuOpen
         }
         setState(obj)
-        
+
         vector(routes[params])
     }
 
@@ -91,9 +91,9 @@ function Navbar(props) {
     const logoutFunc = () => {
         props.dispatch(initUser());
         props.dispatch(initToken());
-        removeLocalStorage("token")
-        removeLocalStorage("refreshToken")
-        vector(routes.HOME)
+        removeLocalStorage("token");
+        removeLocalStorage("refreshToken");
+        vector(routes.LAYOUT);
     }
     return (
         <>
@@ -109,7 +109,7 @@ function Navbar(props) {
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
-                            props.tokenDuck.token !== null  ?
+                            props.tokenDuck.token !== null ?
                                 <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
                                 <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }

@@ -55,6 +55,7 @@
         "formErrorConfirmPassword": "Passwords do not match",
         "formErrorTerms": "You must accept the terms and conditions",
         "formSuccess": "Success!",
+        "formErrorApi": "Wrong email or password, try again",
         "messageError": "No messages",
         "operationAnnounce": "Announce title, input required",
         "operationDescription": "Description, input required",

@@ -17,13 +17,15 @@ function FormButton(props) {
          placeholder={props.label}
          value={props.label}
          type="submit"
+         disabled={props.disabled}
       />
    )
 }
 
 FormButton.defaultProps = {
    className: '',
-   placeholder: 'Press me!'
+   placeholder: 'Press me!',
+   disabled: false
 }
 
 FormButton.propTypes = {

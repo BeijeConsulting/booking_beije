@@ -1,19 +1,33 @@
 import React from "react";
+
+// components
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
 
-
+// modules
 import { useTranslation } from 'react-i18next';
 import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
-
-
-import './profileMenuCSS/Settings.less'
 import { Helmet } from "react-helmet";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 
-function Settings() {
+// duck
+import { initUser } from "../../../redux/ducks/userDuck";
+import { initToken } from "../../../redux/ducks/tokenDuck";
+
+// style
+import './profileMenuCSS/Settings.less';
+
+// utils
+import { removeLocalStorage } from "../../../utils/localStorage/localStorage";
+import { routes } from "../../../routes/routes";
+
+function Settings(props) {
 
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
 
   const user_type = "HOST"
 
@@ -50,6 +64,14 @@ function Settings() {
     return <SettingsCard key={key} icon={card.icon} name={card.name} path={card.path} className={cssClass} />
   })
 
+  const handleLogOut = () => {
+    props.dispatch(initUser());
+    props.dispatch(initToken());
+    removeLocalStorage("token")
+    removeLocalStorage("refreshToken")
+    navigate(routes.LAYOUT)
+  }
+
   return (
     <>
       <Helmet>
@@ -67,6 +89,7 @@ function Settings() {
         </div>
         <div className="setting_disclaimer_container">
           <UiButton
+          callback={handleLogOut}
             className={"logout_button"}
             label={"Logout"} />
           <Disclaimer />
@@ -78,4 +101,4 @@ function Settings() {
   );
 };
 
-export default Settings
+export default connect()(Settings);
