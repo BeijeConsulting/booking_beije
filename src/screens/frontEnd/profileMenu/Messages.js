@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//HELMET
+import { Helmet } from "react-helmet"
+
 //LESS
 import './profileMenuCSS/Messages.less'
+
+//TRANSLATIONS
+import { t } from "i18next";
 
 
 import { routes } from '../../../routes/routes'
@@ -60,6 +66,9 @@ let arrayMessages = [{
 }]
 
 
+// modules
+
+
 const Messages = () => {
 
 
@@ -84,14 +93,21 @@ const Messages = () => {
   }
 
   return (
-    <div className='messages-page'>
-      <div className='back-button'><GoBackButton /></div>
+    <>
+      <Helmet>
+        <title>{t("fe.screens.settings.settingsCard.messages")}</title>
+      </Helmet>
 
-      <h1 className='title'>Messages</h1>
-      {arrayMessages.map(renderMessages)}
+      <div className='messages-page'>
+        <div className='back-button'><GoBackButton /></div>
 
-      <div className="pagination"></div>
-    </div>
+        <h1 className='title'>Messages</h1>
+        {arrayMessages.map(renderMessages)}
+
+        <div className="pagination"></div>
+      </div>
+    </>
+
   );
 };
 
