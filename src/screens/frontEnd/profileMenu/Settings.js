@@ -18,12 +18,12 @@ function Settings() {
   const user_type = "HOST"
 
   const settingsToComponents = [{
-    name: t("fe.screens.settings.settingsCard.account"),
+    name: t("common.account"),
     path: 'account',
     icon: faUser
   },
   {
-    name: t("fe.screens.settings.settingsCard.bookings"),
+    name: t("common.bookings"),
     path: 'bookings',
     icon: faSuitcaseRolling
   },
@@ -33,12 +33,13 @@ function Settings() {
     icon: faHeart
   },
   {
-    name: t("fe.screens.settings.settingsCard.messages"),
+    name: t("common.messages"),
     path: 'messages',
     icon: faCommentAlt
   },
+
   {
-    name: user_type === "USER" ? t("fe.screens.setting.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
+    name: user_type === "USER" ? t("fe.screens.settings.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
     path: 'yourProperties',
     icon: faBuilding
   }

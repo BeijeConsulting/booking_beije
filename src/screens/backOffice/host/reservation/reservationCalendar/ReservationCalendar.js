@@ -63,9 +63,9 @@ const ReservationCalendar = (props) => {
         <div className="container_calendar">
 
             <ChoiceButton
-                firstButtonName={"Accettati"}
-                secondButtonName={"In attesa"}
-                thirdButtonName={"Rifiutato"}
+                firstButtonName={t('bo.screens.host.reservationList.accepted')}
+                secondButtonName={t('bo.screens.host.reservationList.pending')}
+                thirdButtonName={t('bo.screens.host.reservationList.rejected')}
                 callbackFirstButton={handlerAccepted}
                 callbackSecondButton={handlerWaiting}
                 callbackThirdButton={handlerRejected}
