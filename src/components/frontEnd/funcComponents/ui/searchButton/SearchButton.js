@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { t } from 'i18next';
 
 // style
 import './SearchButton.less';
@@ -19,7 +20,7 @@ const SearchButton = ({callback, classCustom}) => {
             <span>
                 <FontAwesomeIcon icon={faSearch} />
             </span>
-            Search your destination
+            {t('fe.screens.homePage.searchButton')}
         </button>
     )
 }
