@@ -5,6 +5,7 @@ function setLocalStorage(key, token) {
 }
 
 function getLocalStorage(key) {
+    if(localStorage.getItem('token') === null) return null;
     return decryptItem(JSON.parse(localStorage.getItem(key)));
 }
 

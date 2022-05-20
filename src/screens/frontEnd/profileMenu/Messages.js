@@ -83,10 +83,10 @@ const Messages = (props) => {
   const vector = useNavigate()
 
   useEffect(() => {
-    // messageToReceiverIdGetApi(48, getLocalStorage("token"))
-    //   .then(res => {
-    //     console.log('test', res)
-    //   })
+    messageToReceiverIdGetApi(120, getLocalStorage("token"))
+      .then(res => {
+        console.log('test', res)
+      })
   }, [])
 
   function renderMessages(mess, key) {
