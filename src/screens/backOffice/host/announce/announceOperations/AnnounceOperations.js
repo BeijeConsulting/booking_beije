@@ -13,17 +13,19 @@ import UploadFoto from "../../../../../components/backOffice/hookComponents/uplo
 
 import { useState, useEffect } from "react";
 
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 
 //STYLE
 import "./AnnounceOperations.less";
 import { useTranslation } from "react-i18next";
 
 const AnnounceOperation = () => {
+  
   const [state, setState] = useState({ data: null });
+  
   const { t } = useTranslation();
 
-  const location = useLocation();
+  //const location = useLocation();
 
   const initialFormValue = {
     announce: "",

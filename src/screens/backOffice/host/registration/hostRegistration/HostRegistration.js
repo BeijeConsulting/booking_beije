@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 
 //STYLE
 import "./HostRegistration.less"
-import FormItem from 'antd/lib/form/FormItem';
 
 const layout = {
     labelCol: {
