@@ -1,121 +1,67 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 
 import "./HostAccount.less"
 
 // COMPONENTS
-import { Button } from "antd";
-import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
-import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
+import { Button, Input, Form } from "antd";
 
-// FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+//TRANSLATION
+import { useTranslation } from "react-i18next";
 
-// UTILS
+const layout = {
+    labelCol: {
+        span: 5,
+    },
+    wrapperCol: {
+        span: 16,
+    },
+};
 
-const HostAccount = (props) => {
 
-    const cardsTest = [
-        {
-            img: "https://picsum.photos/200/300",
-            title: "Camera bellissima",
-            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
-            href: "notarealurl.io",
-        },
-        {
-            img: "https://picsum.photos/200/300",
-            title: "Camera bellissima",
-            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
-            href: "notarealurl.io",
-        },
-        {
-            img: "https://picsum.photos/200/300",
-            title: "Camera bellissima",
-            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
-            href: "notarealurl.io",
-        },
-        {
-            img: "https://picsum.photos/200/300",
-            title: "Camera bellissima",
-            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
-            href: "notarealurl.io",
-        },
-        {
-            img: "https://picsum.photos/200/300",
-            title: "Camera bellissima",
-            text: "Lorem ipsum dolor sit amet li mortacis delo reduxos",
-            href: "notarealurl.io",
-        },
-    ];
+const HostAccount = () => {
 
-    const goToDetails = (url) => (e) => {
-        console.log(`go to ${url}`);
-    }
-    const renderCards = (card, key) => {
-        return <HorizontalCard
-            callback={goToDetails(`/announce/${key}`)}
-            imageSrc={card?.img}
-            title={card?.title}
-            text={card?.text}
-            upperRightContent={<>
-                <Link to="#">
-                    <FontAwesomeIcon icon={faCrown} />
-                </Link>
-                <Link to="#">
-                    <FontAwesomeIcon icon={faCrown} />
-                </Link>
-            </>
-            }
-            key={key} //key should respect standard set in generalIteration
-        />
+    const [state, setState] = useState()
+
+    const { t } = useTranslation()
+
+    const saveHostData = () => {
+        console.log("salvato!")
+        //axios for put host data
     }
 
+    useEffect(() => {
+        //get host data to place in placeholder form input 
+        //setState with host data
+    })
 
-    const switchToPage = (clickedPage) => {
-        console.log("switch to page", clickedPage);
-        //set paginationProps.currentPage to clickedPage (with useState)
 
-        //remap new object's array from API
-    }
-
-    const paginationProps = {
-        itemsCount: 50,
-        pageSize: 10,
-        paginationCallback: switchToPage
-    }
-
-    return <>
-        HostAccount screen
-
-        <HorizontalCard
-            imageSrc="https://picsum.photos/200/300"
-            callback={goToDetails(`/announce/key`)}
-            title="Card test"
-            subtitle="Chioggia, Italy"
-            text="Card testing right now blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            upperRightContent={
-                <Button>
-                    <FontAwesomeIcon icon={faCrown} />
-                </Button>
-            }
-            footerContent={<Button> Button test </Button>}
-        />
-
-        <CardList
-            sectionTitle={"Annunci"}
-            actions={
-                <>
-                    <Button type={"primary"}>Add rooms</Button>
-                    <Button>Delete rooms</Button>
-                </>
-            }
-            {...paginationProps}
-        >
-            {/* {wrapperMap(HorizontalCard, cardsTest)} */}
-            {cardsTest.map(renderCards)}
-        </CardList>
-    </>
+    return (
+        <>
+            <h1>Account</h1>
+            <div className="host-profile">
+                <img alt="profile_img" src="https://nastec.eu/wp-content/uploads/2019/06/sfondo-grigio-chiaro.jpg" />
+                <h1>Hotel name</h1>
+            </div>
+            <Form {...layout} layout={"vertical"} name="nest-messages">
+                <Form.Item label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}>
+                    <Input placeholder="Phone number" />
+                </Form.Item>
+                <Form.Item label={t("bo.screens.host.hostRegistration.fields.vatNumber")}>
+                    <Input placeholder="VAT Number" />
+                </Form.Item>
+                <Form.Item label={t("bo.screens.host.hostRegistration.fields.city")}>
+                    <Input placeholder="City" />
+                </Form.Item>
+                <Form.Item label={t("bo.screens.host.hostRegistration.fields.postcode")}>
+                    <Input placeholder="Postcode" />
+                </Form.Item>
+                <Form.Item label={t("bo.screens.host.hostRegistration.fields.billingAddress")}>
+                    <Input placeholder="Billing address" />
+                </Form.Item>
+            </Form>
+            <Button onClick={saveHostData} type="primary" htmlType="submit">{t("common.save")}</Button>
+        </>
+    )
 }
 
 

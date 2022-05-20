@@ -3,12 +3,12 @@ const routes = {
     LAYOUT : '/',
     HOME: 'home',
     LOGIN: 'login',
-    REGISTRATION: 'registration',
+    REGISTRATION: '/registration',
 
     BOOKED: 'bookings',
     FAVOURITE: 'favourites',
     MESSAGES: 'messages',
-    SINGLECONVERSATION: 'singleconversation',
+    SINGLECONVERSATION: '/singleconversation',
     SETTINGS: 'settings',
     ACCOUNT: 'account',
 

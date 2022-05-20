@@ -48,5 +48,6 @@ const wrapperFilter = (Component, array, trueStatement) => {
 
 export {
     wrapperMap,
-    wrapperFilter
+    wrapperFilter,
+    randomKey
 }

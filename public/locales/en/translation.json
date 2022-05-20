@@ -1,154 +1,201 @@
 {
-   "common": {
-      "number": "{{value, number(minimumFractionDigits: 2)}}",
-      "currency": "{{price, currency(currency: EUR)}}",
-      "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
-      "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
-      "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
-      "relativeDay": "{{value, relativetime(day)}}",
-      "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
-      "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
-      "relativeMonth": "{{value, relativetime(range: month)}}",
-      "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
-      "account": "Account",
-      "backToHome": "Back to home",
-      "email": "Email",
-      "english": "English",
-      "home": "Home",
-      "italian": "Italian",
-      "loginLabel": "Login",
-      "messages": "Messages",
-      "mra": "Most reviewed apartments",
-      "name": "Name",
-      "noMessages": "No messages found",
-      "or": "or",
-      "password": "Password",
-      "passwordConfirm": "Confirm password",
-      "registerLabel": "Register",
-      "registration": "Registration",
-      "rooms": "{{count}} room",
-      "rooms_other": "{{count}} rooms",
-      "select": "Select",
-      "send": "Send",
-      "surname": "Surname",
-      "termsConditions": "Terms and Agreement",
-      "writeMessage": "Write your message here...",
-      "you": "You"
-   },
-   "toasts": {
-      "formErrorAllFields": "Please, fill in all fields",
-      "formErrorEmail": "Please, insert a valid email",
-      "formErrorPassword": "Please, insert a valid password: at least 8 characters long, 1 capital letter and 1 symbol",
-      "formErrorConfirmPassword": "Passwords do not match",
-      "formErrorTerms": "You must accept the terms and conditions",
-      "formSuccess": "Success!",
-      "messageError": "No messages"
-   },
-   "bo": {
-      "components": {
-         "sidebar": {
-            "structure": "Structure",
-            "payments": "Payments",
-            "reservations": "Reservations",
-            "messages": "Messages"
-         },
-         "uploadFoto": {
-            "upload": "Upload"
-         }
-      },
-      "modals": {},
-      "screens": {
-         "host": {
-            "hostAccount": {
-               "vat": "VAT number",
-               "billingAddress": "Billing address"
+    "common": {
+        "number": "{{value, number(minimumFractionDigits: 2)}}",
+        "currency": "{{price, currency(currency: EUR)}}",
+        "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
+        "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
+        "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
+        "relativeDay": "{{value, relativetime(day)}}",
+        "relativeDayExplicitNarrow": "{{value, relativetime(range: day; numeric: auto; style: narrow;)}}",
+        "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
+        "relativeMonth": "{{value, relativetime(range: month)}}",
+        "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+        "account": "Account",
+        "backToHome": "Back to home",
+        "email": "Email",
+        "english": "English",
+        "home": "Home",
+        "italian": "Italian",
+        "loginLabel": "Login",
+        "messages": "Messages",
+        "mra": "Most reviewed apartments",
+        "name": "Name",
+        "noMessages": "No messages found",
+        "or": "or",
+        "password": "Password",
+        "passwordConfirm": "Confirm password",
+        "registerLabel": "Register",
+        "registration": "Registration",
+        "rooms": "{{count}} room",
+        "rooms_other": "{{count}} rooms",
+        "save": "Save",
+        "select": "Select",
+        "send": "Send",
+        "surname": "Surname",
+        "termsConditions": "Terms and Agreement",
+        "writeMessage": "Write your message here...",
+        "you": "You"
+    },
+    "toasts": {
+        "formErrorAllFields": "Please, fill in all fields",
+        "formErrorEmail": "Please, insert a valid email",
+        "formErrorPassword": "Please, insert a valid password: at least 8 characters long, 1 capital letter and 1 symbol",
+        "formErrorConfirmPassword": "Passwords do not match",
+        "formErrorTerms": "You must accept the terms and conditions",
+        "formSuccess": "Success!",
+        "messageError": "No messages"
+    },
+    "bo": {
+        "components": {
+            "sidebar": {
+                "structure": "Structure",
+                "payments": "Payments",
+                "reservations": "Reservations",
+                "messages": "Messages"
             },
-            "hostRegistration": {
-               "title": "Host registration",
-               "privateRegistration": "I'm a private",
-               "companyRegistration": "I have a company",
-               "setUpPrivateAccount": "Set up your private account",
-               "setUpCompanyAccount": "Set up your company account",
-               "accept": "I accept",
-               "termsConditionsForHost": "Terms and Conditions for Host",
-               "fields": {
-                  "phoneNumber": "Phone number",
-                  "city": "City",
-                  "postcode": "Postcode",
-                  "billingAddress": "Billing address",
-                  "companyName": "Company name",
-                  "vatNumber": "VAT",
-                  "registerButton": "Register"
-               }
-            },
-            "reservationList": {
-               "title": "Reservation list",
-               "accepted": "Accepted",
-               "pending": "Pending",
-               "rejected": "Rejected",
-               "calendar": "Calendar"
-            },
-            "structure": {
-               "structureListTitle": "Structure list",
-               "addStructure": "Add structure"
-            },
-            "structureDetails": {
-               "structureDetailsTitle": "Structure details",
-               "editStructure": "Edit structure",
-               "addRoom": "Add room",
-               "announce": "Announce"
+            "uploadFoto": {
+                "upload": "Upload"
             }
-         },
-         "admin": {}
-      }
-   },
-   "fe": {
-      "components": {
-         "rooms": {
-            "person": "Person",
-            "people": "People",
-            "price": "Price for",
-            "nights": "nights",
-            "night": "night"
-         },
-         "review": {
-            "username": "username",
-            "title": "title",
-            "description": "description"
-         },
-         "service": {
-            "service": "Service",
-            "wifi": "Wi-Fi",
-            "kitchen": "Kitchen",
-            "airConditioning": "Air conditioning",
-            "parking": "Parking",
-            "washingMachine": "Washing machine",
-            "iron": "Iron",
-            "workingPlace": "Shared working place",
-            "swimmingPool": "Swimming pool",
-            "allowedSmoking": "Allowed Smoking",
-            "alarm": "Alarm"
-         }
-      },
-      "modals": {},
-      "screens": {
-         "guestAccount": {
-            "becomeAHost": "Become a host"
-         },
-         "registration": {
-            "acceptTerms": "I accept the terms and conditions"
-         },
-         "settings": {
-            "title": "Settings",
-            "settingsCard": {
-               "account": "Account",
-               "bookings": "Bookings",
-               "favourites": "Favourites",
-               "messages": "Messages",
-               "becomeAHost": "Become a Host",
-               "yourProperties": "Your properties"
+        },
+        "modals": {},
+        "screens": {
+            "host": {
+                "hostAccount": {
+                    "vat": "VAT number",
+                    "billingAddress": "Billing address"
+                },
+                "hostRegistration": {
+                    "title": "Host registration",
+                    "privateRegistration": "I'm a private",
+                    "companyRegistration": "I have a company",
+                    "setUpPrivateAccount": "Set up your private account",
+                    "setUpCompanyAccount": "Set up your company account",
+                    "accept": "I accept",
+                    "termsConditionsForHost": "Terms and Conditions for Host",
+                    "fields": {
+                        "phoneNumber": "Phone number",
+                        "city": "City",
+                        "postcode": "Postcode",
+                        "billingAddress": "Billing address",
+                        "companyName": "Company name",
+                        "vatNumber": "VAT",
+                        "registerButton": "Register"
+                    }
+                },
+                "reservationList": {
+                    "title": "Reservation list",
+                    "accepted": "Accepted",
+                    "pending": "Pending",
+                    "rejected": "Rejected",
+                    "calendar": "Calendar"
+                },
+                "structure": {
+                    "structureListTitle": "Structure list",
+                    "addStructure": "Add structure"
+                },
+                "structureDetails": {
+                    "structureDetailsTitle": "Structure details",
+                    "editStructure": "Edit structure",
+                    "addRoom": "Add room",
+                    "announce": "Announce"
+                },
+                "StructureOperation": {
+                    "announce": "Announce",
+                    "description": "Description",
+                    "address": "Address",
+                    "city": "City",
+                    "country": "Country",
+                    "zipCode": "ZIP code",
+                    "checkIn": "Check In",
+                    "checkOut": "Check Out",
+                    "category": "Category",
+                    "photos": "Photos",
+                    "errorMessage": {
+                        "announce": "Announce, input required",
+                        "description": "Description, input required",
+                        "address": "Address, input required",
+                        "city": "City, input required",
+                        "country": "Country, input required",
+                        "zipCode": "ZIP code, input required",
+                        "checkIn": "Check In, input required",
+                        "checkOut": "Check Out, input required",
+                        "category": "Category, input required",
+                        "photos": "Category, input required"
+                    }
+                },
+                "AnnounceOperation": {
+                    "photos": "Photos",
+                    "priceForNight": "Price for night",
+                    "beds": "Beds",
+                    "services": "services",
+                    "announce": "Announce",
+                    "rooms": "Rooms",
+                    "rules": "Rules",
+                    "errorMessage": {
+                        "photos": "Photos, input required",
+                        "priceForNight": "Price for night, input required",
+                        "beds": "Beds, input required",
+                        "services": "services, input required",
+                        "announce": "Announce, input required",
+                        "rooms": "Rooms, input required",
+                        "rules": "Rules, input required"
+                    }
+                }
             }
-         }
-      }
-   }
+        },
+        "admin": {}
+    },
+    "fe": {
+        "components": {
+            "rooms": {
+                "person": "Person",
+                "people": "People",
+                "price": "Price for",
+                "nights": "nights",
+                "night": "night"
+            },
+            "review": {
+                "username": "username",
+                "title": "title",
+                "description": "description"
+            },
+            "service": {
+                "service": "Service",
+                "wifi": "Wi-Fi",
+                "kitchen": "Kitchen",
+                "airConditioning": "Air conditioning",
+                "parking": "Parking",
+                "washingMachine": "Washing machine",
+                "iron": "Iron",
+                "workingPlace": "Shared working place",
+                "swimmingPool": "Swimming pool",
+                "allowedSmoking": "Allowed Smoking",
+                "alarm": "Alarm"
+            }
+        },
+        "modals": {},
+        "screens": {
+            "guestAccount": {
+                "becomeAHost": "Become a host"
+            },
+            "registration": {
+                "acceptTerms": "I accept the terms and conditions"
+            },
+            "settings": {
+                "title": "Settings",
+                "settingsCard": {
+                    "account": "Account",
+                    "bookings": "Bookings",
+                    "favourites": "Favourites",
+                    "messages": "Messages",
+                    "becomeAHost": "Become a Host",
+                    "yourProperties": "Your properties"
+                }
+            },
+            "propertyDetails": {
+                "details": "Details",
+                "roomDetails": "Room details"
+            }
+        }
+    }
 }
