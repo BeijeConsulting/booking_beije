@@ -5,12 +5,12 @@ const routes = {
     LOGIN: 'login',
     REGISTRATION: '/registration',
 
-    BOOKED: 'bookings',
-    FAVOURITE: 'favourites',
-    MESSAGES: 'messages',
+    BOOKINGS: '/bookings',
+    FAVOURITES: '/favourites',
+    MESSAGES: '/messages',
     SINGLECONVERSATION: '/singleconversation',
     SETTINGS: 'settings',
-    ACCOUNT: 'account',
+    ACCOUNT: '/account',
 
     //details
     DETAILSPROP: 'detailsproperty',

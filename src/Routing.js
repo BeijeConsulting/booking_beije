@@ -40,7 +40,7 @@ import AnnounceOperations from "./screens/backOffice/host/announce/announceOpera
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage } from './utils/localStorage/localStorage'
 // import { postApi, getApi } from "./services/genericServices";
 // import { decryptItem } from "./utils/crypto/crypto";
 
@@ -49,15 +49,15 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 
 function Routing(props) {
-    useEffect(() => {
-        // if (getLocalStorage('token') !== null){
-        //     let token = getLocalStorage('token')
-        //     props.dispatch(setToken(token))
-        // }
-        setLocalStorage(
-            "token",
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-        );
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null){
+        let token = getLocalStorage('token')
+        props.dispatch(setToken(token))
+    }
+    // setLocalStorage(
+    //   "token",
+    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+    // );
 
         // da qui in poi avete il token per fare tutte le chimate
     }, []);
@@ -78,10 +78,10 @@ function Routing(props) {
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
                 <Route path={routes.MESSAGES} element={<Messages />} />
                 <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
-                <Route path={routes.BOOKED} element={<Bookings />} />
+                <Route path={routes.BOOKINGS} element={<Bookings />} />
                 <Route path={routes.SETTINGS} element={<Settings />} />
                 <Route path={routes.ACCOUNT} element={<Account />} />
-                <Route path={routes.FAVOURITE} element={<Favourites />} />
+                <Route path={routes.FAVOURITES} element={<Favourites />} />
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />

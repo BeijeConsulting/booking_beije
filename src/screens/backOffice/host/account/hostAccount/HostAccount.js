@@ -44,19 +44,19 @@ const HostAccount = () => {
             </div>
             <Form {...layout} layout={"vertical"} name="nest-messages">
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}>
-                    <Input placeholder="Phone number" />
+                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.phoneNumber")} />
                 </Form.Item>
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.vatNumber")}>
-                    <Input placeholder="VAT Number" />
+                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.vatNumber")} />
                 </Form.Item>
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.city")}>
-                    <Input placeholder="City" />
+                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.city")} />
                 </Form.Item>
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.postcode")}>
-                    <Input placeholder="Postcode" />
+                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.postcode")} />
                 </Form.Item>
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.billingAddress")}>
-                    <Input placeholder="Billing address" />
+                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.billingAddress")} />
                 </Form.Item>
             </Form>
             <Button onClick={saveHostData} type="primary" htmlType="submit">{t("common.save")}</Button>
