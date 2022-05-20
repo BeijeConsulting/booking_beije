@@ -185,6 +185,9 @@
          "propertyDetails": {
             "details": "Dettagli",
             "roomDetails": "Dettaglio stanza"
+         },
+         "homePage": {
+            "searchButton": "Cerca destinazione"
          }
       }
    }
