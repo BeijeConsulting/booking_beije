@@ -48,7 +48,6 @@ function Navbar(props) {
 
 
     const [state, setState] = useState({
-        // windowWidth: window.innerWidth,
         isMenuOpen: false,
         modalSearchIsOpen: false,
         isLogIn: false
@@ -110,6 +109,9 @@ function Navbar(props) {
         props.dispatch(initToken());
         removeLocalStorage("token");
         removeLocalStorage("refreshToken");
+        setState({...state,
+            isMenuOpen : false
+        })
         vector(routes.LAYOUT);
     }
     return (
@@ -162,15 +164,15 @@ function Navbar(props) {
                                     }
                                     </>
                                     :
-                                    <span onClick={goTo('LOGIN')}>Login</span>
+                                    <span className="go_to_login" onClick={goTo('LOGIN')}>Login</span>
                             }
                         </nav>
                         {
                             state.isMenuOpen &&
                             <ul className={props.cssCustomMenu}>
                                 <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
-                                <li onClick={goTo('BOOKED')}>{t('common.bookings')}</li>
-                                <li onClick={goTo('FAVOURITE')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
+                                <li onClick={goTo('BOOKINGS')}>{t('common.bookings')}</li>
+                                <li onClick={goTo('FAVOURITES')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
                                 <li onClick={goTo('MESSAGES')}>{t('common.messages')}</li>
                                 {
                                     // (props.userDuck.user.permission[0] === 'guest' )?
