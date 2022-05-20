@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { signInPostApi } from '../../../../services/api/auth/authApi'
 
 //localstorage
-import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { setLocalStorage, getLocalStorage } from '../../../../utils/localStorage/localStorage';
 import { setUser } from '../../../../redux/ducks/userDuck';
 
 
@@ -53,6 +53,7 @@ function LoginForm(props) {
          setLocalStorage("refreshToken", res.data.refreshToken);
          props.dispatch(setToken(res.data.token));
       });
+      console.log(getLocalStorage('token'));
       props.dispatch(setUser())
       navigate(routes.LAYOUT);
    }
@@ -78,7 +79,7 @@ function LoginForm(props) {
             </form>
 
             <div className="txt">
-               <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
+               <a href="#" onClick={handleNavigation(routes.LAYOUT)}>{t('common.backToHome')}</a>
             </div>
 
          </div>

@@ -37,7 +37,6 @@ const Layout = () => {
         const arr = ['/settings', '/messages', '/singleConversation', '/favourites', '/account', '/bookings'];
 
         const test = arr.some((x) => location.pathname === x)
-        console.log('path trovato', test)
         return test
         // if (location.pathname !== "settings" || location.pathname !== "messages" !==)
     }
