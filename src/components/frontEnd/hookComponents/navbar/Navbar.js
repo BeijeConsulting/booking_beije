@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 // translation 
 import { useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ import { initToken } from '../../../../redux/ducks/tokenDuck';
 import { initUser } from '../../../../redux/ducks/userDuck'
 
 // utils localstorage 
-import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { getLocalStorage, removeLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 
 //da cancellare quando implementato duck user
@@ -51,7 +51,26 @@ function Navbar(props) {
         // windowWidth: window.innerWidth,
         isMenuOpen: false,
         modalSearchIsOpen: false,
+        isLogIn: false
     })
+
+    useEffect(isLogIn,[getLocalStorage('token')])
+
+    function isLogIn() {
+        if (getLocalStorage('token') !== null) {
+            setState({
+                ...state,
+                isLogIn: true
+            })
+        }else{
+            setState({
+                ...state,
+                isLogIn: false
+            })
+        }
+        
+        console.log('islog', state.isLogIn);
+    }
 
     // function to set modal search open true 
     const openModalSearch = () => {
@@ -109,7 +128,7 @@ function Navbar(props) {
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
-                            props.tokenDuck.token !== null ?
+                            state.isLogIn ?
                                 <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
                                 <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }

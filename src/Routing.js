@@ -47,12 +47,14 @@ import { getLocalStorage } from './utils/localStorage/localStorage'
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
+import { setUser } from "./redux/ducks/userDuck";
 
 function Routing(props) {
   useEffect(() => {
     if (localStorage.getItem('token') !== null){
         let token = getLocalStorage('token')
         props.dispatch(setToken(token))
+        props.dispatch(setUser())
     }
     // setLocalStorage(
     //   "token",
