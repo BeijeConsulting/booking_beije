@@ -110,7 +110,7 @@ function LoginForm(props) {
          }).catch((error) => {
             if (error.status === 401) {
                openNotification(t('toasts.formErrorApi'), 'info-toast');
-               navigate(routes.LOGIN);
+               // navigate(routes.LOGIN);
 
             }
          })
