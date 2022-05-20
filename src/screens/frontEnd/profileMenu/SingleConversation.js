@@ -4,19 +4,26 @@ import { useLocation } from 'react-router-dom'
 //LESS
 import './profileMenuCSS/SingleConversation.less'
 
+//CONNECT
+import { connect } from 'react-redux'
+
 import { Helmet } from 'react-helmet'
 import { messageToSenderIdGetApi } from '../../../services/api/messaggi/messaggiApi'
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 
+import { Input } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const SingleConversation = () => {
+let inputMessage = null;
+
+const SingleConversation = (props) => {
 
   const location = useLocation()
-  console.log(location.state.id)
 
   const singleConvers =
   {
@@ -48,12 +55,12 @@ const SingleConversation = () => {
       idSender: 48,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
       dateTime: '2022-05-20'
-    },{
+    }, {
       id: 1,
       idSender: location.state.id,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
       dateTime: '2022-05-20'
-    },{
+    }, {
       id: 1,
       idSender: 48,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
@@ -69,10 +76,10 @@ const SingleConversation = () => {
 
   useEffect(() => {
 
-
     setState({
       ...state,
       msgArray: singleConvers
+
     })
 
 
@@ -84,6 +91,45 @@ const SingleConversation = () => {
        })
      }) */
   }, [])
+
+  const handlerInput = (e) => {
+    inputMessage = e.target.value
+  }
+
+  const submitMessageOnEnter = (e) => {
+    if (e.key === "Enter") {
+      console.log(inputMessage)
+      let obj = {
+        idSender: 48,
+        text: inputMessage,
+        dateTime: "2000-22-22"
+      }
+
+      singleConvers.messages.push(obj)
+      setState({
+        ...state,
+        msgArray: singleConvers
+      })
+
+      inputMessage = ""
+    }
+  }
+
+  const submitMessageOnSendPress = () => {
+    console.log(inputMessage)
+    let obj = {
+      idSender: 48,
+      text: inputMessage,
+      dateTime: "2000-22-22"
+    }
+
+    singleConvers.messages.push(obj)
+    setState({
+      ...state,
+      msgArray: singleConvers
+    })
+  }
+
 
   function renderConversation(mess, key) {
     return (
@@ -110,9 +156,19 @@ const SingleConversation = () => {
         {
           state?.msgArray?.messages?.map(renderConversation)
         }
+
+        <div className="space-input">
+          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+        </div>
       </div>
     </>
   );
 };
 
-export default SingleConversation
+
+const mapStateToProps = (state) => ({
+  tokenDuck: state.tokenDuck
+})
+
+export default connect(mapStateToProps)(SingleConversation);
+

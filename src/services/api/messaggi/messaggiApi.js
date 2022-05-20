@@ -11,9 +11,9 @@ const messageMultipleGetApi = async () => {
 }
 
 /* AUTH:USER */
-const messageToReceiverIdGetApi = async (reicever_id) => {
+const messageToReceiverIdGetApi = async (reicever_id, header) => {
     return await getApi(`messages/receiver/${reicever_id
-        }`);
+        }`, header);
 }
 
 /* AUTH:USER */

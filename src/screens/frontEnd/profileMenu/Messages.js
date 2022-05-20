@@ -10,6 +10,14 @@ import './profileMenuCSS/Messages.less'
 //TRANSLATIONS
 import { t } from "i18next";
 
+//API
+import { messageToReceiverIdGetApi } from '../../../services/api/messaggi/messaggiApi'
+
+//LOCALSTORAGE
+import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+
+//CONNECT
+import { connect } from 'react-redux'
 
 import { routes } from '../../../routes/routes'
 
@@ -69,12 +77,19 @@ let arrayMessages = [{
 // modules
 
 
-const Messages = () => {
+const Messages = (props) => {
 
+  console.log(props)
 
   const [state, setState] = useState({})
   const vector = useNavigate()
 
+  useEffect(() => {
+    messageToReceiverIdGetApi(48, getLocalStorage("token"))
+      .then(res => {
+        console.log('test', res)
+      })
+  }, [])
 
   function renderMessages(mess, key) {
     return (
@@ -89,7 +104,7 @@ const Messages = () => {
   }
 
   const goToSingleConversation = (idSender) => () => {
-    vector(routes.SINGLECONVERSATION, {state:{id:idSender}})
+    vector(routes.SINGLECONVERSATION, { state: { id: idSender } })
   }
 
   return (
@@ -111,4 +126,10 @@ const Messages = () => {
   );
 };
 
-export default Messages
+
+const mapStateToProps = (state) => ({
+  tokenDuck: state.tokenDuck,
+  userDuck: state.userDuck
+})
+
+export default connect(mapStateToProps)(Messages);
