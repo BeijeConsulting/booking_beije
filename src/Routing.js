@@ -35,7 +35,7 @@ import StructureDetails from "./screens/backOffice/host/structure/structureDetai
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
 // import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
-// import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
@@ -94,12 +94,14 @@ function Routing(props) {
         <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
         <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
         <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
-        <Route path={routes.STRUCTURE_OPERATION} element={<StructureOperation />} />
+        <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
         <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
         <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
         <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
         <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
         <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
+        <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
+
         {/* //to add in admin route */}
         <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
       </Route>

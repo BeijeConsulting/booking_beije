@@ -44,7 +44,7 @@ const StructureList = () => {
   const goToStructure =
     (idStructure = null) =>
     () => {
-      navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}`, {
+      navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idStructure===null ? "new" : idStructure}`, {
         state: { idStructure: idStructure },
       });
     };
@@ -52,6 +52,7 @@ const StructureList = () => {
   const getCardStructures = (structure, key) => {
     return (
       <HorizontalCard
+        key={`structure-list-${key}`}
         callback={goToStructure(key)}
         imageSrc={structure.img}
         altText={`${key}_${structure.title}`}

@@ -7,19 +7,23 @@ import {
   Col,
   Form,
   Spin,
-  Space,
 } from "antd";
+
+import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
+
 import { useState, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
 //STYLE
 import "./AnnounceOperations.less";
+import { useTranslation } from "react-i18next";
 
 const AnnounceOperation = () => {
   const [state, setState] = useState({ data: null });
+  const { t } = useTranslation();
 
-  const location = useLocation()
+  const location = useLocation();
 
   const initialFormValue = {
     announce: "",
@@ -42,7 +46,7 @@ const AnnounceOperation = () => {
     //   // futura chiamata a API
     //   getAnnounce();
     // } else {
-      setState({ ...state, data: initialFormValue });
+    setState({ ...state, data: initialFormValue });
     // }
   }, []);
 
@@ -54,6 +58,15 @@ const AnnounceOperation = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const onChangeFoto = (value) => {
+    setState({
+      data: {
+        ...state.data,
+        fotoStructure: value,
+      },
+    });
   };
 
   return (
@@ -77,58 +90,69 @@ const AnnounceOperation = () => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          {/* INPUT NUMBER PRICE AND BEDS */}
-          <div className="input_number_container ">
-            <Form.Item
-              label="Price for night"
-              name="priceForNight"
-              rules={[
-                {
-                  required: true,
-                  message: "Insert price",
-                },
-              ]}
-            >
-              <InputNumber
-                prefix="$"
-                className="input_number_item border_radius_all_input"
-                min={1}
-                max={9999}
-                // value={state.data !== null ? state.data.priceOfNight : ""}
-              />
-            </Form.Item>
+          <Form.Item
+            label={t("bo.screens.host.AnnounceOperation.photos")}
+            name="photos"
+            rules={[
+              {
+                required: true,
+                message: t(
+                  "bo.screens.host.AnnounceOperation.errorMessage.photos"
+                ),
+              },
+            ]}
+          >
+            <UploadFoto addFotoStructure={onChangeFoto} />
+          </Form.Item>
 
-            <Form.Item
-              label="Beds"
-              name="beds"
-              rules={[
-                {
-                  required: true,
-                  message: "Insert number of beds",
-                },
-              ]}
-            >
-              <InputNumber
-                className="input_number_item border_radius_all_input"
-                min={1}
-                max={50}
-              />
-            </Form.Item>
-          </div>
+          <Row gutter={32}>
+            <Col>
+              <Form.Item
+                label={t("bo.screens.host.AnnounceOperation.priceForNight")}
+                name="priceForNight"
+                rules={[
+                  {
+                    required: true,
+                    message: "bo.screens.host.AnnounceOperation.errorMessage.pricePerNight",
+                  },
+                ]}
+              >
+                <InputNumber
+                  prefix="$"
+                  min={1}
+                  max={9999}
+                />
+              </Form.Item>
+            </Col>
 
-          {/* CHECKBOX AMMENITIES GROUPE */}
-          <div className="checkbox_ammenities_container">
+            <Col>
+              <Form.Item
+                label={t("bo.screens.host.AnnounceOperation.beds")}
+                name="beds"
+                rules={[
+                  {
+                    required: true,
+                    message: "bo.screens.host.AnnounceOperation.errorMessage.beds",
+                  },
+                ]}
+              >
+                <InputNumber min={1} max={50} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
             <Form.Item
-              label="Services"
-              name="checkbox-group"
+              label={t("bo.screens.host.AnnounceOperation.services")}
+              name="services"
               rules={[
                 {
                   required: true,
-                  message: "!",
+                  message: "bo.screens.host.AnnounceOperation.errorMessage.services",
                 },
               ]}
             >
-              <Checkbox.Group className="checkbox_group_service" name="service">
+              <Checkbox.Group name="service">
                 <Row>
                   <Col span={8}>
                     <Checkbox value="servizio-3">servizio-3</Checkbox>
@@ -154,78 +178,64 @@ const AnnounceOperation = () => {
                 </Row>
               </Checkbox.Group>
             </Form.Item>
-          </div>
+          </Row>
 
-          {/* ONLY INPUT TEXT AND TEXT AREA */}
-          <div className="input_text_container">
+          <Row>
             <Form.Item
-              label="Announce"
+              label={t("bo.screens.host.AnnounceOperation.announce")}
               name="announce"
               rules={[
                 {
                   required: true,
-                  message: "!",
+                  message: "bo.screens.host.AnnounceOperation.errorMessage.announce",
                 },
               ]}
             >
-              <Input
-                name="announce"
-                placeholder="Basic usage"
-                className="input_announce border_radius_all_input"
-              />
+              <Input name="announce" placeholder="Basic usage" />
             </Form.Item>
-
+          </Row>
+          <Row>
             <Form.Item
               label="Description"
               name="description"
               rules={[
                 {
                   required: true,
-                  message: "!",
+                  message: "bo.screens.host.AnnounceOperation.errorMessage.description",
                 },
               ]}
             >
-              <TextArea
-                placeholder="Description"
-                name="description"
-                rows={6}
-                className="input_text_area border_radius_all_input"
+              <TextArea placeholder="Description" name="description" rows={6} />
+            </Form.Item>
+          </Row>
+
+          <Row>
+            <Form.Item
+              label={t("bo.screens.host.AnnounceOperation.rooms")}
+              name="rooms"
+              rules={[
+                {
+                  required: true,
+                  message: "bo.screens.host.AnnounceOperation.errorMessage.rooms",
+                },
+              ]}
+            >
+              <InputNumber
+                min={1}
+                max={50}
+                // defaultValue={50}
               />
             </Form.Item>
-          </div>
+          </Row>
 
-          {/* INPUT NUMBER FOR NUMBER OF BADS AND NUMBER OF ROOMS */}
-          <div className="input_number_container">
-            <div className="margin_input_number">
-              <Form.Item
-                label="Rooms"
-                name="rooms"
-                rules={[
-                  {
-                    required: true,
-                    message: "!",
-                  },
-                ]}
-              >
-                <InputNumber
-                  className="input_number_item border_radius_all_input"
-                  min={1}
-                  max={50}
-                  // defaultValue={50}
-                />
-              </Form.Item>
-            </div>
-          </div>
-
-          {/* CHECKBOX OF RULES */}
-          <div className="checkbox_rules_container">
+          <Row>
             <Form.Item
-              label="Rules"
+              label={t("bo.screens.host.AnnounceOperation.rules")}
               name="rules"
               rules={[
                 {
                   required: true,
-                  message: "!",
+                  message: t("bo.screens.host.AnnounceOperation.errorMessage.rules"),
                 },
               ]}
             >
@@ -247,8 +257,7 @@ const AnnounceOperation = () => {
                 </div>
               </Checkbox.Group>
             </Form.Item>
-          </div>
-
+          </Row>
           <Form.Item
             wrapperCol={{
               offset: 20,

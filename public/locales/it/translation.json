@@ -60,6 +60,10 @@
     "modals": {},
     "screens": {
       "host": {
+        "hostAccount": {
+          "vat": "Partita IVA",
+          "billingAddress": "Indirizzo di fatturazione"
+        },
         "hostRegistration": {
           "title": "Registrazione Host",
           "privateRegistration": "Sono un privato",
@@ -94,6 +98,48 @@
           "editStructure": "Modifica struttura",
           "addRoom": "Aggiungi camera",
           "announce": "Annunci"
+        },
+        "StructureOperation": {
+          "announce": "Announce",
+          "description": "Description",
+          "address": "Address",
+          "city": "City",
+          "country": "Country",
+          "zipCode": "ZIP code",
+          "checkIn": "Check In",
+          "checkOut": "Check Out",
+          "category": "Category",
+          "photos": "Photos",
+          "errorMessage": {
+            "announce": "Announce, input required",
+            "description": "Description, input required",
+            "address": "Address, input required",
+            "city": "City, input required",
+            "country": "Country, input required",
+            "zipCode": "ZIP code, input required",
+            "checkIn": "Check In, input required",
+            "checkOut": "Check Out, input required",
+            "category": "Category, input required",
+            "photos": "Category, input required"
+          }
+        },
+        "AnnounceOperation":{
+          "photos": "Photos",
+          "priceForNight": "Price for night",
+          "beds": "Beds",
+          "services": "services",
+          "announce": "Announce",
+          "rooms": "Rooms",
+          "rules": "Rules",
+          "errorMessage":{
+            "photos": "Photos, input required",
+            "priceForNight": "Price for night, input required",
+            "beds": "Beds, input required",
+            "services": "services, input required",
+            "announce": "Announce, input required",
+            "rooms": "Rooms, input required",
+            "rules": "Rules, input required"
+          }
         }
       },
       "admin": {}
