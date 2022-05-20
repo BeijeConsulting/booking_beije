@@ -2,17 +2,29 @@ import { useState, useEffect } from "react";
 
 import moment from "moment";
 
-import { Form, Input, InputNumber, Button, TimePicker, Spin } from "antd";
+import {
+  Form,
+  Input,
+  InputNumber,
+  Button,
+  TimePicker,
+  Spin,
+  Radio,
+  Row,
+  Col,
+} from "antd";
+import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
+
 import GoBackButton from "../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const StructureOperation = () => {
+  const { t } = useTranslation();
+
   const { TextArea } = Input;
-
   const [state, setState] = useState({ data: null });
-
   const location = useLocation();
-
   const initialFormValue = {
     address: "",
     announce: "",
@@ -29,17 +41,17 @@ const StructureOperation = () => {
     // Per farlo funzionare usare json-server
     // const getStructure = async () => {
     //   const res = await fetch(
-    //     `http://localhost:30001/data/${location.state.idStructure}`
+    //     `http://localhost:3001/data/${location.state.idStructure}`
     //   );
     //   const structureFromServer = await res.json();
     //   setState({ ...state, data: structureFromServer });
     // };
 
     // if (location.state.idStructure !== null) {
-    //   // futura chiamata a API
-    //   getStructure();
+    // futura chiamata a API
+    // getStructure();
     // } else {
-      setState({ ...state, data: initialFormValue });
+    setState({ ...state, data: initialFormValue });
     // }
   }, []);
 
@@ -51,6 +63,15 @@ const StructureOperation = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const onChangeFoto = (value) => {
+    setState({
+      data: {
+        ...state.data,
+        fotoStructure: value,
+      },
+    });
   };
 
   return (
@@ -76,110 +97,190 @@ const StructureOperation = () => {
             checkOut: moment(state.data.checkOut, "HH:mm"),
           }}
         >
-          <GoBackButton />
-          <Form.Item
-            label="Announce"
-            name="announce"
-            rules={[
-              {
-                required: true,
-                message: "Please input your announce!",
-              },
-            ]}
-          >
-            <Input name="announce" placeholder="Announce title" />
-          </Form.Item>
+          <div>
+            <GoBackButton />
+            <h1>{`${
+              location.state.idStructure === null ? "Inserisci" : "Modifica"
+            } Annuncio`}</h1>
+          </div>
 
           <Form.Item
-            label="Description"
-            name="description"
+            label={t("bo.screens.host.StructureOperation.photos")}
+            name="photos"
             rules={[
               {
                 required: true,
-                message: "Please input your description!",
+                message: t(
+                  "bo.screens.host.StructureOperation.errorMessage.photos"
+                ),
               },
             ]}
           >
-            <TextArea name="description" placeholder="Descriprion" />
+            <UploadFoto addFotoStructure={onChangeFoto} />
           </Form.Item>
 
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={[
-              {
-                required: true,
-                message: "Please input your address!",
-              },
-            ]}
-          >
-            <Input name="address" placeholder="address" />
-          </Form.Item>
+          <Row>
+            <Form.Item
+              label={t("bo.screens.host.StructureOperation.announce")}
+              name="announce"
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "bo.screens.host.StructureOperation.errorMessage.announce"
+                  ),
+                },
+              ]}
+            >
+              <Input name="announce" placeholder="Announce title" />
+            </Form.Item>
+          </Row>
 
-          <Form.Item
-            label="City"
-            name="city"
-            rules={[
-              {
-                required: true,
-                message: "Please input your city!",
-              },
-            ]}
-          >
-            <Input name="city" placeholder="city" />
-          </Form.Item>
+          <Row>
+            <Form.Item
+              label={t("bo.screens.host.StructureOperation.category")}
+              name="category"
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "bo.screens.host.StructureOperation.errorMessage.category"
+                  ),
+                },
+              ]}
+            >
+              <Radio.Group>
+                <Radio value={"Hotel"}>Hotel</Radio>
+                <Radio value={"Apartment"}>Apartment</Radio>
+                <Radio value={"Villa"}>Villa</Radio>
+                <Radio value={"Hostel"}>Hostel</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </Row>
 
-          <Form.Item
-            label="Country"
-            name="country"
-            rules={[
-              {
-                required: true,
-                message: "Please input your country!",
-              },
-            ]}
-          >
-            <Input name="country" placeholder="country" />
-          </Form.Item>
+          <Row>
+            <Form.Item
+              label={t("bo.screens.host.StructureOperation.description")}
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "bo.screens.host.StructureOperation.errorMessage.description"
+                  ),
+                },
+              ]}
+            >
+              <TextArea name="description" placeholder="Descriprion" />
+            </Form.Item>
+          </Row>
 
-          <Form.Item
-            label="ZIP code"
-            name="zipCode"
-            rules={[
-              {
-                required: true,
-                message: "Please input your zipCode!",
-              },
-            ]}
-          >
-            <InputNumber name="zipCode" placeholder="zipCode" />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.address")}
+                name="address"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.address"
+                    ),
+                  },
+                ]}
+              >
+                <Input name="address" placeholder="address" />
+              </Form.Item>
+            </Col>
 
-          <Form.Item
-            label="Check-in"
-            name="checkIn"
-            rules={[
-              {
-                required: true,
-                message: "Please input your checkIn!",
-              },
-            ]}
-          >
-            <TimePicker name="checkIn" placeholder="checkIn" />
-          </Form.Item>
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.city")}
+                name="city"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.city"
+                    ),
+                  },
+                ]}
+              >
+                <Input name="city" placeholder="city" />
+              </Form.Item>
+            </Col>
+          </Row>
 
-          <Form.Item
-            label="Check-out"
-            name="checkOut"
-            rules={[
-              {
-                required: true,
-                message: "Please input your checkIn!",
-              },
-            ]}
-          >
-            <TimePicker name="checkOut" placeholder="checkOut" />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.country")}
+                name="country"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.country"
+                    ),
+                  },
+                ]}
+              >
+                <Input name="country" placeholder="country" />
+              </Form.Item>
+            </Col>
+
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.zipCode")}
+                name="zipCode"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.zipCode"
+                    ),
+                  },
+                ]}
+              >
+                <InputNumber name="zipCode" placeholder="zipCode" />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.checkIn")}
+                name="checkIn"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.checkIn"
+                    ),
+                  },
+                ]}
+              >
+                <TimePicker name="checkIn" placeholder="checkIn" />
+              </Form.Item>
+            </Col>
+            <Col className="gutter-row">
+              <Form.Item
+                label={t("bo.screens.host.StructureOperation.checkOut")}
+                name="checkOut"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "bo.screens.host.StructureOperation.errorMessage.checkOut"
+                    ),
+                  },
+                ]}
+              >
+                <TimePicker name="checkOut" placeholder="checkOut" />
+              </Form.Item>
+            </Col>
+          </Row>
 
           <Button type="primary" htmlType="submit">
             Submit

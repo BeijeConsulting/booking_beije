@@ -14,6 +14,9 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 //STYLE
 import "./ReservationList.less"
 
+//UTILS
+import { randomKey } from "../../../../../utils/generalIteration/generalIteration"
+
 
 const ReservationList = () => {
     const [state, setState] = useState([]) //state using for display announce categories
@@ -67,19 +70,17 @@ const ReservationList = () => {
         //setState announce refused
     }
 
-    const getCardStructures = (structure, key) => {
-        return <HorizontalCard
-            key={key}
-            imageSrc={structure.img}
-            altText={`${key}_${structure.title}`}
-            title={structure.title}
-            text={structure.text}
-            callback={getConsole}
-        />
+    const switchToPage = (clickedPage) => {
+        console.log("switch to page", clickedPage);
+        //set paginationProps.currentPage to clickedPage (with useState)
+
+        //remap new object's array from API
     }
-{/* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */}
-    const getConsole = () =>{
-        console.log("callback")
+
+    const paginationProps = {
+        itemsCount: 50,
+        pageSize: 10,
+        paginationCallback: switchToPage
     }
 
     return (
@@ -89,7 +90,6 @@ const ReservationList = () => {
             actions={
                 <>
                     <ChoiceButton
-                    /* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */
                         callbackFirstButton={showAccepted}
                         firstButtonName={t("bo.screens.host.reservationList.accepted")}
                         callbackSecondButton={showPending}
@@ -104,16 +104,24 @@ const ReservationList = () => {
                         {t("bo.screens.host.reservationList.calendar")}
                     </Button>
                 </>
-
             }
 
-            
+            {...paginationProps}
         >
-            {obj.map(getCardStructures)}
+            {obj.map(renderReservations)}
 
         </CardList>
     )
 }
 
+const renderReservations = (structure, key) => {
+    return <HorizontalCard
+        key={`${key}-${randomKey()}`}
+        imageSrc={structure.img}
+        altText={`${key}_${structure.title}`}
+        title={structure.title}
+        text={structure.text}
+    />
+}
 
 export default ReservationList;
