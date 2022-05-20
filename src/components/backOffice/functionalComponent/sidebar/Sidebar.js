@@ -19,7 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const toggleSidebar = () => {
     console.log("qui sidebar");
@@ -48,17 +48,17 @@ const Sidebar = () => {
           {
             key: "3",
             icon: <FontAwesomeIcon icon={faBookOpen} />,
-            label: t("bo.components.sidebar.reservations"),
+            label: t("common.bookings"),
           },
           {
             key: "4",
             icon: <FontAwesomeIcon icon={faMessage} />,
-            label: t("bo.components.sidebar.messages"),
+            label: t("common.messages"),
           },
         ]}
       />
     </>
   );
-};
+}
 
 export default Sidebar;

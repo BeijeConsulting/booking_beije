@@ -110,7 +110,7 @@ const Messages = (props) => {
   return (
     <>
       <Helmet>
-        <title>{t("fe.screens.settings.settingsCard.messages")}</title>
+        <title>{t("common.messages")}</title>
       </Helmet>
 
       <div className='messages-page'>

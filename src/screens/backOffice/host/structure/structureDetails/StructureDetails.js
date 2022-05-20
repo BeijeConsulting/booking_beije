@@ -9,8 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'antd';
 
+//ROUTING
+import { routes } from "../../../../../routes/routes";
+import { useNavigate } from "react-router-dom";
+
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
+
 // import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList"
 
@@ -25,6 +30,7 @@ const StructureDetails = () => {
 
     const { t } = useTranslation()
 
+    const navigate = useNavigate()
 
     const obj = [
         {
@@ -47,9 +53,13 @@ const StructureDetails = () => {
         },
     ]
 
-    const goToAnnounce = (url) => (e) => {
-        console.log(`go to ${url}`);
-    }
+    const goToStructure = (idAnnounce = null) => () => {
+                navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
+                    state: { idAnnounce: idAnnounce },
+                });
+
+            };
+
     const getAnnounceCards = (announce, key) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
@@ -57,7 +67,7 @@ const StructureDetails = () => {
             imageAlt={`${key}_${announce.title}`}
             title={announce.title}
             text={announce.text}
-            callback={goToAnnounce}
+            callback={goToStructure(key)}
         />
     }
 
