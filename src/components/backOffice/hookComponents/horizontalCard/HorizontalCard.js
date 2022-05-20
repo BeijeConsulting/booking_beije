@@ -22,7 +22,10 @@ const HorizontalCard = (props) => {
     } = props
 
     const handleCardClick = (e) => {
-        callback(e);
+        if ("callback" in props) {
+            callback(e);
+        }
+
     }
 
     return (
@@ -75,12 +78,12 @@ HorizontalCard.defaultProps = {
 }
 
 HorizontalCard.propTypes = {
-    imageSrc: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string,
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
     text: PropTypes.string,
-    callback: PropTypes.func.isRequired,
+    callback: PropTypes.func,
     upperRightContent: PropTypes.any,
     footerContent: PropTypes.any,
 

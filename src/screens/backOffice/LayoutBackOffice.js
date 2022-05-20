@@ -7,8 +7,12 @@ import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../../components/backOffice/functionalComponent/sidebar/Sidebar';
 
 import { Outlet } from 'react-router-dom';
+import Footer from '../../components/frontEnd/hookComponents/footer/Footer';
+//UTILS
+import { LinksFooterHost } from '../../utils/linksFooter/linksFooter';
 
 const { Header, Sider, Content } = Layout;
+
 
 const LayoutBackOffice = () => {
 
@@ -47,6 +51,8 @@ const LayoutBackOffice = () => {
                 >
                     <Outlet />
                 </Content>
+
+                <Footer link={LinksFooterHost} />
             </Layout>
         </Layout>
     );
