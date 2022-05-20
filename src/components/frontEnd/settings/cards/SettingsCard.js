@@ -12,7 +12,7 @@ export default function SettingsCard(props) {
      }
 
     return (
-        <div className='settings_list_card' onClick={handleNavigation(props.name.toUpperCase())} >
+        <div className='settings_list_card' onClick={handleNavigation(props.path.toUpperCase())} >
             <div className={`settings_card_container ${props.className}`}>
                 <div className='position'>
                 <FontAwesomeIcon className='icon' icon={props.icon} />
