@@ -133,6 +133,7 @@ const SingleConversation = (props) => {
 
   function renderConversation(mess, key) {
     return (
+
       <div key={key} className={mess.idSender === location.state.id ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
           mess.idSender === location.state.id ? singleConvers.announceName : 'You'
@@ -141,6 +142,8 @@ const SingleConversation = (props) => {
         <p>{mess.text}</p>
         <div className="dateTimeMessage">{mess.dateTime}</div>
       </div>
+
+
     )
   }
 
@@ -150,12 +153,16 @@ const SingleConversation = (props) => {
         <title>SingleConversation</title>
       </Helmet>
       <div className="singleConversation-page">
-        <div className='back-button'><GoBackButton /></div>
+        <div className="container_messages">
 
-        <h1 className='title'>{state.msgArray.announceName}</h1>
-        {
-          state?.msgArray?.messages?.map(renderConversation)
-        }
+          <div className='back-button'><GoBackButton /></div>
+
+          <h1 className='title'>{state.msgArray.announceName}</h1>
+          {
+            state?.msgArray?.messages?.map(renderConversation)
+          }
+        </div>
+
 
         <div className="space-input">
           <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
