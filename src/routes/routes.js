@@ -8,7 +8,7 @@ const routes = {
     BOOKED: 'bookings',
     FAVOURITE: 'favourites',
     MESSAGES: 'messages',
-    SINGLECONVERSATION: 'singleconversation',
+    SINGLECONVERSATION: '/singleconversation',
     SETTINGS: 'settings',
     ACCOUNT: 'account',
 
