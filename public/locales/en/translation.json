@@ -152,6 +152,12 @@
          "propertyDetails": {
             "details": "Details",
             "roomDetails": "Room details"
+         },
+         "bookings": {
+            "history": "Storico",
+            "pending": "In attesa",
+            "planned": "Pianificati",
+            "refused": "Rifiutati"
          }
       }
    }
