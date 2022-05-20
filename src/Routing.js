@@ -51,7 +51,7 @@ import { setUser } from "./redux/ducks/userDuck";
 
 function Routing(props) {
   useEffect(() => {
-    if (localStorage.getItem('token') !== null){
+    if (localStorage.getItem('token') !== null && localStorage.getItem('refreshToken') !== null ){
         let token = getLocalStorage('token')
         props.dispatch(setToken(token))
         props.dispatch(setUser())
