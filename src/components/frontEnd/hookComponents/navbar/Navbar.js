@@ -89,8 +89,8 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        initUser()
-        initToken()
+        props.dispatch(initUser());
+        props.dispatch(initToken());
         removeLocalStorage("token")
         removeLocalStorage("refreshToken")
         vector(routes.HOME)
@@ -109,7 +109,7 @@ function Navbar(props) {
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
-                            props.tokenDuck.token ?
+                            props.tokenDuck.token !== null  ?
                                 <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
                                 <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }
@@ -124,7 +124,7 @@ function Navbar(props) {
 
 
                             {
-                                props.tokenDuck.token ?
+                                props.tokenDuck.token !== null ?
 
 
                                     <>{
@@ -152,9 +152,9 @@ function Navbar(props) {
                             state.isMenuOpen &&
                             <ul className={props.cssCustomMenu}>
                                 <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
-                                <li onClick={goTo('BOOKED')}>{t('fe.screens.settings.settingsCard.bookings')}</li>
+                                <li onClick={goTo('BOOKED')}>{t('common.bookings')}</li>
                                 <li onClick={goTo('FAVOURITE')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
-                                <li onClick={goTo('MESSAGES')}>{t('fe.screens.settings.settingsCard.messages')}</li>
+                                <li onClick={goTo('MESSAGES')}>{t('common.messages')}</li>
                                 {
                                     // (props.userDuck.user.permission[0] === 'guest' )?
                                     // <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :

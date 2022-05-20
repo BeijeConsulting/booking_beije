@@ -52,8 +52,8 @@ function LoginForm(props) {
          setLocalStorage("token", res.data.token);
          setLocalStorage("refreshToken", res.data.refreshToken);
          props.dispatch(setToken(res.data.token));
+         props.dispatch(setUser())
       });
-      props.dispatch(setUser())
       navigate(routes.LAYOUT);
    }
 
@@ -78,7 +78,7 @@ function LoginForm(props) {
             </form>
 
             <div className="txt">
-               <a href="#" onClick={handleNavigation(routes.HOME)}>{t('common.backToHome')}</a>
+               <a href="#" onClick={handleNavigation(routes.LAYOUT)}>{t('common.backToHome')}</a>
             </div>
 
          </div>

@@ -9,11 +9,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'antd';
 
+//ROUTING
+import { routes } from "../../../../../routes/routes";
+import { useNavigate } from "react-router-dom";
+
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
+
 // import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList"
 
+//UTILS
+import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 
 
 const StructureDetails = () => {
@@ -23,6 +30,7 @@ const StructureDetails = () => {
 
     const { t } = useTranslation()
 
+    const navigate = useNavigate()
 
     const obj = [
         {
@@ -45,27 +53,40 @@ const StructureDetails = () => {
         },
     ]
 
-    //DA LASCIARE COMMENTATO FINCHè NON TORNA FEDE, CAUSA ROTTURA CALLBACK
+    const goToStructure = (idAnnounce = null) => () => {
+                navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
+                    state: { idAnnounce: idAnnounce },
+                });
+
+            };
 
     const getAnnounceCards = (announce, key) => {
         return <HorizontalCard
-            key={key}
+            key={`${key}-${randomKey()}`}
             imageSrc={announce.img}
             imageAlt={`${key}_${announce.title}`}
             title={announce.title}
             text={announce.text}
-            callback={getConsole}
+            callback={goToStructure(key)}
         />
     }
 
-    {/* CALLBACK A CASO PER CONFLITTO HORIZONTALCARD, DA RISOLVERE QUANDO TORNA FEDE */ }
-    const getConsole = () => {
-        console.log("callback")
+    const switchToPage = (clickedPage) => {
+        console.log("switch to page", clickedPage);
+        //set paginationProps.currentPage to clickedPage (with useState)
+
+        //remap new object's array from API
+    }
+
+    const paginationProps = {
+        itemsCount: 50,
+        pageSize: 10,
+        paginationCallback: switchToPage
     }
 
     return (
         <>
-    
+
             <h1>{t("bo.screens.host.structureDetails.structureDetailsTitle")}</h1>
             <Button className="edit_button"><FontAwesomeIcon icon={faPen} />{t("bo.screens.host.structureDetails.editStructure")}</Button>
             <div className="structure_details_container">
@@ -87,11 +108,11 @@ const StructureDetails = () => {
 
             </div>
 
-            
-            <CardList sectionTitle="Annunci"
+
+            <CardList
+                sectionTitle="Annunci"
                 actions={<Button>{t("bo.screens.host.structureDetails.addRoom")}</Button>}
-                //RICHIAMATA CALLBACK A CASO CAUSA ROTTURA
-                paginationCallback={getConsole}>
+                {...paginationProps}>
                 {
                     obj.map(getAnnounceCards)
                 }

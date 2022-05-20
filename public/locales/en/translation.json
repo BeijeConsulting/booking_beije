@@ -11,7 +11,16 @@
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
       "account": "Account",
+      "announceTitle": "Announce title",
+      "address": "Address",
       "backToHome": "Back to home",
+      "bookings": "Bookings",
+      "category": "Category",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "city": "City",
+      "country": "Country",
+      "description": "Description",
       "email": "Email",
       "english": "English",
       "home": "Home",
@@ -24,16 +33,20 @@
       "or": "or",
       "password": "Password",
       "passwordConfirm": "Confirm password",
+      "photos": "Photos",
       "registerLabel": "Register",
       "registration": "Registration",
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
+      "save": "Save",
       "select": "Select",
       "send": "Send",
+      "submit": "Submit",
       "surname": "Surname",
       "termsConditions": "Terms and Agreement",
       "writeMessage": "Write your message here...",
-      "you": "You"
+      "you": "You",
+      "zipCode": "ZIP code"
    },
    "toasts": {
       "formErrorAllFields": "Please, fill in all fields",
@@ -42,15 +55,28 @@
       "formErrorConfirmPassword": "Passwords do not match",
       "formErrorTerms": "You must accept the terms and conditions",
       "formSuccess": "Success!",
-      "messageError": "No messages"
+      "messageError": "No messages",
+      "operationAnnounce": "Announce title, input required",
+      "operationDescription": "Description, input required",
+      "operationAddress": "Address, input required",
+      "operationCity": "City, input required",
+      "operationCountry": "Country, input required",
+      "operationZipCode": "ZIP code, input required",
+      "operationCheckIn": "Check In, input required",
+      "operationCheckOut": "Check Out, input required",
+      "operationCategory": "Category, input required",
+      "operationPhotos": "Photos, input required",
+      "operationPriceForNight": "Price for night, input required",
+      "operationBeds": "Beds, input required",
+      "operationServices": "services, input required",
+      "operationRooms": "Rooms, input required",
+      "operationRules": "Rules, input required"
    },
    "bo": {
       "components": {
          "sidebar": {
             "structure": "Structure",
-            "payments": "Payments",
-            "reservations": "Reservations",
-            "messages": "Messages"
+            "payments": "Payments"
          },
          "uploadFoto": {
             "upload": "Upload"
@@ -59,10 +85,6 @@
       "modals": {},
       "screens": {
          "host": {
-            "hostAccount": {
-               "vat": "VAT number",
-               "billingAddress": "Billing address"
-            },
             "hostRegistration": {
                "title": "Host registration",
                "privateRegistration": "I'm a private",
@@ -97,68 +119,29 @@
                "editStructure": "Edit structure",
                "addRoom": "Add room",
                "announce": "Announce"
+            },
+            "structureOperation": {
+               "structureName": "Structure name"
+            },
+            "announceOperation": {
+               "photos": "Photos",
+               "priceForNight": "Price for night",
+               "beds": "Beds",
+               "services": "services",
+               "rooms": "Rooms",
+               "rules": "Rules"
             }
-         },
-         "admin": {}
-      }
-   },
-   "fe": {
-      "components": {
-         "rooms": {
-            "person": "Person",
-            "people": "People",
-            "price": "Price for",
-            "nights": "nights",
-            "night": "night"
-         },
-         "review": {
-            "username": "username",
-            "title": "title",
-            "description": "description"
-         },
-         "service": {
-            "service": "Service",
-            "wifi": "Wi-Fi",
-            "kitchen": "Kitchen",
-            "airConditioning": "Air conditioning",
-            "parking": "Parking",
-            "washingMachine": "Washing machine",
-            "iron": "Iron",
-            "workingPlace": "Shared working place",
-            "swimmingPool": "Swimming pool",
-            "allowedSmoking": "Allowed Smoking",
-            "alarm": "Alarm"
          }
       },
-      "modals": {},
-      "screens": {
-         "guestAccount": {
-            "becomeAHost": "Become a host"
-         },
-         "registration": {
-            "acceptTerms": "I accept the terms and conditions"
-         },
-         "settings": {
-            "title": "Settings",
-            "settingsCard": {
-               "account": "Account",
-               "bookings": "Bookings",
-               "favourites": "Favourites",
-               "messages": "Messages",
-               "becomeAHost": "Become a Host",
-               "yourProperties": "Your properties"
-            }
-         },
-         "propertyDetails": {
-            "details": "Details",
-            "roomDetails": "Room details"
-         },
-         "bookings": {
-            "history": "Storico",
-            "pending": "In attesa",
-            "planned": "Pianificati",
-            "refused": "Rifiutati"
-         }
+      "propertyDetails": {
+         "details": "Details",
+         "roomDetails": "Room details"
+      },
+      "bookings": {
+         "history": "Storico",
+         "pending": "In attesa",
+         "planned": "Pianificati",
+         "refused": "Rifiutati"
       }
    }
 }

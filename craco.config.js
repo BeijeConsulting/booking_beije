@@ -1,4 +1,10 @@
-const CracoLessPlugin = require('craco-less');
+const CracoLessPlugin = require("craco-less");
+
+const antOverrideVariables = {
+  "@primary-color": "#2a8ba8",
+  "@layout-header-background": "#44403C",
+  "layout-body-background" : '#fff9f5'
+};
 
 module.exports = {
   plugins: [
@@ -7,7 +13,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: { '@primary-color': '#2a8ba8' },
+            modifyVars: antOverrideVariables,
             javascriptEnabled: true,
           },
         },

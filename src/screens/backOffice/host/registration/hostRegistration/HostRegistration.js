@@ -22,6 +22,7 @@ const layout = {
     },
 };
 
+let termsIsChecked = false
 
 const HostRegistration = () => {
 
@@ -56,13 +57,16 @@ const HostRegistration = () => {
     }
 
     const onFinish = (values) => {
-        console.log(values);
-    };
 
-    const sendHostData = (e) => {
+        console.log(values);
         alert("Utente registrato correttamente")
         navigate("/structure-operation")
-    }
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log("Failed:", errorInfo);
+    };
+
 
 
 
@@ -81,7 +85,7 @@ const HostRegistration = () => {
                 <>
 
 
-                    <Form {...layout} name="nest-messages" onFinish={onFinish} >
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
                         <div className='title-setup'>
                             <h2>{t("bo.screens.host.hostRegistration.setUpPrivateAccount")}</h2>
                             <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
@@ -131,18 +135,28 @@ const HostRegistration = () => {
                         >
                             <Input />
                         </Form.Item>
-                        <Checkbox>{t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link></Checkbox>
-                        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                            <Button onClick={sendHostData} type="primary" htmlType="submit">
-                                {t("bo.screens.host.hostRegistration.fields.registerButton")}
-                            </Button>
+                        
+                        <Form.Item
+                            name="agreement"
+                            valuePropName="checked"
+                            rules={[
+                                {
+                                    validator: (_, value) =>
+                                        value ? Promise.resolve() : Promise.reject(new Error(t("toasts.formErrorTerms"))),
+                                },
+                            ]}
+                        >
+                            <Checkbox>
+                                {t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link>
+                            </Checkbox>
                         </Form.Item>
+                    
                     </Form>
                 </>
             }
 
             {state.displaySecondchoice &&
-                <Form {...layout} name="nest-messages" onFinish={onFinish} >
+                <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
                     <div className='title-setup'>
                         <h2>{t("bo.screens.host.hostRegistration.setUpCompanyAccount")}</h2>
                         <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
@@ -174,7 +188,6 @@ const HostRegistration = () => {
                         label={t("bo.screens.host.hostRegistration.fields.vatNumber")}
                         rules={[
                             {
-                                type: 'number',
                                 required: true
                             },
                         ]}
@@ -215,9 +228,24 @@ const HostRegistration = () => {
                     >
                         <Input />
                     </Form.Item>
-                    <Checkbox>{t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link></Checkbox>
+
+                    <Form.Item
+                        name="agreement"
+                        valuePropName="checked"
+                        rules={[
+                            {
+                                validator: (_, value) =>
+                                    value ? Promise.resolve() : Promise.reject(new Error(t("toasts.formErrorTerms"))),
+                            },
+                        ]}
+                    >
+                        <Checkbox>
+                            {t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link>
+                        </Checkbox>
+                    </Form.Item>
+
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                        <Button onClick={sendHostData} type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit">
                             {t("bo.screens.host.hostRegistration.fields.registerButton")}
                         </Button>
                     </Form.Item>

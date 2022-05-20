@@ -1,55 +1,66 @@
-import React, { useState } from 'react';
-import { Layout } from 'antd';
+import React, { useState } from "react";
+import { Layout, Button } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import Sidebar from '../../components/backOffice/functionalComponent/sidebar/Sidebar';
+import Sidebar from "../../components/backOffice/functionalComponent/sidebar/Sidebar";
 
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
+import Foo from "../../components/frontEnd/hookComponents/footer/Footer";
+//UTILS
+import { LinksFooterHost } from "../../utils/linksFooter/linksFooter";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 const LayoutBackOffice = () => {
+  const [state, setState] = useState({
+    collapsed: false,
+  });
 
-    const [state, setState] = useState({
-        collapsed: false
-    })
+  const toggleSidebar = () => {
+    console.log(state.collapsed);
+    setState({
+      ...state,
+      collapsed: !state.collapsed,
+    });
+  };
 
-    const toggleSidebar = () => {
-        setState({
-            ...state,
-            collapsed: !state.collapsed,
-        });
-    };
-
-    return (
-        <Layout>
-            <Sider trigger={null} collapsed={state.collapsed} collapsible>
-                <Sidebar />
-            </Sider>
-            <Layout className="site-layout">
-                <Header className="site-layout-background" style={{ padding: 0 }}>
-                    {state.collapsed ? <FontAwesomeIcon icon={faPen} className={'trigger'}
-                        onClick={toggleSidebar} inverse /> : <FontAwesomeIcon icon={faHotel} className={'trigger'}
-                            onClick={toggleSidebar} inverse />
-                    }
-                </Header>
-                <Content
-                    className="site-layout-background"
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                        height: "90vh",
-                        overflowY: "scroll"
-                    }}
-                >
-                    <Outlet />
-                </Content>
-            </Layout>
-        </Layout>
-    );
-}
+  return (
+    <Layout>
+      <Header
+        className="site-layout-background"
+        style={{ padding: 0 }}
+      ></Header>
+      <Layout>
+        <Sider trigger={null} collapsed={state.collapsed} collapsible>
+          {state.collapsed ? (
+            <Button type="primary" onClick={toggleSidebar} block>
+              <FontAwesomeIcon icon={faAngleRight} className={"trigger"} inverse />
+            </Button>
+          ) : (
+            <Button type="primary" onClick={toggleSidebar} block>
+              <FontAwesomeIcon icon={faBars} className={"trigger"} inverse />
+            </Button>
+          )}
+          <Sidebar />
+        </Sider>
+        <Content
+          className="site-layout-background"
+          style={{
+            margin: "24px 16px",
+            padding: 24,
+            minHeight: 280,
+            // height: "100vh",
+            // overflowY: "scroll",
+          }}
+        >
+          <Outlet />
+        </Content>
+      </Layout>
+      <Foo link={LinksFooterHost} />
+    </Layout>
+  );
+};
 
 export default LayoutBackOffice;

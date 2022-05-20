@@ -26,6 +26,7 @@ import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 //api
 import { registerUserPostApi } from '../../../../services/api/user/userApi'
 import { signInPostApi } from '../../../../services/api/auth/authApi'
+import { setUser } from '../../../../redux/ducks/userDuck';
 
 
 let formObject = {
@@ -96,13 +97,8 @@ function RegistrationForm(props) {
       !value ? errors[name] = true : errors[name] = false;
    }
 
-
-
-
    const handleSubmit = (e) => {
       e.preventDefault();
-
-
 
       notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
@@ -134,24 +130,14 @@ function RegistrationForm(props) {
             registerUserPostApi(formObject).then(signInPostApi({
                email: formObject.email,
                password: formObject.password
-            }).then(res => {
+            })).then(res => {
                setLocalStorage("token", res.data.token);
                setLocalStorage("refreshToken", res.data.refreshToken);
                props.dispatch(setToken(res.data.token));
-            }));
+               props.dispatch(setUser());
+            });
 
-            
-
-
-
-            // delete formObjectCtrl.confirmPassword;
-            // const response = postApi('user', formObject);
-            // console.log(response);
-
-            // set token in localStorage
-            // redux
-
-            // navigate(routes.HOME);
+            navigate(routes.LAYOUT);
          }
       }
 

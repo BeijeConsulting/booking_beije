@@ -12,10 +12,10 @@ const LinksFooterHost = [
         nameLink: 'common.mra'
     },
     {
-        route : 'DASHBOARD',
-        nameLink: 'Vai a dashboard'
+        route: 'DASHBOARD',
+        nameLink: 'inserire traduzione'
     }
-    
+
 ]
 
 // GUEST 

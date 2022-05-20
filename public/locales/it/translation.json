@@ -11,7 +11,13 @@
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
       "account": "Account",
+      "announceTitle": "Annunci",
       "backToHome": "Torna alla home",
+      "bookings": "Prenotazioni",
+      "category": "Categoria",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "description": "Descrizione",
       "email": "Email",
       "english": "Inglese",
       "home": "Home",
@@ -24,16 +30,23 @@
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
+      "photos": "Foto",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
       "rooms": "{{count}} stanza",
       "rooms_other": "{{count}} stanze",
+      "save": "Salva",
       "select": "Seleziona",
       "send": "Invia",
+      "submit": "Invia",
       "surname": "Cognome",
       "termsConditions": "Termini e condizioni",
       "writeMessage": "Scrivi qui il tuo messaggio...",
-      "you": "Tu"
+      "you": "Tu",
+      "address": "Indirizzo",
+      "city": "Città",
+      "country": "Stato",
+      "zipCode": "Codice postale"
    },
    "toasts": {
       "formErrorAllFields": "Compila tutti i campi",
@@ -42,15 +55,28 @@
       "formErrorConfirmPassword": "Le password inserite non coincidono",
       "formErrorTerms": "Accetta i termini e le condizioni",
       "formSuccess": "Tutto ok",
-      "messageError": "Nessun messaggio trovato"
+      "messageError": "Nessun messaggio trovato",
+      "operationAnnounce": "Titolo annuncio, campo obbligatorio",
+      "operationDescription": "Descrizione, campo obbligatorio",
+      "operationAddress": "Indirizzo, campo obbligatorio",
+      "operationCity": "Città, campo obbligatorio",
+      "operationCountry": "Stato, campo obbligatorio",
+      "operationZipCode": "Codice postale, campo obbligatorio",
+      "operationCheckIn": "Check In, campo obbligatorio",
+      "operationCheckOut": "Check Out, campo obbligatorio",
+      "operationCategory": "Categoria, campo obbligatorio",
+      "operationPhotos": "Foto, campo obbligatorio",
+      "operationPriceForNight": "Prezzo a notte, campo obbligatorio",
+      "operationBeds": "Letti, campo obbligatorio",
+      "operationServices": "Servizi, campo obbligatorio",
+      "operationRooms": "Stanza, campo obbligatorio",
+      "operationRules": "Regole, campo obbligatorio"
    },
    "bo": {
       "components": {
          "sidebar": {
             "structure": "Strutture",
-            "payments": "Pagamenti",
-            "reservations": "Prenotazioni",
-            "messages": "Messaggi"
+            "payments": "Pagamenti"
          },
          "uploadFoto": {
             "upload": "Carica"
@@ -59,10 +85,6 @@
       "modals": {},
       "screens": {
          "host": {
-            "hostAccount": {
-               "vat": "Partita IVA",
-               "billingAddress": "Indirizzo di fatturazione"
-            },
             "hostRegistration": {
                "title": "Registrazione Host",
                "privateRegistration": "Sono un privato",
@@ -97,6 +119,17 @@
                "editStructure": "Modifica struttura",
                "addRoom": "Aggiungi camera",
                "announce": "Annunci"
+            },
+            "structureOperation": {
+               "structureName": "Nome struttura"
+            },
+            "announceOperation": {
+               "photos": "Foto",
+               "priceForNight": "Prezzo per notte",
+               "beds": "Letti",
+               "services": "Servizi",
+               "rooms": "Stanze",
+               "rules": "Regole"
             }
          },
          "admin": {}
@@ -142,9 +175,7 @@
             "title": "Impostazioni",
             "settingsCard": {
                "account": "Account",
-               "bookings": "Prenotazioni",
                "favourites": "Preferiti",
-               "messages": "Messaggi",
                "becomeAHost": "Diventa un Host",
                "yourProperties": "Le tue proprietà"
             }
