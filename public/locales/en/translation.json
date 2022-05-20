@@ -28,6 +28,7 @@
       "registration": "Registration",
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
+      "save": "Save", 
       "select": "Select",
       "send": "Send",
       "surname": "Surname",
@@ -59,10 +60,6 @@
       "modals": {},
       "screens": {
          "host": {
-            "hostAccount": {
-               "vat": "VAT number",
-               "billingAddress": "Billing address"
-            },
             "hostRegistration": {
                "title": "Host registration",
                "privateRegistration": "I'm a private",
