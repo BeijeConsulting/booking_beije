@@ -28,6 +28,7 @@ const Favourites = () => {
    });
 
    useEffect(() => {
+      if(localStorage.getItem('token') !== null)
       getFavourites(getLocalStorage('token'))
          .then(res => {
             setState({

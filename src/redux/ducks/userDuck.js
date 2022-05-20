@@ -25,15 +25,19 @@ export function initUser() {
 const INIT_STATE = {
     user: {}
 }
-
+/**
+ * handle action.type, return the new value of state
+ * @param  {object} state=INIT_STATE
+ * @param  {funnction} action
+ * @returns {object} return the state with the new value
+ */
 export default async function userDuck(state = INIT_STATE, action) {
     var newState;
     switch (action.type) {
         case SET_USER:
             newState = Object.assign({}, state);
-            // let res = await myProfilesGetApi('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNjUyOTY0ODE1LCJleHAiOjE2NTI5Njg0MTV9.mbp0mwQw2OMOwey6YJK43_Y644jVHfWDdmtr44yPKcE');
-            let res = await myProfilesGetApi(getLocalStorage('token'));
-            newState.user = res.data;
+            await myProfilesGetApi(getLocalStorage('token')).then(res => newState.user = res.data);
+            
             return newState;
 
         case INIT_STATE:
