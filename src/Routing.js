@@ -46,12 +46,13 @@ import { getLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
+import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 
 function Routing(props) {
   useEffect(() => {
-    if (getLocalStorage('token') !== null){
-        let token = getLocalStorage('token')
-        props.dispatch(setToken(token))
+    if (getLocalStorage('token') !== null) {
+      let token = getLocalStorage('token')
+      props.dispatch(setToken(token))
     }
     // setLocalStorage(
     //   "token",
@@ -67,7 +68,7 @@ function Routing(props) {
   return (
     <Routes>
 
-      <Route path={routes.DISCLAIMER} element={<Disclaimer/>} />
+      <Route path={routes.DISCLAIMER} element={<Disclaimer />} />
       <Route path={routes.REGISTRATION} element={<Registration />} />
       <Route path={routes.LOGIN} element={<Login />} />
 
@@ -97,7 +98,7 @@ function Routing(props) {
         <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
         <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
         <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
-
+        <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
         <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
         {/* //to add in admin route */}
         <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
