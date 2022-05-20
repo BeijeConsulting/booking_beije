@@ -20,7 +20,6 @@ axiosInstance.interceptors.response.use(function (response) {
   // Do something with response error
   if (error.response.status === 401 && !originalConfig._retry) {
     originalConfig._retry = true
-    console.log("sono qui");
     //qui chiamata updateAuthToken
     /* Token valido fino alle 11,00 del 19/05/2022 */
     const res = await updateAuthTokenPostApi({
