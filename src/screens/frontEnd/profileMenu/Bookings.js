@@ -8,11 +8,9 @@ const Bookings = () => {
   return (
     <>
     <Helmet>
-      <title>{t("fe.screens.settings.settingsCard.bookings")}</title>
+      <title>{t("common.bookings")}</title>
     </Helmet>
-      <p>Bookings</p>
-      <p>lalalalalala</p>
-
+      <p>{t("common.bookings")}</p>
     </>
   );
 };

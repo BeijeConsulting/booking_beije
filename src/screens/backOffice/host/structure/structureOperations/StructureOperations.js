@@ -105,13 +105,13 @@ const StructureOperation = () => {
           </div>
 
           <Form.Item
-            label={t("bo.screens.host.StructureOperation.photos")}
+            label={t("common.photos")}
             name="photos"
             rules={[
               {
                 required: true,
                 message: t(
-                  "bo.screens.host.StructureOperation.errorMessage.photos"
+                  "toasts.operationPhotos"
                 ),
               },
             ]}
@@ -121,30 +121,30 @@ const StructureOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.StructureOperation.announce")}
+              label={t("common.announceTitle")}
               name="announce"
               rules={[
                 {
                   required: true,
                   message: t(
-                    "bo.screens.host.StructureOperation.errorMessage.announce"
+                    "toasts.operationAnnounce"
                   ),
                 },
               ]}
             >
-              <Input name="announce" placeholder="Announce title" />
+              <Input name="announce" placeholder={t("common.announceTitle")} />
             </Form.Item>
           </Row>
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.StructureOperation.category")}
+              label={t("common.category")}
               name="category"
               rules={[
                 {
                   required: true,
                   message: t(
-                    "bo.screens.host.StructureOperation.errorMessage.category"
+                    "toasts.operationCategory"
                   ),
                 },
               ]}
@@ -160,53 +160,53 @@ const StructureOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.StructureOperation.description")}
+              label={t("common.description")}
               name="description"
               rules={[
                 {
                   required: true,
                   message: t(
-                    "bo.screens.host.StructureOperation.errorMessage.description"
+                    "toasts.operationDescription"
                   ),
                 },
               ]}
             >
-              <TextArea name="description" placeholder="Descriprion" />
+              <TextArea name="description" placeholder={t("common.description")} />
             </Form.Item>
           </Row>
 
           <Row gutter={16}>
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.address")}
+                label={t("common.address")}
                 name="address"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.address"
+                      "toasts.operationAddress"
                     ),
                   },
                 ]}
               >
-                <Input name="address" placeholder="address" />
+                <Input name="address" placeholder={t("common.address")} />
               </Form.Item>
             </Col>
 
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.city")}
+                label={t("common.city")}
                 name="city"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.city"
+                      "toasts.operationCity"
                     ),
                   },
                 ]}
               >
-                <Input name="city" placeholder="city" />
+                <Input name="city" placeholder={t("common.city")} />
               </Form.Item>
             </Col>
           </Row>
@@ -214,35 +214,35 @@ const StructureOperation = () => {
           <Row gutter={16}>
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.country")}
+                label={t("common.country")}
                 name="country"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.country"
+                      "toasts.operationCountry"
                     ),
                   },
                 ]}
               >
-                <Input name="country" placeholder="country" />
+                <Input name="country" placeholder={t("common.country")} />
               </Form.Item>
             </Col>
 
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.zipCode")}
+                label={t("common.zipCode")}
                 name="zipCode"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.zipCode"
+                      "toasts.operationZipCode"
                     ),
                   },
                 ]}
               >
-                <InputNumber name="zipCode" placeholder="zipCode" />
+                <InputNumber name="zipCode" placeholder={t("common.zipCode")} />
               </Form.Item>
             </Col>
           </Row>
@@ -250,40 +250,40 @@ const StructureOperation = () => {
           <Row gutter={16}>
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.checkIn")}
+                label={t("common.checkIn")}
                 name="checkIn"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.checkIn"
+                      "toasts.operationCheckIn"
                     ),
                   },
                 ]}
               >
-                <TimePicker name="checkIn" placeholder="checkIn" />
+                <TimePicker name="checkIn" placeholder={t("common.checkIn")} />
               </Form.Item>
             </Col>
             <Col className="gutter-row">
               <Form.Item
-                label={t("bo.screens.host.StructureOperation.checkOut")}
+                label={t("common.checkOut")}
                 name="checkOut"
                 rules={[
                   {
                     required: true,
                     message: t(
-                      "bo.screens.host.StructureOperation.errorMessage.checkOut"
+                      "toasts.operationCheckOut"
                     ),
                   },
                 ]}
               >
-                <TimePicker name="checkOut" placeholder="checkOut" />
+                <TimePicker name="checkOut" placeholder={t("common.checkOut")} />
               </Form.Item>
             </Col>
           </Row>
 
           <Button type="primary" htmlType="submit">
-            Submit
+            {t('common.submit')}
           </Button>
         </Form>
       )}
