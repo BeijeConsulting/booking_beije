@@ -9,6 +9,7 @@ import { faUser, faSuitcaseRolling, faHeart, faCommentAlt, faBuilding } from '@f
 
 
 import './profileMenuCSS/Settings.less'
+import { Helmet } from "react-helmet";
 
 function Settings() {
 
@@ -44,23 +45,29 @@ function Settings() {
   })
 
   return (
-    <div className="settings_container">
-      <div>
-        <div className="title_and_logout_container">
-          <h1>{t("fe.screens.settings.title")}</h1>
-        </div>
-        <div className="settings_card_list_container">
-          {settingsToComponents.map(createCardSettingsComponent)}
-        </div>
-      </div>
-      <div className="setting_disclaimer_container">
-        <UiButton
-          className={"logout_button"}
-          label={"Logout"} />
-        <Disclaimer />
-      </div>
+    <>
+      <Helmet>
+        <title>{t("fe.screens.settings.title")}</title>
 
-    </div>
+      </Helmet>
+      <div className="settings_container">
+        <div>
+          <div className="title_and_logout_container">
+            <h1>{t("fe.screens.settings.title")}</h1>
+          </div>
+          <div className="settings_card_list_container">
+            {settingsToComponents.map(createCardSettingsComponent)}
+          </div>
+        </div>
+        <div className="setting_disclaimer_container">
+          <UiButton
+            className={"logout_button"}
+            label={"Logout"} />
+          <Disclaimer />
+        </div>
+
+      </div>
+    </>
 
   );
 };

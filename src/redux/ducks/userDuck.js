@@ -31,7 +31,9 @@ export default async function userDuck(state = INIT_STATE, action) {
     switch (action.type) {
         case SET_USER:
             newState = Object.assign({}, state);
-            await myProfilesGetApi(getLocalStorage('token')).then(res => newState.user = res?.data);
+            // let res = await myProfilesGetApi('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNjUyOTY0ODE1LCJleHAiOjE2NTI5Njg0MTV9.mbp0mwQw2OMOwey6YJK43_Y644jVHfWDdmtr44yPKcE');
+            let res = await myProfilesGetApi(getLocalStorage('token'));
+            newState.user = res.data;
             return newState;
 
         case INIT_STATE:
