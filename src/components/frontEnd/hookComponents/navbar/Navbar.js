@@ -54,7 +54,7 @@ function Navbar(props) {
         isLogIn: false
     })
 
-    useEffect(isLogIn,[getLocalStorage('token')])
+    useEffect(isLogIn, [getLocalStorage('token')])
 
     function isLogIn() {
         if (getLocalStorage('token') !== null) {
@@ -62,14 +62,12 @@ function Navbar(props) {
                 ...state,
                 isLogIn: true
             })
-        }else{
+        } else {
             setState({
                 ...state,
                 isLogIn: false
             })
         }
-        
-        console.log('islog', state.isLogIn);
     }
 
     // function to set modal search open true 
@@ -143,7 +141,7 @@ function Navbar(props) {
 
 
                             {
-                                props.tokenDuck.token !== null ?
+                                state.isLogIn ?
 
 
                                     <>{
