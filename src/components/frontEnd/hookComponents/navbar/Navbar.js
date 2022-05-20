@@ -89,8 +89,8 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        initUser()
-        initToken()
+        props.dispatch(initUser());
+        props.dispatch(initToken());
         removeLocalStorage("token")
         removeLocalStorage("refreshToken")
         vector(routes.HOME)
