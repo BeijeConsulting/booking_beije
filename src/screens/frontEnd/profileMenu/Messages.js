@@ -83,13 +83,13 @@ const Messages = () => {
         thumbnail={mess.senderProfileIcon}
         textMessage={mess.lastMessage.description}
         date={mess.lastMessage.date}
-        callback={goToSingleConversation}
+        callback={goToSingleConversation(mess.idSender)}
       />
     )
   }
 
-  const goToSingleConversation = () => {
-    vector(routes.SINGLECONVERSATION)
+  const goToSingleConversation = (idSender) => () => {
+    vector(routes.SINGLECONVERSATION, {state:{id:idSender}})
   }
 
   return (
