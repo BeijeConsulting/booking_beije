@@ -36,9 +36,10 @@ const Layout = () => {
     const checkPathForFooter = () => {
         const arr = ['/settings', '/messages', '/singleConversation', '/favourites', '/account', '/bookings'];
 
-        const test = arr.some((x) => location.pathname === x)
-        return test
-        // if (location.pathname !== "settings" || location.pathname !== "messages" !==)
+        const pathFound = arr.some((path) => location.pathname === path)
+
+        return pathFound
+      
     }
     return (
         <div className="layoutContainer">
