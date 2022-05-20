@@ -70,10 +70,13 @@ function Navbar(props) {
     }
     // function to Go to dimanic vector 
     const goTo = (params) => () => {
-        setState({
-            ...state,
-            isMenuOpen: !state.isMenuOpen
-        })
+        let obj = { ...state }
+
+        if (params !== 'HOME') {
+            obj.isMenuOpen = !obj.isMenuOpen
+        }
+        setState(obj)
+        
         vector(routes[params])
     }
 
@@ -115,7 +118,7 @@ function Navbar(props) {
                     : <>
                         <nav className="navDesktop">
                             <div>
-                                <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
+                                <img onClick={goTo('HOME')} className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
                                 <LanguagesSwitch />
                             </div>
 
@@ -126,15 +129,15 @@ function Navbar(props) {
 
                                     <>{
                                         state.isMenuOpen === false ?
-                                            < div className="hambMenu" onClick={handleNavMenu}>
-                                                <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} />
+                                            < div className="hambMenu" >
+                                                <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} onClick={handleNavMenu} />
                                                 {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                 <img className="phUser" src={LoggedUser} alt="profileUser" />
                                             </div>
 
                                             : <>
-                                                <div className="hambMenu" onClick={handleNavMenu}>
-                                                    <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} />
+                                                <div className="hambMenu">
+                                                    <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} onClick={handleNavMenu} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                     <img className="phUser" src={LoggedUser} alt="profileUser" />
                                                 </div>
