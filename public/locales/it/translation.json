@@ -46,7 +46,8 @@
       "address": "Indirizzo",
       "city": "Città",
       "country": "Stato",
-      "zipCode": "Codice postale"
+      "zipCode": "Codice postale",
+      "suggestedApartaments": "Appartamenti consigliati"
    },
    "toasts": {
       "formErrorAllFields": "Compila tutti i campi",
@@ -184,6 +185,9 @@
          "propertyDetails": {
             "details": "Dettagli",
             "roomDetails": "Dettaglio stanza"
+         },
+         "homePage": {
+            "searchButton": "Cerca destinazione"
          }
       }
    }

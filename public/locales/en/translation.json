@@ -46,7 +46,8 @@
         "termsConditions": "Terms and Agreement",
         "writeMessage": "Write your message here...",
         "you": "You",
-        "zipCode": "ZIP code"
+        "zipCode": "ZIP code",
+        "suggestedApartaments": "Suggested apartament"
     },
     "toasts": {
         "formErrorAllFields": "Please, fill in all fields",
@@ -184,6 +185,9 @@
             "propertyDetails": {
                 "details": "Details",
                 "roomDetails": "Room details"
+            },
+            "homePage": {
+                "searchButton": "Search your destination"
             }
         }
     }

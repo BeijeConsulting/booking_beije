@@ -122,7 +122,7 @@ function Navbar(props) {
                 props.stateLayout < 480 ?
                     <nav className="navMobile">
                         <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
-                        <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
+                        <Modal isOpen={state.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
 
                         {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
