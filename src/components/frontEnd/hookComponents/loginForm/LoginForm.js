@@ -21,6 +21,7 @@ import { signInPostApi } from '../../../../services/api/auth/authApi'
 
 //localstorage
 import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { setUser } from '../../../../redux/ducks/userDuck';
 
 
 let formObject = {
@@ -35,7 +36,7 @@ function LoginForm(props) {
    const navigate = useNavigate();
 
    const handleNavigation = (routes) => () => {
-      navigate(`/${routes}`)
+      navigate(`${routes}`)
    }
 
    const handleChange = (name) => (value) => {
@@ -43,7 +44,6 @@ function LoginForm(props) {
          ...formObject,
          [name]: value
       }
-      console.log(formObject);
    }
 
    const handleSubmit = (e) => {
@@ -53,6 +53,7 @@ function LoginForm(props) {
          setLocalStorage("refreshToken", res.data.refreshToken);
          props.dispatch(setToken(res.data.token));
       });
+      props.dispatch(setUser())
       navigate(routes.LAYOUT);
    }
 

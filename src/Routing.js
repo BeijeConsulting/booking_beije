@@ -40,7 +40,7 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage } from './utils/localStorage/localStorage'
 // import { postApi, getApi } from "./services/genericServices";
 // import { decryptItem } from "./utils/crypto/crypto";
 
@@ -49,20 +49,17 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 
 function Routing(props) {
   useEffect(() => {
-    setLocalStorage(
-      "token",
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-    );
-    props.dispatch(setToken(getLocalStorage("token")));
+    if (getLocalStorage('token') !== null){
+        let token = getLocalStorage('token')
+        props.dispatch(setToken(token))
+    }
+    // setLocalStorage(
+    //   "token",
+    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+    // );
 
     // da qui in poi avete il token per fare tutte le chimate
   }, []);
-  // if (getLocalStorage('token') !== null){
-  //     let token = getLocalStorage('token')
-  //     let decriptedToken = decryptItem(token)
-  //     props.dispatch(setToken(decriptedToken))
-  //     console.log(props.tokenDuck.token);
-  // }
 
 
   //login, registration, account, messages, favourites, booking

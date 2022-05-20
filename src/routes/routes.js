@@ -3,7 +3,7 @@ const routes = {
     LAYOUT : '/',
     HOME: 'home',
     LOGIN: 'login',
-    REGISTRATION: 'registration',
+    REGISTRATION: '/registration',
 
     BOOKED: 'bookings',
     FAVOURITE: 'favourites',
