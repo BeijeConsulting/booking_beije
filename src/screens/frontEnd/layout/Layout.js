@@ -34,7 +34,7 @@ const Layout = () => {
     })
 
     const checkPathForFooter = () => {
-        const arr = ['/settings', '/messages', '/singleConversation', '/favourites', '/account', '/bookings'];
+        const arr = ['/settings', '/messages', '/singleconversation', '/favourites', '/account', '/bookings'];
 
         const pathFound = arr.some((path) => location.pathname === path)
 
