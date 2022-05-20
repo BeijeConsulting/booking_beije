@@ -91,13 +91,13 @@ const AnnounceOperation = () => {
           autoComplete="off"
         >
           <Form.Item
-            label={t("bo.screens.host.AnnounceOperation.photos")}
+            label={t("bo.screens.host.announceOperation.photos")}
             name="photos"
             rules={[
               {
                 required: true,
                 message: t(
-                  "bo.screens.host.AnnounceOperation.errorMessage.photos"
+                  "toasts.operationPhotos"
                 ),
               },
             ]}
@@ -108,12 +108,12 @@ const AnnounceOperation = () => {
           <Row gutter={32}>
             <Col>
               <Form.Item
-                label={t("bo.screens.host.AnnounceOperation.priceForNight")}
+                label={t("bo.screens.host.announceOperation.priceForNight")}
                 name="priceForNight"
                 rules={[
                   {
                     required: true,
-                    message: "bo.screens.host.AnnounceOperation.errorMessage.pricePerNight",
+                    message: "toasts.operationPricePerNight",
                   },
                 ]}
               >
@@ -127,12 +127,12 @@ const AnnounceOperation = () => {
 
             <Col>
               <Form.Item
-                label={t("bo.screens.host.AnnounceOperation.beds")}
+                label={t("bo.screens.host.announceOperation.beds")}
                 name="beds"
                 rules={[
                   {
                     required: true,
-                    message: "bo.screens.host.AnnounceOperation.errorMessage.beds",
+                    message: "toasts.operationBeds",
                   },
                 ]}
               >
@@ -143,12 +143,12 @@ const AnnounceOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.AnnounceOperation.services")}
+              label={t("bo.screens.host.announceOperation.services")}
               name="services"
               rules={[
                 {
                   required: true,
-                  message: "bo.screens.host.AnnounceOperation.errorMessage.services",
+                  message: "toasts.operationServices",
                 },
               ]}
             >
@@ -182,41 +182,41 @@ const AnnounceOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.AnnounceOperation.announce")}
+              label={t("common.announceTitle")}
               name="announce"
               rules={[
                 {
                   required: true,
-                  message: "bo.screens.host.AnnounceOperation.errorMessage.announce",
+                  message: "toasts.operationAnnounce",
                 },
               ]}
             >
-              <Input name="announce" placeholder="Basic usage" />
+              <Input name="announce" placeholder={t("common.announceTitle")} />
             </Form.Item>
           </Row>
           <Row>
             <Form.Item
-              label="Description"
+              label={t('common.description')}
               name="description"
               rules={[
                 {
                   required: true,
-                  message: "bo.screens.host.AnnounceOperation.errorMessage.description",
+                  message: "toasts.operationDescription",
                 },
               ]}
             >
-              <TextArea placeholder="Description" name="description" rows={6} />
+              <TextArea placeholder={t('common.description')} name="description" rows={6} />
             </Form.Item>
           </Row>
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.AnnounceOperation.rooms")}
+              label={t("bo.screens.host.announceOperation.rooms")}
               name="rooms"
               rules={[
                 {
                   required: true,
-                  message: "bo.screens.host.AnnounceOperation.errorMessage.rooms",
+                  message: "toasts.operationRooms",
                 },
               ]}
             >
@@ -230,12 +230,12 @@ const AnnounceOperation = () => {
 
           <Row>
             <Form.Item
-              label={t("bo.screens.host.AnnounceOperation.rules")}
+              label={t("bo.screens.host.announceOperation.rules")}
               name="rules"
               rules={[
                 {
                   required: true,
-                  message: t("bo.screens.host.AnnounceOperation.errorMessage.rules"),
+                  message: t("toasts.operationRules"),
                 },
               ]}
             >
