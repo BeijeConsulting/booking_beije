@@ -41,8 +41,6 @@ import AnnounceOperations from "./screens/backOffice/host/announce/announceOpera
 import NotFound from "./screens/notFound/NotFound";
 
 import { getLocalStorage } from './utils/localStorage/localStorage'
-// import { postApi, getApi } from "./services/genericServices";
-// import { decryptItem } from "./utils/crypto/crypto";
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -51,7 +49,7 @@ import { setUser } from "./redux/ducks/userDuck";
 
 function Routing(props) {
   useEffect(() => {
-    if (localStorage.getItem('token') !== null){
+    if (localStorage.getItem('token') !== null && localStorage.getItem('refreshToken') !== null ){
         let token = getLocalStorage('token')
         props.dispatch(setToken(token))
         props.dispatch(setUser())

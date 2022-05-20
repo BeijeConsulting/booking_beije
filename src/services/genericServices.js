@@ -22,7 +22,7 @@ axiosInstance.interceptors.response.use(function (response) {
     originalConfig._retry = true
     //qui chiamata updateAuthToken
     /* Token valido fino alle 11,00 del 19/05/2022 */
-    if(localStorage.getItem('refreshTOken') !== null) {
+    if(localStorage.getItem('refreshToken') !== null) {
 
       await updateAuthTokenPostApi({
         refreshToken: getLocalStorage('refreshToken')
