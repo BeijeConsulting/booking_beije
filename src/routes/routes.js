@@ -6,9 +6,11 @@ const routes = {
     REGISTRATION: '/registration',
 
     BOOKINGS: '/bookings',
+    CHAT :'/chat',
     FAVOURITES: '/favourites',
     MESSAGES: '/messages',
-    SINGLECONVERSATION: '/singleconversation',
+    SINGLECONVERSATIONMOBILE: '/singleconversation/:id',
+    SINGLECONVERSATION: 'singleconversation/:id',
     SETTINGS: 'settings',
     ACCOUNT: '/account',
 
@@ -39,6 +41,15 @@ const routes = {
     PENDING_ANNOUNCE_LIST: 'pending-announce-list' //to add in admin route
 }
 
+let routesDetails = {
+    singleConversation : function (params) {
+        return `singleconversation/${params}`
+    },
+    singleConversationMobile : function (params) {
+        return `/singleconversation/${params}`
+    }
+}
 export {
-    routes
+    routes,
+    routesDetails
 }

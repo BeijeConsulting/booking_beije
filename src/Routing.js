@@ -13,6 +13,7 @@ import Layout from './screens/frontEnd/layout/Layout'
 import Home from "./screens/frontEnd/home/Homepage";
 import Login from "./screens/frontEnd/login/Login";
 import Bookings from "./screens/frontEnd/profileMenu/Bookings";
+import Chat from "./screens/frontEnd/profileMenu/Chat";
 import Messages from "./screens/frontEnd/profileMenu/Messages";
 import SingleConversation from "./screens/frontEnd/profileMenu/SingleConversation";
 import Settings from "./screens/frontEnd/profileMenu/Settings";
@@ -48,16 +49,16 @@ import HostRegistration from "./screens/backOffice/host/registration/hostRegistr
 import { setUser } from "./redux/ducks/userDuck";
 
 function Routing(props) {
-  useEffect(() => {
-    if (localStorage.getItem('token') !== null && localStorage.getItem('refreshToken') !== null ){
-        let token = getLocalStorage('token')
-        props.dispatch(setToken(token))
-        props.dispatch(setUser())
-    }
-    // setLocalStorage(
-    //   "token",
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-    // );
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null && localStorage.getItem('refreshToken') !== null) {
+            let token = getLocalStorage('token')
+            props.dispatch(setToken(token))
+            props.dispatch(setUser())
+        }
+        // setLocalStorage(
+        //   "token",
+        //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+        // );
 
         // da qui in poi avete il token per fare tutte le chimate
     }, []);
@@ -76,8 +77,11 @@ function Routing(props) {
 
             <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
+                <Route path={routes.CHAT} element={<Chat />} >
+                    <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+                </Route>
                 <Route path={routes.MESSAGES} element={<Messages />} />
-                <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+                <Route path={routes.SINGLECONVERSATIONMOBILE} element={<SingleConversation />} />
                 <Route path={routes.BOOKINGS} element={<Bookings />} />
                 <Route path={routes.SETTINGS} element={<Settings />} />
                 <Route path={routes.ACCOUNT} element={<Account />} />
