@@ -57,24 +57,16 @@ function Navbar(props) {
 
     function isLogIn() {
         let newState = Object.assign({}, state)
-        if (getLocalStorage('token') !== null) {
+        if (getLocalStorage('token')) {
             newState = {
                 ...newState,
                 isLogIn: true
             }
-            // setState({
-            //     ...state,
-            //     isLogIn: true
-            // })
         } else {
             newState = {
                 ...newState,
                 isLogIn: false
             }
-            // setState({
-            //     ...state,
-            //     isLogIn: false
-            // })
         }
         setState(newState)
     }

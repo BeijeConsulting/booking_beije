@@ -13,7 +13,8 @@ function setLocalStorage(key, token) {
 
 function getLocalStorage(key) {
     if(localStorage.getItem('token') === null) return null;
-    return decryptItem(JSON.parse(localStorage.getItem(key)));
+    const token = decryptItem(JSON.parse(localStorage.getItem(key)));
+    return token.token;
 }
 
 function removeLocalStorage(key) {
