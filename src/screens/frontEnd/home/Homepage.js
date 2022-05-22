@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import './Homepage.less'
 import SearchButton from "../../../components/frontEnd/funcComponents/ui/searchButton/SearchButton";
 import Modal from "../../../components/common/modal/Modal";
+import SearchForm from "../../../components/frontEnd/classComponents/pageComponents/searchForm/SearchForm";
 
 const Homepage = () => {
 
@@ -36,7 +37,7 @@ const Homepage = () => {
         <title>{t("common.home")}</title>
       </Helmet>
       <Modal isOpen={state.isOpen} callback={handleClick}  >
-          bau
+          <SearchForm />
       </Modal>
       <div className="home">
         <SearchButton callback={handleClick} />
