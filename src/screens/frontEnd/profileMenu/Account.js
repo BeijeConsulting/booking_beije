@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 //icon
 import { t } from "i18next";
 import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { checkPassword, checkMail } from '../../../utils/validationForm/validation'
-import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import { connect } from "react-redux";
 //css
 import './profileMenuCSS/Account.less'
@@ -20,7 +20,7 @@ let psw
 const Account = (props) => {
 
   const [state, setState] = useState({
-    id:null,
+    id: null,
     name: null,
     surname: null,
     email: null,
@@ -30,7 +30,7 @@ const Account = (props) => {
 
 
   let objToValue = {
-    id:1,
+    id: 1,
     name: "paolo",
     surname: "Pascucci",
     email: "pp@gmail.com",
@@ -51,7 +51,7 @@ const Account = (props) => {
 
   const editProfile = () => {
     // console.log("cambiate credenziali");
-    let credentialToChange = [1,"name", "surname", "email", "password"];
+    let credentialToChange = [1, "name", "surname", "email", "password"];
 
     for (let index = 0; index < 5; index++) {
 
@@ -69,14 +69,14 @@ const Account = (props) => {
   const accName = (e) => {
     console.log("e", e);
     uName = e.target.value
-    
+
   }
   const accSurname = (e) => {
     console.log("e", e);
     uSurname = e.target.value
-    
+
   }
-  
+
   const Controllmail = (e) => {
     mail = e.target.value
     checkMail(mail)

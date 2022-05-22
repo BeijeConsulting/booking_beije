@@ -8,8 +8,8 @@ import './profileMenuCSS/SingleConversation.less'
 import { connect } from 'react-redux'
 
 import { Helmet } from 'react-helmet'
-import { messageToSenderIdGetApi } from '../../../services/api/messaggi/messaggiApi'
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { messageToSenderIdGetApi } from '../../../services/api/messaggi/messaggiApi'
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 
