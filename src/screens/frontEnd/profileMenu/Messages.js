@@ -90,7 +90,7 @@ const Messages = (props) => {
     if (state.windowWidth > 991) {
       vector(routes.CHAT)
     }
-    if (props.arrayOfChats !== []) {
+    if (props.arrayOfChats === undefined) {
       //chiamata api per settare array
       setState({
         ...state,

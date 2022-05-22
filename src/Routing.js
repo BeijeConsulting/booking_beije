@@ -86,9 +86,18 @@ function Routing(props) {
                 }
                 />
 
-                <Route path={routes.SINGLECONVERSATION} element={
+                <Route path={routes.SINGLECONVERSATIONMOBILE} element={
                     <ProtectedRoute>
                         <SingleConversation />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
+                    <ProtectedRoute>
+                        <Chat>
+                            <SingleConversation />
+                        </Chat>
                     </ProtectedRoute>
                 }
                 />
@@ -119,7 +128,7 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
-                
+
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
