@@ -1,4 +1,6 @@
+// import FullCalendar from '@fullcalendar/react';
 import React, { Component } from 'react'
+import SearchPlace from '../../../hookComponents/ui/searchPlace/SearchPlace';
 
 class SearchForm extends Component {
     constructor(props) {
@@ -10,7 +12,10 @@ class SearchForm extends Component {
     render() {
         return (
             <>
-                SearchForm
+                <section className='searchFormContainer'>
+                    <SearchPlace />
+                    {/* <FullCalendar /> */}
+                </section>
             </>
         )
     }
