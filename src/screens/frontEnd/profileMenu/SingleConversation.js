@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
+
+// ROUTES 
+import { routes } from '../../../routes/routes'
+
 
 //LESS
 import './profileMenuCSS/SingleConversation.less'
@@ -22,10 +26,9 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 let inputMessage = null;
 
 const SingleConversation = (props) => {
+  const params = useParams();
   const myRef = useRef(null)
   const inputMessageRef = useRef()
-  const location = useLocation()
-
   const singleConvers =
   {
     announceName: 'PizzaPazza',
@@ -38,12 +41,12 @@ const SingleConversation = (props) => {
       dateTime: '2022-05-20'
     }, {
       id: 2,
-      idSender: location.state.id,
+      idSender: 5,
       text: 'Lorem ipsum',
       dateTime: '2022-05-20'
     }, {
       id: 3,
-      idSender: location.state.id,
+      idSender: 5,
       text: 'Lorem ipsum 2',
       dateTime: '2022-05-20'
     }, {
@@ -58,7 +61,7 @@ const SingleConversation = (props) => {
       dateTime: '2022-05-20'
     }, {
       id: 1,
-      idSender: location.state.id,
+      idSender: 5,
       text: 'Lorem ipsum  congue,',
       dateTime: '2022-05-20'
     }, {
@@ -72,31 +75,65 @@ const SingleConversation = (props) => {
 
 
   const [state, setState] = useState({
-    msgArray: null,
+    msgArray: [],
+    windowWidth: window.innerWidth
   })
-
   useEffect(() => {
+    
+    scrollToRef(myRef)
+    function handleResize() {
+      setState({
+        ...state,
+        windowWidth: window.innerWidth
+      })
+    }
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  })
+  useEffect(() => {
+    if (state.windowWidth < 992) {
+      /*  messageToSenderIdGetApi(params.id, getLocalStorage("token"))
+     .then(res =>{
+       setState({
+         ...state,
+         msgArray: res?.data
+       })
+     }) */
 
-    if (state.msgArray === null) {
+     //da cancellare quando api prontee !
       setState({
         ...state,
         msgArray: singleConvers
       })
-    }
-    scrollToRef(myRef)
-
-    /*  messageToSenderIdGetApi(location.state.id, getLocalStorage("token"))
+    } else if (state.windowWidth > 992) {
+      /*  messageToSenderIdGetApi(params.id, getLocalStorage("token"))
      .then(res =>{
        setState({
          ...state,
-         messages: res?.data
+         msgArray: res?.data
        })
      }) */
-  }, [state])
 
+     //da cancellare quando api pronte !!!
+      setState({
+        ...state,
+        msgArray:
+        {
+          announceName: 'PizzaPazza',
+          announceProfileIcon: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg',
+          hostName: 'Ettore Vettori',
+          messages: [{
+            id: 1,
+            idSender: params.id,
+            text: params.id,
+            dateTime: '2022-05-20'
+          }]
+        }
+      })
+    } 
+  }, [params.id])
   //function to scroll on last messages
   const scrollToRef = (ref) => myRef.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
-
   //function to set input value
   const handlerInput = (e) => {
     inputMessage = e.target.value
@@ -105,6 +142,9 @@ const SingleConversation = (props) => {
   // function to submit message on enter press 
   const submitMessageOnEnter = (e) => {
     if (e.key === "Enter") {
+    //chiamata post API
+      // Se risposta ok 
+
       let objcopy = Object.assign({}, state)
       let obj = {
         idSender: 48,
@@ -118,8 +158,7 @@ const SingleConversation = (props) => {
         ...state,
         msgArray: objcopy.msgArray
       })
-      inputMessage = "";
-      inputMessageRef.current.input.value = "";
+      
 
     }
 
@@ -127,6 +166,8 @@ const SingleConversation = (props) => {
 
   // function to submit on click in icon 
   const submitMessageOnSendPress = () => {
+    //chiamata post API
+      // Se risposta ok 
     let objcopy = Object.assign({}, state)
     let obj = {
       idSender: 48,
@@ -140,17 +181,15 @@ const SingleConversation = (props) => {
       ...state,
       msgArray: objcopy.msgArray
     })
-    inputMessageRef.current.input.value = "";
-    // inputMessage = "";
   }
 
   // render chat 
   function renderConversation(mess, key) {
     return (
 
-      <div key={key} className={mess.idSender === location.state.id ? "conversation conversation-host" : "conversation conversation-guest"}>
+      <div key={key} className={mess.idSender === params.id ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
-          mess.idSender === location.state.id ? singleConvers.announceName : 'You'
+          mess.idSender === params.id ? singleConvers.announceName : 'You'
         }
         </div>
         <p>{mess.text}</p>
@@ -168,10 +207,16 @@ const SingleConversation = (props) => {
       </Helmet>
       <div className="singleConversation-page">
         <div className="container_messages">
+          {
+            state.windowWidth < 992 &&
+            <>
+              <div className='back-button'><GoBackButton /></div>
 
-          <div className='back-button'><GoBackButton /></div>
+              <h1 className='title'>{state?.msgArray?.announceName}</h1>
+            </>
+          }
 
-          <h1 className='title'>{state?.msgArray?.announceName}</h1>
+
           {
             state?.msgArray?.messages?.map(renderConversation)
           }

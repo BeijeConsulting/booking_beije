@@ -13,6 +13,7 @@ import Layout from './screens/frontEnd/layout/Layout'
 import Home from "./screens/frontEnd/home/Homepage";
 import Login from "./screens/frontEnd/login/Login";
 import Bookings from "./screens/frontEnd/profileMenu/Bookings";
+import Chat from "./screens/frontEnd/profileMenu/Chat";
 import Messages from "./screens/frontEnd/profileMenu/Messages";
 import SingleConversation from "./screens/frontEnd/profileMenu/SingleConversation";
 import Settings from "./screens/frontEnd/profileMenu/Settings";

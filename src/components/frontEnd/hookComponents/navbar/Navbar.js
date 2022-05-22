@@ -175,7 +175,7 @@ function Navbar(props) {
                                 <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
                                 <li onClick={goTo('BOOKINGS')}>{t('common.bookings')}</li>
                                 <li onClick={goTo('FAVOURITES')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
-                                <li onClick={goTo('MESSAGES')}>{t('common.messages')}</li>
+                                <li onClick={goTo(props.stateLayout > 991 ? 'CHAT' : 'MESSAGES')}>{t('common.messages')}</li>
                                 {
                                     // (props.userDuck.user.permission[0] === 'guest' )?
                                     // <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :
