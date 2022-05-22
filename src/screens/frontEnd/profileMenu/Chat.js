@@ -90,7 +90,16 @@ class Chat extends Component {
         this.state = {
             windowWidth: window.innerWidth,
             idAnnouncement: undefined,
-            arrayOfChats: []
+            arrayOfChats: [{
+                idSender: 25,
+                senderName: 'CiaoRagazzi Hotel',
+                senderProfileIcon: 'https://www.veneto.info/wp-content/uploads/sites/114/chioggia.jpg',
+                lastMessage: {
+                  description: 'CiaoBelli',
+                  date: "2022-05-20",
+                  time: "02:44:02"
+                }
+              }]
         }
     }
     componentDidMount() {

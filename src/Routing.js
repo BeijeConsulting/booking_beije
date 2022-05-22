@@ -95,12 +95,12 @@ function Routing(props) {
 
                 <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
                     <ProtectedRoute>
-                        <Chat>
-                            <SingleConversation />
-                        </Chat>
+                        <Chat/>
                     </ProtectedRoute>
                 }
-                />
+                >
+                    <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+                </Route>
 
                 <Route path={routes.BOOKINGS} element={
                     <ProtectedRoute>
