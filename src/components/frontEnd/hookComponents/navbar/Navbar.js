@@ -56,17 +56,27 @@ function Navbar(props) {
     useEffect(isLogIn, [getLocalStorage('token')])
 
     function isLogIn() {
+        let newState = Object.assign({}, state)
         if (getLocalStorage('token') !== null) {
-            setState({
-                ...state,
+            newState = {
+                ...newState,
                 isLogIn: true
-            })
+            }
+            // setState({
+            //     ...state,
+            //     isLogIn: true
+            // })
         } else {
-            setState({
-                ...state,
+            newState = {
+                ...newState,
                 isLogIn: false
-            })
+            }
+            // setState({
+            //     ...state,
+            //     isLogIn: false
+            // })
         }
+        setState(newState)
     }
 
     // function to set modal search open true 

@@ -109,13 +109,9 @@ function LoginForm(props) {
          signInPostApi(formObject).then(response).catch((error) => {
             if (error?.response?.status === 401) {
                openNotification(t('toasts.formErrorApi'), 'info-toast');
-               // navigate(routes.LOGIN);
-
             }
          })
-      }
-
-
+      }  
    }
 
    return (
