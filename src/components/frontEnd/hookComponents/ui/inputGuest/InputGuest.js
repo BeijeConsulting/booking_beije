@@ -1,50 +1,56 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
 // ant
 import { InputNumber, Space } from 'antd';
 
+// events
+import { eventBus } from '../../../../../eventBus/eventBus';
+
+
 function InputGuest(props) {
 
-    const [state, setState] = useState({
-        value: 1
-    });
+   const [state, setState] = useState({
+      value: 1
+   });
 
-    function handleClick(e) {
-        let newState = Object.assign({}, state);
-        let value =e.target.getAttribute("name");
-            newState = { ...newState, value: newState.value + parseInt(value) }
-       
-        setState(newState);
-    }
+   const handleEvent = () => {
+      eventBus.onDispatch('guests', state.value);
+   }
 
-    const handleChange = (e) => {
-        setState({
-            ...state,
-            value: parseInt(e)
-        })
-    }
+   useEffect(handleEvent,[state.value]);
 
-    const selectBefore = (
-        <span name={-1} onClick={handleClick}>
-            -
-        </span>
-    );
+   function handleClick(e) {
+      let newState = Object.assign({}, state);
+      let value = e.target.getAttribute("name");
+      newState = { ...newState, value: newState.value + parseInt(value) }
+      setState(newState);
+   }
 
-    const selectAfter = (
-        <span name={1} onClick={handleClick}>
-            +
-        </span>
-    );
+   const handleChange = (e) => {
+      setState({
+         ...state,
+         value: parseInt(e)
+      })
+   }
 
-    return (
-        <Space direction="vertical">
-            <InputNumber addonBefore={selectBefore} addonAfter={selectAfter} onChange={handleChange} min={1} max={12} value={state.value} />
+   const selectBefore = (
+      <span name={-1} onClick={handleClick}>
+         -
+      </span>
+   );
 
-        </Space>
-    )
+   const selectAfter = (
+      <span name={1} onClick={handleClick}>
+         +
+      </span>
+   );
+
+   return (
+      <Space direction="vertical">
+         <InputNumber addonBefore={selectBefore} addonAfter={selectAfter} onChange={handleChange} min={1} max={12} value={state.value} />
+
+      </Space>
+   )
 }
-
-InputGuest.propTypes = {}
 
 export default InputGuest;

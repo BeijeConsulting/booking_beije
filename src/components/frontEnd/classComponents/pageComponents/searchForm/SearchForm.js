@@ -2,10 +2,20 @@
 import React, { Component } from 'react';
 import { t } from "i18next";
 
+// api
+// import { getStructuresBySearch } from '../../../../../services/api/search/searchApi';
+
 // components
 import FormButton from '../../../funcComponents/ui/buttons/formButton/FormButton';
 import SearchPlace from '../../../hookComponents/ui/searchPlace/SearchPlace';
 import { DatePicker, Space, } from 'antd';
+
+// redux
+import { connect } from 'react-redux';
+
+// router dom
+import withRouting from '../../../../../withRouting/withRouting';
+import { routes } from '../../../../../routes/routes';
 
 // styles
 import './SearchForm.less';
@@ -22,8 +32,6 @@ const arrTest = [
    { id: 7, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
 ]
 
-
-eventBus.onListening("coordinate", this.coordinate)
 
 class SearchForm extends Component {
 
@@ -44,30 +52,39 @@ class SearchForm extends Component {
       this.dateFormat = 'YYYY-MM-DD';
    }
 
-   // coordinate = (e) => {
-   //    // console.log(e);
-   //    this.bookingData.latitudine = e.lat,
-   //       this.bookingData.longitudine = e.lon
-   //    console.log(this.bookingData);
-   // }
+   setNumberOfGuests = (e) => {
+      this.bookingData.numberOfGuests = e;
+      console.log(this.bookingData.numberOfGuests);
+   }
+
+   componentDidMount() {
+      eventBus.onListening('guests', this.setNumberOfGuests);
+   }
+
    handleSubmit = (e) => {
-      e.preventDefault()
+      e.preventDefault();
+      let [latitude, longitude] = this.props.positionDuck.coordinates;
+      this.bookingData.latitudine = latitude;
+      this.bookingData.longitudine = longitude;
+      console.log(this.bookingData);
+      // getStructuresBySearch(this.bookingData).then(res =>
+      //    this.props.router.navigate(routes.SEARCH, {
+      //       state: res?.data
+      //    })
+      // );
+      this.props.router.navigate(routes.SEARCH, {
+         state: this.bookingData
+      })
    }
 
    handleSelect = (e) => {
-      console.log('start', e.start);
-      console.log('end', e.end);
-      console.log(e);
       this.bookingData.checkin = e.startStr;
-      console.log('qui');
       this.bookingData.checkout = e.endStr;
-      console.log(this.bookingData);
    }
 
    handleUnSelect = (e) => {
       console.log('start', e.start);
       console.log('end', e.end);
-      // console.log(e);
    }
 
    renderEventCalendar = (item, key) => {
@@ -95,7 +112,7 @@ class SearchForm extends Component {
 
                   <InputGuest />
 
-                  <FormButton className="btn-primary" label={t("common.send")} callback={this.handleSubmit} disabled={this.state.isDisable} />
+                  <FormButton className="btn-primary" label={t("common.send")} callback={this.handleSubmit} />
 
                </form>
             </section>
@@ -104,4 +121,8 @@ class SearchForm extends Component {
    }
 }
 
-export default SearchForm;
+const mapStateToProps = (state) => ({
+   positionDuck: state.positionDuck
+})
+
+export default connect(mapStateToProps)(withRouting(SearchForm));
