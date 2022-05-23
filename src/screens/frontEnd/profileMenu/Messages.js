@@ -36,22 +36,13 @@ class Messages extends Component {
   componentDidMount() {
     this.resize = window.addEventListener('resize', this.handleResize);
     if (localStorage.getItem('token') !== null) {
-      chatMessagesUserGetApi('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTMzMTA2MTYsImV4cCI6MTY1MzMxNDIxNn0.kaAZeYQzx4zSOHEuuMk0ZN_ijpvHtweWdhr5q8a2kOA')
-
+      chatMessagesUserGetApi(getLocalStorage("token"))
         .then(res => {
 
           this.setState({
-            arrayMessages: res.data
+            arrayMessages: res?.data
           })
         })
-      //   //chiamataApi per recuperare i messaggi(chat)
-      //   // chatMessagesUserGetApi(getLocalStorage("token"))
-      //   //.the(res =>{
-      //   //   setState({
-      //   //     ...state,
-      //   //     arrayMessages : res?.data
-      //   //   })
-      //   // })
     }
 
 
@@ -89,11 +80,8 @@ class Messages extends Component {
   goToSingleConversation = (idSender) => () => {
     if (this.state.windowWidth < 992) {
       this.props.router.navigate(routesDetails.singleConversationMobile(idSender));
-      // vector(routesDetails.singleConversationMobile(idSender))
     } else {
       this.props.router.navigate(routesDetails.singleConversation(idSender));
-
-      // vector(routesDetails.singleConversation(idSender))
     }
   }
   render() {
