@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 //ROUTING
 import { Link, useNavigate } from 'react-router-dom';
+import { routes } from "../../../../../routes/routes"
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
@@ -22,6 +23,13 @@ const layout = {
     },
 };
 
+let companyName = null,
+    phone = null,
+    vat = null,
+    city = null,
+    postcode = null,
+    billingAddress = null,
+    userRoles = null
 
 const HostRegistration = () => {
 
@@ -55,12 +63,34 @@ const HostRegistration = () => {
         })
     }
 
-    const onFinish = (values) => {
+    const onFinish = (userType) => (values) => {
 
         console.log(values);
+        console.log(userType);
         alert("Utente registrato correttamente")
-        navigate("/structure-operation")
-    };
+        navigate(`/${routes.STRUCTURE_OPERATION}`)
+        phone = values.user.phoneNumber
+        city = values.user.city
+        postcode = values.user.postcode
+        billingAddress = values.user.billingAddress
+        companyName = userType === 2 ? values.user.companyName : null
+        vat = userType === 2 ? values.user.vatNumber : null
+        userRoles = userType === 2 ? "company" : "private"
+
+        /* {
+               hostDataPut(  ipotetico put da mandare a backend
+                   {
+                        phone: phone,
+                        city: city,
+                        postcode: postcode,
+                        billingAddress: billingAddress,
+                        companyName: companyName,
+                        vat: vat,
+                        userRoles: userRoles
+                   }
+               )
+           } */
+    }
 
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
@@ -74,8 +104,8 @@ const HostRegistration = () => {
             {state.displayRegistration &&
                 <div>
                     <h2>{t("bo.screens.host.hostRegistration.title")}</h2>
-                    <div className="host_choice" onClick={setHostType(1)}>{t("bo.screens.host.hostRegistration.privateRegistration")}</div>
-                    <div className="host_choice" onClick={setHostType(2)}>{t("bo.screens.host.hostRegistration.companyRegistration")}</div>
+                    <div className="host_choice" onClick={setHostType(1)}>{t("bo.screens.host.hostRegistration.privateRegistration")}</div> {/* to onClik parameter define type of host */}
+                    <div className="host_choice" onClick={setHostType(2)}>{t("bo.screens.host.hostRegistration.companyRegistration")}</div> {/* to onClik parameter define type of host */}
                 </div>
             }
 
@@ -84,13 +114,13 @@ const HostRegistration = () => {
                 <>
 
 
-                    <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
+                    <Form {...layout} name="nest-messages" onFinish={onFinish(1)} onFinishFailed={onFinishFailed} > {/* to onFinish parameter define type of host */}
                         <div className='title-setup'>
                             <h2>{t("bo.screens.host.hostRegistration.setUpPrivateAccount")}</h2>
                             <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
                         </div>
                         <Form.Item
-                            name={['user', 'phone-number']}
+                            name={['user', 'phoneNumber']}
                             label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}
                             rules={[
                                 {
@@ -123,7 +153,7 @@ const HostRegistration = () => {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            name={['user', 'billing-address']}
+                            name={['user', 'billingAddress']}
                             label={t("bo.screens.host.hostRegistration.fields.billingAddress")}
                             rules={[
                                 {
@@ -161,13 +191,13 @@ const HostRegistration = () => {
             }
 
             {state.displaySecondchoice &&
-                <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
+                <Form {...layout} name="nest-messages" onFinish={onFinish(2)} onFinishFailed={onFinishFailed} > {/* to onFinish parameter define type of host */}
                     <div className='title-setup'>
                         <h2>{t("bo.screens.host.hostRegistration.setUpCompanyAccount")}</h2>
                         <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
                     </div>
                     <Form.Item
-                        name={['user', 'company-name']}
+                        name={['user', 'companyName']}
                         label={t("bo.screens.host.hostRegistration.fields.companyName")}
                         rules={[
                             {
@@ -178,7 +208,7 @@ const HostRegistration = () => {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name={['user', 'phone-number']}
+                        name={['user', 'phoneNumber']}
                         label={t("bo.screens.host.hostRegistration.fields.phoneNumber")}
                         rules={[
                             {
@@ -189,7 +219,7 @@ const HostRegistration = () => {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name={['user', 'vat-number']}
+                        name={['user', 'vatNumber']}
                         label={t("bo.screens.host.hostRegistration.fields.vatNumber")}
                         rules={[
                             {
@@ -223,7 +253,7 @@ const HostRegistration = () => {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name={['user', 'billing-address']}
+                        name={['user', 'billingAddress']}
                         label={t("bo.screens.host.hostRegistration.fields.billingAddress")}
                         rules={[
                             {
