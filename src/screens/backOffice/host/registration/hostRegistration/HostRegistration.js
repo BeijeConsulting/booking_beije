@@ -22,7 +22,6 @@ const layout = {
     },
 };
 
-let termsIsChecked = false
 
 const HostRegistration = () => {
 
@@ -106,7 +105,7 @@ const HostRegistration = () => {
                             label={t("bo.screens.host.hostRegistration.fields.city")}
                             rules={[
                                 {
-
+                                    required: true,
                                 },
                             ]}
                         >
@@ -117,7 +116,7 @@ const HostRegistration = () => {
                             label={t("bo.screens.host.hostRegistration.fields.postcode")}
                             rules={[
                                 {
-                                    type: 'number',
+                                    required: true,
                                 },
                             ]}
                         >
@@ -135,7 +134,7 @@ const HostRegistration = () => {
                         >
                             <Input />
                         </Form.Item>
-                        
+
                         <Form.Item
                             name="agreement"
                             valuePropName="checked"
@@ -150,7 +149,13 @@ const HostRegistration = () => {
                                 {t("bo.screens.host.hostRegistration.accept")} <Link to={"/terms-and-service"} target="_blank">{t("bo.screens.host.hostRegistration.termsConditionsForHost")}</Link>
                             </Checkbox>
                         </Form.Item>
-                    
+
+                        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                            <Button type="primary" htmlType="submit">
+                                {t("bo.screens.host.hostRegistration.fields.registerButton")}
+                            </Button>
+                        </Form.Item>
+
                     </Form>
                 </>
             }
@@ -199,7 +204,7 @@ const HostRegistration = () => {
                         label={t("bo.screens.host.hostRegistration.fields.city")}
                         rules={[
                             {
-
+                                required: true,
                             },
                         ]}
                     >
@@ -210,7 +215,8 @@ const HostRegistration = () => {
                         label={t("bo.screens.host.hostRegistration.fields.postcode")}
                         rules={[
                             {
-                                type: 'number',
+
+                                required: true,
                             },
                         ]}
                     >
