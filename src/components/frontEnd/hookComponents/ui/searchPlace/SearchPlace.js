@@ -90,7 +90,7 @@ function SearchPlace(props) {
                     />
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}>
+                {/* <div style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}>
                     <button
                         onClick={() => {
                             // Search
@@ -98,7 +98,7 @@ function SearchPlace(props) {
                     >
                         Search
                     </button>
-                </div>
+                </div> */}
             </div>
             <div>
                 <div component="nav" aria-label="main mailbox folders">

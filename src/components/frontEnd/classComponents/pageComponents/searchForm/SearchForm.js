@@ -1,9 +1,6 @@
 // import FullCalendar from '@fullcalendar/react';
 import React, { Component } from 'react';
 import { t } from "i18next";
-import FullCalendar from '@fullcalendar/react';
-import interactionPlugin from '@fullcalendar/interaction'; // plugin
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 
 // components
 import FormButton from '../../../funcComponents/ui/buttons/formButton/FormButton';
@@ -12,6 +9,7 @@ import { DatePicker, Space, } from 'antd';
 
 // styles
 import './SearchForm.less';
+import InputGuest from '../../../hookComponents/ui/inputGuest/InputGuest';
 
 const arrTest = [
    { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },
@@ -69,8 +67,8 @@ class SearchForm extends Component {
    }
 
    handleDateChange = (e) => {
-      console.log(e[0].format(this.dateFormat));
-      console.log(e[1].format(this.dateFormat));
+      this.bookingData.checkin = e[0].format(this.dateFormat);
+      this.bookingData.checkout = e[1].format(this.dateFormat);
    }
 
    render() {
@@ -81,23 +79,13 @@ class SearchForm extends Component {
                   <SearchPlace />
 
                   <Space direction="vertical" size={12}>
-                     <DatePicker.RangePicker 
-                     format={this.dateFormat} 
-                     placeholder={['Checkin date','Checkout date']}
-                     onChange={this.handleDateChange} />
+                     <DatePicker.RangePicker
+                        format={this.dateFormat}
+                        placeholder={['Checkin date', 'Checkout date']}
+                        onChange={this.handleDateChange} />
                   </ Space>
 
-                  {/* <FullCalendar
-                     plugins={[dayGridPlugin, interactionPlugin]}
-                     initialView="dayGridMonth"
-                     weekends={true}
-                     selectable
-                     select={this.handleSelect}
-                     unselect={this.handleUnSelect}
-                  // events={
-                  //    this.state.dataInfo.map(this.renderEventCalendar)
-                  // }
-                  /> */}
+                  <InputGuest />
 
                   <FormButton className="btn-primary" label={t("common.send")} callback={this.handleSubmit} disabled={this.state.isDisable} />
 
