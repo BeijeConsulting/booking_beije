@@ -88,15 +88,17 @@ const Bookings = (props) => {
   }
 
   return (
-    <div className="bookings_container">
+    <div className="bookings-page">
       <Helmet>
         <title>{t("common.bookings")}</title>
       </Helmet>
-      <h1>{t("common.bookings")}</h1>
-      <div className="button_switch_container">
+      <h1 className="bookings-title">{t("common.bookings")}</h1>
+
+      <div className="button_switch_container display">
         {buttonType.map(popolateSwitchButton)}
       </div>
-      <div className="apartment_container">
+
+      <div className="apartment_container card-container">
         {state.PeriodListStructure.length <= 0 ? <p>Non ci sono appartamenti da mostrare</p> : state.PeriodListStructure.map((item, key) => {
           return <p key={key}>{item.annuncio.titolo}</p>
         })}
