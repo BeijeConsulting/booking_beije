@@ -186,6 +186,12 @@
             "details": "Dettagli",
             "roomDetails": "Dettaglio stanza"
          },
+         "bookings": {
+            "history": "Storico",
+            "pending": "In attesa",
+            "planned": "Pianificati",
+            "refused": "Rifiutati"
+         },
          "homePage": {
             "searchButton": "Cerca destinazione"
          }

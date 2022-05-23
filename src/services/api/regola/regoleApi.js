@@ -22,7 +22,7 @@ const regolaModifyPutApi = async (id, obj, header) => {
 
 /* AUTH:ADMIN */
 const regoleIdDeleteApi = async (id, header) => {
-    return await postApi(`regole/${id}`, header);
+    return await deleteApi(`regole/${id}`, header);
 }
 
 export {
