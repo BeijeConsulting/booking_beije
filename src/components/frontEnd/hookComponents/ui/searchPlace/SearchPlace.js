@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // REDUX
 import { connect } from "react-redux";
+import { eventBus } from "../../../../../eventBus/eventBus";
 
 // DUCKS
 import { setAddress } from "../../../../../redux/ducks/addressDuck";
@@ -62,7 +63,11 @@ function SearchPlace(props) {
             <div key={item?.place_id}>
                 <ul
                     onClick={() => {
-                        props.dispatch(setPosition([item.lat, item.lon]))
+                        eventBus.onDispatch("coordinate", {
+                            lat: item?.lat,
+                            lon: item?.lon
+                        })
+                        props.dispatch(setPosition([item?.lat, item?.lon]))
                         props.dispatch(setAddress(item))
                         setState({
                             ...state,
@@ -90,7 +95,7 @@ function SearchPlace(props) {
                     />
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}>
+                {/* <div style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}>
                     <button
                         onClick={() => {
                             // Search
@@ -98,7 +103,7 @@ function SearchPlace(props) {
                     >
                         Search
                     </button>
-                </div>
+                </div> */}
             </div>
             <div>
                 <div component="nav" aria-label="main mailbox folders">

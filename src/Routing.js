@@ -22,6 +22,7 @@ import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
 import MostRewApart from "./screens/frontEnd/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
+import Search from "./screens/frontEnd/Search";
 
 //Screen backOffice
 import ReservationCalendar from "./screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar";
@@ -123,6 +124,7 @@ function Routing(props) {
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
                 <Route path={routes.MRA} element={<MostRewApart />} />
+                <Route path={routes.SEARCH} element={<Search />} />
             </Route>
 
 
