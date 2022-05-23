@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import { useLocation } from "react-router-dom";
 
 import { Layout, Button, Grid } from "antd";
@@ -13,7 +14,7 @@ import Foo from "../../components/frontEnd/hookComponents/footer/Footer";
 //UTILS
 import { LinksFooterHost } from "../../utils/linksFooter/linksFooter";
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const { useBreakpoint } = Grid;
 
@@ -37,7 +38,6 @@ const LayoutBackOffice = () => {
   };
 
   const toggleSidebar = () => {
-    console.log(state.collapsed);
     setState({
       ...state,
       collapsed: !state.collapsed,
@@ -59,23 +59,23 @@ const LayoutBackOffice = () => {
               width={200}
               collapsible
             >
-              {state.collapsed ? (
-                <Button type="primary" onClick={toggleSidebar} block>
-                  <FontAwesomeIcon
-                    icon={faAngleRight}
-                    className={"trigger"}
-                    inverse
-                  />
-                </Button>
-              ) : (
-                <Button type="primary" onClick={toggleSidebar} block>
-                  <FontAwesomeIcon
-                    icon={faBars}
-                    className={"trigger"}
-                    inverse
-                  />
-                </Button>
-              )}
+              <Button
+                style={{
+                  backgroundColor: "#44403c",
+                  border: "none",
+                  paddingLeft: `${state.collapsed ? "" : "24px"}`,
+                }}
+                type="primary"
+                onClick={toggleSidebar}
+                block={state.collapsed ? true : false}
+              >
+                <FontAwesomeIcon
+                  icon={state.collapsed ? faAngleRight : faBars}
+                  className={"trigger"}
+                  inverse
+                />
+              </Button>
+
               <Sidebar />
             </Sider>
           )}
