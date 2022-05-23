@@ -5,14 +5,19 @@ import { t } from "i18next";
 import { Helmet } from "react-helmet";
 
 //function
-import { periodiPrenotatiGetApi } from "../../../services/api/periodoPrenotatoApi/periodoApi";
 import { CurrentDate } from "../../../utils/date/date";
 //ui
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 
+//api
+import { periodiPrenotatiUserGetApi } from '../../../services/api/periodoPrenotatoApi/periodoApi'
+
+//redux
+import { connect } from 'react-redux';
+
 let arrayBkp = [];
 
-const Bookings = () => {
+const Bookings = (props) => {
 
   const [state, setState] = useState({
     PeriodListStructure: [],
@@ -21,15 +26,14 @@ const Bookings = () => {
   const dateCurrent = CurrentDate();
 
   useEffect(() => {
-    periodiPrenotatiGetApi('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsInJvbGVzIjpbIlVTRVIiLCJBRE1JTiJdLCJpYXQiOjE2NTMwNjI3MTMsImV4cCI6MTY1MzA2NjMxM30.hjJ0954uINQJ37Iv9zX3abG_RhTDoUFsb3UIeBxH8_M').then(res => {
-      arrayBkp = res.data
+    periodiPrenotatiUserGetApi(props.tokenDuck?.token).then(res => {
+      arrayBkp = res.data.length > 0 ? res.data : [];
       setState({
         PeriodListStructure: arrayBkp.filter((item) => {
           return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
         })
       })
     })
-    console.log(arrayBkp);
   }, [])
 
 
@@ -92,4 +96,9 @@ const Bookings = () => {
   );
 };
 
-export default Bookings
+const mapStateToProps = state => ({
+  userDuck: state.userDuck,
+  tokenDuck: state.tokenDuck
+});
+
+export default connect(mapStateToProps)(Bookings)
