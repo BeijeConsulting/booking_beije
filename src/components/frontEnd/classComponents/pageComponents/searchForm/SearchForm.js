@@ -106,7 +106,7 @@ class SearchForm extends Component {
                   <Space direction="vertical" size={12}>
                      <DatePicker.RangePicker
                         format={this.dateFormat}
-                        placeholder={['Checkin date', 'Checkout date']}
+                        placeholder={['Checkin', 'Checkout']}
                         onChange={this.handleDateChange} />
                   </ Space>
 
