@@ -36,7 +36,7 @@ const SingleConversation = (props) => {
     hostName: 'Ettore Vettori',
     messages: [{
       id: 1,
-      idSender: 48,
+      idSender: params.id,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
       dateTime: '2022-05-20'
     }, {
@@ -51,7 +51,7 @@ const SingleConversation = (props) => {
       dateTime: '2022-05-20'
     }, {
       id: 1,
-      idSender: 48,
+      idSender: params.id,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
       dateTime: '2022-05-20'
     }, {
@@ -66,7 +66,7 @@ const SingleConversation = (props) => {
       dateTime: '2022-05-20'
     }, {
       id: 1,
-      idSender: 48,
+      idSender: params.id,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse diam ipsum, cursus id placerat congue,',
       dateTime: '2022-05-20'
     },]
