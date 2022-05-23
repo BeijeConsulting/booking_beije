@@ -14,6 +14,8 @@ import { periodiPrenotatiUserGetApi } from '../../../services/api/periodoPrenota
 
 //redux
 import { connect } from 'react-redux';
+import { decryptItem } from "../../../utils/crypto/crypto";
+import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 let arrayBkp = [];
 
@@ -26,16 +28,17 @@ const Bookings = (props) => {
   const dateCurrent = CurrentDate();
 
   useEffect(() => {
-    periodiPrenotatiUserGetApi(props.tokenDuck?.token).then(res => {
-      arrayBkp = res.data.length > 0 ? res.data : [];
-      setState({
-        PeriodListStructure: arrayBkp.filter((item) => {
-          return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
+    periodiPrenotatiUserGetApi(
+      props.tokenDuck?.token === null ? getLocalStorage('token') :
+        decryptItem(props.tokenDuck?.token)).then(res => {
+          arrayBkp = res.data.length > 0 ? res.data : [];
+          setState({
+            PeriodListStructure: arrayBkp.filter((item) => {
+              return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
+            })
+          })
         })
-      })
-    })
   }, [])
-
 
   const buttonType =
     [t("fe.screens.bookings.history"), t("fe.screens.bookings.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
@@ -81,9 +84,9 @@ const Bookings = (props) => {
   return (
     <div className="bookings_container">
       <Helmet>
-        <title>{t("fe.screens.settings.settingsCard.bookings")}</title>
+        <title>{t("common.bookings")}</title>
       </Helmet>
-      <h1>{t("fe.screens.settings.settingsCard.bookings")}</h1>
+      <h1>{t("common.bookings")}</h1>
       <div className="button_switch_container">
         {buttonType.map(popolateSwitchButton)}
       </div>
