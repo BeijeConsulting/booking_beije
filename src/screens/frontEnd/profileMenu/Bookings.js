@@ -25,6 +25,7 @@ import './profileMenuCSS/Bookings.less';
 let arrayBkp = [];
 
 const Bookings = (props) => {
+  const { t } = useTranslation();
 
   const [state, setState] = useState({
     PeriodListStructure: [],
