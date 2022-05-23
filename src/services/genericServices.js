@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getLocalStorage, setLocalStorage } from "../utils/localStorage/localStorage";
+import { setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 import { updateAuthTokenPostApi } from "./api/auth/authApi";
@@ -22,12 +22,9 @@ axiosInstance.interceptors.response.use(function (response) {
     originalConfig._retry = true
     //qui chiamata updateAuthToken
     /* Token valido fino alle 11,00 del 19/05/2022 */
-    if(localStorage.getItem('refreshToken') !== null) {
+    if (localStorage.getItem('refreshToken') !== null) {
 
-      await updateAuthTokenPostApi({
-        refreshToken: getLocalStorage('refreshToken')
-      }).then(res => {
-
+      await updateAuthTokenPostApi().then(res => {
         const { token } = res.data;
         setLocalStorage('token', token);
       })

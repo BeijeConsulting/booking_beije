@@ -47,10 +47,12 @@ import { getLocalStorage } from './utils/localStorage/localStorage'
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 import { setUser } from "./redux/ducks/userDuck";
+import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
+
 
 function Routing(props) {
     useEffect(() => {
-        if (localStorage.getItem('token') !== null && localStorage.getItem('refreshToken') !== null) {
+        if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
             let token = getLocalStorage('token')
             props.dispatch(setToken(token))
             props.dispatch(setUser())
@@ -77,15 +79,56 @@ function Routing(props) {
 
             <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
-                <Route path={routes.CHAT} element={<Chat />} >
+                <Route path={routes.MESSAGES} element={
+                    <ProtectedRoute>
+                        <Messages />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.SINGLECONVERSATIONMOBILE} element={
+                    <ProtectedRoute>
+                        <SingleConversation />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
+                    <ProtectedRoute>
+                        <Chat/>
+                    </ProtectedRoute>
+                }
+                >
                     <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
                 </Route>
-                <Route path={routes.MESSAGES} element={<Messages />} />
-                <Route path={routes.SINGLECONVERSATIONMOBILE} element={<SingleConversation />} />
-                <Route path={routes.BOOKINGS} element={<Bookings />} />
-                <Route path={routes.SETTINGS} element={<Settings />} />
-                <Route path={routes.ACCOUNT} element={<Account />} />
-                <Route path={routes.FAVOURITES} element={<Favourites />} />
+
+                <Route path={routes.BOOKINGS} element={
+                    <ProtectedRoute>
+                        <Bookings />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.SETTINGS} element={
+                    <ProtectedRoute>
+                        <Settings />
+                    </ProtectedRoute>
+                }
+                />
+                <Route path={routes.ACCOUNT} element={
+                    <ProtectedRoute>
+                        <Account />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.FAVOURITES} element={
+                    <ProtectedRoute>
+                        <Favourites />
+                    </ProtectedRoute>
+                }
+                />
+
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
@@ -118,8 +161,5 @@ function Routing(props) {
 
 }
 
-const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck,
-});
 
-export default connect(mapStateToProps)(Routing);
+export default connect()(Routing);
