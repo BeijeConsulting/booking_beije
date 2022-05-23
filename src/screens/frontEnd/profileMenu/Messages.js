@@ -38,10 +38,13 @@ class Messages extends Component {
     if (localStorage.getItem('token') !== null) {
       chatMessagesUserGetApi(getLocalStorage("token"))
         .then(res => {
-
-          this.setState({
-            arrayMessages: res?.data
-          })
+          if (res.data !== "") {
+            this.setState({
+              arrayMessages: res?.data?.list
+            })
+          }
+        }).catch((e)=>{
+          console.log('error',e)
         })
     }
 
@@ -101,7 +104,13 @@ class Messages extends Component {
             </>
           }
 
-          {this.state.arrayMessages.map(this.renderMessages)}
+          {
+            this.state.arrayMessages.length > 0 ?
+              <>
+                {this.state.arrayMessages.map(this.renderMessages)}
+              </> :
+              <h2> chat vuota </h2>
+          }
 
           <div className="pagination"></div>
         </div>
