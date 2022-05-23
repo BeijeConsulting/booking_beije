@@ -34,6 +34,7 @@
       "password": "Password",
       "passwordConfirm": "Confirm password",
       "photos": "Photos",
+      "rate":"Rate",
       "registerLabel": "Register",
       "registration": "Registration",
       "rooms": "{{count}} room",
