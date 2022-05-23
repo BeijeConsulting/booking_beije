@@ -1,9 +1,33 @@
 @import '../../../../../assets/variables/globalVariables.less';
 
-.searchFormContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.searchFormContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 1rem;
+
+   form {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+   }
+
+   form > * {
+      margin: 0 5px;
+   }
+
+   .ant-space.ant-space-vertical {
+      max-width: 200px;
+   }
+
+   .ant-input-number-input {
+      max-width: 36px;
+      text-align: center;
+   }
+
+   .ant-input-number-handler-wrap {
+      display: none;
+   }
 }
 
 .fc .fc-highlight {
