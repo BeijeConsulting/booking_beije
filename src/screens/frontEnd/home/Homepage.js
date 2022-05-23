@@ -13,42 +13,42 @@ import SearchForm from "../../../components/frontEnd/classComponents/pageCompone
 
 const Homepage = () => {
 
-  const [state, setState] = useState({
-    isOpen: false
-  });
+   const [state, setState] = useState({
+      isOpen: false
+   });
 
-  const { t } = useTranslation();
-  const navigate = useNavigate()
+   const { t } = useTranslation();
+   const navigate = useNavigate()
 
-  const handleNavigation = (path) => () => {
-    navigate(path)
-  }
+   const handleNavigation = (path) => () => {
+      navigate(path)
+   }
 
-  function handleClick() {
-    setState({
-      ...state,
-      isOpen: !state.isOpen
-    })
-  }
+   function handleClick() {
+      setState({
+         ...state,
+         isOpen: !state.isOpen
+      })
+   }
 
-  return (
-    <>
-      <Helmet>
-        <title>{t("common.home")}</title>
-      </Helmet>
-      <Modal isOpen={state.isOpen} callback={handleClick}  >
-          <SearchForm />
-      </Modal>
-      <div className="home">
-        <SearchButton callback={handleClick} />
-        <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
-        <div>
-          <h3>{t("common.suggestedApartaments")}</h3>
-        <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg"/>
-        </div>
-      </div>
-    </>
-  );
+   return (
+      <>
+         <Helmet>
+            <title>{t("common.home")}</title>
+         </Helmet>
+         <Modal isOpen={state.isOpen} callback={handleClick}  >
+            <SearchForm />
+         </Modal>
+         <div className="home">
+            <SearchButton callback={handleClick} />
+            <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
+            <div className="suggested-container">
+               <h3>{t("common.suggestedApartaments")}</h3>
+               <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
+            </div>
+         </div>
+      </>
+   );
 };
 
 export default Homepage
