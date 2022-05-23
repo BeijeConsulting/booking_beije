@@ -21,13 +21,17 @@ const arrTest = [
    { id: 6, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
    { id: 7, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
 ]
+
+
+eventBus.onListening("coordinate", this.coordinate)
+
 class SearchForm extends Component {
 
    constructor(props) {
       super(props)
       this.state = {
          isDisable: true,
-         dataInfo: arrTest
+         dataInfo: arrTest,
       }
       this.bookingData = {
          latitudine: 0,
@@ -40,6 +44,12 @@ class SearchForm extends Component {
       this.dateFormat = 'YYYY-MM-DD';
    }
 
+   // coordinate = (e) => {
+   //    // console.log(e);
+   //    this.bookingData.latitudine = e.lat,
+   //       this.bookingData.longitudine = e.lon
+   //    console.log(this.bookingData);
+   // }
    handleSubmit = (e) => {
       e.preventDefault()
    }
