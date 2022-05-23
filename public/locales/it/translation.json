@@ -49,7 +49,8 @@
       "address": "Indirizzo",
       "city": "Città",
       "country": "Stato",
-      "zipCode": "Codice postale"
+      "zipCode": "Codice postale",
+      "suggestedApartaments": "Appartamenti consigliati"
    },
    "toasts": {
       "formErrorAllFields": "Compila tutti i campi",
@@ -58,6 +59,7 @@
       "formErrorConfirmPassword": "Le password inserite non coincidono",
       "formErrorTerms": "Accetta i termini e le condizioni",
       "formSuccess": "Tutto ok",
+      "formErrorApi": "Email o password errata, prova di nuovo",
       "messageError": "Nessun messaggio trovato",
       "operationAnnounce": "Titolo annuncio, campo obbligatorio",
       "operationDescription": "Descrizione, campo obbligatorio",
@@ -187,6 +189,9 @@
          "propertyDetails": {
             "details": "Dettagli",
             "roomDetails": "Dettaglio stanza"
+         },
+         "homePage": {
+            "searchButton": "Cerca destinazione"
          }
       }
    }

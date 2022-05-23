@@ -1,5 +1,29 @@
 .home{
     overflow-y: scroll;
     overflow-x: hidden;
-    max-width: 100vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #44403C;
+
+    div{
+        position: relative;
+        
+        h3 {
+            position: absolute;
+            top: 55%;
+            left: 25%;
+            color: #fff;
+            text-shadow: 1px 1px 4px #44403C;
+        }
+    }
+    
+    img{
+        object-fit: cover;
+        padding: 1rem 0;
+        width: 80vw;
+        height: 60vw;
+    }
 }

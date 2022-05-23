@@ -49,8 +49,8 @@
         "update":"Update",
         "writeMessage": "Write your message here...",
         "you": "You",
-        "zipCode": "ZIP code"
-        
+        "zipCode": "ZIP code",
+        "suggestedApartaments": "Suggested apartament"
     },
     "toasts": {
         "formErrorAllFields": "Please, fill in all fields",
@@ -59,6 +59,7 @@
         "formErrorConfirmPassword": "Passwords do not match",
         "formErrorTerms": "You must accept the terms and conditions",
         "formSuccess": "Success!",
+        "formErrorApi": "Wrong email or password, try again",
         "messageError": "No messages",
         "operationAnnounce": "Announce title, input required",
         "operationDescription": "Description, input required",
@@ -187,6 +188,9 @@
             "propertyDetails": {
                 "details": "Details",
                 "roomDetails": "Room details"
+            },
+            "homePage": {
+                "searchButton": "Search your destination"
             }
         }
     }
