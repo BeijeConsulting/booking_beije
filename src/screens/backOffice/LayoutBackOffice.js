@@ -53,6 +53,7 @@ const LayoutBackOffice = () => {
             minHeight: 280,
             // height: "100vh",
             // overflowY: "scroll",
+            // backgroundColor: "#44403c"
           }}
         >
           <Outlet />
