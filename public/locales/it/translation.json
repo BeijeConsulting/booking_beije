@@ -33,6 +33,7 @@
       "password": "Password",
       "passwordConfirm": "Conferma password",
       "photos": "Foto",
+      "rate":"Recensione",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
       "rooms": "{{count}} stanza",
