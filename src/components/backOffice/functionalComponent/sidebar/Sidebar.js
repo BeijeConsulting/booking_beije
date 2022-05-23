@@ -1,6 +1,7 @@
 import React from "react";
 
-import { eventBus } from "../../../../eventBus/eventBus";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../routes/routes";
 
 //ANT Design
 import { Menu } from "antd";
@@ -21,10 +22,11 @@ import {
 const Sidebar = () => {
   const { t } = useTranslation()
 
-  const toggleSidebar = () => {
-    console.log("qui sidebar");
-    eventBus.onDispatch("collapseSidebar", {});
-  };
+  const navigate = useNavigate()
+
+  const goTo = (path) => {
+    navigate(path)
+  }
 
   return (
     <>
@@ -38,22 +40,25 @@ const Sidebar = () => {
             key: "1",
             icon: <FontAwesomeIcon icon={faHotel} />,
             label: t("bo.components.sidebar.structure"),
-            onClick: toggleSidebar,
+            onClick: () => goTo(routes.STRUCTURE_LIST),
           },
           {
             key: "2",
-            icon: <FontAwesomeIcon icon={faWallet} />,
-            label: t("bo.components.sidebar.payments"),
+            icon: <FontAwesomeIcon icon={faBookOpen} />,
+            label: t("common.bookings"),
+            onClick: () => goTo(routes.RESERVATION_LIST),
           },
           {
             key: "3",
-            icon: <FontAwesomeIcon icon={faBookOpen} />,
-            label: t("common.bookings"),
+            icon: <FontAwesomeIcon icon={faMessage} />,
+            label: t("common.messages"),
+            onClick: () => goTo(routes.MESSAGE_LIST),
           },
           {
             key: "4",
-            icon: <FontAwesomeIcon icon={faMessage} />,
-            label: t("common.messages"),
+            icon: <FontAwesomeIcon icon={faWallet} />,
+            label: t("bo.components.sidebar.payments"),
+            // onClick: () => goTo(),
           },
         ]}
       />
