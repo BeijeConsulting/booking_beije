@@ -10,6 +10,7 @@ import { DatePicker, Space, } from 'antd';
 // styles
 import './SearchForm.less';
 import InputGuest from '../../../hookComponents/ui/inputGuest/InputGuest';
+import { eventBus } from '../../../../../eventBus/eventBus';
 
 const arrTest = [
    { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },
@@ -20,9 +21,6 @@ const arrTest = [
    { id: 6, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
    { id: 7, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
 ]
-
-
-
 class SearchForm extends Component {
 
    constructor(props) {

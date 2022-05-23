@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // REDUX
 import { connect } from "react-redux";
+import { eventBus } from "../../../../../eventBus/eventBus";
 
 // DUCKS
 import { setAddress } from "../../../../../redux/ducks/addressDuck";
@@ -62,7 +63,11 @@ function SearchPlace(props) {
             <div key={item?.place_id}>
                 <ul
                     onClick={() => {
-                        props.dispatch(setPosition([item.lat, item.lon]))
+                        eventBus.onDispatch("coordinate", {
+                            lat: item?.lat,
+                            lon: item?.lon
+                        })
+                        props.dispatch(setPosition([item?.lat, item?.lon]))
                         props.dispatch(setAddress(item))
                         setState({
                             ...state,
