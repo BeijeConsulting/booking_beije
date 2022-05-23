@@ -9,6 +9,7 @@
     border-radius: 1rem;
     color: #44403c;
     margin: .5rem auto;
+    cursor: pointer;
 
     .thumbnail-container {
         width: 6rem;
@@ -27,6 +28,7 @@
         justify-content: space-between;
         margin-bottom: 1rem;
         align-items: center;
+        flex-wrap: wrap;
 
         .card-title {
             font-weight: bold;
@@ -46,4 +48,12 @@
     }
 
     .message-text {}
+}
+@media all and (min-width:992px) {
+    .message-card{
+        background-color: #FFF9F5;
+        margin: 0;
+        border-radius: 0;
+        border-bottom: 1px solid #44403c;
+    }
 }

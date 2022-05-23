@@ -13,6 +13,7 @@ import Layout from './screens/frontEnd/layout/Layout'
 import Home from "./screens/frontEnd/home/Homepage";
 import Login from "./screens/frontEnd/login/Login";
 import Bookings from "./screens/frontEnd/profileMenu/Bookings";
+import Chat from "./screens/frontEnd/profileMenu/Chat";
 import Messages from "./screens/frontEnd/profileMenu/Messages";
 import SingleConversation from "./screens/frontEnd/profileMenu/SingleConversation";
 import Settings from "./screens/frontEnd/profileMenu/Settings";
@@ -86,12 +87,21 @@ function Routing(props) {
                 }
                 />
 
-                <Route path={routes.SINGLECONVERSATION} element={
+                <Route path={routes.SINGLECONVERSATIONMOBILE} element={
                     <ProtectedRoute>
                         <SingleConversation />
                     </ProtectedRoute>
                 }
                 />
+
+                <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
+                    <ProtectedRoute>
+                        <Chat/>
+                    </ProtectedRoute>
+                }
+                >
+                    <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
+                </Route>
 
                 <Route path={routes.BOOKINGS} element={
                     <ProtectedRoute>
@@ -119,7 +129,7 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
-                
+
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
