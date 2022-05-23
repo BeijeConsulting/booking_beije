@@ -17,7 +17,7 @@ function InputGuest(props) {
       eventBus.onDispatch('guests', state.value);
    }
 
-   useEffect(handleEvent,[state.value]);
+   useEffect(handleEvent, [state.value]);
 
    function handleClick(e) {
       let newState = Object.assign({}, state);
@@ -47,7 +47,14 @@ function InputGuest(props) {
 
    return (
       <Space direction="vertical">
-         <InputNumber addonBefore={selectBefore} addonAfter={selectAfter} onChange={handleChange} min={1} max={12} value={state.value} />
+         <InputNumber
+            addonBefore={selectBefore}
+            addonAfter={selectAfter}
+            onChange={handleChange}
+            min={1}
+            max={12}
+            value={state.value}
+         />
 
       </Space>
    )
