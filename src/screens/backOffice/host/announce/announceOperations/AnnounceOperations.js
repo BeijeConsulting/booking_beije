@@ -20,9 +20,9 @@ import "./AnnounceOperations.less";
 import { useTranslation } from "react-i18next";
 
 const AnnounceOperation = () => {
-  
+
   const [state, setState] = useState({ data: null });
-  
+
   const { t } = useTranslation();
 
   //const location = useLocation();
@@ -56,6 +56,9 @@ const AnnounceOperation = () => {
 
   const onFinish = (values) => {
     setState({ ...state, values });
+    /* {
+               announcePut( state.values.data )
+                */
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -225,7 +228,7 @@ const AnnounceOperation = () => {
               <InputNumber
                 min={1}
                 max={50}
-                // defaultValue={50}
+              // defaultValue={50}
               />
             </Form.Item>
           </Row>
