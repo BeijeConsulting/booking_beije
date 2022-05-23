@@ -34,7 +34,7 @@ let formObject = {
    surname: '',
    email: '',
    password: '',
-   url_immagine: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
+   url_image: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
    //placeholder
 }
 

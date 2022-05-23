@@ -9,8 +9,6 @@ import LoginForm from "../../../components/frontEnd/hookComponents/loginForm/Log
 
 const Login = () => {
 
-
-
   return (
     <>
     <Helmet>

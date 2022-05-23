@@ -22,6 +22,7 @@ import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
 import MostRewApart from "./screens/frontEnd/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
+import Search from "./screens/frontEnd/Search";
 
 //Screen backOffice
 import ReservationCalendar from "./screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar";
@@ -41,23 +42,25 @@ import AnnounceOperations from "./screens/backOffice/host/announce/announceOpera
 import NotFound from "./screens/notFound/NotFound";
 
 import { getLocalStorage } from './utils/localStorage/localStorage'
-// import { postApi, getApi } from "./services/genericServices";
-// import { decryptItem } from "./utils/crypto/crypto";
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
+import { setUser } from "./redux/ducks/userDuck";
+import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
+
 
 function Routing(props) {
-  useEffect(() => {
-    if (localStorage.getItem('token') !== null){
-        let token = getLocalStorage('token')
-        props.dispatch(setToken(token))
-    }
-    // setLocalStorage(
-    //   "token",
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-    // );
+    useEffect(() => {
+        if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
+            let token = getLocalStorage('token')
+            props.dispatch(setToken(token))
+            props.dispatch(setUser())
+        }
+        // setLocalStorage(
+        //   "token",
+        //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
+        // );
 
         // da qui in poi avete il token per fare tutte le chimate
     }, []);
@@ -76,16 +79,52 @@ function Routing(props) {
 
             <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
-                <Route path={routes.MESSAGES} element={<Messages />} />
-                <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
-                <Route path={routes.BOOKINGS} element={<Bookings />} />
-                <Route path={routes.SETTINGS} element={<Settings />} />
-                <Route path={routes.ACCOUNT} element={<Account />} />
-                <Route path={routes.FAVOURITES} element={<Favourites />} />
+                <Route path={routes.MESSAGES} element={
+                    <ProtectedRoute>
+                        <Messages />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.SINGLECONVERSATION} element={
+                    <ProtectedRoute>
+                        <SingleConversation />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.BOOKINGS} element={
+                    <ProtectedRoute>
+                        <Bookings />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.SETTINGS} element={
+                    <ProtectedRoute>
+                        <Settings />
+                    </ProtectedRoute>
+                }
+                />
+                <Route path={routes.ACCOUNT} element={
+                    <ProtectedRoute>
+                        <Account />
+                    </ProtectedRoute>
+                }
+                />
+
+                <Route path={routes.FAVOURITES} element={
+                    <ProtectedRoute>
+                        <Favourites />
+                    </ProtectedRoute>
+                }
+                />
+                
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
                 <Route path={routes.MRA} element={<MostRewApart />} />
+                <Route path={routes.SEARCH} element={<Search />} />
             </Route>
 
 
@@ -114,8 +153,5 @@ function Routing(props) {
 
 }
 
-const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck,
-});
 
-export default connect(mapStateToProps)(Routing);
+export default connect()(Routing);

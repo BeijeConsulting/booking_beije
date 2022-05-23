@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 //icon
 import { t } from "i18next";
 import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { checkPassword, checkMail } from '../../../utils/validationForm/validation'
-import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import { connect } from "react-redux";
 //css
 import './profileMenuCSS/Account.less'
@@ -20,7 +20,7 @@ let psw
 const Account = (props) => {
 
   const [state, setState] = useState({
-    id:null,
+    id: null,
     name: null,
     surname: null,
     email: null,
@@ -30,7 +30,7 @@ const Account = (props) => {
 
 
   let objToValue = {
-    id:1,
+    id: 1,
     name: "paolo",
     surname: "Pascucci",
     email: "pp@gmail.com",
@@ -51,7 +51,7 @@ const Account = (props) => {
 
   const editProfile = () => {
     // console.log("cambiate credenziali");
-    let credentialToChange = [1,"name", "surname", "email", "password"];
+    let credentialToChange = [1, "name", "surname", "email", "password"];
 
     for (let index = 0; index < 5; index++) {
 
@@ -69,14 +69,14 @@ const Account = (props) => {
   const accName = (e) => {
     console.log("e", e);
     uName = e.target.value
-    
+
   }
   const accSurname = (e) => {
     console.log("e", e);
     uSurname = e.target.value
-    
+
   }
-  
+
   const Controllmail = (e) => {
     mail = e.target.value
     checkMail(mail)
@@ -108,7 +108,7 @@ const Account = (props) => {
       <div className="header_container">
         <h1>Ciao, {objToValue.name}!</h1>
         <div>
-          <button className="acc_logout">logout</button>
+          <button className="acc_logout">{t("common.logout")}</button>
         </div>
       </div>
 
@@ -117,37 +117,37 @@ const Account = (props) => {
           <button className="penIcon"><FontAwesomeIcon icon={faPencil} /></button>
         </div>
         <div className="update_cont">
-          <button className="update" onClick={editProfile} type="submit">Update</button>
+          <button className="update" onClick={editProfile} type="submit">{t("common.update")}</button>
         </div>
       </div>
 
       <form>
         <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Name</label>
+          <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.name")}</label>
           {/*<input type="text" onChange={accName} id="name" />*/}
           <FormInput type="text" placeholder={objToValue.name} info="name" callback={accName} />
         </div>
 
         <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Surname</label>
+          <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.surname")}</label>
           {/* <input type="text" id="surname" /> */}
           <FormInput type="text" info="surname" placeholder={objToValue.surname} callback={accSurname} />
         </div>
 
         <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Mail</label>
+          <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.email")}</label>
           {/* <input type="email" id="email" /> */}
           <FormInput type="email" info="email" placeholder={objToValue.email} callback={Controllmail} />
         </div>
 
         <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Password</label>
+          <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.password")}</label>
           <input type="password" id="password" onChange={checkpass1} />
           {/* <FormInput type="password" onChange={checkpass1} info="password" /> */}
         </div>
 
         <div className="i">
-          <label className="L" ><FontAwesomeIcon icon={faPencil} /> Confirm Password</label>
+          <label className="L" ><FontAwesomeIcon icon={faPencil} /> {t("common.passwordConfirm")}</label>
           <input type="password" id="confirmPassword" onChange={checkpass2} />
           {/* <FormInput type="password" onChange={checkpass2}  info="confPassword"/> */}
         </div>

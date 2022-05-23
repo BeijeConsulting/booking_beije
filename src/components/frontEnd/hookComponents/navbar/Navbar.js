@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 // translation 
 import { useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ import { initToken } from '../../../../redux/ducks/tokenDuck';
 import { initUser } from '../../../../redux/ducks/userDuck'
 
 // utils localstorage 
-import { removeLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { getLocalStorage, removeLocalStorage } from '../../../../utils/localStorage/localStorage';
 
 
 //da cancellare quando implementato duck user
@@ -48,10 +48,28 @@ function Navbar(props) {
 
 
     const [state, setState] = useState({
-        // windowWidth: window.innerWidth,
         isMenuOpen: false,
         modalSearchIsOpen: false,
+        isLogIn: false
     })
+
+    useEffect(isLogIn, [getLocalStorage('token')])
+
+    function isLogIn() {
+        let newState = Object.assign({}, state)
+        if (getLocalStorage('token')) {
+            newState = {
+                ...newState,
+                isLogIn: true
+            }
+        } else {
+            newState = {
+                ...newState,
+                isLogIn: false
+            }
+        }
+        setState(newState)
+    }
 
     // function to set modal search open true 
     const openModalSearch = () => {
@@ -76,7 +94,7 @@ function Navbar(props) {
             obj.isMenuOpen = !obj.isMenuOpen
         }
         setState(obj)
-        
+
         vector(routes[params])
     }
 
@@ -91,9 +109,12 @@ function Navbar(props) {
     const logoutFunc = () => {
         props.dispatch(initUser());
         props.dispatch(initToken());
-        removeLocalStorage("token")
-        removeLocalStorage("refreshToken")
-        vector(routes.HOME)
+        removeLocalStorage("token");
+        removeLocalStorage("refreshToken");
+        setState({...state,
+            isMenuOpen : false
+        })
+        vector(routes.LAYOUT);
     }
     return (
         <>
@@ -103,13 +124,13 @@ function Navbar(props) {
                 props.stateLayout < 480 ?
                     <nav className="navMobile">
                         <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
-                        <Modal isOpen={state?.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
+                        <Modal isOpen={state.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
 
                         {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
                         <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
-                            props.tokenDuck.token !== null  ?
+                            state.isLogIn ?
                                 <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
                                 <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }
@@ -124,7 +145,7 @@ function Navbar(props) {
 
 
                             {
-                                props.tokenDuck.token !== null ?
+                                state.isLogIn ?
 
 
                                     <>{
@@ -145,15 +166,15 @@ function Navbar(props) {
                                     }
                                     </>
                                     :
-                                    <span onClick={goTo('LOGIN')}>Login</span>
+                                    <span className="go_to_login" onClick={goTo('LOGIN')}>Login</span>
                             }
                         </nav>
                         {
                             state.isMenuOpen &&
                             <ul className={props.cssCustomMenu}>
                                 <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
-                                <li onClick={goTo('BOOKED')}>{t('common.bookings')}</li>
-                                <li onClick={goTo('FAVOURITE')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
+                                <li onClick={goTo('BOOKINGS')}>{t('common.bookings')}</li>
+                                <li onClick={goTo('FAVOURITES')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
                                 <li onClick={goTo('MESSAGES')}>{t('common.messages')}</li>
                                 {
                                     // (props.userDuck.user.permission[0] === 'guest' )?

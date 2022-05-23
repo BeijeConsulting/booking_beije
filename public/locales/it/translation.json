@@ -15,6 +15,7 @@
       "backToHome": "Torna alla home",
       "bookings": "Prenotazioni",
       "category": "Categoria",
+      "change":"Cambia",
       "checkIn": "Check In",
       "checkOut": "Check Out",
       "description": "Descrizione",
@@ -23,6 +24,7 @@
       "home": "Home",
       "italian": "Italiano",
       "loginLabel": "Accedi",
+      "logout":"Esci",
       "messages": "Messaggi",
       "mra": "I più recensiti",
       "name": "Nome",
@@ -31,6 +33,7 @@
       "password": "Password",
       "passwordConfirm": "Conferma password",
       "photos": "Foto",
+      "rate":"Recensione",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
       "rooms": "{{count}} stanza",
@@ -41,12 +44,14 @@
       "submit": "Invia",
       "surname": "Cognome",
       "termsConditions": "Termini e condizioni",
+      "update":"Aggiorna",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu",
       "address": "Indirizzo",
       "city": "Città",
       "country": "Stato",
-      "zipCode": "Codice postale"
+      "zipCode": "Codice postale",
+      "suggestedApartaments": "Appartamenti consigliati"
    },
    "toasts": {
       "formErrorAllFields": "Compila tutti i campi",
@@ -55,6 +60,7 @@
       "formErrorConfirmPassword": "Le password inserite non coincidono",
       "formErrorTerms": "Accetta i termini e le condizioni",
       "formSuccess": "Tutto ok",
+      "formErrorApi": "Email o password errata, prova di nuovo",
       "messageError": "Nessun messaggio trovato",
       "operationAnnounce": "Titolo annuncio, campo obbligatorio",
       "operationDescription": "Descrizione, campo obbligatorio",
@@ -172,6 +178,7 @@
             "acceptTerms": "Accetto i termini e le condizioni"
          },
          "settings": {
+            
             "title": "Impostazioni",
             "settingsCard": {
                "account": "Account",
@@ -183,6 +190,15 @@
          "propertyDetails": {
             "details": "Dettagli",
             "roomDetails": "Dettaglio stanza"
+         },
+         "bookings": {
+            "history": "Storico",
+            "pending": "In attesa",
+            "planned": "Pianificati",
+            "refused": "Rifiutati"
+         },
+         "homePage": {
+            "searchButton": "Cerca destinazione"
          }
       }
    }
