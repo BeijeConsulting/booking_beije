@@ -46,7 +46,8 @@
       "termsConditions": "Terms and Agreement",
       "writeMessage": "Write your message here...",
       "you": "You",
-      "zipCode": "ZIP code"
+      "zipCode": "ZIP code",
+      "suggestedApartaments": "Suggested apartament"
    },
    "toasts": {
       "formErrorAllFields": "Please, fill in all fields",
@@ -55,6 +56,7 @@
       "formErrorConfirmPassword": "Passwords do not match",
       "formErrorTerms": "You must accept the terms and conditions",
       "formSuccess": "Success!",
+      "formErrorApi": "Wrong email or password, try again",
       "messageError": "No messages",
       "operationAnnounce": "Announce title, input required",
       "operationDescription": "Description, input required",
@@ -78,8 +80,33 @@
             "structure": "Structure",
             "payments": "Payments"
          },
-         "uploadFoto": {
-            "upload": "Upload"
+         "reservationList": {
+            "title": "Reservation list",
+            "accepted": "Accepted",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "calendar": "Calendar"
+         },
+         "structure": {
+            "structureListTitle": "Structure list",
+            "addStructure": "Add structure"
+         },
+         "structureDetails": {
+            "structureDetailsTitle": "Structure details",
+            "editStructure": "Edit structure",
+            "addRoom": "Add room",
+            "announce": "Announce"
+         },
+         "structureOperation": {
+            "structureName": "Structure name"
+         },
+         "announceOperation": {
+            "photos": "Photos",
+            "priceForNight": "Price for night",
+            "beds": "Beds",
+            "services": "services",
+            "rooms": "Rooms",
+            "rules": "Rules"
          }
       },
       "modals": {},
@@ -133,15 +160,66 @@
             }
          }
       },
-      "propertyDetails": {
-         "details": "Details",
-         "roomDetails": "Room details"
+      "admin": {}
+   },
+   "fe": {
+      "components": {
+         "rooms": {
+            "person": "Person",
+            "people": "People",
+            "price": "Price for",
+            "nights": "nights",
+            "night": "night"
+         },
+         "review": {
+            "username": "username",
+            "title": "title",
+            "description": "description"
+         },
+         "service": {
+            "service": "Service",
+            "wifi": "Wi-Fi",
+            "kitchen": "Kitchen",
+            "airConditioning": "Air conditioning",
+            "parking": "Parking",
+            "washingMachine": "Washing machine",
+            "iron": "Iron",
+            "workingPlace": "Shared working place",
+            "swimmingPool": "Swimming pool",
+            "allowedSmoking": "Allowed Smoking",
+            "alarm": "Alarm"
+         }
       },
-      "bookings": {
-         "history": "Storico",
-         "pending": "In attesa",
-         "planned": "Pianificati",
-         "refused": "Rifiutati"
+      "modals": {},
+      "screens": {
+         "guestAccount": {
+            "becomeAHost": "Become a host"
+         },
+         "registration": {
+            "acceptTerms": "I accept the terms and conditions"
+         },
+         "settings": {
+            "title": "Settings",
+            "settingsCard": {
+               "account": "Account",
+               "favourites": "Favourites",
+               "becomeAHost": "Become a Host",
+               "yourProperties": "Your properties"
+            }
+         },
+         "propertyDetails": {
+            "details": "Details",
+            "roomDetails": "Room details"
+         },
+         "homePage": {
+            "searchButton": "Search your destination"
+         },
+         "bookings": {
+            "history": "Storico",
+            "pending": "In attesa",
+            "planned": "Pianificati",
+            "refused": "Rifiutati"
+         }
       }
    }
 }
