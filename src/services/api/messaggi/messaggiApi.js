@@ -2,26 +2,25 @@
 
 import { getApi, deleteApi, postApi } from '../../genericServices'
 
-const messageInsertPostApi = async (obj) => {
-    return await postApi(`message`, obj);
+const messageInsertPostApi = async (obj, header) => {
+    return await postApi(`message`, obj, header);
 }
 
 const messageMultipleGetApi = async () => {
     return await postApi(`messages`);
 }
 
-/* AUTH:USER */
-const messageToReceiverIdGetApi = async (reicever_id, header) => {
-    return await getApi(`messages/receiver/${reicever_id}`, header);
+
+/* AUTH:USER (MESSAGES PAGE)*/
+const chatMessagesUserGetApi = async (header) =>{
+    return await getApi(`messages/chat`, header);
 }
 
-/* AUTH:USER */
-const messageToSenderIdGetApi = async (sender_id) => {
-    return await getApi(`messages/sender/${sender_id
-        }`);
+/* AUTH:USER (SINGLECONVERSATIONPAGE)*/
+const messageToSenderIdGetApi = async (sender_id,header) => {
+    return await getApi(`messages/chat/${sender_id
+        }`,header);
 }
-
-
 
 /* AUTH:USER */
 const messageRelativeAnnuncioGetApi = async (annuncio_id) => {
@@ -34,8 +33,6 @@ const messageDeleteApi = async (id, header) => {
     return await deleteApi(`message/${id}`, header);
 }
 
-
-
 export {
-    messageInsertPostApi, messageMultipleGetApi, messageToReceiverIdGetApi, messageToSenderIdGetApi, messageRelativeAnnuncioGetApi, messageDeleteApi
+    chatMessagesUserGetApi,messageInsertPostApi, messageMultipleGetApi, messageToSenderIdGetApi, messageRelativeAnnuncioGetApi, messageDeleteApi
 }

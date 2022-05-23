@@ -1,8 +1,9 @@
 .messages-page {
     background-color: #44403c;
     color: #fff9f5;
-    padding: 1rem 1rem 19vh;
-
+    padding: 1rem 1rem;
+    overflow-y: scroll;
+    min-height: 90vh;
     .title {
         color: #fff9f5;
         margin-bottom: 2rem;
@@ -11,8 +12,19 @@
 
 @media all and (max-width:480px) {
     .messages-page{
-        padding: 1rem 1rem;
+        padding: 1rem 1rem 10vh;
         height: 85vh;
+        overflow-y: scroll;
+    }
+}
+
+@media all and (min-width:991px) {
+    .messages-page{
+        min-height: auto;
+        width: 30%;
+        height: 100%;
+        padding: 0;
+        background-color: #EADDD4;
         overflow-y: scroll;
     }
 }

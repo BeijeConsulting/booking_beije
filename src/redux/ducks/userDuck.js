@@ -31,12 +31,12 @@ const INIT_STATE = {
  * @param  {funnction} action
  * @returns {object} return the state with the new value
  */
-export default async function userDuck(state = INIT_STATE, action) {
+export default function userDuck(state = INIT_STATE, action) {
     var newState;
     switch (action.type) {
         case SET_USER:
             newState = Object.assign({}, state);
-            await myProfilesGetApi(getLocalStorage('token')).then(res => newState.user = res.data);
+            myProfilesGetApi(getLocalStorage('token')).then(res => newState.user = res.data);
             
             return newState;
 
