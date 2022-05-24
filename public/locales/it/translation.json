@@ -114,7 +114,9 @@
                "accepted": "Accettate",
                "pending": "In attesa",
                "rejected": "Rifiutate",
-               "calendar": "Calendario"
+               "calendar": "Calendario",
+               "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
+               "confirmReservationDelete": "Conferma eliminazione"
             },
             "structure": {
                "structureListTitle": "Lista strutture",

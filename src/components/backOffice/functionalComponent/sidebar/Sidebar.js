@@ -3,6 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../routes/routes";
 
+import { eventBus } from "../../../../eventBus/eventBus";
+
 //ANT Design
 import { Menu } from "antd";
 
@@ -58,7 +60,7 @@ const Sidebar = () => {
             key: "4",
             icon: <FontAwesomeIcon icon={faWallet} />,
             label: t("bo.components.sidebar.payments"),
-            // onClick: () => goTo(),
+            onClick: () => eventBus.onDispatch('prova', {}),
           },
         ]}
       />
