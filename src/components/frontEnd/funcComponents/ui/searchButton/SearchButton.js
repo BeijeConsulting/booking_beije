@@ -8,7 +8,7 @@ import './SearchButton.less';
 // components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import SearchForm from '../../../classComponents/pageComponents/searchForm/SearchForm';
+import SearchForm from '../../../classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm';
 
 const SearchButton = ({callback, classCustom}) => {
   

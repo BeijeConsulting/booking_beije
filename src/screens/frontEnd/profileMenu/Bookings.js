@@ -19,6 +19,8 @@ import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //css
 import './profileMenuCSS/Bookings.less';
+import Modal from '../../../components/common/modal/Modal';
+import Rate from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/rate/Rate";
 
 
 
@@ -29,6 +31,7 @@ const Bookings = (props) => {
 
   const [state, setState] = useState({
     PeriodListStructure: [],
+    isOpen: false
   })
 
   const dateCurrent = CurrentDate();
@@ -39,6 +42,7 @@ const Bookings = (props) => {
         decryptItem(props.tokenDuck?.token)).then(res => {
           arrayBkp = res.data.length > 0 ? res.data : [];
           setState({
+            ...state,
             PeriodListStructure: arrayBkp.filter((item) => {
               return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
             })
@@ -87,11 +91,27 @@ const Bookings = (props) => {
     })
   }
 
+  const handleClose = () => {
+    setState({
+      ...state,
+      isOpen: !state.isOpen
+    })
+  }
+
   return (
     <div className="bookings-page">
       <Helmet>
         <title>{t("common.bookings")}</title>
       </Helmet>
+      <button onClick={() => setState({
+        ...state,
+        isOpen: !state.isOpen
+      })}>bau</button>
+      <Modal 
+      callback={handleClose} 
+      isOpen={state.isOpen}>
+        <Rate />
+      </Modal>
       <h1 className="bookings-title">{t("common.bookings")}</h1>
 
       <div className="button_switch_container display">
