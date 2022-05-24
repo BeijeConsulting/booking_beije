@@ -1,12 +1,23 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import withRouting from '../../../../../../withRouting/withRouting';
+
+// modules
 import { t } from 'i18next';
+import withRouting from '../../../../../../withRouting/withRouting';
+
+
+// components
 import FormInput from '../../../../funcComponents/ui/input/formInput/FormInput';
 import TextArea from '../../../../hookComponents/ui/textArea/TextArea';
 import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
+
+// api
 import { reviewPostApi } from '../../../../../../services/api/recensioni/recensioniApi';
+
+// utils
 import { getLocalStorage } from '../../../../../../utils/localStorage/localStorage';
+
+// fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';

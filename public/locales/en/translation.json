@@ -37,6 +37,7 @@
       "password": "Password",
       "passwordConfirm": "Confirm password",
       "photos": "Photos",
+      "price": "Price",
       "rate":"Rate",
       "registerLabel": "Register",
       "registration": "Registration",
@@ -199,7 +200,11 @@
             "alarm": "Alarm"
          }
       },
-      "modals": {},
+      "modals": {
+         "filter": {
+            "apply": "Apply filters"
+         }
+      },
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"

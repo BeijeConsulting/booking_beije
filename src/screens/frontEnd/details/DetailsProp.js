@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { strutturaDetailIdGetApi } from "../../../services/api/struttura/strutturaApi";
 
 //localstorage
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,36 +26,31 @@ import Service from '../../../components/frontEnd/services/Service';
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+import DetailsPropRoom from "./DetailsPropRoom";
 
 const DetailsProp = () => {
    const [state, setState] = useState({
       property: null,
       serviceList: null,
       roomsList: null,
-      isOpen: false
+      isContactHost: false,
+      isDetailsRoom: false
    })
    const { id } = useParams();
-   ;
+
    useEffect(() => {
-      strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzM4NDc4OCwiZXhwIjoxNjUzMzg4Mzg4fQ.G_ZfLvWtgxHZodUT7tQDBeiQyoMdDYBICnQguSBM-tg").then(res => {
-         console.log('data', res)
+      (async () => {
+         const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQwNDk5NCwiZXhwIjoxNjUzNDA4NTk0fQ.-KxYMOissoXNS0a-noRefEi283pF6ppHzAj3TsiWJCE")
+         const services = await serviceStruttureIdGetApi(id)
+         const rooms = await annuncioOnStrutturaGetApi(id)
+         console.log(properties, services, rooms)
          setState({
-            ...state,
-            property: res.data
+            property: properties?.data,
+            serviceList: services?.data,
+            roomsList: rooms?.data
          })
-      }).then(serviceStruttureIdGetApi(id).then(res => {
-         console.log('serices', res)
-         setState({
-            ...state,
-            serviceList: res.data
-         })
-      })).then(annuncioOnStrutturaGetApi(id).then(res => {
-         console.log('room', res.data)
-         setState({
-            ...state,
-            roomsList: res.data
-         })
-      }))
+         console.log(state)
+      })()
    }, [])
 
    const { t } = useTranslation();
@@ -72,18 +67,19 @@ const DetailsProp = () => {
 
       return <Rooms
          key={key}
-         numberOfPeople={state.roomsList?.numPostiLetto}
-         title={state.roomsList?.titolo}
-         price={state.roomsList?.prezzo}
+         numberOfPeople={4} //da modificare
+         title={item?.titolo}
+         price={item?.prezzo}
+         count={item?.count}
       /* services={} da far aggiungere a BE*/
       /* numberOfNights={} da far aggiungere a BE*/
       />
    }
 
-   const handleClose = () => {
+   const handleClose = (params) => () => {
       setState({
          ...state,
-         isOpen: !state.isOpen
+         [params]: false
       })
    }
 
@@ -93,14 +89,25 @@ const DetailsProp = () => {
          <Helmet>
             <title>{t("fe.screens.propertyDetails.details")}</title>
          </Helmet>
-
-   
+         <button
+            onClick={() => setState({ ...state, isDetailsRoom: true })}
+         >
+            bau
+         </button>
          <Modal
-            callback={handleClose}
-            isOpen={state.isOpen}
+            callback={handleClose('isContactHost')}
+            isOpen={state.isContactHost}
             classNameCustom={'modal contact-host-modal'}
          >
             <ContactHost />
+         </Modal>
+
+         <Modal
+            callback={handleClose("isDetailsRoom")}
+            isOpen={state.isDetailsRoom}
+            classNameCustom={'modal contact-host-modal'}
+         >
+            <DetailsPropRoom />
          </Modal>
 
          {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
