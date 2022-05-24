@@ -7,6 +7,7 @@ import "./PendingAnnounceList.less"
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+import { Button } from "antd";
 
 const PendingAnnounceList = () => {
     const obj = [
@@ -70,6 +71,14 @@ const renderPendingAnnounces = (announce, key) => {
         altText={`${key}_${announce.title}`}
         title={announce.title}
         text={announce.text}
+        
+        /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
+        footerContent={
+            <>
+                <Button type="primary">Accept</Button>
+                <Button type="primary">Decline</Button>
+            </>
+        }
     />
 }
 export default PendingAnnounceList;

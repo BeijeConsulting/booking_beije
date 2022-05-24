@@ -59,6 +59,9 @@ const StructureOperation = () => {
     console.log("Success:", values);
     setState({ ...state, values });
     // CONTROLLARE, IMMAGINI NON GESTITE
+    /* {
+               structurePut(state.values.data ) 
+                 */
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -99,9 +102,8 @@ const StructureOperation = () => {
         >
           <div>
             <GoBackButton />
-            <h1>{`${
-              location.state.idStructure === null ? "Inserisci" : "Modifica"
-            } Annuncio`}</h1>
+            <h1>{`${location.state.idStructure === null ? "Inserisci" : "Modifica"
+              } Annuncio`}</h1>
           </div>
 
           <Form.Item
