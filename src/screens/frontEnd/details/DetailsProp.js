@@ -33,26 +33,19 @@ const DetailsProp = () => {
   })
   const { id } = useParams();
   ;
+
   useEffect(() => {
-    strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzM4NDc4OCwiZXhwIjoxNjUzMzg4Mzg4fQ.G_ZfLvWtgxHZodUT7tQDBeiQyoMdDYBICnQguSBM-tg").then(res => {
-      console.log('data', res)
+    (async () => {
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzM5NDUzNSwiZXhwIjoxNjUzMzk4MTM1fQ.7K9M9kooTBoAl0moPd7kyRtOBJWitZXP1h4hCknIlms")
+      const services = await serviceStruttureIdGetApi(id)
+      const rooms = await annuncioOnStrutturaGetApi(id)
       setState({
-        ...state,
-        property: res.data
+        property: properties?.data,
+        serviceList: services?.data,
+        roomsList: rooms?.data
       })
-    }).then(serviceStruttureIdGetApi(id).then(res => {
-      console.log('serices', res)
-      setState({
-        ...state,
-        serviceList: res.data
-      })
-    })).then(annuncioOnStrutturaGetApi(id).then(res => {
-      console.log('room', res.data)
-      setState({
-        ...state,
-        roomsList: res.data
-      })
-    }))
+      console.log(state)
+    })()
   }, [])
 
   const { t } = useTranslation();
@@ -78,7 +71,6 @@ const DetailsProp = () => {
   }
   return (
     <>
-      {console.log(state)}
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
