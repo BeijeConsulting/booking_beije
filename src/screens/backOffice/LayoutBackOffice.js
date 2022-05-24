@@ -4,12 +4,16 @@ import { useLocation } from "react-router-dom";
 
 // import { eventBus } from "../../eventBus/eventBus";
 
-import './LayoutBackOffice.scss'
+import "./LayoutBackOffice.scss";
 
 import { Layout, Button, Grid } from "antd";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faAngleRight,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 import Sidebar from "../../components/backOffice/functionalComponent/sidebar/Sidebar";
 
@@ -23,16 +27,15 @@ const { Header, Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
-  const [state, setState] = useState({collapsed: false});
+  const [state, setState] = useState({ collapsed: false });
 
   useEffect(() => {
     // eventBus.onListening('prova', toggleSidebar)
 
-
     return () => {
       // eventBus.onRemoveEventListener('prova')
-    }
-  }, [state.collapsed])
+    };
+  }, [state.collapsed]);
 
   const location = useLocation();
   const screens = useBreakpoint();
@@ -50,8 +53,25 @@ const LayoutBackOffice = () => {
   };
 
   const toggleSidebar = () => {
-    setState({...state, collapsed: !state.collapsed})
+    setState({ ...state, collapsed: !state.collapsed });
   };
+
+  const routeWithoutSidebar = () => {
+    // if(location.pathname.replaceAll("/", "") !== "dashboard"){
+    //   return true
+    // }
+
+    switch (location.pathname.replaceAll("/", "")) {
+      case "dashboard":
+        return false
+      case "dashboardhost-registration":
+        return false
+      default:
+        console.log(location.pathname.replaceAll("/", ""));
+        return true;
+    }
+
+  }
 
   return (
     <Layout>
@@ -60,7 +80,7 @@ const LayoutBackOffice = () => {
         style={{ padding: 0 }}
       ></Header>
       <Layout>
-        {location.pathname.replaceAll("/", "") !== "dashboard" &&
+        { routeWithoutSidebar() &&
           getBreakPoint() && (
             <Sider
               trigger={null}
@@ -86,6 +106,26 @@ const LayoutBackOffice = () => {
               </Button>
 
               <Sidebar />
+              <Button
+                style={{
+                  backgroundColor: "#44403c",
+                  border: "none",
+                  paddingLeft: `${state.collapsed ? "" : "24px"}`,
+                  position: "absolute",
+                  bottom: 5
+
+                }}
+                type="primary"
+                onClick={() => console.log("Logout")}
+                block={state.collapsed ? true : false}
+              >
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className={"trigger"}
+                  inverse
+                />
+                <span className={`logoutButton ${!state.collapsed ? "visible" : "hide"}`} >Logout</span>
+              </Button>
             </Sider>
           )}
 
@@ -95,10 +135,10 @@ const LayoutBackOffice = () => {
             margin: "24px 16px",
             padding: 24,
             minHeight: "70vh",
-            width: "calc(100% - 200px)",
+            // width: "calc(100% - 200px)",
           }}
         >
-          {location.pathname.replaceAll("/", "") !== "dashboard" ? (
+          {location.pathname.replaceAll("/", "") !== "dashboard"  ? (
             <Outlet />
           ) : (
             <p>Pannello da fare</p>

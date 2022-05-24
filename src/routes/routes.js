@@ -43,10 +43,10 @@ const routes = {
 
 let routesDetails = {
     singleConversation: function (params) {
-        return `singleconversation / ${params}`
+        return `singleconversation/${params}`
     },
     singleConversationMobile: function (params) {
-        return `singleconversation/${params}`
+        return `/singleconversation/${params}`
     },
     detailProperty: function (params) {
         return `detailsproperty/${params} `

@@ -48,7 +48,7 @@ function Settings(props) {
   },
   {
     name: t("common.messages"),
-    path: 'messages',
+    path: window.innerWidth < 991 ? 'messages' : 'chat',
     icon: faCommentAlt
   },
 
