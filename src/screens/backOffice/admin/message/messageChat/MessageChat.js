@@ -20,7 +20,7 @@ import {
 } from 'antd';
 
 //STYLE
-import './messageChat.less'
+import './messageChat.scss'
 
 //COMPONENTS
 import MessageCard from '../../../components/backOffice/hookComponents/MessageCard/MessageCard'

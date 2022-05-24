@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 
-import { eventBus } from "../../eventBus/eventBus";
+// import { eventBus } from "../../eventBus/eventBus";
+
+import './LayoutBackOffice.scss'
 
 import { Layout, Button, Grid } from "antd";
 

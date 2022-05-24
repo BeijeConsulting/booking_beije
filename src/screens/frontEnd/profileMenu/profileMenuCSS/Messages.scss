@@ -1,0 +1,31 @@
+@import "../../../../assets/variables/globalVariables.scss";
+.messages-page {
+    background-color: #44403c;
+    color: $white_primary;
+    padding: 1rem 1rem;
+    overflow-y: scroll;
+    min-height: 90vh;
+    .title {
+        color: $white_primary;
+        margin-bottom: 2rem;
+    }
+}
+
+@media all and (max-width:480px) {
+    .messages-page{
+        padding: 1rem 1rem 10vh;
+        height: 85vh;
+        overflow-y: scroll;
+    }
+}
+
+@media all and (min-width:991px) {
+    .messages-page{
+        min-height: auto;
+        width: 30%;
+        height: 100%;
+        padding: 0;
+        background-color: $secondary_lighter;
+        overflow-y: scroll;
+    }
+}

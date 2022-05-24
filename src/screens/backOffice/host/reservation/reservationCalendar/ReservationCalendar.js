@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 // import propTypes from './prop-types'
 
 //STYLE
-import './ReservationCalendar.less'
+import './ReservationCalendar.scss'
 
 //Transition
 import { useTranslation } from 'react-i18next'

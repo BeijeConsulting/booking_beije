@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 //Style
-import "./StructureDetails.less"
+import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'antd';

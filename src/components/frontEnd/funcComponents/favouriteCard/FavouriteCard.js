@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './FavouriteCard.less'
+import './FavouriteCard.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';

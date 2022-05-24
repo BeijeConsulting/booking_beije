@@ -32,7 +32,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="logo" />
       <Menu
         theme="dark"
         mode="inline"

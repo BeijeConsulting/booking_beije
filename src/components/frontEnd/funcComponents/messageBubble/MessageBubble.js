@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 // style
-import './MessageBubble.less';
+import './MessageBubble.scss';
 
 
 function MessageBubble(props) {

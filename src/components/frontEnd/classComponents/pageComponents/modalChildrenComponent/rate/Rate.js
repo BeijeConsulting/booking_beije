@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';
 
-import './Rate.less';
+import './Rate.scss';
 
 
 

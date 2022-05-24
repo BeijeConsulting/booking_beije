@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.4.3",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
@@ -15,7 +14,6 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.20.4",
     "axios": "^0.27.2",
-    "craco-less": "^2.0.0",
     "crypto-js": "^4.1.1",
     "framer-motion": "^6.3.3",
     "i18next-browser-languagedetector": "^6.1.4",
@@ -31,12 +29,13 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.52.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

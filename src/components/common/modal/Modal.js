@@ -2,7 +2,7 @@ import React from "react";
 import ReactPortal from "../reactPortal/ReactPortal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import "./Modal.less";
+import "./Modal.scss";
 import PropTypes from "prop-types";
 function Modal({ classNameCustomParent, closeBtn, modalContent, classNameCustom, children, isOpen, callback }) {
     if (!isOpen) return null;
