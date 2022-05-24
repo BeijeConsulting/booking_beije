@@ -109,6 +109,9 @@
             "services": "services",
             "rooms": "Rooms",
             "rules": "Rules"
+         },
+         "uploadPhoto": {
+            "upload": "upload"
          }
       },
       "modals": {},

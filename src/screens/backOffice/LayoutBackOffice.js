@@ -21,17 +21,16 @@ const { Header, Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
-  const [state, setState] = useState({
-    collapsed: false,
-  });
+  const [state, setState] = useState({collapsed: false});
 
   useEffect(() => {
-    eventBus.onListening('prova', () => toggleSidebar())
+    // eventBus.onListening('prova', toggleSidebar)
+
 
     return () => {
-      eventBus.onRemoveEventListener('prova')
+      // eventBus.onRemoveEventListener('prova')
     }
-  }, [])
+  }, [state.collapsed])
 
   const location = useLocation();
   const screens = useBreakpoint();
@@ -48,13 +47,8 @@ const LayoutBackOffice = () => {
     return checkOther;
   };
 
-  
-
   const toggleSidebar = () => {
-    setState({
-      ...state,
-      collapsed: !state.collapsed,
-    });
+    setState({...state, collapsed: !state.collapsed})
   };
 
   return (

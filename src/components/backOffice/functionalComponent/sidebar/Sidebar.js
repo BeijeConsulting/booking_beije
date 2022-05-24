@@ -60,7 +60,7 @@ const Sidebar = () => {
             key: "4",
             icon: <FontAwesomeIcon icon={faWallet} />,
             label: t("bo.components.sidebar.payments"),
-            onClick: () => eventBus.onDispatch('prova', {}),
+            // onClick: () => eventBus.onDispatch('prova', {}),
           },
         ]}
       />

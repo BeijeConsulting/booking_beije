@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import moment from "moment";
 
+import {routes} from '../../../../../routes/routes'
+
 import {
   Form,
   Input,
@@ -101,7 +103,7 @@ const StructureOperation = () => {
           }}
         >
           <div>
-            <GoBackButton />
+            <GoBackButton route={`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`} />
             <h1>{`${location.state.idStructure === null ? "Inserisci" : "Modifica"
               } Annuncio`}</h1>
           </div>
