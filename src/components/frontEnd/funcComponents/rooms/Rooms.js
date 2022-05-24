@@ -29,6 +29,14 @@ function Rooms(props) {
         }
         return userIcon
     }
+    const generateMaxRooms = () => {
+        let arrayData = []
+        for (let index = 1; index < props.count + 1; index++) {
+            arrayData.push(index)
+        }
+        console.log('select', props.count, arrayData)
+        return arrayData;
+    }
     /* The following css class structure is optimized to be used with flex */
     return (
         <div className='rooms_card_container'>
@@ -50,7 +58,7 @@ function Rooms(props) {
                         label={t("common.select")}
                     />
                     <UiSelect
-                        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+                        data={generateMaxRooms()} />
                 </div>
             </div>
         </div>
