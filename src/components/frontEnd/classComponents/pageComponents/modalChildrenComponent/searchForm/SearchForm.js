@@ -18,7 +18,7 @@ import withRouting from '../../../../../../withRouting/withRouting';
 import { routes } from '../../../../../../routes/routes';
 
 // styles
-import './SearchForm.less';
+import './SearchForm.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
 import { eventBus } from '../../../../../../eventBus/eventBus';
 

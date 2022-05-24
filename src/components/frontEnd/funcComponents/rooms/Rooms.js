@@ -1,5 +1,5 @@
 import React from 'react'
-import './Rooms.less';
+import './Rooms.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faInfoCircle, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';

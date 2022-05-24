@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import Helmet from 'react-helmet';
 
 // styles
-import './profileMenuCSS/Favourites.less';
+import './profileMenuCSS/Favourites.scss';
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 // utils

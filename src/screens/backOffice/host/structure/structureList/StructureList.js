@@ -1,5 +1,5 @@
 //STYLE
-import "./StructureList.less";
+import "./StructureList.scss";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";

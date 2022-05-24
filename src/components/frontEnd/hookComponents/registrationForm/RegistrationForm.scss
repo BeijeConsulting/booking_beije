@@ -1,0 +1,99 @@
+@import "../../../../assets/variables/globalVariables.scss";
+
+.bg-color {
+   background-color: $black_primary;
+}
+
+.form-container {
+   max-width: 350px;
+   margin: auto;
+   padding: 0 1rem;
+}
+
+.container {
+   min-height: 100vh;
+}
+
+.column {
+   flex-direction: column;
+}
+
+.flex {
+   display: flex;
+}
+
+.center {
+   justify-content: center;
+   align-items: center;
+}
+
+.color {
+   background-color: $black_primary;
+}
+
+.w {
+   color: $white_primary;
+}
+
+.txt {
+   text-align: center;
+}
+
+.btn-primary {
+   background-color: $primary;
+   color: $white_primary;
+   margin: 0;
+   border: none;
+   border-radius: 7px;
+   width: 100px;
+   padding: 0.3rem;
+}
+
+.btn-secondary {
+   border: none;
+   background: none;
+   color: $white_primary;
+}
+
+.button-link:hover {
+   cursor: pointer;
+   text-decoration: underline;
+}
+
+.bottom {
+   vertical-align: middle;
+}
+
+.form-container {
+   display: flex;
+   flex-direction: column;
+}
+
+.form-container input.right-margin {
+   margin-right: 0.2rem;
+}
+
+.form-container input {
+   color: $black_primary;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+   border: none;
+   border-radius: 0.3rem;
+   margin: 0.5rem 0;
+   padding: 0.5rem;
+}
+
+.custom-toast {
+   background: $white_primary;
+   color: $error_color;
+}
+
+.custom-toast:hover {
+   cursor: pointer;
+}
+
+.info-toast {
+   color: $black_primary;
+}

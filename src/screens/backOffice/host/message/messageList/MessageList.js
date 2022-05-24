@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'
 
 //STYLE
-import './MessageList.less';
+import './MessageList.scss';
 
 //COMPONENTS
 import CardList from '../../../../../components/backOffice/hookComponents/cardList/CardList';

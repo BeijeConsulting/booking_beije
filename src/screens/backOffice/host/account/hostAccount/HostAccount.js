@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 
-import "./HostAccount.less"
+import "./HostAccount.scss"
 
 // COMPONENTS
 import { Button, Input, Form } from "antd";

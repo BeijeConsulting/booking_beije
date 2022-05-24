@@ -1,5 +1,5 @@
 import React from 'react'
-import './UiButton.less'
+import './UiButton.scss'
 import PropTypes from 'prop-types';
 
 

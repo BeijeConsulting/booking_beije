@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./UploadFoto.less";
+import "./UploadFoto.scss";
 
 //ANT DESIGN
 import { Upload, Modal } from "antd";

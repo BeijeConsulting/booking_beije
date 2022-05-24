@@ -1,5 +1,5 @@
 import React from "react";
-import './Registration.less';
+import './Registration.scss';
 import RegistrationForm from '../../../components/frontEnd/hookComponents/registrationForm/RegistrationForm';
 
 const Registration = () => {

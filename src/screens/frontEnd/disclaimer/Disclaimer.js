@@ -1,5 +1,5 @@
 import React from 'react'
-import './Disclaimer.less'
+import './Disclaimer.scss'
 
 function Disclaimer() {
     return (

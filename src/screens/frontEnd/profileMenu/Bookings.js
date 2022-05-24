@@ -18,7 +18,7 @@ import { decryptItem } from "../../../utils/crypto/crypto";
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //css
-import './profileMenuCSS/Bookings.less';
+import './profileMenuCSS/Bookings.scss';
 import Modal from '../../../components/common/modal/Modal';
 import Rate from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/rate/Rate";
 

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { routes } from '../../../../routes/routes';
 
 //import {postApi} from '../../../../services/genericServices';
-import './LoginForm.less'
+import './LoginForm.scss'
 import { useTranslation } from 'react-i18next';
 
 //api

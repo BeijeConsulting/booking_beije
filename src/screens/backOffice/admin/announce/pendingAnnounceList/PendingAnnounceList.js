@@ -1,7 +1,7 @@
 import React from "react";
 
 //STYLE
-import "./PendingAnnounceList.less"
+import "./PendingAnnounceList.scss"
 
 //COMPONENTS
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";

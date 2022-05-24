@@ -17,7 +17,7 @@ import { initUser } from "../../../redux/ducks/userDuck";
 import { initToken } from "../../../redux/ducks/tokenDuck";
 
 // style
-import './profileMenuCSS/Settings.less';
+import './profileMenuCSS/Settings.scss';
 
 // utils
 import { removeLocalStorage } from "../../../utils/localStorage/localStorage";

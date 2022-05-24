@@ -2,7 +2,7 @@ import React from 'react'
 // import PropTypes from "prop-types";
 
 //LESS
-import './MessageCard.less'
+import './MessageCard.scss'
 
 function MessageCard(props) {
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import './ReviewCard.less';
+import './ReviewCard.scss';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
