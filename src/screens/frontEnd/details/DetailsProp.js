@@ -35,9 +35,21 @@ const DetailsProp = () => {
     isOpen: false
   })
   const { id } = useParams();
-  ;
 
-
+  useEffect(() => {
+    (async () => {
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQwNDk5NCwiZXhwIjoxNjUzNDA4NTk0fQ.-KxYMOissoXNS0a-noRefEi283pF6ppHzAj3TsiWJCE")
+      const services = await serviceStruttureIdGetApi(id)
+      const rooms = await annuncioOnStrutturaGetApi(id)
+      console.log(properties, services, rooms)
+      setState({
+        property: properties?.data,
+        serviceList: services?.data,
+        roomsList: rooms?.data
+      })
+      console.log(state)
+    })()
+  }, [])
 
   const { t } = useTranslation();
 
@@ -53,9 +65,10 @@ const DetailsProp = () => {
 
     return <Rooms
       key={key}
-      numberOfPeople={item?.numPostiLetto}
+      numberOfPeople={4} //da modificare
       title={item?.titolo}
       price={item?.prezzo}
+      count={item?.count}
     /* services={} da far aggiungere a BE*/
     /* numberOfNights={} da far aggiungere a BE*/
     />
