@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import withRouting from '../../../../../../withRouting/withRouting';
 import { t } from 'i18next';
@@ -83,7 +83,6 @@ class Rate extends Component {
       } else {
          newState.isDisable = true;
       }
-      console.log(newState);
       this.setState(newState);
    }
 
