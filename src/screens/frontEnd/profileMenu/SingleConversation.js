@@ -8,7 +8,7 @@ import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import { useTranslation } from 'react-i18next';
 
 //LESS
-import './profileMenuCSS/SingleConversation.less'
+import './profileMenuCSS/SingleConversation.scss'
 
 //CONNECT
 import { connect } from 'react-redux'
@@ -157,13 +157,13 @@ const SingleConversation = (props) => {
             <>
               <div className='back-button'><GoBackButton /></div>
 
-              <h1 className='title'>{state?.msgArray[0]?.insertion?.titolo}</h1>
+              <h1 className='title'>{state.msgArray[0].insertion.titolo}</h1>
             </>
           }
 
 
           {
-            state?.msgArray.map(renderConversation)
+            state.msgArray.map(renderConversation)
           }
           <span ref={myRef}></span>
         </div>

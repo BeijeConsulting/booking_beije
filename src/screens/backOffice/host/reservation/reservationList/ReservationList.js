@@ -23,7 +23,7 @@ import { routes } from "../../../../../routes/routes";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 //STYLE
-import "./ReservationList.less";
+import "./ReservationList.scss";
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";

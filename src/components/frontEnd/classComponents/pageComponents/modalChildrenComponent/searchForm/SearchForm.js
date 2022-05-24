@@ -18,7 +18,7 @@ import withRouting from '../../../../../../withRouting/withRouting';
 import { routes } from '../../../../../../routes/routes';
 
 // styles
-import './SearchForm.less';
+import './SearchForm.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
 import { eventBus } from '../../../../../../eventBus/eventBus';
 
@@ -66,7 +66,6 @@ class SearchForm extends Component {
       let [latitude, longitude] = this.props.positionDuck.coordinates;
       this.bookingData.latitudine = latitude;
       this.bookingData.longitudine = longitude;
-      console.log(this.bookingData);
       // getStructuresBySearch(this.bookingData).then(res =>
       //    this.props.router.navigate(routes.SEARCH, {
       //       state: res?.data

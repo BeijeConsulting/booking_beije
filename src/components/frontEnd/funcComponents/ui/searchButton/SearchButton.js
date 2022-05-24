@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { t } from 'i18next';
 
 // style
-import './SearchButton.less';
+import './SearchButton.scss';
 
 // components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
