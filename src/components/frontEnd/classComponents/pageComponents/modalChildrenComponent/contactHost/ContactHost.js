@@ -21,11 +21,7 @@ class ContactHost extends Component {
       super(props)
       this.state = {
          isDisable: true,
-         clickedStar: 0,
          property: {
-            checkin: "10-10-10",
-            checkout: "11-11-10",
-            descrizione: "descxrizione",
             host: {
                id: 0,
                user: {
@@ -34,60 +30,24 @@ class ContactHost extends Component {
                }
             },
             id: 0,
-            indirizzo: {
-               cap: "string",
-               citta: "Pippo",
-               disable_date: "2022-05-24T08:03:57.469Z",
-               id: 0,
-               latitudine: 0,
-               longitudine: 0,
-               numero_civico: "string",
-               provincia: "string",
-               stato: "Italia",
-               struttura_id: 0,
-               utente_id: 0,
-               via: "string"
-            },
-            media_recensioni: 0,
             nome_struttura: "string",
             numero_recensioni: 0,
          }
       }
-      this.rating = {
+      this.contactForm = {
          title: "",
          message: "",
-         rate: 0
       }
-      this.map = [1, 2, 3, 4, 5];
-   }
-
-
-   componentDidMount() {
-      // this.setState({
-      //     property: 
-      // })
-      //chiamata api
    }
 
    handleSubmit = async (e) => {
       e.preventDefault();
-      await reviewPostApi(this.rating, getLocalStorage('token'));
+      await reviewPostApi(this.contactForm, getLocalStorage('token'));
    }
 
    handleChange = (params) => (e) => {
-      this.rating[params] = e;
+      this.contactForm[params] = e;
    }
-
-   handleRate = (value) => (e) => {
-      this.setState({ clickedStar: value });
-      this.rating.rate = value;
-   }
-
-   handleMap = (item, key) => {
-      return <FontAwesomeIcon key={key} icon={key < this.state.clickedStar ? faStar : faStarOutlined} onClick={this.handleRate(item)} />
-   }
-
-
 
    render() {
 
