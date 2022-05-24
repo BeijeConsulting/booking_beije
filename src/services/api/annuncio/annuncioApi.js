@@ -15,7 +15,7 @@ const annuncioDetailGetApi = async (id) => {
 }
 
 const annuncioOnStrutturaGetApi = async (id) => {
-    return await getApi(`annuncio/${id}`);
+    return await getApi(`annuncio/struttura/${id}`);
 }
 
 /* AUTH:HOST */
