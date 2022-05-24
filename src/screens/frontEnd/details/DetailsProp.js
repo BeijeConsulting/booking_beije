@@ -36,7 +36,7 @@ const DetailsProp = () => {
 
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzM5NDUzNSwiZXhwIjoxNjUzMzk4MTM1fQ.7K9M9kooTBoAl0moPd7kyRtOBJWitZXP1h4hCknIlms")
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQwMjcwMywiZXhwIjoxNjUzNDA2MzAzfQ.0Z5JdEoek4fGveUyb2lTa4lcrDTZv7N9mx0xglFUTis")
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       setState({
@@ -62,15 +62,17 @@ const DetailsProp = () => {
 
     return <Rooms
       key={key}
-      numberOfPeople={state.roomsList?.numPostiLetto}
-      title={state.roomsList?.titolo}
-      price={state.roomsList?.prezzo}
+      numberOfPeople={4}/* da modificare */
+      title={item?.titolo}
+      price={item?.prezzo}
+      count={item?.count}
     /* services={} da far aggiungere a BE*/
     /* numberOfNights={} da far aggiungere a BE*/
     />
   }
   return (
     <>
+      {console.log(state)}
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
