@@ -6,21 +6,21 @@ import { t } from "i18next";
 // import { getStructuresBySearch } from '../../../../../services/api/search/searchApi';
 
 // components
-import FormButton from '../../../funcComponents/ui/buttons/formButton/FormButton';
-import SearchPlace from '../../../hookComponents/ui/searchPlace/SearchPlace';
+import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
+import SearchPlace from '../../../../hookComponents/ui/searchPlace/SearchPlace';
 import { DatePicker, Space, } from 'antd';
 
 // redux
 import { connect } from 'react-redux';
 
 // router dom
-import withRouting from '../../../../../withRouting/withRouting';
-import { routes } from '../../../../../routes/routes';
+import withRouting from '../../../../../../withRouting/withRouting';
+import { routes } from '../../../../../../routes/routes';
 
 // styles
 import './SearchForm.less';
-import InputGuest from '../../../hookComponents/ui/inputGuest/InputGuest';
-import { eventBus } from '../../../../../eventBus/eventBus';
+import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
+import { eventBus } from '../../../../../../eventBus/eventBus';
 
 const arrTest = [
    { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },

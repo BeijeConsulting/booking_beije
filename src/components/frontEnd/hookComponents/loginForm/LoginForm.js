@@ -33,7 +33,6 @@ let formObject = {
 
 let errors = {
    email: false,
-   password: false
 }
 
 function LoginForm(props) {
@@ -76,15 +75,12 @@ function LoginForm(props) {
          openNotification(t('toasts.formErrorEmail'), 'email');
       }
 
-      if (!checkPassword(formObject.password)) {
-         errors['password'] = true;
-         openNotification(t('toasts.formErrorPassword'), 'password');
-      }
+    
 
 
       value.length === 0 ? errors[name] = true : errors[name] = false;
 
-      if (checkPassword(formObject.password) && checkMail(formObject.email))
+      if (checkMail(formObject.email))
       setState({
          ...state,
          isDisable: false
