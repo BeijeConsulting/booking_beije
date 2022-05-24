@@ -1,6 +1,8 @@
+@import "../../../../assets/variables/globalVariables.less";
+
 footer{
-    background-color: #FFF9F5;
-    color: #44403C;
+    background-color: @white_primary;
+    color: @black_primary;
     padding: 4vh 7vw;
     .container_links_footer{
         display: flex;
@@ -19,7 +21,7 @@ footer{
     .disclaimer_container_footer{
         margin-top: 2rem;
         font-size: x-small;
-        color: #44403C;
+        color: @black_primary;
         span{
             font-style: italic;
         }
@@ -28,10 +30,10 @@ footer{
         }
     }
     .becomeHost {
-        background-color: #2A8BA8;
+        background-color: @primary;
         padding: 0.5rem;
         width: 200px;
-        color: white;
+        color: @white_primary;
         border-radius: 2rem;
         border: none;
         font-size: 1.2rem;
