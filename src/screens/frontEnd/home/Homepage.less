@@ -1,29 +1,31 @@
-.home{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #44403C;
+@import "../../../assets/variables/globalVariables.less";
 
-    div{
-        position: relative;
-        
-        h3 {
-            position: absolute;
-            top: 55%;
-            left: 25%;
-            color: #fff;
-            text-shadow: 1px 1px 4px #44403C;
-        }
-    }
-    
-    img{
-        object-fit: cover;
-        padding: 1rem 0;
-        width: 80vw;
-        height: 60vw;
-    }
+.home {
+   overflow-y: scroll;
+   overflow-x: hidden;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   background-color: @black_primary;
+
+   .suggested-container {
+      position: relative;
+
+      h3 {
+         position: absolute;
+         top: 55%;
+         left: 25%;
+         color: @white_primary;
+         text-shadow: 1px 1px 4px @black_primary;
+      }
+   }
+
+   img {
+      object-fit: cover;
+      padding: 1rem 0;
+      width: 80vw;
+      height: 60vw;
+   }
 }

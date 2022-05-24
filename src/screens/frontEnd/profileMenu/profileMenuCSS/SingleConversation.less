@@ -1,16 +1,18 @@
+@import "../../../../assets/variables/globalVariables.less";
 .singleConversation-page {
-    background-color: #44403c;
+    background-color: @black_primary;
     height: 75vh;
     overflow-y: scroll;
-    min-height: 75vh;
+    min-height: 90vh;
     padding: 0 1rem 1rem;
-    color: #fff9f5;
+    color: @white_primary;
     display: flex;
     flex-direction: column;
+    width: 100%;
 
 
     .title {
-        color: #fff9f5;
+        color: @white_primary;
         margin-bottom: 2rem;
     }
     .container_messages{
@@ -18,7 +20,7 @@
         overflow-y: scroll;
     }
     .conversation {
-        color: #44403c;
+        color: @black_primary;
         padding: .5rem .8rem;
         margin: 1rem 0;
         border-radius: 1rem;
@@ -33,7 +35,7 @@
     }
 
     .conversation.conversation-host {
-        background-color: #fff9f5;
+        background-color: @white_primary;
 
         div {
             font-weight: 1000;
@@ -44,7 +46,7 @@
 
     .conversation.conversation-guest {
 
-        background-color: #d2b48c;
+        background-color: @secondary_dark;
         margin-left: 20%;
 
         div {
@@ -56,41 +58,60 @@
 
     .space-input {
         position: fixed;
-        bottom: 15vh;
+        bottom: 0vh;
         left: 0;
         margin-top: 15px;
         width: 100%;
         height: 10vh;
-        background-color: #44403c;
+        background-color: @black_primary;
     }
 
     .send_message_input {
-        /*    position: fixed;
-        bottom: 17vh;
-        left: 0; */
         border-radius: 10px;
         width: 100%;
         height: 7vh;
         padding: 1rem;
-        color: #44403C;
+        color: @black_primary;
     }
 
 }
 
-@media all and (min-width:481px) {
+@media all and (min-width :991px) {
     .singleConversation-page{
+        height: 100%;
+        min-height: auto;
         display: flex;
         flex-direction: column;
+        width: 70%;
         .container_messages {
-            height: auto;
+            height: 100%;
             overflow-y: none;
+            flex-grow: 1;
         }
         .space-input {
             position: unset;
             margin-top: 15px;
             width: 100%;
             height: 10vh;
-            background-color: #44403c;
+            background-color: @black_primary;
+        }
+    }
+}
+@media all and (max-width:480px) {
+    .singleConversation-page{
+        .container_messages{
+            height: 75vh;
+            overflow-y: scroll;
+        }
+
+        .space-input{
+            position: fixed;
+            bottom: 15vh;
+            left: 0;
+            margin-top: 15px;
+            width: 100%;
+            height: 10vh;
+            background-color: @black_primary;
         }
     }
 }

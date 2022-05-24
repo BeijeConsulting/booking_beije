@@ -16,6 +16,7 @@
       "backToHome": "Torna alla home",
       "bookings": "Prenotazioni",
       "category": "Categoria",
+      "change":"Cambia",
       "checkIn": "Check In",
       "checkOut": "Check Out",
       "description": "Descrizione",
@@ -24,14 +25,17 @@
       "home": "Home",
       "italian": "Italiano",
       "loginLabel": "Accedi",
+      "logout":"Esci",
       "messages": "Messaggi",
       "mra": "I più recensiti",
       "name": "Nome",
       "noMessages": "Non esistono messaggi...",
+      "noApartments":"Non ci sono appartamenti da mostrare",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
       "photos": "Foto",
+      "rate":"Recensione",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
       "rooms": "{{count}} stanza",
@@ -42,6 +46,7 @@
       "submit": "Invia",
       "surname": "Cognome",
       "termsConditions": "Termini e condizioni",
+      "update":"Aggiorna",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu",
       "address": "Indirizzo",
@@ -175,6 +180,7 @@
             "acceptTerms": "Accetto i termini e le condizioni"
          },
          "settings": {
+            
             "title": "Impostazioni",
             "settingsCard": {
                "account": "Account",

@@ -51,7 +51,7 @@ export function responseApiError(error) {
 export async function postApi(resource, obj, header = null) {
   return axiosInstance
     .post(resource, obj, {
-      headers: header !== null ? `"Authorization": Bearer ${header}` : "",
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
     .catch(responseApiError());

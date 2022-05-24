@@ -6,9 +6,11 @@ const routes = {
     REGISTRATION: '/registration',
 
     BOOKINGS: '/bookings',
+    CHAT: '/chat',
     FAVOURITES: '/favourites',
     MESSAGES: '/messages',
-    SINGLECONVERSATION: '/singleconversation',
+    SINGLECONVERSATIONMOBILE: '/singleconversation/:id',
+    SINGLECONVERSATION: 'singleconversation/:id',
     SETTINGS: 'settings',
     ACCOUNT: '/account',
 
@@ -19,7 +21,7 @@ const routes = {
     //all
     CHECKOUT: 'checkout',
     NOTFOUND: '*',
-    SEARCH: 'search',
+    SEARCH: '/search',
     MRA: 'mostreviewedBuilding',
     DISCLAIMER: 'disclaimer',
 

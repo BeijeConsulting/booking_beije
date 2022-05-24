@@ -1,8 +1,10 @@
+@import "../../../../assets/variables/globalVariables.less";
+
 .Account_container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #44403C;
+    background-color: @black_primary;
     height: 85vh;
 }
 
@@ -13,12 +15,12 @@
 
     .acc_logout {
         border: none;
-        background-color: #44403C;
-        color: white;
+        background-color: @black_primary;
+        color: @white_primary;
     }
 
     h1 {
-        color: white;
+        color: @white_primary;
     }
 
     button {
@@ -36,10 +38,10 @@
         justify-content: center;
 
         .update {
-            background-color: #2A8BA8;
+            background-color: @primary;
             padding: 0.5rem;
             width: 130px;
-            color: white;
+            color: @white_primary;
             border-radius: .5rem;
             border: none;
             font-size: 1.2rem;
@@ -50,7 +52,7 @@
 
     .penIcon {
         font-size: 20px;
-        background-color: #EADDD4;
+        background-color: @secondary_lighter;
         border: none;
         border-radius: 50%;
         height: 100px;
@@ -74,6 +76,6 @@
         border: 1px solid black;
         padding: .5rem;
         border-radius: 1rem;
-        background-color: #EADDD4;
+        background-color: @secondary_lighter;
     }
 }

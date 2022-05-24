@@ -31,10 +31,12 @@
       "mra": "Most reviewed apartments",
       "name": "Name",
       "noMessages": "No messages found",
+      "noApartments":"No apartments to show.",
       "or": "or",
       "password": "Password",
       "passwordConfirm": "Confirm password",
       "photos": "Photos",
+      "rate":"Rate",
       "registerLabel": "Register",
       "registration": "Registration",
       "rooms": "{{count}} room",
@@ -217,10 +219,10 @@
             "searchButton": "Search your destination"
          },
          "bookings": {
-            "history": "Storico",
-            "pending": "In attesa",
-            "planned": "Pianificati",
-            "refused": "Rifiutati"
+            "history": "History",
+            "pending": "Pending",
+            "planned": "Planned",
+            "refused": "Rejected"
          }
       }
    }

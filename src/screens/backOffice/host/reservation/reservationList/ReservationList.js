@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ChoiceButton from "../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard"
 
+//NAVIGATE
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../../../routes/routes";
+
 //ICON
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,10 +20,13 @@ import "./ReservationList.less"
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration"
+import Routing from "../../../../../Routing";
 
 
 const ReservationList = () => {
     const [state, setState] = useState([]) //state using for display announce categories
+
+    const navigate = useNavigate()
 
     const { t } = useTranslation()
 
@@ -53,7 +60,7 @@ const ReservationList = () => {
     ]
 
     const showCalendar = (e) => {
-
+        navigate(`/${routes.DASHBOARD}/${routes.RESERVATION_CALENDAR}`)
     }
 
     const showAccepted = () => {

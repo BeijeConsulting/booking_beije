@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation,useParams } from "react-router";
 // less 
 import './Layout.less'
 // Routes
@@ -17,7 +17,7 @@ const Layout = () => {
     })
     let vector = useNavigate();
     let location = useLocation();
-
+    let params = useParams()
     useEffect(() => {
         function handleResize() {
             setState({
@@ -34,7 +34,7 @@ const Layout = () => {
     })
 
     const checkPathForFooter = () => {
-        const arr = ['/settings', '/messages', '/singleconversation', '/favourites', '/account', '/bookings'];
+        const arr = ['/settings', '/messages', `/singleconversation/${params.id}`, '/favourites', '/account', '/bookings'];
 
         const pathFound = arr.some((path) => location.pathname === path)
 
@@ -44,13 +44,13 @@ const Layout = () => {
     return (
         <div className="layoutContainer">
             <Navbar stateLayout={state.windowWidth} />
-            <Outlet />
+            <Outlet/>
             {
-                state.windowWidth > 480 &&
+                state.windowWidth > 991 &&
                 <Footer link={LinksFooterGuest} />
             }
             {
-                (state.windowWidth < 480 && (!checkPathForFooter())) &&
+                (state.windowWidth < 992 && (!checkPathForFooter())) &&
                 <Footer link={LinksFooterGuest} />
             }
         </div>
