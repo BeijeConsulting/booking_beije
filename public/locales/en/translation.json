@@ -25,6 +25,7 @@
       "email": "Email",
       "english": "English",
       "home": "Home",
+      "insertTitle": "Insert title",
       "italian": "Italian",
       "loginLabel": "Login",
       "messages": "Messages",
@@ -110,6 +111,9 @@
             "services": "services",
             "rooms": "Rooms",
             "rules": "Rules"
+         },
+         "uploadPhoto": {
+            "upload": "upload"
          }
       },
       "modals": {},
@@ -138,7 +142,9 @@
                "accepted": "Accepted",
                "pending": "Pending",
                "rejected": "Rejected",
-               "calendar": "Calendar"
+               "calendar": "Calendar",
+               "confirmReservationDeleteMessage": "Are you sure you want to delete",
+               "confirmReservationDelete": "Confirm removal"
             },
             "structure": {
                "structureListTitle": "Structure list",

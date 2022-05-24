@@ -57,6 +57,7 @@ function Routing(props) {
             let token = getLocalStorage('token')
             props.dispatch(setToken(token))
             props.dispatch(setUser())
+            console.log(getLocalStorage('token'));
         }
         // setLocalStorage(
         //   "token",

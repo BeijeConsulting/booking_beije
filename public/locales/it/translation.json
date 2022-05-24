@@ -23,6 +23,7 @@
       "email": "Email",
       "english": "Inglese",
       "home": "Home",
+      "insertTitle": "Inserisci titolo",
       "italian": "Italiano",
       "loginLabel": "Accedi",
       "logout":"Esci",
@@ -86,7 +87,7 @@
             "structure": "Strutture",
             "payments": "Pagamenti"
          },
-         "uploadFoto": {
+         "uploadPhoto": {
             "upload": "Carica"
          }
       },
@@ -116,7 +117,9 @@
                "accepted": "Accettate",
                "pending": "In attesa",
                "rejected": "Rifiutate",
-               "calendar": "Calendario"
+               "calendar": "Calendario",
+               "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
+               "confirmReservationDelete": "Conferma eliminazione"
             },
             "structure": {
                "structureListTitle": "Lista strutture",
