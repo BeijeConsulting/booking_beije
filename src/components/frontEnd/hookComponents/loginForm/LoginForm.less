@@ -1,4 +1,8 @@
+@import "../../../../assets/variables/globalVariables.less";
+
+
 //all
+
 
 .column {
     flex-direction: column;
@@ -17,12 +21,12 @@
 }
 
 .color {
-    background-color: #44403C;
+    background-color: @black_primary;
 }
 
 //simple
 .w {
-    color: white;
+    color: @white_primary;
 }
 .txt{
     text-align: center;
@@ -33,8 +37,8 @@
 }
 
 .btn-primary {
-    background-color: #2A8BA8;
-    color: white;
+    background-color: @primary;
+    color: @white_primary;
     margin-bottom: 0.5rem;
     border: none;
     border-radius: 0.4rem;
@@ -44,10 +48,10 @@
 .btn-secondary{
     border: none;
     background: none;
-    color: white;
+    color: @white_primary;
 }
 
 a{
-    color: white;
+    color: @white_primary;
     text-decoration: underline;
 }

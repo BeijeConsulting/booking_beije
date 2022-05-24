@@ -99,8 +99,24 @@ const Bookings = (props) => {
       </div>
 
       <div className="apartment_container card-container">
-        {state.PeriodListStructure.length <= 0 ? <p>Non ci sono appartamenti da mostrare</p> : state.PeriodListStructure.map((item, key) => {
-          return <p key={key}>{item.annuncio.titolo}</p>
+        {state.PeriodListStructure.length <= 0 ? <p>{t("common.noApartments")}</p> : state.PeriodListStructure.map((item, key) => {
+          return (
+            <p key={key}>{item.annuncio.titolo}</p>
+            //         <div className="card-container">
+            //           <div className="card">
+            //             <div className="card-info">
+            //               <img src="{item.annuncio.url_image}" alt="card-img" />
+            //               <div className="card-info-info">
+            //                 <h1>{item.annuncio.titolo}</h1>
+            //                 <span>{item.annuncio.luogo}</span>
+            //                 <span>{item.annuncio.checkin}, {item.annuncio.checkout}</span>
+            //                 <button className="rate" onClick={openModal}>{t("common.rate")}</button>
+            //               </div>
+            //             </div>
+            //             <span className="price">{item.annuncio.prezzo}</span>
+            //           </div>
+            //         </div>
+          )
         })}
       </div>
     </div>
