@@ -94,15 +94,12 @@ const DetailsProp = () => {
             <title>{t("fe.screens.propertyDetails.details")}</title>
          </Helmet>
 
-         <button onClick={() => setState({
-            ...state,
-            isOpen: !state.isOpen
-         })}>open Contact Host modal</button>
+   
          <Modal
             callback={handleClose}
             isOpen={state.isOpen}
             classNameCustom={'modal contact-host-modal'}
-            >
+         >
             <ContactHost />
          </Modal>
 
