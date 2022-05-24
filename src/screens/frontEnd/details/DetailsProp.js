@@ -26,13 +26,15 @@ import Service from '../../../components/frontEnd/services/Service';
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+import DetailsPropRoom from "./DetailsPropRoom";
 
 const DetailsProp = () => {
    const [state, setState] = useState({
       property: null,
       serviceList: null,
       roomsList: null,
-      isOpen: false
+      isContactHost: false,
+      isDetailsRoom: false
    })
    const { id } = useParams();
    ;
@@ -80,27 +82,41 @@ const DetailsProp = () => {
       />
    }
 
-   const handleClose = () => {
+   const handleClose = (params) => () => {
       setState({
          ...state,
-         isOpen: !state.isOpen
+         [params]: false
       })
+      console.log(state);
    }
 
    return (
       <>
-         {console.log(state)}
          <Helmet>
             <title>{t("fe.screens.propertyDetails.details")}</title>
          </Helmet>
 
+
+         <button
+         onClick={() => setState({...state, isDetailsRoom: true})}
+         >
+            bau
+         </button>
    
          <Modal
-            callback={handleClose}
-            isOpen={state.isOpen}
+            callback={handleClose("isContactHost")}
+            isOpen={state.isContactHost}
             classNameCustom={'modal contact-host-modal'}
          >
             <ContactHost />
+         </Modal>
+
+         <Modal
+            callback={handleClose("isDetailsRoom")}
+            isOpen={state.isDetailsRoom}
+            classNameCustom={'modal contact-host-modal'}
+         >
+            <DetailsPropRoom />
          </Modal>
 
          {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">

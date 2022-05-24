@@ -18,7 +18,7 @@ const DetailsPropRoom = () => {
 
   useEffect(() => {
     annuncioDetailGetApi(14).then(res => {
-      console.log('1', res.data);
+      // console.log('1', res.data);
       setState({
         property: res.data
       })
