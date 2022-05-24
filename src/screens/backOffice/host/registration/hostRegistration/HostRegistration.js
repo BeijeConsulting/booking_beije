@@ -12,7 +12,7 @@ import { routes } from "../../../../../routes/routes"
 import { useTranslation } from 'react-i18next';
 
 //STYLE
-import "./HostRegistration.less"
+import "./HostRegistration.scss"
 
 const layout = {
     labelCol: {

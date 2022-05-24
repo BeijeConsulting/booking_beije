@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from 'react-i18next';
 
 // less 
-import './Navbar.less';
+import './Navbar.scss';
 
 import LanguagesSwitch from "../../../common/languagesSwitch/LanguagesSwitch";
 

@@ -1,0 +1,26 @@
+@import '../../assets/variables/_colors.scss';
+
+.ant-layout-sider {
+    background-color: $black_primary;
+}
+
+.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark {
+    background-color: $black_primary;
+}
+.ant-menu.ant-menu-root.ant-menu-vertical.ant-menu-dark.ant-menu-inline-collapsed{
+    background-color: $black_primary;
+}
+
+.ant-menu-item.ant-menu-item-selected {
+    background-color: $secondary !important;
+}
+
+.ant-layout{
+    background-color: $white_primary;
+}
+
+.ant-btn.ant-btn-primary{
+    background-color: $primary;
+    border: 0px;
+    border-radius: 0.5rem;
+}

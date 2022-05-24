@@ -1,5 +1,5 @@
 import React from 'react'
-import './SettingsCard.less'
+import './SettingsCard.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index';
 import { useNavigate } from 'react-router';
 import { routes } from '../../../../routes/routes';

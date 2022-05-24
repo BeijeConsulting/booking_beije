@@ -1,5 +1,5 @@
 import React from 'react'
-import './SearchInput.less'
+import './SearchInput.scss'
 import PropTypes from 'prop-types';
 
 

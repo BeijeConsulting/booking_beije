@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 // styles
-import './RegistrationForm.less';
+import './RegistrationForm.scss';
 
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';

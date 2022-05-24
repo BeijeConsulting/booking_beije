@@ -22,8 +22,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';
 
-// style
-import './Rate.less';
+import './Rate.scss';
+
+
+
+
 class Rate extends Component {
    constructor(props) {
       super(props)

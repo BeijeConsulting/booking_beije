@@ -1,5 +1,5 @@
 import React from 'react'
-import './PropertyCards.less'
+import './PropertyCards.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 /* import BackupImage from '../../../../assets/backupimage.jpg' */

@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { createPortalNode } from "../../../utils/Utils";
-import './ReactPortal.less'
+import './ReactPortal.scss'
 
 function ReactPortal({ children,classNameContainer }) {  //function to create a portal.
     const [state, setState] = useState(null);

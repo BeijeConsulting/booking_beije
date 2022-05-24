@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //LESS
-import './profileMenuCSS/SingleConversation.less'
+import './profileMenuCSS/SingleConversation.scss'
 
 //CONNECT
 import { connect } from 'react-redux'

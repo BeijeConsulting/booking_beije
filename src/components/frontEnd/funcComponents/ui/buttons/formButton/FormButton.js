@@ -1,5 +1,5 @@
 import React from 'react'
-import './FormButton.less'
+import './FormButton.scss'
 import PropTypes from 'prop-types';
 
 

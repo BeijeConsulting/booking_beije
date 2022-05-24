@@ -2,7 +2,7 @@ import { React } from "react";
 import PropTypes from "prop-types";
 
 //STYLES
-import "./CardList.less"
+import "./CardList.scss"
 
 //COMPONENTS
 import { Pagination } from "antd";
