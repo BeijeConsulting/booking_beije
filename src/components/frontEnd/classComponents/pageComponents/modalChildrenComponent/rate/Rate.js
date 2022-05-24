@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';
 
+import './Rate.less';
+
 
 
 
@@ -73,7 +75,7 @@ class Rate extends Component {
    }
 
    handleChange = (params) => (e) => {
-      this.rating[params] = e
+      this.rating[params] = e;
    }
 
    handleRate = (value) => (e) => {
@@ -127,14 +129,16 @@ class Rate extends Component {
 
                      <FormButton
                         className="btn-primary"
-                        label={t("common.loginLabel")}
+                        label={t("common.rate")}
                         callback={this.handleSubmit}
                         disabled={this.state.isDisable}
                      />
 
-                     {
-                        this.map.map(this.handleMap)
-                     }
+                     <div>
+                        {
+                           this.map.map(this.handleMap)
+                        }
+                     </div>
 
                   </form>
 
