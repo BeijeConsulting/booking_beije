@@ -18,7 +18,7 @@ import { decryptItem } from "../../../utils/crypto/crypto";
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //css
-import './profileMenuCSS/Bookings.less';
+import './profileMenuCSS/Bookings.scss';
 import Modal from '../../../components/common/modal/Modal';
 import Rate from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/rate/Rate";
 
@@ -110,7 +110,7 @@ const Bookings = (props) => {
       <Modal 
       callback={handleClose} 
       isOpen={state.isOpen}>
-        <Rate />
+        <Rate /> {/* prop for property id */}
       </Modal>
       <h1 className="bookings-title">{t("common.bookings")}</h1>
 

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from "prop-types"
 
 //LESS
-import './MostReviewedApartments.less'
+import './MostReviewedApartments.scss'
 
 function MostReviewedApartments(props) {
 

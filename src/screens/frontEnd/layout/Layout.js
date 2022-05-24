@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation,useParams } from "react-router";
 // less 
-import './Layout.less'
+import './Layout.scss'
 // Routes
 import { routes } from "../../../routes/routes";
 // component 

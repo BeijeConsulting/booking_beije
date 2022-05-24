@@ -6,7 +6,7 @@ import Messages from './Messages';
 
 import withRouting from "../../../withRouting/withRouting";
 // less 
-import '../profileMenu/profileMenuCSS/Chat.less';
+import '../profileMenu/profileMenuCSS/Chat.scss';
 import { Outlet } from "react-router";
 
 class Chat extends Component {

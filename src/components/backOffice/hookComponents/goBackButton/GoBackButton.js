@@ -3,7 +3,7 @@ import React from "react"
 import { useNavigate } from 'react-router-dom'
 
 //Style
-import './GoBackButton.less'
+import './GoBackButton.scss'
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

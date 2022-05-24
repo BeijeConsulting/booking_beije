@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 //import { useLocation } from "react-router-dom";
 
 //STYLE
-import "./AnnounceOperations.less";
+import "./AnnounceOperations.scss";
 import { useTranslation } from "react-i18next";
 
 const AnnounceOperation = () => {

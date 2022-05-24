@@ -2,7 +2,7 @@ import { React } from "react";
 import PropTypes from "prop-types";
 
 //STYLE
-import "./HorizontalCard.less"
+import "./HorizontalCard.scss"
 
 const HorizontalCard = (props) => {
 

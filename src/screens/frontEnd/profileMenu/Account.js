@@ -9,7 +9,7 @@ import { checkPassword, checkMail } from '../../../utils/validationForm/validati
 // import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import { connect } from "react-redux";
 //css
-import './profileMenuCSS/Account.less'
+import './profileMenuCSS/Account.scss'
 import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
 
 let uName

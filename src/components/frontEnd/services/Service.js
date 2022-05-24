@@ -1,5 +1,5 @@
 import React from 'react'
-import './Service.less'
+import './Service.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { t } from 'i18next';
 import { faGear } from '@fortawesome/free-solid-svg-icons'

@@ -4,7 +4,7 @@ import withRouting from "../../../withRouting/withRouting";
 import { Helmet } from "react-helmet"
 
 //LESS
-import './profileMenuCSS/Messages.less'
+import './profileMenuCSS/Messages.scss'
 
 //TRANSLATIONS
 import { t } from "i18next";

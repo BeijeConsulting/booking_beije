@@ -22,31 +22,22 @@ import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServi
 import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annuncioApi";
 
 //components
-import Service from '../../../components/frontEnd/services/Service'
-import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms'
+import Service from '../../../components/frontEnd/services/Service';
+import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
+import Modal from '../../../components/common/modal/Modal';
+import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 
 const DetailsProp = () => {
   const [state, setState] = useState({
     property: null,
     serviceList: null,
-    roomsList: null
+    roomsList: null,
+    isOpen: false
   })
   const { id } = useParams();
   ;
 
-  useEffect(() => {
-    (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQwMjcwMywiZXhwIjoxNjUzNDA2MzAzfQ.0Z5JdEoek4fGveUyb2lTa4lcrDTZv7N9mx0xglFUTis")
-      const services = await serviceStruttureIdGetApi(id)
-      const rooms = await annuncioOnStrutturaGetApi(id)
-      setState({
-        property: properties?.data,
-        serviceList: services?.data,
-        roomsList: rooms?.data
-      })
-      console.log(state)
-    })()
-  }, [])
+
 
   const { t } = useTranslation();
 
@@ -62,20 +53,35 @@ const DetailsProp = () => {
 
     return <Rooms
       key={key}
-      numberOfPeople={4}/* da modificare */
+      numberOfPeople={item?.numPostiLetto}
       title={item?.titolo}
       price={item?.prezzo}
-      count={item?.count}
     /* services={} da far aggiungere a BE*/
     /* numberOfNights={} da far aggiungere a BE*/
     />
   }
+
+  const handleClose = () => {
+    setState({
+      ...state,
+      isOpen: !state.isOpen
+    })
+  }
+
   return (
     <>
       {console.log(state)}
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
+      <Modal
+        callback={handleClose}
+        isOpen={state.isOpen}
+        classNameCustom={'modal contact-host-modal'}
+      >
+        <ContactHost />
+      </Modal>
+
       {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
         <img></img>
         <h2>{state.property?.nome_struttura}</h2>

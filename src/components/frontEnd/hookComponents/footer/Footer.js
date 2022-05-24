@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 // routes 
 import { routes } from "../../../../routes/routes";
-import './Footer.less';
+import './Footer.scss';
 
 import Button from '../../funcComponents/ui/buttons/uiButtons/UiButton'
 

@@ -6,7 +6,7 @@ import { routes } from "../../../routes/routes";
 
 import { useNavigate } from "react-router-dom";
 // less 
-import './Homepage.less'
+import './Homepage.scss'
 import SearchButton from "../../../components/frontEnd/funcComponents/ui/searchButton/SearchButton";
 import Modal from "../../../components/common/modal/Modal";
 import SearchForm from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm";

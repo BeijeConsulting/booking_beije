@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"
 
 //STYLE
-import "./Sidebar.less"
+import "./Sidebar.scss"
 import { Link } from "react-router-dom";
 
 //ICON
