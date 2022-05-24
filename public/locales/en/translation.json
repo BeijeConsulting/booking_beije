@@ -23,6 +23,7 @@
       "country": "Country",
       "description": "Description",
       "email": "Email",
+      "emptyChat": "Empty chat",
       "english": "English",
       "home": "Home",
       "insertTitle": "Insert title",
@@ -41,6 +42,7 @@
       "rate":"Rate",
       "registerLabel": "Register",
       "registration": "Registration",
+      "research": "Research",
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
       "save": "Save",
@@ -234,6 +236,10 @@
             "pending": "Pending",
             "planned": "Planned",
             "refused": "Rejected"
+         },
+         "searchResult": {
+            "filterButton": "Filters",
+            "mapButton": "Map"
          }
       }
    }
