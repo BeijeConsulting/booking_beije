@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import withRouting from '../../../../../../withRouting/withRouting';
 import { t } from 'i18next';
@@ -83,7 +83,6 @@ class Rate extends Component {
       } else {
          newState.isDisable = true;
       }
-      console.log(newState);
       this.setState(newState);
    }
 
@@ -107,7 +106,7 @@ class Rate extends Component {
                   {/* da fare chiamata per l'immagine della proprietà */}
                   <img className='rateImg' src={this.state.property.host.user.url_image} />
                   <div>
-                     <h3>{this.state.property.descrizione}</h3>
+                     <h3>{this.state.property.nome_struttura}</h3>
                      <small>{`${this.state.property.indirizzo.citta}, ${this.state.property.indirizzo.stato}`}</small>
                      <small>{t('common.extendedDate', { value: this.state.property.checkin })} - {t('common.extendedDate', { value: this.state.property.checkout })} </small>
                      {this.state.property.numero_recensioni > 0 &&
