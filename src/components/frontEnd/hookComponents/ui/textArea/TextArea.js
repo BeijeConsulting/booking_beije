@@ -9,7 +9,7 @@ function TextArea(props) {
     return (
         <>
             <textarea
-            callback={handleOnChange}
+            onChange={handleOnChange}
             className={props.className}
             >
 
