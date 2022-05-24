@@ -8,7 +8,9 @@ import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormBut
 import { reviewPostApi } from '../../../../../../services/api/recensioni/recensioniApi';
 import { getLocalStorage } from '../../../../../../utils/localStorage/localStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarOutlined }  from '@fortawesome/free-regular-svg-icons';
+
 
 
 
@@ -17,7 +19,7 @@ class Rate extends Component {
         super(props)
         this.state = {
             isDisable: true,
-            isRated: false,
+            clickedStar: 0,
             property: {
                 checkin: "10-10-10",
                 checkout: "11-11-10",
@@ -54,7 +56,7 @@ class Rate extends Component {
             message: "",
             rate: 0
         }
-        this.map = [1, 2, 3, 4, 5]
+        this.map = [1, 2, 3, 4, 5];
     }
 
 
@@ -65,28 +67,22 @@ class Rate extends Component {
         //chiamata api
     }
 
-    componentDidUpdate(prevProp, prevState) {
-        if (prevState.isRated !== this.state.isRated) console.log(this.state.isRated);
-
-    }
-
     handleSubmit = async (e) => {
         e.preventDefault();
         await reviewPostApi(this.rating, getLocalStorage('token'));
-
     }
 
     handleChange = (params) => (e) => {
         this.rating[params] = e
     }
 
-    handleRate = (key) => (e) => {
-        if(key )
-        this.setState({ isRated: true })
+    handleRate = (value) => (e) => {
+        this.setState({ clickedStar: value });
+        this.rating.rate = value;
     }
 
     handleMap = (item, key) => {
-        return <FontAwesomeIcon key={key} icon={this.state.isRated ? faStar : faStarHalf} onClick={this.handleRate(key)} />
+        return <FontAwesomeIcon key={key} icon={key < this.state.clickedStar ? faStar : faStarOutlined} onClick={this.handleRate(item)} />
     }
 
 
