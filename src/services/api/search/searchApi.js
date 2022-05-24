@@ -1,3 +1,8 @@
+
+
+
+
+
 import { getApi } from "../../genericServices";
 
 const RESOURCE = 'searchPointMap';
