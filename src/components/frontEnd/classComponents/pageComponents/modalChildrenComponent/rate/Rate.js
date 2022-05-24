@@ -56,7 +56,8 @@ class Rate extends Component {
       this.rating = {
          title: "",
          message: "",
-         rate: 0
+         rate: 0,
+         propertyId: props?.struttura_id 
       }
       this.map = [1, 2, 3, 4, 5];
    }
@@ -76,6 +77,14 @@ class Rate extends Component {
 
    handleChange = (params) => (e) => {
       this.rating[params] = e;
+      let newState = Object.assign({}, this.state);
+      if ((this.rating.title && this.rating.message) !== ''){
+         newState.isDisable = false;
+      } else {
+         newState.isDisable = true;
+      }
+      console.log(newState);
+      this.setState(newState);
    }
 
    handleRate = (value) => (e) => {
