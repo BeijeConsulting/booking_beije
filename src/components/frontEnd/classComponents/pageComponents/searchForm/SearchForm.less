@@ -1,6 +1,6 @@
 @import '../../../../../assets/variables/globalVariables.less';
 
-.searchFormContainer {
+.home .searchFormContainer {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -12,7 +12,7 @@
       justify-content: space-evenly;
    }
 
-   form > * {
+   form>* {
       margin: 0 5px;
    }
 
@@ -30,6 +30,9 @@
    }
 }
 
-.fc .fc-highlight {
-   background: @secondary;
+.modal .searchFormContainer {
+   form {
+      display: flex;
+      flex-direction: column;
+   }
 }
