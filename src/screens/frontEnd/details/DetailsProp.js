@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { strutturaDetailIdGetApi } from "../../../services/api/struttura/strutturaApi";
 
 //localstorage
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
