@@ -20,7 +20,7 @@ function MessageCard(props) {
                     <span className='card-title'>{props.title}</span>
                     <span className='data-message'>{props.date}</span>
                 </div>
-                <p className='message-text'>{props.textMessage}</p>
+                <p className='message-text'>{props.textMessage.length > 30 ? props.textMessage.substring(0, 30) + '...' : props.textMessage}</p>
             </div>
         </div>
     )
