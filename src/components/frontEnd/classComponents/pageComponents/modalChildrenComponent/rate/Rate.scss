@@ -1,4 +1,4 @@
-@import '../../../../../../assets/variables/globalVariables.less';
+@import '../../../../../../assets/variables/globalVariables.scss';
 
 .rateContainer {
 
@@ -44,6 +44,6 @@
    }
 
    textarea, input[type="text"] {
-      color: @black_primary;
+      color: $black_primary;
    }
 }
