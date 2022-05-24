@@ -8,7 +8,7 @@ import UiSelect from "../../../components/frontEnd/funcComponents/ui/uiSelect/Ui
 import { annuncioDetailGetApi } from "../../../services/api/annuncio/annuncioApi";
 // import applicationStore from "../../../applicationStore";
 
-const DetailsPropRoom = () => {
+const DetailsPropRoom = (props) => {
 
   const { t } = useTranslation();
 

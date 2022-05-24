@@ -87,7 +87,6 @@ const DetailsProp = () => {
          ...state,
          [params]: false
       })
-      console.log(state);
    }
 
    return (
