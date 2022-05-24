@@ -1,6 +1,5 @@
 import { faWifi, faUtensils, faFan, faParking, faJugDetergent, faShirt, faDesktop, faWaterLadder, faSmoking, faBell } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from 'react-i18next';
-const { t } = useTranslation();
+import { t } from 'i18next';
 
 /* link a service_id with the relative Font Awesome Icon */
 const servicesToIcons = [{

@@ -81,7 +81,7 @@ const UploadFoto = (props) => {
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>{t("bo.components.uploadFoto.upload")}</div>
+      <div style={{ marginTop: 8 }}>{t("bo.components.uploadPhoto.upload")}</div>
     </div>
   );
 

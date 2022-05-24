@@ -1,3 +1,5 @@
+@import "../../../../assets/variables/globalVariables.less";
+
 .navMobile{
     height: 15%;
     background-color: #fff9f5c7;
@@ -28,7 +30,7 @@
 
 .navDesktop{
     height: 10vh;
-    background-color: #44403C;
+    background-color: @black_primary;
     top: 0;
     width: 100%;
     display: flex;
@@ -37,9 +39,9 @@
     padding: 0 7vw;
     position: relative;
     z-index: 2;
-    border-bottom: 2px solid #FFF9F5;
+    border-bottom: 2px solid @white_primary;
     .go_to_login{
-        color: #FFF9F5;
+        color: @white_primary;
         font-weight: 600;
         font-size: 1.3rem;
         cursor: pointer;
@@ -53,7 +55,7 @@
     .hambMenu{
         display: flex;
         padding: 0.3rem 1.8rem;
-        background-color: #FFF9F5;
+        background-color: @white_primary;
         border-radius: 8px;
         cursor: pointer;
         .phUser{
@@ -80,7 +82,7 @@
 .settingOpen{
     width: 100%;
     min-height: 15vh;
-    background: #44403cbf;
+    background: @black_primary;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -90,7 +92,7 @@
     animation: settingOpen .4s linear;
     position: absolute;
     top: 10vh;
-    border-bottom: 2px solid #FFF9F5;
+    border-bottom: 2px solid @white_primary;
     backdrop-filter: blur(10px);
     z-index: 1;
     li{

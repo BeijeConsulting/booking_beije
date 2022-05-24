@@ -11,6 +11,7 @@
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
       "account": "Account",
+      "selected": "Selezionata",
       "announceTitle": "Annunci",
       "backToHome": "Torna alla home",
       "bookings": "Prenotazioni",
@@ -30,6 +31,7 @@
       "mra": "I più recensiti",
       "name": "Nome",
       "noMessages": "Non esistono messaggi...",
+      "noApartments":"Non ci sono appartamenti da mostrare",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
@@ -85,7 +87,7 @@
             "structure": "Strutture",
             "payments": "Pagamenti"
          },
-         "uploadFoto": {
+         "uploadPhoto": {
             "upload": "Carica"
          }
       },
@@ -115,7 +117,9 @@
                "accepted": "Accettate",
                "pending": "In attesa",
                "rejected": "Rifiutate",
-               "calendar": "Calendario"
+               "calendar": "Calendario",
+               "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
+               "confirmReservationDelete": "Conferma eliminazione"
             },
             "structure": {
                "structureListTitle": "Lista strutture",
@@ -190,7 +194,8 @@
          },
          "propertyDetails": {
             "details": "Dettagli",
-            "roomDetails": "Dettaglio stanza"
+            "roomDetails": "Dettaglio stanza",
+            "noProperty": "Struttura non disponibile."
          },
          "bookings": {
             "history": "Storico",

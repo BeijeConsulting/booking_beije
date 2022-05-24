@@ -1,3 +1,5 @@
+@import "../../../assets/variables/globalVariables.less";
+
 .home {
    overflow-y: scroll;
    overflow-x: hidden;
@@ -6,7 +8,7 @@
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   background-color: #44403C;
+   background-color: @black_primary;
 
    .suggested-container {
       position: relative;
@@ -15,8 +17,8 @@
          position: absolute;
          top: 55%;
          left: 25%;
-         color: #fff;
-         text-shadow: 1px 1px 4px #44403C;
+         color: @white_primary;
+         text-shadow: 1px 1px 4px @black_primary;
       }
    }
 

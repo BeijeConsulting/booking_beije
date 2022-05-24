@@ -2,13 +2,13 @@
 
 .bookings-page {
     min-height: 100vh;
-    background-color: #44403C;
+    background-color: @black_primary;
     display: flex;
     flex-direction: column;
     padding: 0 5vw 15vh;
 
     .bookings-title {
-        color: #fff;
+        color: @white_primary;
         font-weight: 600;
         margin: 1rem 9.5rem;
         font-size: 50px;
@@ -18,7 +18,7 @@
         margin: 3rem 0 0 0;
 
         .card {
-            background-color: #EADDD4;
+            background-color: @secondary_lighter;
             display: flex;
             justify-content: space-between;
             margin:auto;
@@ -45,12 +45,12 @@
             flex-direction: column;
 
             span {
-                color: gray;
+                color: @gray;
                 margin: 5px
             }
 
             .rate {
-                background-color: #EADDD4;
+                background-color: @secondary_lighter;
                 width: 8vw;
                 cursor: pointer;
             }
@@ -58,7 +58,7 @@
     }
 
     .modal-container {
-        background-color: #EADDD4;
+        background-color: @secondary_lighter;
         position: absolute;
         display: flex;
         align-items: center;
@@ -76,7 +76,7 @@
         }
 
         .card-modal {
-            background-color: #EADDD4;
+            background-color: @secondary_lighter;
             
             flex-direction: column;
             border-radius: 1rem;
@@ -89,7 +89,7 @@
                 align-content: center;
 
                 .titleR {
-                    background-color: white;
+                    background-color: @white_primary;
                     border: none;
                     font-weight: bold;
                     border-radius: 10px;
@@ -114,8 +114,8 @@
 
 
                 .rateIt {
-                    color: white;
-                    background-color: #2A8BA8;
+                    color: @white_primary;
+                    background-color: @primary;
                     border: none;
                     border-radius: 5px;
                     margin: 1rem;
@@ -133,7 +133,7 @@
 
         .modal-info {
             display: flex;
-            background-color: #fff;
+            background-color: @white_primary;
             margin:3rem 0 2rem 0;
             padding: 1rem;
             border-radius: 1rem;
@@ -144,7 +144,7 @@
             flex-direction: column;
 
             span {
-                color: gray;
+                color: @gray;
                 margin: 5px
             }
         }
@@ -160,15 +160,15 @@
         justify-content: space-evenly;
 
         button {
-            color: #fff;
-            background-color: #44403C;
+            color: @white_primary;
+            background-color: @black_primary;
             border: none;
             width: 100px;
             cursor: pointer;
 
             &:hover {
                 color: #44403C;
-                background-color: #fff;
+                background-color: @white_primary;
                 border-radius: 5px;
             }
         }
