@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './index.less'
+import './index.css'
 
 // react-router-dom
 import { BrowserRouter } from 'react-router-dom';
