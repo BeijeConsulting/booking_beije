@@ -11,12 +11,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';
 
-import './Rate.less';
+import './ContactHost.less';
 
 
 
 
-class Rate extends Component {
+class ContactHost extends Component {
    constructor(props) {
       super(props)
       this.state = {
@@ -56,8 +56,7 @@ class Rate extends Component {
       this.rating = {
          title: "",
          message: "",
-         rate: 0,
-         propertyId: props?.struttura_id 
+         rate: 0
       }
       this.map = [1, 2, 3, 4, 5];
    }
@@ -77,14 +76,6 @@ class Rate extends Component {
 
    handleChange = (params) => (e) => {
       this.rating[params] = e;
-      let newState = Object.assign({}, this.state);
-      if ((this.rating.title && this.rating.message) !== ''){
-         newState.isDisable = false;
-      } else {
-         newState.isDisable = true;
-      }
-      console.log(newState);
-      this.setState(newState);
    }
 
    handleRate = (value) => (e) => {
@@ -102,7 +93,7 @@ class Rate extends Component {
 
       return (
          <>
-            <section className='rateContainer'>
+            <section className='contact-host-container'>
                <div>
                   {/* da fare chiamata per l'immagine della proprietà */}
                   <img className='rateImg' src={this.state.property.host.user.url_image} />
@@ -158,4 +149,4 @@ class Rate extends Component {
    }
 }
 
-export default withRouting(Rate);
+export default withRouting(ContactHost);

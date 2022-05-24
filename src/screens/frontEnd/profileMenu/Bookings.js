@@ -110,7 +110,7 @@ const Bookings = (props) => {
       <Modal 
       callback={handleClose} 
       isOpen={state.isOpen}>
-        <Rate />
+        <Rate /> {/* prop for property id */}
       </Modal>
       <h1 className="bookings-title">{t("common.bookings")}</h1>
 
