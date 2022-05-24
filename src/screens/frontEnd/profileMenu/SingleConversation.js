@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom'
 // get local storage 
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
+//TRANSLATIONS
+import { useTranslation } from 'react-i18next';
+
 //LESS
 import './profileMenuCSS/SingleConversation.less'
 
@@ -22,12 +25,15 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 let inputMessage;
 const SingleConversation = (props) => {
+  const {t} = useTranslation()
+  console.log(props.userDuck.user)
   const params = useParams();
   const myRef = useRef(null)
   const [state, setState] = useState({
     msgArray: [],
     windowWidth: window.innerWidth
   })
+  
   useEffect(() => {
     scrollToRef(myRef)
     window.addEventListener('resize', handleResize)
@@ -37,7 +43,6 @@ const SingleConversation = (props) => {
     if (localStorage.getItem('token') !== null) {
       messageToSenderIdGetApi(params.id, getLocalStorage("token"))
         .then(res => {
-          console.log(res.data)
           setState({
             ...state,
             msgArray: res?.data
@@ -69,9 +74,9 @@ const SingleConversation = (props) => {
 
       let objcopy = Object.assign({}, state)
       let obj = {
-        annuncioId: 15,
+        annuncioId: params.id,
         contenuto: inputMessage,
-        receiverId: 22
+        receiverId: state.msgArray[0].insertion.struttura.host.user.id
       }
 
 
@@ -100,9 +105,9 @@ const SingleConversation = (props) => {
   const submitMessageOnSendPress = () => {
     let objcopy = Object.assign({}, state)
     let obj = {
-      annuncioId: 15,
+      annuncioId: params.id,
       contenuto: inputMessage,
-      receiverId: 22
+      receiverId: state.msgArray[0].insertion.struttura.host.user.id
     }
 
 
@@ -129,9 +134,9 @@ const SingleConversation = (props) => {
 
     return (
 
-      <div key={key} className={mess.sender.id !== 14 ? "conversation conversation-host" : "conversation conversation-guest"}>
+      <div key={key} className={(mess.sender.id !== props.userDuck.user.id ) ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
-          mess.sender.id !== 14 ? mess.insertion.titolo : 'You'
+          (mess.sender.id !== props.userDuck.user.id)? mess.insertion.titolo : t('common.you')
         }
         </div>
         <p>{mess.text}</p>
@@ -165,7 +170,7 @@ const SingleConversation = (props) => {
 
 
         <div className="space-input">
-          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder="Write your message..." prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
         </div>
       </div>
     </>
@@ -174,7 +179,8 @@ const SingleConversation = (props) => {
 
 
 const mapStateToProps = (state) => ({
-  tokenDuck: state.tokenDuck
+  tokenDuck: state.tokenDuck,
+  userDuck : state.userDuck
 })
 
 export default connect(mapStateToProps)(SingleConversation);

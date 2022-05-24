@@ -100,7 +100,7 @@ class Messages extends Component {
             <>
               <div className='back-button'><GoBackButton /></div>
 
-              <h1 className='title'>Messages</h1>
+              <h1 className='title'>{t("common.messages")}</h1>
             </>
           }
 
