@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import UiButton from '../ui/buttons/uiButtons/UiButton';
 import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
+import UiSelect from '../ui/uiSelect/UiSelect';
 
 function Rooms(props) {
     const { t } = useTranslation();
@@ -42,12 +43,14 @@ function Rooms(props) {
                 <div className='services_price_container'>{props.services.map(generateServicesIcon)}</div>
                 <div className='price_container'>
                     <p>{`${t("fe.components.rooms.price")} ${props.numberOfNights} ${props.numberOfNights > 1 ? t("fe.components.rooms.nights") : t("fe.components.rooms.night")}`}</p>
+                    <p>{props.price}&euro;</p>
                 </div>
                 <div className='ui_components_container'>
                     <UiButton
                         label={t("common.select")}
                     />
-                    {/* Select */}
+                    <UiSelect
+                        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
                 </div>
             </div>
         </div>

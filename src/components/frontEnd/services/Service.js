@@ -1,12 +1,11 @@
 import React from 'react'
 import './Service.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 import { faGear } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 import { servicesToIcons } from '../../../utils/serviceIdToFAIcon/servicesToIcons';
 
-const { t } = useTranslation();
 
 function Service(props) {
     return (

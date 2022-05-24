@@ -1,12 +1,12 @@
 const routes = {
     // FE
-    LAYOUT : '/',
+    LAYOUT: '/',
     HOME: 'home',
     LOGIN: 'login',
     REGISTRATION: '/registration',
 
     BOOKINGS: '/bookings',
-    CHAT :'/chat',
+    CHAT: '/chat',
     FAVOURITES: '/favourites',
     MESSAGES: '/messages',
     SINGLECONVERSATIONMOBILE: '/singleconversation/:id',
@@ -15,17 +15,17 @@ const routes = {
     ACCOUNT: '/account',
 
     //details
-    DETAILSPROP: 'detailsproperty',
-    DETAILSPROPROOM: 'detailspropertyroom',
+    DETAILSPROP: 'detailsproperty/:id',
+    DETAILSPROPROOM: 'detailsproperty/rooms/:id',
 
     //all
     CHECKOUT: 'checkout',
     NOTFOUND: '*',
     SEARCH: '/search',
     MRA: 'mostreviewedBuilding',
-    DISCLAIMER : 'disclaimer',
+    DISCLAIMER: 'disclaimer',
 
-    
+
     // BO
     DASHBOARD: 'dashboard',
     HOST_ACCOUNT: 'host-account',
@@ -42,13 +42,20 @@ const routes = {
 }
 
 let routesDetails = {
-    singleConversation : function (params) {
+    singleConversation: function (params) {
+        return `singleconversation / ${params}`
+    },
+    singleConversationMobile: function (params) {
         return `singleconversation/${params}`
     },
-    singleConversationMobile : function (params) {
-        return `/singleconversation/${params}`
+    detailProperty: function (params) {
+        return `detailsproperty/${params} `
+    },
+    detailPropertyRoom: function (params) {
+        return `detailsproperty/rooms/${params} `
     }
 }
+
 export {
     routes,
     routesDetails
