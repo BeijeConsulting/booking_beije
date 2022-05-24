@@ -25,15 +25,14 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 let inputMessage;
 const SingleConversation = (props) => {
-  const {t} = useTranslation()
-  console.log(props.userDuck.user)
+  const { t } = useTranslation()
   const params = useParams();
   const myRef = useRef(null)
   const [state, setState] = useState({
     msgArray: [],
     windowWidth: window.innerWidth
   })
-  
+
   useEffect(() => {
     scrollToRef(myRef)
     window.addEventListener('resize', handleResize)
@@ -76,7 +75,7 @@ const SingleConversation = (props) => {
       let obj = {
         annuncioId: params.id,
         contenuto: inputMessage,
-        receiverId: state.msgArray[0].insertion.struttura.host.user.id
+        receiverId: state.msgArray[0]?.insertion?.struttura.host.user.id
       }
 
 
@@ -134,9 +133,9 @@ const SingleConversation = (props) => {
 
     return (
 
-      <div key={key} className={(mess.sender.id !== props.userDuck.user.id ) ? "conversation conversation-host" : "conversation conversation-guest"}>
+      <div key={key} className={(mess.sender.id !== props.userDuck.user.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
-          (mess.sender.id !== props.userDuck.user.id)? mess.insertion.titolo : t('common.you')
+          (mess.sender.id !== props.userDuck.user.id) ? mess.insertion.titolo : t('common.you')
         }
         </div>
         <p>{mess.text}</p>
@@ -157,7 +156,7 @@ const SingleConversation = (props) => {
             <>
               <div className='back-button'><GoBackButton /></div>
 
-              <h1 className='title'>{state.msgArray[0].insertion.titolo}</h1>
+              <h1 className='title'>{state.msgArray[0]?.insertion?.descrizione}</h1>
             </>
           }
 
@@ -180,7 +179,7 @@ const SingleConversation = (props) => {
 
 const mapStateToProps = (state) => ({
   tokenDuck: state.tokenDuck,
-  userDuck : state.userDuck
+  userDuck: state.userDuck
 })
 
 export default connect(mapStateToProps)(SingleConversation);
