@@ -68,7 +68,7 @@ const HostRegistration = () => {
         console.log(values);
         console.log(userType);
         alert("Utente registrato correttamente")
-        navigate(`/${routes.STRUCTURE_OPERATION}`)
+        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/new`, {state: { idStructure: null }})
         phone = values.user.phoneNumber
         city = values.user.city
         postcode = values.user.postcode

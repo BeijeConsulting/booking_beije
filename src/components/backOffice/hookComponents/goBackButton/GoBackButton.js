@@ -11,16 +11,16 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 
-const GoBackButton = () => {
+const GoBackButton = ({route}) => {
 
     const navigate = useNavigate()
 
-    const handlerClick = () => {
-        navigate(-1)
+    const handlerClick = (route = -1) => ()=> {
+        navigate(route)
     }
     return (
         <>
-            <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} onClick={handlerClick} />
+            <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} onClick={handlerClick(route)} />
         </>
     )
 }

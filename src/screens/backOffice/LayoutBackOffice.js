@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
+
+import { eventBus } from "../../eventBus/eventBus";
 
 import { Layout, Button, Grid } from "antd";
 
@@ -19,9 +21,17 @@ const { Header, Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
-  const [state, setState] = useState({
-    collapsed: false,
-  });
+  const [state, setState] = useState({collapsed: false});
+
+  useEffect(() => {
+    // eventBus.onListening('prova', toggleSidebar)
+
+
+    return () => {
+      // eventBus.onRemoveEventListener('prova')
+    }
+  }, [state.collapsed])
+
   const location = useLocation();
   const screens = useBreakpoint();
 
@@ -38,10 +48,7 @@ const LayoutBackOffice = () => {
   };
 
   const toggleSidebar = () => {
-    setState({
-      ...state,
-      collapsed: !state.collapsed,
-    });
+    setState({...state, collapsed: !state.collapsed})
   };
 
   return (
