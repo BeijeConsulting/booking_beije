@@ -118,7 +118,7 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
-                
+
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
                 <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />

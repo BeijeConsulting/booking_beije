@@ -11,6 +11,7 @@
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
       "account": "Account",
+      "selected": "Selezionata",
       "announceTitle": "Annunci",
       "backToHome": "Torna alla home",
       "bookings": "Prenotazioni",
@@ -184,7 +185,8 @@
          },
          "propertyDetails": {
             "details": "Dettagli",
-            "roomDetails": "Dettaglio stanza"
+            "roomDetails": "Dettaglio stanza",
+            "noProperty": "Struttura non disponibile."
          },
          "bookings": {
             "history": "Storico",

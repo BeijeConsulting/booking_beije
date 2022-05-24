@@ -14,6 +14,7 @@
       "announceTitle": "Announce title",
       "address": "Address",
       "backToHome": "Back to home",
+      "selected": "Selezionata",
       "bookings": "Bookings",
       "category": "Category",
       "checkIn": "Check In",
@@ -209,7 +210,8 @@
          },
          "propertyDetails": {
             "details": "Details",
-            "roomDetails": "Room details"
+            "roomDetails": "Room details",
+            "noProperty": "Property unavailable."
          },
          "homePage": {
             "searchButton": "Search your destination"

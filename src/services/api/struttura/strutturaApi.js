@@ -11,6 +11,10 @@ const insertStrutturaPostApi = async (obj, header) => {
     return await postApi(`insertStruttura`, obj, header);
 }
 
+const strutturaDetailIdGetApi = async (id, header) => {
+    return await getApi(`struttura/${id}`, header);
+}
+
 /* AUTH:HOST */
 const disableStrutturaPutApi = async (id, header) => {
     return await putApi(`disableStruttura/${id}`, header);
@@ -22,5 +26,5 @@ const updateStrutturaPutApi = async (id, obj, header) => {
 }
 
 export {
-    showAllStruttureGetApi, insertStrutturaPostApi, disableStrutturaPutApi, updateStrutturaPutApi
+    showAllStruttureGetApi, insertStrutturaPostApi, disableStrutturaPutApi, updateStrutturaPutApi, strutturaDetailIdGetApi
 }
