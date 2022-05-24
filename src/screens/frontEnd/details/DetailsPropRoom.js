@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import UiSelect from "../../../components/frontEnd/funcComponents/ui/uiSelect/UiSelect"
 import { annuncioDetailGetApi } from "../../../services/api/annuncio/annuncioApi";
-import applicationStore from "../../../applicationStore";
+// import applicationStore from "../../../applicationStore";
 
 const DetailsPropRoom = () => {
 
