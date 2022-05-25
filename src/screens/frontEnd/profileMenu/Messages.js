@@ -22,6 +22,7 @@ import { routes, routesDetails } from '../../../routes/routes'
 
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
+import { withTranslation } from "react-i18next";
 
 
 class Messages extends Component {
@@ -34,11 +35,11 @@ class Messages extends Component {
     this.resize = null;
   }
   componentDidMount() {
-    this.resize = window.addEventListener('resize', this.handleResize);
+    window.addEventListener('resize', this.handleResize);
     if (localStorage.getItem('token') !== null) {
       chatMessagesUserGetApi(getLocalStorage("token"))
         .then(res => {
-          if (res.data !== "") {
+          if (res?.data !== "") {
             this.setState({
               arrayMessages: res?.data?.list
             })
@@ -59,7 +60,7 @@ class Messages extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.handleResize);
   }
   handleResize = () => {
     this.setState({
@@ -91,7 +92,7 @@ class Messages extends Component {
     return (
       <>
         <Helmet>
-          <title>{t("common.messages")}</title>
+          <title>{this.props.t("common.messages")}</title>
         </Helmet>
 
         <div className='messages-page'>
@@ -100,7 +101,7 @@ class Messages extends Component {
             <>
               <div className='back-button'><GoBackButton /></div>
 
-              <h1 className='title'>{t("common.messages")}</h1>
+              <h1 className='title'>{this.props.t("common.messages")}</h1>
             </>
           }
 
@@ -109,7 +110,7 @@ class Messages extends Component {
               <>
                 {this.state.arrayMessages.map(this.renderMessages)}
               </> :
-              <h2> chat vuota </h2>
+              <h2>{this.props.t('common.emptyChat')} </h2>
           }
 
           <div className="pagination"></div>
@@ -127,4 +128,4 @@ const mapStateToProps = (state) => ({
   userDuck: state.userDuck
 })
 
-export default withRouting(connect(mapStateToProps)(Messages));
+export default withTranslation() (withRouting(connect(mapStateToProps)(Messages)));

@@ -4,7 +4,7 @@ function setLocalStorage(key, token) {
     const now = new Date();
 
     const item = {
-        token : token,
+        [key] : token,
         expire: now.getTime()
     }
 
@@ -13,8 +13,10 @@ function setLocalStorage(key, token) {
 
 function getLocalStorage(key) {
     if(localStorage.getItem('token') === null) return null;
+
     const token = decryptItem(JSON.parse(localStorage.getItem(key)));
-    return token.token;
+
+    return token[key];
 }
 
 function removeLocalStorage(key) {

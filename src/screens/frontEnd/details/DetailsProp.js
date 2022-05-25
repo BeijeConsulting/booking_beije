@@ -49,7 +49,6 @@ const DetailsProp = () => {
             serviceList: services?.data,
             roomsList: rooms?.data
          })
-         console.log(state)
       })()
    }, [])
 
