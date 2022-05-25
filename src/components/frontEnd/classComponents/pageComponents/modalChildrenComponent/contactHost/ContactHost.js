@@ -1,16 +1,24 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
+// modules
 import withRouting from '../../../../../../withRouting/withRouting';
 import { t } from 'i18next';
+
+// components
 // import FormInput from '../../../../funcComponents/ui/input/formInput/FormInput';
 import TextArea from '../../../../hookComponents/ui/textArea/TextArea';
 import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
+
+// api
+import { messageInsertPostApi } from '../../../../../../services/api/messaggi/messaggiApi';
+
+// utils
 import { getLocalStorage } from '../../../../../../utils/localStorage/localStorage';
 
 
-
+// style
 import './ContactHost.less';
-import { messageInsertPostApi } from '../../../../../../services/api/messaggi/messaggiApi';
 
 
 

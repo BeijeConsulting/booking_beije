@@ -13,6 +13,7 @@ function CheckboxInput(props) {
          type="checkbox"
          name={props.name}
          className={props.className}
+         value={props.value}
          onClick={handleClick}
       />
    )
@@ -25,7 +26,8 @@ CheckboxInput.defaultProps = {
 CheckboxInput.propTypes = {
    name: PropTypes.string,
    className: PropTypes.string,
-   callback: PropTypes.func
+   callback: PropTypes.func,
+   value: PropTypes.number
 }
 
 export default CheckboxInput;
