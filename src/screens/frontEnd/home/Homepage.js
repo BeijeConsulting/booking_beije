@@ -38,7 +38,6 @@ const Homepage = () => {
             <title>{t("common.home")}</title>
          </Helmet>
 
-         <Filter />
          <Modal isOpen={state.isOpen} callback={handleClick}  >
             <SearchForm />
          </Modal>

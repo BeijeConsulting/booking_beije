@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { t } from "i18next";
 
 // api
-// import { getStructuresBySearch } from '../../../../../services/api/search/searchApi';
+import { getStructuresBySearch } from '../../../../../../services/api/search/searchApi';
 
 // components
 import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
@@ -38,42 +38,67 @@ class SearchForm extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         isDisable: true,
          dataInfo: arrTest,
       }
       this.bookingData = {
-         latitudine: 0,
-         longitudine: 0,
-         radius: 0,
-         checkin: '',
-         checkout: '',
-         numberOfGuests: 0
+         checkin: null,
+         checkout: null,
+         posti_letto: 2
       }
       this.dateFormat = 'YYYY-MM-DD';
    }
 
    setNumberOfGuests = (e) => {
-      this.bookingData.numberOfGuests = e;
-      console.log(this.bookingData.numberOfGuests);
+      this.bookingData.posti_letto = e;
+      console.log(this.bookingData["posti_letto"]);
+      // return e;
    }
 
-   componentDidMount() {
-      eventBus.onListening('guests', this.setNumberOfGuests);
+
+   objToString(obj) {
+
+      let string = "";
+      for (const item in obj) {
+         if (obj[item] !== null) {
+
+            string += `${item}=${obj[item]}&`
+         }
+      }
+      let finalString = string.slice(0, -1);
+
+      console.log(finalString);
+
+
+      return finalString;
+   }
+
+   componentWillUnmount() {
+      window.removeEventListener('guests', this.setNumberOfGuests);
    }
 
    handleSubmit = (e) => {
       e.preventDefault();
+      const coordinate = {
+         latitudine: null,
+         longitudine: null,
+         radius: 10,
+      }
+      eventBus.onListening('guests', this.setNumberOfGuests);
+      console.log(this.bookingData);
       let [latitude, longitude] = this.props.positionDuck.coordinates;
-      this.bookingData.latitudine = latitude;
-      this.bookingData.longitudine = longitude;
-      // getStructuresBySearch(this.bookingData).then(res =>
-      //    this.props.router.navigate(routes.SEARCH, {
-      //       state: res?.data
-      //    })
-      // );
-      this.props.router.navigate(routes.SEARCH, {
-         state: this.bookingData
-      })
+      coordinate.latitudine = latitude;
+      coordinate.longitudine = longitude;
+
+
+      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify( coordinate )).then(res =>
+         console.log(res.data)
+         // this.props.router.navigate(routes.SEARCH, {
+         //    state: res?.data
+         // })
+      ).catch(error => error)
+      // this.props.router.navigate(routes.SEARCH, {
+      //    state: this.bookingData
+      // })
    }
 
    handleSelect = (e) => {

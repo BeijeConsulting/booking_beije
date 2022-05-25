@@ -14,6 +14,7 @@ function InputGuest(props) {
    });
 
    const handleEvent = () => {
+      // console.log(state.value);
       eventBus.onDispatch('guests', state.value);
    }
 
@@ -23,6 +24,7 @@ function InputGuest(props) {
       let newState = Object.assign({}, state);
       let value = e.target.getAttribute("name");
       newState = { ...newState, value: newState.value + parseInt(value) }
+      eventBus.onDispatch('guests', state.value);
       setState(newState);
    }
 
@@ -32,6 +34,8 @@ function InputGuest(props) {
          value: parseInt(e)
       })
    }
+
+  
 
    const selectBefore = (
       <span name={-1} onClick={handleClick}>
