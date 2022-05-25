@@ -33,13 +33,13 @@
       "mra": "Most reviewed apartments",
       "name": "Name",
       "noMessages": "No messages found",
-      "noApartments":"No apartments to show.",
+      "noApartments": "No apartments to show.",
       "or": "or",
       "password": "Password",
       "passwordConfirm": "Confirm password",
       "photos": "Photos",
       "price": "Price",
-      "rate":"Rate",
+      "rate": "Rate",
       "registerLabel": "Register",
       "registration": "Registration",
       "research": "Research",
@@ -54,7 +54,8 @@
       "writeMessage": "Write your message here...",
       "you": "You",
       "zipCode": "ZIP code",
-      "suggestedApartaments": "Suggested apartament"
+      "suggestedApartaments": "Suggested apartament",
+      "bookNow": "Prenota adesso!"
    },
    "toasts": {
       "favouritesDeleted": "has been deleted from your favourites",
@@ -241,6 +242,12 @@
          "searchResult": {
             "filterButton": "Filters",
             "mapButton": "Map"
+         },
+         "checkout": {
+            "total": "Total",
+            "confirmPayment": "Confirm payment",
+            "price": " Price",
+            "qty": "Qty"
          }
       }
    }

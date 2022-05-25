@@ -24,6 +24,7 @@ import MostRewApart from "./screens/frontEnd/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
+import Checkout from "./screens/frontEnd/Checkout";
 
 //Screen backOffice
 import ReservationCalendar from "./screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar";
@@ -52,6 +53,7 @@ import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
 import { logout } from "./utils/user/user";
 
 
+
 function Routing(props) {
     useEffect(() => {
         if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
@@ -60,7 +62,7 @@ function Routing(props) {
             props.dispatch(setToken(token))
             props.dispatch(setUser())
         }
-        
+
     }, []);
 
 
@@ -93,7 +95,7 @@ function Routing(props) {
 
                 <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
                     <ProtectedRoute>
-                        <Chat/>
+                        <Chat />
                     </ProtectedRoute>
                 }
                 >
@@ -126,6 +128,8 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
+
+                <Route path={routes.CHECKOUT} element={<Checkout />} />
 
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
