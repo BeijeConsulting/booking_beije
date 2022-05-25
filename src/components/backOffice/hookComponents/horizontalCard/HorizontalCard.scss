@@ -10,7 +10,8 @@ $card_height: 150px;
     display: flex;
     background-color: #EADDD4;
     border-radius: 1rem;
-    margin: .5rem 0 0 .5rem;
+    margin: .5rem 0;
+    transition: transform .5s;
     //align-items: center;
 
     .card_img {
@@ -67,6 +68,10 @@ $card_height: 150px;
         display: flex;
         //justify-content: flex-end;
     }
+}
+
+.h_card_container:hover {
+    transform: scale(1.01);
 }
 
 @media screen and (max-width: 600px) {
