@@ -18,7 +18,7 @@ import { getLocalStorage } from '../../../../../../utils/localStorage/localStora
 
 
 // style
-import './ContactHost.less';
+import './ContactHost.scss';
 
 
 

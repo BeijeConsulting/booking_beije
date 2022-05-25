@@ -1,13 +1,14 @@
+@import "../../../../assets/variables/globalVariables.scss";
 .message-card {
     width: 100%;
     height: 7rem;
-    background-color: #EADDD4;
+    background-color: $secondary_lighter;
     display: flex;
     justify-content: space-between;
     padding: .8rem 1.4rem;
     margin-bottom: .5rem;
     border-radius: 1rem;
-    color: #44403c;
+    color: $black_primary;
     margin: .5rem auto;
     cursor: pointer;
 
@@ -51,9 +52,9 @@
 }
 @media all and (min-width:992px) {
     .message-card{
-        background-color: #FFF9F5;
+        background-color: $white_primary;
         margin: 0;
         border-radius: 0;
-        border-bottom: 1px solid #44403c;
+        border-bottom: 1px solid $black_primary;
     }
 }

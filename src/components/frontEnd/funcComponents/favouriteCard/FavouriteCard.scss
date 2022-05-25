@@ -1,5 +1,6 @@
+@import "../../../../assets/variables/globalVariables.scss";
 .favourite-card {
-   background-color: #eaddd4;
+   background-color: $secondary_lighter;
    border-radius: 13px;
    display: flex;
    flex-direction: row;
@@ -28,7 +29,7 @@
 
    .card {
       width: 100%;
-      color: #44403C;
+      color: $black_primary;
       margin-left: 1rem;
    }
 

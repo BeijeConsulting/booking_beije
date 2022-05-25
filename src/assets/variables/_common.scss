@@ -1,0 +1,190 @@
+.flex {
+    display: flex;
+}
+.wrap{
+    flex-wrap: wrap;
+}
+.column {
+    flex-direction: column;
+}
+.jcCenter {
+    justify-content: center;
+}
+.jcSpaceB {
+    justify-content: space-between;
+}
+.jcSpaceA {
+    justify-content: space-around;
+}
+.jcSpaceE {
+    justify-content: space-evenly;
+}
+
+.aiCenter {
+    align-items: center;
+}
+.acCenter {
+    align-content: center;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.absolute {
+    position: absolute;
+}
+.relative {
+    position: relative;
+}
+.fixed {
+    position: fixed;
+}
+
+.scrollY {
+    overflow-y: scroll;
+}
+
+.liStyle {
+    list-style: none;
+}
+.fsI {
+    font-style: italic;
+}
+.fsXS{
+    font-size:x-small;
+}
+.fsXXL{
+    font-size: xx-large;
+}
+.bgNone{
+    background: none;
+}
+.fwB{
+    font-weight: bold;
+}
+
+.bNone {
+    border: none;
+}
+.br1 {
+    border-radius: 5px;
+}
+.br2 {
+    border-radius: 10px;
+}
+.br3 {
+    border-radius: 15px;
+}
+.br50 {
+    border-radius: 50%;
+}
+.p0{
+    padding: 0;
+}
+.p1 {
+    padding: 1rem;
+}
+.px1 {
+    padding: 0 1rem;
+}
+.py1 {
+    padding: 1rem 0;
+}
+
+.m0{
+    margin: 0;
+}
+.m1 {
+    margin: 1rem;
+}
+.mx1 {
+    margin: 0 1rem;
+}
+.my1 {
+    margin: 1rem 0;
+}
+.mL1{
+    margin-left: 1rem;
+}
+.mT1{
+    margin-top: 1rem;
+}
+.fs50 {
+    font-size: 50px;
+}
+
+.w50 {
+    width: 50%;
+}
+.w100 {
+    width: 100%;
+}
+
+.h85 {
+    height: 85vh;
+}
+.height {
+    height: 100vh;
+}
+.oX1 {
+    overflow-x: hidden;
+}
+.oX2 {
+    overflow-x: scroll;
+}
+.oY1 {
+    overflow-y: hidden;
+}
+.oY2 {
+    overflow-y: scroll;
+}
+
+.t0 {
+    top: 0;
+}
+.t25 {
+    top: 25%;
+}
+.t50 {
+    top: 50%;
+}
+.b0 {
+    bottom: 0;
+}
+.b25 {
+    bottom: 25%;
+}
+.b50 {
+    bottom: 50%;
+}
+.r0 {
+    right: 0;
+}
+.r25 {
+    right: 25%;
+}
+.r50 {
+    right: 50%;
+}
+.l0 {
+    left: 0;
+}
+.l25 {
+    left: 25%;
+}
+.l50 {
+    left: 50%;
+}
+
+.link{
+    text-decoration: underline;
+}
+
+.vaM{
+    vertical-align: middle;
+}
+
+.ofC{
+    object-fit: cover;
+}
