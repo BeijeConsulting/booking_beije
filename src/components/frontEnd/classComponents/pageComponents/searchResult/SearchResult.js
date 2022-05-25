@@ -39,12 +39,18 @@ class SearchResult extends Component {
         this.getapi();
     }
 
+    // componentDidUpdate(prevProps, prevState){
+    //     if(this.state.property !== prevState.property){
+    //     }
+    // }
+
     async getapi() {
         const response = await showAllStruttureGetApi();
         // console.log(response.data);
         this.setState({
-            property: response.data
+            property: response.data.list
         })
+        // console.log(this.state.property);
     }
 
     handleButton = (params) => () => {

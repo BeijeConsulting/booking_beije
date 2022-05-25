@@ -17,14 +17,13 @@ class PropertyCard extends Component {
         this.State = {
             image: null
         }
-
+        console.log(this.props.data);
         // const {descrizione} = this.props.data
     }
 
     componentDidMount(){
         getStructureImage(this.props?.data?.indirizzo?.struttura_id).then(res => {
             this.setState({image: res.data?.immagine?.urlImage})})
-        
     }
 
     render() {
@@ -33,11 +32,11 @@ class PropertyCard extends Component {
                 <section className='propertyCardContainer'>
                     {/* <img src={this.state.image}/> */}
                     <div>
-                        <h4>{this.props?.data?.indirizzo?.nome_struttura}</h4>
+                        <h4>{this.props?.data?.nome_struttura}</h4>
                         <small>{this.props?.data?.tipologiaStrutturaId?.tipo}</small>
-                        <div>
+                        <div className='mediaRateCard'>
                             <FontAwesomeIcon icon={faStar} />
-                            <small>{this.props?.data?.media_recensioni}</small>
+                            <small>{this.props?.data?.media_recensioni}3</small>
                         </div>
                         {/* <small>{this.props.t()}</small> */}
                         {/* <h4>{this.props.t()}</h4> */}
