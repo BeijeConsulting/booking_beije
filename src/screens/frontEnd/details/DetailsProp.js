@@ -60,6 +60,10 @@ const DetailsProp = () => {
 
   const generateRooms = (item, key) => {
 
+    const addToCheckOut = (temp_id, isSelected) => {
+      console.log(temp_id, isSelected)
+    }
+
     return <Rooms
       key={key}
       numberOfPeople={4} //da modificare
@@ -67,9 +71,7 @@ const DetailsProp = () => {
       price={item?.prezzo}
       count={item?.count}
       temp_id={key}
-      callback={(item) => {
-        console.log(item)
-      }}
+      callback={addToCheckOut}
     /* services={} da far aggiungere a BE*/
     /* numberOfNights={} da far aggiungere a BE*/
     />

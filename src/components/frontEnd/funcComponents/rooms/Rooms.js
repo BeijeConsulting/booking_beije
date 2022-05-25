@@ -43,7 +43,7 @@ function Rooms(props) {
         setState({
             selected: !state.selected
         })
-        props.callback(props.temp_id)
+        props.callback(props.temp_id, state.selected)
     }
     /* The following css class structure is optimized to be used with flex */
     return (
