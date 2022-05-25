@@ -78,10 +78,10 @@ function Filter() {
             <section>
 
                 {
-                    state.propertyTypes.map(mapType)
+                   state.propertyTypes !== null && state.propertyTypes.map(mapType)
                 }
                 {
-                    state.services.map(mapService)
+                   state.services !== null && state.services.map(mapService)
                 }
 
             </section>
