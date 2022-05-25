@@ -16,29 +16,29 @@
       "backToHome": "Torna alla home",
       "bookings": "Prenotazioni",
       "category": "Categoria",
-      "change":"Cambia",
+      "change": "Cambia",
       "checkIn": "Check In",
       "checkOut": "Check Out",
       "description": "Descrizione",
       "email": "Email",
       "english": "Inglese",
-      "emptyChat": "Chat vuota", 
+      "emptyChat": "Chat vuota",
       "home": "Home",
       "insertTitle": "Inserisci titolo",
       "italian": "Italiano",
       "loginLabel": "Accedi",
-      "logout":"Esci",
+      "logout": "Esci",
       "messages": "Messaggi",
       "mra": "I più recensiti",
       "name": "Nome",
       "noMessages": "Non esistono messaggi...",
-      "noApartments":"Non ci sono appartamenti da mostrare",
+      "noApartments": "Non ci sono appartamenti da mostrare",
       "or": "o",
       "password": "Password",
       "passwordConfirm": "Conferma password",
       "photos": "Foto",
       "price": "Prezzo",
-      "rate":"Recensione",
+      "rate": "Recensione",
       "registerLabel": "Registrati",
       "registration": "Registrazione",
       "research": "Research",
@@ -50,7 +50,7 @@
       "submit": "Invia",
       "surname": "Cognome",
       "termsConditions": "Termini e condizioni",
-      "update":"Aggiorna",
+      "update": "Aggiorna",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu",
       "address": "Indirizzo",
@@ -190,7 +190,6 @@
             "acceptTerms": "Accetto i termini e le condizioni"
          },
          "settings": {
-            
             "title": "Impostazioni",
             "settingsCard": {
                "account": "Account",
@@ -216,6 +215,12 @@
          "searchResult": {
             "filterButton": "Filtri",
             "mapButton": "Mappa"
+         },
+         "checkout": {
+            "total": "Totale",
+            "confirmPayment": "Conferma pagamento",
+            "price": " Prezzo",
+            "qty": "Qta"
          }
       }
    }
