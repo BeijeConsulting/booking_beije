@@ -78,6 +78,7 @@ function Rooms(props) {
 
                     />
                     <UiSelect
+                        selected={state.selected}
                         data={generateMaxRooms()}
                         callback={handleNumberOfRooms}
                     />
