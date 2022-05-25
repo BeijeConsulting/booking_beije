@@ -47,7 +47,7 @@ function Map(props) {
     return (
         <>
             <SearchPlace />
-            <MapContainer style={{ width: '100vw', height: '100vh' }} center={[45.44982831807649, 9.238670319666845]} zoom={13} scrollWheelZoom={true}>
+            <MapContainer style={{ width: '100px', height: '100px' }} center={[45.44982831807649, 9.238670319666845]} zoom={13} scrollWheelZoom={true}>
 
                 <ChangeView center={{ lat: selectPosition[0], lon: selectPosition[1] }} zoom={10} />
 

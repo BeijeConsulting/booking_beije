@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 // module
 import { Helmet } from "react-helmet";
+
+//rrd
+import { Navigate, useLocation } from "react-router-dom";
 
 //css
 import "./DetailsProp.scss";
 // REACT LEAFLET
-import { MapContainer, Marker } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+
+import Map from '../../../components/frontEnd/hookComponents/map/Map'
 
 //hooks
 import { useTranslation } from "react-i18next";
@@ -48,10 +52,10 @@ const DetailsProp = () => {
     checkOutPrice: 0
   })
   const { id } = useParams();
-
+  const location = useLocation();
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ3MjcyNSwiZXhwIjoxNjUzNDc2MzI1fQ.UzRLVJRqtravqjWY0hfFm5zX3sFtzLzPCJvwMWZuSWw")
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ4MDMxOCwiZXhwIjoxNjUzNDgzOTE4fQ.fDgfebDnxjvqzzyQoEHHL0LuxhUrEsLdD14Kv8ip9Ck")
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       console.log(properties, services, rooms)
@@ -95,6 +99,10 @@ const DetailsProp = () => {
       return element !== undefined;
     })
     console.log(arrayToCheckout)
+  }
+
+  const goToCheckout = () => {
+    Navigate("checkout", { state: arrayToCheckout })
   }
 
   const generateRooms = (item, key) => {
@@ -163,9 +171,12 @@ const DetailsProp = () => {
           <div className="total_price_container">
             <p>Total {state.checkOutPrice}&euro;</p>
             <UiButton
+              callback={goToCheckout}
               label={"Book Now!"} />
           </div>
-          <div className="map_container"></div>
+          <div className="map_container">
+            {/* <Map ></Map> */}
+          </div>
           <div className="review_container"></div>
         </div>
       </div>}
