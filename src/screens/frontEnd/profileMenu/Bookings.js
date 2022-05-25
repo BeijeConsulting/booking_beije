@@ -97,7 +97,9 @@ const Bookings = (props) => {
       isOpen: !state.isOpen
     })
   }
-
+  const openModal = () => {
+    console.log("click");
+  }
   return (
     <div className="bookings-page">
       <Helmet>
@@ -107,9 +109,9 @@ const Bookings = (props) => {
         ...state,
         isOpen: !state.isOpen
       })}>bau</button>
-      <Modal 
-      callback={handleClose} 
-      isOpen={state.isOpen}>
+      <Modal
+        callback={handleClose}
+        isOpen={state.isOpen}>
         <Rate /> {/* prop for property id */}
       </Modal>
       <h1 className="bookings-title">{t("common.bookings")}</h1>
@@ -121,21 +123,20 @@ const Bookings = (props) => {
       <div className="apartment_container card-container">
         {state.PeriodListStructure.length <= 0 ? <p>{t("common.noApartments")}</p> : state.PeriodListStructure.map((item, key) => {
           return (
-            <p key={key}>{item.annuncio.titolo}</p>
-            //         <div className="card-container">
-            //           <div className="card">
-            //             <div className="card-info">
-            //               <img src="{item.annuncio.url_image}" alt="card-img" />
-            //               <div className="card-info-info">
-            //                 <h1>{item.annuncio.titolo}</h1>
-            //                 <span>{item.annuncio.luogo}</span>
-            //                 <span>{item.annuncio.checkin}, {item.annuncio.checkout}</span>
-            //                 <button className="rate" onClick={openModal}>{t("common.rate")}</button>
-            //               </div>
-            //             </div>
-            //             <span className="price">{item.annuncio.prezzo}</span>
-            //           </div>
-            //         </div>
+            <div key={key} className="card-container">
+              <div className="card">
+                <div className="card-info">
+                  <img src="{item.annuncio.url_image}" alt="card-img" />
+                  <div className="card-info-info">
+                    <h1>{item.annuncio.titolo}</h1>
+                    <span>{item.annuncio.luogo}</span>
+                    <span>{item.annuncio.struttura.checkin}, {item.annuncio.struttura.checkout}</span>
+                    <button className="rate" onClick={openModal}>{t("common.rate")}</button>
+                  </div>
+                </div>
+                <span className="price">{item.annuncio.prezzo}</span>
+              </div>
+            </div>
           )
         })}
       </div>
