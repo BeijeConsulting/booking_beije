@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Rooms.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
 import { faInfoCircle, faUser, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -10,10 +10,19 @@ import UiSelect from '../ui/uiSelect/UiSelect';
 
 let selectValue = 1
 function Rooms(props) {
+    const ref = useRef();
     const { t } = useTranslation();
     const [state, setState] = useState({
         selected: false
     })
+
+    useEffect(() => {
+        props.callback(props.temp_id, state.selected, {
+            price: props.price,
+            title: props.title,
+            count: selectValue
+        })
+    }, [state.selected])
 
 
     const generateServicesIcon = ((service, index) => {
@@ -48,11 +57,6 @@ function Rooms(props) {
     const selectedButton = () => {
         setState({
             selected: !state.selected
-        })
-        props.callback(props.temp_id, state.selected, {
-            price: props.price,
-            title: props.title,
-            count: selectValue
         })
     }
     /* The following css class structure is optimized to be used with flex */

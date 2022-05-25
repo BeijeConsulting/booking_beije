@@ -46,7 +46,7 @@ let checkOutArray = []
 let arrayToCheckout = []
 
 const DetailsProp = () => {
- 
+
   const [state, setState] = useState({
     property: null,
     serviceList: null,
@@ -64,7 +64,7 @@ const DetailsProp = () => {
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
-      console.log(properties, services, rooms, review)
+      console.log(properties, services, 'stazmne', rooms, review)
       setState({
         ...state,
         property: properties?.data,
@@ -79,8 +79,6 @@ const DetailsProp = () => {
 
   const { t } = useTranslation();
 
-
-
   const handleClose = (params) => () => {
     setState({
       ...state,
@@ -89,10 +87,10 @@ const DetailsProp = () => {
   }
 
   const addToCheckOut = (temp_id, isSelected, obj) => {
-    isSelected ? checkOutArray[temp_id] = undefined : checkOutArray[temp_id] = {
+    isSelected ? checkOutArray[temp_id] = {
       ...obj,
       price: obj.price * obj.count
-    };
+    } : checkOutArray[temp_id] = undefined;
     let totalPrice = 0
     for (let index = 0; index < checkOutArray.length; index++) {
       if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index].price
@@ -105,7 +103,6 @@ const DetailsProp = () => {
     arrayToCheckout = checkOutArray.filter((element) => {
       return element !== undefined;
     })
-    console.log('ArrayToCheckOut', arrayToCheckout)
   }
 
   const goToCheckout = () => {
