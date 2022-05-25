@@ -4,17 +4,7 @@ import moment from "moment";
 
 import { routes } from "../../../../../routes/routes";
 
-import {
-  Form,
-  Input,
-  InputNumber,
-  Button,
-  TimePicker,
-  Spin,
-  Radio,
-  Row,
-  Col,
-} from "antd";
+import { Form, Input, Button, TimePicker, Spin, Radio, Row, Col } from "antd";
 import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
 import SearchAddress from "../../../../../components/backOffice/hookComponents/searchAddress/SearchAddress";
 
@@ -22,7 +12,13 @@ import GoBackButton from "../../../../../components/backOffice/hookComponents/go
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const StructureOperation = () => {
+//API
+import { insertStrutturaPostApi } from "../../../../../services/api/struttura/strutturaApi";
+
+import tokenDuck from "../../../../../redux/ducks/tokenDuck";
+import { connect } from "react-redux";
+
+const StructureOperation = (props) => {
   const { t } = useTranslation();
 
   const { TextArea } = Input;
@@ -60,11 +56,9 @@ const StructureOperation = () => {
 
   // PER FORM ANT
   const onFinish = (values) => {
-    setState({ ...state, values });
-    // CONTROLLARE, IMMAGINI NON GESTITE
-    /* {
-               structurePut(state.values.data ) 
-                 */
+    
+
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -329,4 +323,9 @@ const StructureOperation = () => {
   );
 };
 
-export default StructureOperation;
+const mapStateToProps = (state) => ({
+ tokenDuck: state.tokenDuck,
+ userDuck: state.userDuck
+})
+
+export default connect(mapStateToProps)(StructureOperation);
