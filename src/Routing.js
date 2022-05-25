@@ -170,4 +170,4 @@ function Routing(props) {
 }
 
 
-export default connect()(Routing);
+export default connect()(React.memo(Routing));

@@ -18,6 +18,7 @@ import Map from '../../../hookComponents/map/Map';
 // api
 import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
 import Filter from '../../../hookComponents/filter/Filter';
+import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 
 
 
@@ -26,25 +27,27 @@ class SearchResult extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            property: null,
+            property: [],
             isFilter: false,
-            isMap: false
+            isMap: false,
+            isSearch: false,
+            data: this.props.data
         }
     }
-    
-    componentDidMount(){
-        this.getapi();  
+
+    componentDidMount() {
+        this.getapi();
     }
 
-    async getapi(){
+    async getapi() {
         const response = await showAllStruttureGetApi();
-        // console.log(response);
+        // console.log(response.data);
         this.setState({
             property: response.data
         })
     }
 
-    handleButton =(params) => () => {
+    handleButton = (params) => () => {
         this.setState({
             [params]: !this.state[params]
         })
@@ -69,23 +72,33 @@ class SearchResult extends Component {
                     <title>{this.props.t("common.research")}</title>
                 </Helmet>
 
+                {/* modals */}
+
                 <Modal
-                callback={this.handleButton("isFilter")}
-                isOpen={this.state.isFilter}
+                    callback={this.handleButton("isFilter")}
+                    isOpen={this.state.isFilter}
                 >
                     <Filter />
                 </Modal>
 
                 <Modal
-                callback={this.handleButton("isMap")}
-                isOpen={this.state.isMap}
-
+                    callback={this.handleButton("isMap")}
+                    isOpen={this.state.isMap}
                 >
                     <Map />
                 </Modal>
 
+                <Modal 
+                isOpen={this.state.isSearch} 
+                callback={this.handleButton("isSearch")}  >
+                    <SearchForm />
+                </Modal>
+
+                {/* end modals */}
+
                 <section className='ButtonContainer'>
                     <SearchButton
+                        callback={this.handleButton("isSearch")}
                     />
                     <div>
 
@@ -101,9 +114,9 @@ class SearchResult extends Component {
                     </div>
 
                 </section>
-              {
-                  this.state.property !== null && this.state.property.map(this.mapping)
-              }
+                {
+                    this.state.property.length > 0 && this.state.property.map(this.mapping)
+                }
             </div>
         )
     }

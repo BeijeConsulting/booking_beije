@@ -20,7 +20,6 @@ import { routes } from '../../../../../../routes/routes';
 // styles
 import './SearchForm.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
-import { eventBus } from '../../../../../../eventBus/eventBus';
 
 const arrTest = [
    { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },
@@ -48,12 +47,10 @@ class SearchForm extends Component {
       this.dateFormat = 'YYYY-MM-DD';
    }
 
-   setNumberOfGuests = (e) => {
-      this.bookingData.posti_letto = e;
-      console.log(this.bookingData["posti_letto"]);
-      // return e;
-   }
-
+   // setNumberOfGuests = (e) => {
+   //    this.bookingData.posti_letto = e;
+   //    console.log(this.bookingData["posti_letto"]);
+   // }
 
    objToString(obj) {
 
@@ -83,22 +80,24 @@ class SearchForm extends Component {
          longitudine: null,
          radius: 10,
       }
-      eventBus.onListening('guests', this.setNumberOfGuests);
+      this.bookingData.posti_letto = this.props.guestDuck.guest
       console.log(this.bookingData);
       let [latitude, longitude] = this.props.positionDuck.coordinates;
       coordinate.latitudine = latitude;
       coordinate.longitudine = longitude;
 
 
-      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify( coordinate )).then(res =>
-         console.log(res.data)
-         // this.props.router.navigate(routes.SEARCH, {
-         //    state: res?.data
-         // })
+      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify(coordinate)).then(res =>
+         this.props.router.navigate(routes.SEARCH, {
+            state: res?.data
+         })
       ).catch(error => error)
-      // this.props.router.navigate(routes.SEARCH, {
-      //    state: this.bookingData
-      // })
+      this.props.router.navigate(routes.SEARCH, {
+         state: {
+            data: this.bookingData,
+            coordinate: coordinate
+         }
+      })
    }
 
    handleSelect = (e) => {
@@ -146,7 +145,8 @@ class SearchForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   positionDuck: state.positionDuck
+   positionDuck: state.positionDuck,
+   guestDuck: state.guestDuck
 })
 
 export default connect(mapStateToProps)(withRouting(SearchForm));

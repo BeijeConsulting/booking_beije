@@ -7,12 +7,14 @@ import tokenDuck from './ducks/tokenDuck';
 import userDuck from './ducks/userDuck';
 import addressDuck from './ducks/addressDuck';
 import positionDuck from './ducks/positionDuck';
+import guestDuck from './ducks/guestDuck';
 
 const rootReducer = combineReducers({
     tokenDuck,
     userDuck,
     addressDuck,
-    positionDuck
+    positionDuck,
+    guestDuck
 });
 
 

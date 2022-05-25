@@ -70,7 +70,7 @@ export async function getApi(resource, header = null) {
 export async function getSearchApi(resource, body, header = null) {
   //function for get api call
   return axiosInstance
-    .get(resource, body, {
+    .get(resource, {
       headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
