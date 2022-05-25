@@ -3,15 +3,18 @@ $upperright_width: 100px;
 $card_height: 150px;
 
 .h_card_container {
-    margin: 1rem 2rem;
-    background-color: #EADDD4;
-    border-radius: 1rem;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
     padding: 1rem;
     display: flex;
-    cursor: pointer;
+    background-color: #EADDD4;
+    border-radius: 1rem;
+    margin: .5rem 0 0 .5rem;
+    //align-items: center;
 
     .card_img {
-        max-height: $card_height;
+        max-height: 150px;
         aspect-ratio: 1/1;
         object-fit: cover;
         border-radius: .5rem;
@@ -31,29 +34,49 @@ $card_height: 150px;
 
     .card_main {
         display: flex;
-        height: calc($card_height - 2rem); //same as card_img
+        justify-content: space-between;
+        //height: calc($card_height - 2rem); //same as card_img
 
         .left_col {
             flex-basis: calc(100% - $upperright_width);
         }
 
-        .right_col {
+        /* .right_col {
             width: $upperright_width;
             text-align: end;
+        } */
+    }
+
+    .subtitle_and_text {
+        display: flex;
+        flex-direction: column;
+        .card_text {
+            //max-height: 4rem;
+            word-break: break-all;
+            // next: need to add truncate to text, therefore a height should be set
+            /* white-space: wrap;
+        overflow: hidden;
+        text-overflow: ellipsis; */
         }
     }
 
-    .card_text {
-        max-height: 4rem;
-        word-break: break-all;
-        // next: need to add truncate to text, therefore a height should be set
-        /* white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis; */
-    }
+
 
     .card_footer {
         display: flex;
-        justify-content: flex-end;
+        //justify-content: flex-end;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .h_card_container {
+        flex-direction: column;
+        justify-content: center;
+
+        .card_img {
+            margin: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {}

@@ -9,6 +9,16 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { Button } from "antd";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faPen,
+    faTrashCan,
+    faHotel,
+    faApartment,
+    faHouse
+} from '@fortawesome/free-solid-svg-icons'
+
+
 const PendingAnnounceList = () => {
     const obj = [
         {
@@ -35,7 +45,7 @@ const PendingAnnounceList = () => {
         }, {
             img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
             title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
+            text: "Casa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a Savona"
         },
     ]
 
@@ -71,13 +81,25 @@ const renderPendingAnnounces = (announce, key) => {
         altText={`${key}_${announce.title}`}
         title={announce.title}
         text={announce.text}
-        
+        upperRightContent={
+            <>
+                <FontAwesomeIcon className="icon_edit" icon={faPen} />
+                <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
+            </>
+        }
         /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
         footerContent={
-            <>
-                <Button type="primary">Accept</Button>
-                <Button type="primary">Decline</Button>
-            </>
+            <div className="footer_container">
+                <div className="left">
+                    <p>FEDERICO FRASCà</p>
+                    <p>124782487683</p>
+                </div>
+                <div className="right">
+                    <Button className="pending_button" type="primary">Accept</Button>
+                    <Button className="pending_button" type="primary">Decline</Button>
+                </div>
+            </div>
+
         }
     />
 }
