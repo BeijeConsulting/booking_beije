@@ -11,7 +11,7 @@ function UiSelect(props) {
 
    return (
       <>
-         <select name={props.name} className={props.cssClass} onChange={onChangeCallback}>
+         <select disabled={props.selected} name={props.name} className={props.cssClass} onChange={onChangeCallback}>
             {props.data.map(props.renderingCallback(props.name))}
          </select>
       </>
@@ -19,7 +19,8 @@ function UiSelect(props) {
 }
 
 UiSelect.defaultProps = {
-   renderingCallback: renderSelectOptions
+   renderingCallback: renderSelectOptions,
+   selected: false
 }
 
 UiSelect.propTypes = {

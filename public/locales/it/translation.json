@@ -57,7 +57,8 @@
       "city": "Città",
       "country": "Stato",
       "zipCode": "Codice postale",
-      "suggestedApartaments": "Appartamenti consigliati"
+      "suggestedApartaments": "Appartamenti consigliati",
+      "bookNow": "Prenota adesso!"
    },
    "toasts": {
       "formErrorAllFields": "Compila tutti i campi",

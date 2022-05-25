@@ -54,7 +54,8 @@
       "writeMessage": "Write your message here...",
       "you": "You",
       "zipCode": "ZIP code",
-      "suggestedApartaments": "Suggested apartament"
+      "suggestedApartaments": "Suggested apartament",
+      "bookNow": "Prenota adesso!"
    },
    "toasts": {
       "formErrorAllFields": "Please, fill in all fields",

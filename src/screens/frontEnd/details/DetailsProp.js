@@ -39,6 +39,8 @@ import ContactHost from "../../../components/frontEnd/classComponents/pageCompon
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
+import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 
 let checkOutArray = []
 let arrayToCheckout = []
@@ -61,12 +63,14 @@ const DetailsProp = () => {
       const properties = await strutturaDetailIdGetApi(id, getLocalStorage('token'))
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
-      console.log(properties, services, rooms)
+      const review = await reviewsOnStrutturaIdGetApi(id)
+      console.log(properties, services, rooms, review)
       setState({
         ...state,
         property: properties?.data,
         serviceList: services?.data,
-        roomsList: rooms?.data
+        roomsList: rooms?.data,
+        reviewsList: review?.data
       })
       console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
@@ -126,7 +130,16 @@ const DetailsProp = () => {
     />
   }
 
+  const generateReviews = (item, key) => {
 
+    return <ReviewCard
+      key={key}
+      username={`${item.user_id?.name} ${item.user_id?.surname}`}
+      title={item.booking_id.annuncio?.descrizione}
+      reviewDescription={item.text}
+      rating={item.score}
+    />
+  }
 
   return (
     <>
@@ -155,7 +168,7 @@ const DetailsProp = () => {
         <DetailsPropRoom />
       </Modal>
 
-      {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
+      {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
         <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
         <div className="padding_page">
           <h2>{state.property?.nome_struttura}</h2>
@@ -180,12 +193,20 @@ const DetailsProp = () => {
             <p>Total {state.checkOutPrice}&euro;</p>
             <UiButton
               callback={goToCheckout}
-              label={"Book Now!"} />
+              label={t("common.bookNow")} />
           </div>
           <div className="map_container">
-            {/* <Map ></Map> */}
+            <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
+              <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            </MapContainer>
           </div>
-          <div className="review_container"></div>
+          <div className="review_container">
+            {state.reviewsList?.map(generateReviews)}
+          </div>
         </div>
       </div>}
     </>
