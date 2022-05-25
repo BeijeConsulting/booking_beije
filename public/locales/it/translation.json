@@ -60,6 +60,7 @@
       "suggestedApartaments": "Appartamenti consigliati"
    },
    "toasts": {
+      "favouritesDeleted": "non è più tra i tuoi preferiti",
       "formErrorAllFields": "Compila tutti i campi",
       "formErrorEmail": "Inserisci una mail valida",
       "formErrorPassword": "Inserisci una password di almeno 8 caratteri, con almeno un simbolo",
