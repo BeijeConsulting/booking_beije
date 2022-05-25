@@ -19,7 +19,7 @@ const routes = {
     DETAILSPROPROOM: 'detailsproperty/rooms/:id',
 
     //all
-    CHECKOUT: 'checkout',
+    CHECKOUT: '/checkout',
     NOTFOUND: '*',
     SEARCH: '/search',
     MRA: 'mostreviewedBuilding',
