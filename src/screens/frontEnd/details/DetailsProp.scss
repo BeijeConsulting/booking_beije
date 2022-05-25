@@ -1,11 +1,36 @@
+@import '../../../assets/variables/globalVariables.scss';
 .property_container {
+    background-color: $black_primary;
     .padding_page {
-        padding: 0 7vw;
+        padding: 3rem 7vw;
     }
-
-    .structure_img_property {
+    .container_img_property{
         width: 100%;
-        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60vh;
+    }
+    .structure_img_property {
+        width: 50%;
+        height: 100%;
         object-fit: cover;
+        border-radius: 1rem;
+        padding: .5rem 0 0 .5rem;
+    }
+    .container_structure_img_property_secondary{
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+        justify-content: space-around;
+        align-content: space-between;
+        padding: 0 .5rem 0 0;
+    }
+    .structure_img_property_secondary{
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+        padding: .5rem 0 0 .5rem;
+        border-radius: 1rem;
     }
 }

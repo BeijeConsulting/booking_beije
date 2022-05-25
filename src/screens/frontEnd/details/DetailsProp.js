@@ -51,7 +51,7 @@ const DetailsProp = () => {
 
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ3MjcyNSwiZXhwIjoxNjUzNDc2MzI1fQ.UzRLVJRqtravqjWY0hfFm5zX3sFtzLzPCJvwMWZuSWw")
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY2FycGFuZHJlYS4xOTk2QGhvdG1haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE2NTM0ODcyMzksImV4cCI6MTY1MzQ5MDgzOX0.1msrPwOgb_E0XvmTEO4Z4EX-S2ppjakwrVOfidLZtYs")
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       console.log(properties, services, rooms)
@@ -140,7 +140,15 @@ const DetailsProp = () => {
       </Modal>
 
       {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
-        <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+        <div className="container_img_property">
+          <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+          <div className="container_structure_img_property_secondary">
+            <img className="structure_img_property_secondary" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+            <img className="structure_img_property_secondary" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+            <img className="structure_img_property_secondary" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+            <img className="structure_img_property_secondary" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+          </div>
+        </div>
         <div className="padding_page">
           <h2>{state.property?.nome_struttura}</h2>
           <div className="property_core_info_container">
