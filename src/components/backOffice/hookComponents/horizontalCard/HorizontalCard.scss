@@ -50,6 +50,7 @@ $card_height: 150px;
     .subtitle_and_text {
         display: flex;
         flex-direction: column;
+
         .card_text {
             //max-height: 4rem;
             word-break: break-all;
@@ -75,6 +76,7 @@ $card_height: 150px;
 
         .card_img {
             margin: 0;
+            max-height: 300px;
         }
     }
 }
