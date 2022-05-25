@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 // module
 import { Helmet } from "react-helmet";
 
+//css
+import "./DetailsProp.scss";
+
 //hooks
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -27,10 +30,12 @@ import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
+import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 
 let checkOutArray = []
 
 const DetailsProp = () => {
+  let arrayToCheckout = []
   const [state, setState] = useState({
     property: null,
     serviceList: null,
@@ -44,7 +49,7 @@ const DetailsProp = () => {
 
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ2NjI2MiwiZXhwIjoxNjUzNDY5ODYyfQ.QVnhW8j91eqCx0iAJmgj8j_T3NaABfebpf0u7bMUAzg")
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ3MjcyNSwiZXhwIjoxNjUzNDc2MzI1fQ.UzRLVJRqtravqjWY0hfFm5zX3sFtzLzPCJvwMWZuSWw")
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       console.log(properties, services, rooms)
@@ -70,19 +75,24 @@ const DetailsProp = () => {
     })
   }
 
-  const addToCheckOut = (temp_id, isSelected, price) => {
-
-    isSelected ? checkOutArray[temp_id] = undefined : checkOutArray[temp_id] = price;
-    console.log('chka', checkOutArray);
+  const addToCheckOut = (temp_id, isSelected, obj) => {
+    isSelected ? checkOutArray[temp_id] = undefined : checkOutArray[temp_id] = {
+      ...obj,
+      price: obj.price * obj.count
+    };
     let totalPrice = 0
     for (let index = 0; index < checkOutArray.length; index++) {
-      if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index]
+      if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index].price
     }
     setState({
       ...state,
       checkOutPrice: totalPrice
     })
-    console.log('totalPrice', totalPrice);
+
+    arrayToCheckout = checkOutArray.filter((element) => {
+      return element !== undefined;
+    })
+    console.log(arrayToCheckout)
   }
 
   const generateRooms = (item, key) => {
@@ -106,11 +116,11 @@ const DetailsProp = () => {
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
-      <button
+      {/*  <button
         onClick={() => setState({ ...state, isDetailsRoom: true })}
       >
         bau
-      </button>
+      </button> */}
       <Modal
         callback={handleClose('isContactHost')}
         isOpen={state.isContactHost}
@@ -128,26 +138,32 @@ const DetailsProp = () => {
       </Modal>
 
       {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
-        <img></img>
-        <h2>{state.property?.nome_struttura}</h2>
-        <div className="property_core_info_container">
-          <div className="location_review">
-            <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
-            <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
+        <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+        <div className="padding_page">
+          <h2>{state.property?.nome_struttura}</h2>
+          <div className="property_core_info_container">
+            <div className="location_review">
+              <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
+              <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
+            </div>
+            <div className="checkout_in_date">
+              <span>{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+            </div>
           </div>
-          <div className="checkout_in_date">
-            <span>{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+          <div className="description_container">
+            <h3>{t("common.description")}</h3>
+            <p>{state.property?.descrizione}</p>
+          </div>
+          {/* regole da aggiungere appena pronte */}
+          <div className="room_container">
+            {state.roomsList?.map(generateRooms)}
+          </div>
+          <div className="total_price_container">
+            <p>Total {state.checkOutPrice}&euro;</p>
+            <UiButton
+              label={"Book Now!"} />
           </div>
         </div>
-        <div className="description_container">
-          <h3>{t("common.description")}</h3>
-          <p>{state.property?.descrizione}</p>
-        </div>
-        {/* regole da aggiungere appena pronte */}
-        <div className="room_container">
-          {state.roomsList?.map(generateRooms)}
-        </div>
-        <p>{state.checkOutPrice}</p>
       </div>}
     </>
   );

@@ -8,6 +8,7 @@ import UiButton from '../ui/buttons/uiButtons/UiButton';
 import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
 import UiSelect from '../ui/uiSelect/UiSelect';
 
+let selectValue = 1
 function Rooms(props) {
     const { t } = useTranslation();
     const [state, setState] = useState({
@@ -33,18 +34,26 @@ function Rooms(props) {
     }
     const generateMaxRooms = () => {
         let arrayData = []
-        for (let index = 1; index < props.count + 1; index++) {
+        for (let index = 1; index <= props.count; index++) {
             arrayData.push(index)
         }
-        // console.log('select', props.count, arrayData)
         return arrayData;
     }
+
+    const handleNumberOfRooms = (e) => {
+        selectValue = e;
+    }
+
 
     const selectedButton = () => {
         setState({
             selected: !state.selected
         })
-        props.callback(props.temp_id, state.selected, props.price)
+        props.callback(props.temp_id, state.selected, {
+            price: props.price,
+            title: props.title,
+            count: selectValue
+        })
     }
     /* The following css class structure is optimized to be used with flex */
     return (
@@ -69,7 +78,10 @@ function Rooms(props) {
 
                     />
                     <UiSelect
-                        data={generateMaxRooms()} />
+                        data={generateMaxRooms()}
+                        callback={handleNumberOfRooms}
+                    />
+
                 </div>
             </div>
         </div>
