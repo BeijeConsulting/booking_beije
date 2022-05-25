@@ -27,7 +27,7 @@ import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 
-let checkOutArray = 0
+let checkOutArray = []
 
 const DetailsProp = () => {
   const [state, setState] = useState({
