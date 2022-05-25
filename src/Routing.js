@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setToken } from "./redux/ducks/tokenDuck";
 
+import { myProfilesGetApi } from './services/api/user/userApi'
 // routes
 import { routes } from "./routes/routes";
 
@@ -54,13 +55,17 @@ import { logout } from "./utils/user/user";
 
 function Routing(props) {
     useEffect(() => {
-        if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-            logout();
-            let token = getLocalStorage('token')
-            props.dispatch(setToken(token))
-            props.dispatch(setUser())
-        }
-        
+        (async () => {
+            if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
+                logout();
+                let token = getLocalStorage('token')
+                props.dispatch(setToken(token))
+                const res = await myProfilesGetApi(token);
+                props.dispatch(setUser(res.data))
+            }
+        })()
+
+
     }, []);
 
 
@@ -93,7 +98,7 @@ function Routing(props) {
 
                 <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
                     <ProtectedRoute>
-                        <Chat/>
+                        <Chat />
                     </ProtectedRoute>
                 }
                 >
