@@ -27,39 +27,36 @@ import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 
+let checkOutArray = 0
+
 const DetailsProp = () => {
   const [state, setState] = useState({
     property: null,
     serviceList: null,
     roomsList: null,
-    isOpen: false
+    isOpen: false,
+    checkOutList: []
   })
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQwNDk5NCwiZXhwIjoxNjUzNDA4NTk0fQ.-KxYMOissoXNS0a-noRefEi283pF6ppHzAj3TsiWJCE")
+      const properties = await strutturaDetailIdGetApi(id, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXRoQGhvc3QiLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCIsIkFETUlOIl0sImlhdCI6MTY1MzQ2NjI2MiwiZXhwIjoxNjUzNDY5ODYyfQ.QVnhW8j91eqCx0iAJmgj8j_T3NaABfebpf0u7bMUAzg")
       const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       console.log(properties, services, rooms)
       setState({
+        ...state,
         property: properties?.data,
         serviceList: services?.data,
         roomsList: rooms?.data
       })
       console.log(state)
+      checkOutArray = Array.apply(null, Array(rooms?.data));
     })()
   }, [])
 
   const { t } = useTranslation();
-
-  const generateServices = (item, key) => {
-    //completare una volta sistemata la lista dei servizi
-    return <Service
-      key={key}
-      serviceId={1}
-    />
-  }
 
   const generateRooms = (item, key) => {
 
@@ -69,6 +66,10 @@ const DetailsProp = () => {
       title={item?.titolo}
       price={item?.prezzo}
       count={item?.count}
+      temp_id={key}
+      callback={(item) => {
+        console.log(item)
+      }}
     /* services={} da far aggiungere a BE*/
     /* numberOfNights={} da far aggiungere a BE*/
     />
@@ -111,10 +112,6 @@ const DetailsProp = () => {
           <h3>{t("common.description")}</h3>
           <p>{state.property?.descrizione}</p>
         </div>
-        <div className="service_container">
-          {state.serviceList?.map(generateServices)}
-        </div>
-        {/* regole da aggiungere appena pronte */}
         <div className="room_container">
           {state.roomsList?.map(generateRooms)}
         </div>
