@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Rooms.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { faInfoCircle, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faUser, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import UiButton from '../ui/buttons/uiButtons/UiButton';
@@ -10,7 +10,9 @@ import UiSelect from '../ui/uiSelect/UiSelect';
 
 function Rooms(props) {
     const { t } = useTranslation();
-
+    const [state, setState] = useState({
+        selected: false
+    })
 
 
     const generateServicesIcon = ((service, index) => {
@@ -37,6 +39,13 @@ function Rooms(props) {
         // console.log('select', props.count, arrayData)
         return arrayData;
     }
+
+    const selectedButton = () => {
+        setState({
+            selected: !state.selected
+        })
+        props.callback(props.temp_id, state.selected)
+    }
     /* The following css class structure is optimized to be used with flex */
     return (
         <div className='rooms_card_container'>
@@ -55,7 +64,9 @@ function Rooms(props) {
                 </div>
                 <div className='ui_components_container'>
                     <UiButton
-                        label={t("common.select")}
+                        label={(state.selected === true ? 'checked' : '') + ' ' + 'selected'}
+                        callback={selectedButton}
+
                     />
                     <UiSelect
                         data={generateMaxRooms()} />
