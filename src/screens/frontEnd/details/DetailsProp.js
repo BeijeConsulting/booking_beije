@@ -37,7 +37,8 @@ const DetailsProp = () => {
     roomsList: null,
     isContactHost: false,
     isDetailsRoom: false,
-    checkOutList: []
+    checkOutList: [],
+    checkOutPrice: 0
   })
   const { id } = useParams();
 
@@ -54,19 +55,11 @@ const DetailsProp = () => {
         roomsList: rooms?.data
       })
       console.log(state)
-      checkOutArray = Array.apply(null, Array(rooms?.data));
+      checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
 
   const { t } = useTranslation();
-
-  const generateServices = (item, key) => {
-    //completare una volta sistemata la lista dei servizi
-    return <Service
-      key={key}
-      serviceId={1}
-    />
-  }
 
 
 
@@ -77,8 +70,19 @@ const DetailsProp = () => {
     })
   }
 
-  const addToCheckOut = (temp_id, isSelected) => {
-    console.log(temp_id, isSelected)
+  const addToCheckOut = (temp_id, isSelected, price) => {
+
+    isSelected ? checkOutArray[temp_id] = undefined : checkOutArray[temp_id] = price;
+    console.log('chka', checkOutArray);
+    let totalPrice = 0
+    for (let index = 0; index < checkOutArray.length; index++) {
+      if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index]
+    }
+    setState({
+      ...state,
+      checkOutPrice: totalPrice
+    })
+    console.log('totalPrice', totalPrice);
   }
 
   const generateRooms = (item, key) => {
@@ -93,6 +97,9 @@ const DetailsProp = () => {
       callback={addToCheckOut}
     />
   }
+
+
+
   return (
     <>
       {console.log(state)}
@@ -136,13 +143,11 @@ const DetailsProp = () => {
           <h3>{t("common.description")}</h3>
           <p>{state.property?.descrizione}</p>
         </div>
-        <div className="service_container">
-          {state.serviceList?.map(generateServices)}
-        </div>
         {/* regole da aggiungere appena pronte */}
         <div className="room_container">
           {state.roomsList?.map(generateRooms)}
         </div>
+        <p>{state.checkOutPrice}</p>
       </div>}
     </>
   );
