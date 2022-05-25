@@ -18,7 +18,8 @@ const HorizontalCard = (props) => {
         subtitle,
         text,
         upperRightContent,
-        footerContent
+        footerContentLeft,
+        footerContentRight
     } = props
 
     const handleCardClick = (e) => {
@@ -65,14 +66,25 @@ const HorizontalCard = (props) => {
 
 
                 {/* Card Footer, typically contains primary/secondary buttons */}
-                {footerContent &&
 
-                    <div className={"card_footer"}>
-                        {footerContent}
+                {
+                    (footerContentLeft && footerContentRight) &&
+                    < div className={"card_footer_right_and_left"}>
+                        {footerContentLeft}
+                        {footerContentRight}
                     </div>
                 }
+
+                {
+                    (!footerContentLeft && footerContentRight) &&
+                    < div className={"card_footer_right"}>
+                        {footerContentRight}
+                    </div>
+                }
+
+
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -89,7 +101,8 @@ HorizontalCard.propTypes = {
     text: PropTypes.string,
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
-    footerContent: PropTypes.any,
+    footerContentLeft: PropTypes.any,
+    footerContentRight: PropTypes.any,
 
 }
 
