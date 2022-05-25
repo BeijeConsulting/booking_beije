@@ -109,7 +109,7 @@ const DetailsProp = () => {
             <DetailsPropRoom />
          </Modal>
 
-         {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
+         {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
             <img></img>
             <h2>{state.property?.nome_struttura}</h2>
             <div className="property_core_info_container">
