@@ -36,6 +36,7 @@ function Rooms(props) {
         for (let index = 1; index < props.count + 1; index++) {
             arrayData.push(index)
         }
+        // console.log('select', props.count, arrayData)
         return arrayData;
     }
 

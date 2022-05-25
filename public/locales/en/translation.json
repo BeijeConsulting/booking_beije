@@ -23,6 +23,7 @@
       "country": "Country",
       "description": "Description",
       "email": "Email",
+      "emptyChat": "Empty chat",
       "english": "English",
       "home": "Home",
       "insertTitle": "Insert title",
@@ -37,9 +38,11 @@
       "password": "Password",
       "passwordConfirm": "Confirm password",
       "photos": "Photos",
+      "price": "Price",
       "rate":"Rate",
       "registerLabel": "Register",
       "registration": "Registration",
+      "research": "Research",
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
       "save": "Save",
@@ -199,7 +202,11 @@
             "alarm": "Alarm"
          }
       },
-      "modals": {},
+      "modals": {
+         "filter": {
+            "apply": "Apply filters"
+         }
+      },
       "screens": {
          "guestAccount": {
             "becomeAHost": "Become a host"
@@ -229,6 +236,10 @@
             "pending": "Pending",
             "planned": "Planned",
             "refused": "Rejected"
+         },
+         "searchResult": {
+            "filterButton": "Filters",
+            "mapButton": "Map"
          }
       }
    }

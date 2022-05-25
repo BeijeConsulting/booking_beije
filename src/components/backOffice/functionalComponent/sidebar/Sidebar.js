@@ -6,7 +6,7 @@ import { routes } from "../../../../routes/routes";
 import { eventBus } from "../../../../eventBus/eventBus";
 
 //ANT Design
-import { Menu } from "antd";
+import { Menu, Button } from "antd";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";
@@ -22,13 +22,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const goTo = (path) => {
-    navigate(path)
-  }
+    navigate(path);
+  };
 
   return (
     <>
@@ -65,6 +65,6 @@ const Sidebar = () => {
       />
     </>
   );
-}
+};
 
 export default Sidebar;

@@ -49,22 +49,18 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
+import { logout } from "./utils/user/user";
 
 
 function Routing(props) {
     useEffect(() => {
         if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
+            logout();
             let token = getLocalStorage('token')
             props.dispatch(setToken(token))
             props.dispatch(setUser())
-            console.log(getLocalStorage('token'));
         }
-        // setLocalStorage(
-        //   "token",
-        //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbXSwiaWF0IjoxNjUyODgxMTEwLCJleHAiOjE2NTI4ODQ3MTB9.bq9aH8E9m0_t2x8NdT5Wknug7Yi-dXluMXqWLbPddBs"
-        // );
-
-        // da qui in poi avete il token per fare tutte le chimate
+        
     }, []);
 
 

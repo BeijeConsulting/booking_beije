@@ -103,10 +103,10 @@ const Bookings = (props) => {
       <Helmet>
         <title>{t("common.bookings")}</title>
       </Helmet>
-      <button onClick={() => setState({
+      {/* <button onClick={() => setState({
         ...state,
         isOpen: !state.isOpen
-      })}>bau</button>
+      })}>bau</button> */}
       <Modal 
       callback={handleClose} 
       isOpen={state.isOpen}>

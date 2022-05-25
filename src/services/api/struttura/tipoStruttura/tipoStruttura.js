@@ -1,6 +1,6 @@
 /* The following API are sorted by AUTH then with the following priority: GET->POST->PUT->PATCH->DELETE  */
 
-import { getApi, deleteApi, putApi, postApi } from '../../genericServices'
+import { getApi, deleteApi, putApi, postApi } from '../../../genericServices';
 
 const searchTipoStrutturabyStringGetApi = async (str) => {
     return await getApi(`searchTipoStruttura/search/${str}`);

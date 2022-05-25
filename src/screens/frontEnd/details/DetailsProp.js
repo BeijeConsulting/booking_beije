@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { strutturaDetailIdGetApi } from "../../../services/api/struttura/strutturaApi";
 
 //localstorage
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,6 +26,7 @@ import Service from '../../../components/frontEnd/services/Service';
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+import DetailsPropRoom from "./DetailsPropRoom";
 
 let checkOutArray = []
 
@@ -34,7 +35,8 @@ const DetailsProp = () => {
     property: null,
     serviceList: null,
     roomsList: null,
-    isOpen: false,
+    isContactHost: false,
+    isDetailsRoom: false,
     checkOutList: []
   })
   const { id } = useParams();
@@ -58,11 +60,28 @@ const DetailsProp = () => {
 
   const { t } = useTranslation();
 
-  const generateRooms = (item, key) => {
+  const generateServices = (item, key) => {
+    //completare una volta sistemata la lista dei servizi
+    return <Service
+      key={key}
+      serviceId={1}
+    />
+  }
 
-    const addToCheckOut = (temp_id, isSelected) => {
-      console.log(temp_id, isSelected)
-    }
+
+
+  const handleClose = (params) => () => {
+    setState({
+      ...state,
+      [params]: false
+    })
+  }
+
+  const addToCheckOut = (temp_id, isSelected) => {
+    console.log(temp_id, isSelected)
+  }
+
+  const generateRooms = (item, key) => {
 
     return <Rooms
       key={key}
@@ -72,30 +91,33 @@ const DetailsProp = () => {
       count={item?.count}
       temp_id={key}
       callback={addToCheckOut}
-    /* services={} da far aggiungere a BE*/
-    /* numberOfNights={} da far aggiungere a BE*/
     />
   }
-
-  const handleClose = () => {
-    setState({
-      ...state,
-      isOpen: !state.isOpen
-    })
-  }
-
   return (
     <>
       {console.log(state)}
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
+      <button
+        onClick={() => setState({ ...state, isDetailsRoom: true })}
+      >
+        bau
+      </button>
       <Modal
-        callback={handleClose}
-        isOpen={state.isOpen}
+        callback={handleClose('isContactHost')}
+        isOpen={state.isContactHost}
         classNameCustom={'modal contact-host-modal'}
       >
         <ContactHost />
+      </Modal>
+
+      <Modal
+        callback={handleClose("isDetailsRoom")}
+        isOpen={state.isDetailsRoom}
+        classNameCustom={'modal contact-host-modal'}
+      >
+        <DetailsPropRoom />
       </Modal>
 
       {state.property === null || '' ? <p>{t("fe.screen.propertyDetails.noProperty")}</p> : <div className="property_container">
@@ -114,6 +136,10 @@ const DetailsProp = () => {
           <h3>{t("common.description")}</h3>
           <p>{state.property?.descrizione}</p>
         </div>
+        <div className="service_container">
+          {state.serviceList?.map(generateServices)}
+        </div>
+        {/* regole da aggiungere appena pronte */}
         <div className="room_container">
           {state.roomsList?.map(generateRooms)}
         </div>
