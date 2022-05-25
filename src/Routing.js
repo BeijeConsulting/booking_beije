@@ -25,6 +25,7 @@ import MostRewApart from "./screens/frontEnd/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
+import Checkout from "./screens/frontEnd/Checkout";
 
 //Screen backOffice
 import ReservationCalendar from "./screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar";
@@ -51,6 +52,7 @@ import HostRegistration from "./screens/backOffice/host/registration/hostRegistr
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
 import { logout } from "./utils/user/user";
+
 
 
 function Routing(props) {
@@ -131,6 +133,8 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
+
+                <Route path={routes.CHECKOUT} element={<Checkout />} />
 
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />

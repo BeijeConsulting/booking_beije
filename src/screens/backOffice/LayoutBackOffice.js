@@ -57,10 +57,6 @@ const LayoutBackOffice = () => {
   };
 
   const routeWithoutSidebar = () => {
-    // if(location.pathname.replaceAll("/", "") !== "dashboard"){
-    //   return true
-    // }
-
     switch (location.pathname.replaceAll("/", "")) {
       case "dashboard":
         return false

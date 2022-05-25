@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import moment from "moment";
 
-import {routes} from '../../../../../routes/routes'
+import { routes } from "../../../../../routes/routes";
 
 import {
   Form,
@@ -16,6 +16,7 @@ import {
   Col,
 } from "antd";
 import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
+import SearchAddress from "../../../../../components/backOffice/hookComponents/searchAddress/SearchAddress";
 
 import GoBackButton from "../../../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import { useLocation } from "react-router-dom";
@@ -57,8 +58,8 @@ const StructureOperation = () => {
     // }
   }, []);
 
+  // PER FORM ANT
   const onFinish = (values) => {
-    console.log("Success:", values);
     setState({ ...state, values });
     // CONTROLLARE, IMMAGINI NON GESTITE
     /* {
@@ -70,12 +71,52 @@ const StructureOperation = () => {
     console.log("Failed:", errorInfo);
   };
 
+  // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
     setState({
       data: {
         ...state.data,
         fotoStructure: value,
       },
+    });
+  };
+
+  const getAddressObject = (addressObj) => {
+    let splittedAddress = addressObj.value.split(", ");
+    const [city, province, region, zipCode, country] =
+      splittedAddress.slice(-5);
+    let address = splittedAddress.slice(0, -4);
+
+    let houseNumber = splittedAddress[0];
+
+    let firstPartHouseNumber = houseNumber.slice(0, -1);
+    let secondPartHouseNumber = houseNumber.slice(-1);
+
+    if (!isNaN(parseInt(secondPartHouseNumber))) {
+      houseNumber = `${firstPartHouseNumber}${secondPartHouseNumber}`;
+      address.shift();
+    } else {
+      if (!isNaN(parseInt(firstPartHouseNumber))) {
+        houseNumber = `${firstPartHouseNumber}${secondPartHouseNumber}`;
+        address.shift();
+      } else {
+        houseNumber = 0;
+      }
+    }
+
+    address = address.join(", ");
+
+    setState({
+      ...state,
+      houseNumber: houseNumber,
+      address: address,
+      latitudine: addressObj.coo.lat,
+      longitudine: addressObj.coo.lon,
+      city: city,
+      province: province,
+      region: region,
+      zipCode: zipCode,
+      country: country,
     });
   };
 
@@ -103,22 +144,23 @@ const StructureOperation = () => {
           }}
         >
           <div>
-            <GoBackButton route={`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`} />
-            <h1>{`${location.state.idStructure === null ? "Inserisci" : "Modifica"
-              } Annuncio`}</h1>
+            <GoBackButton
+              route={`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`}
+            />
+            <h1>{`${
+              location.state.idStructure === null ? "Inserisci" : "Modifica"
+            } Annuncio`}</h1>
           </div>
 
           <Form.Item
             label={t("common.photos")}
             name="photos"
-            rules={[
-              {
-                required: true,
-                message: t(
-                  "toasts.operationPhotos"
-                ),
-              },
-            ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: t("toasts.operationPhotos"),
+            //   },
+            // ]}
           >
             <UploadFoto addFotoStructure={onChangeFoto} />
           </Form.Item>
@@ -130,9 +172,7 @@ const StructureOperation = () => {
               rules={[
                 {
                   required: true,
-                  message: t(
-                    "toasts.operationAnnounce"
-                  ),
+                  message: t("toasts.operationAnnounce"),
                 },
               ]}
             >
@@ -147,9 +187,7 @@ const StructureOperation = () => {
               rules={[
                 {
                   required: true,
-                  message: t(
-                    "toasts.operationCategory"
-                  ),
+                  message: t("toasts.operationCategory"),
                 },
               ]}
             >
@@ -169,13 +207,14 @@ const StructureOperation = () => {
               rules={[
                 {
                   required: true,
-                  message: t(
-                    "toasts.operationDescription"
-                  ),
+                  message: t("toasts.operationDescription"),
                 },
               ]}
             >
-              <TextArea name="description" placeholder={t("common.description")} />
+              <TextArea
+                name="description"
+                placeholder={t("common.description")}
+              />
             </Form.Item>
           </Row>
 
@@ -183,49 +222,47 @@ const StructureOperation = () => {
             <Col className="gutter-row">
               <Form.Item
                 label={t("common.address")}
-                name="address"
-                rules={[
-                  {
-                    required: true,
-                    message: t(
-                      "toasts.operationAddress"
-                    ),
-                  },
-                ]}
+                // name="address"
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: t("toasts.operationAddress"),
+                //   },
+                // ]}
               >
-                <Input name="address" placeholder={t("common.address")} />
+                {/* <Input name="address" placeholder={t("common.address")} /> */}
+                <SearchAddress
+                  placeholder={t("common.address")}
+                  callback={getAddressObject}
+                />
               </Form.Item>
             </Col>
 
-            <Col className="gutter-row">
+            {/* <Col className="gutter-row">
               <Form.Item
                 label={t("common.city")}
                 name="city"
                 rules={[
                   {
                     required: true,
-                    message: t(
-                      "toasts.operationCity"
-                    ),
+                    message: t("toasts.operationCity"),
                   },
                 ]}
               >
                 <Input name="city" placeholder={t("common.city")} />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
 
           <Row gutter={16}>
-            <Col className="gutter-row">
+            {/* <Col className="gutter-row">
               <Form.Item
                 label={t("common.country")}
                 name="country"
                 rules={[
                   {
                     required: true,
-                    message: t(
-                      "toasts.operationCountry"
-                    ),
+                    message: t("toasts.operationCountry"),
                   },
                 ]}
               >
@@ -240,15 +277,13 @@ const StructureOperation = () => {
                 rules={[
                   {
                     required: true,
-                    message: t(
-                      "toasts.operationZipCode"
-                    ),
+                    message: t("toasts.operationZipCode"),
                   },
                 ]}
               >
                 <InputNumber name="zipCode" placeholder={t("common.zipCode")} />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
 
           <Row gutter={16}>
@@ -259,9 +294,7 @@ const StructureOperation = () => {
                 rules={[
                   {
                     required: true,
-                    message: t(
-                      "toasts.operationCheckIn"
-                    ),
+                    message: t("toasts.operationCheckIn"),
                   },
                 ]}
               >
@@ -275,19 +308,20 @@ const StructureOperation = () => {
                 rules={[
                   {
                     required: true,
-                    message: t(
-                      "toasts.operationCheckOut"
-                    ),
+                    message: t("toasts.operationCheckOut"),
                   },
                 ]}
               >
-                <TimePicker name="checkOut" placeholder={t("common.checkOut")} />
+                <TimePicker
+                  name="checkOut"
+                  placeholder={t("common.checkOut")}
+                />
               </Form.Item>
             </Col>
           </Row>
 
           <Button type="primary" htmlType="submit">
-            {t('common.submit')}
+            {t("common.submit")}
           </Button>
         </Form>
       )}
