@@ -68,7 +68,7 @@ const HostRegistration = () => {
         console.log(values);
         console.log(userType);
         alert("Utente registrato correttamente")
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/new`, {state: { idStructure: null }})
+        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/new`, { state: { idStructure: null } })
         phone = values.user.phoneNumber
         city = values.user.city
         postcode = values.user.postcode
@@ -97,12 +97,10 @@ const HostRegistration = () => {
     };
 
 
-
-
     return (
         <>
             {state.displayRegistration &&
-                <div>
+                <div className='host_type_pick'>
                     <h2>{t("bo.screens.host.hostRegistration.title")}</h2>
                     <div className="host_choice" onClick={setHostType(1)}>{t("bo.screens.host.hostRegistration.privateRegistration")}</div> {/* to onClik parameter define type of host */}
                     <div className="host_choice" onClick={setHostType(2)}>{t("bo.screens.host.hostRegistration.companyRegistration")}</div> {/* to onClik parameter define type of host */}
