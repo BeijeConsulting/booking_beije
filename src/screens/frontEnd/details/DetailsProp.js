@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 
 //css
 import "./DetailsProp.scss";
+// REACT LEAFLET
+import { MapContainer, Marker } from 'react-leaflet';
 
 //hooks
 import { useTranslation } from "react-i18next";
@@ -163,6 +165,8 @@ const DetailsProp = () => {
             <UiButton
               label={"Book Now!"} />
           </div>
+          <div className="map_container"></div>
+          <div className="review_container"></div>
         </div>
       </div>}
     </>
