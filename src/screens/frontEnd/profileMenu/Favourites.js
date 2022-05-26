@@ -59,7 +59,7 @@ const Favourites = () => {
    const showToast = (propertyId, propertyName) => {
       const key = `${propertyId}-toast`;
       notification.open({
-         description: t('toasts.favouritesDeleted', {name: propertyName}),
+         description: t('toasts.favouritesDeleted', { name: propertyName }),
          onClick: () => {
             notification.close(key)
          },
@@ -82,15 +82,27 @@ const Favourites = () => {
       })
    }
 
+   let favouritesRendering;
+   if (state.favourites && state.favourites.length > 0) {
+      favouritesRendering = wrapperMap(FavouriteCard, state.favourites, handleFavourite);
+   } else {
+      favouritesRendering = <p>{t('fe.screens.favourites.noFavourites')}</p>
+   }
+
    return (
       <>
          <Helmet>
             <title>{t('fe.screens.settings.settingsCard.favourites')}</title>
          </Helmet>
          <div className='favourites-page flex column'>
-           
+            {
+               state.windowWidth < 991 &&
+               <div className="back-button"><GoBackButton /></div>
+            }
+
             <h1 className="title">{t('fe.screens.settings.settingsCard.favourites')}</h1>
-            {wrapperMap(FavouriteCard, state.favourites, handleFavourite)}
+
+            {favouritesRendering}
 
             {state.favourites.length > 5 &&
                <Pagination

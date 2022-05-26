@@ -23,8 +23,9 @@ import { signInPostApi } from '../../../../services/api/auth/authApi'
 //localstorage
 import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 import { setUser } from '../../../../redux/ducks/userDuck';
-import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
+import { checkMail } from '../../../../utils/validationForm/validation';
 import { notification } from 'antd';
+import { myProfilesGetApi } from '../../../../services/api/user/userApi';
 
 
 let formObject = {
@@ -88,21 +89,31 @@ function LoginForm(props) {
          })
    }
 
+   const profile = (res) => {
+      props.dispatch(setUser(res?.data))
+   }
+
+   const error = (error) => {
+      if (error?.response?.status === 401) {
+         openNotification(t('toasts.formErrorApi'), 'info-toast');
+      }
+   }
+
    const response = res => {
       openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
       setLocalStorage("token", res.data.token);
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));
-      props.dispatch(setUser())
+      myProfilesGetApi(res.data.token).then(profile).catch(error)
       {
          props.isCheckout === true ? navigate(routes.CHECKOUT, {
             state: {
                property: props.checkoutProperty,
                checkOut: props.checkoutList
             }
-         }) 
-         : 
-         navigate(routes.LAYOUT)
+         })
+            :
+            navigate(routes.LAYOUT)
       };
    }
 
@@ -112,11 +123,7 @@ function LoginForm(props) {
 
       if (!Object.values(errors).includes(true)) {
 
-         signInPostApi(formObject).then(response).catch((error) => {
-            if (error?.response?.status === 401) {
-               openNotification(t('toasts.formErrorApi'), 'info-toast');
-            }
-         })
+         signInPostApi(formObject).then(response).catch(error)
       }
    }
 

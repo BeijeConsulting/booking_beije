@@ -213,6 +213,9 @@
          }
       },
       "screens": {
+         "favourites": {
+            "noFavourites": "No favourites to show"
+         },
          "guestAccount": {
             "becomeAHost": "Become a host"
          },
