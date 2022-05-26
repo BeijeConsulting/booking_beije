@@ -9,6 +9,7 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { Button } from "antd";
 
+
 const PendingAnnounceList = () => {
     const obj = [
         {
@@ -35,7 +36,7 @@ const PendingAnnounceList = () => {
         }, {
             img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
             title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
+            text: "Casa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a Savona"
         },
     ]
 
@@ -52,6 +53,35 @@ const PendingAnnounceList = () => {
         paginationCallback: switchToPage
     }
 
+
+    const testCardOnClick = (e) => {
+        console.log("CARD CLICK")
+    }
+
+    const renderPendingAnnounces = (announce, key) => {
+        return <HorizontalCard
+            key={`${key}-${randomKey()}`}
+            imageSrc={announce.img}
+            altText={`${key}_${announce.title}`}
+            title={announce.title}
+            text={announce.text}
+            callback={testCardOnClick}
+            /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
+            footerContentLeft={
+                <div className="left">
+                    <p>FEDERICO FRASCà</p>
+                    <p>124782487683</p>
+                </div>
+            }
+
+            footerContent={
+                <div className="right">
+                    <Button className="pending_button" type="primary" onClick={() => console.log('ACCEPT')}>Accept</Button>
+                    <Button className="pending_button" type="primary" onClick={() => console.log('DECLINE')}>Decline</Button>
+                </div>
+            }
+        />
+    }
     return (
         <>
             <CardList
@@ -64,21 +94,5 @@ const PendingAnnounceList = () => {
     )
 }
 
-const renderPendingAnnounces = (announce, key) => {
-    return <HorizontalCard
-        key={`${key}-${randomKey()}`}
-        imageSrc={announce.img}
-        altText={`${key}_${announce.title}`}
-        title={announce.title}
-        text={announce.text}
-        
-        /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
-        footerContent={
-            <>
-                <Button type="primary">Accept</Button>
-                <Button type="primary">Decline</Button>
-            </>
-        }
-    />
-}
+
 export default PendingAnnounceList;
