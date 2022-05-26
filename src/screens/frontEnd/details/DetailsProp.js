@@ -227,7 +227,7 @@ const DetailsProp = () => {
                 </MapContainer>
               </div>
               <div className="review_container">
-                {state.reviewsList?.map(generateReviews)}
+                {state.reviewsList && state.reviewsList.map(generateReviews)}
               </div>
             </div>
 
