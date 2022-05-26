@@ -3,7 +3,6 @@ $upperright_width: 100px;
 $card_height: 150px;
 
 .h_card_container {
-    cursor: pointer;
     height: 100%;
     width: 100%;
     padding: 1rem;
@@ -12,9 +11,9 @@ $card_height: 150px;
     border-radius: 1rem;
     margin: .5rem 0;
     transition: transform .5s;
-    //align-items: center;
 
     .card_img {
+        cursor: pointer;
         max-height: 150px;
         aspect-ratio: 1/1;
         object-fit: cover;
@@ -38,14 +37,6 @@ $card_height: 150px;
         justify-content: space-between;
         //height: calc($card_height - 2rem); //same as card_img
 
-        .left_col {
-            flex-basis: calc(100% - $upperright_width);
-        }
-
-        /* .right_col {
-            width: $upperright_width;
-            text-align: end;
-        } */
     }
 
     .subtitle_and_text {
@@ -53,20 +44,22 @@ $card_height: 150px;
         flex-direction: column;
 
         .card_text {
-            //max-height: 4rem;
-            word-break: break-all;
-            // next: need to add truncate to text, therefore a height should be set
-            /* white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis; */
+            word-wrap: break-all;
         }
     }
 
 
 
-    .card_footer {
+    .card_footer_right_and_left {
+        z-index: 99;
+        align-items: end;
         display: flex;
-        //justify-content: flex-end;
+        justify-content: space-between;
+    }
+
+    .card_footer_right {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
@@ -83,7 +76,12 @@ $card_height: 150px;
             margin: 0;
             max-height: 300px;
         }
+
+        .card_footer_right_and_left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
     }
 }
-
-@media screen and (max-width: 992px) {}
