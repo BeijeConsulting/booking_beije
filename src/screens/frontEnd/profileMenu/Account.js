@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //icon
 import { t } from "i18next";
 import { Helmet } from "react-helmet";
@@ -13,6 +13,7 @@ import './profileMenuCSS/Account.scss'
 import '../../../assets/variables/_common.scss'
 
 import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 let uName
 let uSurname
@@ -27,7 +28,8 @@ const Account = (props) => {
     surname: null,
     email: null,
     password: null,
-    user: []
+    user: [],
+    windowWidth: window.innerWidth
   });
 
 
@@ -50,6 +52,18 @@ const Account = (props) => {
 
   /*}, []) */
 
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  })
+
+  function handleResize() {
+    setState({
+      ...state,
+      windowWidth: window.innerWidth
+    })
+  }
 
   const editProfile = () => {
     // console.log("cambiate credenziali");
@@ -106,7 +120,10 @@ const Account = (props) => {
       <Helmet>
         <title>{t("common.account")}</title>
       </Helmet>
-
+      {
+        state.windowWidth < 991 &&
+        <div className="back-button"><GoBackButton /></div>
+      }
       <div className="header_container flex jcSpaceB mx1">
         <h1>Ciao, {objToValue.name}!</h1>
         <div>

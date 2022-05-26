@@ -55,10 +55,9 @@ const DetailsProp = () => {
     isDetailsRoom: false,
     checkOutList: [],
     checkOutPrice: 0,
-    reviewsList : null,
-    windowWidth: window.innerWidth,
-
-    isLoading: false
+    reviewsList: null,
+    isLoading: true,
+    windowWidth: window.innerWidth
   })
 
   const { id } = useParams();
@@ -74,7 +73,7 @@ const DetailsProp = () => {
         property: properties?.data,
         roomsList: rooms?.data.list,
         reviewsList: review?.data,
-        isLoading: true
+        isLoading: false
       })
       console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
@@ -156,8 +155,8 @@ const DetailsProp = () => {
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
-
-      {state.isLoading &&
+      {state.isLoading && <h1>Caricamento...</h1>}
+      {!state.isLoading &&
         <div>
           <Modal
             callback={handleClose('isContactHost')}
@@ -207,7 +206,7 @@ const DetailsProp = () => {
                 </div>
               </div>
 
-              {/* regole da aggiungere appena pronte */}
+
               <div className="room_container">
                 {state.roomsList?.map(generateRooms)}
               </div>

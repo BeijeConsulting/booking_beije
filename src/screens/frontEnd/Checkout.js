@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //RRD
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 
 //COMPONENTS
 import LoginForm from '../../components/frontEnd/hookComponents/loginForm/LoginForm'
+import GoBackButton from "../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 const Checkout = () => {
 
@@ -19,10 +20,24 @@ const Checkout = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const [state, setState] = useState({ windowWidth: window.innerWidth })
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  })
+
+
   let checkoutPropertyInfo = location.state.property
   let checkoutArrayList = location.state.checkOut
 
-  console.log('property info:', checkoutPropertyInfo)
+
+  function handleResize() {
+    setState({
+      ...state,
+      windowWidth: window.innerWidth
+    })
+  }
 
   const goToPayment = () => { }
 
@@ -43,6 +58,10 @@ const Checkout = () => {
         <title>Checkout</title>
       </Helmet>
       <div className="checkout-container">
+        {
+          state.windowWidth < 991 &&
+          <div className="back-button"><GoBackButton /></div>
+        }
 
         <h1>Checkout</h1>
 
@@ -69,7 +88,7 @@ const Checkout = () => {
             <button onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button>
             :
             <div className="checkout-login-form">
-              <LoginForm isCheckout={true} checkoutProperty={checkoutPropertyInfo} checkoutList={checkoutArrayList}/>
+              <LoginForm isCheckout={true} checkoutProperty={checkoutPropertyInfo} checkoutList={checkoutArrayList} />
             </div>
         }
 
