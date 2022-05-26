@@ -53,6 +53,9 @@ function Navbar(props) {
         isLogIn: false
     })
 
+    console.log(props.propertyDuck.property);
+    console.log(props.userDuck.user);
+
     useEffect(isLogIn, [getLocalStorage('token')])
 
     function isLogIn() {
@@ -206,6 +209,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     tokenDuck: state.tokenDuck,
-    userDuck: state.userDuck
+    userDuck: state.userDuck,
+    propertyDuck: state.propertyDuck,
 })
 export default connect(mapStateToProps)(Navbar);

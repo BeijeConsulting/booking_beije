@@ -52,6 +52,8 @@ import HostRegistration from "./screens/backOffice/host/registration/hostRegistr
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
 import { logout } from "./utils/user/user";
+import { setProperty } from "./redux/ducks/propertyDuck";
+import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
 
 
 
@@ -60,10 +62,12 @@ function Routing(props) {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
                 logout();
-                let token = getLocalStorage('token')
-                props.dispatch(setToken(token))
-                const res = await myProfilesGetApi(token);
-                props.dispatch(setUser(res.data))
+                let token = getLocalStorage('token');
+                props.dispatch(setToken(token));
+                const PROFILE = await myProfilesGetApi(token);
+                const PROPERTY = await showAllStruttureGetApi();
+                props.dispatch(setUser(PROFILE?.data));
+                props.dispatch(setProperty(PROPERTY?.data?.list));
             }
         })()
 

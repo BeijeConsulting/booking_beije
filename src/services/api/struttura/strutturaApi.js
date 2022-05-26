@@ -2,8 +2,8 @@
 
 import { getApi, putApi, postApi } from '../../genericServices'
 
-const showAllStruttureGetApi = async () => {
-    return await getApi(`showAllStrutture`);
+const showAllStruttureGetApi = async (itemsPerPage = 10, page = 1) => {
+    return await getApi(`showAllStrutture?itemsPerPage=${itemsPerPage}&page=${page}`);
 }
 
 /* AUTH:HOST */

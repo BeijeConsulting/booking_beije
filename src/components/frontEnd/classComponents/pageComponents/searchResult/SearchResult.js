@@ -19,6 +19,7 @@ import Map from '../../../hookComponents/map/Map';
 import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
 import Filter from '../../../hookComponents/filter/Filter';
 import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
+import { Pagination } from 'antd';
 
 
 
@@ -123,6 +124,11 @@ class SearchResult extends Component {
                 {
                     this.state.property.length > 0 && this.state.property.map(this.mapping)
                 }
+
+                <div>
+                    <Pagination
+                    />
+                </div>
             </div>
         )
     }
