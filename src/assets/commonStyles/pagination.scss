@@ -1,0 +1,67 @@
+@import '../variables/globalVariables.scss';
+
+.fe-pagination {
+   margin-top: 3rem;
+}
+
+.fe-pagination.ant-pagination.mini .ant-pagination-prev, 
+.fe-pagination.ant-pagination.mini .ant-pagination-next,
+.fe-pagination.ant-pagination.mini .ant-pagination-item {
+   border: 0;
+   margin: 0 0.2rem;
+   min-width: 1.7rem;
+   height: 1.7rem;
+   line-height: 1.7rem;
+}
+
+.fe-pagination .ant-pagination-item,
+.fe-pagination.ant-pagination.mini .ant-pagination-item:not(.ant-pagination-item-active) {
+   background-color: $white_primary;
+   border-radius: 50%;
+}
+
+.fe-pagination.ant-pagination.mini .ant-pagination-item:not(.ant-pagination-item-active):hover {
+   background-color: $white_primary_light;
+}
+
+.fe-pagination .ant-pagination-prev:not(.ant-pagination-disabled):hover, 
+.fe-pagination .ant-pagination-next:not(.ant-pagination-disabled):hover {
+   opacity: .7;
+}
+
+.fe-pagination li:not([class*="active"],.ant-pagination-disabled):hover,
+.fe-pagination li:not([class*="active"],.ant-pagination-disabled):hover a {
+   cursor: pointer;
+}
+
+.fe-pagination .ant-pagination-item {
+   font-weight: 700;
+}
+
+.fe-pagination .ant-pagination-item-active {
+   background-color: $secondary_dark;
+   cursor: default;
+}
+
+.fe-pagination .ant-pagination-prev,
+.fe-pagination .ant-pagination-next,
+.fe-pagination .ant-pagination-jump-prev,
+.fe-pagination .ant-pagination-jump-next, 
+.fe-pagination .ant-pagination-item a {
+   color: $black_primary;
+}
+
+.fe-pagination .ant-pagination-disabled .ant-pagination-item-link, 
+.fe-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
+   color: $black_primary_light;
+}
+
+.fe-pagination .ant-pagination-item-active {
+   border: 0;
+}
+
+.fe-pagination li,
+.fe-pagination a {
+   text-decoration: none;
+   cursor: default;
+}
