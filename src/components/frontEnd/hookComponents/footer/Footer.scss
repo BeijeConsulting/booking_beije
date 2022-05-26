@@ -1,24 +1,27 @@
-@import "../../../../assets/variables/globalVariables.scss";
+@use "../../../../assets/variables/globalVariables.scss" as var;
 
-footer{
-    background-color: $white_primary;
-    color: $black_primary;
+footer {
+    background-color: var.$secondary_lighter;
+    color: var.$black_primary;
     padding: 4vh 7vw;
-    .container_links_footer{
+
+    .container_links_footer {
         display: flex;
         justify-content: space-between;
         margin-bottom: 3rem;
     }
-    ul{
+
+    ul {
         padding-inline: 0;
     }
-    ul li{
+
+    ul li {
         list-style: none;
         cursor: pointer;
         margin: .5rem 0;
-        font-size: 1.4rem;
     }
-    .disclaimer_container_footer{
+
+    .disclaimer_container_footer {
         margin-top: 2rem;
         // font-size: x-small;
         color: $black_primary;
@@ -29,11 +32,12 @@ footer{
         //     margin-right: 1rem;
         // }
     }
+
     .becomeHost {
-        background-color: $primary;
+        background-color: var.$primary;
         padding: 0.5rem;
         width: 200px;
-        color: $white_primary;
+        color: var.$white_primary;
         border-radius: 2rem;
         font-size: 1.2rem;
         // border: none;
@@ -47,13 +51,13 @@ footer{
 
 
 @media all and (max-width:480px) {
-    footer{
+    footer {
         padding-bottom: 19vh;
     }
 }
 
-@media all and (max-width:360px){
-    footer .container_links_footer{
+@media all and (max-width:360px) {
+    footer .container_links_footer {
         flex-direction: column;
     }
 }

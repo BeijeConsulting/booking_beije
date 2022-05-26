@@ -41,7 +41,7 @@ const Favourites = () => {
    const showToast = (propertyId, propertyName) => {
       const key = `${propertyId}-toast`;
       notification.open({
-         description: `"${propertyName}" has been deleted from your favourites`,
+         description: `"${propertyName}" ${t('toasts.favouritesDeleted')}`,
          onClick: () => {
             notification.close(key)
          },
