@@ -208,6 +208,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     tokenDuck: state.tokenDuck,
-    userDuck: state.userDuck
+    userDuck: state.userDuck,
+    propertyDuck: state.propertyDuck,
 })
 export default connect(mapStateToProps)(Navbar);

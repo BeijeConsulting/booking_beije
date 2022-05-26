@@ -1,6 +1,3 @@
-import { myProfilesGetApi } from '../../services/api/user/userApi'
-import { getLocalStorage } from '../../utils/localStorage/localStorage';
-
 const SET_USER = 'web/user/SET_USER';
 const INIT_USER = 'web/user/INIT_USER';
 
@@ -36,7 +33,6 @@ export default function userDuck(state = INIT_STATE, action) {
     switch (action.type) {
         case SET_USER:
             newState = Object.assign({}, state);
-            // myProfilesGetApi(getLocalStorage('token')).then(res => newState.user = res.data);
             newState.user = action.payload.user;
             
             return newState;

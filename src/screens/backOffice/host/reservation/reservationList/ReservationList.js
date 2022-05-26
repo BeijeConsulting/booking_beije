@@ -88,7 +88,7 @@ const ReservationList = () => {
     },
   ];
 
-  const showCalendar = (e) => {};
+  const showCalendar = (e) => { };
 
   const showAccepted = () => {
     //api get accepted

@@ -11,12 +11,11 @@ import '../../../assets/variables/_common.scss';
 import SearchButton from "../../../components/frontEnd/funcComponents/ui/searchButton/SearchButton";
 import Modal from "../../../components/common/modal/Modal";
 import SearchForm from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm";
-import Filter from "../../../components/frontEnd/hookComponents/filter/Filter";
 
 const Homepage = () => {
 
    const [state, setState] = useState({
-      isOpen: false
+      isOpen: false,
    });
 
    const { t } = useTranslation();
@@ -39,7 +38,6 @@ const Homepage = () => {
             <title>{t("common.home")}</title>
          </Helmet>
 
-         <Filter />
          <Modal isOpen={state.isOpen} callback={handleClick}  >
             <SearchForm />
          </Modal>

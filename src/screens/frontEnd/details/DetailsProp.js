@@ -54,13 +54,14 @@ const DetailsProp = () => {
     isContactHost: false,
     isDetailsRoom: false,
     checkOutList: [],
-    checkOutPrice: 0
+    checkOutPrice: 0,
+    isLoading: false
   })
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
-      const properties = await strutturaDetailIdGetApi(id, getLocalStorage('token'))
+      const properties = await strutturaDetailIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
       console.log(properties, 'stazmne', rooms, review)
@@ -68,7 +69,8 @@ const DetailsProp = () => {
         ...state,
         property: properties?.data,
         roomsList: rooms?.data.list,
-        reviewsList: review?.data
+        reviewsList: review?.data,
+        isLoading: true
       })
       console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
@@ -138,7 +140,6 @@ const DetailsProp = () => {
 
   return (
     <>
-      {console.log(state)}
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
@@ -147,63 +148,68 @@ const DetailsProp = () => {
       >
         bau
       </button> */}
-      <Modal
-        callback={handleClose('isContactHost')}
-        isOpen={state.isContactHost}
-        classNameCustom={'modal contact-host-modal'}
-      >
-        <ContactHost />
-      </Modal>
+      {state.isLoading &&
+        <div>
+          <Modal
+            callback={handleClose('isContactHost')}
+            isOpen={state.isContactHost}
+            classNameCustom={'modal contact-host-modal'}
+          >
+            <ContactHost />
+          </Modal>
 
-      <Modal
-        callback={handleClose("isDetailsRoom")}
-        isOpen={state.isDetailsRoom}
-        classNameCustom={'modal contact-host-modal'}
-      >
-        <DetailsPropRoom />
-      </Modal>
+          <Modal
+            callback={handleClose("isDetailsRoom")}
+            isOpen={state.isDetailsRoom}
+            classNameCustom={'modal contact-host-modal'}
+          >
+            <DetailsPropRoom />
+          </Modal>
+          {console.log(state.isLoading)}
+          {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
+            <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
+            <div className="padding_page">
+              <h2>{state.property?.nome_struttura}</h2>
+              <div className="property_core_info_container">
+                <div className="location_review">
+                  <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
+                  <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
+                </div>
+                <div className="checkout_in_date">
+                  <span>{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+                </div>
+              </div>
+              <div className="description_container">
+                <h3>{t("common.description")}</h3>
+                <p>{state.property?.descrizione}</p>
+              </div>
+              {/* regole da aggiungere appena pronte */}
+              <div className="room_container">
+                {state.roomsList?.map(generateRooms)}
+              </div>
+              <div className="total_price_container">
+                <p>Total {state.checkOutPrice}&euro;</p>
+                <UiButton
+                  callback={goToCheckout}
+                  label={t("common.bookNow")} />
+              </div>
+              <div className="map_container">
+                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
+                  <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                </MapContainer>
+              </div>
+              <div className="review_container">
+                {state.reviewsList?.map(generateReviews)}
+              </div>
+            </div>
 
-      {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
-        <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
-        <div className="padding_page">
-          <h2>{state.property?.nome_struttura}</h2>
-          <div className="property_core_info_container">
-            <div className="location_review">
-              <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
-              <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
-            </div>
-            <div className="checkout_in_date">
-              <span>{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
-            </div>
-          </div>
-          <div className="description_container">
-            <h3>{t("common.description")}</h3>
-            <p>{state.property?.descrizione}</p>
-          </div>
-          {/* regole da aggiungere appena pronte */}
-          <div className="room_container">
-            {state.roomsList?.map(generateRooms)}
-          </div>
-          <div className="total_price_container">
-            <p>Total {state.checkOutPrice}&euro;</p>
-            <UiButton
-              callback={goToCheckout}
-              label={t("common.bookNow")} />
-          </div>
-          <div className="map_container">
-            <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
-              <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-            </MapContainer>
-          </div>
-          <div className="review_container">
-            {state.reviewsList?.map(generateReviews)}
-          </div>
+          </div>}
         </div>
-      </div>}
+      }
     </>
   );
 };

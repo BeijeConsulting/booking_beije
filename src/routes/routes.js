@@ -15,7 +15,7 @@ const routes = {
     ACCOUNT: '/account',
 
     //details
-    DETAILSPROP: 'detailsproperty/:id',
+    DETAILSPROP: '/detailsproperty/:id',
     DETAILSPROPROOM: 'detailsproperty/rooms/:id',
 
     //all
