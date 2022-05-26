@@ -10,6 +10,10 @@ import { randomKey } from "../../../../../utils/generalIteration/generalIteratio
 import { Button } from "antd";
 
 
+import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 const PendingAnnounceList = () => {
     const obj = [
         {
@@ -67,18 +71,24 @@ const PendingAnnounceList = () => {
             text={announce.text}
             callback={testCardOnClick}
             /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
+            upperRightContent={
+                <>
+                    <FontAwesomeIcon className="icon_edit" icon={faPen} />
+                    <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
+                </>
+            }
             footerContentLeft={
-                <div className="left">
+                <>
                     <p>FEDERICO FRASCà</p>
                     <p>124782487683</p>
-                </div>
+                </>
             }
 
             footerContent={
-                <div className="right">
+                <>
                     <Button className="pending_button" type="primary" onClick={() => console.log('ACCEPT')}>Accept</Button>
                     <Button className="pending_button" type="primary" onClick={() => console.log('DECLINE')}>Decline</Button>
-                </div>
+                </>
             }
         />
     }
