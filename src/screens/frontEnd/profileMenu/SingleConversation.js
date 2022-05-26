@@ -76,7 +76,7 @@ const SingleConversation = (props) => {
       let obj = {
         annuncioId: params.id,
         contenuto: inputMessage,
-        receiverId: state.msgArray[0]?.insertion?.struttura.host.user.id
+        receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
       }
 
 
@@ -101,13 +101,15 @@ const SingleConversation = (props) => {
 
   }
 
+  console.log('what is this?: ', state?.msgArray[0]?.insertion?.struttura?.host?.user?.id)
+
   // function to submit on click in icon 
   const submitMessageOnSendPress = () => {
     let objcopy = Object.assign({}, state)
     let obj = {
       annuncioId: params.id,
       contenuto: inputMessage,
-      receiverId: state.msgArray[0].insertion.struttura.host.user.id
+      receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
     }
 
 
@@ -131,12 +133,11 @@ const SingleConversation = (props) => {
 
   // render chat 
   function renderConversation(mess, key) {
-
     return (
 
-      <div key={key} className={(mess.sender.id !== props.userDuck.user.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
+      <div key={key} className={(mess.sender.id !== props.userDuck.user.utente.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
-          (mess.sender.id !== props.userDuck.user.id) ? mess.insertion.titolo : t('common.you')
+          (mess.sender.id !== props.userDuck.user.utente.id) ? mess.insertion.titolo : t('common.you')
         }
         </div>
         <p>{mess.text}</p>
