@@ -3,8 +3,9 @@ import { useNavigate } from "react-router";
 // translation 
 import { useTranslation } from 'react-i18next';
 
-// less 
+// scss 
 import './Navbar.scss';
+import '../../../../assets/variables/_common.scss';
 
 import LanguagesSwitch from "../../../common/languagesSwitch/LanguagesSwitch";
 
@@ -111,8 +112,9 @@ function Navbar(props) {
         props.dispatch(initToken());
         removeLocalStorage("token");
         removeLocalStorage("refreshToken");
-        setState({...state,
-            isMenuOpen : false
+        setState({
+            ...state,
+            isMenuOpen: false
         })
         vector(routes.LAYOUT);
     }
@@ -122,24 +124,24 @@ function Navbar(props) {
             {
                 //MOBILE
                 props.stateLayout < 480 ?
-                    <nav className="navMobile">
+                    <nav className="navMobile fixed b0 w100 flex jcSpaceA aiCenter">
                         <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                         <Modal isOpen={state.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
 
                         {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
-                        <img className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
+                        <img className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
 
                         {
                             state.isLogIn ?
-                                <img className="iconIfLogged" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
-                                <img className="iconNotLogged" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
+                                <img className="iconIfLogged ofC brr50" onClick={goTo('SETTINGS')} src={LoggedUser} alt=""></img> :
+                                <img className="iconNotLogged ofC br50" onClick={goTo('LOGIN')} src={notLoggedUser} alt="user"></img>
                         }
                     </nav>
                     //DESKTOP
                     : <>
-                        <nav className="navDesktop">
+                        <nav className="navDesktop t0 w100 flex jcSpaceB aiCenter relative">
                             <div>
-                                <img onClick={goTo('HOME')} className="iconIfLogged" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
+                                <img onClick={goTo('HOME')} className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
                                 <LanguagesSwitch />
                             </div>
 
@@ -150,23 +152,23 @@ function Navbar(props) {
 
                                     <>{
                                         state.isMenuOpen === false ?
-                                            < div className="hambMenu" >
+                                            < div className="hambMenu flex br2 cursor" >
                                                 <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} onClick={handleNavMenu} />
                                                 {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
-                                                <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
                                             </div>
 
                                             : <>
-                                                <div className="hambMenu">
+                                                <div className="hambMenu flex br2 cursor">
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} onClick={handleNavMenu} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
-                                                    <img className="phUser" src={LoggedUser} alt="profileUser" />
+                                                    <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
                                                 </div>
                                             </>
                                     }
                                     </>
                                     :
-                                    <span className="go_to_login" onClick={goTo('LOGIN')}>Login</span>
+                                    <span className="go_to_login cursor" onClick={goTo('LOGIN')}>Login</span>
                             }
                         </nav>
                         {
@@ -196,7 +198,7 @@ function Navbar(props) {
 }
 
 Navbar.defaultProps = {
-    cssCustomMenu: 'settingOpen'
+    cssCustomMenu: 'settingOpen w100 flex wrap jcSpaceB aiCenter absolute'
 }
 
 // propTypes 

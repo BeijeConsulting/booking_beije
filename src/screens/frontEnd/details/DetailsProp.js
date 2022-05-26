@@ -61,15 +61,13 @@ const DetailsProp = () => {
   useEffect(() => {
     (async () => {
       const properties = await strutturaDetailIdGetApi(id, getLocalStorage('token'))
-      const services = await serviceStruttureIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
-      console.log(properties, services, 'stazmne', rooms, review)
+      console.log(properties, 'stazmne', rooms, review)
       setState({
         ...state,
         property: properties?.data,
-        serviceList: services?.data,
-        roomsList: rooms?.data,
+        roomsList: rooms?.data.list,
         reviewsList: review?.data
       })
       console.log(state)

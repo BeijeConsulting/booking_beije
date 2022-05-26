@@ -6,8 +6,7 @@ import { withTranslation } from 'react-i18next';
 
 // style
 import './SearchResult.scss';
-
-// components
+import '../../../../../assets/variables/_common.scss';
 import SearchButton from '../../../funcComponents/ui/searchButton/SearchButton';
 import Helmet from 'react-helmet';
 import Card from '../../../funcComponents/card/Card';
@@ -115,11 +114,11 @@ class SearchResult extends Component {
 
                 {/* end modals */}
 
-                <section className='ButtonContainer'>
+                <section className='ButtonContainer flex column jcCenter aiCenter'>
                     <SearchButton
                         callback={this.handleButton("isSearch")}
                     />
-                    <div>
+                    <div className='w100 flex jcSpaceA'>
 
                         <UiButton className="becomeHost"
                             callback={this.handleButton("isFilter")}

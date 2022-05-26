@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // style
 import './PropertyCard.scss';
-import { getStructureImage } from '../../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
+// import { getStructureImage } from '../../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
+import '../../../../../assets/variables/_common.scss';
 
 class PropertyCard extends Component {
     constructor(props) {
@@ -29,9 +30,9 @@ class PropertyCard extends Component {
     render() {
         return (
             <>
-                <section className='propertyCardContainer'>
+                <section className='propertyCardContainer flex relative aiCenter'>
                     {/* <img src={this.state.image}/> */}
-                    <img src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"}/> 
+                    <img className='ofC' src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"}/>
                     <div>
                         <h4>{this.props?.data?.nome_struttura}</h4>
                         <small>{this.props?.data?.tipologiaStrutturaId?.tipo}</small>
@@ -43,7 +44,7 @@ class PropertyCard extends Component {
                         {/* <h4>{this.props.t()}</h4> */}
                     </div>
 
-                    <span>prezzo</span>
+                    <span className='absolute r0 b0'>prezzo</span>
                     {/* <span>{this.props.t()}</span> */}
                 </section>
             </>

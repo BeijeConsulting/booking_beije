@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 
 // styles
 import './RegistrationForm.scss';
+import '../../../../assets/variables/_common.scss';
 
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
@@ -145,9 +146,9 @@ function RegistrationForm(props) {
 
    return (
       <section className="bg-color">
-         <div className="form-container container flex column space">
+         <div className="container flex column">
 
-            <div className="flex center column">
+            <div className="flex jcCenter aiCenter column">
                <div className="w">LOGO</div>
                {/* <Logo></Logo> */}
             </div>
@@ -160,12 +161,12 @@ function RegistrationForm(props) {
                <FormInput placeholder={t("common.password")} info="password" type="password" callback={handleChange("password")} />
                <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" type="password" callback={handleChange("confirmPassword")} />
                <div className="terms-container">
-                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
+                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="vaM right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
                </div>
-               <div className="flex center column">
-                  <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
+               <div className="flex jcCenter aiCenter column">
+                  <FormButton className="btn-primary m0 bNone br2" label={t("common.registerLabel")} callback={handleSubmit} />
                   <span className="w">{t('common.or')}</span>
-                  <UiButton className="btn-secondary button-link" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
+                  <UiButton className="btn-secondary button-link bNone bgNone" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
                </div>
             </form>
 

@@ -7,6 +7,7 @@ import { routes } from "../../../routes/routes";
 import { useNavigate } from "react-router-dom";
 // less 
 import './Homepage.scss'
+import '../../../assets/variables/_common.scss';
 import SearchButton from "../../../components/frontEnd/funcComponents/ui/searchButton/SearchButton";
 import Modal from "../../../components/common/modal/Modal";
 import SearchForm from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm";
@@ -40,12 +41,12 @@ const Homepage = () => {
          <Modal isOpen={state.isOpen} callback={handleClick}  >
             <SearchForm />
          </Modal>
-         <div className="home">
+         <div className="home oY2 oX1 w100 flex aiCenter jcCenter column">
             <SearchButton callback={handleClick} />
-            <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
-            <div className="suggested-container">
-               <h3>{t("common.suggestedApartaments")}</h3>
-               <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
+            <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
+            <div className="suggested-container relative">
+               <h3 className="absolute">{t("common.suggestedApartaments")}</h3>
+               <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
             </div>
          </div>
       </>

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 // style
 import './Card.scss';
+import '../../../../assets/variables/_common.scss';
 
 function Card({children}) {
   return (
-    <div className='cardLayout'>
+    <div className='cardLayout br2 p1'>
         {
             children
         }
