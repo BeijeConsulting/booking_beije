@@ -26,142 +26,17 @@ import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
+import withRouting from '../../../../../withRouting/withRouting';
 
 
 
 class SearchResult extends Component {
 
-   // constructor(props) {
-   //    super(props)
-   //    this.state = {
-   //       property: [],
-   //       isFilter: false,
-   //       isMap: false,
-   //       isSearch: false,
-   //       data: this.props.data,
-   //       page: 1
-   //    }
-   // }
-
-   // componentDidMount() {
-   //    this.getapi();
-   // }
-
-   // componentDidUpdate(prevProps, prevState) {
-   //    if (this.state.page !== prevState.page) {
-   //       showAllStruttureGetApi(5, this.state.page).then(res =>
-   //          this.setState({
-   //             property: res?.data?.list
-   //          }))
-
-   //    }
-   // }
-
-   // async getapi() {
-   //    const response = await showAllStruttureGetApi(5, this.state.page);
-   //    // console.log(response.data);
-   //    this.setState({
-   //       property: response.data.list
-   //    })
-   //    // console.log(this.state.property);
-   // }
-
-   // handleButton = (params) => () => {
-   //    this.setState({
-   //       [params]: !this.state[params]
-   //    })
-   // }
-
-   // onPageChange = (page) => {
-   //    this.setState({
-   //       page: page
-   //    })
-   // }
-
-   // mapping = (item, key) => {
-   //    return (
-   //       <Card
-   //          key={`${key}- ${item?.indirizzo?.citta}`}
-   //       >
-   //          <PropertyCard
-   //             data={item}
-   //          />
-   //       </Card>
-   //    )
-   // }
-
-   // render() {
-   //    return (
-   //       <div className='researchContainer'>
-   //          <Helmet>
-   //             <title>{this.props.t("common.research")}</title>
-   //          </Helmet>
-
-   //          {/* modals */}
-
-   //          <Modal
-   //             callback={this.handleButton("isFilter")}
-   //             isOpen={this.state.isFilter}
-   //          >
-   //             <Filter />
-   //          </Modal>
-
-   //          <Modal
-   //             callback={this.handleButton("isMap")}
-   //             isOpen={this.state.isMap}
-   //          >
-   //             <Map />
-   //          </Modal>
-
-   //          <Modal
-   //             isOpen={this.state.isSearch}
-   //             callback={this.handleButton("isSearch")}  >
-   //             <SearchForm />
-   //          </Modal>
-
-   //          {/* end modals */}
-
-   //          <section className='ButtonContainer flex column jcCenter aiCenter'>
-   //             <SearchButton
-   //                callback={this.handleButton("isSearch")}
-   //             />
-   //             <div className='w100 flex jcSpaceA'>
-
-   //                <UiButton className="becomeHost"
-   //                   callback={this.handleButton("isFilter")}
-   //                   label={this.props.t('fe.screens.searchResult.filterButton')}
-   //                />
-
-   //                <UiButton className="becomeHost"
-   //                   callback={this.handleButton("isMap")}
-   //                   label={this.props.t('fe.screens.searchResult.mapButton')}
-   //                />
-   //             </div>
-
-   //          </section>
-   //          {
-   //             this.state.property.length > 0 && this.state.property.map(this.mapping)
-   //          }
-
-   //          {/* <div> */}
-   //          <Pagination
-   //             size={"small"}
-   //             total={10}
-   //             pageSize={5}
-   //             current={this.state.page}
-   //             onChange={this.onPageChange}
-   //             itemRender={paginationArrowsRender}
-   //             className={'custom-pagination'}
-   //          />
-   //          {/* </div> */}
-   //       </div>
-   //    )
-   // }
-
    constructor(props) {
       super(props)
       this.state = {
          property: [],
+         isOpen: false,
          isFilter: false,
          isMap: false,
          isSearch: false,
@@ -169,9 +44,9 @@ class SearchResult extends Component {
          page: 1
       }
    }
+   
    componentDidMount() {
       this.getapi();
-      console.log('data', this.props.data)
    }
 
    componentDidUpdate(prevProps, prevState) {
@@ -186,21 +61,34 @@ class SearchResult extends Component {
 
    async getapi() {
       const response = await showAllStruttureGetApi(5, this.state.page);
-      console.log(response.data);
       this.setState({
          property: response.data.list
       })
-      // console.log(this.state.property);
    }
 
    handleButton = (params) => () => {
+      let newState = Object.assign({}, this.state)
+      switch (params) {
+         case "isFilter":
+            newState.isFilter = !newState.isFilter
+            break;
+         case "isMap":
+            newState.isMap = !newState.isMap
+            break;
+         case "isSearch":
+            newState.isSearch = !newState.isSearch
+            break;
+         default:
+            break;
+      }
       this.setState({
-         [params]: !this.state[params]
+         ...newState,
+         isOpen: !this.state.isOpen
       })
    }
 
-   handleDetails = () => {
-
+   handleDetails = (id) => (e) => {
+      this.props.router.navigate("/detailsproperty/" + id)
    }
 
    onPageChange = (page) => {
@@ -213,7 +101,7 @@ class SearchResult extends Component {
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-            onClick={this.handleDetails}
+            callback={this.handleDetails(item?.id)}
          >
             <PropertyCard
                data={item}
@@ -233,27 +121,16 @@ class SearchResult extends Component {
             {/* modals */}
 
             <Modal
-               callback={this.handleButton("isFilter")}
-               isOpen={this.state.isFilter}
+               callback={this.handleButton("isOpen")}
+               isOpen={this.state.isOpen}
             >
-               <Filter />
-            </Modal>
-
-            <Modal
-               callback={this.handleButton("isMap")}
-               isOpen={this.state.isMap}
-
-            >
-               <Map
-                  propertyList={this.state.property}
-                  initialPos={this.props.data}
-               />
-            </Modal>
-
-            <Modal
-               isOpen={this.state.isSearch}
-               callback={this.handleButton("isSearch")}  >
-               <SearchForm />
+               {this.state.isFilter && <Filter />}
+               {this.state.isSearch && <SearchForm />}
+               {this.state.isMap &&
+                  <Map
+                     propertyList={this.state.property}
+                     initialPos={this.props.data}
+                  />}
             </Modal>
 
             {/* end modals */}
@@ -296,4 +173,4 @@ class SearchResult extends Component {
    }
 }
 
-export default withTranslation()(SearchResult)
+export default withTranslation()(withRouting(SearchResult))

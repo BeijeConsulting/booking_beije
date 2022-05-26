@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '../../../../routes/routes';
+
 // REACT LEAFLET
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import ChangeView from './ChangeView';
@@ -9,7 +9,6 @@ import ChangeView from './ChangeView';
 import { connect } from 'react-redux';
 
 // components
-import SearchPlace from '../ui/searchPlace/SearchPlace';
 import PropertyCards from '../../funcComponents/propertyCards/PropertyCards';
 
 
