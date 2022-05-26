@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // modules
-import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 import withRouting from '../../../../../../withRouting/withRouting';
 
 
@@ -119,7 +119,7 @@ class Rate extends Component {
                   <div>
                      <h3>{this.state.property.nome_struttura}</h3>
                      <small>{`${this.state.property.indirizzo.citta}, ${this.state.property.indirizzo.stato}`}</small>
-                     <small>{t('common.extendedDate', { value: this.state.property.checkin })} - {t('common.extendedDate', { value: this.state.property.checkout })} </small>
+                     <small>{this.props.t('common.extendedDate', { value: this.state.property.checkin })} - {this.props.t('common.extendedDate', { value: this.state.property.checkout })} </small>
                      {this.state.property.numero_recensioni > 0 &&
                         <small>
                            <FontAwesomeIcon icon={faStar} />
@@ -138,7 +138,7 @@ class Rate extends Component {
                      <FormInput
                         type='text'
                         className=''
-                        placeholder={t('common.insertTitle')}
+                        placeholder={this.props.t('common.insertTitle')}
                         callback={this.handleChange("title")}
                      />
 
@@ -148,7 +148,7 @@ class Rate extends Component {
 
                      <FormButton
                         className="btn-primary"
-                        label={t("common.rate")}
+                        label={this.props.t("common.rate")}
                         callback={this.handleSubmit}
                         disabled={this.state.isDisable}
                      />
@@ -168,4 +168,4 @@ class Rate extends Component {
    }
 }
 
-export default withRouting(Rate);
+export default withTranslation()(withRouting(Rate));
