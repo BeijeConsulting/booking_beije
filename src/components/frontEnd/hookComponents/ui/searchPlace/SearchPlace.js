@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// COMPONENTS
 import { Popover, Button } from 'antd';
 
 // REDUX
@@ -10,11 +11,16 @@ import { eventBus } from "../../../../../eventBus/eventBus";
 import { setAddress } from "../../../../../redux/ducks/addressDuck";
 import { setPosition } from "../../../../../redux/ducks/positionDuck";
 
+// MODULES
+import { useTranslation } from "react-i18next";
+
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
 let obj;
 
 function SearchPlace(props) {
+
+   const {t} = useTranslation();
 
    const [state, setState] = useState({
       selectPosition: null,
@@ -99,7 +105,7 @@ function SearchPlace(props) {
                      style={{ width: "100%" }}
                      value={state.searchText}
                      onChange={handleChange}
-                     placeholder={'Search...'}
+                     placeholder={t('common.searchPlaceholder')}
                   />
                </div>
 
