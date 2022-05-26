@@ -15,6 +15,7 @@ const CardList = (props) => {
     const handlePageSwitch = (clickedPage) => {
         props.paginationCallback(clickedPage)
     }
+
     return (
         <section className={"section_container"}>
 
@@ -55,7 +56,7 @@ CardList.defaultProps = {
 CardList.propTypes = {
     sectionTitle: PropTypes.string,
     actions: PropTypes.any,
-    children: PropTypes.arrayOf(PropTypes.object),
+    // children: PropTypes.arrayOf(PropTypes.object),
     //Pagination props
     itemsCount: PropTypes.number.isRequired,
     pageSize: PropTypes.number.isRequired,
