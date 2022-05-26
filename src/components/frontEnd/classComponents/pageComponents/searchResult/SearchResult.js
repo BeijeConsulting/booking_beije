@@ -35,17 +35,17 @@ class SearchResult extends Component {
             page: 1
         }
     }
-
     componentDidMount() {
         this.getapi();
+        console.log('data', this.props.data)
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(this.state.page !== prevState.page){
-            showAllStruttureGetApi(5, this.state.page).then(res => 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.page !== prevState.page) {
+            showAllStruttureGetApi(5, this.state.page).then(res =>
                 this.setState({
-                property: res?.data?.list
-            }))
+                    property: res?.data?.list
+                }))
 
         }
     }
@@ -71,7 +71,7 @@ class SearchResult extends Component {
 
     onChange = (page) => {
         this.setState({
-           page: page
+            page: page
         })
     }
 
@@ -90,6 +90,7 @@ class SearchResult extends Component {
 
     render() {
         return (
+
             <div className='researchContainer'>
                 <Helmet>
                     <title>{this.props.t("common.research")}</title>
@@ -107,13 +108,17 @@ class SearchResult extends Component {
                 <Modal
                     callback={this.handleButton("isMap")}
                     isOpen={this.state.isMap}
+
                 >
-                    <Map />
+                    <Map
+                        propertyList={this.state.property}
+                        initialPos={this.props.data}
+                    />
                 </Modal>
 
-                <Modal 
-                isOpen={this.state.isSearch} 
-                callback={this.handleButton("isSearch")}  >
+                <Modal
+                    isOpen={this.state.isSearch}
+                    callback={this.handleButton("isSearch")}  >
                     <SearchForm />
                 </Modal>
 
@@ -143,11 +148,11 @@ class SearchResult extends Component {
 
                 <div>
                     <Pagination
-                    size={"small"}
-                    total={10}
-                    pageSize={5}
-                    current={this.state.page}
-                    onChange={this.onChange}
+                        size={"small"}
+                        total={10}
+                        pageSize={5}
+                        current={this.state.page}
+                        onChange={this.onChange}
                     />
                 </div>
             </div>
