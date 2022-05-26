@@ -6,6 +6,7 @@ import { getFavourites, deleteFavourite } from '../../../services/api/lista/list
 // components
 import FavouriteCard from '../../../components/frontEnd/funcComponents/favouriteCard/FavouriteCard';
 import { notification } from 'antd';
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 // modules
 import { useTranslation } from 'react-i18next';
@@ -25,18 +26,33 @@ const Favourites = () => {
    const { t } = useTranslation();
 
    const [state, setState] = useState({
-      favourites: []
+      favourites: [],
+      windowWidth: window.innerWidth
    });
 
+
    useEffect(() => {
-      if(localStorage.getItem('token') !== null)
-      getFavourites(getLocalStorage('token'))
-         .then(res => {
-            setState({
-               favourites: res?.data
-            })
-         });
+      window.addEventListener('resize', handleResize)
+      return () => { window.removeEventListener('resize', handleResize) }
+   })
+
+   useEffect(() => {
+      if (localStorage.getItem('token') !== null)
+         getFavourites(getLocalStorage('token'))
+            .then(res => {
+               setState({
+                  favourites: res?.data
+               })
+            });
    }, [])
+
+
+   function handleResize() {
+      setState({
+         ...state,
+         windowWidth: window.innerWidth
+      })
+   }
 
    const showToast = (propertyId, propertyName) => {
       const key = `${propertyId}-toast`;
@@ -63,8 +79,7 @@ const Favourites = () => {
             <title>{t('fe.screens.settings.settingsCard.favourites')}</title>
          </Helmet>
          <div className='favourites-page flex column'>
-            {/* To-DO: back button */}
-            <div className="back-button"></div>
+           
             <h1 className="title">{t('fe.screens.settings.settingsCard.favourites')}</h1>
             {wrapperMap(FavouriteCard, state.favourites, handleFavourite)}
             {/* To-DO: pagination */}

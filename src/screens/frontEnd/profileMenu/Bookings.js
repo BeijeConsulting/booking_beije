@@ -23,7 +23,8 @@ import '../../../assets/variables/_common.scss';
 import Modal from '../../../components/common/modal/Modal';
 import Rate from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/rate/Rate";
 
-
+//components
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 let arrayBkp = [];
 
@@ -32,10 +33,17 @@ const Bookings = (props) => {
 
   const [state, setState] = useState({
     PeriodListStructure: [],
-    isOpen: false
+    isOpen: false,
+    windowWidth: window.innerWidth
   })
 
   const dateCurrent = CurrentDate();
+
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  })
 
   useEffect(() => {
     periodiPrenotatiUserGetApi(
@@ -50,6 +58,14 @@ const Bookings = (props) => {
           })
         })
   }, [])
+
+
+  function handleResize() {
+    setState({
+      ...state,
+      windowWidth: window.innerWidth
+    })
+  }
 
   const buttonType =
     [t("fe.screens.bookings.history"), t("fe.screens.bookings.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
@@ -106,13 +122,17 @@ const Bookings = (props) => {
       <Helmet>
         <title>{t("common.bookings")}</title>
       </Helmet>
+      {
+        state.windowWidth < 991 &&
+        <div className="back-button"><GoBackButton /></div>
+      }
       {/* <button onClick={() => setState({
         ...state,
         isOpen: !state.isOpen
       })}>bau</button> */}
-      <Modal 
-      callback={handleClose} 
-      isOpen={state.isOpen}>
+      <Modal
+        callback={handleClose}
+        isOpen={state.isOpen}>
         <Rate /> {/* prop for property id */}
       </Modal>
       <h1 className="bookings-title">{t("common.bookings")}</h1>
