@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet"
 
 //LESS
 import './profileMenuCSS/Messages.scss'
+import '../../../assets/variables/_common.scss'
 
 //TRANSLATIONS
 import { t } from "i18next";
@@ -95,7 +96,7 @@ class Messages extends Component {
           <title>{this.props.t("common.messages")}</title>
         </Helmet>
 
-        <div className='messages-page'>
+        <div className='messages-page oY2'>
           {
             this.state.windowWidth < 992 &&
             <>

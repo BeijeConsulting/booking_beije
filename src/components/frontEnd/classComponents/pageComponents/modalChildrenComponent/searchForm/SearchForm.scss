@@ -1,17 +1,6 @@
 @import '../../../../../../assets/variables/globalVariables.scss';
 
 .home .searchFormContainer {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   margin-top: 1rem;
-
-   form {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-   }
-
    form>* {
       margin: 0 5px;
    }

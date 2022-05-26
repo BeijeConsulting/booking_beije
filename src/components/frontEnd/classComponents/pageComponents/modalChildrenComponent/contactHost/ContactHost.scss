@@ -1,4 +1,4 @@
-@import '../../../../../../assets/variables/globalVariables.less';
+@import '../../../../../../assets/variables/globalVariables.scss';
 
 .contact-host-container {
 
@@ -32,18 +32,12 @@
       max-width: 2rem;
       max-height: 2rem;
    }
-
-   form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-   }
-
+   
    form > * {
       margin: 0.5rem 0;
    }
 
    textarea, input[type="text"] {
-      color: @black_primary;
+      color: $black_primary;
    }
 }

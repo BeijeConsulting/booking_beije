@@ -3,9 +3,9 @@
 .favourites-page {
    min-height: 100vh;
    color: $white_primary;
-   background-color: #44403C;
-   display: flex;
-   flex-direction: column;
+   background-color: $black_primary;
+   // display: flex;
+   // flex-direction: column;
    padding: 0 5vw 15vh;
 
    h1 {
@@ -13,9 +13,9 @@
       margin: 2rem 0 1rem;
    }
 
-   .pagination {
-      margin: 1rem 0;
-   }
+   // .pagination {
+   //    margin: 1rem 0;
+   // }
 }
 
 @media (min-width:481px) {

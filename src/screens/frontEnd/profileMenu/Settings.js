@@ -18,6 +18,7 @@ import { initToken } from "../../../redux/ducks/tokenDuck";
 
 // style
 import './profileMenuCSS/Settings.scss';
+import '../../../assets/variables/_common.scss'
 
 // utils
 import { removeLocalStorage } from "../../../utils/localStorage/localStorage";
@@ -60,7 +61,7 @@ function Settings(props) {
   ]
 
   const createCardSettingsComponent = ((card, key) => {
-    let cssClass = key === settingsToComponents.length - 1 ? 'beige posLast' : '';
+    let cssClass = key === settingsToComponents.length - 1 ? 'beige m0 br1 posLast' : '';
     return <SettingsCard key={key} icon={card.icon} name={card.name} path={card.path} className={cssClass} />
   })
 
@@ -80,14 +81,14 @@ function Settings(props) {
       </Helmet>
       <div className="settings_container">
         <div>
-          <div className="title_and_logout_container">
+          <div className="title_and_logout_container flex jcSpacB aiCnter w100">
             <h1>{t("fe.screens.settings.title")}</h1>
           </div>
-          <div className="settings_card_list_container">
+          <div className="settings_card_list_container flex jcCenter aiCenter column w100  ">
             {settingsToComponents.map(createCardSettingsComponent)}
           </div>
         </div>
-        <div className="setting_disclaimer_container">
+        <div className="setting_disclaimer_container flex column aiCenter">
           <UiButton
           callback={handleLogOut}
             className={"logout_button"}

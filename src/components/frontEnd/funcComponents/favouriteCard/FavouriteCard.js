@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import { getStructureImage } from '../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
 
+//style
+import '../../../../assets/variables/_common.scss';
 
 function FavouriteCard(props) {
 
@@ -23,12 +25,12 @@ function FavouriteCard(props) {
    }
 
    return (
-      <div className='favourite-card'>
+      <div className='favourite-card br3 flex p1'>
          <div className='thumbnail-container'>
             <img src={thumbnail} alt={descrizione} />
          </div>
-         <div className={`card ${props.className}`}>
-            <div className='card-header'>
+         <div className={`card w100 mL1 ${props.className}`}>
+            <div className='card-header flex aiCenter jcSpaceB'>
                <span className='card-title'>{descrizione}</span>
                <FontAwesomeIcon icon={faHeart} onClick={handleOnClick} />
             </div>
