@@ -5,6 +5,7 @@ import { getFavourites, deleteFavourite } from '../../../services/api/lista/list
 
 // components
 import FavouriteCard from '../../../components/frontEnd/funcComponents/favouriteCard/FavouriteCard';
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import { notification, Pagination } from 'antd';
 
 // modules
@@ -27,8 +28,15 @@ const Favourites = () => {
 
    const [state, setState] = useState({
       favourites: [],
+      windowWidth: window.innerWidth,
       page: 1
    });
+
+
+   useEffect(() => {
+      window.addEventListener('resize', handleResize)
+      return () => { window.removeEventListener('resize', handleResize) }
+   })
 
    useEffect(() => {
       if (localStorage.getItem('token') !== null)
@@ -39,6 +47,14 @@ const Favourites = () => {
                })
             });
    }, [])
+
+
+   function handleResize() {
+      setState({
+         ...state,
+         windowWidth: window.innerWidth
+      })
+   }
 
    const showToast = (propertyId, propertyName) => {
       const key = `${propertyId}-toast`;
@@ -72,8 +88,7 @@ const Favourites = () => {
             <title>{t('fe.screens.settings.settingsCard.favourites')}</title>
          </Helmet>
          <div className='favourites-page flex column'>
-            {/* To-DO: back button */}
-            <div className="back-button"></div>
+           
             <h1 className="title">{t('fe.screens.settings.settingsCard.favourites')}</h1>
             {wrapperMap(FavouriteCard, state.favourites, handleFavourite)}
 

@@ -18,10 +18,12 @@ function PropertyCards(props) {
     )
 }
 
-
+PropertyCards.defaultProps = {
+    isMostReviewed: false
+}
 
 PropertyCards.propTypes = {
-    imgPreview: PropTypes.string.isRequired,
+    /*  imgPreview: PropTypes.string.isRequired, */
     title: PropTypes.string.isRequired,
     className: PropTypes.string
 }
