@@ -54,11 +54,11 @@ const StructureDetails = () => {
     ]
 
     const goToStructure = (idAnnounce = null) => () => {
-                navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
-                    state: { idAnnounce: idAnnounce },
-                });
+        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
+            state: { idAnnounce: idAnnounce },
+        });
 
-            };
+    };
 
     const getAnnounceCards = (announce, key) => {
         return <HorizontalCard
