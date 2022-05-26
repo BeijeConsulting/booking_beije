@@ -32,7 +32,8 @@ class SearchResult extends Component {
             isFilter: false,
             isMap: false,
             isSearch: false,
-            data: this.props.data
+            data: this.props.data,
+            page: 1
         }
     }
 
@@ -40,13 +41,18 @@ class SearchResult extends Component {
         this.getapi();
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //     if(this.state.property !== prevState.property){
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.page !== prevState.page){
+            showAllStruttureGetApi(5, this.state.page).then(res => 
+                this.setState({
+                property: res?.data?.list
+            }))
+
+        }
+    }
 
     async getapi() {
-        const response = await showAllStruttureGetApi();
+        const response = await showAllStruttureGetApi(5, this.state.page);
         // console.log(response.data);
         this.setState({
             property: response.data.list
@@ -57,6 +63,12 @@ class SearchResult extends Component {
     handleButton = (params) => () => {
         this.setState({
             [params]: !this.state[params]
+        })
+    }
+
+    onChange = (page) => {
+        this.setState({
+           page: page
         })
     }
 
@@ -127,6 +139,11 @@ class SearchResult extends Component {
 
                 <div>
                     <Pagination
+                    size={"small"}
+                    total={10}
+                    pageSize={5}
+                    current={this.state.page}
+                    onChange={this.onChange}
                     />
                 </div>
             </div>

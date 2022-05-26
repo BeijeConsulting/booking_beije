@@ -53,9 +53,6 @@ function Navbar(props) {
         isLogIn: false
     })
 
-    console.log(props.propertyDuck.property);
-    console.log(props.userDuck.user);
-
     useEffect(isLogIn, [getLocalStorage('token')])
 
     function isLogIn() {

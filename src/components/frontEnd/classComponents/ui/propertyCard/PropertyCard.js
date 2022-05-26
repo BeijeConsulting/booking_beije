@@ -17,13 +17,13 @@ class PropertyCard extends Component {
         this.State = {
             image: null
         }
-        console.log(this.props.data);
+        // console.log(this.props.data);
         // const {descrizione} = this.props.data
     }
 
     componentDidMount(){
-        getStructureImage(this.props?.data?.indirizzo?.struttura_id).then(res => {
-            this.setState({image: res.data?.immagine?.urlImage})})
+        // getStructureImage(this.props?.data?.indirizzo?.struttura_id).then(res => {
+        //     this.setState({image: res.data?.immagine?.urlImage})})
     }
 
     render() {
@@ -31,6 +31,7 @@ class PropertyCard extends Component {
             <>
                 <section className='propertyCardContainer'>
                     {/* <img src={this.state.image}/> */}
+                    <img src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"}/> 
                     <div>
                         <h4>{this.props?.data?.nome_struttura}</h4>
                         <small>{this.props?.data?.tipologiaStrutturaId?.tipo}</small>
