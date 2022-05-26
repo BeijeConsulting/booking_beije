@@ -15,32 +15,31 @@ import PropertyCards from '../../funcComponents/propertyCards/PropertyCards';
 
 function Map(props) {
     console.log('list', props.propertyList)
-    const [selectPosition, setSelectPosition] = useState(props.coordinatesDuck?.coordinates)
+    const [selectPosition, setSelectPosition] = useState(props.positionDuck?.coordinates)
 
     const navigate = useNavigate();
 
     function setState() {
-        setSelectPosition(props?.coordinatesDuck?.coordinates)
-        // console.log(props.addressDuck.address);
-
+        setSelectPosition(props?.positionDuck?.coordinates)
     }
 
     const goToProperty = (id) => (e) => {
         navigate("/detailsproperty/" + id)
     }
 
-    function marker(cord, key) {
-        return <Marker key={key} position={[cord?.indirizzo.latitudine, cord?.indirizzo.longitudine]}>
+    function markers(marker, key) {
+        console.log(marker);
+        return <Marker key={key} position={[marker?.indirizzo.latitudine, marker?.indirizzo.longitudine]}>
             <Popup >
                 <div onClick={
-                    goToProperty(cord?.id)
+                    goToProperty(marker?.id)
                 }>
                     <PropertyCards
-                        title={cord?.nome_struttura}
+                        title={marker?.nome_struttura}
                     >
-                        <h4>{`${cord?.indirizzo.citta} ${cord?.indirizzo.via} `}</h4>
-                        <h5>{`${cord?.checkin} ${cord?.checkout}`}</h5>
-                        <p>{cord?.descrizione}</p>
+                        <h4>{`${marker?.indirizzo.citta} ${marker?.indirizzo.via} `}</h4>
+                        <h5>{`${marker?.checkin} ${marker?.checkout}`}</h5>
+                        <p>{marker?.descrizione}</p>
                     </PropertyCards>
                 </div>
             </Popup>
@@ -52,7 +51,7 @@ function Map(props) {
 
     return (
         <>
-            <MapContainer style={{ width: '100vw', height: '100vh' }} center={[props.initialPos.latitudine, props.initialPos.longitudine]} zoom={13} scrollWheelZoom={true}>
+            <MapContainer style={{ width: '100vw', height: '100vh' }} center={[selectPosition[0], selectPosition[1]]} zoom={13} scrollWheelZoom={true}>
 
                 <ChangeView center={{ lat: selectPosition[0], lon: selectPosition[1] }} zoom={10} />
 
@@ -62,7 +61,7 @@ function Map(props) {
                 />
 
                 {
-                    props.propertyList.map(marker)
+                    props.propertyList.map(markers)
                 }
 
             </MapContainer>
@@ -71,7 +70,7 @@ function Map(props) {
 }
 
 const mapStateToProps = (state) => ({
-    coordinatesDuck: state.positionDuck,
+    positionDuck: state.positionDuck,
     addressDuck: state.addressDuck
 })
 

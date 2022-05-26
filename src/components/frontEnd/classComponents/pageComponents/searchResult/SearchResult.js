@@ -36,7 +36,6 @@ class SearchResult extends Component {
       super(props)
       this.state = {
          property: [],
-         isOpen: false,
          isFilter: false,
          isMap: false,
          isSearch: false,
@@ -44,7 +43,7 @@ class SearchResult extends Component {
          page: 1
       }
    }
-   
+
    componentDidMount() {
       this.getapi();
    }
@@ -67,28 +66,38 @@ class SearchResult extends Component {
    }
 
    handleButton = (params) => () => {
-      let newState = Object.assign({}, this.state)
-      switch (params) {
-         case "isFilter":
-            newState.isFilter = !newState.isFilter
-            break;
-         case "isMap":
-            newState.isMap = !newState.isMap
-            break;
-         case "isSearch":
-            newState.isSearch = !newState.isSearch
-            break;
-         default:
-            break;
-      }
       this.setState({
-         ...newState,
-         isOpen: !this.state.isOpen
+         [params]: !this.state[params]
       })
    }
 
+   
+   // handleButton = (params) => () => {
+   //    let newState = Object.assign({}, this.state)
+   //    switch (params) {
+   //       case "isFilter":
+   //          newState.isFilter = !newState.isFilter
+   //          break;
+   //       case "isMap":
+   //          newState.isMap = !newState.isMap
+   //          break;
+   //       case "isSearch":
+   //          newState.isSearch = !newState.isSearch
+   //          break;
+   //       default:
+   //          break;
+   //    }
+   //    if(Object.values(this.state).includes(true)){
+         
+   //    }
+   //    this.setState({
+   //       ...newState,
+   //       isOpen: !this.state.isOpen
+   //    })
+   // }
+
    handleDetails = (id) => (e) => {
-      this.props.router.navigate("/detailsproperty/" + id)
+      this.props.router.navigate("/detailsproperty/"+ id)
    }
 
    onPageChange = (page) => {
@@ -121,16 +130,29 @@ class SearchResult extends Component {
             {/* modals */}
 
             <Modal
-               callback={this.handleButton("isOpen")}
-               isOpen={this.state.isOpen}
+               callback={this.handleButton("isFilter")}
+               isOpen={this.state.isFilter}
             >
-               {this.state.isFilter && <Filter />}
-               {this.state.isSearch && <SearchForm />}
-               {this.state.isMap &&
-                  <Map
-                     propertyList={this.state.property}
-                     initialPos={this.props.data}
-                  />}
+               <Filter />
+            </Modal>
+
+            <Modal
+               callback={this.handleButton("isMap")}
+               isOpen={this.state.isMap}
+
+            >
+               <Map
+                  propertyList={this.state.property}
+                  initialPos={this.props.data}
+               />
+            </Modal>
+
+            <Modal
+               isOpen={this.state.isSearch}
+               callback={this.handleButton("isSearch")}>
+               <SearchForm
+               callback={this.handleButton("isSearch")}
+               />
             </Modal>
 
             {/* end modals */}
