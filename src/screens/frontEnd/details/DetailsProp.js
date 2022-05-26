@@ -165,7 +165,7 @@ const DetailsProp = () => {
           >
             <DetailsPropRoom />
           </Modal>
-          {console.log(state.isLoading)}
+
           {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
             <img className="structure_img_property" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
             <div className="padding_page">
@@ -203,10 +203,9 @@ const DetailsProp = () => {
                 </MapContainer>
               </div>
               <div className="review_container">
-                {state.reviewsList?.map(generateReviews)}
+                {state.reviewsList && state.reviewsList.map(generateReviews)}
               </div>
             </div>
-
           </div>}
         </div>
       }
