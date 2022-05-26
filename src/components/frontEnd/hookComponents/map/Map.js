@@ -10,12 +10,13 @@ import { connect } from 'react-redux';
 
 // components
 import SearchPlace from '../ui/searchPlace/SearchPlace';
+import PropertyCards from '../../funcComponents/propertyCards/PropertyCards';
 
 
 
 function Map(props) {
-    console.log('list', props?.propertyList)
-    const [selectPosition, setSelectPosition] = useState(props?.coordinatesDuck?.coordinates)
+    console.log('list', props.propertyList)
+    const [selectPosition, setSelectPosition] = useState(props.coordinatesDuck?.coordinates)
 
     const navigate = useNavigate();
 
@@ -26,22 +27,28 @@ function Map(props) {
     }
 
     const goToProperty = (id) => (e) => {
-        navigate("/detailsproperty/" + 2)
+        navigate("/detailsproperty/" + id)
     }
 
     function marker(cord, key) {
-        return <Marker key={key} position={[cord.indirizzo.latitudine, cord.indirizzo.longitudine]}>
+        return <Marker key={key} position={[cord?.indirizzo.latitudine, cord?.indirizzo.longitudine]}>
             <Popup >
                 <div onClick={
-                    goToProperty(cord.id)
+                    goToProperty(cord?.id)
                 }>
-                    {cord.title} <br /> Easily customizable.
+                    <PropertyCards
+                        title={cord?.nome_struttura}
+                    >
+                        <h4>{`${cord?.indirizzo.citta} ${cord?.indirizzo.via} `}</h4>
+                        <h5>{`${cord?.checkin} ${cord?.checkout}`}</h5>
+                        <p>{cord?.descrizione}</p>
+                    </PropertyCards>
                 </div>
             </Popup>
         </Marker>
     }
 
-    useEffect(setState, [props?.coordinatesDuck?.coordinates])
+    useEffect(setState, [props.coordinatesDuck?.coordinates])
 
 
     return (
