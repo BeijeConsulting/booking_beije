@@ -67,6 +67,16 @@ export async function getApi(resource, header = null) {
     .catch(responseApiError());
 }
 
+export async function getSearchApi(resource, body, header = null) {
+  //function for get api call
+  return axiosInstance
+    .get(resource, {
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
+    })
+    .then(responseApi())
+    .catch(responseApiError());
+}
+
 export async function putApi(resource, obj, header = null) {
   //function for put api call
   return axiosInstance

@@ -8,12 +8,14 @@ import SearchResult from "../../components/frontEnd/classComponents/pageComponen
 
 const Search = () => {
 
-  //  const location = useLocation();
-  //  console.log(location.state);
-   
+ 
+  const location = useLocation();
+  const data = Object.assign({}, location?.state?.data, location?.state?.coordinate)
   return (
     <>
-      <SearchResult />
+      <SearchResult
+        data={data}
+      />
     </>
   );
 };
