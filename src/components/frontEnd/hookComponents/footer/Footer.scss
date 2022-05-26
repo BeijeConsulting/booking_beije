@@ -1,4 +1,4 @@
-@use "../../../../assets/variables/globalVariables.scss" as var;
+@import "../../../../assets/variables/globalVariables.scss";
 
 footer {
     background-color: var.$secondary_lighter;
