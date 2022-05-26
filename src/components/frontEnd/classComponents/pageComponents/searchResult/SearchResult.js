@@ -52,7 +52,7 @@ class SearchResult extends Component {
 
     async getapi() {
         const response = await showAllStruttureGetApi(5, this.state.page);
-        // console.log(response.data);
+        console.log(response.data);
         this.setState({
             property: response.data.list
         })
@@ -65,6 +65,10 @@ class SearchResult extends Component {
         })
     }
 
+    handleDetails = () => {
+
+    }
+
     onChange = (page) => {
         this.setState({
            page: page
@@ -75,6 +79,7 @@ class SearchResult extends Component {
         return (
             <Card
                 key={`${key}- ${item?.indirizzo?.citta}`}
+                onClick={this.handleDetails}
             >
                 <PropertyCard
                     data={item}
