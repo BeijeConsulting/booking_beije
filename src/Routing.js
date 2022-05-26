@@ -37,9 +37,10 @@ import StructureOperation from "./screens/backOffice/host/structure/structureOpe
 import StructureList from "./screens/backOffice/host/structure/structureList/StructureList";
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations";
+import PendingStructuresList from "./screens/backOffice/admin/structure/pendingStructureList/PendingStructuresList";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
-// import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
-import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
+
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
@@ -76,6 +77,11 @@ function Routing(props) {
 
 
     //login, registration, account, messages, favourites, booking
+
+    //TODO: to be deleted ( - setLocalStorage import too)
+    //setLocalStorage('token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJBRE1JTiJdLCJpYXQiOjE2NTM1NzkxNDMsImV4cCI6MTY1MzU4Mjc0M30.gT3moHwwaa6cSnt_1uCXVwIXK8rWW6i57_HgXK4eFE8')
+    //setLocalStorage('refresh token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM2NjM4OTF9.HmC_m4W3gA2ABY9I60UeGOwfWlWikkJ8yGTZb_JmuXs')
+
 
     return (
         <Routes>
@@ -162,6 +168,7 @@ function Routing(props) {
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
+                <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
                 <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
             </Route>
 

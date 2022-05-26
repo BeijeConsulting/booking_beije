@@ -100,7 +100,7 @@ HorizontalCard.propTypes = {
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
-    text: PropTypes.object,
+    text: PropTypes.string,
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
     footerContentLeft: PropTypes.any,
