@@ -11,12 +11,19 @@
         height: 8rem;
         margin-right: .5rem;
     }
-    div:first-child{
+
+    div:first-child {
         display: flex;
         flex-direction: column;
 
-        small{
-            color: $black_primary_lighter;
+        small {
+            color: $black_primary;
+            padding-left: .2rem;
+        }
+
+        .mediaRateCard {
+            display: flex;
+            align-items: center;
         }
     }
 
