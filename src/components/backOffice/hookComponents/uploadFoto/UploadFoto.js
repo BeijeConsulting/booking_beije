@@ -99,6 +99,7 @@ const UploadFoto = (props) => {
           onPreview={handlePreview}
           onChange={handleChange}
           beforeUpload={blockAutoPostPhoto}
+          name="photos"
         >
           {fileList.length < 5 && (
             <div className="upload_foto_struture">{uploadButton}</div>

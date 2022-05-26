@@ -6,10 +6,6 @@ import "./HorizontalCard.scss"
 
 const HorizontalCard = (props) => {
 
-    // IGNORE THIS
-    // needed for generalIteration -> wrapperMap function 
-    // const { img, title, text, href } = props.item;
-
     const {
         callback,
         imageSrc,
@@ -18,7 +14,9 @@ const HorizontalCard = (props) => {
         subtitle,
         text,
         upperRightContent,
-        footerContent
+        footerContent,
+        footerContentLeft,
+        footerContentRight
     } = props
 
     const handleCardClick = (e) => {
@@ -29,27 +27,19 @@ const HorizontalCard = (props) => {
     }
 
     return (
-        <div className={"h_card_container"} onClick={handleCardClick}>
+        <div className={"h_card_container"} >
             {/* Card image */}
-            <img className={"card_img"} src={imageSrc} alt={imageAlt} />
+            <img className={"card_img"} src={imageSrc} alt={imageAlt} onClick={handleCardClick} />
 
             {/* Card body */}
             <div className={"card_body"}>
                 <div className={"card_main"}>
-                    <div className={"left_col"}>
-                        <h5 className={"card_title"}>
+                    <h5 className={"card_title"}>
+                        {/* needs refactor */}
+                        <a onClick={handleCardClick}>
                             {title}
-                        </h5>
-                        {subtitle &&
-
-                            <p className="card_subtitle">{subtitle}</p>
-                        }
-
-                        {/* text overflows in mobile viewport. It should be truncated in CSS. Needs to be fixed!!*/}
-                        <p className="card_text">
-                            {text}
-                        </p>
-                    </div>
+                        </a>
+                    </h5>
 
                     {/* Upper right corner (typically used for action buttons or badge-like icons) */}
                     {upperRightContent &&
@@ -59,16 +49,36 @@ const HorizontalCard = (props) => {
                         </div>
                     }
                 </div>
+                <div className="subtitle_and_text">
+                    {subtitle &&
+                        <p className="card_subtitle">{subtitle}</p>
+                    }
+
+                    <p className="card_text">
+                        {text}
+                    </p>
+                </div>
+
 
                 {/* Card Footer, typically contains primary/secondary buttons */}
-                {footerContent &&
-
-                    <div className={"card_footer"}>
+                {
+                    (footerContentLeft && footerContent) &&
+                    <div className={"card_footer_right_and_left"}>
+                        {footerContentLeft}
                         {footerContent}
                     </div>
                 }
+
+                {
+                    (!footerContentLeft && footerContent) &&
+                    < div className={"card_footer_right"}>
+                        {footerContent}
+                    </div>
+                }
+
+
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -85,7 +95,8 @@ HorizontalCard.propTypes = {
     text: PropTypes.string,
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
-    footerContent: PropTypes.any,
+    footerContentLeft: PropTypes.any,
+    footerContentRight: PropTypes.any,
 
 }
 
