@@ -23,7 +23,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarOutlined } from '@fortawesome/free-regular-svg-icons';
 
 import './Rate.scss';
-
+import '../../../../../../assets/variables/_common.scss';
 
 
 
@@ -134,7 +134,7 @@ class Rate extends Component {
                      <h4>{this.state.property.host.user.name}</h4>
                   </div>
 
-                  <form>
+                  <form className='flex column jcCenter'>
                      <FormInput
                         type='text'
                         className=''

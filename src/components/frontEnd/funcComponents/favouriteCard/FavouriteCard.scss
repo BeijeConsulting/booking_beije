@@ -1,11 +1,11 @@
 @import "../../../../assets/variables/globalVariables.scss";
 .favourite-card {
    background-color: $secondary_lighter;
-   border-radius: 13px;
-   display: flex;
+   // border-radius: 13px;
+   // display: flex;
    flex-direction: row;
    margin: 0.3rem 0;
-   padding: 1rem;
+   // padding: 1rem;
 
    .thumbnail-container {
       height: 70px;
@@ -16,10 +16,10 @@
    }
 
    .card-header {
-      display: flex;
+      // display: flex;
       flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      // align-items: center;
+      // justify-content: space-between;
    }
 
    .card-title {
@@ -28,9 +28,9 @@
    }
 
    .card {
-      width: 100%;
+      // width: 100%;
       color: $black_primary;
-      margin-left: 1rem;
+      // margin-left: 1rem;
    }
 
    .card-content p {

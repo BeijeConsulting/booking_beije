@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 //LESS
 import './profileMenuCSS/SingleConversation.scss'
+import '../../../assets/variables/_common.scss'
 
 //CONNECT
 import { connect } from 'react-redux'
@@ -139,7 +140,7 @@ const SingleConversation = (props) => {
         }
         </div>
         <p>{mess.text}</p>
-        <div className="dateTimeMessage">{mess.date_and_time}</div>
+        <div className="dateTimeMessage fsXS fsI">{mess.date_and_time}</div>
       </div>
     )
   }
@@ -149,8 +150,8 @@ const SingleConversation = (props) => {
       <Helmet>
         <title>SingleConversation</title>
       </Helmet>
-      <div className="singleConversation-page">
-        <div className="container_messages">
+      <div className="singleConversation-page flex column w100 oY2">
+        <div className="container_messages oY2">
           {
             state.windowWidth < 992 &&
             <>
@@ -168,8 +169,8 @@ const SingleConversation = (props) => {
         </div>
 
 
-        <div className="space-input">
-          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+        <div className="space-input fixed b0 l0 w100">
+          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input p1 w100" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
         </div>
       </div>
     </>

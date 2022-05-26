@@ -19,6 +19,7 @@ import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 //css
 import './profileMenuCSS/Bookings.scss';
+import '../../../assets/variables/_common.scss';
 import Modal from '../../../components/common/modal/Modal';
 import Rate from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/rate/Rate";
 
@@ -101,7 +102,7 @@ const Bookings = (props) => {
     console.log("click");
   }
   return (
-    <div className="bookings-page">
+    <div className="bookings-page flex column">
       <Helmet>
         <title>{t("common.bookings")}</title>
       </Helmet>
@@ -124,17 +125,17 @@ const Bookings = (props) => {
         {state.PeriodListStructure.length <= 0 ? <p>{t("common.noApartments")}</p> : state.PeriodListStructure.map((item, key) => {
           return (
             <div key={key} className="card-container">
-              <div className="card">
-                <div className="card-info">
-                  <img src="{item.annuncio.url_image}" alt="card-img" />
-                  <div className="card-info-info">
+              <div className="card flex jcSpaceB p1 br3">
+                <div className="card-info flex">
+                  <img className="br3 mx1" src="{item.annuncio.url_image}" alt="card-img" />
+                  <div className="card-info-info flex column">
                     <h1>{item.annuncio.titolo}</h1>
                     <span>{item.annuncio.luogo}</span>
                     <span>{item.annuncio.struttura.checkin}, {item.annuncio.struttura.checkout}</span>
-                    <button className="rate" onClick={openModal}>{t("common.rate")}</button>
+                    <button className="rate cursor" onClick={openModal}>{t("common.rate")}</button>
                   </div>
                 </div>
-                <span className="price">{item.annuncio.prezzo}</span>
+                <span className="price fwB">{item.annuncio.prezzo}</span>
               </div>
             </div>
           )

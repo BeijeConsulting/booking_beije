@@ -10,6 +10,8 @@ import { checkPassword, checkMail } from '../../../utils/validationForm/validati
 import { connect } from "react-redux";
 //css
 import './profileMenuCSS/Account.scss'
+import '../../../assets/variables/_common.scss'
+
 import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
 
 let uName
@@ -100,56 +102,56 @@ const Account = (props) => {
   }
 
   return (
-    <div className="Account_container">
+    <div className="Account_container flex column jcSpaceB h85">
       <Helmet>
         <title>{t("common.account")}</title>
       </Helmet>
 
-      <div className="header_container">
+      <div className="header_container flex jcSpaceB mx1">
         <h1>Ciao, {objToValue.name}!</h1>
         <div>
-          <button className="acc_logout">{t("common.logout")}</button>
+          <button className="acc_logout bNone">{t("common.logout")}</button>
         </div>
       </div>
 
-      <div className="edit">
+      <div className="edit flex jcSpaceA">
         <div>
-          <button className="penIcon"><FontAwesomeIcon icon={faPencil} /></button>
+          <button className="penIcon bNone br50"><FontAwesomeIcon icon={faPencil} /></button>
         </div>
-        <div className="update_cont">
-          <button className="update" onClick={editProfile} type="submit">{t("common.update")}</button>
+        <div className="update_cont flex aiCenter jcCenter">
+          <button className="update cursor fwB bNone" onClick={editProfile} type="submit">{t("common.update")}</button>
         </div>
       </div>
 
       <form>
-        <div className="i">
+        <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.name")}</label>
           {/*<input type="text" onChange={accName} id="name" />*/}
           <FormInput type="text" placeholder={objToValue.name} info="name" callback={accName} />
         </div>
 
-        <div className="i">
+        <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.surname")}</label>
           {/* <input type="text" id="surname" /> */}
           <FormInput type="text" info="surname" placeholder={objToValue.surname} callback={accSurname} />
         </div>
 
-        <div className="i">
+        <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.email")}</label>
           {/* <input type="email" id="email" /> */}
           <FormInput type="email" info="email" placeholder={objToValue.email} callback={Controllmail} />
         </div>
 
-        <div className="i">
+        <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.password")}</label>
-          <input type="password" id="password" onChange={checkpass1} />
-          {/* <FormInput type="password" onChange={checkpass1} info="password" /> */}
+          <input className="br3" type="password" id="password" onChange={checkpass1} />
+          {/* <FormInput className="br3" type="password" onChange={checkpass1} info="password" /> */}
         </div>
 
-        <div className="i">
+        <div className="i flex column m1">
           <label className="L" ><FontAwesomeIcon icon={faPencil} /> {t("common.passwordConfirm")}</label>
-          <input type="password" id="confirmPassword" onChange={checkpass2} />
-          {/* <FormInput type="password" onChange={checkpass2}  info="confPassword"/> */}
+          <input className="br3" type="password" id="confirmPassword" onChange={checkpass2} />
+          {/* <FormInput className="br3" type="password" onChange={checkpass2}  info="confPassword"/> */}
         </div>
 
       </form>

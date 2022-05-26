@@ -19,7 +19,7 @@ import { getLocalStorage } from '../../../../../../utils/localStorage/localStora
 
 // style
 import './ContactHost.scss';
-
+import '../../../../../../assets/variables/_common.scss';
 
 
 
@@ -76,7 +76,7 @@ class ContactHost extends Component {
                   <h4>{this.state.property.host.user.name}</h4>
                </div>
 
-               <form>
+               <form className='flex column jcCenter'>
 {/* 
                   <FormInput
                      type='text'

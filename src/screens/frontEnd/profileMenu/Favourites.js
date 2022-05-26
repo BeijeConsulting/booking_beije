@@ -13,6 +13,7 @@ import Helmet from 'react-helmet';
 
 // styles
 import './profileMenuCSS/Favourites.scss';
+import '../../../assets/variables/_common.scss'
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 // utils
@@ -61,13 +62,13 @@ const Favourites = () => {
          <Helmet>
             <title>{t('fe.screens.settings.settingsCard.favourites')}</title>
          </Helmet>
-         <div className='favourites-page'>
+         <div className='favourites-page flex column'>
             {/* To-DO: back button */}
             <div className="back-button"></div>
             <h1 className="title">{t('fe.screens.settings.settingsCard.favourites')}</h1>
             {wrapperMap(FavouriteCard, state.favourites, handleFavourite)}
             {/* To-DO: pagination */}
-            <div className="pagination"></div>
+            <div className="pagination my1"></div>
          </div>
       </>
    );
