@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 // modules
 import withRouting from '../../../../../../withRouting/withRouting';
-import { t } from 'i18next';
+import { withTranslation } from 'react-i18next';
 
 // components
 // import FormInput from '../../../../funcComponents/ui/input/formInput/FormInput';
@@ -91,7 +91,7 @@ class ContactHost extends Component {
 
                   <FormButton
                      className="btn-primary"
-                     label={t("common.send")}
+                     label={this.props.t("common.send")}
                      callback={this.handleSubmit}
                      disabled={this.state.isDisable}
                   />
@@ -103,4 +103,4 @@ class ContactHost extends Component {
    }
 }
 
-export default withRouting(ContactHost);
+export default withTranslation()(withRouting(ContactHost));
