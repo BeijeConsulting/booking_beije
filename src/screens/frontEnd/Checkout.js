@@ -65,11 +65,11 @@ const Checkout = () => {
         </div>
 
         {
-          localStorage.getItem('token') === null ?
+          localStorage.getItem('token') !== null ?
             <button onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button>
             :
             <div className="checkout-login-form">
-              <LoginForm />
+              <LoginForm isCheckout={true} checkoutProperty={checkoutPropertyInfo} checkoutList={checkoutArrayList}/>
             </div>
         }
 
