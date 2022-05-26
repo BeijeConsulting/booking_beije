@@ -11,8 +11,8 @@ const insertStrutturaPostApi = async (obj, header) => {
     return await postApi(`insertStruttura`, obj, header);
 }
 
-const strutturaDetailIdGetApi = async (id, header) => {
-    return await getApi(`struttura/${id}`, header);
+const strutturaDetailIdGetApi = async (id) => {
+    return await getApi(`struttura/${id}`);
 }
 
 /* AUTH:HOST */
