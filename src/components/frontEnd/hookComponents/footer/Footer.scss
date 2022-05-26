@@ -1,8 +1,8 @@
 @import "../../../../assets/variables/globalVariables.scss";
 
 footer {
-    background-color: var.$secondary_lighter;
-    color: var.$black_primary;
+    background-color: $secondary_lighter;
+    color: $black_primary;
     padding: 4vh 7vw;
 
     .container_links_footer {
@@ -24,7 +24,7 @@ footer {
     .disclaimer_container_footer {
         margin-top: 2rem;
         // font-size: x-small;
-        color: var.$black_primary;
+        color: $black_primary;
         // span{
         //     font-style: italic;
         // }
@@ -34,10 +34,10 @@ footer {
     }
 
     .becomeHost {
-        background-color: var.$primary;
+        background-color: $primary;
         padding: 0.5rem;
         width: 200px;
-        color: var.$white_primary;
+        color: $white_primary;
         border-radius: 2rem;
         font-size: 1.2rem;
         // border: none;
