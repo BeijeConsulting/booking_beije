@@ -3,6 +3,7 @@ import React from 'react'
 
 //LESS
 import './MessageCard.scss'
+import '../../../../assets/variables/_common.scss';
 
 function MessageCard(props) {
 
@@ -11,14 +12,14 @@ function MessageCard(props) {
     }
 
     return (
-        <div className='message-card' onClick={goToMessage}>
+        <div className='message-card flex jcSpaceB cursor br3' onClick={goToMessage}>
             <div className='thumbnail-container'>
-                <img src={props.thumbnail} alt={props.title} />
+                <img className='w100 h100 ofC br3' src={props.thumbnail} alt={props.title} />
             </div>
             <div className={props.classNameContent}>
-                <div className='card-header'>
-                    <span className='card-title'>{props.title}</span>
-                    <span className='data-message'>{props.date}</span>
+                <div className='card-header flex jcSpaceB mB1 aiCenter wrap'>
+                    <span className='card-title fwB'>{props.title}</span>
+                    <span className='data-message mL1'>{props.date}</span>
                 </div>
                 <p className='message-text'>{props.textMessage.length > 30 ? props.textMessage.substring(0, 30) + '...' : props.textMessage}</p>
             </div>

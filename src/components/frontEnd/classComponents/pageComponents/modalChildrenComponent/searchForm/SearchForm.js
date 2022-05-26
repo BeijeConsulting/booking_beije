@@ -19,6 +19,7 @@ import { routes } from '../../../../../../routes/routes';
 
 // styles
 import './SearchForm.scss';
+import '../../../../../../assets/variables/_common.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
 import { eventBus } from '../../../../../../eventBus/eventBus';
 
@@ -98,8 +99,8 @@ class SearchForm extends Component {
    render() {
       return (
          <>
-            <section className='searchFormContainer'>
-               <form>
+            <section className='searchFormContainer flex aiCenter jcCenter mT1'>
+               <form className='flex aiCenter jcSpaceE'>
                   <SearchPlace />
 
                   <Space direction="vertical" size={12}>

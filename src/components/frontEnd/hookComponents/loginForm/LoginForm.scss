@@ -4,21 +4,21 @@
 //all
 
 
-.column {
-    flex-direction: column;
-}
+// .column {
+//     flex-direction: column;
+// }
 
-.flex {
-    display: flex;
-}
-.space{
-    justify-content: space-around;
+// .flex {
+//     display: flex;
+// }
+// .space{
+//     justify-content: space-around;
 
-}
-.center {
-    justify-content: center;
-    align-items: center;
-}
+// }
+// .center {
+//     justify-content: center;
+//     align-items: center;
+// }
 
 .color {
     background-color: $black_primary;
@@ -46,8 +46,8 @@
     padding: 0.3rem;
 }
 .btn-secondary{
-    border: none;
-    background: none;
+    // border: none;
+    // background: none;
     color: $white_primary;
 }
 

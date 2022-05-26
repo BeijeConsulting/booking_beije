@@ -1,5 +1,6 @@
 import React from 'react'
 import './UiButton.scss'
+import '../../../../../../assets/variables/_common.scss';
 import PropTypes from 'prop-types';
 
 

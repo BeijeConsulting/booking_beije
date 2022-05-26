@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 // routes 
 import { routes } from "../../../../routes/routes";
 import './Footer.scss';
+import '../../../../assets/variables/_common.scss';
 
 import Button from '../../funcComponents/ui/buttons/uiButtons/UiButton'
 
@@ -35,14 +36,14 @@ function Footer(props) {
     }
     return (
         <footer>
-            <div className="container_links_footer">
+            <div className="container_links_footer flex jcSpaceB">
                 <ul>
                     {props.link.map(mapLinks)}
                 </ul>
                 {
                     permission === 'guest' &&
                     <div>
-                        <Button className="becomeHost" callback={goTo('DASHBOARD')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
+                        <Button className="becomeHost bNone fwB cursor" callback={goTo('DASHBOARD')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
                     </div>
                 }
                 {/* {
@@ -53,8 +54,8 @@ function Footer(props) {
 
             <LanguagesSwitch />
 
-            <div className='disclaimer_container_footer'>
-                <span className='first'>&copy;BeijeBnb, Inc.</span><span className="cursorOnLink" onClick={goTo('DISCLAIMER')}>{t('common.termsConditions')}</span>
+            <div className='disclaimer_container_footer fsI'>
+                <span className='mR1 fsXS'>&copy;BeijeBnb, Inc.</span><span className="cursor fsXS" onClick={goTo('DISCLAIMER')}>{t('common.termsConditions')}</span>
             </div>
 
 

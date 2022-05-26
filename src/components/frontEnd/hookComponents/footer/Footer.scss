@@ -23,16 +23,14 @@ footer {
 
     .disclaimer_container_footer {
         margin-top: 2rem;
-        font-size: x-small;
-        color: var.$black_primary;
-
-        span {
-            font-style: italic;
-        }
-
-        .first {
-            margin-right: 1rem;
-        }
+        // font-size: x-small;
+        color: $black_primary;
+        // span{
+        //     font-style: italic;
+        // }
+        // .first{
+        //     margin-right: 1rem;
+        // }
     }
 
     .becomeHost {
@@ -41,14 +39,14 @@ footer {
         width: 200px;
         color: var.$white_primary;
         border-radius: 2rem;
-        border: none;
-        font-weight: var.$fw-bold;
-        cursor: pointer;
+        font-size: 1.2rem;
+        // border: none;
+        // font-weight: bold;
+        // cursor: pointer;
     }
-
-    .cursorOnLink {
-        cursor: pointer;
-    }
+    // .cursorOnLink{
+    //     cursor: pointer;
+    // }
 }
 
 

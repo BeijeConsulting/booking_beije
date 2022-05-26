@@ -5,8 +5,9 @@ import { routes } from "../../../routes/routes";
 import Messages from './Messages';
 
 import withRouting from "../../../withRouting/withRouting";
-// less 
+// scss 
 import '../profileMenu/profileMenuCSS/Chat.scss';
+import '../../../assets/variables/_common.scss'
 import { Outlet } from "react-router";
 
 class Chat extends Component {
@@ -38,7 +39,7 @@ class Chat extends Component {
     render() {
         return (
             <div className="chat">
-                <div className="chatContainer">
+                <div className="chatContainer flex oY1">
                     <Messages />
                     <Outlet />
                 </div>

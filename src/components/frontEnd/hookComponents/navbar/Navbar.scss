@@ -3,18 +3,18 @@
 .navMobile{
     height: 15%;
     background-color: #fff9f5c7;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    // position: fixed;
+    // bottom: 0;
+    // width: 100%;
+    // display: flex;
+    // justify-content: space-around;
+    // align-items: center;
     backdrop-filter: blur(10px);
     .iconIfLogged{
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        object-fit: cover;
+        // object-fit: cover;
     }
     .iconSearch{
         font-size: 3rem;
@@ -23,7 +23,7 @@
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        object-fit: cover;
+        // object-fit: cover;
     }
 }
 
@@ -31,38 +31,38 @@
 .navDesktop{
     height: 10vh;
     background-color: $black_primary;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // top: 0;
+    // width: 100%;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
     padding: 0 7vw;
-    position: relative;
+    // position: relative;
     z-index: 2;
     border-bottom: 2px solid $white_primary;
     .go_to_login{
         color: $white_primary;
         font-weight: 600;
         font-size: 1.3rem;
-        cursor: pointer;
+        // cursor: pointer;
     }
     .iconIfLogged{
         width: 2.5rem;
         height: 2.5rem;
-        border-radius: 50%;
-        object-fit: cover;
+        // border-radius: 50%;
+        // object-fit: cover;
     }
     .hambMenu{
-        display: flex;
+        // display: flex;
         padding: 0.3rem 1.8rem;
         background-color: $white_primary;
-        border-radius: 8px;
-        cursor: pointer;
+        // border-radius: 8px;
+        // cursor: pointer;
         .phUser{
             width: 34px;
             height: 34px;
-            border-radius: 50%;
-            object-fit: cover;
+            // border-radius: 50%;
+            // object-fit: cover;
         }
         .arrowMenu{
             transition: .4s;
@@ -83,14 +83,14 @@
     width: 100%;
     min-height: 15vh;
     background: $black_primary;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    // align-items: center;
     color: #E9E9E9;
     padding: 0 7vw;
     animation: settingOpen .4s linear;
-    position: absolute;
+    // position: absolute;
     top: 10vh;
     border-bottom: 2px solid $white_primary;
     backdrop-filter: blur(10px);
