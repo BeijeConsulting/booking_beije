@@ -14,26 +14,34 @@ import { useTranslation } from "react-i18next";
 
 //API
 import { insertStrutturaPostApi } from "../../../../../services/api/struttura/strutturaApi";
+import { decryptItem } from "../../../../../utils/crypto/crypto";
 
-import tokenDuck from "../../../../../redux/ducks/tokenDuck";
 import { connect } from "react-redux";
 
 const StructureOperation = (props) => {
   const { t } = useTranslation();
 
   const { TextArea } = Input;
-  const [state, setState] = useState({ data: null });
   const location = useLocation();
-  const initialFormValue = {
-    address: "",
-    announce: "",
-    city: "",
-    category: null,
-    country: "",
-    description: "",
-    zipCode: null,
+
+  let structureValue = {
+    address: {
+      cap: "",
+      citta: "",
+      latitudine: 0,
+      longitudine: 0,
+      numero_civico: "",
+      provincia: "",
+      stato: "",
+      via: "",
+    },
+    category: "",
     checkIn: "16:00",
-    checkOut: "19:00",
+    checkOut: "22:00",
+    description: "",
+    images: [],
+    title: "",
+    userId: 14, //int
   };
 
   useEffect(() => {
@@ -45,20 +53,23 @@ const StructureOperation = (props) => {
     //   const structureFromServer = await res.json();
     //   setState({ ...state, data: structureFromServer });
     // };
-
     // if (location.state.idStructure !== null) {
     // futura chiamata a API
     // getStructure();
-    // } else {
-    setState({ ...state, data: initialFormValue });
     // }
   }, []);
 
   // PER FORM ANT
   const onFinish = (values) => {
-    
+    const HEADER = decryptItem(props.tokenDuck.token);
 
+    structureValue.title = values.announce;
+    structureValue.description = values.description;
+    structureValue.category = values.category;
+    structureValue.checkIn = moment(values.checkIn).format("HH:MM");
+    structureValue.checkOut = moment(values.checkOut).format("HH:MM");
 
+    console.log(insertStrutturaPostApi(structureValue, HEADER));
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -67,12 +78,7 @@ const StructureOperation = (props) => {
 
   // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
-    setState({
-      data: {
-        ...state.data,
-        fotoStructure: value,
-      },
-    });
+    structureValue.images = value;
   };
 
   const getAddressObject = (addressObj) => {
@@ -100,23 +106,23 @@ const StructureOperation = (props) => {
 
     address = address.join(", ");
 
-    setState({
-      ...state,
-      houseNumber: houseNumber,
-      address: address,
+    let objAddressForPost = {
+      cap: zipCode,
+      citta: city,
       latitudine: addressObj.coo.lat,
       longitudine: addressObj.coo.lon,
-      city: city,
-      province: province,
-      region: region,
-      zipCode: zipCode,
-      country: country,
-    });
+      numero_civico: houseNumber,
+      provincia: province,
+      stato: country,
+      via: address,
+    };
+
+    structureValue = { ...structureValue, address: objAddressForPost };
   };
 
   return (
     <>
-      {state.data === null ? (
+      {structureValue.userId === null ? (
         <Spin />
       ) : (
         <Form
@@ -126,15 +132,12 @@ const StructureOperation = (props) => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
           initialValues={{
-            address: state.data.address,
-            announce: state.data.announce,
-            city: state.data.city,
-            category: state.data.category,
-            country: state.data.country,
-            description: state.data.description,
-            zipCode: state.data.zipCode,
-            checkIn: moment(state.data.checkIn, "HH:mm"),
-            checkOut: moment(state.data.checkOut, "HH:mm"),
+            address: structureValue.address,
+            announce: structureValue.title,
+            category: structureValue.category,
+            description: structureValue.description,
+            checkIn: moment(structureValue.checkIn, "HH:mm"),
+            checkOut: moment(structureValue.checkOut, "HH:mm"),
           }}
         >
           <div>
@@ -324,8 +327,8 @@ const StructureOperation = (props) => {
 };
 
 const mapStateToProps = (state) => ({
- tokenDuck: state.tokenDuck,
- userDuck: state.userDuck
-})
+  tokenDuck: state.tokenDuck,
+  userDuck: state.userDuck,
+});
 
 export default connect(mapStateToProps)(StructureOperation);
