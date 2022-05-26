@@ -76,16 +76,16 @@ function LoginForm(props) {
          openNotification(t('toasts.formErrorEmail'), 'email');
       }
 
-    
+
 
 
       value.length === 0 ? errors[name] = true : errors[name] = false;
 
       if (checkMail(formObject.email))
-      setState({
-         ...state,
-         isDisable: false
-      })
+         setState({
+            ...state,
+            isDisable: false
+         })
    }
 
    const response = res => {
@@ -94,7 +94,16 @@ function LoginForm(props) {
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));
       props.dispatch(setUser())
-      navigate(routes.LAYOUT);
+      {
+         props.isCheckout === true ? navigate(routes.CHECKOUT, {
+            state: {
+               property: props.checkoutProperty,
+               checkOut: props.checkoutList
+            }
+         }) 
+         : 
+         navigate(routes.LAYOUT)
+      };
    }
 
    const handleSubmit = (e) => {
@@ -108,7 +117,7 @@ function LoginForm(props) {
                openNotification(t('toasts.formErrorApi'), 'info-toast');
             }
          })
-      }  
+      }
    }
 
    return (
