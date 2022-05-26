@@ -109,7 +109,7 @@ const Bookings = (props) => {
       {/* <button onClick={() => setState({
         ...state,
         isOpen: !state.isOpen
-      })}>bau</button> */}
+      })}>click for modal</button> */}
       <Modal 
       callback={handleClose} 
       isOpen={state.isOpen}>
