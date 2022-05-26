@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Rooms.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { faInfoCircle, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faUser, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import UiButton from '../ui/buttons/uiButtons/UiButton';
 import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
 import UiSelect from '../ui/uiSelect/UiSelect';
 
+let selectValue = 1
 function Rooms(props) {
+    const ref = useRef();
     const { t } = useTranslation();
+    const [state, setState] = useState({
+        selected: false
+    })
 
+    useEffect(() => {
+        props.callback(props.temp_id, state.selected, {
+            price: props.price,
+            title: props.title,
+            count: selectValue
+        })
+    }, [state.selected])
 
 
     const generateServicesIcon = ((service, index) => {
@@ -31,11 +43,21 @@ function Rooms(props) {
     }
     const generateMaxRooms = () => {
         let arrayData = []
-        for (let index = 1; index < props.count + 1; index++) {
+        for (let index = 1; index <= props.count; index++) {
             arrayData.push(index)
         }
-        // console.log('select', props.count, arrayData)
         return arrayData;
+    }
+
+    const handleNumberOfRooms = (e) => {
+        selectValue = e;
+    }
+
+
+    const selectedButton = () => {
+        setState({
+            selected: !state.selected
+        })
     }
     /* The following css class structure is optimized to be used with flex */
     return (
@@ -55,10 +77,16 @@ function Rooms(props) {
                 </div>
                 <div className='ui_components_container'>
                     <UiButton
-                        label={t("common.select")}
+                        label={(state.selected === true ? 'checked' : '') + ' ' + 'selected'}
+                        callback={selectedButton}
+
                     />
                     <UiSelect
-                        data={generateMaxRooms()} />
+                        selected={state.selected}
+                        data={generateMaxRooms()}
+                        callback={handleNumberOfRooms}
+                    />
+
                 </div>
             </div>
         </div>

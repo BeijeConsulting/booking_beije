@@ -19,30 +19,30 @@
 
         .card {
             background-color: $secondary_lighter;
-            display: flex;
-            justify-content: space-between;
+            // display: flex;
+            // justify-content: space-between;
             margin:auto;
-            padding: 1rem;
-            border-radius: 15px;
+            // padding: 1rem;
+            // border-radius: 15px;
             width: 75%;
-            .price {
-                font-weight: bold;
-            }
+            // .price {
+            //     font-weight: bold;
+            // }
         }
 
         img {
             height: 150px;
-            border-radius: 15px;
-            margin: 0 1rem;
+            // border-radius: 15px;
+            // margin: 0 1rem;
         }
 
-        .card-info {
-            display: flex;
-        }
+        // .card-info {
+        //     display: flex;
+        // }
 
         .card-info-info {
-            display: flex;
-            flex-direction: column;
+            // display: flex;
+            // flex-direction: column;
 
             span {
                 color: $gray;
@@ -52,7 +52,7 @@
             .rate {
                 background-color: $secondary_lighter;
                 width: 8vw;
-                cursor: pointer;
+                // cursor: pointer;
             }
         }
     }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation,useParams } from "react-router";
 // less 
-import './Layout.scss'
+// import './Layout.scss'
+import '../../../assets/variables/_common.scss'
 // Routes
 import { routes } from "../../../routes/routes";
 // component 
@@ -42,7 +43,7 @@ const Layout = () => {
       
     }
     return (
-        <div className="layoutContainer">
+        <div className="h100 relative">
             <Navbar stateLayout={state.windowWidth} />
             <Outlet/>
             {

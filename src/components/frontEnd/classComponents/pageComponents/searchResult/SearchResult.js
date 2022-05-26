@@ -6,6 +6,7 @@ import { t } from 'i18next';
 
 // style
 import './SearchResult.scss';
+import '../../../../../assets/variables/_common.scss';
 import SearchButton from '../../../funcComponents/ui/searchButton/SearchButton';
 import Helmet from 'react-helmet';
 import { withTranslation } from 'react-i18next';
@@ -45,10 +46,10 @@ class SearchResult extends Component {
                 <Helmet>
                     <title>{this.props.t("common.research")}</title>
                 </Helmet>
-                <section className='ButtonContainer'>
+                <section className='ButtonContainer flex column jcCenter aiCenter'>
                     <SearchButton
                     />
-                    <div>
+                    <div className='w100 flex jcSpaceA'>
 
                         <UiButton className="becomeHost"
                             callback={this.handleButton}

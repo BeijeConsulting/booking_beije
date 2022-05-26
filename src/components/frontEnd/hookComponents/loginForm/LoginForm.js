@@ -14,6 +14,7 @@ import { routes } from '../../../../routes/routes';
 
 //import {postApi} from '../../../../services/genericServices';
 import './LoginForm.scss'
+import '../../../../assets/variables/_common.scss';
 import { useTranslation } from 'react-i18next';
 
 //api
@@ -75,16 +76,16 @@ function LoginForm(props) {
          openNotification(t('toasts.formErrorEmail'), 'email');
       }
 
-    
+
 
 
       value.length === 0 ? errors[name] = true : errors[name] = false;
 
       if (checkMail(formObject.email))
-      setState({
-         ...state,
-         isDisable: false
-      })
+         setState({
+            ...state,
+            isDisable: false
+         })
    }
 
    const response = res => {
@@ -93,7 +94,16 @@ function LoginForm(props) {
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));
       props.dispatch(setUser())
-      navigate(routes.LAYOUT);
+      {
+         props.isCheckout === true ? navigate(routes.CHECKOUT, {
+            state: {
+               property: props.checkoutProperty,
+               checkOut: props.checkoutList
+            }
+         }) 
+         : 
+         navigate(routes.LAYOUT)
+      };
    }
 
    const handleSubmit = (e) => {
@@ -107,26 +117,26 @@ function LoginForm(props) {
                openNotification(t('toasts.formErrorApi'), 'info-toast');
             }
          })
-      }  
+      }
    }
 
    return (
       <section className="bg-color">
-         <div className="form-container container flex column space">
+         <div className="form-container container flex column jcSpaceA">
 
-            <div className="flex center column">
+            <div className="flex jcCenter aiCenter column">
                <div className="w">LOGO</div>
                {/* <Logo></Logo> */}
             </div>
 
             <form className="flex column">
-               <h1 className="w title">{t('common.loginLabel')}</h1>
+               <h1 className="w fsXXL">{t('common.loginLabel')}</h1>
                <FormInput type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
                <FormInput type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />
-               <div className="flex center column">
+               <div className="flex jcCenter aiCenter column">
                   <FormButton className="btn-primary" label={t("common.loginLabel")} callback={handleSubmit} disabled={state.isDisable} />
                   <span className="w">{t('common.or')}</span>
-                  <UiButton className="btn-secondary button-link" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
+                  <UiButton className="btn-secondary bNone bgNone button-link" label={t("common.registerLabel")} callback={handleNavigation(routes.REGISTRATION)} />
                </div>
             </form>
 

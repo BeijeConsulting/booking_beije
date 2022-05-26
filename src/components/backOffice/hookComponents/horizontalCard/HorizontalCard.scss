@@ -1,3 +1,5 @@
+@import '../../../../assets/variables/globalVariables.scss';
+
 // local variables
 $upperright_width: 100px;
 $card_height: 150px;
@@ -5,9 +7,9 @@ $card_height: 150px;
 .h_card_container {
     height: 100%;
     width: 100%;
+    background-color: $secondary_light;
     padding: 1rem;
     display: flex;
-    background-color: #EADDD4;
     border-radius: 1rem;
     margin: .5rem 0;
     transition: transform .5s;
@@ -22,7 +24,7 @@ $card_height: 150px;
     }
 
     .card_title {
-        font-size: 1.5rem;
+        font-size: $fs-2;
         margin-bottom: 0rem;
     }
 

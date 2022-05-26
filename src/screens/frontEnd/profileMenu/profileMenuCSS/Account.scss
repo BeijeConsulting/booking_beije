@@ -1,20 +1,20 @@
 @import "../../../../assets/variables/globalVariables.scss";
 
 .Account_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
     background-color: $black_primary;
-    height: 85vh;
+    // height: 85vh;
 }
 
 .header_container {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 1rem;
+    // display: flex;
+    // justify-content: space-between;
+    // margin: 0 1rem;
 
     .acc_logout {
-        border: none;
+        // border: none;
         background-color: $black_primary;
         color: $white_primary;
     }
@@ -29,13 +29,13 @@
 }
 
 .edit {
-    display: flex;
-    justify-content: space-around;
+    // display: flex;
+    // justify-content: space-around;
 
     .update_cont {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
 
         .update {
             background-color: $primary;
@@ -43,18 +43,18 @@
             width: 130px;
             color: $white_primary;
             border-radius: .5rem;
-            border: none;
+            // border: none;
             font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
+            // font-weight: bold;
+            // cursor: pointer;
         }
     }
 
     .penIcon {
         font-size: 20px;
         background-color: $secondary_lighter;
-        border: none;
-        border-radius: 50%;
+        // border: none;
+        // border-radius: 50%;
         height: 100px;
         width: 105px;
     }
@@ -68,14 +68,14 @@
 
 
 .i {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
+    // display: flex;
+    // flex-direction: column;
+    // margin: 1rem;
 
     input {
         border: 1px solid black;
         padding: .5rem;
-        border-radius: 1rem;
+        // border-radius: 1rem;
         background-color: $secondary_lighter;
     }
 }
