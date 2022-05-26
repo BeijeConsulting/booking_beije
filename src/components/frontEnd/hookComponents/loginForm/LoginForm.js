@@ -19,9 +19,9 @@ import { useTranslation } from 'react-i18next';
 
 //api
 import { signInPostApi } from '../../../../services/api/auth/authApi'
-
+import {myProfilesGetApi} from '../../../../services/api/user/userApi'
 //localstorage
-import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { setLocalStorage,getLocalStorage } from '../../../../utils/localStorage/localStorage';
 import { setUser } from '../../../../redux/ducks/userDuck';
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
 import { notification } from 'antd';
@@ -88,12 +88,14 @@ function LoginForm(props) {
          })
    }
 
-   const response = res => {
+   const response = async res => {
       openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
       setLocalStorage("token", res.data.token);
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));
-      props.dispatch(setUser())
+      let token = getLocalStorage('token')
+      const result = await myProfilesGetApi(token);
+      props.dispatch(setUser(result.data))
       {
          props.isCheckout === true ? navigate(routes.CHECKOUT, {
             state: {
