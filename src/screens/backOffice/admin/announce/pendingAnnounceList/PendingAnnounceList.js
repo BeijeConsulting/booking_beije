@@ -8,6 +8,7 @@ import { decryptItem } from "../../../../../utils/crypto/crypto";
 //API
 import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
 
+
 //STYLE
 import "./PendingAnnounceList.scss"
 
