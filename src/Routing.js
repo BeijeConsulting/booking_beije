@@ -61,13 +61,18 @@ function Routing(props) {
     useEffect(() => {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-                logout();
-                let token = getLocalStorage('token');
-                props.dispatch(setToken(token));
-                const PROFILE = await myProfilesGetApi(token);
-                const PROPERTY = await showAllStruttureGetApi();
-                props.dispatch(setUser(PROFILE?.data));
-                props.dispatch(setProperty(PROPERTY?.data?.list));
+                
+                try {
+                    logout();
+                    let token = getLocalStorage('token');
+                    props.dispatch(setToken(token));
+                    const PROFILE = await myProfilesGetApi(token);
+                    const PROPERTY = await showAllStruttureGetApi();
+                    props.dispatch(setUser(PROFILE?.data));
+                    props.dispatch(setProperty(PROPERTY?.data?.list));
+                } catch (error) {
+                    return error.message
+                }
             }
         })()
 
