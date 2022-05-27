@@ -72,11 +72,11 @@ const Checkout = () => {
         <div className="structure-info-container">
           <PropertyCard
             data={{
-              nome_struttura: checkoutPropertyInfo?.nome_struttura,
+              struttura: {
+                nome: checkoutPropertyInfo?.nome_struttura,
+                tipologia: checkoutPropertyInfo?.descrizione
+              },
               media_recensioni: checkoutPropertyInfo?.media_recensioni,
-              tipologiaStrutturaId: {
-                tipo: checkoutPropertyInfo?.descrizione
-              }
             }}
           />
           {/*  <div className="structure-photo-container" style={{ width: "100px", height: "100px", backgroundColor: "aqua" }}>
@@ -95,11 +95,14 @@ const Checkout = () => {
           }
           <div className="line_out"><div className="line"></div></div>
 
-          <p className="detail-info">{t("fe.screens.checkout.total")}: {tot}</p>
+          <div className="detail-info">
+            <p>{t("fe.screens.checkout.total")}:</p>
+            <p>{tot}</p>
+          </div>
         </div>
-
-        {getLocalStorage('token') !== null ? <button onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button> : <button onClick={goToLogin}>{t("common.loginLabel")}</button>}
-
+        <div className="button_container">
+          {getLocalStorage('token') !== null ? <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button> : <button className="button_on" onClick={goToLogin}>{t("common.loginLabel")}</button>}
+        </div>
       </div>
     </>
 
