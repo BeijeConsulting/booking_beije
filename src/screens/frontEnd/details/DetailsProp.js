@@ -60,7 +60,7 @@ const DetailsProp = () => {
     storageRooms: getLocalStorageCheckout('checkout') || null
   })
 
-  console.log(state.storageRooms)
+
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ const DetailsProp = () => {
       id: temp_id
     } : checkOutArray[temp_id] = undefined;
     let totalPrice = 0
-    console.log('massima preoccupazione', checkOutArray)
+
     for (let index = 0; index < checkOutArray.length; index++) {
       if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index].price
     }
@@ -119,7 +119,7 @@ const DetailsProp = () => {
     arrayToCheckout = checkOutArray.filter((element) => {
       return element !== undefined;
     })
-    console.log('artck', arrayToCheckout);
+
   }
 
   const goToCheckout = () => {

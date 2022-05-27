@@ -9,8 +9,6 @@ import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToI
 import UiSelect from '../ui/uiSelect/UiSelect';
 
 function Rooms(props) {
-
-    console.log('stored', props.stored)
     const ref = useRef();
     const { t } = useTranslation();
     const [state, setState] = useState({
@@ -19,13 +17,12 @@ function Rooms(props) {
     })
 
     useEffect(() => {
-
         props.callback(props.temp_id, state.selected, {
             price: props.price,
             title: props.title,
-            count: state.selectValue
+            id: props.temp_id,
+            count: props.stored !== undefined ? props.stored.count : state.selectValue
         })
-        console.log('fro', state.selectValue, props.title)
     }, [state.selected])
 
 
@@ -54,7 +51,6 @@ function Rooms(props) {
     }
 
     const handleNumberOfRooms = (e) => {
-        console.log('e', e)
         state.selectValue = e;
     }
 
@@ -99,6 +95,7 @@ function Rooms(props) {
                     selected={state.selected}
                     data={generateMaxRooms()}
                     callback={handleNumberOfRooms}
+                    storedNOfRooms={props.stored?.count}
                 />
 
             </div>

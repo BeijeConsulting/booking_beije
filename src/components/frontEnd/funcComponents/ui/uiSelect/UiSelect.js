@@ -10,7 +10,7 @@ function UiSelect(props) {
 
    return (
       <>
-         <select defaultValue={props.isStored} disabled={props.selected} name={props.name} className={props.cssClass} onChange={onChangeCallback}>
+         <select defaultValue={props.storedNOfRooms} disabled={props.selected} name={props.name} className={props.cssClass} onChange={onChangeCallback}>
             {props.data.map(props.renderingCallback(props.name))}
          </select>
       </>
