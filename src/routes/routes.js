@@ -38,7 +38,8 @@ const routes = {
     RESERVATION_CALENDAR: 'reservation-calendar',
     RESERVATION_LIST: 'reservation-list',
     HOST_REGISTRATION: 'host-registration',
-    PENDING_ANNOUNCE_LIST: 'pending-announce-list' //to add in admin route
+    PENDING_ANNOUNCE_LIST: 'pending-announce-list', //to add in admin route
+    PENDING_STRUCTURE_LIST: 'pending-structure-list' //to add in admin route
 }
 
 let routesDetails = {

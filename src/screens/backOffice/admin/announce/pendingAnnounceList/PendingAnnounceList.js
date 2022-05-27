@@ -1,4 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+//REDUX AND TOKEN MANAGEMENT
+import { connect } from "react-redux";
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
+//import { decryptItem } from "../../../../../utils/crypto/crypto";
+
+//API
+import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
+
 
 //STYLE
 import "./PendingAnnounceList.scss"
@@ -9,40 +18,23 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { Button } from "antd";
 
+//TRANSLATION
+import { useTranslation } from "react-i18next";
 
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//TODO: PAGINATION
+//TODO: TEST DECLINE AGAIN, waiting for back-end to fix error 500
+
+let responseApiGetAll = null;
 
 
-const PendingAnnounceList = () => {
-    const obj = [
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        },
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a SavonaCasa in riva al mare a Savona"
-        },
-    ]
+const PendingAnnounceList = (props) => {
+
+    const [state, setState] = useState({
+        pendingAnnounceList: []
+    });
+
+    const { t } = useTranslation();
 
     const switchToPage = (clickedPage) => {
         console.log("switch to page", clickedPage);
@@ -53,56 +45,112 @@ const PendingAnnounceList = () => {
 
     const paginationProps = {
         itemsCount: 50, //get from backend
-        pageSize: 10, //get from backend
+        pageSize: 10, //get from backend --> state.lastPage
         paginationCallback: switchToPage
     }
 
 
-    const testCardOnClick = (e) => {
-        console.log("CARD CLICK")
+    const getAll = async () => {
+        let token = getLocalStorage('token')
+        responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
+
+        setState({
+            ...state,
+            pendingAnnounceList: responseApiGetAll.data.list
+        });
+    }
+
+    useEffect(() => {
+        getAll();
+    }, [])
+
+
+    const acceptPendingAnnounce = (clickedAnnounceId) => () => {
+
+        const update = async () => {
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+
+                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
+
+                await acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER));
+        }
+
+        update();
+
+        let updated = state.pendingAnnounceList.filter((announce, index) => {
+            return announce.id !== clickedAnnounceId
+        })
+
+        setState({
+            ...state,
+            pendingAnnounceList: updated
+        })
+
+    }
+
+
+    const declinePendingAnnounce = (clickedAnnounceId) => () => {
+
+        const decline = async () => {
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
+                await declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
+        }
+
+        decline();
+
+
+        let declined = state.pendingAnnounceList.filter((structure) => {
+            return structure.id !== clickedAnnounceId
+        })
+
+        setState({
+            ...state,
+            pendingAnnounceList: declined
+        })
+
     }
 
     const renderPendingAnnounces = (announce, key) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
-            imageSrc={announce.img}
-            altText={`${key}_${announce.title}`}
-            title={announce.title}
-            text={announce.text}
-            callback={testCardOnClick}
-            /* DA METTERE SOLO SE L'ANNUNCIO è ANCORA DA ACCETTARE O DECLINARE */
-            upperRightContent={
-                <>
-                    <FontAwesomeIcon className="icon_edit" icon={faPen} />
-                    <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
-                </>
-            }
-            footerContentLeft={
-                <>
-                    <p>FEDERICO FRASCà</p>
-                    <p>124782487683</p>
-                </>
-            }
+            title={announce.nome_struttura}
+            text={announce.descrizione}
 
             footerContent={
                 <>
-                    <Button className="pending_button" type="primary" onClick={() => console.log('ACCEPT')}>Accept</Button>
-                    <Button className="pending_button" type="primary" onClick={() => console.log('DECLINE')}>Decline</Button>
+                    <Button className="pending_button" type="primary" onClick={acceptPendingAnnounce(announce.id)}>{t('common.accept')}</Button>
+                    <Button className="pending_button" type="primary" onClick={declinePendingAnnounce(announce.id)}>{t('common.decline')}</Button>
                 </>
             }
+
         />
     }
+
+
     return (
         <>
             <CardList
-                sectionTitle={"Pending announce list"}
+                sectionTitle={t('bo.screens.admin.pendingAnnounceListTitle')}
                 {...paginationProps}
             >
-                {obj.map(renderPendingAnnounces)}
+                {state.pendingAnnounceList.map(renderPendingAnnounces)}
             </CardList>
         </>
     )
 }
 
+const mapStateToProps = (state) => ({
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck,
+});
 
-export default PendingAnnounceList;
+export default connect(mapStateToProps)(PendingAnnounceList);
