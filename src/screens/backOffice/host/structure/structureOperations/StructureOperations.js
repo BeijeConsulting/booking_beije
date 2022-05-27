@@ -62,10 +62,12 @@ const StructureOperation = (props) => {
 
       structureValue.title = strutturaDetail?.nome_struttura;
       structureValue.description = strutturaDetail?.descrizione;
-      structureValue.address = strutturaDetail?.indirizzo
+      structureValue.address = strutturaDetail?.indirizzo;
       structureValue.category = strutturaDetail?.tipologiaStruttura?.tipo;
       structureValue.checkIn = moment(strutturaDetail?.checkIn).format("HH:MM");
-      structureValue.checkOut = moment(strutturaDetail?.checkOut).format("HH:MM");
+      structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
+        "HH:MM"
+      );
       structureValue.userId = strutturaDetail?.host.user.id;
 
       setState(structureValue);
@@ -77,24 +79,24 @@ const StructureOperation = (props) => {
 
   // PER FORM ANT
   const onFinish = (values) => {
-    const HEADER = getLocalStorage('token');
-    
-    let upState = Object.assign(state)
+    let upState = Object.assign(state);
+    if (state.address.via !== "") {
+      const HEADER = getLocalStorage("token");
+      upState.title = values.announce;
+      upState.description = values.description;
+      upState.category = values.category;
+      upState.checkIn = moment(values.checkIn).format("HH:MM");
+      upState.checkOut = moment(values.checkOut).format("HH:MM");
 
-    upState.title = values.announce;
-    upState.description = values.description;
-    upState.category = values.category;
-    upState.checkIn = moment(values.checkIn).format("HH:MM");
-    upState.checkOut = moment(values.checkOut).format("HH:MM");
-
-    if (location.state.idStructure === null){
-      //nuovo inserimento
-      insertStrutturaPostApi(upState, HEADER);
-    }else{
-      updateStrutturaPutApi(location.state.idStructure, upState, HEADER)
+      if (location.state.idStructure === null) {
+        //nuovo inserimento
+        insertStrutturaPostApi(upState, HEADER);
+      } else {
+        updateStrutturaPutApi(location.state.idStructure, upState, HEADER);
+      }
     }
 
-    setState(upState)
+    setState(upState);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -103,7 +105,7 @@ const StructureOperation = (props) => {
 
   // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
-    setState({...state, images: value})
+    setState({ ...state, images: value });
   };
 
   const getAddressObject = (addressObj) => {
@@ -142,7 +144,7 @@ const StructureOperation = (props) => {
       via: address,
     };
 
-    setState({...state, address: objAddressForPost });
+    setState({ ...state, address: objAddressForPost });
   };
 
   return (
@@ -157,7 +159,6 @@ const StructureOperation = (props) => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
           initialValues={{
-            address: `${state.address.via}, ${state.address.citta} (${state.address.provincia})`,
             announce: state.title,
             category: state.category,
             description: state.description,
@@ -242,17 +243,7 @@ const StructureOperation = (props) => {
 
           <Row gutter={16}>
             <Col className="gutter-row">
-              <Form.Item
-                name="address"
-                label={t("common.address")}
-                // name="address"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: t("toasts.operationAddress"),
-                //   },
-                // ]}
-              >
+              <Form.Item name="address" label={t("common.address")}>
                 {/* <Input name="address" placeholder={t("common.address")} /> */}
                 <SearchAddress
                   placeholder={t("common.address")}

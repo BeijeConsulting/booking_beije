@@ -62,6 +62,7 @@ const SearchAddress = (props) => {
       placeholder={props.placeholder}
       allowClear
       defaultValue={props.defValue}
+      status={`${state.value === '' ? "error" : ""}`}
     />
   );
 };
