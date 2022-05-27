@@ -88,8 +88,6 @@ const StructureList = (props) => {
         const HEADER = getLocalStorage("token")
         let disableStructureApi = await disableStrutturaPutApi(id, { esito: true }, HEADER)
 
-        console.log(id)
-        console.log(disableStructureApi)
         setState({
             ...state,
             isModalVisible: true
