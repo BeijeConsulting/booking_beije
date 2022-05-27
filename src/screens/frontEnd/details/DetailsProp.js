@@ -211,10 +211,14 @@ const DetailsProp = () => {
                 {state.roomsList?.map(generateRooms)}
               </div>
               <div className="total_price_container">
-                <p>Total {state.checkOutPrice}&euro;</p>
-                <UiButton
-                  callback={goToCheckout}
-                  label={t("common.bookNow")} />
+                <div className="container_price">
+                  <p>Total {state.checkOutPrice}&euro;</p>
+                  <UiButton
+                    className="button_price"
+                    callback={goToCheckout}
+                    label={t("common.bookNow")}
+                  />
+                </div>
               </div>
               <div className="map_container">
                 <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
