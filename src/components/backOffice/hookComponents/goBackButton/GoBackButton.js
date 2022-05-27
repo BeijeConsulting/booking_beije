@@ -22,7 +22,7 @@ const GoBackButton = ({route}) => {
     }
     return (
         <>
-            <FontAwesomeIcon className="button_go_back m1 flex jcStart" icon={faChevronLeft} onClick={handlerClick(route)} />
+            <FontAwesomeIcon className="button_go_back p1 flex jcStart" icon={faChevronLeft} onClick={handlerClick(route)} />
         </>
     )
 }

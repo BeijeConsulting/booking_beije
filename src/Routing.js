@@ -37,14 +37,15 @@ import StructureOperation from "./screens/backOffice/host/structure/structureOpe
 import StructureList from "./screens/backOffice/host/structure/structureList/StructureList";
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations";
+import PendingStructuresList from "./screens/backOffice/admin/structure/pendingStructureList/PendingStructuresList";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
-// import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
-import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
+
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -55,15 +56,13 @@ import { logout } from "./utils/user/user";
 import { setProperty } from "./redux/ducks/propertyDuck";
 import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
 
-import { setLocalStorage } from "./utils/localStorage/localStorage"
-
 
 
 function Routing(props) {
 
 
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM2NTM2MDYsImV4cCI6MTY1MzY1NzIwNn0.VmyN9LmhFoY8LMbJvzfRZi7Jc6HTb_6sunCiGdiL-o8")
-    setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTM3MjM4MDJ9.iTPltIoaSCB-NCSrXgdOyJbSeQQI_30tzjBRsxsN6Ak")
+    //setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0MDA3LCJleHAiOjE2NTM2Njc2MDd9.S2LFboBSHE8titm89jQ39FWCnwxj8RWZC8R3i4D_rwQ")
+    //setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
 
 
     useEffect(() => {
@@ -89,6 +88,11 @@ function Routing(props) {
 
 
     //login, registration, account, messages, favourites, booking
+
+    //TODO: to be deleted ( - setLocalStorage import too)
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0OTAyLCJleHAiOjE2NTM2Njg1MDJ9.PQpyiNZgaLZrwsVcH1aQzGKSS9Q_GLZwPkCmhyv8ZMY")
+    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
+
 
     return (
         <Routes>
@@ -175,6 +179,7 @@ function Routing(props) {
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
+                <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
                 <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
             </Route>
 
