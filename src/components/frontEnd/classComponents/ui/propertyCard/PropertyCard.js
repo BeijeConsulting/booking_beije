@@ -13,6 +13,7 @@ import '../../../../../assets/variables/_common.scss';
 // API
 import { getStructureImage } from '../../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
 import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
+import withRouting from '../../../../../withRouting/withRouting';
 
 class PropertyCard extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class PropertyCard extends Component {
             image: IMAGE.data?.immagine?.urlImage
         })
         this.listings = LISTINGS?.data?.list;
-        this.findLowestPrice()  
+        this.findLowestPrice()
 
     }
     findLowestPrice() {
@@ -53,11 +54,15 @@ class PropertyCard extends Component {
         })
     }
 
+    handleNavigate = (id) => {
+        this.props.router.navigate("/detailsproperty/" + id)
+    }
+
     render() {
         return (
             <>
                 <section className='propertyCardContainer flex relative aiCenter'>
-                    <img src={this.state?.image}/>
+                    <img src={this.state?.image} />
                     {/* <img className='ofC' src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"} /> */}
                     <div>
                         <h4>{this.props?.data?.struttura.nome}</h4>
@@ -79,4 +84,4 @@ PropertyCard.propTypes = {
 
 }
 
-export default withTranslation()(PropertyCard);
+export default withTranslation()(withRouting(PropertyCard));
