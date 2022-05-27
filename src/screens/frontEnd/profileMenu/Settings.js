@@ -94,27 +94,29 @@ function Settings(props) {
         <title>{t("fe.screens.settings.title")}</title>
 
       </Helmet>
-      <div className="settings_container flex aiCenter jcSpaceE column">
-        {
-          state.windowWidth < 991 &&
-          <div className="back-button"><GoBackButton /></div>
-        }
+      <div className="settings_container flex column ">
         <div>
-          <div className="title_and_logout_container flex jcSpaceB aiCenter w100">
-            <h1>{t("fe.screens.settings.title")}</h1>
-          </div>
-          <div className="settings_card_list_container flex jcCenter aiCenter column w100  ">
-            {settingsToComponents.map(createCardSettingsComponent)}
-          </div>
+          {
+            state.windowWidth < 991 &&
+            <div className="back-button"><GoBackButton /></div>
+          }
+            <div className="cont mxAuto">
+              <div className="title_and_logout_container mx3">
+                <h1>{t("fe.screens.settings.title")}</h1>
+              </div>
+              <div className="settings_card_list_container flex jcCenter aiCenter column w100">
+                {settingsToComponents.map(createCardSettingsComponent)}
+              </div>
+              <div className="setting_disclaimer_container flex column aiCenter">
+                <UiButton
+                  callback={handleLogOut}
+                  className={"logout_button"}
+                  label={"Logout"} />
+                <Disclaimer />
+              </div>
+            </div>
+          
         </div>
-        <div className="setting_disclaimer_container flex column aiCenter">
-          <UiButton
-            callback={handleLogOut}
-            className={"logout_button"}
-            label={"Logout"} />
-          <Disclaimer />
-        </div>
-
       </div>
     </>
 
