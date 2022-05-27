@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 
 //rrd
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { routes } from '../../../routes/routes'
 
 //css
@@ -13,7 +13,6 @@ import "./DetailsProp.scss";
 // REACT LEAFLET
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
-import Map from '../../../components/frontEnd/hookComponents/map/Map'
 
 //hooks
 import { useTranslation } from "react-i18next";
@@ -25,13 +24,13 @@ import { strutturaDetailIdGetApi } from "../../../services/api/struttura/struttu
 //icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
+// import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
 
 //util
 import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annuncioApi";
 
 //components
-import Service from '../../../components/frontEnd/services/Service';
+// import Service from '../../../components/frontEnd/services/Service';
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
@@ -70,7 +69,7 @@ const DetailsProp = () => {
       const properties = await strutturaDetailIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
-      console.log(properties, 'stazmne', rooms, review)
+      // console.log(properties, 'stazmne', rooms, review)
       setState({
         ...state,
         property: properties?.data,
@@ -78,7 +77,7 @@ const DetailsProp = () => {
         reviewsList: review?.data,
         isLoading: false
       })
-      console.log(state)
+      // console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
@@ -224,11 +223,14 @@ const DetailsProp = () => {
                 {state.roomsList?.map(generateRooms)}
               </div>
               <div className="total_price_container">
-
-                <p>Total {state.storageRooms?.property.id === state.property?.id ? state.storageRooms.totalPrice : state.checkOutPrice}&euro;</p>
-                <UiButton
-                  callback={goToCheckout}
-                  label={t("common.bookNow")} />
+                <div className="container_price">
+                  <p>Total {state.checkOutPrice}&euro;</p>
+                  <UiButton
+                    className="button_price"
+                    callback={goToCheckout}
+                    label={t("common.bookNow")}
+                  />
+                </div>
               </div>
               <div className="map_container">
                 <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>

@@ -48,11 +48,6 @@ class SearchForm extends Component {
       this.dateFormat = 'YYYY-MM-DD';
    }
 
-   // setNumberOfGuests = (e) => {
-   //    this.bookingData.posti_letto = e;
-   //    console.log(this.bookingData["posti_letto"]);
-   // }
-
    objToString(obj) {
 
       let string = "";
@@ -64,14 +59,7 @@ class SearchForm extends Component {
       }
       let finalString = string.slice(0, -1);
 
-      console.log(finalString);
-
-
       return finalString;
-   }
-
-   componentWillUnmount() {
-      window.removeEventListener('guests', this.setNumberOfGuests);
    }
 
    handleSubmit = (e) => {
@@ -82,11 +70,9 @@ class SearchForm extends Component {
          radius: 10,
       }
       this.bookingData.posti_letto = this.props.guestDuck.guest
-      console.log(this.bookingData);
       let [latitude, longitude] = this.props.positionDuck.coordinates;
       coordinate.latitudine = latitude;
       coordinate.longitudine = longitude;
-
 
       getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify(coordinate)).then(res =>
          this.props.router.navigate(routes.SEARCH, {
@@ -99,6 +85,7 @@ class SearchForm extends Component {
             coordinate: coordinate
          }
       })
+      this.props.callback()
    }
 
    handleSelect = (e) => {

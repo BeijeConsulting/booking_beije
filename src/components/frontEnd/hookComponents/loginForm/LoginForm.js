@@ -120,14 +120,14 @@ function LoginForm(props) {
 
    return (
       <section className="bg-color">
-         <div className="form-container container flex column jcSpaceA">
+         <div className="form-container-L container flex column jcSpaceA">
 
             <div className="flex jcCenter aiCenter column">
                <div className="w">LOGO</div>
                {/* <Logo></Logo> */}
             </div>
 
-            <form className="flex column">
+            <form className="flex column px1 w75 mAuto">
                <h1 className="w fsXXL">{t('common.loginLabel')}</h1>
                <FormInput type={'text'} placeholder={t("common.email")} info="email" callback={handleChange('email')} />
                <FormInput type={'password'} placeholder={t("common.password")} info="password" callback={handleChange('password')} />

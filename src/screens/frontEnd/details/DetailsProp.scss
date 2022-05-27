@@ -44,9 +44,47 @@
         .total_price_container{
             display: flex;
             justify-content: center;
-            align-items: center;
+            margin: 2rem 0;
+            .container_price{
+                display: flex;
+                align-items: center;
+                background-color: $secondary;
+                border-radius: .5rem;
+                color: $white_primary;
+                padding: 0.1rem 0.1rem 0.1rem 1.5rem;
+            }
+            .button_price{
+                background-color: $primary;
+                border-style: none;
+                height: 100%;
+                padding: .5rem;
+                border-radius: .5rem;
+            }
             p{
+                margin-right: 1rem;
                 margin-bottom: 0;
+            }
+        }
+        .review_container{
+            margin: 2rem 0;
+            display: flex;
+            overflow-x: scroll;
+            .review_card_container0{
+                min-width: 60%;
+                background-color: $secondary_lighter;
+                color: $black_primary;
+                margin-right: 2rem;
+                padding: 1rem;
+                border-radius: .5rem;
+                h3{
+                    color: $black_primary;
+                }
+                img{
+                    width: 30%;
+                    height: auto;
+                    margin-bottom: .5rem;
+                }
+
             }
         }
     }
@@ -57,6 +95,10 @@
         .title_info{
             display: flex;
             justify-content: space-between;
+            .info_icon{
+                color: $black_primary;
+                font-size: 1.4rem;
+            }
             h2{
                 margin-right: .6rem;
             }
@@ -68,8 +110,62 @@
             margin: 0 2rem 2rem 0;
             padding: 1rem;
             border-radius: 1rem;
+            min-height: 25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             h2{
                 color: $black_primary
+            }
+            .description_container{
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                .number_people_container{
+                    flex-grow: 1;
+                    span{
+                        font-size: 1.4rem;
+                        margin-right: .6rem;
+                    }
+                }
+                .services_price_container{
+                    margin: 1rem 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .services_icon{
+                        margin-right: 1rem;
+                        font-size: 1.4rem;
+                    }
+                    .price_container{
+                        .price_room{
+                            font-weight: bold;
+                            font-size: 1.4rem;
+                        }
+                    }
+                }
+            }
+            .ui_components_container{
+                display: flex;
+                .button_room{
+                    flex-grow: 1;
+                    color: $white_primary;
+                    background-color:$secondary ;
+                    border-style: none;
+                    padding: .5rem 0;
+                    border-radius: .5rem;
+                    margin-right: .5rem;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                }
+                .select_on_roomCard{
+                    background-color:$secondary ;
+                    border-radius: .5rem;
+                    color: $white_primary;
+                    padding: .5rem;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                }
             }
         }
     }
@@ -97,11 +193,19 @@
     }
 }
 @media all and (max-width:480px) {
+    .property_container .padding_page .property_core_info_container {
+        flex-direction: column;
+    }
     .property_container{
         .room_container{
             .rooms_card_container{
                 min-width: 80%;
             }
         }
+    }
+}
+@media all and (min-width:481px){
+    .property_container .padding_page .review_container .review_card_container0 img{
+        width: 10%;
     }
 }

@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 import './Card.scss';
 import '../../../../assets/variables/_common.scss';
 
-function Card({children}) {
+function Card({children, callback}) {
   return (
-    <div className='cardLayout br2 p1'>
+    <div 
+    className='cardLayout br2 p1'
+    onClick={callback}
+    >
         {
             children
         }
