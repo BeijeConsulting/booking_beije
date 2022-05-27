@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 //Style
 import './GoBackButton.scss'
+import '../../../../assets/variables/_common.scss'
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,7 +21,7 @@ const GoBackButton = ({route}) => {
     }
     return (
         <>
-            <FontAwesomeIcon className="button_go_back" icon={faChevronLeft} onClick={handlerClick(route)} />
+            <FontAwesomeIcon className="button_go_back snow flex jcStart" icon={faChevronLeft} onClick={handlerClick(route)} />
         </>
     )
 }

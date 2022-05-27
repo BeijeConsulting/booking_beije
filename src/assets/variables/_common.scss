@@ -7,8 +7,15 @@
 .column {
     flex-direction: column;
 }
+.jcStart {
+    justify-content:start;
+}
 .jcCenter {
     justify-content: center;
+}
+
+.jcEnd {
+    justify-content: flex-end;
 }
 .jcSpaceB {
     justify-content: space-between;
@@ -191,4 +198,7 @@
 
 .ofC{
     object-fit: cover;
+}
+.snow{
+    background-color: white;
 }
