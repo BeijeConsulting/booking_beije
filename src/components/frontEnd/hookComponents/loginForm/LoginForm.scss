@@ -54,4 +54,16 @@
     // background: none;
     color: $white_primary;
 }
-
+.form-container-L input[type="text"],
+.form-container-L input[type="password"] {
+   border: none;
+   border-radius: 0.3rem;
+   margin: 0.5rem 0;
+   padding: 0.5rem;
+}
+@media all and (min-width:769px) {
+    .form-container-L{
+       width:50%;
+       margin: auto;
+    }
+ }
