@@ -65,3 +65,10 @@
    text-decoration: none;
    cursor: default;
 }
+
+.custom-pagination .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, 
+.custom-pagination .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.custom-pagination .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, 
+.custom-pagination .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+   color: $white_primary;
+}
