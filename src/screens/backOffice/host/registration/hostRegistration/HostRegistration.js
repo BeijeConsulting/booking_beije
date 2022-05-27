@@ -1,18 +1,25 @@
 //ANT DESIGN
-import { Form, Input, Checkbox, Button } from 'antd';
+import { Form, Input, Checkbox, Button, Spin } from 'antd';
 
 //REACT
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //ROUTING
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from "../../../../../routes/routes"
+
+//API
+import { hostRequestPost } from '../../../../../services/api/host/hostApi';
+import { decryptItem } from '../../../../../utils/crypto/crypto';
 
 //TRANSLATION
 import { useTranslation } from 'react-i18next';
 
 //STYLE
 import "./HostRegistration.scss"
+
+import { connect } from 'react-redux';
+
 
 const layout = {
     labelCol: {
@@ -24,16 +31,12 @@ const layout = {
 };
 
 let companyName = null,
-    phone = null,
-    vat = null,
-    city = null,
-    postcode = null,
-    billingAddress = null,
-    userRoles = null
+    vat = null
 
-const HostRegistration = () => {
+const HostRegistration = (props) => {
 
     const [state, setState] = useState({
+        loading: true,
         displayRegistration: true,
         displayFirstchoice: false,
         displaySecondchoice: false
@@ -42,6 +45,25 @@ const HostRegistration = () => {
     const navigate = useNavigate()
 
     const { t } = useTranslation();
+
+
+    useEffect(() => {
+        console.log(props.userDuck.user.auth)
+        let userType = props.userDuck.user.auth
+        setTimeout(() => {
+            if (userType.includes("HOST")) {
+                navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`)
+            }
+            else {
+                setState({
+                    ...state,
+                    loading: false
+                })
+            }
+            console.log(userType)
+        }, 1000)
+
+    }, [props.userDuck.user.auth])
 
     const setHostType = (hostChoice) => () => {
         let displayFirstchoice = false;
@@ -57,39 +79,36 @@ const HostRegistration = () => {
 
     const closeInputRegistration = (e) => {
         setState({
+            ...state,
             displayRegistration: true,
             displayFirstchoice: false,
             displaySecondchoice: false
         })
     }
 
-    const onFinish = (userType) => (values) => {
+    const onFinish = (values) => {
+        const HEADER = decryptItem(props.tokenDuck.token);
+        console.log("values", values.user.companyName);
+        companyName = values.user.companyName
+        vat = values.user.vatNumber
+        console.log(hostRequestPost({ companyName: companyName, vat: vat }, HEADER,
+            {
+                "utente": {
+                    "telephone_number": values.user.phoneNumber,
+                    "address": {
+                        "city": values.user.city,
+                        "postcode": values.user.postcode,
+                    },
+                    "billingAddress": values.user.billingAddress,
+                    "companyName": companyName,
+                    "iva": vat
+                }
+            }
+        ));
 
-        console.log(values);
-        console.log(userType);
         alert("Utente registrato correttamente")
         navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/new`, { state: { idStructure: null } })
-        phone = values.user.phoneNumber
-        city = values.user.city
-        postcode = values.user.postcode
-        billingAddress = values.user.billingAddress
-        companyName = userType === 2 ? values.user.companyName : null
-        vat = userType === 2 ? values.user.vatNumber : null
-        userRoles = userType === 2 ? "company" : "private"
 
-        /* {
-               hostDataPut(  ipotetico put da mandare a backend
-                   {
-                        phone: phone,
-                        city: city,
-                        postcode: postcode,
-                        billingAddress: billingAddress,
-                        companyName: companyName,
-                        vat: vat,
-                        userRoles: userRoles
-                   }
-               )
-           } */
     }
 
     const onFinishFailed = (errorInfo) => {
@@ -99,7 +118,11 @@ const HostRegistration = () => {
 
     return (
         <>
-            {state.displayRegistration &&
+            {state.loading === true &&
+                <Spin />
+            }
+
+            {(state.displayRegistration && state.loading === false) &&
                 <div className='host_type_pick'>
                     <h2>{t("bo.screens.host.hostRegistration.title")}</h2>
                     <div className="host_choice" onClick={setHostType(1)}>{t("bo.screens.host.hostRegistration.privateRegistration")}</div> {/* to onClik parameter define type of host */}
@@ -112,7 +135,7 @@ const HostRegistration = () => {
                 <>
 
 
-                    <Form {...layout} name="nest-messages" onFinish={onFinish(1)} onFinishFailed={onFinishFailed} > {/* to onFinish parameter define type of host */}
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
                         <div className='title-setup'>
                             <h2>{t("bo.screens.host.hostRegistration.setUpPrivateAccount")}</h2>
                             <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
@@ -189,7 +212,7 @@ const HostRegistration = () => {
             }
 
             {state.displaySecondchoice &&
-                <Form {...layout} name="nest-messages" onFinish={onFinish(2)} onFinishFailed={onFinishFailed} > {/* to onFinish parameter define type of host */}
+                <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} >
                     <div className='title-setup'>
                         <h2>{t("bo.screens.host.hostRegistration.setUpCompanyAccount")}</h2>
                         <div onClick={closeInputRegistration} className='go_back'><strong>X</strong></div>
@@ -289,4 +312,9 @@ const HostRegistration = () => {
     );
 };
 
-export default HostRegistration;
+const mapStateToProps = (state) => ({
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck,
+});
+
+export default connect(mapStateToProps)(HostRegistration);
