@@ -1,25 +1,6 @@
 // import PropTypes from 'prop-types'
 import React, { Component } from 'react';
 
-<<<<<<< HEAD
-// api
-import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
-
-// components
-import UiButton from '../../../funcComponents/ui/buttons/uiButtons/UiButton';
-import SearchButton from '../../../funcComponents/ui/searchButton/SearchButton';
-import Card from '../../../funcComponents/card/Card';
-import PropertyCard from '../../ui/propertyCard/PropertyCard';
-import Modal from "../../../../common/modal/Modal";
-import Filter from '../../../hookComponents/filter/Filter';
-
-// modules
-import Helmet from 'react-helmet';
-import { withTranslation } from 'react-i18next';
-
-// style
-import './SearchResult.scss';
-=======
 // components
 import UiButton from '../../../funcComponents/ui/buttons/uiButtons/UiButton';
 import { withTranslation } from 'react-i18next';
@@ -45,7 +26,6 @@ import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
->>>>>>> c1963132e43f7bdbbd0f62881dea92300359f960
 
 
 
@@ -54,76 +34,137 @@ class SearchResult extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         property: null,
-         isOpen: false
+         property: [],
+         isFilter: false,
+         isMap: false,
+         isSearch: false,
+         data: this.props.data,
+         page: 1
       }
-      this.searchFilters = {};
    }
-
    componentDidMount() {
       this.getapi();
+      console.log('data', this.props.data)
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      if (this.state.page !== prevState.page) {
+         showAllStruttureGetApi(5, this.state.page).then(res =>
+            this.setState({
+               property: res?.data?.list
+            }))
+
+      }
    }
 
    async getapi() {
-      const response = await showAllStruttureGetApi();
+      const response = await showAllStruttureGetApi(5, this.state.page);
+      console.log(response.data);
       this.setState({
-         property: response.data
+         property: response.data.list
+      })
+      // console.log(this.state.property);
+   }
+
+   handleButton = (params) => () => {
+      this.setState({
+         [params]: !this.state[params]
       })
    }
 
-   handleButton = () => {
-      return null
+   handleDetails = () => {
+
    }
 
-   handleClick = () => {
+   onPageChange = (page) => {
       this.setState({
-         isOpen: !this.state.isOpen
+         page: page
       })
    }
 
-   getFilters = (data) => {
-      this.searchFilters = data;
-      console.log(this.searchFilters);
+   mapping = (item, key) => {
+      return (
+         <Card
+            key={`${key}- ${item?.indirizzo?.citta}`}
+            onClick={this.handleDetails}
+         >
+            <PropertyCard
+               data={item}
+            />
+         </Card>
+      )
    }
 
    render() {
       return (
-         <>
-            <Modal
-               isOpen={this.state.isOpen}
-               callback={this.handleClick}
-               classNameCustom={'modal filters-modal'}
-            >
-               <Filter closeModal={this.handleClick} callback={this.getFilters} />
-            </Modal>
 
+         <div className='researchContainer'>
             <Helmet>
                <title>{this.props.t("common.research")}</title>
             </Helmet>
 
-            <div className={this.state.isOpen ? 'prevent-scrolling' : 'researchContainer'}>
-               <section className='ButtonContainer'>
-                  <SearchButton
+            {/* modals */}
+
+            <Modal
+               callback={this.handleButton("isFilter")}
+               isOpen={this.state.isFilter}
+            >
+               <Filter />
+            </Modal>
+
+            <Modal
+               callback={this.handleButton("isMap")}
+               isOpen={this.state.isMap}
+
+            >
+               <Map
+                  propertyList={this.state.property}
+                  initialPos={this.props.data}
+               />
+            </Modal>
+
+            <Modal
+               isOpen={this.state.isSearch}
+               callback={this.handleButton("isSearch")}  >
+               <SearchForm />
+            </Modal>
+
+            {/* end modals */}
+
+            <section className='ButtonContainer flex column jcCenter aiCenter'>
+               <SearchButton
+                  callback={this.handleButton("isSearch")}
+               />
+               <div className='w100 flex jcSpaceA'>
+
+                  <UiButton className="becomeHost"
+                     callback={this.handleButton("isFilter")}
+                     label={this.props.t('fe.screens.searchResult.filterButton')}
                   />
-                  <div>
 
-                     <UiButton className="becomeHost"
-                        callback={this.handleClick}
-                        label={this.props.t('fe.screens.searchResult.filterButton')}
-                     />
+                  <UiButton className="becomeHost"
+                     callback={this.handleButton("isMap")}
+                     label={this.props.t('fe.screens.searchResult.mapButton')}
+                  />
+               </div>
 
-                     <UiButton className="becomeHost"
-                        callback={this.handleButton}
-                        label={this.props.t('fe.screens.searchResult.mapButton')}
-                     />
-                  </div>
+            </section>
+            {
+               this.state.property.length > 0 && this.state.property.map(this.mapping)
+            }
 
-               </section>
-               <Card>
-                  <PropertyCard />
-               </Card>
-            </div>
-         </>
+            {this.state.property.length > 5 &&
+               <Pagination
+                  size={"small"}
+                  total={10}
+                  pageSize={5}
+                  current={this.state.page}
+                  onChange={this.onPageChange}
+                  itemRender={paginationArrowsRender}
+                  className={'custom-pagination'}
+               />
+            }
+         </div>
       )
    }
 }
