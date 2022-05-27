@@ -10,7 +10,7 @@ const Search = () => {
 
  
   const location = useLocation();
-  const data = Object.assign({}, location?.state?.data, location?.state?.coordinate)
+  const data = Object.assign({}, location?.state?.data)
   return (
     <>
       <SearchResult
