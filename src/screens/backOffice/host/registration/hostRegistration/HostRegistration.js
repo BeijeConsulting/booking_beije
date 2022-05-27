@@ -79,6 +79,7 @@ const HostRegistration = (props) => {
 
     const closeInputRegistration = (e) => {
         setState({
+            ...state,
             displayRegistration: true,
             displayFirstchoice: false,
             displaySecondchoice: false
@@ -87,10 +88,9 @@ const HostRegistration = (props) => {
 
     const onFinish = (values) => {
         const HEADER = decryptItem(props.tokenDuck.token);
-        console.log("values", values);
+        console.log("values", values.user.companyName);
         companyName = values.user.companyName
         vat = values.user.vatNumber
-
         console.log(hostRequestPost({ companyName: companyName, vat: vat }, HEADER,
             {
                 "utente": {
