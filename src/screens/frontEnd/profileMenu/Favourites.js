@@ -5,7 +5,8 @@ import { getFavourites, deleteFavourite } from '../../../services/api/lista/list
 
 // components
 import FavouriteCard from '../../../components/frontEnd/funcComponents/favouriteCard/FavouriteCard';
-import { notification } from 'antd';
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
+import { notification, Pagination } from 'antd';
 
 // modules
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 
 // utils
 import { wrapperMap } from "../../../utils/generalIteration/generalIteration";
+import { paginationArrowsRender } from "../../../utils/pagination/pagination";
 
 
 
@@ -25,23 +27,39 @@ const Favourites = () => {
    const { t } = useTranslation();
 
    const [state, setState] = useState({
-      favourites: []
+      favourites: [],
+      windowWidth: window.innerWidth,
+      page: 1
    });
 
+
    useEffect(() => {
-      if(localStorage.getItem('token') !== null)
-      getFavourites(getLocalStorage('token'))
-         .then(res => {
-            setState({
-               favourites: res?.data
-            })
-         });
+      window.addEventListener('resize', handleResize)
+      return () => { window.removeEventListener('resize', handleResize) }
+   })
+
+   useEffect(() => {
+      if (localStorage.getItem('token') !== null)
+         getFavourites(getLocalStorage('token'))
+            .then(res => {
+               setState({
+                  favourites: res?.data
+               })
+            });
    }, [])
+
+
+   function handleResize() {
+      setState({
+         ...state,
+         windowWidth: window.innerWidth
+      })
+   }
 
    const showToast = (propertyId, propertyName) => {
       const key = `${propertyId}-toast`;
       notification.open({
-         description: `"${propertyName}" ${t('toasts.favouritesDeleted')}`,
+         description: t('toasts.favouritesDeleted', { name: propertyName }),
          onClick: () => {
             notification.close(key)
          },
@@ -57,18 +75,47 @@ const Favourites = () => {
       showToast(propertyId, propertyName);
    }
 
+   const onPageChange = (page) => {
+      setState({
+         ...state,
+         page: page
+      })
+   }
+
+   let favouritesRendering;
+   if (state.favourites && state.favourites.length > 0) {
+      favouritesRendering = wrapperMap(FavouriteCard, state.favourites, handleFavourite);
+   } else {
+      favouritesRendering = <p>{t('fe.screens.favourites.noFavourites')}</p>
+   }
+
    return (
       <>
          <Helmet>
             <title>{t('fe.screens.settings.settingsCard.favourites')}</title>
          </Helmet>
          <div className='favourites-page flex column'>
-            {/* To-DO: back button */}
-            <div className="back-button"></div>
+            {
+               state.windowWidth < 991 &&
+               <div className="back-button"><GoBackButton /></div>
+            }
+
             <h1 className="title">{t('fe.screens.settings.settingsCard.favourites')}</h1>
-            {wrapperMap(FavouriteCard, state.favourites, handleFavourite)}
-            {/* To-DO: pagination */}
-            <div className="pagination my1"></div>
+
+            {favouritesRendering}
+
+            {state.favourites.length > 5 &&
+               <Pagination
+                  size={"small"}
+                  total={10}
+                  pageSize={5}
+                  current={state.page}
+                  onChange={onPageChange}
+                  itemRender={paginationArrowsRender}
+                  className={'custom-pagination'}
+               />
+            }
+
          </div>
       </>
    );

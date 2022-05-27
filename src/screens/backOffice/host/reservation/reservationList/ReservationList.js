@@ -88,7 +88,7 @@ const ReservationList = () => {
     },
   ];
 
-  const showCalendar = (e) => {};
+  const showCalendar = (e) => { };
 
   const showAccepted = () => {
     //api get accepted
@@ -119,8 +119,7 @@ const ReservationList = () => {
 
   const handleModal = (key, title) => () => {
     console.log(key, title);
-    let oldText = modalRef.current.innerHTML
-    modalRef.current.innerHTML = `${oldText.replaceAll(` ${title}?`, '')} ${title}?`
+    modalRef.current.innerHTML = `${t("bo.screens.host.reservationList.confirmReservationDeleteMessage")} ${title}?`
     showModal(key);
   };
 
@@ -168,7 +167,7 @@ const ReservationList = () => {
         <h1>
           <FontAwesomeIcon icon={faTriangleExclamation} /> {t("bo.screens.host.reservationList.confirmReservationDelete")}
         </h1>
-        <p ref={modalRef}>{t("bo.screens.host.reservationList.confirmReservationDeleteMessage")}</p>
+        <p ref={modalRef}></p>
       </Modal>
     </CardList>
   );

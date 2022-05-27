@@ -38,6 +38,7 @@ import { initUser } from '../../../../redux/ducks/userDuck'
 
 // utils localstorage 
 import { getLocalStorage, removeLocalStorage } from '../../../../utils/localStorage/localStorage';
+import { decryptItem } from "../../../../utils/crypto/crypto";
 
 
 //da cancellare quando implementato duck user
@@ -46,7 +47,6 @@ let permission = 'host';
 function Navbar(props) {
     let vector = useNavigate();
     const { t } = useTranslation();
-
 
     const [state, setState] = useState({
         isMenuOpen: false,
@@ -208,6 +208,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     tokenDuck: state.tokenDuck,
-    userDuck: state.userDuck
+    userDuck: state.userDuck,
+    propertyDuck: state.propertyDuck,
 })
 export default connect(mapStateToProps)(Navbar);

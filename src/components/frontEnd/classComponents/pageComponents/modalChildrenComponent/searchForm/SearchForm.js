@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { t } from "i18next";
 
 // api
-// import { getStructuresBySearch } from '../../../../../services/api/search/searchApi';
+import { getStructuresBySearch } from '../../../../../../services/api/search/searchApi';
 
 // components
 import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
@@ -21,7 +21,6 @@ import { routes } from '../../../../../../routes/routes';
 import './SearchForm.scss';
 import '../../../../../../assets/variables/_common.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
-import { eventBus } from '../../../../../../eventBus/eventBus';
 
 const arrTest = [
    { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },
@@ -39,42 +38,54 @@ class SearchForm extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         isDisable: true,
          dataInfo: arrTest,
       }
       this.bookingData = {
-         latitudine: 0,
-         longitudine: 0,
-         radius: 0,
-         checkin: '',
-         checkout: '',
-         numberOfGuests: 0
+         checkin: null,
+         checkout: null,
+         posti_letto: 2
       }
       this.dateFormat = 'YYYY-MM-DD';
    }
 
-   setNumberOfGuests = (e) => {
-      this.bookingData.numberOfGuests = e;
-      console.log(this.bookingData.numberOfGuests);
-   }
+   objToString(obj) {
 
-   componentDidMount() {
-      eventBus.onListening('guests', this.setNumberOfGuests);
+      let string = "";
+      for (const item in obj) {
+         if (obj[item] !== null) {
+
+            string += `${item}=${obj[item]}&`
+         }
+      }
+      let finalString = string.slice(0, -1);
+
+      return finalString;
    }
 
    handleSubmit = (e) => {
       e.preventDefault();
+      const coordinate = {
+         latitudine: null,
+         longitudine: null,
+         radius: 10,
+      }
+      this.bookingData.posti_letto = this.props.guestDuck.guest
       let [latitude, longitude] = this.props.positionDuck.coordinates;
-      this.bookingData.latitudine = latitude;
-      this.bookingData.longitudine = longitude;
-      // getStructuresBySearch(this.bookingData).then(res =>
-      //    this.props.router.navigate(routes.SEARCH, {
-      //       state: res?.data
-      //    })
-      // );
+      coordinate.latitudine = latitude;
+      coordinate.longitudine = longitude;
+
+      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify(coordinate)).then(res =>
+         this.props.router.navigate(routes.SEARCH, {
+            state: res?.data
+         })
+      ).catch(error => error)
       this.props.router.navigate(routes.SEARCH, {
-         state: this.bookingData
+         state: {
+            data: this.bookingData,
+            coordinate: coordinate
+         }
       })
+      this.props.callback()
    }
 
    handleSelect = (e) => {
@@ -122,7 +133,8 @@ class SearchForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   positionDuck: state.positionDuck
+   positionDuck: state.positionDuck,
+   guestDuck: state.guestDuck
 })
 
 export default connect(mapStateToProps)(withRouting(SearchForm));

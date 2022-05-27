@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // import { eventBus } from "../../eventBus/eventBus";
 
@@ -13,14 +13,17 @@ import {
   faBars,
   faAngleRight,
   faUser,
+  faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 
 import Sidebar from "../../components/backOffice/functionalComponent/sidebar/Sidebar";
+import Dasboard from "./host/dashboard/Dashboard";
 
 import { Outlet } from "react-router-dom";
 import Foo from "../../components/frontEnd/hookComponents/footer/Footer";
 //UTILS
 import { LinksFooterHost } from "../../utils/linksFooter/linksFooter";
+import { routes } from "../../routes/routes";
 
 const { Header, Sider, Content } = Layout;
 
@@ -28,6 +31,8 @@ const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
   const [state, setState] = useState({ collapsed: false });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // eventBus.onListening('prova', toggleSidebar)
@@ -59,15 +64,20 @@ const LayoutBackOffice = () => {
   const routeWithoutSidebar = () => {
     switch (location.pathname.replaceAll("/", "")) {
       case "dashboard":
-        return false
+        return false;
       case "dashboardhost-registration":
-        return false
+        return false;
       default:
         console.log(location.pathname.replaceAll("/", ""));
         return true;
     }
+  };
 
-  }
+  const goTo =
+    (path = '', obj = null) =>
+    () => {
+      return navigate(`/${routes.DASHBOARD}/${path}`);
+    };
 
   return (
     <Layout>
@@ -76,54 +86,54 @@ const LayoutBackOffice = () => {
         style={{ padding: 0 }}
       ></Header>
       <Layout>
-        { routeWithoutSidebar() &&
-          getBreakPoint() && (
-            <Sider
-              trigger={null}
-              collapsed={state.collapsed}
-              width={200}
-              collapsible
+        {routeWithoutSidebar() && getBreakPoint() && (
+          <Sider
+            trigger={null}
+            collapsed={state.collapsed}
+            width={200}
+            collapsible
+          >
+            <Button
+              style={{
+                backgroundColor: "#44403c",
+                border: "none",
+                paddingLeft: `${state.collapsed ? "" : "24px"}`,
+              }}
+              type="primary"
+              onClick={toggleSidebar}
+              block={state.collapsed ? true : false}
             >
-              <Button
-                style={{
-                  backgroundColor: "#44403c",
-                  border: "none",
-                  paddingLeft: `${state.collapsed ? "" : "24px"}`,
-                }}
-                type="primary"
-                onClick={toggleSidebar}
-                block={state.collapsed ? true : false}
-              >
-                <FontAwesomeIcon
-                  icon={state.collapsed ? faAngleRight : faBars}
-                  className={"trigger"}
-                  inverse
-                />
-              </Button>
+              <FontAwesomeIcon
+                icon={state.collapsed ? faAngleRight : faBars}
+                className={"trigger"}
+                inverse
+              />
+            </Button>
 
-              <Sidebar />
-              <Button
-                style={{
-                  backgroundColor: "#44403c",
-                  border: "none",
-                  paddingLeft: `${state.collapsed ? "" : "24px"}`,
-                  position: "absolute",
-                  bottom: 5
-
-                }}
-                type="primary"
-                onClick={() => console.log("Logout")}
-                block={state.collapsed ? true : false}
+            <Sidebar />
+            <Button
+              style={{
+                backgroundColor: "#44403c",
+                border: "none",
+                paddingLeft: `${state.collapsed ? "" : "24px"}`,
+                position: "absolute",
+                bottom: 5,
+              }}
+              type="primary"
+              onClick={() => console.log("Logout")}
+              block={state.collapsed ? true : false}
+            >
+              <FontAwesomeIcon icon={faUser} className={"trigger"} inverse />
+              <span
+                className={`logoutButton ${
+                  !state.collapsed ? "visible" : "hide"
+                }`}
               >
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className={"trigger"}
-                  inverse
-                />
-                <span className={`logoutButton ${!state.collapsed ? "visible" : "hide"}`} >Logout</span>
-              </Button>
-            </Sider>
-          )}
+                Logout
+              </span>
+            </Button>
+          </Sider>
+        )}
 
         <Content
           className="site-layout-background"
@@ -134,10 +144,15 @@ const LayoutBackOffice = () => {
             // width: "calc(100% - 200px)",
           }}
         >
-          {location.pathname.replaceAll("/", "") !== "dashboard"  ? (
-            <Outlet />
+          {location.pathname.replaceAll("/", "") !== "dashboard" ? (
+            <>
+              <div onClick={goTo()} style={{cursor: "pointer"}}>
+                <FontAwesomeIcon icon={faEllipsis} /> back to dashboard
+              </div>
+              <Outlet />
+            </>
           ) : (
-            <p>Pannello da fare</p>
+            <Dasboard />
           )}
         </Content>
       </Layout>

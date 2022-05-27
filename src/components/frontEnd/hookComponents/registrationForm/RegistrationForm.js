@@ -146,15 +146,15 @@ function RegistrationForm(props) {
 
    return (
       <section className="bg-color">
-         <div className="container flex column">
+         <div className="container flex column px1">
 
             <div className="flex jcCenter aiCenter column">
                <div className="w">LOGO</div>
                {/* <Logo></Logo> */}
             </div>
 
-            <form className="flex column">
-               <h1 className="w title">{t('common.registerLabel')}</h1>
+            <form className=" form-container flex column myAuto">
+               <h1 className="w fsXXL">{t('common.registerLabel')}</h1>
                <FormInput placeholder={t("common.name")} info="name" callback={handleChange("name")} />
                <FormInput placeholder={t("common.surname")} info="surname" callback={handleChange("surname")} />
                <FormInput placeholder={t("common.email")} info="email" callback={handleChange("email")} />

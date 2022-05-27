@@ -5,7 +5,7 @@
     //  border-radius: 5px;
      width: 400px;
      height: 65px;
-     margin: 0.2rem;
+     margin: .5rem;
     // font-size: large;
      .beige {
          background-color: $secondary_dark;
@@ -37,3 +37,26 @@
     //  align-items: center;
      margin-top: 2rem;
  }
+
+ @media (max-width:481px) {
+    .settings_list_card{
+        width: 350px;
+
+    .settings_card_container{
+        .position{
+            margin: 0 4.2rem
+        }
+    }    
+    }
+}
+
+@media (max-width:371px) {
+    .settings_list_card{
+        width: 300px;
+        .settings_card_container{
+            .position{
+                margin: 0 3.2rem
+            }
+        }    
+    }
+}
