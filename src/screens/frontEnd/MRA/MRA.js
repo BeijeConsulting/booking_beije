@@ -20,7 +20,7 @@ import GoBackButton from '../../../components/backOffice/hookComponents/goBackBu
 import './MRA.scss'
 import '../../../assets/variables/_common.scss'
 
-let arrayTest
+
 let avgReview = 0
 
 const MostRewApart = () => {
@@ -41,21 +41,24 @@ const MostRewApart = () => {
     //API call
     showAllStruttureGetApi()
       .then(res => {
-        arrayTest = res?.data?.list
-        //Get averageReview for every single structure
-        for (let i = 0; i < arrayTest?.length; i++) {
-          //Check if there is at least one review
-          if (arrayTest[i].lista_recensioni?.length > 0) {
-            avgReview += arrayTest[i].lista_recensioni?.length
+        let arrayTest = res?.data?.list.map(({ lista_recensioni, ...rest }) => {
+          let avgScore = 0
+          if (lista_recensioni) {
+            avgReview += lista_recensioni.length
+            avgScore = lista_recensioni.reduce((a, b) => a += b.score, 0) / lista_recensioni.length
           }
-        }
+          return { ...rest, lista_recensioni, avgScore }
+        })
+
         avgReview = (avgReview / arrayTest?.length)
+
         setState({
+          ...state,
           mostReviewedBuildingArray: arrayTest.sort((a, b) => {
-            if (a.lista_recensioni?.lenght > b.lista_recensioni?.lenght) {
-              return 1
-            } else if ((a.lista_recensioni?.lenght < b.lista_recensioni?.lenght)) {
+            if (a.avgScore > b.avgScore) {
               return -1
+            } else if ((a.avgScore < b.avgScore)) {
+              return +1
             } else {
               return 0
             }
