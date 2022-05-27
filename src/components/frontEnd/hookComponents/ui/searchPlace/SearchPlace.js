@@ -5,7 +5,6 @@ import { Popover, Button } from 'antd';
 
 // REDUX
 import { connect } from "react-redux";
-import { eventBus } from "../../../../../eventBus/eventBus";
 
 // DUCKS
 import { setAddress } from "../../../../../redux/ducks/addressDuck";
@@ -20,13 +19,24 @@ let obj;
 
 function SearchPlace(props) {
 
-   const {t} = useTranslation();
+   const { t } = useTranslation();
 
    const [state, setState] = useState({
       selectPosition: null,
       searchText: '',
       listPlace: []
    })
+
+   const handleButtonSearch = (item) => () => {              
+      props.dispatch(setPosition([item.lat, item.lon]))
+      props.dispatch(setAddress(item))
+      setState({
+         ...state,
+         selectPosition: item,
+         searchText: '',
+         listPlace: []
+      })
+   }
 
    function handleChange(event) {
       obj = Object.assign({}, state);
@@ -70,24 +80,10 @@ function SearchPlace(props) {
       return (
          <Button
             key={item?.place_id}
-            onClick={() => {
-               eventBus.onDispatch("coordinate", {
-                  lat: item?.lat,
-                  lon: item?.lon
-               })
-               props.dispatch(setPosition([item?.lat, item?.lon]))
-               props.dispatch(setAddress(item))
-               setState({
-                  ...state,
-                  selectPosition: item,
-                  searchText: '',
-                  listPlace: []
-               })
-            }}>
+            onClick={handleButtonSearch(item)}>
 
             {item?.display_name}
 
-            {/* <Divider /> */}
          </Button>
       );
    }
@@ -108,24 +104,8 @@ function SearchPlace(props) {
                      placeholder={t('common.searchPlaceholder')}
                   />
                </div>
-
-               {/* <div style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}>
-                    <button
-                        onClick={() => {
-                            // Search
-                        }}
-                    >
-                        Search
-                    </button>
-                </div> */}
             </div>
             <div>
-
-               {/* <div component="nav" aria-label="main mailbox folders"> */}
-               {/* {
-                     state.listPlace.map(item)
-                  } */}
-               {/* </div> */}
             </div>
          </div>
       </Popover>

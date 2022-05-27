@@ -1,18 +1,57 @@
 @import '../../../../../assets/variables/globalVariables.scss';
+
 .researchContainer {
-    background-color: $black_primary;
-    padding-bottom: 3rem;
+   background-color: $black_primary;
+   padding-bottom: 3rem;
 
-    // .ButtonContainer {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
+   .ButtonContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-    //     div {
-    //         width: 100%;
-    //         display: flex;
-    //         justify-content: space-around;
-    //     }
-    // }
+      div {
+         width: 100%;
+         display: flex;
+         justify-content: space-around;
+      }
+   }
+}
+
+.filters-modal .ant-slider-track,
+.filters-modal .ant-slider:hover .ant-slider-track {
+   background-color: $secondary
+}
+
+.filters-modal .ant-slider .ant-slider-rail {
+   background-color: rgba(179, 139, 87, 0.15);
+}
+
+.filters-modal .ant-slider:hover .ant-slider-rail {
+   background-color: rgba(179, 139, 87, 0.30);
+}
+
+.filters-modal .ant-slider-handle,
+.filters-modal .ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
+   border-color: $secondary;
+}
+
+.filters-modal .filter-container {
+   background-color: $white_primary;
+   border-radius: 1rem;
+   padding: 1rem;
+   color: $black_primary;
+}
+
+.filters-modal .filter-container input[type="checkbox"] {
+   margin-right: 0.2rem;
+}
+
+.filters-modal h3 {
+   color: $white_primary;
+   margin: 0.5rem 0;
+}
+
+.filters-modal input[type="submit"] {
+   margin-top: 1rem;
 }
