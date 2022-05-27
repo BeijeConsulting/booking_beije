@@ -21,7 +21,7 @@ import Settings from "./screens/frontEnd/profileMenu/Settings";
 import Registration from "./screens/frontEnd/registration/Registration";
 import DetailsProp from "./screens/frontEnd/details/DetailsProp";
 import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
-import MostRewApart from "./screens/frontEnd/MRA";
+import MostRewApart from "./screens/frontEnd/MRA/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
@@ -37,14 +37,15 @@ import StructureOperation from "./screens/backOffice/host/structure/structureOpe
 import StructureList from "./screens/backOffice/host/structure/structureList/StructureList";
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations";
+import PendingStructuresList from "./screens/backOffice/admin/structure/pendingStructureList/PendingStructuresList";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
-// import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
-import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
+
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -58,10 +59,16 @@ import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
 
 
 function Routing(props) {
+
+
+    //setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0MDA3LCJleHAiOjE2NTM2Njc2MDd9.S2LFboBSHE8titm89jQ39FWCnwxj8RWZC8R3i4D_rwQ")
+    //setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
+
+
     useEffect(() => {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-                
+
                 try {
                     logout();
                     let token = getLocalStorage('token');
@@ -81,6 +88,11 @@ function Routing(props) {
 
 
     //login, registration, account, messages, favourites, booking
+
+    //TODO: to be deleted ( - setLocalStorage import too)
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0OTAyLCJleHAiOjE2NTM2Njg1MDJ9.PQpyiNZgaLZrwsVcH1aQzGKSS9Q_GLZwPkCmhyv8ZMY")
+    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
+
 
     return (
         <Routes>
@@ -167,6 +179,7 @@ function Routing(props) {
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
+                <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
                 <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
             </Route>
 

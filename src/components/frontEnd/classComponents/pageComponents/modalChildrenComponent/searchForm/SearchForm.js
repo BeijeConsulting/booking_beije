@@ -43,7 +43,10 @@ class SearchForm extends Component {
       this.bookingData = {
          checkin: null,
          checkout: null,
-         posti_letto: 2
+         posti_letto: 2,
+         latitudine: null,
+         longitudine: null,
+         radius: 10,
       }
       this.dateFormat = 'YYYY-MM-DD';
    }
@@ -58,34 +61,38 @@ class SearchForm extends Component {
          }
       }
       let finalString = string.slice(0, -1);
-
       return finalString;
    }
 
    handleSubmit = (e) => {
       e.preventDefault();
-      const coordinate = {
-         latitudine: null,
-         longitudine: null,
-         radius: 10,
-      }
-      this.bookingData.posti_letto = this.props.guestDuck.guest
-      let [latitude, longitude] = this.props.positionDuck.coordinates;
-      coordinate.latitudine = latitude;
-      coordinate.longitudine = longitude;
 
-      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify(coordinate)).then(res =>
-         this.props.router.navigate(routes.SEARCH, {
-            state: res?.data
-         })
-      ).catch(error => error)
-      this.props.router.navigate(routes.SEARCH, {
-         state: {
-            data: this.bookingData,
-            coordinate: coordinate
+      this.bookingData.posti_letto = this.props.guestDuck.guest;
+
+      let [latitude, longitude] = this.props.positionDuck.coordinates;
+
+      this.bookingData.latitudine = latitude;
+      this.bookingData.longitudine = longitude;
+
+      if(this.props.router.location.pathname === '/home'){
+
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => {   
+            this.props.router.navigate(routes.SEARCH, {
+               state: {
+                  property: res?.data
+               }
+            })
          }
-      })
-      this.props.callback()
+         ).catch(error => error)
+         // dovbbiamo fare un toast
+      }
+
+
+      if (this.props.router.location.pathname === '/search') {
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.props.data(res?.data))
+         this.props.callback();
+         
+      }
    }
 
    handleSelect = (e) => {
