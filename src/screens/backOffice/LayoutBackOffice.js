@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import Sidebar from "../../components/backOffice/functionalComponent/sidebar/Sidebar";
+import Dasboard from './host/dashboard/Dashboard'
 
 import { Outlet } from "react-router-dom";
 import Foo from "../../components/frontEnd/hookComponents/footer/Footer";
@@ -137,7 +138,7 @@ const LayoutBackOffice = () => {
           {location.pathname.replaceAll("/", "") !== "dashboard"  ? (
             <Outlet />
           ) : (
-            <p>Pannello da fare</p>
+            <Dasboard />
           )}
         </Content>
       </Layout>
