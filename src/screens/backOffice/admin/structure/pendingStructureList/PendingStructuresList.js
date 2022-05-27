@@ -23,7 +23,7 @@ import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 
 //TODO: PAGINATION
-
+//TODO: TEST DECLINE AGAIN, waiting for back-end to fix error 500
 
 let responseApiGetAll = null;
 
