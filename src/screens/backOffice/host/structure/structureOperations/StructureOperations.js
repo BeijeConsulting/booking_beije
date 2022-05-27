@@ -13,13 +13,21 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 //API
-import { insertStrutturaPostApi } from "../../../../../services/api/struttura/strutturaApi";
+import {
+  disableStrutturaPutApi,
+  insertStrutturaPostApi,
+  strutturaDetailIdGetApi,
+  updateStrutturaPutApi,
+} from "../../../../../services/api/struttura/strutturaApi";
 import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 import { connect } from "react-redux";
+import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
 
 const StructureOperation = (props) => {
   const { t } = useTranslation();
+
+  const [state, setState] = useState(null);
 
   const { TextArea } = Input;
   const location = useLocation();
@@ -41,35 +49,54 @@ const StructureOperation = (props) => {
     description: "",
     images: [],
     title: "",
-    userId: 14, //int
+    userId: null, //int
   };
 
   useEffect(() => {
     // Per farlo funzionare usare json-server
-    // const getStructure = async () => {
-    //   const res = await fetch(
-    //     `http://localhost:3001/data/${location.state.idStructure}`
-    //   );
-    //   const structureFromServer = await res.json();
-    //   setState({ ...state, data: structureFromServer });
-    // };
-    // if (location.state.idStructure !== null) {
-    // futura chiamata a API
-    // getStructure();
-    // }
+    const getStructure = async () => {
+      const res = await strutturaDetailIdGetApi(location.state.idStructure);
+      const strutturaDetail = res.data;
+
+      console.log(strutturaDetail);
+
+      structureValue.title = strutturaDetail?.nome_struttura;
+      structureValue.description = strutturaDetail?.descrizione;
+      structureValue.address = strutturaDetail?.indirizzo;
+      structureValue.category = strutturaDetail?.tipologiaStruttura?.tipo;
+      structureValue.checkIn = moment(strutturaDetail?.checkIn).format("HH:MM");
+      structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
+        "HH:MM"
+      );
+      structureValue.userId = strutturaDetail?.host.user.id;
+
+      setState(structureValue);
+    };
+    if (location.state.idStructure !== null) {
+      getStructure();
+    }
   }, []);
 
   // PER FORM ANT
   const onFinish = (values) => {
-    const HEADER = decryptItem(props.tokenDuck.token);
+    let upState = Object.assign(state);
+    if (state.address.via !== "") {
+      const HEADER = getLocalStorage("token");
+      upState.title = values.announce;
+      upState.description = values.description;
+      upState.category = values.category;
+      upState.checkIn = moment(values.checkIn).format("HH:MM");
+      upState.checkOut = moment(values.checkOut).format("HH:MM");
 
-    structureValue.title = values.announce;
-    structureValue.description = values.description;
-    structureValue.category = values.category;
-    structureValue.checkIn = moment(values.checkIn).format("HH:MM");
-    structureValue.checkOut = moment(values.checkOut).format("HH:MM");
+      if (location.state.idStructure === null) {
+        //nuovo inserimento
+        insertStrutturaPostApi(upState, HEADER);
+      } else {
+        updateStrutturaPutApi(location.state.idStructure, upState, HEADER);
+      }
+    }
 
-    console.log(insertStrutturaPostApi(structureValue, HEADER));
+    setState(upState);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -78,7 +105,7 @@ const StructureOperation = (props) => {
 
   // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
-    structureValue.images = value;
+    setState({ ...state, images: value });
   };
 
   const getAddressObject = (addressObj) => {
@@ -117,12 +144,12 @@ const StructureOperation = (props) => {
       via: address,
     };
 
-    structureValue = { ...structureValue, address: objAddressForPost };
+    setState({ ...state, address: objAddressForPost });
   };
 
   return (
     <>
-      {structureValue.userId === null ? (
+      {state === null ? (
         <Spin />
       ) : (
         <Form
@@ -132,12 +159,11 @@ const StructureOperation = (props) => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
           initialValues={{
-            address: structureValue.address,
-            announce: structureValue.title,
-            category: structureValue.category,
-            description: structureValue.description,
-            checkIn: moment(structureValue.checkIn, "HH:mm"),
-            checkOut: moment(structureValue.checkOut, "HH:mm"),
+            announce: state.title,
+            category: state.category,
+            description: state.description,
+            checkIn: moment(state.checkIn, "HH:mm"),
+            checkOut: moment(state.checkOut, "HH:mm"),
           }}
         >
           <div>
@@ -217,20 +243,12 @@ const StructureOperation = (props) => {
 
           <Row gutter={16}>
             <Col className="gutter-row">
-              <Form.Item
-                label={t("common.address")}
-                // name="address"
-                // rules={[
-                //   {
-                //     required: true,
-                //     message: t("toasts.operationAddress"),
-                //   },
-                // ]}
-              >
+              <Form.Item name="address" label={t("common.address")}>
                 {/* <Input name="address" placeholder={t("common.address")} /> */}
                 <SearchAddress
                   placeholder={t("common.address")}
                   callback={getAddressObject}
+                  defValue={`${state.address.via}, ${state.address.citta} (${state.address.provincia}) - CAP: ${state.address.cap}`}
                 />
               </Form.Item>
             </Col>
