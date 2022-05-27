@@ -7,8 +7,15 @@
 .column {
     flex-direction: column;
 }
+.jcStart {
+    justify-content:start;
+}
 .jcCenter {
     justify-content: center;
+}
+
+.jcEnd {
+    justify-content: flex-end;
 }
 .jcSpaceB {
     justify-content: space-between;
@@ -101,8 +108,23 @@
 .m1 {
     margin: 1rem;
 }
+.mAuto{
+    margin: auto;
+}
+.mxAuto{
+    margin: 0 auto;
+}
+.myAuto{
+    margin:auto 0;
+}
 .mx1 {
     margin: 0 1rem;
+}
+.mx2 {
+    margin: 0 2rem;
+}
+.mx3 {
+    margin: 0 3rem;
 }
 .my1 {
     margin: 1rem 0;
@@ -116,9 +138,14 @@
 .fs50 {
     font-size: 50px;
 }
-
 .w50 {
     width: 50%;
+}
+.w60 {
+    width: 60%;
+}
+.w75{
+    width: 75%;
 }
 .w100 {
     width: 100%;
@@ -128,8 +155,9 @@
     height: 85vh;
 }
 .h100 {
-    height: 100vh;
+    height: 100%;
 }
+
 .oX1 {
     overflow-x: hidden;
 }

@@ -153,8 +153,8 @@ function RegistrationForm(props) {
                {/* <Logo></Logo> */}
             </div>
 
-            <form className="flex column">
-               <h1 className="w title">{t('common.registerLabel')}</h1>
+            <form className=" form-container flex column">
+               <h1 className="w fsXXL">{t('common.registerLabel')}</h1>
                <FormInput placeholder={t("common.name")} info="name" callback={handleChange("name")} />
                <FormInput placeholder={t("common.surname")} info="surname" callback={handleChange("surname")} />
                <FormInput placeholder={t("common.email")} info="email" callback={handleChange("email")} />

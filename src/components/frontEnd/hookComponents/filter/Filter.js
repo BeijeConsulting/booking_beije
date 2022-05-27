@@ -8,88 +8,122 @@ import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import { Slider } from 'antd';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
 
-// api
-import { showAllTipoStrutturaGetApi } from '../../../../services/api/struttura/tipoStruttura/tipoStruttura';
-import { serviceListGetApi } from '../../../../services/api/lista/listaServizio/listaServizioApi';
+// modules
 import { useTranslation } from 'react-i18next';
 
-function Filter() {
+// api
+import { showAllTipoStrutturaGetApi } from '../../../../services/api/struttura/tipoStruttura/tipoStruttura';
+import { servicesGetApi } from '../../../../services/api/servizio/servizioApi';
 
-    const { t } = useTranslation();
+function Filter(props) {
 
-    const [state, setState] = useState({
-        isDisable: true,
-        propertyTypes: null,
-        services: null
-    })
+   const { t } = useTranslation();
 
-    const callbackUseEffect = () => {
-        (async () => {
-            const types = await showAllTipoStrutturaGetApi();
-            const amenities = await serviceListGetApi();
+   const [state, setState] = useState({
+      isDisable: false,
+      propertyTypes: null,
+      services: null
+   })
 
-            setState({
-                ...state,
-                propertyTypes: types?.data,
-                services: amenities?.data
-            })
+   const filtersData = {
+      minPrice: null,
+      maxPrice: null,
+      types: [],
+      services: []
+   }
 
-            console.log(state);
+   const callbackUseEffect = () => {
+      (async () => {
+         const types = await showAllTipoStrutturaGetApi();
+         const amenities = await servicesGetApi();
+         setState({
+            ...state,
+            propertyTypes: types?.data,
+            services: amenities?.data
+         })
+      })()
+   }
 
-        })()
-    }
+   useEffect(callbackUseEffect, []);
+
+   const handleCheck = (dataKey, dataId) => (value) => {
+      if (value) {
+         if (!filtersData[dataKey].includes(dataId)) {
+            filtersData[dataKey].push(dataId);
+         }
+      } else {
+         filtersData[dataKey].splice(filtersData[dataKey].indexOf(dataId), 1);
+      }
+   }
+
+   const mapType = (item, key) => {
+      return <div key={`${key}-${item.tipo}`}>
+         <CheckboxInput callback={handleCheck('types', item.id)} value={item.id} />
+         <label>{t(item.tipo)}</label>
+      </div>
+   };
+
+   const mapService = (item, key) => {
+      return <div key={`${key}-${item?.nome}`}>
+         <CheckboxInput callback={handleCheck('services', item?.id)} value={item?.id} />
+         <label>{t(item?.nome)}</label>
+      </div>
+   };
+
+   function handleSubmit(e) {
+      e.preventDefault();
+      props.closeModal();
+
+      let filtersAsArray = Object.entries(filtersData);
+      let filtered = filtersAsArray.filter(([key, value]) => {
+         return (Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value !== null);
+      });
+      let appliedFilters = Object.fromEntries(filtered);
+
+      props.callback(appliedFilters);
+   }
+
+   const handlePrice = (value) => {
+      [filtersData.minPrice, filtersData.maxPrice] = value;
+   };
 
 
-    useEffect(callbackUseEffect, [])
+   return (
+      <form className={props.classNameCustom}>
+         <section>
+            <h3>{t("common.price")}</h3>
+            <div className='filter-container'>
+               <Slider
+                  range
+                  defaultValue={[0, 1000]} /* check default prices */
+                  onAfterChange={handlePrice}
+               />
+            </div>
+         </section>
 
-    function handleCheck(e) {
-        return null
-    }
+         <section>
 
-    const mapType = (item, key) => {
-       return  <div key={`${key}-${item.tipo}`}>
-            <CheckboxInput callback={handleCheck} value={item.id} />
-            <label>{t(item.tipo)}</label>
-        </div>
-    };
-
-    const mapService = (item, key) => {
-        return  <div key={`${key}-${item.servizioId?.nome}`}>
-             <CheckboxInput  callback={handleCheck} value={item.servizioId?.id} />
-             <label>{t(item.servizioId?.nome)}</label>
-         </div>
-     };
-
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
+            <h3>{t('common.properties')}</h3>
+            <div className='filter-container'>
+               {
+                  state.propertyTypes !== null && state.propertyTypes.map(mapType)
+               }
+            </div>
 
 
-    return (
-        <form>
-            <section>
-                <h3>{t("common.price")}</h3>
-                <Slider
-                    range
-                    defaultValue={[10, 1000]}
-                />
-            </section>
+            <h3>{t('common.services')}</h3>
+            <div className='filter-container'>
+               {
+                  state.services !== null && state.services.map(mapService)
+               }
+            </div>
 
-            <section>
+         </section>
 
-                {
-                   state.propertyTypes !== null && state.propertyTypes.map(mapType)
-                }
-                {
-                   state.services !== null && state.services.map(mapService)
-                }
+         <FormButton className="btn-primary" label={t("fe.modals.filter.apply")} callback={handleSubmit} disabled={state.isDisable} />
 
-            </section>
-
-            <FormButton className="btn-primary" label={t("fe.modals.filter.apply")} callback={handleSubmit} disabled={state.isDisable} />
-
-        </form>
-    )
+      </form>
+   )
 }
 
 export default Filter;
