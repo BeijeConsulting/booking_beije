@@ -177,7 +177,10 @@
             }
          }
       },
-      "admin": {}
+      "admin": {
+         "pendingAnnounceListTitle": "Pending announces",
+         "pendingStructureListTitle": "Pending structures"
+      }
    },
    "fe": {
       "components": {

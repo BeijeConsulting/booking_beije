@@ -6,7 +6,7 @@ import { getLocalStorage } from '../../../../../utils/localStorage/localStorage'
 import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 //API
-import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
+import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
 
 
 //STYLE
@@ -22,7 +22,7 @@ import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 
 
-//TODO: PAGINATION, DECLINE ANNOUNCE
+//TODO: PAGINATION
 
 
 const PendingAnnounceList = (props) => {
@@ -47,13 +47,14 @@ const PendingAnnounceList = (props) => {
     const getAll = async () => {
         let token = getLocalStorage('token')
         let responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
-        setPendingAnnounceList(responseApiGetAll.data.list);
+        setPendingAnnounceList(responseApiGetAll.data);
     }
 
     useEffect(() => {
         getAll();
     }, [])
 
+    //TODO: MANCA "N" per dire quanti annunci accettare/rifiutare + manca anche a video...
     const acceptPendingAnnounce = (clickedAnnounceId) => () => {
 
         const update = async () => {
@@ -72,11 +73,24 @@ const PendingAnnounceList = (props) => {
     }
 
 
-    {/* TODO! AND UPDATE BUTTON TOO
-    const declinePendingAnnounce = () => {
+    const declinePendingAnnounce = (clickedAnnounceId) => () => {
+
+        const decline = async () => {
+            const HEADER = decryptItem(props.tokenDuck.token);
+            console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
+            let responseApiPutDecline = await declinePendingAnnouncesPutApi(clickedAnnounceId);
+        }
+
+        decline();
+
+
+        let declined = pendingAnnounceList.filter((structure) => {
+            return structure.id !== clickedAnnounceId
+        })
+
+        setPendingAnnounceList(declined)
 
     }
-*/}
 
     const renderPendingAnnounces = (announce, key) => {
         return <HorizontalCard
@@ -87,18 +101,19 @@ const PendingAnnounceList = (props) => {
             footerContent={
                 <div className="right">
                     <Button className="pending_button" type="primary" onClick={acceptPendingAnnounce(announce.id)}>{t('common.accept')}</Button>
-                    <Button className="pending_button" type="primary" onClick={acceptPendingAnnounce(announce.id)}>{t('common.decline')}</Button>
+                    <Button className="pending_button" type="primary" onClick={declinePendingAnnounce(announce.id)}>{t('common.decline')}</Button>
                 </div>
             }
         />
     }
 
+    //prendere numero annunci di quel tipo e agiungere bottone per cancellare tot 
 
 
     return (
         <>
             <CardList
-                sectionTitle={"Pending announce list"}
+                sectionTitle={t('bo.screens.admin.pendingAnnounceListTitle')}
                 {...paginationProps}
             >
                 {pendingAnnounceList.map(renderPendingAnnounces)}
