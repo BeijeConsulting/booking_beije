@@ -1,131 +1,151 @@
 import React, { Component } from "react";
-import withRouting from "../../../withRouting/withRouting";
-//HELMET
+
+// modules
 import { Helmet } from "react-helmet"
+import { withTranslation } from "react-i18next";
+import withRouting from "../../../withRouting/withRouting";
+import { routes, routesDetails } from '../../../routes/routes';
 
-//LESS
-import './profileMenuCSS/Messages.scss'
+// style
+import './profileMenuCSS/Messages.scss';
+import '../../../assets/variables/_common.scss';
 
-//TRANSLATIONS
-import { t } from "i18next";
+// api
+import { chatMessagesUserGetApi } from '../../../services/api/messaggi/messaggiApi';
 
-//API
-import { chatMessagesUserGetApi } from '../../../services/api/messaggi/messaggiApi'
-
-//LOCALSTORAGE
+// utils
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+import { paginationArrowsRender } from "../../../utils/pagination/pagination";
 
-//CONNECT
-import { connect } from 'react-redux'
+// redux
+import { connect } from 'react-redux';
 
-import { routes, routesDetails } from '../../../routes/routes'
-
+// components
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-import { withTranslation } from "react-i18next";
+import { Pagination } from "antd";
 
 
 class Messages extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      windowWidth: window.innerWidth,
-      arrayMessages: []
-    }
-    this.resize = null;
-  }
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-    if (localStorage.getItem('token') !== null) {
-      chatMessagesUserGetApi(getLocalStorage("token"))
-        .then(res => {
-          if (res?.data !== "") {
-            this.setState({
-              arrayMessages: res?.data?.list
-            })
-          }
-        }).catch((e)=>{
-          console.log('error',e)
-        })
-    }
-
-
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.windowWidth !== this.state.windowWidth) {
-      if (this.state.windowWidth > 991) {
-        this.props.router.navigate(routes.CHAT);
+   constructor(props) {
+      super(props)
+      this.state = {
+         windowWidth: window.innerWidth,
+         arrayMessages: [],
+         page: 1
       }
-    }
-  }
+      this.resize = null;
+   }
+   componentDidMount() {
+      window.addEventListener('resize', this.handleResize);
+      if (localStorage.getItem('token') !== null) {
+         chatMessagesUserGetApi(getLocalStorage("token"))
+            .then(res => {
+               if (res?.data !== "") {
+                  this.setState({
+                     arrayMessages: res?.data?.list
+                  })
+               }
+            }).catch((e) => {
+               console.log('error', e)
+            })
+      }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-  handleResize = () => {
-    this.setState({
-      windowWidth: window.innerWidth
-    })
-  }
-  // function to render array of chats 
-  renderMessages = (mess, key) => {
-    return (
-      <MessageCard key={key}
-        title={mess.lastMessaggio.insertion.title}
-        thumbnail={""}
-        textMessage={mess.lastMessaggio.text}
-        date={mess.lastMessaggio.date_and_time}
-        callback={this.goToSingleConversation(mess.annuncioId)}
-      />
-    )
-  }
 
-  // function to navigate in singleConversation 
-  goToSingleConversation = (idSender) => () => {
-    if (this.state.windowWidth < 992) {
-      this.props.router.navigate(routesDetails.singleConversationMobile(idSender));
-    } else {
-      this.props.router.navigate(routesDetails.singleConversation(idSender));
-    }
-  }
-  render() {
-    return (
-      <>
-        <Helmet>
-          <title>{this.props.t("common.messages")}</title>
-        </Helmet>
+   }
+   componentDidUpdate(prevProps, prevState) {
+      if (prevState.windowWidth !== this.state.windowWidth) {
+         if (this.state.windowWidth > 991) {
+            this.props.router.navigate(routes.CHAT);
+         }
+      }
+   }
 
-        <div className='messages-page'>
-          {
-            this.state.windowWidth < 992 &&
-            <>
-              <div className='back-button'><GoBackButton /></div>
+   componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+   }
+   handleResize = () => {
+      this.setState({
+         windowWidth: window.innerWidth
+      })
+   }
+   // function to render array of chats 
+   renderMessages = (mess, key) => {
+      return (
+         <MessageCard key={key}
+            title={mess.lastMessaggio.insertion.title}
+            thumbnail={""}
+            textMessage={mess.lastMessaggio.text}
+            date={mess.lastMessaggio.date_and_time}
+            callback={this.goToSingleConversation(mess.annuncioId)}
+         />
+      )
+   }
 
-              <h1 className='title'>{this.props.t("common.messages")}</h1>
-            </>
-          }
+   // function to navigate in singleConversation 
+   goToSingleConversation = (idSender) => () => {
+      if (this.state.windowWidth < 992) {
+         this.props.router.navigate(routesDetails.singleConversationMobile(idSender));
+      } else {
+         this.props.router.navigate(routesDetails.singleConversation(idSender));
+      }
+   }
 
-          {
-            this.state.arrayMessages.length > 0 ?
-              <>
-                {this.state.arrayMessages.map(this.renderMessages)}
-              </> :
-              <h2>{this.props.t('common.emptyChat')} </h2>
-          }
+   onPageChange = (page) => {
+      this.setState({
+         page: page
+      })
+   }
 
-          <div className="pagination"></div>
-        </div>
-      </>
+   render() {
+      return (
+         <>
+            <Helmet>
+               <title>{this.props.t("common.messages")}</title>
+            </Helmet>
 
-    );
-  }
+            <div className='messages-page oY2'>
+               {
+                  this.state.windowWidth < 992 &&
+                  <>
+                     <div className='back-button'><GoBackButton /></div>
+
+                     <h1 className='title'>{this.props.t("common.messages")}</h1>
+                  </>
+               }
+
+               {
+                  this.state.arrayMessages.length > 0 ?
+                     <>
+                        {this.state.arrayMessages.map(this.renderMessages)}
+                     </> :
+                     <h2>{this.props.t('common.emptyChat')} </h2>
+               }
+
+               {this.state.arrayMessages.length > 5 &&
+                  <Pagination
+                     size={"small"}
+                     total={10}
+                     pageSize={5}
+                     current={this.state.page}
+                     onChange={this.onPageChange}
+                     itemRender={paginationArrowsRender}
+                     className={'custom-pagination'}
+                  />
+               }
+
+            </div>
+         </>
+
+      );
+   }
 
 };
 
 
 const mapStateToProps = (state) => ({
-  tokenDuck: state.tokenDuck,
-  userDuck: state.userDuck
+   tokenDuck: state.tokenDuck,
+   userDuck: state.userDuck
 })
 
-export default withTranslation() (withRouting(connect(mapStateToProps)(Messages)));
+export default withTranslation()(withRouting(connect(mapStateToProps)(Messages)));

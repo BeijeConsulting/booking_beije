@@ -1,0 +1,107 @@
+@import "../../../assets/variables/globalVariables.scss";
+
+.property_container {
+    background-color:$black_primary;
+    padding-top: 2rem;
+    color: $white_primary;
+    h2,h3{
+      color: $white_primary;
+    }
+    .container_img{
+        position: relative;
+        display: flex;
+        height: 50vh;
+        .structure_img_property.first{
+            height: 100%;
+        }
+        .back-button.goBackProperty{
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: white;
+        }
+    }
+    .img_container_secondary{
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        height: 100%;
+    }
+    .structure_img_property {
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+        padding: .3rem;
+        border-radius: 1rem;
+    }
+    .padding_page {
+        padding: 2rem 7vw;
+        .property_core_info_container{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8rem;
+        }
+        .total_price_container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+    .room_container{
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+        .title_info{
+            display: flex;
+            justify-content: space-between;
+            h2{
+                margin-right: .6rem;
+            }
+        }
+        .rooms_card_container{
+            background-color: $secondary_lighter;
+            color: $black_primary;
+            min-width: 30%;
+            margin: 0 2rem 2rem 0;
+            padding: 1rem;
+            border-radius: 1rem;
+            h2{
+                color: $black_primary
+            }
+        }
+    }
+}
+
+@media all and (max-width:992px) {
+    .property_container{
+        padding-top: 0;
+        .structure_img_property {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            padding: 0;
+            border-radius: 0;
+        }
+    }
+}
+@media all and (max-width:991px) {
+    .property_container{
+        .room_container{
+            .rooms_card_container{
+                min-width: 60%;
+            }
+        }
+    }
+}
+@media all and (max-width:480px) {
+    .property_container{
+        .room_container{
+            .rooms_card_container{
+                min-width: 80%;
+            }
+        }
+    }
+}

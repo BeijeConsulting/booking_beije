@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setToken } from "./redux/ducks/tokenDuck";
 
+import { myProfilesGetApi } from './services/api/user/userApi'
 // routes
 import { routes } from "./routes/routes";
 
@@ -24,6 +25,7 @@ import MostRewApart from "./screens/frontEnd/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
+import Checkout from "./screens/frontEnd/Checkout";
 
 //Screen backOffice
 import ReservationCalendar from "./screens/backOffice/host/reservation/reservationCalendar/ReservationCalendar";
@@ -50,17 +52,31 @@ import HostRegistration from "./screens/backOffice/host/registration/hostRegistr
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
 import { logout } from "./utils/user/user";
+import { setProperty } from "./redux/ducks/propertyDuck";
+import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
+
 
 
 function Routing(props) {
     useEffect(() => {
-        if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-            logout();
-            let token = getLocalStorage('token')
-            props.dispatch(setToken(token))
-            props.dispatch(setUser())
-        }
-        
+        (async () => {
+            if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
+                
+                try {
+                    logout();
+                    let token = getLocalStorage('token');
+                    props.dispatch(setToken(token));
+                    const PROFILE = await myProfilesGetApi(token);
+                    const PROPERTY = await showAllStruttureGetApi();
+                    props.dispatch(setUser(PROFILE?.data));
+                    props.dispatch(setProperty(PROPERTY?.data?.list));
+                } catch (error) {
+                    return error.message
+                }
+            }
+        })()
+
+
     }, []);
 
 
@@ -93,7 +109,7 @@ function Routing(props) {
 
                 <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
                     <ProtectedRoute>
-                        <Chat/>
+                        <Chat />
                     </ProtectedRoute>
                 }
                 >
@@ -126,6 +142,8 @@ function Routing(props) {
                     </ProtectedRoute>
                 }
                 />
+
+                <Route path={routes.CHECKOUT} element={<Checkout />} />
 
                 <Route index path={routes.HOME} element={<Home />} />
                 <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
@@ -161,4 +179,4 @@ function Routing(props) {
 }
 
 
-export default connect()(Routing);
+export default connect()(React.memo(Routing));

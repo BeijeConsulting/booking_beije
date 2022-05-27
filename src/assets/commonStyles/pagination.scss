@@ -1,0 +1,74 @@
+@import '../variables/globalVariables.scss';
+
+.custom-pagination {
+   margin-top: 3rem;
+}
+
+.custom-pagination.ant-pagination.mini .ant-pagination-prev, 
+.custom-pagination.ant-pagination.mini .ant-pagination-next,
+.custom-pagination.ant-pagination.mini .ant-pagination-item {
+   border: 0;
+   margin: 0 0.2rem;
+   min-width: 1.7rem;
+   height: 1.7rem;
+   line-height: 1.7rem;
+}
+
+.custom-pagination .ant-pagination-item,
+.custom-pagination.ant-pagination.mini .ant-pagination-item:not(.ant-pagination-item-active) {
+   background-color: $white_primary;
+   border-radius: 50%;
+}
+
+.custom-pagination.ant-pagination.mini .ant-pagination-item:not(.ant-pagination-item-active):hover {
+   background-color: $white_primary_light;
+}
+
+.custom-pagination .ant-pagination-prev:not(.ant-pagination-disabled):hover, 
+.custom-pagination .ant-pagination-next:not(.ant-pagination-disabled):hover {
+   opacity: .7;
+}
+
+.custom-pagination li:not([class*="active"],.ant-pagination-disabled):hover,
+.custom-pagination li:not([class*="active"],.ant-pagination-disabled):hover a {
+   cursor: pointer;
+}
+
+.custom-pagination .ant-pagination-item {
+   font-weight: 700;
+}
+
+.custom-pagination .ant-pagination-item-active {
+   background-color: $secondary_dark;
+   cursor: default;
+}
+
+.custom-pagination .ant-pagination-prev,
+.custom-pagination .ant-pagination-next,
+.custom-pagination .ant-pagination-jump-prev,
+.custom-pagination .ant-pagination-jump-next, 
+.custom-pagination .ant-pagination-item a {
+   color: $black_primary;
+}
+
+.custom-pagination .ant-pagination-disabled .ant-pagination-item-link, 
+.custom-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
+   color: $black_primary_light;
+}
+
+.custom-pagination .ant-pagination-item-active {
+   border: 0;
+}
+
+.custom-pagination li,
+.custom-pagination a {
+   text-decoration: none;
+   cursor: default;
+}
+
+.custom-pagination .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, 
+.custom-pagination .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.custom-pagination .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, 
+.custom-pagination .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+   color: $white_primary;
+}

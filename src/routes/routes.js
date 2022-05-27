@@ -15,11 +15,11 @@ const routes = {
     ACCOUNT: '/account',
 
     //details
-    DETAILSPROP: 'detailsproperty/:id',
+    DETAILSPROP: '/detailsproperty/:id',
     DETAILSPROPROOM: 'detailsproperty/rooms/:id',
 
     //all
-    CHECKOUT: 'checkout',
+    CHECKOUT: '/checkout',
     NOTFOUND: '*',
     SEARCH: '/search',
     MRA: 'mostreviewedBuilding',

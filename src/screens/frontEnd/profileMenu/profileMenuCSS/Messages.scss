@@ -1,9 +1,9 @@
 @import "../../../../assets/variables/globalVariables.scss";
 .messages-page {
-    background-color: #44403c;
+    background-color: $black-primary;
     color: $white_primary;
     padding: 1rem 1rem;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     min-height: 90vh;
     .title {
         color: $white_primary;

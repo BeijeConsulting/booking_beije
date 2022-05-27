@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // components
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import Disclaimer from "../disclaimer/Disclaimer";
 import SettingsCard from "../../../components/frontEnd/settings/cards/SettingsCard";
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 // modules
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ import { initToken } from "../../../redux/ducks/tokenDuck";
 
 // style
 import './profileMenuCSS/Settings.scss';
+import '../../../assets/variables/_common.scss'
 
 // utils
 import { removeLocalStorage } from "../../../utils/localStorage/localStorage";
@@ -28,6 +30,20 @@ function Settings(props) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
+
+  const [state, setState] = useState({ windowWidth: window.innerWidth })
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  })
+
+  function handleResize() {
+    setState({
+      ...state,
+      windowWidth: window.innerWidth
+    })
+  }
 
   const user_type = "HOST"
 
@@ -60,7 +76,7 @@ function Settings(props) {
   ]
 
   const createCardSettingsComponent = ((card, key) => {
-    let cssClass = key === settingsToComponents.length - 1 ? 'beige posLast' : '';
+    let cssClass = key === settingsToComponents.length - 1 ? 'beige m0 br1 posLast' : '';
     return <SettingsCard key={key} icon={card.icon} name={card.name} path={card.path} className={cssClass} />
   })
 
@@ -79,17 +95,21 @@ function Settings(props) {
 
       </Helmet>
       <div className="settings_container">
+        {
+          state.windowWidth < 991 &&
+          <div className="back-button"><GoBackButton /></div>
+        }
         <div>
-          <div className="title_and_logout_container">
+          <div className="title_and_logout_container flex jcSpacB aiCnter w100">
             <h1>{t("fe.screens.settings.title")}</h1>
           </div>
-          <div className="settings_card_list_container">
+          <div className="settings_card_list_container flex jcCenter aiCenter column w100  ">
             {settingsToComponents.map(createCardSettingsComponent)}
           </div>
         </div>
-        <div className="setting_disclaimer_container">
+        <div className="setting_disclaimer_container flex column aiCenter">
           <UiButton
-          callback={handleLogOut}
+            callback={handleLogOut}
             className={"logout_button"}
             label={"Logout"} />
           <Disclaimer />

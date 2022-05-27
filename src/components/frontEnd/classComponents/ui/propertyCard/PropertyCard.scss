@@ -1,28 +1,35 @@
 @import "../../../../../assets/variables/globalVariables.scss";
 
 .propertyCardContainer{
-    position: relative;
-    display: flex;
-    align-items: center;
+    // position: relative;
+    // display: flex;
+    // align-items: center;
 
     img{
-        object-fit: contain;
+        // object-fit: contain;
         width: 8rem;
         height: 8rem;
         margin-right: .5rem;
     }
-    div:first-child{
+
+    div:first-child {
         display: flex;
         flex-direction: column;
 
-        small{
-            color: $black_primary_lighter;
+        small {
+            color: $black_primary;
+            padding-left: .2rem;
+        }
+
+        .mediaRateCard {
+            display: flex;
+            align-items: center;
         }
     }
 
-    span{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-    }
+    // span{
+    //     position: absolute;
+    //     right: 0;
+    //     bottom: 0;
+    // }
 }

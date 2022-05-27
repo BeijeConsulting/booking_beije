@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 //LESS
 import './profileMenuCSS/SingleConversation.scss'
+import '../../../assets/variables/_common.scss'
 
 //CONNECT
 import { connect } from 'react-redux'
@@ -75,7 +76,7 @@ const SingleConversation = (props) => {
       let obj = {
         annuncioId: params.id,
         contenuto: inputMessage,
-        receiverId: state.msgArray[0]?.insertion?.struttura.host.user.id
+        receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
       }
 
 
@@ -100,13 +101,15 @@ const SingleConversation = (props) => {
 
   }
 
+  console.log('what is this?: ', state?.msgArray[0]?.insertion?.struttura?.host?.user?.id)
+
   // function to submit on click in icon 
   const submitMessageOnSendPress = () => {
     let objcopy = Object.assign({}, state)
     let obj = {
       annuncioId: params.id,
       contenuto: inputMessage,
-      receiverId: state.msgArray[0].insertion.struttura.host.user.id
+      receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
     }
 
 
@@ -130,16 +133,15 @@ const SingleConversation = (props) => {
 
   // render chat 
   function renderConversation(mess, key) {
-
     return (
 
-      <div key={key} className={(mess.sender.id !== props.userDuck.user.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
+      <div key={key} className={(mess.sender.id !== props.userDuck.user.utente.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
         <div>{
-          (mess.sender.id !== props.userDuck.user.id) ? mess.insertion.titolo : t('common.you')
+          (mess.sender.id !== props.userDuck.user.utente.id) ? mess.insertion.titolo : t('common.you')
         }
         </div>
         <p>{mess.text}</p>
-        <div className="dateTimeMessage">{mess.date_and_time}</div>
+        <div className="dateTimeMessage fsXS fsI">{mess.date_and_time}</div>
       </div>
     )
   }
@@ -149,8 +151,8 @@ const SingleConversation = (props) => {
       <Helmet>
         <title>SingleConversation</title>
       </Helmet>
-      <div className="singleConversation-page">
-        <div className="container_messages">
+      <div className="singleConversation-page flex column w100 oY2">
+        <div className="container_messages oY2">
           {
             state.windowWidth < 992 &&
             <>
@@ -168,8 +170,8 @@ const SingleConversation = (props) => {
         </div>
 
 
-        <div className="space-input">
-          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+        <div className="space-input fixed b0 l0 w100">
+          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input p1 w100" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
         </div>
       </div>
     </>

@@ -33,7 +33,7 @@
       "mra": "Most reviewed apartments",
       "name": "Name",
       "noMessages": "No messages found",
-      "noApartments":"No apartments to show.",
+      "noApartments": "No apartments to show.",
       "or": "or",
       "password": "Password",
       "passwordConfirm": "Confirm password",
@@ -47,6 +47,7 @@
       "rooms": "{{count}} room",
       "rooms_other": "{{count}} rooms",
       "save": "Save",
+      "searchPlaceholder": "Search...",
       "select": "Select",
       "send": "Send",
       "services": "Services",
@@ -56,9 +57,11 @@
       "writeMessage": "Write your message here...",
       "you": "You",
       "zipCode": "ZIP code",
-      "suggestedApartaments": "Suggested apartament"
+      "suggestedApartaments": "Suggested apartament",
+      "bookNow": "Prenota adesso!"
    },
    "toasts": {
+      "favouritesDeleted": "{{name}} has been deleted from your favourites",
       "formErrorAllFields": "Please, fill in all fields",
       "formErrorEmail": "Please, insert a valid email",
       "formErrorPassword": "Please, insert a valid password: at least 8 characters long, 1 capital letter and 1 symbol",
@@ -210,6 +213,9 @@
          }
       },
       "screens": {
+         "favourites": {
+            "noFavourites": "No favourites to show"
+         },
          "guestAccount": {
             "becomeAHost": "Become a host"
          },
@@ -242,6 +248,12 @@
          "searchResult": {
             "filterButton": "Filters",
             "mapButton": "Map"
+         },
+         "checkout": {
+            "total": "Total",
+            "confirmPayment": "Confirm payment",
+            "price": " Price",
+            "qty": "Qty"
          }
       }
    }

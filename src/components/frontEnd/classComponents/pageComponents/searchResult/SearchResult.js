@@ -1,6 +1,7 @@
 // import PropTypes from 'prop-types'
 import React, { Component } from 'react';
 
+<<<<<<< HEAD
 // api
 import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
 
@@ -18,6 +19,33 @@ import { withTranslation } from 'react-i18next';
 
 // style
 import './SearchResult.scss';
+=======
+// components
+import UiButton from '../../../funcComponents/ui/buttons/uiButtons/UiButton';
+import { withTranslation } from 'react-i18next';
+import SearchButton from '../../../funcComponents/ui/searchButton/SearchButton';
+import Card from '../../../funcComponents/card/Card';
+import PropertyCard from '../../ui/propertyCard/PropertyCard';
+import Modal from '../../../../common/modal/Modal';
+import Map from '../../../hookComponents/map/Map';
+import { Pagination } from 'antd';
+
+// modules
+import Helmet from 'react-helmet';
+
+// style
+import './SearchResult.scss';
+import '../../../../../assets/variables/_common.scss';
+import '../../../../../assets/commonStyles/pagination.scss';
+
+// api
+import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
+import Filter from '../../../hookComponents/filter/Filter';
+import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
+
+// utils
+import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
+>>>>>>> c1963132e43f7bdbbd0f62881dea92300359f960
 
 
 

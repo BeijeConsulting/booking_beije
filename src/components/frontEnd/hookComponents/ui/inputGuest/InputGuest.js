@@ -5,25 +5,22 @@ import { InputNumber, Space } from 'antd';
 
 // events
 import { eventBus } from '../../../../../eventBus/eventBus';
+import { connect } from 'react-redux';
+import { setGuest } from '../../../../../redux/ducks/guestDuck';
 
 
 function InputGuest(props) {
 
    const [state, setState] = useState({
-      value: 1
+      value: 2
    });
-
-   const handleEvent = () => {
-      eventBus.onDispatch('guests', state.value);
-   }
-
-   useEffect(handleEvent, [state.value]);
 
    function handleClick(e) {
       let newState = Object.assign({}, state);
       let value = e.target.getAttribute("name");
       newState = { ...newState, value: newState.value + parseInt(value) }
       setState(newState);
+      props.dispatch(setGuest(newState.value));
    }
 
    const handleChange = (e) => {
@@ -32,6 +29,8 @@ function InputGuest(props) {
          value: parseInt(e)
       })
    }
+
+  
 
    const selectBefore = (
       <span name={-1} onClick={handleClick}>
@@ -60,4 +59,4 @@ function InputGuest(props) {
    )
 }
 
-export default InputGuest;
+export default connect() (InputGuest);
