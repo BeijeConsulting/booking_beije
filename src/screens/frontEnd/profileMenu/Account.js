@@ -35,8 +35,8 @@ const Account = (props) => {
 
   let objToValue = {
     id: 1,
-    name: "paolo",
-    surname: "Pascucci",
+    name: "Mario",
+    surname: "Rossi",
     email: "pp@gmail.com",
     password: "password"
   }
@@ -144,19 +144,19 @@ const Account = (props) => {
         <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.name")}</label>
           {/*<input type="text" onChange={accName} id="name" />*/}
-          <FormInput type="text" placeholder={objToValue.name} info="name" callback={accName} />
+          <FormInput className="br3" type="text" placeholder={objToValue.name} info="name" callback={accName} />
         </div>
 
         <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.surname")}</label>
           {/* <input type="text" id="surname" /> */}
-          <FormInput type="text" info="surname" placeholder={objToValue.surname} callback={accSurname} />
+          <FormInput className="br3" type="text" info="surname" placeholder={objToValue.surname} callback={accSurname} />
         </div>
 
         <div className="i flex column m1">
           <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("common.change")} {t("common.email")}</label>
           {/* <input type="email" id="email" /> */}
-          <FormInput type="email" info="email" placeholder={objToValue.email} callback={Controllmail} />
+          <FormInput className="br3" type="email" info="email" placeholder={objToValue.email} callback={Controllmail} />
         </div>
 
         <div className="i flex column m1">
