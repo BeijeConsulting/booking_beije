@@ -105,16 +105,7 @@ function LoginForm(props) {
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));
       myProfilesGetApi(res.data.token).then(profile).catch(error)
-      {
-         props.isCheckout === true ? navigate(routes.CHECKOUT, {
-            state: {
-               property: props.checkoutProperty,
-               checkOut: props.checkoutList
-            }
-         })
-            :
-            navigate(routes.LAYOUT)
-      };
+      navigate(routes.LAYOUT)
    }
 
    const handleSubmit = (e) => {

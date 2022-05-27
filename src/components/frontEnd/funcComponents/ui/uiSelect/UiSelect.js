@@ -4,14 +4,13 @@ import { renderSelectOptions } from '../../../../../utils/Utils';
 
 
 function UiSelect(props) {
-
    const onChangeCallback = (e) => {
       if (props.callback) props.callback(e.target.value);
    }
 
    return (
       <>
-         <select disabled={props.selected} name={props.name} className={props.cssClass} onChange={onChangeCallback}>
+         <select defaultValue={props.isStored} disabled={props.selected} name={props.name} className={props.cssClass} onChange={onChangeCallback}>
             {props.data.map(props.renderingCallback(props.name))}
          </select>
       </>

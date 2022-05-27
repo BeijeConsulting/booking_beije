@@ -4,7 +4,7 @@ function setLocalStorage(key, token) {
     const now = new Date();
 
     const item = {
-        [key] : token,
+        [key]: token,
         expire: now.getTime()
     }
 
@@ -12,12 +12,22 @@ function setLocalStorage(key, token) {
 }
 
 function getLocalStorage(key) {
-    if(localStorage.getItem('token') === null) return null;
+    if (localStorage.getItem('token') === null) return null;
 
     const token = decryptItem(JSON.parse(localStorage.getItem(key)));
 
     return token[key];
 }
+
+
+function getLocalStorageCheckout(key) {
+    if (localStorage.getItem('checkout') === null) return null;
+
+    const checkout = decryptItem(JSON.parse(localStorage.getItem(key)));
+
+    return checkout[key];
+}
+
 
 function removeLocalStorage(key) {
     return localStorage.removeItem(key);
@@ -26,5 +36,6 @@ function removeLocalStorage(key) {
 export {
     setLocalStorage,
     getLocalStorage,
-    removeLocalStorage
+    removeLocalStorage,
+    getLocalStorageCheckout
 }

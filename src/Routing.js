@@ -61,7 +61,7 @@ function Routing(props) {
     useEffect(() => {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-                
+
                 try {
                     logout();
                     let token = getLocalStorage('token');
