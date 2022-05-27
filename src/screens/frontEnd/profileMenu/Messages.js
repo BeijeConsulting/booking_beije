@@ -13,6 +13,7 @@ import '../../../assets/variables/_common.scss';
 // api
 import { chatMessagesUserGetApi } from '../../../services/api/messaggi/messaggiApi';
 
+
 // utils
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
 import { paginationArrowsRender } from "../../../utils/pagination/pagination";
@@ -24,6 +25,7 @@ import { connect } from 'react-redux';
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import { Pagination } from "antd";
+import { myProfilesGetApi } from "../../../services/api/user/userApi";
 
 
 class Messages extends Component {
@@ -31,9 +33,10 @@ class Messages extends Component {
       super(props)
       this.state = {
          windowWidth: window.innerWidth,
-         arrayMessages: [],
+         arrayMessagesFiltered: [],
          page: 1
       }
+      this.arrayMessages = []
       this.resize = null;
    }
    componentDidMount() {
@@ -42,16 +45,22 @@ class Messages extends Component {
          chatMessagesUserGetApi(getLocalStorage("token"))
             .then(res => {
                if (res?.data !== "") {
-                  this.setState({
-                     arrayMessages: res?.data?.list
+                  this.arrayMessages = res?.data?.list;
+                  myProfilesGetApi(getLocalStorage("token"))
+                  .then((user)=>{
+                     let id = user?.data?.utente?.id
+                     const arrFilter = this.arrayMessages.filter((chat) => {
+                        return chat?.lastMessaggio?.insertion?.struttura?.host?.user?.id !== id
+                     })
+                     this.setState({
+                        arrayMessagesFiltered : arrFilter
+                     })
                   })
                }
             }).catch((e) => {
                console.log('error', e)
             })
       }
-
-
    }
    componentDidUpdate(prevProps, prevState) {
       if (prevState.windowWidth !== this.state.windowWidth) {
@@ -74,7 +83,7 @@ class Messages extends Component {
       return (
          <MessageCard key={key}
             title={mess.lastMessaggio.insertion.title}
-            thumbnail={""}
+            thumbnail={mess?.lastMessaggio?.insertion?.struttura?.url_image ? mess?.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg' }
             textMessage={mess.lastMessaggio.text}
             date={mess.lastMessaggio.date_and_time}
             callback={this.goToSingleConversation(mess.annuncioId)}
@@ -115,14 +124,14 @@ class Messages extends Component {
                }
 
                {
-                  this.state.arrayMessages.length > 0 ?
+                  this.state?.arrayMessagesFiltered.length > 0 ?
                      <>
-                        {this.state.arrayMessages.map(this.renderMessages)}
+                        {this.state.arrayMessagesFiltered.map(this.renderMessages)}
                      </> :
                      <h2>{this.props.t('common.emptyChat')} </h2>
                }
 
-               {this.state.arrayMessages.length > 5 &&
+               {this.state.arrayMessagesFiltered.length > 5 &&
                   <Pagination
                      size={"small"}
                      total={10}
@@ -145,7 +154,6 @@ class Messages extends Component {
 
 const mapStateToProps = (state) => ({
    tokenDuck: state.tokenDuck,
-   userDuck: state.userDuck
 })
 
 export default withTranslation()(withRouting(connect(mapStateToProps)(Messages)));
