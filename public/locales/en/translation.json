@@ -89,7 +89,7 @@
    "bo": {
       "components": {
          "sidebar": {
-            "structure": "Structure",
+            "structure": "Structures",
             "payments": "Payments"
          },
          "reservationList": {
