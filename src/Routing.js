@@ -21,7 +21,7 @@ import Settings from "./screens/frontEnd/profileMenu/Settings";
 import Registration from "./screens/frontEnd/registration/Registration";
 import DetailsProp from "./screens/frontEnd/details/DetailsProp";
 import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
-import MostRewApart from "./screens/frontEnd/MRA";
+import MostRewApart from "./screens/frontEnd/MRA/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
