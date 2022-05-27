@@ -61,36 +61,37 @@ class SearchForm extends Component {
          }
       }
       let finalString = string.slice(0, -1);
-
       return finalString;
    }
 
    handleSubmit = (e) => {
       e.preventDefault();
-      // const coordinate = {
-      //    latitudine: null,
-      //    longitudine: null,
-      //    radius: 10,
-      // }
-      this.bookingData.posti_letto = this.props.guestDuck.guest
+
+      this.bookingData.posti_letto = this.props.guestDuck.guest;
+
       let [latitude, longitude] = this.props.positionDuck.coordinates;
+
       this.bookingData.latitudine = latitude;
       this.bookingData.longitudine = longitude;
 
-      getStructuresBySearch(this.objToString(this.bookingData)).then(res =>
-         this.props.router.navigate(routes.SEARCH, {
-            state: res?.data
-         })
-      ).catch(error => error)
-      this.props.router.navigate(routes.SEARCH, {
-         state: {
-            data: this.bookingData,
+      if(this.props.router.location.pathname === '/home'){
+
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => {   
+            this.props.router.navigate(routes.SEARCH, {
+               state: {
+                  property: res?.data
+               }
+            })
          }
-      })
+         ).catch(error => error)
+         // dovbbiamo fare un toast
+      }
+
 
       if (this.props.router.location.pathname === '/search') {
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.props.data(res?.data))
          this.props.callback();
-         this.props.data();
+         
       }
    }
 
