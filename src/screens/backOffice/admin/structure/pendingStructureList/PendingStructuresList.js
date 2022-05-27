@@ -22,7 +22,7 @@ import { Button } from "antd";
 //TRANSLATION
 import { useTranslation } from "react-i18next";
 
-//TODO: PAGINATION, TEST DECLINE STRUCTURE
+//TODO: PAGINATION
 
 
 let responseApiGetAll = null;
@@ -50,6 +50,7 @@ const PendingStructuresList = (props) => {
     const getAll = async () => {
         let token = getLocalStorage('token');
         responseApiGetAll = await showPendingStructuresGetAllApi(token);
+        console.log(responseApiGetAll)
         setPendingStructureList(responseApiGetAll.data.list);
     }
 
@@ -57,16 +58,23 @@ const PendingStructuresList = (props) => {
         getAll();
     }, [])
 
-
     const acceptPendingStructure = (clickedStructureId) => () => {
 
+        console.log('accept clciked', clickedStructureId)
+
         const update = async () => {
-            const HEADER = decryptItem(props.tokenDuck.token);
-            console.log(acceptPendingStructurePutApi(clickedStructureId, HEADER));
-            let responseApiPut = await acceptPendingStructurePutApi(clickedStructureId);
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+                console.log('header', HEADER)
+                await acceptPendingStructurePutApi(clickedStructureId, HEADER);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(acceptPendingStructurePutApi(clickedStructureId, HEADER));
+
         }
 
         update();
+
 
 
         let updated = pendingStructureList.filter((structure) => {
@@ -74,15 +82,23 @@ const PendingStructuresList = (props) => {
         })
 
         setPendingStructureList(updated)
+
+
     }
 
 
     const declinePendingStructure = (clickedStructureId) => () => {
 
+        console.log('decline clciked', clickedStructureId)
+
         const decline = async () => {
-            const HEADER = decryptItem(props.tokenDuck.token);
-            console.log(declinePendingStructurePutApi(clickedStructureId, HEADER));
-            let responseApiPutDecline = await declinePendingStructurePutApi(clickedStructureId);
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+                console.log('decline header', HEADER)
+                await declinePendingStructurePutApi(clickedStructureId, HEADER);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(declinePendingStructurePutApi(clickedStructureId, HEADER));
         }
 
         decline();
@@ -93,6 +109,7 @@ const PendingStructuresList = (props) => {
         })
 
         setPendingStructureList(declined)
+
 
     }
 

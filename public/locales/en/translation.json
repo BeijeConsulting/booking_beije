@@ -177,11 +177,11 @@
                "rooms": "Rooms",
                "rules": "Rules"
             }
+         },
+         "admin": {
+            "pendingAnnounceListTitle": "Pending announces",
+            "pendingStructureListTitle": "Pending structures"
          }
-      },
-      "admin": {
-         "pendingAnnounceListTitle": "Pending announces",
-         "pendingStructureListTitle": "Pending structures"
       }
    },
    "fe": {

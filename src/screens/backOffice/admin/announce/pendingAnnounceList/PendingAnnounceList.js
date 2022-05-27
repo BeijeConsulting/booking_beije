@@ -47,38 +47,46 @@ const PendingAnnounceList = (props) => {
     const getAll = async () => {
         let token = getLocalStorage('token')
         let responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
-        setPendingAnnounceList(responseApiGetAll.data);
+        setPendingAnnounceList(responseApiGetAll.data.list);
     }
 
     useEffect(() => {
         getAll();
     }, [])
 
-    //TODO: MANCA "N" per dire quanti annunci accettare/rifiutare + manca anche a video...
+    //TODO: MANCA "N" per dire quanti annunci accettare/rifiutare
     const acceptPendingAnnounce = (clickedAnnounceId) => () => {
 
         const update = async () => {
-            const HEADER = decryptItem(props.tokenDuck.token);
-            console.log(acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER));
-            let responseApiPut = await acceptPendingAnnouncesPutApi(clickedAnnounceId);
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+                await acceptPendingAnnouncesPutApi(clickedAnnounceId, 1, HEADER);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER));
         }
 
         update();
 
-        let updated = pendingAnnounceList.filter((structure, index) => {
-            return structure.id !== clickedAnnounceId
+        let updated = pendingAnnounceList.filter((announce, index) => {
+            return announce.id !== clickedAnnounceId
         })
 
         setPendingAnnounceList(updated)
+
     }
 
 
     const declinePendingAnnounce = (clickedAnnounceId) => () => {
 
         const decline = async () => {
-            const HEADER = decryptItem(props.tokenDuck.token);
-            console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
-            let responseApiPutDecline = await declinePendingAnnouncesPutApi(clickedAnnounceId);
+            if (localStorage.getItem('token') !== null) {
+                const HEADER = getLocalStorage('token');
+                console.log(clickedAnnounceId)
+                await declinePendingAnnouncesPutApi(clickedAnnounceId, 1, HEADER);
+            }
+            //const HEADER = decryptItem(props.tokenDuck.token);
+            //console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
         }
 
         decline();
@@ -104,10 +112,11 @@ const PendingAnnounceList = (props) => {
                     <Button className="pending_button" type="primary" onClick={declinePendingAnnounce(announce.id)}>{t('common.decline')}</Button>
                 </>
             }
+
         />
     }
 
-    //prendere numero annunci di quel tipo e agiungere bottone per cancellare tot 
+    //TODO: prendere numero annunci di quel tipo e aggiungere bottone per cancellare tot
 
 
     return (

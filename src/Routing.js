@@ -45,7 +45,7 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -84,8 +84,8 @@ function Routing(props) {
     //login, registration, account, messages, favourites, booking
 
     //TODO: to be deleted ( - setLocalStorage import too)
-    //setLocalStorage('token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJBRE1JTiJdLCJpYXQiOjE2NTM1NzkxNDMsImV4cCI6MTY1MzU4Mjc0M30.gT3moHwwaa6cSnt_1uCXVwIXK8rWW6i57_HgXK4eFE8')
-    //setLocalStorage('refresh token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM2NjM4OTF9.HmC_m4W3gA2ABY9I60UeGOwfWlWikkJ8yGTZb_JmuXs')
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjU0NDgxLCJleHAiOjE2NTM2NTgwODF9.Cw3vUAdgRdIMrXdlYoJcKzG5wrOC7Y0cpV-iawa3-28")
+    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM2NjM4OTF9.HmC_m4W3gA2ABY9I60UeGOwfWlWikkJ8yGTZb_JmuXs")
 
 
     return (

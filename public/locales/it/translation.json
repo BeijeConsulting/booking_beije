@@ -151,11 +151,11 @@
                "services": "Servizi",
                "rooms": "Stanze",
                "rules": "Regole"
+            },
+            "admin": {
+               "pendingAnnounceListTitle": "Annunci da approvare",
+               "pendingStructureListTitle": "Strutture da approvare"
             }
-         },
-         "admin": {
-            "pendingAnnounceListTitle": "Annunci da approvare",
-            "pendingStructureListTitle": "Strutture da approvare"
          }
       }
    },
