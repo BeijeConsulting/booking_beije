@@ -84,8 +84,8 @@ function Routing(props) {
     //login, registration, account, messages, favourites, booking
 
     //TODO: to be deleted ( - setLocalStorage import too)
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjU0NDgxLCJleHAiOjE2NTM2NTgwODF9.Cw3vUAdgRdIMrXdlYoJcKzG5wrOC7Y0cpV-iawa3-28")
-    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM2NjM4OTF9.HmC_m4W3gA2ABY9I60UeGOwfWlWikkJ8yGTZb_JmuXs")
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjU4MjA4LCJleHAiOjE2NTM2NjE4MDh9.Suo0UuNGAwJtvVbhrMR_dYjflWCi8FQMy8JweATXJok")
+    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
 
 
     return (

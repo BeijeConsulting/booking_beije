@@ -29,7 +29,9 @@ let responseApiGetAll = null;
 
 const PendingStructuresList = (props) => {
 
-    const [pendingStructureList, setPendingStructureList] = useState([]);
+    const [state, setState] = useState({
+        pendingStructureList: []
+    });
 
     const { t } = useTranslation();
 
@@ -51,7 +53,10 @@ const PendingStructuresList = (props) => {
         let token = getLocalStorage('token');
         responseApiGetAll = await showPendingStructuresGetAllApi(token);
         console.log(responseApiGetAll)
-        setPendingStructureList(responseApiGetAll.data.list);
+        setState({
+            ...state,
+            pendingStructureList: responseApiGetAll.data.list
+        });
     }
 
     useEffect(() => {
@@ -77,12 +82,14 @@ const PendingStructuresList = (props) => {
 
 
 
-        let updated = pendingStructureList.filter((structure) => {
+        let updated = state.pendingStructureList.filter((structure) => {
             return structure.id !== clickedStructureId
         })
 
-        setPendingStructureList(updated)
-
+        setState({
+            ...state,
+            pendingStructureList: updated
+        })
 
     }
 
@@ -104,12 +111,14 @@ const PendingStructuresList = (props) => {
         decline();
 
 
-        let declined = pendingStructureList.filter((structure) => {
+        let declined = state.pendingStructureList.filter((structure) => {
             return structure.id !== clickedStructureId
         })
 
-        setPendingStructureList(declined)
-
+        setState({
+            ...state,
+            pendingStructureList: declined
+        })
 
     }
 
@@ -137,7 +146,7 @@ const PendingStructuresList = (props) => {
                 sectionTitle={"Pending structures list"}
                 {...paginationProps}
             >
-                {pendingStructureList.map(renderPendingStructures)}
+                {state.pendingStructureList.map(renderPendingStructures)}
             </CardList>
         </>
     )

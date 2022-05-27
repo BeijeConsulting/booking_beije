@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 //REDUX AND TOKEN MANAGEMENT
 import { connect } from "react-redux";
 import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-import { decryptItem } from "../../../../../utils/crypto/crypto";
+//import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 //API
 import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
@@ -24,10 +24,14 @@ import { useTranslation } from "react-i18next";
 
 //TODO: PAGINATION
 
+let responseApiGetAll = null;
+
 
 const PendingAnnounceList = (props) => {
 
-    const [pendingAnnounceList, setPendingAnnounceList] = useState([]);
+    const [state, setState] = useState({
+        pendingAnnounceList: []
+    });
 
     const { t } = useTranslation();
 
@@ -40,27 +44,35 @@ const PendingAnnounceList = (props) => {
 
     const paginationProps = {
         itemsCount: 50, //get from backend
-        pageSize: 10, //get from backend
+        pageSize: 10, //get from backend --> state.lastPage
         paginationCallback: switchToPage
     }
 
+
     const getAll = async () => {
         let token = getLocalStorage('token')
-        let responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
-        setPendingAnnounceList(responseApiGetAll.data.list);
+        responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
+
+        setState({
+            ...state,
+            pendingAnnounceList: responseApiGetAll.data.list
+        });
     }
 
     useEffect(() => {
         getAll();
     }, [])
 
-    //TODO: MANCA "N" per dire quanti annunci accettare/rifiutare
+
     const acceptPendingAnnounce = (clickedAnnounceId) => () => {
 
         const update = async () => {
             if (localStorage.getItem('token') !== null) {
                 const HEADER = getLocalStorage('token');
-                await acceptPendingAnnouncesPutApi(clickedAnnounceId, 1, HEADER);
+
+                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
+
+                await acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
             }
             //const HEADER = decryptItem(props.tokenDuck.token);
             //console.log(acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER));
@@ -68,11 +80,14 @@ const PendingAnnounceList = (props) => {
 
         update();
 
-        let updated = pendingAnnounceList.filter((announce, index) => {
+        let updated = state.pendingAnnounceList.filter((announce, index) => {
             return announce.id !== clickedAnnounceId
         })
 
-        setPendingAnnounceList(updated)
+        setState({
+            ...state,
+            pendingAnnounceList: updated
+        })
 
     }
 
@@ -82,8 +97,8 @@ const PendingAnnounceList = (props) => {
         const decline = async () => {
             if (localStorage.getItem('token') !== null) {
                 const HEADER = getLocalStorage('token');
-                console.log(clickedAnnounceId)
-                await declinePendingAnnouncesPutApi(clickedAnnounceId, 1, HEADER);
+                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
+                await declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
             }
             //const HEADER = decryptItem(props.tokenDuck.token);
             //console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
@@ -92,11 +107,14 @@ const PendingAnnounceList = (props) => {
         decline();
 
 
-        let declined = pendingAnnounceList.filter((structure) => {
+        let declined = state.pendingAnnounceList.filter((structure) => {
             return structure.id !== clickedAnnounceId
         })
 
-        setPendingAnnounceList(declined)
+        setState({
+            ...state,
+            pendingAnnounceList: declined
+        })
 
     }
 
@@ -116,8 +134,6 @@ const PendingAnnounceList = (props) => {
         />
     }
 
-    //TODO: prendere numero annunci di quel tipo e aggiungere bottone per cancellare tot
-
 
     return (
         <>
@@ -125,7 +141,7 @@ const PendingAnnounceList = (props) => {
                 sectionTitle={t('bo.screens.admin.pendingAnnounceListTitle')}
                 {...paginationProps}
             >
-                {pendingAnnounceList.map(renderPendingAnnounces)}
+                {state.pendingAnnounceList.map(renderPendingAnnounces)}
             </CardList>
         </>
     )
