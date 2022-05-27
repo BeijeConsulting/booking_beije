@@ -6,11 +6,12 @@ const showAllStruttureGetApi = async (itemsPerPage = 10, page = 1) => {
     return await getApi(`showAllStrutture?itemsPerPage=${itemsPerPage}&page=${page}`);
 }
 
-const showAllStruttureGetApiPagination = async (query) => {
-    return await getApi(`showAllStrutture${query}`);
+/* AUTH:HOST */
+const showHostStruttureGetApi = async (page = 1, itemsPerPage = 3, header) => {
+    return await getApi(`strutture/mine?page=${page}&itemsPerPage=${itemsPerPage
+        }`, header);
 }
 
-/* AUTH:HOST */
 const insertStrutturaPostApi = async (obj, header) => {
     return await postApi(`insertStruttura`, obj, header);
 }
@@ -30,10 +31,10 @@ const updateStrutturaPutApi = async (id, obj, header) => {
 }
 
 export {
-    showAllStruttureGetApiPagination,
     insertStrutturaPostApi,
     disableStrutturaPutApi,
     updateStrutturaPutApi,
     strutturaDetailIdGetApi,
-    showAllStruttureGetApi
+    showAllStruttureGetApi,
+    showHostStruttureGetApi
 }
