@@ -43,7 +43,10 @@ class SearchForm extends Component {
       this.bookingData = {
          checkin: null,
          checkout: null,
-         posti_letto: 2
+         posti_letto: 2,
+         latitudine: null,
+         longitudine: null,
+         radius: 10,
       }
       this.dateFormat = 'YYYY-MM-DD';
    }
@@ -64,17 +67,17 @@ class SearchForm extends Component {
 
    handleSubmit = (e) => {
       e.preventDefault();
-      const coordinate = {
-         latitudine: null,
-         longitudine: null,
-         radius: 10,
-      }
+      // const coordinate = {
+      //    latitudine: null,
+      //    longitudine: null,
+      //    radius: 10,
+      // }
       this.bookingData.posti_letto = this.props.guestDuck.guest
       let [latitude, longitude] = this.props.positionDuck.coordinates;
-      coordinate.latitudine = latitude;
-      coordinate.longitudine = longitude;
+      this.bookingData.latitudine = latitude;
+      this.bookingData.longitudine = longitude;
 
-      getStructuresBySearch(this.objToString(this.bookingData), JSON.stringify(coordinate)).then(res =>
+      getStructuresBySearch(this.objToString(this.bookingData)).then(res =>
          this.props.router.navigate(routes.SEARCH, {
             state: res?.data
          })
@@ -82,10 +85,13 @@ class SearchForm extends Component {
       this.props.router.navigate(routes.SEARCH, {
          state: {
             data: this.bookingData,
-            coordinate: coordinate
          }
       })
-      this.props.callback()
+
+      if (this.props.router.location.pathname === '/search') {
+         this.props.callback();
+         this.props.data();
+      }
    }
 
    handleSelect = (e) => {

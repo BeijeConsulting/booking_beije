@@ -48,6 +48,7 @@ class SearchResult extends Component {
 
    componentDidMount() {
       this.getapi();
+      console.log(this.props.data);
    }
 
    componentDidUpdate(prevProps, prevState) {
@@ -111,6 +112,12 @@ class SearchResult extends Component {
       console.log(this.searchFilters);
    }
 
+   handleData = (data) => {
+      this.setState({
+         data: data
+      })
+   }
+
    render() {
       return (
 
@@ -140,6 +147,7 @@ class SearchResult extends Component {
                {
                   this.state.isSearch && <SearchForm
                      callback={this.handleButton("isSearch")}
+                     data={this.handleData}
                   />
                }
             </Modal>
