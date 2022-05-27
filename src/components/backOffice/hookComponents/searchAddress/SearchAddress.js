@@ -40,7 +40,6 @@ const SearchAddress = (props) => {
   };
 
   const onSelect = (data) => {
-    console.log(data);
     return props.callback(state.options.find((add) => add.value === data));
   };
 
@@ -62,6 +61,8 @@ const SearchAddress = (props) => {
       //   onChange={onChange}
       placeholder={props.placeholder}
       allowClear
+      defaultValue={props.defValue}
+      status={`${state.value === '' ? "error" : ""}`}
     />
   );
 };

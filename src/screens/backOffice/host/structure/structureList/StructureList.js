@@ -17,27 +17,35 @@ import {
 //TRANSLATION
 import { useTranslation } from "react-i18next";
 
+//REDUX
+import { connect } from 'react-redux'
+
+//FUNCTION UTILS
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
+// import { decryptItem } from '../../../../../utils/crypto/crypto';
+
 //COMPONENTS
-import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import { Button, Rate, Spin } from "antd";
+import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import Modal from "antd/lib/modal/Modal";
-
-import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../../routes/routes";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 
+import { useNavigate } from "react-router-dom";
+
+
+
 import {
     disableStrutturaPutApi,
-    showAllStruttureGetApi,
-    showAllStruttureGetApiPagination
+    showHostStruttureGetApi
 } from '../../../../../services/api/struttura/strutturaApi'
 
 
 //TODO: manca get da backend
 //TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
-const StructureList = () => {
+const StructureList = (props) => {
 
 
     const { t } = useTranslation();
@@ -46,20 +54,26 @@ const StructureList = () => {
     const [state, setState] = useState({
         loading: true,
         structureListData: [],
-        lastPage: null,
+        elementsTotal: null,
         isModalVisible: false
     })
 
     const fetchingStructureList = async () => {
-        let allStructure = await showAllStruttureGetApi()
-        setState({
-            ...state,
-            loading: false,
-            structureListData: allStructure?.data.list,
-            lastPage: allStructure?.data.lastPage,
-            curentPage: allStructure?.data.page
-        })
+        if (localStorage.getItem('token') !== null) {
+            // const HEADER = decryptItem(props.tokenDuck.token);
+            const HEADER = getLocalStorage("token")
+            let allStructure = await showHostStruttureGetApi(1, 3, HEADER)
+
+            console.log(allStructure)
+            setState({
+                ...state,
+                loading: false,
+                structureListData: allStructure?.data.list,
+                elementsTotal: allStructure?.data.elementsTotal
+            })
+        }
     }
+
 
     //DISABLE STRUCTURE
     const handleOk = () => {
@@ -70,10 +84,10 @@ const StructureList = () => {
     }
 
     const disableStructure = (id) => async () => {
-        let disableStructureApi = await disableStrutturaPutApi(id, { esito: false }, "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM1Njk3MTksImV4cCI6MTY1MzU3MzMxOX0.Pp0rqFjN61qZ-S9yngBTWG1yCXYZGkbTpMREU93UYeI")
+        // const HEADER = decryptItem(props.tokenDuck.token);
+        const HEADER = getLocalStorage("token")
+        let disableStructureApi = await disableStrutturaPutApi(id, { esito: true }, HEADER)
 
-        console.log(id)
-        console.log(disableStructureApi)
         setState({
             ...state,
             isModalVisible: true
@@ -100,7 +114,7 @@ const StructureList = () => {
         return (
             <HorizontalCard
                 key={`${key}-${randomKey()}`}
-                // callback={goToStructureDetails(structure.id)}
+                callback={goToStructureDetails(structure.id)}
                 imageSrc={structure.url_image}
                 altText={`${key}_${structure}`}
                 title={structure.nome_struttura}
@@ -138,19 +152,24 @@ const StructureList = () => {
 
     //CHANGE PAGE(PAGINATION)
     const switchToPage = async (clickedPage) => {
-        let dataPaginationStructure = await showAllStruttureGetApiPagination(`?page=${clickedPage}&_itemsPerPage=2`)
+        console.log('Curent page', clickedPage);
+        // const HEADER = decryptItem(props.tokenDuck.token);
+        const HEADER = getLocalStorage("token")
+        let dataPaginationStructure = await showHostStruttureGetApi(clickedPage, 3, HEADER)
 
         console.log(dataPaginationStructure)
         setState({
+            ...state,
             structureListData: dataPaginationStructure?.data.list,
-            lastPage: dataPaginationStructure?.data.lastPage
+            elementsTotal: dataPaginationStructure?.data.elementsTotal
         })
     }
+    console.log(state.elementsTotal)
 
     //PAGINATION PROPS
     const paginationProps = {
-        itemsCount: 50, //get from backend
-        pageSize: state.lastPage, //get from backend
+        itemsCount: state.elementsTotal, //get from backend
+        pageSize: 3, //get from backend
         paginationCallback: switchToPage
     }
 
@@ -181,5 +200,10 @@ const StructureList = () => {
         </CardList>
     );
 }
+const mapStateToProps = (state) => ({
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck,
+});
 
-export default StructureList;
+
+export default connect(mapStateToProps)(StructureList);

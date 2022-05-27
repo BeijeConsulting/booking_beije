@@ -1,0 +1,35 @@
+@import '../../../assets/variables/globalVariables.scss';
+
+.mra-page-container {
+    background-color: $black_primary;
+    padding: 1rem 1rem ;
+    .title {
+        color: $white_primary;
+        width: 100%;
+    }
+
+    .structure-card-container {
+        background-color: $secondary_lighter;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 10rem;
+
+        .image {
+            width: 8rem;
+            height: 8rem;
+            margin-right: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .linkN {
+            color: black;
+        }
+    }
+
+    .back-button{
+        display: flex;
+    }
+
+    .structure-card-info {}
+}
