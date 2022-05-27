@@ -2,15 +2,14 @@ import React from 'react'
 import './ReviewCard.scss';
 import PropTypes from 'prop-types';
 import { t } from 'i18next';
-
-
+import userImg from '../../../../assets/images/LoggedUser.png'
 
 function ReviewCard(props) {
 
     return (
         <div className='review_card_container0'>
             <div className='user_info'>
-                <img src=""></img>
+                <img src={userImg}alt="img"></img>
                 <h3>{props.username}</h3>
             </div>
             <span>{`${props.rating}/5`}</span>
