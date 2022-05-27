@@ -2,8 +2,8 @@
 
 import { getApi, deleteApi, putApi, postApi } from '../../genericServices'
 
-const reviewsGetApi = async () => {
-    return await getApi(`reviews`);
+const servicesGetApi = async () => {
+    return await getApi(`services`);
 }
 
 /* AUTH:ADMIN */
@@ -22,5 +22,5 @@ const serviceModifyIdPutApi = async (id, obj, header) => {
 }
 
 export {
-    reviewsGetApi, serviceAddPostApi, serviceDeleteApi, serviceModifyIdPutApi
+    servicesGetApi, serviceAddPostApi, serviceDeleteApi, serviceModifyIdPutApi
 }
