@@ -14,6 +14,11 @@ import '../../../../../assets/variables/_common.scss';
 import { getStructureImage } from '../../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
 import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
 import withRouting from '../../../../../withRouting/withRouting';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as heart } from '@fortawesome/free-solid-svg-icons';
+import { addFavourite, getFavourites } from '../../../../../services/api/lista/listaPreferiti/listaPreferitiApi';
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
+import { notification } from 'antd';
 
 class PropertyCard extends Component {
     constructor(props) {
@@ -22,17 +27,21 @@ class PropertyCard extends Component {
         this.state = {
             image: null,
             price: [],
+            clickedHeart: false
         }
         this.listings = []
     }
 
     componentDidMount() {
         this.handleApi()
+        // console.log(getLocalStorage("token"));
     }
 
     handleApi = async () => {
         const LISTINGS = await annuncioOnStrutturaGetApi(this.props?.data?.struttura?.id);
-        const IMAGE = await getStructureImage(this.props?.data?.struttura?.id)
+        const IMAGE = await getStructureImage(this.props?.data?.struttura?.id);
+        const FAVOURITES = await getFavourites(getLocalStorage("token"));
+        console.log(FAVOURITES.data);
         this.setState({
             image: IMAGE.data?.immagine?.urlImage
         })
@@ -40,6 +49,50 @@ class PropertyCard extends Component {
         this.findLowestPrice()
 
     }
+
+    handleResponse = (name, id) => (res) => {
+        this.showToast(id, name);
+        this.setState({
+            clickedHeart: true
+        })
+    }
+
+    handleError = (error) => {
+        const key = `${error}-toast`;
+
+        notification.open({
+            description: this.props.t('toasts.favouritesError', { error: error.message }),
+            onClick: () => {
+                notification.close(key)
+            },
+            duration: 2,
+            key,
+            placement: 'bottom',
+            className: 'custom-toast'
+        }); 
+    }
+
+    handleAdd = (id, name) => () => {
+        addFavourite(id, getLocalStorage("token"))
+        .then(this.handleResponse(name, id))
+        .catch()
+       
+    }
+
+    showToast = (propertyId, propertyName) => {
+        const key = `${propertyId}-toast`;
+        notification.open({
+            description: this.props.t('toasts.favouritesAdd', { name: propertyName }),
+            onClick: () => {
+                notification.close(key)
+            },
+            duration: 2,
+            key,
+            placement: 'bottom',
+            className: 'custom-toast'
+        });
+    }
+
     findLowestPrice() {
 
         this.listings.forEach(item => {
@@ -54,10 +107,6 @@ class PropertyCard extends Component {
         })
     }
 
-    handleNavigate = (id) => {
-        this.props.router.navigate("/detailsproperty/" + id)
-    }
-
     render() {
         return (
             <>
@@ -65,13 +114,19 @@ class PropertyCard extends Component {
                     <img src={this.state?.image} />
                     {/* <img className='ofC' src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"} /> */}
                     <div>
-                        <h4>{this.props?.data?.struttura.nome}</h4>
+                        <div className='titleContainer'>
+                            <span>{this.props?.data?.struttura?.nome}</span>
+                            <FontAwesomeIcon icon={this.state?.clickedHeart ? heart : faHeart}
+                                onClick={this.handleAdd(this.props?.data?.indirizzo?.struttura_id, this.props?.data?.struttura?.nome)}
+                            />
+                        </div>
                         <small>{this.props?.data?.struttura?.tipologia}</small>
                         <div className='mediaRateCard'>
                             <FontAwesomeIcon icon={faStar} />
                             <small>{this.props?.data?.media_recensioni}</small>
                         </div>
                     </div>
+
 
                     <span className='absolute r0 b0'>{this.props?.t('common.currency', { price: this.state?.price })}</span>
                 </section>

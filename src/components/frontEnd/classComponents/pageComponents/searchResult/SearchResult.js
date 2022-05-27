@@ -212,7 +212,7 @@ class SearchResult extends Component {
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-            callback={this.handleDetails(item?.id)}
+            // callback={this.handleDetails(item?.indirizzo?.struttura_id)}
          >
             <PropertyCard
                data={item}
