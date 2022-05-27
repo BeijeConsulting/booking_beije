@@ -45,6 +45,7 @@
       "rooms": "{{count}} stanza",
       "rooms_other": "{{count}} stanze",
       "save": "Salva",
+      "searchPlaceholder": "Cerca...",
       "select": "Seleziona",
       "send": "Invia",
       "submit": "Invia",
@@ -61,7 +62,7 @@
       "bookNow": "Prenota adesso!"
    },
    "toasts": {
-      "favouritesDeleted": "non è più tra i tuoi preferiti",
+      "favouritesDeleted": "La struttura {{name}} è stata eliminata dai tuoi preferiti",
       "formErrorAllFields": "Compila tutti i campi",
       "formErrorEmail": "Inserisci una mail valida",
       "formErrorPassword": "Inserisci una password di almeno 8 caratteri, con almeno un simbolo",
@@ -185,6 +186,9 @@
          }
       },
       "screens": {
+         "favourites": {
+            "noFavourites": "Nessun preferito da mostrare"
+         },
          "guestAccount": {
             "becomeAHost": "Diventa un host"
          },
