@@ -108,6 +108,15 @@
 .m1 {
     margin: 1rem;
 }
+.mAuto{
+    margin: auto;
+}
+.mxAuto{
+    margin: 0 auto;
+}
+.myAuto{
+    margin:auto 0;
+}
 .mx1 {
     margin: 0 1rem;
 }
@@ -198,7 +207,4 @@
 
 .ofC{
     object-fit: cover;
-}
-.snow{
-    background-color: white;
 }
