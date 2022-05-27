@@ -99,10 +99,10 @@ const PendingAnnounceList = (props) => {
             text={announce.descrizione}
 
             footerContent={
-                <div className="right">
+                <>
                     <Button className="pending_button" type="primary" onClick={acceptPendingAnnounce(announce.id)}>{t('common.accept')}</Button>
                     <Button className="pending_button" type="primary" onClick={declinePendingAnnounce(announce.id)}>{t('common.decline')}</Button>
-                </div>
+                </>
             }
         />
     }

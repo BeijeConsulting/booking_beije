@@ -5,8 +5,6 @@ $upperright_width: 100px;
 $card_height: 150px;
 
 .h_card_container {
-    height: 100%;
-    width: 100%;
     background-color: $secondary_light;
     padding: 1rem;
     display: flex;
@@ -24,11 +22,13 @@ $card_height: 150px;
     }
 
     .card_title {
+        word-break: break-word;
         font-size: $fs-2;
         margin-bottom: 0rem;
     }
 
     .card_body {
+        justify-content: space-between;
         margin-top: .25rem;
         width: 100%;
 
@@ -37,8 +37,11 @@ $card_height: 150px;
     .card_main {
         display: flex;
         justify-content: space-between;
-        //height: calc($card_height - 2rem); //same as card_img
 
+        .right_col {
+            flex-shrink: 0;
+            padding-left: 2rem;
+        }
     }
 
     .subtitle_and_text {
@@ -53,13 +56,19 @@ $card_height: 150px;
 
 
     .card_footer_right_and_left {
-        z-index: 99;
+        margin-top: 1rem;
         align-items: end;
         display: flex;
         justify-content: space-between;
+
+        .right_col {
+            flex-shrink: 0
+        }
+
     }
 
     .card_footer_right {
+        margin-top: 1rem;
         display: flex;
         justify-content: flex-end;
     }
@@ -78,12 +87,11 @@ $card_height: 150px;
             margin: 0;
             max-height: 300px;
         }
+    }
+}
 
-        .card_footer_right_and_left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+@media screen and (max-width: 440px) {
+    .card_footer_right_and_left {
+        flex-wrap: wrap;
     }
 }
