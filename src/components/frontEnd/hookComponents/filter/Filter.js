@@ -89,7 +89,7 @@ function Filter(props) {
 
 
    return (
-      <form>
+      <form className={props.classNameCustom}>
          <section>
             <h3>{t("common.price")}</h3>
             <div className='filter-container'>

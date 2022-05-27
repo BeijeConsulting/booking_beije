@@ -43,6 +43,7 @@ class SearchResult extends Component {
          data: this.props.data,
          page: 1
       }
+      this.searchFilters = {};
    }
 
    componentDidMount() {
@@ -66,25 +67,14 @@ class SearchResult extends Component {
       })
    }
 
-   // handleButton = (params) => () => {
-   //    this.setState({
-   //       [params]: !this.state[params]
-   //    })
-   // }
-
-
    handleButton = (params) => () => {
       let newState = Object.assign({}, this.state);
 
-      if (this.state.isFilter) {
-         newState.isFilter = false
-      }
-      if (this.state.isMap) {
-         newState.isMap = false
-      }
-      if (this.state.isSearch) {
-         newState.isSearch = false
-      }
+      // case zero
+      if (this.state.isFilter) newState.isFilter = false;
+      if (this.state.isMap) newState.isMap = false;
+      if (this.state.isSearch) newState.isSearch = false;
+
 
       switch (params) {
          case "isFilter":
@@ -99,6 +89,7 @@ class SearchResult extends Component {
          default:
             break;
       }
+
       this.setState({
          ...newState,
          isOpen: !this.state.isOpen
@@ -115,17 +106,9 @@ class SearchResult extends Component {
       })
    }
 
-   mapping = (item, key) => {
-      return (
-         <Card
-            key={`${key}- ${item?.indirizzo?.citta}`}
-            callback={this.handleDetails(item?.id)}
-         >
-            <PropertyCard
-               data={item}
-            />
-         </Card>
-      )
+   getFilters = (data) => {
+      this.searchFilters = data;
+      console.log(this.searchFilters);
    }
 
    render() {
@@ -143,18 +126,21 @@ class SearchResult extends Component {
                isOpen={this.state.isOpen}
             >
                {
-               this.state.isFilter && <Filter />
+                  this.state.isFilter && <Filter
+                     classNameCustom={'filters-modal'}
+                     closeModal={this.handleButton('isFilter')}
+                     callback={this.getFilters} />
                }
                {
-               this.state.isMap && <Map
-                  propertyList={this.state.property}
-                  initialPos={this.props.data}
-               />
+                  this.state.isMap && <Map
+                     propertyList={this.state.property}
+                     initialPos={this.props.data}
+                  />
                }
                {
-               this.state.isSearch && <SearchForm
-                  callback={this.handleButton("isSearch")}
-               />
+                  this.state.isSearch && <SearchForm
+                     callback={this.handleButton("isSearch")}
+                  />
                }
             </Modal>
 
@@ -220,6 +206,19 @@ class SearchResult extends Component {
                />
             }
          </div>
+      )
+   }
+
+   mapping = (item, key) => {
+      return (
+         <Card
+            key={`${key}- ${item?.indirizzo?.citta}`}
+            callback={this.handleDetails(item?.id)}
+         >
+            <PropertyCard
+               data={item}
+            />
+         </Card>
       )
    }
 }
