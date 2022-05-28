@@ -45,32 +45,29 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
-import { logout } from "./utils/user/user";
 import { setProperty } from "./redux/ducks/propertyDuck";
 import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
+import useLogout from "./hooks/useLogout";
 
 
 
 function Routing(props) {
 
-
-    //setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0MDA3LCJleHAiOjE2NTM2Njc2MDd9.S2LFboBSHE8titm89jQ39FWCnwxj8RWZC8R3i4D_rwQ")
-    //setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
-
+    const { logoutExpire } = useLogout();
 
     useEffect(() => {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
 
                 try {
-                    logout();
+                    logoutExpire();
                     let token = getLocalStorage('token');
                     props.dispatch(setToken(token));
                     const PROFILE = await myProfilesGetApi(token);
@@ -82,16 +79,10 @@ function Routing(props) {
                 }
             }
         })()
-
-
     }, []);
 
 
     //login, registration, account, messages, favourites, booking
-
-    //TODO: to be deleted ( - setLocalStorage import too)
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0OTAyLCJleHAiOjE2NTM2Njg1MDJ9.PQpyiNZgaLZrwsVcH1aQzGKSS9Q_GLZwPkCmhyv8ZMY")
-    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
 
 
     return (

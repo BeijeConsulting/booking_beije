@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet";
 
 //function
 import { CurrentDate } from "../../../utils/date/date";
-import { wrapperMap } from "../../../utils/generalIteration/generalIteration";
 import { paginationArrowsRender } from "../../../utils/pagination/pagination";
 
 //ui
@@ -61,7 +60,7 @@ const Bookings = (props) => {
                setState({
                   ...state,
                   PeriodListStructure: arrayBkp.filter((item) => {
-                     return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
+                     return item.statoAccettazione === "ACCETTATO" && item.data_fine < dateCurrent;
                   })
                })
             })
@@ -89,22 +88,22 @@ const Bookings = (props) => {
       switch (e.target.innerText) {
          case t("fe.screens.bookings.history"):
             arrayTest = arrayBkp.filter((item) => {
-               return item.statoAccettazione == "ACCETTATO" && item.data_fine < dateCurrent;
+               return item.statoAccettazione === "ACCETTATO" && item.data_fine < dateCurrent;
             })
             break;
          case t("fe.screens.bookings.pending"):
             arrayTest = arrayBkp.filter((item) => {
-               return item.statoAccettazione == "IN ATTESA";
+               return item.statoAccettazione === "IN ATTESA";
             })
             break;
          case t("fe.screens.bookings.planned"):
             arrayTest = arrayBkp.filter((item) => {
-               return item.statoAccettazione == "ACCETTATO" && item.data_inizio > dateCurrent;
+               return item.statoAccettazione === "ACCETTATO" && item.data_inizio > dateCurrent;
             })
             break;
          case t("fe.screens.bookings.refused"):
             arrayTest = arrayBkp.filter((item) => {
-               return item.statoAccettazione == "RIFIUTATO";
+               return item.statoAccettazione === "RIFIUTATO";
             })
             break;
          default:
