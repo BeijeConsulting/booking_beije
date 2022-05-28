@@ -20,18 +20,19 @@ import { messageToSenderIdGetApi, messageInsertPostApi } from '../../../services
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 
 
-import { Input } from 'antd';
+import { Input, Spin } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-let inputMessage;
 const SingleConversation = (props) => {
   const { t } = useTranslation()
   const params = useParams();
   const myRef = useRef(null)
   const [state, setState] = useState({
     msgArray: [],
-    windowWidth: window.innerWidth
+    windowWidth: window.innerWidth,
+    inputMessage: "",
+    isLoading: true
   })
 
   useEffect(() => {
@@ -45,7 +46,8 @@ const SingleConversation = (props) => {
         .then(res => {
           setState({
             ...state,
-            msgArray: res?.data
+            msgArray: res?.data,
+            isLoading: false
           })
         })
     }
@@ -65,7 +67,10 @@ const SingleConversation = (props) => {
 
   //function to set input value
   const handlerInput = (e) => {
-    inputMessage = e.target.value
+    setState({
+      ...state,
+      inputMessage: e.target.value
+    })
   }
 
   // function to submit message on enter press 
@@ -75,8 +80,8 @@ const SingleConversation = (props) => {
       let objcopy = Object.assign({}, state)
       let obj = {
         annuncioId: params.id,
-        contenuto: inputMessage,
-        receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
+        contenuto: state.inputMessage,
+        receiverId: state.msgArray[0]?.insertion?.struttura?.host?.user?.id
       }
 
 
@@ -89,7 +94,8 @@ const SingleConversation = (props) => {
               .then(res => {
                 setState({
                   ...state,
-                  msgArray: res?.data
+                  msgArray: res?.data,
+                  inputMessage: ""
                 })
               })
           }).catch((e) => {
@@ -107,8 +113,8 @@ const SingleConversation = (props) => {
     let objcopy = Object.assign({}, state)
     let obj = {
       annuncioId: params.id,
-      contenuto: inputMessage,
-      receiverId: state?.msgArray[0]?.insertion?.struttura?.host?.user?.id
+      contenuto: state.inputMessage,
+      receiverId: state.msgArray[0]?.insertion?.struttura?.host?.user?.id
     }
 
 
@@ -121,7 +127,8 @@ const SingleConversation = (props) => {
             .then(res => {
               setState({
                 ...state,
-                msgArray: res?.data
+                msgArray: res?.data,
+                inputMessage: ""
               })
             })
         }).catch((e) => {
@@ -132,17 +139,34 @@ const SingleConversation = (props) => {
 
   // render chat 
   function renderConversation(mess, key) {
-    return (
+    if(!props.userDuck?.user?.utente?.id){
+      return null;
+    }
+    if (mess.sender.id !== props.userDuck?.user?.utente?.id) {
+      return (
 
-      <div key={key} className={(mess.sender.id !== props.userDuck?.user?.utente?.id) ? "conversation conversation-host" : "conversation conversation-guest"}>
-        <div>{
-          (mess.sender.id !== props.userDuck?.user?.utente?.id) ? mess.insertion.titolo : t('common.you')
-        }
+        <div key={key} className={"conversation conversation-host"}>
+          <div>{
+            mess.insertion.titolo
+          }
+          </div>
+          <p>{mess.text}</p>
+          <div className="dateTimeMessage fsXS fsI">{mess.date_and_time}</div>
         </div>
-        <p>{mess.text}</p>
-        <div className="dateTimeMessage fsXS fsI">{mess.date_and_time}</div>
-      </div>
-    )
+      )
+    }else {
+
+      return (
+  
+        <div key={key} className={"conversation conversation-guest"}>
+          <div>
+            {t('common.you')}
+          </div>
+          <p>{mess.text}</p>
+          <div className="dateTimeMessage fsXS fsI">{mess.date_and_time}</div>
+        </div>
+      )
+    }
   }
 
   return (
@@ -161,7 +185,9 @@ const SingleConversation = (props) => {
             </>
           }
 
-
+          {
+            state.isLoading && <Spin />
+          }
           {
             state.msgArray.map(renderConversation)
           }
@@ -170,7 +196,7 @@ const SingleConversation = (props) => {
 
 
         <div className="space-input fixed b0 l0 w100">
-          <Input onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input p1 w100" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
+          <Input value={state.inputMessage} onKeyPress={submitMessageOnEnter} onChange={handlerInput} className="send_message_input p1 w100" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon onClick={submitMessageOnSendPress} className="icon_input_message" icon={faPaperPlane} />} />
         </div>
       </div>
     </>
@@ -183,5 +209,5 @@ const mapStateToProps = (state) => ({
   userDuck: state.userDuck
 })
 
-export default connect(mapStateToProps)(SingleConversation);
+export default connect(mapStateToProps)(React.memo(SingleConversation));
 
