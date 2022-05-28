@@ -37,7 +37,7 @@ import Modal from '../../../components/common/modal/Modal';
 import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
-// import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 
@@ -56,8 +56,11 @@ const DetailsProp = () => {
     checkOutPrice: 0,
     reviewsList: null,
     isLoading: true,
-    windowWidth: window.innerWidth
+    windowWidth: window.innerWidth,
+    storageRooms: getLocalStorageCheckout('checkout') || null
   })
+
+
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -100,9 +103,11 @@ const DetailsProp = () => {
   const addToCheckOut = (temp_id, isSelected, obj) => {
     isSelected ? checkOutArray[temp_id] = {
       ...obj,
-      price: obj.price * obj.count
+      price: obj.price * obj.count,
+      id: temp_id
     } : checkOutArray[temp_id] = undefined;
     let totalPrice = 0
+
     for (let index = 0; index < checkOutArray.length; index++) {
       if (checkOutArray[index] !== undefined) totalPrice += checkOutArray[index].price
     }
@@ -114,9 +119,15 @@ const DetailsProp = () => {
     arrayToCheckout = checkOutArray.filter((element) => {
       return element !== undefined;
     })
+
   }
 
   const goToCheckout = () => {
+    setLocalStorage('checkout', {
+      property: state.property,
+      checkOut: arrayToCheckout,
+      totalPrice: state.checkOutPrice
+    })
     navigate(routes.CHECKOUT, {
       state: {
         property: state.property,
@@ -126,8 +137,10 @@ const DetailsProp = () => {
   }
 
   const generateRooms = (item, key) => {
-
+    let isStored = null
+    isStored = state.storageRooms?.checkOut.find(room => room.id === key);
     return <Rooms
+      stored={isStored}
       key={key}
       numberOfPeople={4} //da modificare
       title={item?.titolo}

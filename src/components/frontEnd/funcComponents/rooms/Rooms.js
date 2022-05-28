@@ -8,19 +8,20 @@ import UiButton from '../ui/buttons/uiButtons/UiButton';
 import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
 import UiSelect from '../ui/uiSelect/UiSelect';
 
-let selectValue = 1
 function Rooms(props) {
     const ref = useRef();
     const { t } = useTranslation();
     const [state, setState] = useState({
-        selected: false
+        selected: props.stored !== undefined ? true : false,
+        selectValue: 1
     })
 
     useEffect(() => {
         props.callback(props.temp_id, state.selected, {
             price: props.price,
             title: props.title,
-            count: selectValue
+            id: props.temp_id,
+            count: props.stored !== undefined ? props.stored.count : state.selectValue
         })
     }, [state.selected])
 
@@ -50,12 +51,13 @@ function Rooms(props) {
     }
 
     const handleNumberOfRooms = (e) => {
-        selectValue = e;
+        state.selectValue = e;
     }
 
 
     const selectedButton = () => {
         setState({
+            ...state,
             selected: !state.selected
         })
     }
@@ -93,6 +95,7 @@ function Rooms(props) {
                     selected={state.selected}
                     data={generateMaxRooms()}
                     callback={handleNumberOfRooms}
+                    storedNOfRooms={props.stored?.count}
                 />
 
             </div>

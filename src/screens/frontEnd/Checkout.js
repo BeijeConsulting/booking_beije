@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./Checkout.scss";
 //RRD
 import { useNavigate, useLocation } from 'react-router-dom'
 
@@ -10,16 +10,16 @@ import { Helmet } from "react-helmet";
 //COMPONENTS
 import LoginForm from '../../components/frontEnd/hookComponents/loginForm/LoginForm'
 import GoBackButton from "../../components/backOffice/hookComponents/goBackButton/GoBackButton";
+import { getLocalStorage, getLocalStorageCheckout, removeLocalStorage } from "../../utils/localStorage/localStorage";
+import PropertyCard from "../../components/frontEnd/classComponents/ui/propertyCard/PropertyCard";
 
 const Checkout = () => {
 
   let tot = 0
 
   const { t } = useTranslation();
-
-  const navigate = useNavigate()
-  const location = useLocation()
-
+  const checkoutList = getLocalStorageCheckout('checkout')
+  console.log('chk', checkoutList)
   const [state, setState] = useState({ windowWidth: window.innerWidth })
 
   useEffect(() => {
@@ -27,9 +27,8 @@ const Checkout = () => {
     return () => { window.removeEventListener('resize', handleResize) }
   })
 
-
-  let checkoutPropertyInfo = location.state.property
-  let checkoutArrayList = location.state.checkOut
+  let checkoutPropertyInfo = checkoutList?.property
+  let checkoutArrayList = checkoutList?.checkOut
 
 
   function handleResize() {
@@ -39,15 +38,19 @@ const Checkout = () => {
     })
   }
 
-  const goToPayment = () => { }
+  const goToPayment = () => {
+
+  }
+  const goToLogin = () => {
+    removeLocalStorage('checkout')
+  }
 
   function renderCheckoutList(item, key) {
     tot += item.price
     return (
       <div key={key} className="detail-info">
-        <p>{item.title}</p>
-        <p>{t("fe.screens.checkout.price")}:{item.price}&euro;</p>
-        <p>{t("fe.screens.checkout.qty")}: {item.count}</p>
+        <p>{`${item.title} n:${item.count}`}</p>
+        <p>{item.price}&euro;</p>
       </div>
     )
   }
@@ -57,41 +60,49 @@ const Checkout = () => {
       <Helmet>
         <title>Checkout</title>
       </Helmet>
+
       <div className="checkout-container">
         {
           state.windowWidth < 991 &&
           <div className="back-button"><GoBackButton /></div>
         }
 
-        <h1>Checkout</h1>
+        <h1 className="title_checkout_container">Checkout</h1>
 
         <div className="structure-info-container">
-          <div className="structure-photo-container" style={{ width: "100px", height: "100px", backgroundColor: "aqua" }}>
+          <PropertyCard
+            data={{
+              struttura: {
+                nome: checkoutPropertyInfo?.nome_struttura,
+                tipologia: checkoutPropertyInfo?.descrizione
+              },
+              media_recensioni: checkoutPropertyInfo?.media_recensioni,
+            }}
+          />
+          {/*  <div className="structure-photo-container" style={{ width: "100px", height: "100px", backgroundColor: "aqua" }}>
             IMG
           </div>
           <div className="structure-descriptions-container">
-            <h3>{checkoutPropertyInfo.nome_struttura}</h3>
-            <p>{checkoutPropertyInfo.descrizione}</p>
-          </div>
+            <h3>{checkoutPropertyInfo?.nome_struttura}</h3>
+            <p>{checkoutPropertyInfo?.descrizione}</p>
+          </div> */}
         </div>
 
         <div className="details-info-container">
           <h3>{t("fe.screens.propertyDetails.details")}</h3>
           {
-            checkoutArrayList.map(renderCheckoutList)
+            checkoutArrayList?.map(renderCheckoutList)
           }
-          <p>{t("fe.screens.checkout.total")}: {tot}</p>
+          <div className="line_out"><div className="line"></div></div>
+
+          <div className="detail-info">
+            <p>{t("fe.screens.checkout.total")}:</p>
+            <p>{tot}</p>
+          </div>
         </div>
-
-        {
-          localStorage.getItem('token') !== null ?
-            <button onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button>
-            :
-            <div className="checkout-login-form">
-              <LoginForm isCheckout={true} checkoutProperty={checkoutPropertyInfo} checkoutList={checkoutArrayList} />
-            </div>
-        }
-
+        <div className="button_container">
+          {getLocalStorage('token') !== null ? <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button> : <button className="button_on" onClick={goToLogin}>{t("common.loginLabel")}</button>}
+        </div>
       </div>
     </>
 

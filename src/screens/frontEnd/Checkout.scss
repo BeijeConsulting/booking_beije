@@ -1,0 +1,57 @@
+@import "../../assets/variables/globalVariables.scss";
+
+.checkout-container{
+     background-color: $black_primary; 
+    font-family: $raleway;
+    padding: .7rem;
+    .title_checkout_container{
+        color: $white_primary;
+    }
+    .structure-info-container{
+        h4{
+            color: $white_primary;
+        }
+        small{
+            color: $lightgray
+        }
+    }
+        .details-info-container{
+            margin:  .5rem 0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: .7rem;
+            background-color: $secondary_lighter;
+            h3{
+                color: $black_primary;
+                margin: 0 0 2rem 0;
+                font-size: 1rem;
+            }
+            .detail-info{
+                display: flex;
+                justify-content: space-between;
+            }
+            .line_out{
+                padding: 0 1rem;
+                .line {
+                        height: 1px;
+                        width: 100%;
+                        background-color: $black_primary
+                    }
+            }
+            
+        }
+        .button_container{
+            display: flex;
+            justify-content: center;
+           .button_on{
+               color: white;
+               background-color: $primary;
+               border: 0;
+                padding: 0.5rem;
+                font-size: 1rem;
+                border-radius: 10px;
+           }
+        }
+        
+}

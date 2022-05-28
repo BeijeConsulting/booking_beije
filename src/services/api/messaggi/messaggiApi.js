@@ -12,8 +12,11 @@ const messageMultipleGetApi = async () => {
 
 
 /* AUTH:USER (MESSAGES PAGE)*/
-const chatMessagesUserGetApi = async (header) =>{
-    return await getApi(`messages/chat`, header);
+// const chatMessagesUserGetApi = async (header) =>{
+//     return await getApi(`messages/chat`, header);
+// }
+const chatMessagesUserGetApi = async(header,itemsPerPage = 100, page = 1) => {
+    return await getApi(`messages/chat?itemsPerPage=${itemsPerPage}&page=${page}`,header);
 }
 
 /* AUTH:USER (SINGLECONVERSATIONPAGE)*/
