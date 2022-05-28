@@ -120,7 +120,7 @@ function Navbar(props) {
     }
     return (
         <>
-
+            
             {
                 //MOBILE
                 props.stateLayout < 480 ?
