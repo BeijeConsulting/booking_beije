@@ -175,7 +175,7 @@ const DetailsProp = () => {
             isOpen={state.isContactHost}
             classNameCustom={'modal contact-host-modal'}
           >
-            <ContactHost />
+            {/* <ContactHost annuncioId={id} host={id} /> */}
           </Modal>
 
           <Modal

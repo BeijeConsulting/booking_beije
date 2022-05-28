@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // modules
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import UiSelect from "../../../components/frontEnd/funcComponents/ui/uiSelect/UiSelect"
 import { annuncioDetailGetApi } from "../../../services/api/annuncio/annuncioApi";
@@ -11,14 +12,15 @@ import { annuncioDetailGetApi } from "../../../services/api/annuncio/annuncioApi
 const DetailsPropRoom = (props) => {
 
   const { t } = useTranslation();
+  const { id } = useParams();
 
   const [state, setState] = useState({
     propertyRooms: null
   })
 
   useEffect(() => {
-    annuncioDetailGetApi(14).then(res => {
-      // console.log('1', res.data);
+    console.log(id);
+    annuncioDetailGetApi(id).then(res => {
       setState({
         property: res.data
       })
