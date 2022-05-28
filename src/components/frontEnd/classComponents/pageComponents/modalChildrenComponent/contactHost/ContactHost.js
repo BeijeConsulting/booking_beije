@@ -43,9 +43,9 @@ class ContactHost extends Component {
       }
       this.contactForm = {
          // id recuperati o per props o con event-driven
-         annuncioId: 15,  
+         annuncioId: props.annuncioId,  
          contenuto: "",
-         receiverId: 22
+         receiverId: props.host
       }
    }
 
