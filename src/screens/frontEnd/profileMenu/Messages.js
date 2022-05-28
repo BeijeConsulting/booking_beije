@@ -24,20 +24,18 @@ import { connect } from 'react-redux';
 // components
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-import { Pagination } from "antd";
+import { Pagination, Spin } from "antd";
 import { myProfilesGetApi } from "../../../services/api/user/userApi";
-
-
 class Messages extends Component {
    constructor(props) {
       super(props)
       this.state = {
          windowWidth: window.innerWidth,
          arrayMessagesFiltered: [],
-         page: 1
+         isLoading: true,
+         isEmpty: false
       }
       this.arrayMessages = []
-      this.resize = null;
    }
    componentDidMount() {
       window.addEventListener('resize', this.handleResize);
@@ -47,14 +45,22 @@ class Messages extends Component {
                if (res?.data !== "") {
                   this.arrayMessages = res?.data?.list;
                   myProfilesGetApi(getLocalStorage("token"))
-                  .then((user)=>{
-                     let id = user?.data?.utente?.id
-                     const arrFilter = this.arrayMessages.filter((chat) => {
-                        return chat?.lastMessaggio?.insertion?.struttura?.host?.user?.id !== id
+                     .then((user) => {
+                        let id = user?.data?.utente?.id
+                        const arrFilter = this.arrayMessages.filter((chat) => {
+                           return chat?.lastMessaggio?.insertion?.struttura?.host?.user?.id !== id
+                        })
+                        this.setState({
+                           arrayMessagesFiltered: arrFilter,
+                           isLoading: false,
+                           isEmpty: false
+                        })
                      })
-                     this.setState({
-                        arrayMessagesFiltered : arrFilter
-                     })
+               }
+               else {
+                  this.setState({
+                     isLoading: false,
+                     isEmpty: true
                   })
                }
             }).catch((e) => {
@@ -82,10 +88,10 @@ class Messages extends Component {
    renderMessages = (mess, key) => {
       return (
          <MessageCard key={key}
-            title={mess.lastMessaggio.insertion.title}
-            thumbnail={mess?.lastMessaggio?.insertion?.struttura?.url_image ? mess?.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg' }
-            textMessage={mess.lastMessaggio.text}
-            date={mess.lastMessaggio.date_and_time}
+            title={mess.lastMessaggio?.insertion?.title}
+            thumbnail={mess.lastMessaggio?.insertion?.struttura?.url_image ? mess.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg'}
+            textMessage={mess.lastMessaggio?.text}
+            date={mess.lastMessaggio?.date_and_time}
             callback={this.goToSingleConversation(mess.annuncioId)}
          />
       )
@@ -113,6 +119,7 @@ class Messages extends Component {
                <title>{this.props.t("common.messages")}</title>
             </Helmet>
 
+
             <div className='messages-page oY2'>
                {
                   this.state.windowWidth < 992 &&
@@ -124,11 +131,14 @@ class Messages extends Component {
                }
 
                {
-                  this.state?.arrayMessagesFiltered.length > 0 ?
-                     <>
-                        {this.state.arrayMessagesFiltered.map(this.renderMessages)}
-                     </> :
-                     <h2>{this.props.t('common.emptyChat')} </h2>
+                  this.state.arrayMessagesFiltered.map(this.renderMessages)
+               }
+               {
+                  this.state.isEmpty && <h2>{this.props.t('common.emptyChat')} </h2>
+
+               }
+               {
+                  this.state.isLoading && <Spin />
                }
 
                {this.state.arrayMessagesFiltered.length > 5 &&
