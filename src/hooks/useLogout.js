@@ -5,14 +5,16 @@ import { getLocalStorage, removeLocalStorage } from "../utils/localStorage/local
 // ducks
 import { initToken } from "../redux/ducks/tokenDuck";
 import { initUser } from "../redux/ducks/userDuck";
+import { useDispatch } from "react-redux";
 
 // modules
-import { useNavigate } from "react-router-dom";
-import { routes } from "../routes/routes";
+// import { useNavigate } from "react-router-dom";
+// import { routes } from "../routes/routes";
 
-function useLogout(props) {
+function useLogout() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const dispatch = useDispatch();
 
    const logoutExpire =() => {
         if ((getLocalStorage('refreshToken')) !== null) {
@@ -24,7 +26,7 @@ function useLogout(props) {
             if ((now.getTime() - refreshToken?.expire) > 14200000) {
                 removeLocalStorage('token');
                 removeLocalStorage('refreshToken');
-                navigate(routes.LAYOUT);
+                // navigate(routes.LAYOUT);
             } else {
                 return null;
             }
@@ -34,9 +36,9 @@ function useLogout(props) {
     const logoutUser = () => {
         removeLocalStorage('token');
         removeLocalStorage('refreshToken');
-        props.dispatch(initUser());
-        props.dispatch(initToken());
-        navigate(routes.LAYOUT);
+        dispatch(initUser());
+        dispatch(initToken());
+        // navigate(routes.LAYOUT);
     }
 
     return { logoutExpire, logoutUser}
