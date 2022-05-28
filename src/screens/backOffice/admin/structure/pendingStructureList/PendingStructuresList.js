@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 
+//TRANSLATION
+import { useTranslation } from "react-i18next";
+
 //REDUX AND TOKEN MANAGEMENT
 import { connect } from "react-redux";
-import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-import { decryptItem } from "../../../../../utils/crypto/crypto";
-
-//API
-import { showPendingStructuresGetAllApi } from "../../../../../services/api/struttura/struttura-controller/adminStructuresApi";
-import { acceptPendingStructurePutApi } from '../../../../../services/api/struttura/struttura-controller/adminStructuresApi';
-import { declinePendingStructurePutApi } from '../../../../../services/api/struttura/struttura-controller/adminStructuresApi';
-
-//STYLE
-import "./PendingStructuresList.scss"
 
 //COMPONENTS
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
+
+//API
+import { acceptPendingStructurePutApi, declinePendingStructurePutApi, showPendingStructuresGetAllApi } from "../../../../../services/api/struttura/struttura-controller/adminStructuresApi";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
+
+//STYLE
+import "./PendingStructuresList.scss";
 import { Button } from "antd";
 
-//TRANSLATION
-import { useTranslation } from "react-i18next";
 
 //TODO: PAGINATION
 //TODO: TEST DECLINE AGAIN, waiting for back-end to fix error 500
 
-let responseApiGetAll = null;
 
 const PendingStructuresList = (props) => {
 
@@ -50,9 +47,14 @@ const PendingStructuresList = (props) => {
 
 
     const getAll = async () => {
-        let token = getLocalStorage('token');
-        responseApiGetAll = await showPendingStructuresGetAllApi(token);
-        console.log(responseApiGetAll)
+
+        let responseApiGetAll = null;
+
+        if (localStorage.getItem('token') !== null) {
+            let token = getLocalStorage('token');
+            responseApiGetAll = await showPendingStructuresGetAllApi(token);
+        }
+
         setState({
             ...state,
             pendingStructureList: responseApiGetAll.data.list
@@ -65,22 +67,17 @@ const PendingStructuresList = (props) => {
 
     const acceptPendingStructure = (clickedStructureId) => () => {
 
-        console.log('accept clciked', clickedStructureId)
-
         const update = async () => {
             if (localStorage.getItem('token') !== null) {
-                const HEADER = getLocalStorage('token');
-                console.log('header', HEADER)
-                await acceptPendingStructurePutApi(clickedStructureId, HEADER);
-            }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(acceptPendingStructurePutApi(clickedStructureId, HEADER));
 
+                //TODO: const HEADER = decryptItem(props.tokenDuck.token);
+                const HEADER = getLocalStorage('token');
+
+                acceptPendingStructurePutApi(clickedStructureId, HEADER);
+            }
         }
 
         update();
-
-
 
         let updated = state.pendingStructureList.filter((structure) => {
             return structure.id !== clickedStructureId
@@ -96,16 +93,15 @@ const PendingStructuresList = (props) => {
 
     const declinePendingStructure = (clickedStructureId) => () => {
 
-        console.log('decline clciked', clickedStructureId)
-
         const decline = async () => {
+
             if (localStorage.getItem('token') !== null) {
+
+                //TODO: const HEADER = decryptItem(props.tokenDuck.token);
                 const HEADER = getLocalStorage('token');
-                console.log('decline header', HEADER)
-                await declinePendingStructurePutApi(clickedStructureId, HEADER);
+
+                declinePendingStructurePutApi(clickedStructureId, HEADER);
             }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(declinePendingStructurePutApi(clickedStructureId, HEADER));
         }
 
         decline();

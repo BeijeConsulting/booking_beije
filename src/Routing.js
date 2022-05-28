@@ -61,8 +61,8 @@ import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
 function Routing(props) {
 
 
-    //setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0MDA3LCJleHAiOjE2NTM2Njc2MDd9.S2LFboBSHE8titm89jQ39FWCnwxj8RWZC8R3i4D_rwQ")
-    //setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNzQ4MTgzLCJleHAiOjE2NTM3NTE3ODN9.JKcJUJKufq3srV5JYEwnWFWY5TWc5dZqgcbXMrpbvIw")
+    setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
 
 
     useEffect(() => {
@@ -88,10 +88,6 @@ function Routing(props) {
 
 
     //login, registration, account, messages, favourites, booking
-
-    //TODO: to be deleted ( - setLocalStorage import too)
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNjUzNjY0OTAyLCJleHAiOjE2NTM2Njg1MDJ9.PQpyiNZgaLZrwsVcH1aQzGKSS9Q_GLZwPkCmhyv8ZMY")
-    setLocalStorage('refresh token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJscGlyYW5kZWxsb0BnbWFpbC5jb20iLCJleHAiOjE2NTM3NDQwMzZ9.ffmE0CIxpMAlBv89AqGTXVPN9LuYLaRrlapgQ1Yu8oo")
 
 
     return (
