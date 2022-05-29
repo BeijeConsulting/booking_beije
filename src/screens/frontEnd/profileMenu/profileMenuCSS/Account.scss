@@ -1,26 +1,27 @@
 @import "../../../../assets/variables/globalVariables.scss";
-
-.Account_container {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
+.bg_account{
     background-color: $black_primary;
-    // height: 85vh;
+    padding: 10rem 0;
+    .Account_container {
+        background-color: $secondary_lighter;
+        width: 60%;
+        margin: 0 auto;
+        padding: 3rem 6rem;
+        border-radius: 1.5rem;
+    }
 }
 
+.back-button{
+    color: $black_primary;
+}
 .header_container {
-    // display: flex;
-    // justify-content: space-between;
-    // margin: 0 1rem;
-
     .acc_logout {
-        // border: none;
         background-color: $black_primary;
-        color: $white_primary;
+        color: $black_primary;
     }
 
     h1 {
-        color: $white_primary;
+        color: $black_primary;
     }
 
     button {
@@ -29,53 +30,68 @@
 }
 
 .edit {
-    // display: flex;
-    // justify-content: space-around;
-
+    justify-content: space-between;
+    flex-wrap: wrap;
     .update_cont {
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-
         .update {
             background-color: $primary;
-            padding: 0.5rem;
-            width: 130px;
+            padding: .7rem 4rem;
             color: $white_primary;
             border-radius: .5rem;
-            // border: none;
             font-size: 1.2rem;
-            // font-weight: bold;
-            // cursor: pointer;
         }
     }
-
+    .path_img{
+        color: $white_primary;
+        margin-top: 1rem;
+    }
     .penIcon {
         font-size: 20px;
-        background-color: $secondary_lighter;
-        // border: none;
-        // border-radius: 50%;
-        height: 100px;
-        width: 105px;
+        background-color:$secondary_dark;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        height: 7rem;
+        width: 7rem;
+        vertical-align: middle;
+        line-height: 7rem;
+        margin-bottom: 1.5rem;
+        .pencil_icon{
+            color: white;
+        }
+        .edit_image{
+            display: none;
+        }
+        
     }
 
 }
 
 .L {
-    color: white;
+    color:$black_primary ;
+    margin-bottom: .7rem;
 }
 
 
 
 .i {
-    // display: flex;
-    // flex-direction: column;
-    // margin: 1rem;
-
     input {
         border: 1px solid black;
-        padding: .5rem;
-        // border-radius: 1rem;
-        background-color: $secondary_lighter;
+        padding: 1rem .5rem;
+    }
+}
+@media all and (max-width:991px){
+    .bg_account{
+        padding: 0;
+        .Account_container {
+            width: 100%;
+            padding: 3rem;
+            border-radius: 0;
+        }
+    }
+}
+@media all and (max-width:480px){
+    .bg_account{
+        padding: 0 0 15vh 0;
     }
 }
