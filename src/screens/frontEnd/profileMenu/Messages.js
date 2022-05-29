@@ -16,7 +16,6 @@ import { chatMessagesUserGetApi } from '../../../services/api/messaggi/messaggiA
 
 // utils
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
-import { paginationArrowsRender } from "../../../utils/pagination/pagination";
 
 // redux
 import { connect } from 'react-redux';
@@ -24,20 +23,19 @@ import { connect } from 'react-redux';
 // components
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-import { Pagination } from "antd";
+import { Spin } from "antd";
 import { myProfilesGetApi } from "../../../services/api/user/userApi";
-
-
 class Messages extends Component {
    constructor(props) {
       super(props)
       this.state = {
          windowWidth: window.innerWidth,
          arrayMessagesFiltered: [],
-         page: 1
+         isLoading: true,
+         isEmpty: false,
+         clickedItem: -1
       }
       this.arrayMessages = []
-      this.resize = null;
    }
    componentDidMount() {
       window.addEventListener('resize', this.handleResize);
@@ -47,14 +45,22 @@ class Messages extends Component {
                if (res?.data !== "") {
                   this.arrayMessages = res?.data?.list;
                   myProfilesGetApi(getLocalStorage("token"))
-                  .then((user)=>{
-                     let id = user?.data?.utente?.id
-                     const arrFilter = this.arrayMessages.filter((chat) => {
-                        return chat?.lastMessaggio?.insertion?.struttura?.host?.user?.id !== id
+                     .then((user) => {
+                        let id = user?.data?.utente?.id
+                        const arrFilter = this.arrayMessages.filter((chat) => {
+                           return chat?.lastMessaggio?.insertion?.struttura?.host?.user?.id !== id
+                        })
+                        this.setState({
+                           arrayMessagesFiltered: arrFilter,
+                           isLoading: false,
+                           isEmpty: false
+                        })
                      })
-                     this.setState({
-                        arrayMessagesFiltered : arrFilter
-                     })
+               }
+               else {
+                  this.setState({
+                     isLoading: false,
+                     isEmpty: true
                   })
                }
             }).catch((e) => {
@@ -80,23 +86,26 @@ class Messages extends Component {
    }
    // function to render array of chats 
    renderMessages = (mess, key) => {
+      let formatDate = new Date(mess.lastMessaggio?.date_and_time)
       return (
          <MessageCard key={key}
-            title={mess.lastMessaggio.insertion.title}
-            thumbnail={mess?.lastMessaggio?.insertion?.struttura?.url_image ? mess?.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg' }
-            textMessage={mess.lastMessaggio.text}
-            date={mess.lastMessaggio.date_and_time}
-            callback={this.goToSingleConversation(mess.annuncioId)}
+            cssCustom={key === this.state.clickedItem ? 'active_chat' : null}
+            title={mess.lastMessaggio?.insertion?.descrizione}
+            thumbnail={mess.lastMessaggio?.insertion?.struttura?.url_image ? mess.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg'}
+            textMessage={mess.lastMessaggio?.text}
+            date={formatDate.toISOString().split('T')[0]}
+            callback={this.goToSingleConversation(mess.annuncioId,key)}
          />
       )
    }
 
    // function to navigate in singleConversation 
-   goToSingleConversation = (idSender) => () => {
+   goToSingleConversation = (annuncioId,key) => () => {
+      this.setState({clickedItem: key})
       if (this.state.windowWidth < 992) {
-         this.props.router.navigate(routesDetails.singleConversationMobile(idSender));
+         this.props.router.navigate(routesDetails.singleConversationMobile(annuncioId));
       } else {
-         this.props.router.navigate(routesDetails.singleConversation(idSender));
+         this.props.router.navigate(routesDetails.singleConversation(annuncioId));
       }
    }
 
@@ -113,6 +122,7 @@ class Messages extends Component {
                <title>{this.props.t("common.messages")}</title>
             </Helmet>
 
+
             <div className='messages-page oY2'>
                {
                   this.state.windowWidth < 992 &&
@@ -124,23 +134,14 @@ class Messages extends Component {
                }
 
                {
-                  this.state?.arrayMessagesFiltered.length > 0 ?
-                     <>
-                        {this.state.arrayMessagesFiltered.map(this.renderMessages)}
-                     </> :
-                     <h2>{this.props.t('common.emptyChat')} </h2>
+                  this.state.arrayMessagesFiltered.map(this.renderMessages)
                }
+               {
+                  this.state.isEmpty && <h2>{this.props.t('common.emptyChat')} </h2>
 
-               {this.state.arrayMessagesFiltered.length > 5 &&
-                  <Pagination
-                     size={"small"}
-                     total={10}
-                     pageSize={5}
-                     current={this.state.page}
-                     onChange={this.onPageChange}
-                     itemRender={paginationArrowsRender}
-                     className={'custom-pagination'}
-                  />
+               }
+               {
+                  this.state.isLoading && <Spin />
                }
 
             </div>

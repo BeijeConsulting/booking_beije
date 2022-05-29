@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 
 //rrd
 import { useNavigate } from "react-router-dom";
-import { routes } from '../../../routes/routes'
+import { routes, routesDetails } from '../../../routes/routes'
 
 //css
 import "./DetailsProp.scss";
@@ -136,10 +136,15 @@ const DetailsProp = () => {
     })
   }
 
+ const goToSelectedRoom =(id)=> ()=>{
+   navigate(`/${routesDetails.detailPropertyRoom(id)}`)
+ }
+
   const generateRooms = (item, key) => {
     let isStored = null
     isStored = state.storageRooms?.checkOut.find(room => room.id === key);
     return <Rooms
+      callbackGoToRoom={goToSelectedRoom(item.id)}
       stored={isStored}
       key={key}
       numberOfPeople={4} //da modificare
@@ -175,7 +180,7 @@ const DetailsProp = () => {
             isOpen={state.isContactHost}
             classNameCustom={'modal contact-host-modal'}
           >
-            <ContactHost />
+            {/* <ContactHost annuncioId={id} host={id} /> */}
           </Modal>
 
           <Modal

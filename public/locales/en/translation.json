@@ -71,7 +71,10 @@
       "formErrorTerms": "You must accept the terms and conditions",
       "formSuccess": "Success!",
       "formErrorApi": "Wrong email or password, try again",
+      "loginToPursue" : "You have to sign in or register if you want to continue",
       "messageError": "No messages",
+      "messageNotSent" : "Error on sending message",
+      "messageSent" : "Messaggio inviato !",
       "operationAnnounce": "Announce title, input required",
       "operationDescription": "Description, input required",
       "operationAddress": "Address, input required",
@@ -213,6 +216,9 @@
          }
       },
       "modals": {
+         "contactHostModal" : {
+            "contactHost" : "Contact host"
+         },
          "filter": {
             "apply": "Apply filters"
          }

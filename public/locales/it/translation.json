@@ -74,7 +74,10 @@
       "formErrorTerms": "Accetta i termini e le condizioni",
       "formSuccess": "Tutto ok",
       "formErrorApi": "Email o password errata, prova di nuovo",
+      "loginToPursue" : "Registrati o effettua il login per continuare!",
       "messageError": "Nessun messaggio trovato",
+      "messageNotSent" : "Errore nell invio del messaggio",
+      "messageSent" : "Message sent !",
       "operationAnnounce": "Titolo annuncio, campo obbligatorio",
       "operationDescription": "Descrizione, campo obbligatorio",
       "operationAddress": "Indirizzo, campo obbligatorio",
@@ -188,6 +191,9 @@
          }
       },
       "modals": {
+         "contactHostModal" : {
+            "contactHost" : "Contatta l host"
+         },
          "filter": {
             "apply": "Applica filtri"
          }

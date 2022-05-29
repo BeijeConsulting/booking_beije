@@ -6,13 +6,12 @@ import './MessageCard.scss'
 import '../../../../assets/variables/_common.scss';
 
 function MessageCard(props) {
-
-    const goToMessage = () =>{
+    const goToMessage = () => {
         return props.callback()
     }
 
     return (
-        <div className='message-card flex jcSpaceB cursor br3' onClick={goToMessage}>
+        <div className={`message-card flex jcSpaceB cursor br3 ${props.cssCustom}`} onClick={goToMessage}>
             <div className='thumbnail-container'>
                 <img className='w100 h100 ofC br3' src={props.thumbnail} alt={props.title} />
             </div>

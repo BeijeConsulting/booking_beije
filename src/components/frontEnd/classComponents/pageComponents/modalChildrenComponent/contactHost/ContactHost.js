@@ -21,7 +21,9 @@ import { getLocalStorage } from '../../../../../../utils/localStorage/localStora
 import './ContactHost.scss';
 import '../../../../../../assets/variables/_common.scss';
 
+import { notification } from 'antd';
 
+import { routes } from '../../../../../../routes/routes';
 
 class ContactHost extends Component {
    constructor(props) {
@@ -42,23 +44,46 @@ class ContactHost extends Component {
          }
       }
       this.contactForm = {
-         // id recuperati o per props o con event-driven
-         annuncioId: 15,  
+         annuncioId: props.router.params.id,
          contenuto: "",
-         receiverId: 22
+         receiverId: props.hostId
       }
    }
-
+   openNotification = (toastDescription, name, additionalCss = '') => {
+      const key = `${name}-toast`;
+      let cssClass = `custom-toast ${additionalCss}`;
+      notification.open({
+         description: toastDescription,
+         onClick: () => {
+            notification.close(key)
+         },
+         duration: 2,
+         key,
+         placement: 'bottom',
+         className: cssClass
+      });
+   };
    handleSubmit = async (e) => {
       e.preventDefault();
-      await messageInsertPostApi(this.contactForm, getLocalStorage('token'));
-      
+      if (getLocalStorage('token') === null) {
+         return this.openNotification(this.props.t('toasts.loginToPursue'), 'info-toast');
+      }
+      try {
+         await messageInsertPostApi(this.contactForm, getLocalStorage('token'));
+         this.openNotification(this.props.t('toasts.messageSent'));
+         this.props.router.navigate(routes.LAYOUT);
+
+      }
+      catch (error){
+         this.openNotification(this.props.t('toasts.messageNotSent'))
+      }
+
    }
 
    handleChange = (params) => (e) => {
       this.contactForm[params] = e;
       let newState = Object.assign({}, this.state);
-      if (this.contactForm.contenuto !== ''){
+      if (this.contactForm.contenuto !== '') {
          newState.isDisable = false;
       } else {
          newState.isDisable = true;
@@ -77,14 +102,6 @@ class ContactHost extends Component {
                </div>
 
                <form className='flex column jcCenter'>
-{/* 
-                  <FormInput
-                     type='text'
-                     className=''
-                     placeholder={t('common.insertTitle')}
-                     callback={this.handleChange()}
-                  /> */}
-
                   <TextArea
                      callback={this.handleChange("contenuto")}
                   />

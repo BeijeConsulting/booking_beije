@@ -17,6 +17,10 @@ import notLoggedUser from '../../../../assets/images/notLoggedUser.png';
 // connect to redux 
 import { connect } from "react-redux";
 
+// duck
+import { initUser } from "../../../../redux/ducks/userDuck";
+import { initToken } from "../../../../redux/ducks/tokenDuck";
+
 // routes 
 import { routes } from "../../../../routes/routes";
 // modale 
@@ -31,20 +35,17 @@ import { faChevronLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 // proptypes 
 import PropTypes from "prop-types";
 
-// tokenDuck 
-import { initToken } from '../../../../redux/ducks/tokenDuck';
-// userDuck
-import { initUser } from '../../../../redux/ducks/userDuck'
-
 // utils localstorage 
-import { getLocalStorage, removeLocalStorage } from '../../../../utils/localStorage/localStorage';
-import { decryptItem } from "../../../../utils/crypto/crypto";
+import { getLocalStorage } from '../../../../utils/localStorage/localStorage';
+import useLogout from "../../../../hooks/useLogout";
 import { Link } from "react-router-dom";
 
 
 function Navbar(props) {
     let vector = useNavigate();
     const { t } = useTranslation();
+    const { logoutUser } = useLogout();
+    // const logout = useLogout();
 
     const [state, setState] = useState({
         isMenuOpen: false,
@@ -106,19 +107,20 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        props.dispatch(initUser());
-        props.dispatch(initToken());
-        removeLocalStorage("token");
-        removeLocalStorage("refreshToken");
         setState({
             ...state,
             isMenuOpen: false
         })
+
+        logoutUser();
+        props.dispatch(initUser());
+        props.dispatch(initToken());
         vector(routes.LAYOUT);
+        // logout.logoutUser();
     }
     return (
         <>
-
+            
             {
                 //MOBILE
                 props.stateLayout < 480 ?
@@ -186,7 +188,7 @@ function Navbar(props) {
                                 <li onClick={goTo('FAVOURITES')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
                                 <li onClick={goTo(props.stateLayout > 991 ? 'CHAT' : 'MESSAGES')}>{t('common.messages')}</li> 
                                 {
-                                    props.userDuck?.user?.auth.length < 2 ?
+                                    props.userDuck?.user?.auth?.length < 2 ?
                                         <li>
                                             <Link className="link_navbar" to={`${routes.DASHBOARD}/${routes.HOST_REGISTRATION}`} >
                                                 {t('fe.screens.guestAccount.becomeAHost')}
