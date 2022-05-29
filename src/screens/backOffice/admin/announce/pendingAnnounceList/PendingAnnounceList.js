@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 
 //REDUX AND TOKEN MANAGEMENT
 import { connect } from "react-redux";
+import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 //COMPONENTS
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
@@ -12,8 +14,6 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 
 //API
 import { acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi, showPendingAnnouncesGetAllApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
-import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
-import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 //STYLE
 import "./PendingAnnounceList.scss";
