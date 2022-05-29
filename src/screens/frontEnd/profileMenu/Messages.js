@@ -16,7 +16,6 @@ import { chatMessagesUserGetApi } from '../../../services/api/messaggi/messaggiA
 
 // utils
 import { getLocalStorage } from "../../../utils/localStorage/localStorage";
-import { paginationArrowsRender } from "../../../utils/pagination/pagination";
 
 // redux
 import { connect } from 'react-redux';
@@ -24,7 +23,7 @@ import { connect } from 'react-redux';
 // components
 import MessageCard from "../../../components/frontEnd/funcComponents/messageCard/MessageCard";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-import { Pagination, Spin } from "antd";
+import { Spin } from "antd";
 import { myProfilesGetApi } from "../../../services/api/user/userApi";
 class Messages extends Component {
    constructor(props) {
@@ -33,7 +32,8 @@ class Messages extends Component {
          windowWidth: window.innerWidth,
          arrayMessagesFiltered: [],
          isLoading: true,
-         isEmpty: false
+         isEmpty: false,
+         clickedItem: -1
       }
       this.arrayMessages = []
    }
@@ -86,23 +86,26 @@ class Messages extends Component {
    }
    // function to render array of chats 
    renderMessages = (mess, key) => {
+      let formatDate = new Date(mess.lastMessaggio?.date_and_time)
       return (
          <MessageCard key={key}
-            title={mess.lastMessaggio?.insertion?.title}
+            cssCustom={key === this.state.clickedItem ? 'active_chat' : null}
+            title={mess.lastMessaggio?.insertion?.descrizione}
             thumbnail={mess.lastMessaggio?.insertion?.struttura?.url_image ? mess.lastMessaggio?.insertion?.struttura?.url_image : 'https://media-cdn.tripadvisor.com/media/photo-s/03/89/c6/20/b-b-il-laghetto.jpg'}
             textMessage={mess.lastMessaggio?.text}
-            date={mess.lastMessaggio?.date_and_time}
-            callback={this.goToSingleConversation(mess.annuncioId)}
+            date={formatDate.toISOString().split('T')[0]}
+            callback={this.goToSingleConversation(mess.annuncioId,key)}
          />
       )
    }
 
    // function to navigate in singleConversation 
-   goToSingleConversation = (idSender) => () => {
+   goToSingleConversation = (annuncioId,key) => () => {
+      this.setState({clickedItem: key})
       if (this.state.windowWidth < 992) {
-         this.props.router.navigate(routesDetails.singleConversationMobile(idSender));
+         this.props.router.navigate(routesDetails.singleConversationMobile(annuncioId));
       } else {
-         this.props.router.navigate(routesDetails.singleConversation(idSender));
+         this.props.router.navigate(routesDetails.singleConversation(annuncioId));
       }
    }
 
@@ -139,18 +142,6 @@ class Messages extends Component {
                }
                {
                   this.state.isLoading && <Spin />
-               }
-
-               {this.state.arrayMessagesFiltered.length > 5 &&
-                  <Pagination
-                     size={"small"}
-                     total={10}
-                     pageSize={5}
-                     current={this.state.page}
-                     onChange={this.onPageChange}
-                     itemRender={paginationArrowsRender}
-                     className={'custom-pagination'}
-                  />
                }
 
             </div>

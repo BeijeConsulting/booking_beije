@@ -26,9 +26,13 @@ function Rooms(props) {
     }, [state.selected])
 
 
+
+    const goToRoom = () =>{
+        props.callbackGoToRoom()
+    }
     const generateServicesIcon = ((service, index) => {
         return <span key={index}>
-            <FontAwesomeIcon className="services_icon" icon={servicesToIcons[service].icon} />
+            <FontAwesomeIcon  className="services_icon" icon={servicesToIcons[service].icon} />
         </span>
     })
 
@@ -66,7 +70,7 @@ function Rooms(props) {
         <div className='rooms_card_container'>
             <div className='title_info'>
                 <h2>{props.title}</h2>
-                <FontAwesomeIcon className="info_icon" icon={faInfoCircle} />
+                <FontAwesomeIcon onClick={goToRoom} className="info_icon" icon={faInfoCircle} />
             </div>
             <div className='description_container'>
                 <div className='number_people_container'>

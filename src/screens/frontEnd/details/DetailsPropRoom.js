@@ -7,6 +7,9 @@ import { useParams } from "react-router-dom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
 import UiSelect from "../../../components/frontEnd/funcComponents/ui/uiSelect/UiSelect"
 import { annuncioDetailGetApi } from "../../../services/api/annuncio/annuncioApi";
+
+import Modal from '../../../components/common/modal/Modal';
+import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 // import applicationStore from "../../../applicationStore";
 
 const DetailsPropRoom = (props) => {
@@ -15,17 +18,33 @@ const DetailsPropRoom = (props) => {
   const { id } = useParams();
 
   const [state, setState] = useState({
-    propertyRooms: null
+    propertyRooms: null,
+    isOpen: false,
   })
 
   useEffect(() => {
-    console.log(id);
     annuncioDetailGetApi(id).then(res => {
+      console.log(res.data?.struttura?.host?.user?.id)
       setState({
-        property: res.data
+        propertyRooms: res.data
       })
     });
   }, [])
+
+  // close modal 
+  const handleClose = () => {
+    setState({
+      ...state,
+      isOpen: !state.isOpen
+    })
+  }
+  // open modal 
+  const contactHostModal = () =>{
+    setState({
+      ...state,
+      isOpen: true
+    })
+  }
 
   return (
     <>
@@ -33,9 +52,9 @@ const DetailsPropRoom = (props) => {
         <title>{t("fe.screens.propertyDetails.roomDetails")}</title>
       </Helmet>
       <div className="property_room_container">
-        <h2>{state.property?.titolo}</h2>
+        <h2>{state.propertyRooms?.titolo}</h2>
         <div className="price_checkout_in_date">
-          <span>{`${state.property?.prezzo}/${t('fe.components.rooms.night')}`}</span>
+          <span>{`${state.propertyRooms?.prezzo}/${t('fe.components.rooms.night')}`}</span>
         </div>
         <div className="selected_container">
           <UiButton
@@ -46,8 +65,12 @@ const DetailsPropRoom = (props) => {
         </div>
         <div className="description_container_room">
           <h3>{t('common.description')}</h3>
-          <p>{state.property?.descrizione}</p>
+          <p>{state.propertyRooms?.descrizione}</p>
         </div>
+        <button onClick={contactHostModal}>{t('fe.modals.contactHostModal.contactHost')}</button>
+        <Modal isOpen={state.isOpen} callback={handleClose}>
+          <ContactHost hostId={state.propertyRooms?.struttura?.host?.user?.id} />
+        </Modal>
       </div>
     </>
   );
