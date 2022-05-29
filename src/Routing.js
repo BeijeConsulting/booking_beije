@@ -45,7 +45,7 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
