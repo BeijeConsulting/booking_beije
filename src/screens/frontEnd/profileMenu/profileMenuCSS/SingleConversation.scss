@@ -2,12 +2,9 @@
 .singleConversation-page {
     background-color: $black_primary;
     height: 75vh;
-    // overflow-y: scroll;
     min-height: 90vh;
     padding: 0 1rem 1rem;
     color: $white_primary;
-    // display: flex;
-    // flex-direction: column;
     width: 100%;
 
 
@@ -17,7 +14,6 @@
     }
     .container_messages{
         height: 80vh;
-        // overflow-y: scroll;
     }
     .conversation {
         color: $black_primary;
