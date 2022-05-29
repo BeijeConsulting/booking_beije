@@ -41,7 +41,7 @@ const MostRewApart = () => {
     //API call
     showAllStruttureGetApi()
       .then(res => {
-        if (res.data.list) {
+        if (res?.data?.list) {
           let arrayTest = res?.data?.list.map(({ lista_recensioni, ...rest }) => {
             let avgScore = 0
             if (lista_recensioni) {
@@ -51,22 +51,24 @@ const MostRewApart = () => {
             return { ...rest, lista_recensioni, avgScore }
           })
 
-          avgReview = (avgReview / arrayTest?.length)
+          avgReview = (avgReview / arrayTest.length)
+
+          arrayTest = arrayTest.sort((a, b) => {
+            if (a.avgScore > b.avgScore) {
+              return -1
+            } else if ((a.avgScore < b.avgScore)) {
+              return +1
+            } else {
+              return 0
+            }
+          })
+            .filter(filt => {
+              return filt?.lista_recensioni?.length > avgReview
+            })
 
           setState({
             ...state,
-            mostReviewedBuildingArray: arrayTest.sort((a, b) => {
-              if (a.avgScore > b.avgScore) {
-                return -1
-              } else if ((a.avgScore < b.avgScore)) {
-                return +1
-              } else {
-                return 0
-              }
-            })
-              .filter(filt => {
-                return filt?.lista_recensioni?.length > avgReview
-              })
+            mostReviewedBuildingArray: arrayTest
           })
         }
       })
