@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from "react";
 
+//TRANSLATION
+import { useTranslation } from "react-i18next";
+
 //REDUX AND TOKEN MANAGEMENT
 import { connect } from "react-redux";
+import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-//import { decryptItem } from "../../../../../utils/crypto/crypto";
-
-//API
-import { showPendingAnnouncesGetAllApi, acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
-
-
-//STYLE
-import "./PendingAnnounceList.scss"
 
 //COMPONENTS
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
-import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
-import { Button } from "antd";
 
-//TRANSLATION
-import { useTranslation } from "react-i18next";
+//API
+import { acceptPendingAnnouncesPutApi, declinePendingAnnouncesPutApi, showPendingAnnouncesGetAllApi } from "../../../../../services/api/annuncio/annuncio-controller/adminAnnouncesApi";
+
+//STYLE
+import "./PendingAnnounceList.scss";
+import { Button } from "antd";
 
 
 //TODO: PAGINATION
 //TODO: TEST DECLINE AGAIN, waiting for back-end to fix error 500
-
-let responseApiGetAll = null;
 
 
 const PendingAnnounceList = (props) => {
@@ -51,8 +47,13 @@ const PendingAnnounceList = (props) => {
 
 
     const getAll = async () => {
-        let token = getLocalStorage('token')
-        responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
+
+        let responseApiGetAll = null;
+
+        if (localStorage.getItem('token') !== null) {
+            let token = getLocalStorage('token')
+            responseApiGetAll = await showPendingAnnouncesGetAllApi(token);
+        }
 
         setState({
             ...state,
@@ -68,15 +69,15 @@ const PendingAnnounceList = (props) => {
     const acceptPendingAnnounce = (clickedAnnounceId) => () => {
 
         const update = async () => {
+
+            //TODO: const HEADER = decryptItem(props.tokenDuck.token);
             if (localStorage.getItem('token') !== null) {
                 const HEADER = getLocalStorage('token');
 
-                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
+                let n = state.pendingAnnounceList.find((announce) => announce.id === clickedAnnounceId).count;
 
-                await acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
+                acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
             }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(acceptPendingAnnouncesPutApi(clickedAnnounceId, HEADER));
         }
 
         update();
@@ -96,13 +97,16 @@ const PendingAnnounceList = (props) => {
     const declinePendingAnnounce = (clickedAnnounceId) => () => {
 
         const decline = async () => {
+
             if (localStorage.getItem('token') !== null) {
+
+                //TODO: const HEADER = decryptItem(props.tokenDuck.token);
                 const HEADER = getLocalStorage('token');
-                let n = responseApiGetAll.data.list[clickedAnnounceId].count;
-                await declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
+
+                let n = state.pendingAnnounceList.find((announce) => announce.id === clickedAnnounceId).count;
+
+                declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER, n);
             }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(declinePendingAnnouncesPutApi(clickedAnnounceId, HEADER));
         }
 
         decline();
