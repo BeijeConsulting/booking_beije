@@ -103,7 +103,10 @@ HorizontalCard.propTypes = {
     imageSrc: PropTypes.string,
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
+    subtitle: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     text: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
@@ -111,7 +114,7 @@ HorizontalCard.propTypes = {
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
     footerContentLeft: PropTypes.any,
-    footerContentRight: PropTypes.any,
+    footerContent: PropTypes.any,
 
 }
 
