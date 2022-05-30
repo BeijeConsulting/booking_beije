@@ -40,6 +40,7 @@ import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiB
 import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
+import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
 
 let checkOutArray = []
 let arrayToCheckout = []
@@ -69,12 +70,14 @@ const DetailsProp = () => {
       const properties = await strutturaDetailIdGetApi(id)
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
+      const services = await serviceStruttureIdGetApi(id)
       // console.log(properties, 'stazmne', rooms, review)
       setState({
         ...state,
         property: properties?.data,
         roomsList: rooms?.data.list,
         reviewsList: review?.data,
+        serviceList: services?.data,
         isLoading: false
       })
       // console.log(state)
@@ -136,15 +139,15 @@ const DetailsProp = () => {
     })
   }
 
- const goToSelectedRoom =(id)=> ()=>{
-   navigate(`/${routesDetails.detailPropertyRoom(id)}`)
- }
+  const goToSelectedRoom = (id) => () => {
+    navigate(`/${routesDetails.detailPropertyRoom(id)}`)
+  }
 
   const generateRooms = (item, key) => {
     let isStored = null
     isStored = state.storageRooms?.checkOut.find(room => room.id === key);
     return <Rooms
-      callbackGoToRoom={goToSelectedRoom(item.id)}
+      callbackGoToRoom={goToSelectedRoom(item?.id)}
       stored={isStored}
       key={key}
       numberOfPeople={4} //da modificare
@@ -152,6 +155,7 @@ const DetailsProp = () => {
       price={item?.prezzo}
       count={item?.count}
       temp_id={key}
+      services={state.serviceList}
       callback={addToCheckOut}
     />
   }

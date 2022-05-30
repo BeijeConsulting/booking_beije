@@ -27,15 +27,15 @@ function Rooms(props) {
 
 
 
-    const goToRoom = () =>{
+    const goToRoom = () => {
         props.callbackGoToRoom()
     }
     const generateServicesIcon = ((service, index) => {
+        const serviceType = servicesToIcons.find(serv => serv.id === service.id)
         return <span key={index}>
-            <FontAwesomeIcon  className="services_icon" icon={servicesToIcons[service].icon} />
+            <FontAwesomeIcon className="services_icon" icon={serviceType.icon} />
         </span>
     })
-
     /* Generate a N number of User icon, where N is the number passed by props.numberOfPeople */
     const generatePeopleIcon = () => {
         let userIcon = [];
