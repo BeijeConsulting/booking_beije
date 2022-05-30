@@ -41,8 +41,9 @@ const MostRewApart = () => {
     //API call
     showAllStruttureGetApi()
       .then(res => {
+        let arrayTest = [];
         if (res?.data?.list) {
-          let arrayTest = res?.data?.list.map(({ lista_recensioni, ...rest }) => {
+          arrayTest = res?.data?.list.map(({ lista_recensioni, ...rest }) => {
             let avgScore = 0
             if (lista_recensioni) {
               avgReview += lista_recensioni.length
