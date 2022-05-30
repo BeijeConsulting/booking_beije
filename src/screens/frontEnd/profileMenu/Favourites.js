@@ -40,9 +40,9 @@ const Favourites = () => {
       return () => { window.removeEventListener('resize', handleResize) }
    })
 
-   function loadFavourites(page = state.page) {
+   function loadFavourites() {
       if (localStorage.getItem('token') !== null)
-         getFavourites(itemsPerPage, page, getLocalStorage('token'))
+         getFavourites(itemsPerPage, state.page, getLocalStorage('token'))
             .then(res => {
                setState({
                   ...state,
@@ -77,7 +77,7 @@ const Favourites = () => {
 
    const handleFavourite = async (favouriteId, propertyName) => {
       await deleteFavourite(favouriteId, getLocalStorage('token'));
-      loadFavourites(1);
+      onPageChange(1);
       showToast(favouriteId, propertyName);
    }
 
