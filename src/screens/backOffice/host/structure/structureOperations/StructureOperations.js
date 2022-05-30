@@ -75,6 +75,8 @@ const StructureOperation = (props) => {
       getStructure();
     }
     structureValue.userId = props.userDuck.user.utente.id
+
+    console.log(structureValue);
     setState(structureValue);
 
   }, []);
