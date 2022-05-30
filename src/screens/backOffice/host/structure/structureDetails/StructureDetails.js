@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";
@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 //Style
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'antd';
+import { faBed, faHotel, faPen, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { Button, Col, Row, Space } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
@@ -21,56 +21,110 @@ import CardList from "../../../../../components/backOffice/hookComponents/cardLi
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
 
+//API
+import { showStrutturaById } from "../../../../../services/api/struttura/strutturaApi";
+import { annuncioOnStrutturaGetApi } from "../../../../../services/api/annuncio/annuncioApi";
 
 const StructureDetails = () => {
 
-    //header
-    //footer
-
     const { t } = useTranslation()
-
     const navigate = useNavigate()
+    const params = useParams();
+    const [state, setState] = useState({
+        structure: {},
+        structureAnnounces: [],
+        announceDeleteModal: false,
+        loading: {
 
-    const obj = [
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        },
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        },
-    ]
+        }
+    })
 
-    const goToStructure = (idAnnounce = null) => () => {
+    useEffect(() => {
+        // should use redux stored token when ready!!!
+        if (localStorage.getItem('token') !== null) {
+            const token = getLocalStorage('token');
+
+            fetchOnMount(params.id, token)
+        }
+    }, [])
+
+    //APIS
+    const fetchOnMount = async (id, token) => {
+
+        const structure = await showStrutturaById(id, token)
+        const announces = await annuncioOnStrutturaGetApi(structure?.data?.id)
+
+        console.log(structure)
+        console.log(announces)
+
+        setState({
+            ...state,
+            structure: structure?.data,
+            structureAnnounces: announces?.data?.list
+        })
+    }
+
+
+
+
+    //CARD LIST
+    const goToAnnounce = (idAnnounce = null) => () => {
         navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
 
     };
 
-    const getAnnounceCards = (announce, key) => {
+    const getAnnounceCards = (announce) => {
         return <HorizontalCard
-            key={`${key}-${randomKey()}`}
-            imageSrc={announce.img}
-            imageAlt={`${key}_${announce.title}`}
-            title={announce.title}
-            text={announce.text}
-            callback={goToStructure(key)}
+            key={`${announce.id}-${randomKey()}`}
+            // imageSrc={announce.img}
+            imageAlt={announce?.slug}
+            title={announce?.titolo}
+            subtitle={<>
+                <span className="structure_details__icon">
+                    <FontAwesomeIcon icon={faBed} />
+                </span>
+                {announce?.numPostiLetto}
+            </>
+            }
+            text={announce?.descrizione}
+            upperRightContent={
+                <>
+                    {/* <Modal visible={state.isModalVisible} onOk={handleOk} onCancel={handleCancel} forceRender={true}>
+                        <h1>
+                            <FontAwesomeIcon icon={faTriangleExclamation} /> {t("bo.screens.host.reservationList.confirmReservationDelete")}
+                        </h1>
+                        <p>Sei sicuro di voler disativare la strutture, una volta disativata non sara visibile ai clienti di BeijeBnb</p>
+                    </Modal> */}
+                    <Link to={routes.ANNOUNCE_OPERATION}>
+                        <FontAwesomeIcon className="icon_edit" icon={faPen} />
+                    </Link>
+                    <button type="button" className="trash_announce_btn" onClick={announceDeleteModal}>
+                        <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
+                    </button>
+                </>
+            }
+            footerContentLeft={<strong>€{announce?.prezzo}/night</strong>}
+            footerContent={
+                <span className="announce_count">
+                    x{announce.count}
+                </span>
+            }
+            callback={goToAnnounce(announce.id)}
         />
     }
 
+    const announceDeleteModal = (e) => {
+        setState({
+            ...state,
+            announceDeleteModal: true,
+        })
+    }
+
+    //PAGINATION
     const switchToPage = (clickedPage) => {
         console.log("switch to page", clickedPage);
         //set paginationProps.currentPage to clickedPage (with useState)
@@ -87,34 +141,50 @@ const StructureDetails = () => {
     return (
         <>
 
-            <h1>{t("bo.screens.host.structureDetails.structureDetailsTitle")}</h1>
-            <Button className="edit_button"><FontAwesomeIcon icon={faPen} />{t("bo.screens.host.structureDetails.editStructure")}</Button>
+            <h1 className="page_title">
+                {t("bo.screens.host.structureDetails.structureDetailsTitle")}
+            </h1>
+
+            <Row>
+                <Col offset={21}>
+                    <Button className="edit_button" type="primary" >
+                        <span className="structure_details__icon">
+                            <FontAwesomeIcon icon={faPen} />
+                        </span>
+                        {t("bo.screens.host.structureDetails.editStructure")}
+                    </Button>
+                </Col>
+            </Row>
+
             <div className="structure_details_container">
 
-                <img src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
+                <img className="structure_img" src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
 
                 <div className="structure_information">
-                    <h1>Camera bellissima</h1>
-                    <p>Chioggia, Italy</p>
-                    <p><FontAwesomeIcon icon={faHotel} />Hotel</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae sem sagittis, ornare magna vitae, pulvinar augue. Quisque et euismod metus. Nunc blandit orci dui,
-                        quis porttitor urna vestibulum vel.Praesent et turpis justo. Duis sed suscipit justo. Sed mollis, ex vitae vehicula ultrices, metus nibh interdum augue, sed tempus ligula nibh sed neque.
-                        Nam id elit sed velit aliquam porta in sit amet magna.Duis nibh tellus, dictum id ante ac, vestibulum volutpat nibh. Donec finibus libero et purus consequat congue. Maecenas mollis, diam ut varius commodo,
-                        leo nisi lacinia erat, at finibus lorem ex sed velit. Proin sem felis,eleifend eu gravida at, porta non nunc. Sed erat velit, tincidunt vel pellentesque vel, pellentesque eget nisi. Maecenas efficitur arcu faucibus,
-                        blandit libero ut, finibus purus. Duis ut sollicitudin urna. Etiam sit amet imperdiet est. Cras tristique elit a ante suscipit maximus. Sed vulputate lorem nec nunc euismod, quis congue velit porta.
-                        Aliquam sollicitudin ex non dui tempor laoreet. Nulla at varius dolor.
+                    <h1>{state.structure?.nome_struttura}</h1>
+                    <p>{state.structure?.indirizzo?.citta}, {state.structure?.indirizzo?.stato}</p>
+                    <p>
+                        <span className="structure_details__icon">
+                            <FontAwesomeIcon icon={faHotel} />
+                        </span>
+                        {state.structure?.tipologiaStrutturaId?.tipo}
                     </p>
+                    <p>{state.structure?.descrizione}</p>
                 </div>
 
             </div>
 
-
             <CardList
                 sectionTitle="Annunci"
-                actions={<Button>{t("bo.screens.host.structureDetails.addRoom")}</Button>}
+                actions={<Button type="primary">
+                    <span className="structure_details__icon">
+                        <FontAwesomeIcon icon={faPlus} />
+                    </span>
+                    {t("bo.screens.host.structureDetails.addRoom")}
+                </Button>}
                 {...paginationProps}>
                 {
-                    obj.map(getAnnounceCards)
+                    state.structureAnnounces.map(getAnnounceCards)
                 }
             </CardList>
         </>

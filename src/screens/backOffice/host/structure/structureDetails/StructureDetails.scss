@@ -1,19 +1,55 @@
-.structure_details_container{
+@use '../../../../../assets/variables/globalVariables.scss' as var;
+
+.page_title {
+    font-size: var.$fs-1;
+}
+
+.structure_details__icon {
+    margin-right: .5rem;
+}
+
+.structure_details_container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    align-items: start;
     margin-bottom: 30px;
     margin-top: 20px;
-    
-    img{
-        order: 1;
+
+    .structure_img {
         width: 40%;
-        
+        margin-right: 2rem;
     }
 
-    .structure_information{
-        order: 2;
+    .structure_information {
         width: 40%;
+    }
+
+}
+
+.announce_count {
+    font-weight: var.$fw-bold;
+    font-size: var.$fs-2;
+}
+
+@media screen and (max-width: 768px) {
+    .structure_details_container {
+        flex-direction: column;
+
+        .structure_img {
+            margin-right: 0;
+        }
+
+        .structure_information,
+        .structure_img {
+            width: 100%;
+        }
+
+        .structure_information {
+            h1 {
+                font-size: var.$fs-2;
+            }
+
+
+        }
     }
 }
