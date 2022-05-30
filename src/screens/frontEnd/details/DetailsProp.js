@@ -40,6 +40,7 @@ import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiB
 import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
+import Like from "../../../components/frontEnd/hookComponents/like/Like";
 
 let checkOutArray = []
 let arrayToCheckout = []
@@ -144,7 +145,7 @@ const DetailsProp = () => {
     let isStored = null
     isStored = state.storageRooms?.checkOut.find(room => room.id === key);
     return <Rooms
-      callbackGoToRoom={goToSelectedRoom(item.id)}
+      callbackGoToRoom={goToSelectedRoom(item?.id)}
       stored={isStored}
       key={key}
       numberOfPeople={4} //da modificare
@@ -215,6 +216,7 @@ const DetailsProp = () => {
                   <h2>{state.property?.nome_struttura}</h2>
                   <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
+                  <Like id={id} propertyName={state.property?.nome_struttura} />
                 </div>
                 <div className="description_container">
                   <h3>{t("common.description")}</h3>

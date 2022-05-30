@@ -26,8 +26,6 @@ import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
 import withRouting from '../../../../../withRouting/withRouting';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 // import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
 
 
@@ -214,11 +212,10 @@ class SearchResult extends Component {
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-         // callback={this.handleDetails(item?.indirizzo?.struttura_id)}
+         callback={this.handleDetails(item?.indirizzo?.struttura_id)}
          >
 
             <PropertyCard
-               callback={this.handleDetails(item?.indirizzo?.struttura_id)}
                data={item}
             />
          </Card>
