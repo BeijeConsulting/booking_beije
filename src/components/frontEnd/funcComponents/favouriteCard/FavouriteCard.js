@@ -18,6 +18,7 @@ function FavouriteCard(props) {
 
    const { descrizione, id, nome_struttura } = props.item.Struttura;
    const { tipo } = props.item.Struttura.tipologiaStrutturaId;
+   let favouriteId = props.item.id;
    let thumbnail = propertyPlaceholder;
 
    useEffect(() => {
@@ -26,7 +27,7 @@ function FavouriteCard(props) {
    }, [])
 
    const handleOnClick = () => {
-      props.callback(id, nome_struttura);
+      props.callback(favouriteId, nome_struttura);
    }
 
    return (

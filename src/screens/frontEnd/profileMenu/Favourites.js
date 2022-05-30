@@ -52,14 +52,7 @@ const Favourites = () => {
             });
    }
 
-   useEffect(() => {
-      loadFavourites();
-   }, [])
-
-   useEffect(() => {
-      loadFavourites();
-   }, [state.page])
-
+   useEffect(loadFavourites, [state.page]);
 
    function handleResize() {
       setState({
@@ -68,8 +61,8 @@ const Favourites = () => {
       })
    }
 
-   const showToast = (propertyId, propertyName) => {
-      const key = `${propertyId}-toast`;
+   const showToast = (favouriteId, propertyName) => {
+      const key = `${favouriteId}-toast`;
       notification.open({
          description: t('toasts.favouritesDeleted', { name: propertyName }),
          onClick: () => {
@@ -82,10 +75,10 @@ const Favourites = () => {
       });
    };
 
-   const handleFavourite = (propertyId, propertyName) => {
-      deleteFavourite(propertyId, getLocalStorage('token'));
+   const handleFavourite = async (favouriteId, propertyName) => {
+      await deleteFavourite(favouriteId, getLocalStorage('token'));
       loadFavourites();
-      showToast(propertyId, propertyName);
+      showToast(favouriteId, propertyName);
    }
 
    const onPageChange = (nextPage) => {
