@@ -68,13 +68,15 @@ const StructureOperation = (props) => {
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
-      structureValue.userId = strutturaDetail?.host.user.id;
-
-      setState(structureValue);
+      // structureValue.userId = strutturaDetail?.host.user.id;
+      
     };
     if (location.state.idStructure !== null) {
       getStructure();
     }
+    structureValue.userId = props.userDuck.user.utente.id
+    setState(structureValue);
+
   }, []);
 
   // PER FORM ANT
@@ -252,54 +254,8 @@ const StructureOperation = (props) => {
                 />
               </Form.Item>
             </Col>
-
-            {/* <Col className="gutter-row">
-              <Form.Item
-                label={t("common.city")}
-                name="city"
-                rules={[
-                  {
-                    required: true,
-                    message: t("toasts.operationCity"),
-                  },
-                ]}
-              >
-                <Input name="city" placeholder={t("common.city")} />
-              </Form.Item>
-            </Col> */}
           </Row>
 
-          <Row gutter={16}>
-            {/* <Col className="gutter-row">
-              <Form.Item
-                label={t("common.country")}
-                name="country"
-                rules={[
-                  {
-                    required: true,
-                    message: t("toasts.operationCountry"),
-                  },
-                ]}
-              >
-                <Input name="country" placeholder={t("common.country")} />
-              </Form.Item>
-            </Col>
-
-            <Col className="gutter-row">
-              <Form.Item
-                label={t("common.zipCode")}
-                name="zipCode"
-                rules={[
-                  {
-                    required: true,
-                    message: t("toasts.operationZipCode"),
-                  },
-                ]}
-              >
-                <InputNumber name="zipCode" placeholder={t("common.zipCode")} />
-              </Form.Item>
-            </Col> */}
-          </Row>
 
           <Row gutter={16}>
             <Col className="gutter-row">
