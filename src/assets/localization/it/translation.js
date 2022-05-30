@@ -1,4 +1,4 @@
-{
+export const TRANSLATIONS_IT ={
    "common": {
       "number": "{{value, number(minimumFractionDigits: 2)}}",
       "currency": "{{price, currency(currency: EUR)}}",
