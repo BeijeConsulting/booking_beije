@@ -41,7 +41,7 @@ const Homepage = () => {
          <Modal isOpen={state.isOpen} callback={handleClick}  >
             <SearchForm />
          </Modal>
-         <div className="home oY2 oX1 w100 flex aiCenter jcCenter column">
+         <div className="home oX1 w100 flex aiCenter jcCenter column">
             <SearchButton callback={handleClick} />
             <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
             <div className="suggested-container relative">
