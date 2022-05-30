@@ -117,7 +117,7 @@ class SearchForm extends Component {
    render() {
       return (
          <>
-            <section className='searchFormContainer flex aiCenter jcCenter mT1'>
+            <section className='searchFormContainer flex aiCenter jcCenter m1 br3 w100'>
                <form className='flex aiCenter jcSpaceE'>
                   <SearchPlace />
 
@@ -130,7 +130,7 @@ class SearchForm extends Component {
 
                   <InputGuest />
 
-                  <FormButton className="btn-primary" label={t("common.send")} callback={this.handleSubmit} />
+                  <FormButton className="btn-primary m1" label={t("common.send")} callback={this.handleSubmit} />
 
                </form>
             </section>

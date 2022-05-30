@@ -10,7 +10,7 @@
    }
 
    .ant-input-number-input {
-      max-width: 36px;
+      max-width: 20px;
       text-align: center;
    }
 
@@ -23,5 +23,10 @@
    form {
       display: flex;
       flex-direction: column;
+      
    }
+}
+.searchFormContainer{
+   background-color: $white_primary;
+   
 }
