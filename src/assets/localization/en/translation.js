@@ -164,9 +164,8 @@ export const TRANSLATIONS_EN = {
          "rooms": {
             "person": "Person",
             "people": "People",
-            "price": "Price for",
-            "night": "night",
-            "nights": "nights"
+            "priceForNumberOfNights": "Price for {{number}} night",
+            "priceForNumberOfNights_other": "Price for {{number}} nights"
          },
          "review": {
             "username": "username",
