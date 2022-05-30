@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router";
 //icon
 import { t } from "i18next";
 import { Helmet } from "react-helmet";
@@ -14,16 +15,17 @@ import '../../../assets/variables/_common.scss'
 
 import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-
+import {routes} from '../../../routes/routes'
 
 let userEdit = {
-  uName: null,
-  uSurname: null,
+  name: null,
+  surname: null,
   email: null,
-  psw: null
+  password: null
 }
 
 const Account = (props) => {
+  const vector = useNavigate()
   const imgRef = useRef()
   const [state, setState] = useState({
     userInfo: {
@@ -42,7 +44,9 @@ const Account = (props) => {
       surname: props.userDuck?.user?.utente?.surname,
       email: props.userDuck?.user?.utente?.email
     }
-    userEdit = userFromDuck;
+    userEdit.name = props.userDuck?.user?.utente?.name;
+    userEdit.surname = props.userDuck?.user?.utente?.surname;
+    userEdit.email = props.userDuck?.user?.utente?.email
     setState({
       ...state,
       userInfo: userFromDuck
@@ -66,26 +70,20 @@ const Account = (props) => {
     if (!state.passwordConfirmed) {
       return alert('le password non coincidono')
     }
-    var bodyFormData = new FormData();
-    bodyFormData.append('name', userEdit.uName);
-    bodyFormData.append('surname', userEdit.uSurname);
-    bodyFormData.append('email', userEdit.email);
-    bodyFormData.append('url_image', imgRef.current.value);
-
-
+  
     // chiamata api 
-    editProfileModifyPutApi(bodyFormData, getLocalStorage("token")).then((res) => {
-      console.log(res)
+    editProfileModifyPutApi(userEdit, getLocalStorage("token")).then((res) => {
+      vector(routes.LAYOUT)
     })
   }
 
   // function to change name input
   const accName = (e) => {
-    userEdit.uName = e
+    userEdit.name = e
   }
   // function to change surname input
   const accSurname = (e) => {
-    userEdit.uSurname = e
+    userEdit.surname = e
   }
 
   // function to control mail and set mail 
@@ -98,16 +96,13 @@ const Account = (props) => {
   // function to check password and set it 
   const checkpass1 = (e) => {
     if (checkPassword(e)) {
-      console.log(e)
-      userEdit.psw = e
-    } else {
-      console.log('password errata')
-    }
+      userEdit.password = e
+    } 
   }
 
   // function to check password confirm is the same to psw 
   const checkpass2 = (e) => {
-    if (e !== userEdit.psw) {
+    if (e !== userEdit.password) {
       console.log('password diversa')
       setState({
         ...state,
