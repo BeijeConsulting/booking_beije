@@ -96,7 +96,7 @@ const AnnounceOperation = () => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label={t("bo.screens.host.announceOperation.photos")}
+                        label={t("common.photos")}
                         name="photos"
                         rules={[
                             {
@@ -148,7 +148,7 @@ const AnnounceOperation = () => {
 
                     <Row>
                         <Form.Item
-                            label={t("bo.screens.host.announceOperation.services")}
+                            label={t("common.services")}
                             name="services"
                             rules={[
                                 {
