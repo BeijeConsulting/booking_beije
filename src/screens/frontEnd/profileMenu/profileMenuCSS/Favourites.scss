@@ -4,9 +4,7 @@
    min-height: 100vh;
    color: $white_primary;
    background-color: $black_primary;
-   // display: flex;
-   // flex-direction: column;
-   padding: 0 5vw 15vh;
+   padding: 5vh 5vw;
 
    h1 {
       color: $white_primary;
@@ -14,34 +12,30 @@
    }
 
    .button_go_back {
-      margin: 2rem 0 0;
+      margin: 0;
    }
-
-   // .pagination {
-   //    margin: 1rem 0;
-   // }
 }
 
 @media (min-width:481px) {
    .favourites-page {
-      padding: 0 5vw;
+      padding: 5vh 5vw;
    }
 }
 
 @media (min-width: 576px){
    .favourites-page {
-      padding: 0 10vw;
+      padding: 5vh 10vw;
    }
 }
 
 @media (min-width: 768px) {
    .favourites-page {
-      padding: 0 15vw;
+      padding: 5vh 15vw;
    }
 }
 
 @media (min-width: 992px) {
    .favourites-page {
-      padding: 0 20vw;
+      padding: 5vh 20vw;
    }
 }
