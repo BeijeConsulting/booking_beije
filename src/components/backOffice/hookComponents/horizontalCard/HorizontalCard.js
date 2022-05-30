@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 //STYLE
 import "./HorizontalCard.scss"
-import { Link } from "react-router-dom";
 
 const HorizontalCard = (props) => {
 
@@ -17,7 +16,6 @@ const HorizontalCard = (props) => {
         upperRightContent,
         footerContent,
         footerContentLeft,
-        footerContentRight
     } = props
 
     const handleCardClick = (e) => {
