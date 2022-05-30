@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 //STYLE
 import "./HorizontalCard.scss"
+import { Link } from "react-router-dom";
 
 const HorizontalCard = (props) => {
 
@@ -30,7 +31,9 @@ const HorizontalCard = (props) => {
         <div className={"h_card_container"} >
             {/* Card image */}
             {imageSrc &&
-                <img className={"card_img"} src={imageSrc} alt={imageAlt} onClick={handleCardClick} />
+                <a onClick={handleCardClick} >
+                    <img className={"card_img"} src={imageSrc} alt={imageAlt} />
+                </a>
             }
 
             {/* Card body */}
