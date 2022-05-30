@@ -9,6 +9,7 @@ function createPortalNode(className) {
 }
 
 function renderSelectOptions(name) {
+
    return function (item, key) {
       return (
          <option key={`${name}-${key}`} value={item}>{item}</option>

@@ -10,6 +10,7 @@
       "relativeDayExplicitLong": "{{value, relativetime(range: day; numeric: auto; style: long;)}}",
       "relativeMonth": "{{value, relativetime(range: month)}}",
       "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
+      "accept": "Accetto",
       "account": "Account",
       "selected": "Selezionata",
       "announceTitle": "Annunci",
@@ -19,6 +20,7 @@
       "change": "Cambia",
       "checkIn": "Check In",
       "checkOut": "Check Out",
+      "decline": "Rifiuta",
       "description": "Descrizione",
       "email": "Email",
       "english": "Inglese",
@@ -72,7 +74,10 @@
       "formErrorTerms": "Accetta i termini e le condizioni",
       "formSuccess": "Tutto ok",
       "formErrorApi": "Email o password errata, prova di nuovo",
+      "loginToPursue" : "Registrati o effettua il login per continuare!",
       "messageError": "Nessun messaggio trovato",
+      "messageNotSent" : "Errore nell invio del messaggio",
+      "messageSent" : "Message sent !",
       "operationAnnounce": "Titolo annuncio, campo obbligatorio",
       "operationDescription": "Descrizione, campo obbligatorio",
       "operationAddress": "Indirizzo, campo obbligatorio",
@@ -149,9 +154,12 @@
                "services": "Servizi",
                "rooms": "Stanze",
                "rules": "Regole"
+            },
+            "admin": {
+               "pendingAnnounceListTitle": "Annunci da approvare",
+               "pendingStructureListTitle": "Strutture da approvare"
             }
-         },
-         "admin": {}
+         }
       }
    },
    "fe": {
@@ -183,6 +191,9 @@
          }
       },
       "modals": {
+         "contactHostModal" : {
+            "contactHost" : "Contatta l host"
+         },
          "filter": {
             "apply": "Applica filtri"
          }

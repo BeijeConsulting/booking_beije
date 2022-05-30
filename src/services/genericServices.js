@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLocalStorage } from "../utils/localStorage/localStorage";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 import { updateAuthTokenPostApi } from "./api/auth/authApi";
@@ -10,28 +10,47 @@ const axiosInstance = axios.create({
   timeout: TIMEOUT,
 });
 
+axios.interceptors.request.use(
+  config => {
+    const token = getLocalStorage("token");
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  error => {
+    Promise.reject(error)
+  }
+);
+
 axiosInstance.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
   return response;
-}, async function (error) {
-  const originalConfig = error.config;
+}, function (error) {
+  const originalRequest = error.config;
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
-  if (error.response.status === 401 && !originalConfig._retry) {
-    originalConfig._retry = true
-    //qui chiamata updateAuthToken
-    /* Token valido fino alle 11,00 del 19/05/2022 */
+  if (error.response.status === 401 &&
+    originalRequest.url === `${BASEURL}/updateAuthToken`) {
+    return Promise.reject(error);
+  }
+
+  if (error.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true
+
+    //api call updateAuthToken
     if (localStorage.getItem('refreshToken') !== null) {
 
-      await updateAuthTokenPostApi().then(res => {
-        const { token } = res.data;
+      updateAuthTokenPostApi().then(res => {
+        const { token, refreshToken } = res.data;
         setLocalStorage('token', token);
-      })
+        setLocalStorage('refreshToken', refreshToken);
+        axios.defaults.headers.common['Authorization'] = 'Bearer' + getLocalStorage("token");
+      });
     }
-
-
   }
+
   return Promise.reject(error);
 });
 

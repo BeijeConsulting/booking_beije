@@ -8,26 +8,31 @@ import UiButton from '../ui/buttons/uiButtons/UiButton';
 import { servicesToIcons } from '../../../../utils/serviceIdToFAIcon/servicesToIcons';
 import UiSelect from '../ui/uiSelect/UiSelect';
 
-let selectValue = 1
 function Rooms(props) {
     const ref = useRef();
     const { t } = useTranslation();
     const [state, setState] = useState({
-        selected: false
+        selected: props.stored !== undefined ? true : false,
+        selectValue: 1
     })
 
     useEffect(() => {
         props.callback(props.temp_id, state.selected, {
             price: props.price,
             title: props.title,
-            count: selectValue
+            id: props.temp_id,
+            count: props.stored !== undefined ? props.stored.count : state.selectValue
         })
     }, [state.selected])
 
 
+
+    const goToRoom = () =>{
+        props.callbackGoToRoom()
+    }
     const generateServicesIcon = ((service, index) => {
         return <span key={index}>
-            <FontAwesomeIcon icon={servicesToIcons[service].icon} />
+            <FontAwesomeIcon  className="services_icon" icon={servicesToIcons[service].icon} />
         </span>
     })
 
@@ -50,12 +55,13 @@ function Rooms(props) {
     }
 
     const handleNumberOfRooms = (e) => {
-        selectValue = e;
+        state.selectValue = e;
     }
 
 
     const selectedButton = () => {
         setState({
+            ...state,
             selected: !state.selected
         })
     }
@@ -64,31 +70,40 @@ function Rooms(props) {
         <div className='rooms_card_container'>
             <div className='title_info'>
                 <h2>{props.title}</h2>
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon onClick={goToRoom} className="info_icon" icon={faInfoCircle} />
             </div>
             <div className='description_container'>
                 <div className='number_people_container'>
-                    <div className='people_container'>{generatePeopleIcon()}</div> {props.numberOfPeople > 1 ? t("fe.components.rooms.people") : t("fe.components.rooms.person")}
+                    <div className='people_container'>{generatePeopleIcon()}<span>{props.numberOfPeople > 1 ? t("fe.components.rooms.people") : t("fe.components.rooms.person")}</span></div>
                 </div>
-                <div className='services_price_container'>{props.services.map(generateServicesIcon)}</div>
-                <div className='price_container'>
-                    <p>{`${t("fe.components.rooms.price")} ${props.numberOfNights} ${props.numberOfNights > 1 ? t("fe.components.rooms.nights") : t("fe.components.rooms.night")}`}</p>
-                    <p>{props.price}&euro;</p>
-                </div>
-                <div className='ui_components_container'>
-                    <UiButton
-                        label={(state.selected === true ? 'checked' : '') + ' ' + 'selected'}
-                        callback={selectedButton}
-
-                    />
-                    <UiSelect
-                        selected={state.selected}
-                        data={generateMaxRooms()}
-                        callback={handleNumberOfRooms}
-                    />
-
+                <div className='services_price_container'>
+                    <div>
+                        {props.services.map(generateServicesIcon)}
+                    </div>
+                    <div className='price_container'>
+                        <p>{`${t("fe.components.rooms.price")} ${props.numberOfNights} ${props.numberOfNights > 1 ? t("fe.components.rooms.nights") : t("fe.components.rooms.night")}`}</p>
+                        <p className="price_room">{props.price}&euro;</p>
+                    </div>
                 </div>
             </div>
+
+            <div className='ui_components_container'>
+                <UiButton
+                    className="button_room"
+                    label={(state.selected === true ? 'checked' : '') + ' ' + 'selected'}
+                    callback={selectedButton}
+
+                />
+                <UiSelect
+                    cssClass="select_on_roomCard"
+                    selected={state.selected}
+                    data={generateMaxRooms()}
+                    callback={handleNumberOfRooms}
+                    storedNOfRooms={props.stored?.count}
+                />
+
+            </div>
+
         </div>
     )
 }

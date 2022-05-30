@@ -21,7 +21,7 @@ import Settings from "./screens/frontEnd/profileMenu/Settings";
 import Registration from "./screens/frontEnd/registration/Registration";
 import DetailsProp from "./screens/frontEnd/details/DetailsProp";
 import DetailsPropRoom from "./screens/frontEnd/details/DetailsPropRoom";
-import MostRewApart from "./screens/frontEnd/MRA";
+import MostRewApart from "./screens/frontEnd/MRA/MRA";
 import Account from "./screens/frontEnd/profileMenu/Account";
 import Favourites from "./screens/frontEnd/profileMenu/Favourites";
 import Search from "./screens/frontEnd/Search";
@@ -37,9 +37,10 @@ import StructureOperation from "./screens/backOffice/host/structure/structureOpe
 import StructureList from "./screens/backOffice/host/structure/structureList/StructureList";
 import StructureDetails from "./screens/backOffice/host/structure/structureDetails/StructureDetails";
 import LayoutBackOffice from "./screens/backOffice/LayoutBackOffice";
+import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations";
+import PendingStructuresList from "./screens/backOffice/admin/structure/pendingStructureList/PendingStructuresList";
 import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnnounceList/PendingAnnounceList";
-// import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
-import AnnounceOperations from "./screens/backOffice/host/announce/announceOperations/AnnounceOperations"
+
 
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
@@ -51,19 +52,22 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
-import { logout } from "./utils/user/user";
 import { setProperty } from "./redux/ducks/propertyDuck";
 import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
+import useLogout from "./hooks/useLogout";
 
 
 
 function Routing(props) {
+
+    const { logoutExpire } = useLogout();
+
     useEffect(() => {
         (async () => {
             if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
-                
+
                 try {
-                    logout();
+                    logoutExpire();
                     let token = getLocalStorage('token');
                     props.dispatch(setToken(token));
                     const PROFILE = await myProfilesGetApi(token);
@@ -75,12 +79,11 @@ function Routing(props) {
                 }
             }
         })()
-
-
     }, []);
 
 
     //login, registration, account, messages, favourites, booking
+
 
     return (
         <Routes>
@@ -167,6 +170,7 @@ function Routing(props) {
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
+                <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
                 <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
             </Route>
 

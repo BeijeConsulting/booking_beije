@@ -17,6 +17,10 @@ import notLoggedUser from '../../../../assets/images/notLoggedUser.png';
 // connect to redux 
 import { connect } from "react-redux";
 
+// duck
+import { initUser } from "../../../../redux/ducks/userDuck";
+import { initToken } from "../../../../redux/ducks/tokenDuck";
+
 // routes 
 import { routes } from "../../../../routes/routes";
 // modale 
@@ -31,22 +35,17 @@ import { faChevronLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 // proptypes 
 import PropTypes from "prop-types";
 
-// tokenDuck 
-import { initToken } from '../../../../redux/ducks/tokenDuck';
-// userDuck
-import { initUser } from '../../../../redux/ducks/userDuck'
-
 // utils localstorage 
-import { getLocalStorage, removeLocalStorage } from '../../../../utils/localStorage/localStorage';
-import { decryptItem } from "../../../../utils/crypto/crypto";
+import { getLocalStorage } from '../../../../utils/localStorage/localStorage';
+import useLogout from "../../../../hooks/useLogout";
+import { Link } from "react-router-dom";
 
-
-//da cancellare quando implementato duck user
-let permission = 'host';
 
 function Navbar(props) {
     let vector = useNavigate();
     const { t } = useTranslation();
+    const { logoutUser } = useLogout();
+    // const logout = useLogout();
 
     const [state, setState] = useState({
         isMenuOpen: false,
@@ -108,19 +107,20 @@ function Navbar(props) {
     }
     // function to logout 
     const logoutFunc = () => {
-        props.dispatch(initUser());
-        props.dispatch(initToken());
-        removeLocalStorage("token");
-        removeLocalStorage("refreshToken");
         setState({
             ...state,
             isMenuOpen: false
         })
+
+        logoutUser();
+        props.dispatch(initUser());
+        props.dispatch(initToken());
         vector(routes.LAYOUT);
+        // logout.logoutUser();
     }
     return (
         <>
-
+            
             {
                 //MOBILE
                 props.stateLayout < 480 ?
@@ -140,11 +140,8 @@ function Navbar(props) {
                     //DESKTOP
                     : <>
                         <nav className="navDesktop t0 w100 flex jcSpaceB aiCenter relative">
-                            <div>
-                                <img onClick={goTo('HOME')} className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
-                                <LanguagesSwitch />
-                            </div>
 
+                            <img onClick={goTo('HOME')} className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
 
                             {
                                 state.isLogIn ?
@@ -152,23 +149,35 @@ function Navbar(props) {
 
                                     <>{
                                         state.isMenuOpen === false ?
-                                            < div className="hambMenu flex br2 cursor" >
-                                                <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} onClick={handleNavMenu} />
-                                                {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
-                                                <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
+                                            <div className="flex">
+                                                <LanguagesSwitch />
+
+                                                < div className="hambMenu flex br2 cursor mL1" >
+                                                    <FontAwesomeIcon className="arrowMenu" icon={faChevronLeft} onClick={handleNavMenu} />
+                                                    {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
+                                                    <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
+                                                </div>
                                             </div>
 
-                                            : <>
-                                                <div className="hambMenu flex br2 cursor">
+                                            :
+                                            <div className="flex">
+                                                <LanguagesSwitch />
+
+                                                <div className="hambMenu flex br2 cursor mL1">
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} onClick={handleNavMenu} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                     <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
                                                 </div>
-                                            </>
+                                            </div>
+
+
                                     }
                                     </>
                                     :
-                                    <span className="go_to_login cursor" onClick={goTo('LOGIN')}>Login</span>
+                                    <div className="flex">
+                                        <LanguagesSwitch />
+                                        <span className="go_to_login cursor mL1" onClick={goTo('LOGIN')}>Login</span>
+                                    </div>
                             }
                         </nav>
                         {
@@ -177,13 +186,20 @@ function Navbar(props) {
                                 <li onClick={goTo('SETTINGS')}>{t('common.account')}</li>
                                 <li onClick={goTo('BOOKINGS')}>{t('common.bookings')}</li>
                                 <li onClick={goTo('FAVOURITES')}>{t('fe.screens.settings.settingsCard.favourites')}</li>
-                                <li onClick={goTo(props.stateLayout > 991 ? 'CHAT' : 'MESSAGES')}>{t('common.messages')}</li>
+                                <li onClick={goTo(props.stateLayout > 991 ? 'CHAT' : 'MESSAGES')}>{t('common.messages')}</li> 
                                 {
-                                    // (props.userDuck.user.permission[0] === 'guest' )?
-                                    // <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :
-                                    permission === 'guest' ?
-                                        <li onClick={goTo('NOTFOUND')}>{t('fe.screens.guestAccount.becomeAHost')}</li> :
-                                        <li onClick={goTo('DASHBOARD')}>{t('fe.screens.settings.settingsCard.yourProperties')}</li>
+                                    props.userDuck?.user?.auth?.length < 2 ?
+                                        <li>
+                                            <Link className="link_navbar" to={`${routes.DASHBOARD}/${routes.HOST_REGISTRATION}`} >
+                                                {t('fe.screens.guestAccount.becomeAHost')}
+                                            </Link>
+                                        </li> :
+                                        <li>
+                                            <Link className="link_navbar" to={`${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`} >
+                                                {t('fe.screens.settings.settingsCard.yourProperties')}
+                                            </Link>
+                                        </li>
+
 
                                 }
                                 <li onClick={logoutFunc}>Logout</li>

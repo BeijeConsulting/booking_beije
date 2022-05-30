@@ -20,13 +20,15 @@ import '../../../../../assets/variables/_common.scss';
 import '../../../../../assets/commonStyles/pagination.scss';
 
 // api
-import { showAllStruttureGetApi } from '../../../../../services/api/struttura/strutturaApi';
 import Filter from '../../../hookComponents/filter/Filter';
 import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
 import withRouting from '../../../../../withRouting/withRouting';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+// import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
 
 
 
@@ -48,23 +50,41 @@ class SearchResult extends Component {
 
    componentDidMount() {
       this.getapi();
+      // if(this.props.router.location.state.property !== prevState.property){
+      this.setState({
+         property: this.props.router.location.state.property
+      })
+      // }
+
+
    }
 
    componentDidUpdate(prevProps, prevState) {
-      if (this.state.page !== prevState.page) {
-         showAllStruttureGetApi(5, this.state.page).then(res =>
-            this.setState({
-               property: res?.data?.list
-            }))
 
-      }
+      // if(this.props.router.location.state.property !== prevState.property){
+      // this.setState({
+      //    property: this.props.router.location.state.property
+      // })
+      // console.log('property',this.props.router.location.state.property);
+      // console.log('state',this.state);
+      // console.log('prev',prevState);
+      // }
+
+      // if (this.state.page !== prevState.page) {
+      //    showAllStruttureGetApi(5, this.state.page).then(res =>
+      //       this.setState({
+      //          property: res?.data?.list
+      //       }))
+
+      // }
    }
 
    async getapi() {
-      const response = await showAllStruttureGetApi(5, this.state.page);
-      this.setState({
-         property: response.data.list
-      })
+      // const response = await showAllStruttureGetApi(5, this.state.page);
+      // console.log(response.data.list);
+      // this.setState({
+      //    property: response.data.list
+      // })
    }
 
    handleButton = (params) => () => {
@@ -111,6 +131,12 @@ class SearchResult extends Component {
       console.log(this.searchFilters);
    }
 
+   handleData = (data) => {
+      this.setState({
+         property: data
+      })
+   }
+
    render() {
       return (
 
@@ -140,35 +166,10 @@ class SearchResult extends Component {
                {
                   this.state.isSearch && <SearchForm
                      callback={this.handleButton("isSearch")}
+                     data={this.handleData}
                   />
                }
             </Modal>
-
-            {/* <Modal
-               callback={this.handleButton("isFilter")}
-               isOpen={this.state.isFilter}
-            >
-               <Filter />
-            </Modal>
-
-            <Modal
-               callback={this.handleButton("isMap")}
-               isOpen={this.state.isMap}
-
-            >
-               <Map
-                  propertyList={this.state.property}
-                  initialPos={this.props.data}
-               />
-            </Modal>
-
-            <Modal
-               isOpen={this.state.isSearch}
-               callback={this.handleButton("isSearch")}>
-               <SearchForm
-                  callback={this.handleButton("isSearch")}
-               />
-            </Modal> */}
 
             {/* end modals */}
 
@@ -194,17 +195,17 @@ class SearchResult extends Component {
                this.state.property.length > 0 && this.state.property.map(this.mapping)
             }
 
-            {this.state.property.length > 5 &&
-               <Pagination
-                  size={"small"}
-                  total={10}
-                  pageSize={5}
-                  current={this.state.page}
-                  onChange={this.onPageChange}
-                  itemRender={paginationArrowsRender}
-                  className={'custom-pagination'}
-               />
-            }
+
+            {this.state.property.length > 5 && <Pagination
+               size={"small"}
+               total={10}
+               pageSize={5}
+               current={this.state.page}
+               onChange={this.onPageChange}
+               itemRender={paginationArrowsRender}
+               className={'custom-pagination'}
+            />}
+
          </div>
       )
    }
@@ -213,9 +214,11 @@ class SearchResult extends Component {
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-            callback={this.handleDetails(item?.id)}
+         // callback={this.handleDetails(item?.indirizzo?.struttura_id)}
          >
+
             <PropertyCard
+               callback={this.handleDetails(item?.indirizzo?.struttura_id)}
                data={item}
             />
          </Card>
