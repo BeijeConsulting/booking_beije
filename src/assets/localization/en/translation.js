@@ -63,7 +63,7 @@ export const TRANSLATIONS_EN = {
       "bookNow": "Prenota adesso!"
    },
    "toasts": {
-      "favouritesDeleted": "{{name}} has been deleted from your favourites",
+      "favouritesDeleted": "\"{{name}}\" has been deleted from your favourites",
       "formErrorAllFields": "Please, fill in all fields",
       "formErrorEmail": "Please, insert a valid email",
       "formErrorPassword": "Please, insert a valid password: at least 8 characters long, 1 capital letter and 1 symbol",

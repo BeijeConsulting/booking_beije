@@ -29,25 +29,30 @@ const Favourites = () => {
    const [state, setState] = useState({
       favourites: [],
       windowWidth: window.innerWidth,
-      page: 1
+      page: 1,
+      totalItems: 0
    });
 
+   let itemsPerPage = 5;
 
    useEffect(() => {
       window.addEventListener('resize', handleResize)
       return () => { window.removeEventListener('resize', handleResize) }
    })
 
-   useEffect(() => {
+   function loadFavourites() {
       if (localStorage.getItem('token') !== null)
-         getFavourites(getLocalStorage('token'))
+         getFavourites(itemsPerPage, state.page, getLocalStorage('token'))
             .then(res => {
                setState({
-                  favourites: res?.data
-               })
+                  ...state,
+                  favourites: res?.data?.list ? res?.data?.list : [],
+                  totalItems: res?.data?.elementsTotal
+               });
             });
-   }, [])
+   }
 
+   useEffect(loadFavourites, [state.page]);
 
    function handleResize() {
       setState({
@@ -56,8 +61,8 @@ const Favourites = () => {
       })
    }
 
-   const showToast = (propertyId, propertyName) => {
-      const key = `${propertyId}-toast`;
+   const showToast = (favouriteId, propertyName) => {
+      const key = `${favouriteId}-toast`;
       notification.open({
          description: t('toasts.favouritesDeleted', { name: propertyName }),
          onClick: () => {
@@ -70,23 +75,22 @@ const Favourites = () => {
       });
    };
 
-   const handleFavourite = (propertyId, propertyName) => {
-      deleteFavourite(propertyId, getLocalStorage('token'));
-      showToast(propertyId, propertyName);
+   const handleFavourite = async (favouriteId, propertyName) => {
+      await deleteFavourite(favouriteId, getLocalStorage('token'));
+      loadFavourites();
+      showToast(favouriteId, propertyName);
    }
 
-   const onPageChange = (page) => {
+   const onPageChange = (nextPage) => {
       setState({
          ...state,
-         page: page
+         page: nextPage
       })
    }
 
-   let favouritesRendering;
-   if (state.favourites && state.favourites.length > 0) {
+   let favouritesRendering = <p>{t('fe.screens.favourites.noFavourites')}</p>;
+   if (Array.isArray(state.favourites) && state.favourites.length > 0) {
       favouritesRendering = wrapperMap(FavouriteCard, state.favourites, handleFavourite);
-   } else {
-      favouritesRendering = <p>{t('fe.screens.favourites.noFavourites')}</p>
    }
 
    return (
@@ -104,11 +108,11 @@ const Favourites = () => {
 
             {favouritesRendering}
 
-            {state.favourites.length > 5 &&
+            {state.totalItems > itemsPerPage &&
                <Pagination
                   size={"small"}
-                  total={10}
-                  pageSize={5}
+                  total={state.totalItems}
+                  pageSize={itemsPerPage}
                   current={state.page}
                   onChange={onPageChange}
                   itemRender={paginationArrowsRender}

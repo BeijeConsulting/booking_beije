@@ -1,42 +1,48 @@
 import React, { useEffect } from 'react'
-import './FavouriteCard.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 
+// api
 import { getStructureImage } from '../../../../services/api/struttura/struttura-immagini-controller/structureImagesApi';
 
-//style
+// assets
 import '../../../../assets/variables/_common.scss';
+import './FavouriteCard.scss'
+import propertyPlaceholder from '../../../../assets/images/propertyPlaceholder.png';
+
+// modules
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
 
 function FavouriteCard(props) {
 
-   const { citta, numero_civico, via } = props.item.Struttura.indirizzo;
-   const { descrizione, id } = props.item.Struttura;
+   const { descrizione, id, nome_struttura } = props.item.Struttura;
    const { tipo } = props.item.Struttura.tipologiaStrutturaId;
-   let thumbnail;
+   let favouriteId = props.item.id;
+   let thumbnail = propertyPlaceholder;
 
    useEffect(() => {
-      thumbnail = getStructureImage(id).then(res => res.data);
+      let apiThumbnail = getStructureImage(id).then(res => res?.data?.immagine?.urlImage)
+      if (apiThumbnail !== '') thumbnail = apiThumbnail;
    }, [])
 
    const handleOnClick = () => {
-      props.callback(id, descrizione);
+      props.callback(favouriteId, nome_struttura);
    }
 
    return (
       <div className='favourite-card br3 flex p1'>
          <div className='thumbnail-container'>
-            <img src={thumbnail} alt={descrizione} />
+            <img src={thumbnail} alt={nome_struttura} />
          </div>
          <div className={`card w100 mL1 ${props.className}`}>
             <div className='card-header flex aiCenter jcSpaceB'>
-               <span className='card-title'>{descrizione}</span>
+               <span className='card-title'>{nome_struttura}</span>
                <FontAwesomeIcon icon={faHeart} onClick={handleOnClick} />
             </div>
             <div className='card-content'>
                <p>{tipo}</p>
-               <p>{via} {numero_civico} - {citta}</p>
+               <p>{descrizione}</p>
             </div>
          </div>
       </div>

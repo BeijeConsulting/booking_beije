@@ -66,7 +66,7 @@ export const TRANSLATIONS_IT ={
       "bookNow": "Prenota adesso!"
    },
    "toasts": {
-      "favouritesDeleted": "La struttura {{name}} è stata eliminata dai tuoi preferiti",
+      "favouritesDeleted": "La struttura \"{{name}}\" è stata eliminata dai tuoi preferiti",
       "formErrorAllFields": "Compila tutti i campi",
       "formErrorEmail": "Inserisci una mail valida",
       "formErrorPassword": "Inserisci una password di almeno 8 caratteri, con almeno un simbolo",
