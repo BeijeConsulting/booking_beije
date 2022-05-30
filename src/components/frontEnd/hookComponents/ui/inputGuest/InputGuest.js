@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // ant
 import { InputNumber, Space } from 'antd';
 
 // events
-import { eventBus } from '../../../../../eventBus/eventBus';
+// import { eventBus } from '../../../../../eventBus/eventBus';
 import { connect } from 'react-redux';
 import { setGuest } from '../../../../../redux/ducks/guestDuck';
 
@@ -30,7 +30,7 @@ function InputGuest(props) {
       })
    }
 
-  
+
 
    const selectBefore = (
       <span name={-1} onClick={handleClick}>
@@ -59,4 +59,4 @@ function InputGuest(props) {
    )
 }
 
-export default connect() (InputGuest);
+export default connect()(InputGuest);
