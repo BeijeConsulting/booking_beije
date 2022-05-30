@@ -163,7 +163,7 @@ function Navbar(props) {
                                             <div className="flex">
                                                 <LanguagesSwitch />
 
-                                                <div className="hambMenu flex br2 cursor mL1">
+                                                <div className="hambMenu flex br2 cursor mL1 aiCenter">
                                                     <FontAwesomeIcon className="arrowMenuOpen" icon={faChevronLeft} onClick={handleNavMenu} />
                                                     {/* <img className="phUser" src={props.userDuck.user.image}alt="profileUser" /> */}
                                                     <img className="phUser ofC br50" src={LoggedUser} alt="profileUser" />
