@@ -13,7 +13,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 
-const GoBackButton = ({route}) => {
+const GoBackButton = ({route,cssCustom}) => {
 
     const navigate = useNavigate()
 
@@ -22,7 +22,7 @@ const GoBackButton = ({route}) => {
     }
     return (
         <>
-            <FontAwesomeIcon className="button_go_back p1 flex jcStart" icon={faChevronLeft} onClick={handlerClick(route)} />
+            <FontAwesomeIcon className={`button_go_back p1 flex jcStart ${cssCustom}`} icon={faChevronLeft} onClick={handlerClick(route)} />
         </>
     )
 }
