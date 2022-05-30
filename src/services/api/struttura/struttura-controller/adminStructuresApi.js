@@ -3,7 +3,6 @@ import { getApi, putApi } from '../../../genericServices'
 /* AUTH:ADMIN */
 const showPendingStructuresGetAllApi = async (header) => {
     return await getApi(`strutture/pending`, header);
-    //?page=${currentPage}&itemsPerPage=10
 }
 
 /* AUTH:ADMIN */

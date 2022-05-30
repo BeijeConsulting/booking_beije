@@ -46,7 +46,7 @@ const Homepage = () => {
             <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
             <div className="suggested-container relative">
                <h3 className="absolute">{t("common.suggestedApartaments")}</h3>
-               <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
+               <img onClick={handleNavigation(`/${routes.MRA}`)} className="homeImg ofC py1" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
             </div>
          </div>
       </>

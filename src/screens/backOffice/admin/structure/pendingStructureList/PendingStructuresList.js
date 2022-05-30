@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
 
+//TRANSLATION
+import { useTranslation } from "react-i18next";
+
 //REDUX AND TOKEN MANAGEMENT
 import { connect } from "react-redux";
+import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+//import { decryptItem } from "../../../../../utils/crypto/crypto";
 import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-import { decryptItem } from "../../../../../utils/crypto/crypto";
-
-//API
-import { showPendingStructuresGetAllApi } from "../../../../../services/api/struttura/struttura-controller/adminStructuresApi";
-import { acceptPendingStructurePutApi } from '../../../../../services/api/struttura/struttura-controller/adminStructuresApi';
-import { declinePendingStructurePutApi } from '../../../../../services/api/struttura/struttura-controller/adminStructuresApi';
-
-//STYLE
-import "./PendingStructuresList.scss"
 
 //COMPONENTS
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
-import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+
+//API
+import { acceptPendingStructurePutApi, declinePendingStructurePutApi, showPendingStructuresGetAllApi } from "../../../../../services/api/struttura/struttura-controller/adminStructuresApi";
+
+//STYLE
+import "./PendingStructuresList.scss";
 import { Button } from "antd";
 
-//TRANSLATION
-import { useTranslation } from "react-i18next";
 
 //TODO: PAGINATION
 //TODO: TEST DECLINE AGAIN, waiting for back-end to fix error 500
 
-let responseApiGetAll = null;
 
 const PendingStructuresList = (props) => {
 
     const [state, setState] = useState({
         pendingStructureList: []
     });
+
+    let responseApiGetAll = null;
 
     const { t } = useTranslation();
 
@@ -40,7 +40,17 @@ const PendingStructuresList = (props) => {
         //set paginationProps.currentPage to clickedPage (with useState)
 
         //remap new object's array from API
+        //console.log('Current page', clickedPage);
+
+        //console.log(responseApiGetAll)
+
+        setState({
+            ...state,
+            pendingStructureList: responseApiGetAll?.data.list
+        })
     }
+
+
 
     const paginationProps = {
         itemsCount: 50, //get from backend
@@ -50,9 +60,13 @@ const PendingStructuresList = (props) => {
 
 
     const getAll = async () => {
-        let token = getLocalStorage('token');
-        responseApiGetAll = await showPendingStructuresGetAllApi(token);
-        console.log(responseApiGetAll)
+
+        if (localStorage.getItem('token') !== null) {
+            const HEADER = getLocalStorage('token');
+            // const HEADER = decryptItem(props.tokenDuck.token);
+            responseApiGetAll = await showPendingStructuresGetAllApi(HEADER);
+        }
+
         setState({
             ...state,
             pendingStructureList: responseApiGetAll.data.list
@@ -65,22 +79,17 @@ const PendingStructuresList = (props) => {
 
     const acceptPendingStructure = (clickedStructureId) => () => {
 
-        console.log('accept clciked', clickedStructureId)
-
         const update = async () => {
             if (localStorage.getItem('token') !== null) {
-                const HEADER = getLocalStorage('token');
-                console.log('header', HEADER)
-                await acceptPendingStructurePutApi(clickedStructureId, HEADER);
-            }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(acceptPendingStructurePutApi(clickedStructureId, HEADER));
 
+                // const HEADER = decryptItem(props.tokenDuck.token);
+                const HEADER = getLocalStorage('token');
+
+                acceptPendingStructurePutApi(clickedStructureId, HEADER);
+            }
         }
 
         update();
-
-
 
         let updated = state.pendingStructureList.filter((structure) => {
             return structure.id !== clickedStructureId
@@ -96,16 +105,15 @@ const PendingStructuresList = (props) => {
 
     const declinePendingStructure = (clickedStructureId) => () => {
 
-        console.log('decline clciked', clickedStructureId)
-
         const decline = async () => {
+
             if (localStorage.getItem('token') !== null) {
+
+                // const HEADER = decryptItem(props.tokenDuck.token);
                 const HEADER = getLocalStorage('token');
-                console.log('decline header', HEADER)
-                await declinePendingStructurePutApi(clickedStructureId, HEADER);
+
+                declinePendingStructurePutApi(clickedStructureId, HEADER);
             }
-            //const HEADER = decryptItem(props.tokenDuck.token);
-            //console.log(declinePendingStructurePutApi(clickedStructureId, HEADER));
         }
 
         decline();
@@ -143,7 +151,7 @@ const PendingStructuresList = (props) => {
     return (
         <>
             <CardList
-                sectionTitle={"Pending structures list"}
+                sectionTitle={t('bo.screens.admin.pendingStructureListTitle')}
                 {...paginationProps}
             >
                 {state.pendingStructureList.map(renderPendingStructures)}
