@@ -48,7 +48,7 @@ function Rooms(props) {
     }
     const generateMaxRooms = () => {
         let arrayData = []
-        for (let index = 1; index <= props.count; index++) {
+        for (let index = 1; index <= props.count > 4 ? 4 : props.count; index++) {
             arrayData.push(index)
         }
         return arrayData;
