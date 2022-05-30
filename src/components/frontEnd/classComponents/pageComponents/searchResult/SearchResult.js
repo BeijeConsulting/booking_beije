@@ -26,6 +26,8 @@ import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
 import withRouting from '../../../../../withRouting/withRouting';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 // import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
 
 
@@ -49,25 +51,25 @@ class SearchResult extends Component {
    componentDidMount() {
       this.getapi();
       // if(this.props.router.location.state.property !== prevState.property){
-         this.setState({
-            property: this.props.router.location.state.property
-         })
+      this.setState({
+         property: this.props.router.location.state.property
+      })
       // }
 
-     
+
    }
 
    componentDidUpdate(prevProps, prevState) {
 
       // if(this.props.router.location.state.property !== prevState.property){
-         // this.setState({
-         //    property: this.props.router.location.state.property
-         // })
-         // console.log('property',this.props.router.location.state.property);
-         // console.log('state',this.state);
-         // console.log('prev',prevState);
-         // }
- 
+      // this.setState({
+      //    property: this.props.router.location.state.property
+      // })
+      // console.log('property',this.props.router.location.state.property);
+      // console.log('state',this.state);
+      // console.log('prev',prevState);
+      // }
+
       // if (this.state.page !== prevState.page) {
       //    showAllStruttureGetApi(5, this.state.page).then(res =>
       //       this.setState({
@@ -194,7 +196,7 @@ class SearchResult extends Component {
             }
 
 
-         { this.state.property.length > 5 &&  <Pagination
+            {this.state.property.length > 5 && <Pagination
                size={"small"}
                total={10}
                pageSize={5}
@@ -212,9 +214,11 @@ class SearchResult extends Component {
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-            // callback={this.handleDetails(item?.indirizzo?.struttura_id)}
+         // callback={this.handleDetails(item?.indirizzo?.struttura_id)}
          >
+
             <PropertyCard
+               callback={this.handleDetails(item?.indirizzo?.struttura_id)}
                data={item}
             />
          </Card>
