@@ -2,19 +2,11 @@
 
 .navMobile{
     height: 15%;
-    background-color: #fff9f5c7;
-    // position: fixed;
-    // bottom: 0;
-    // width: 100%;
-    // display: flex;
-    // justify-content: space-around;
-    // align-items: center;
-    backdrop-filter: blur(10px);
+    background-color: #fff9f5;
     .iconIfLogged{
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        // object-fit: cover;
     }
     .iconSearch{
         font-size: 3rem;
@@ -23,7 +15,6 @@
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        // object-fit: cover;
     }
 }
 
@@ -31,13 +22,7 @@
 .navDesktop{
     height: 10vh;
     background-color: $black_primary;
-    // top: 0;
-    // width: 100%;
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
     padding: 0 7vw;
-    // position: relative;
     z-index: 2;
     border-bottom: 2px solid $white_primary;
     .go_to_login{
