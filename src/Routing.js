@@ -167,10 +167,10 @@ function Routing(props) {
                 <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
                 <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-                <Route path={`${routes.STRUCTURE_DETAILS}`} element={<StructureDetails />} />
+                <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
                 <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
                 <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
-                <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
+                <Route path={`${routes.ANNOUNCE_OPERATION}/:id`} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
                 <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />

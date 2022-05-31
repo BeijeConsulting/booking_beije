@@ -75,7 +75,7 @@ const LayoutBackOffice = () => {
   const goTo =
     (path = "", obj = null) =>
     () => {
-      return navigate(`/${routes.DASHBOARD}/${path}`);
+      return navigate(`${path}`);
     };
 
   return (
@@ -119,7 +119,7 @@ const LayoutBackOffice = () => {
                 bottom: 5,
               }}
               type="primary"
-              onClick={() => console.log("Logout")}
+              onClick={goTo(`/${routes.SETTINGS}`)}
               block={state.collapsed ? true : false}
             >
               <FontAwesomeIcon icon={faUser} className={"trigger"} inverse />
@@ -128,7 +128,7 @@ const LayoutBackOffice = () => {
                   !state.collapsed ? "visible" : "hide"
                 }`}
               >
-                Logout
+                Account settings
               </span>
             </Button>
           </Sider>
@@ -145,7 +145,7 @@ const LayoutBackOffice = () => {
         >
           {location.pathname.replaceAll("/", "") !== "dashboard" ? (
             <>
-              <div onClick={goTo()} style={{ cursor: "pointer" }}>
+              <div onClick={goTo(`/${routes.DASHBOARD}`)} style={{ cursor: "pointer" }}>
                 <FontAwesomeIcon icon={faEllipsis} /> back to dashboard
               </div>
               <Outlet />
