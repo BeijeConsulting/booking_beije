@@ -47,7 +47,7 @@ class SearchResult extends Component {
    }
 
    componentDidMount() {
-      this.getapi();
+      // this.getapi();
       if(this.props.router.location.state !== null){
       this.setState({
          property: this.props.router.location.state.property
@@ -78,8 +78,7 @@ class SearchResult extends Component {
    }
 
    async getapi() {
-      // const response = await showAllStruttureGetApi(5, this.state.page);
-      // console.log(response.data.list);
+      // const response = await showAllStruttureGetApi(100, this.state.page);
       // this.setState({
       //    property: response.data.list
       // })
@@ -130,6 +129,7 @@ class SearchResult extends Component {
    }
 
    handleData = (data) => {
+      console.log(data);
       this.setState({
          property: data
       })
