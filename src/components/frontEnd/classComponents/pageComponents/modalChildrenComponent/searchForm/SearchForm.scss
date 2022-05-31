@@ -1,5 +1,10 @@
 @import '../../../../../../assets/variables/globalVariables.scss';
 
+.search-input:focus-visible {
+   border: 0;
+   outline: 0;
+}
+
 .home-search .searchFormContainer {
 
    margin: 2rem 0 1rem;
@@ -20,31 +25,6 @@
       width: 100%;
    }
 
-   .ant-input-number {
-      border: 0;
-   }
-
-   .ant-input-number-input {
-      width: 2rem;
-      padding: 0;
-      color: #fff9f5;
-      text-align: center;
-      border: 0;
-      background: #2a8ba8;
-      outline: 0;
-      border-radius: 0;
-      height: auto;
-      font-size: 1.2rem;
-   }
-
-   .ant-input-number-out-of-range input {
-      color: #f79fa0;
-   }
-
-   .ant-input-number-handler-wrap {
-      display: none;
-   }
-
    .search-input {
       background-color: transparent;
       border: 0;
@@ -55,11 +35,6 @@
    .search-input::-webkit-input-placeholder,
    .search-input::placeholder {
       color: $white_primary;
-   }
-
-   .search-input:focus-visible {
-      border: 0;
-      outline: 0;
    }
 
    .icon-search {
@@ -86,23 +61,60 @@
       width: 5rem;
    }
 
-   .ant-input-number-group {
-      margin: 0 1rem;
-      padding: 0;
-      width: auto;
-      display: flex;
-      align-items: center;
+   .send-search {
+      display: none;
    }
 
-   .ant-input-number-group-addon {
-      border-radius: 50%;
-      color: #44403c;
-      cursor: pointer;
-      background-color: #fff9f5;
-      display: flex;
-      justify-content: center;
-   }
+}
 
+.ant-input-number {
+   border: 0;
+}
+
+.ant-input-number-input {
+   width: 2rem;
+   padding: 0;
+   color: #fff9f5;
+   text-align: center;
+   border: 0;
+   background: #2a8ba8;
+   outline: 0;
+   border-radius: 0;
+   height: auto;
+   font-size: 1.2rem;
+}
+
+.ant-input-number-out-of-range input {
+   color: #f79fa0;
+}
+
+.ant-input-number-handler-wrap {
+   display: none;
+}
+
+.ant-input-number-group {
+   margin: 0 1rem;
+   padding: 0;
+   width: auto;
+   display: flex;
+   align-items: center;
+}
+
+.ant-input-number-group-addon {
+   border-radius: 50%;
+   color: #44403c;
+   cursor: pointer;
+   background-color: #fff9f5;
+   display: flex;
+   justify-content: center;
+}
+
+.ant-input-number-group>.ant-input-number:first-child,
+.ant-input-number-group-addon:first-child,
+.ant-input-number-group>.ant-input-number:last-child,
+.ant-input-number-group-addon:last-child {
+   border: 0;
+   border-radius: 50%;
 }
 
 .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before,
@@ -224,15 +236,8 @@ tr>.ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::after,
    border-color: $primary_lighter;
 }
 
-.modal .searchFormContainer {
-   form {
-      display: flex;
-      flex-direction: column;
-
-   }
-}
-
 @media (min-width: 650px) {
+
    .home-search .searchFormContainer {
       padding: 0.5rem 1rem;
 
@@ -243,5 +248,76 @@ tr>.ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::after,
       .location-bar {
          margin-bottom: 0;
       }
+   }
+}
+
+.modal .searchFormContainer {
+
+   margin-top: 1rem;
+
+   form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+   }
+
+   form div:nth-child(2) {
+      flex-direction: column;
+   }
+
+   .location-bar {
+      background: $white_primary;
+      border-radius: 0.4rem;
+      padding: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+
+      .fa-location-dot {
+         color: $black_primary;
+         font-size: 1.3rem;
+      }
+
+      .search-input {
+         background: $white_primary;
+         color: $black_primary;
+         width: 100%;
+         margin-left: 1rem;
+      }
+
+      .search-input::-webkit-input-placeholder,
+      .search-input::placeholder {
+         color: $black_primary;
+      }
+   }
+
+   .ant-input-number-group-addon {
+      color: $white_primary;
+      background-color: $secondary_dark;
+   }
+
+   .ant-space.ant-space-vertical {
+      width: 100%;
+   }
+
+   .ant-picker.ant-picker-range {
+      background: $white_primary;
+      border-radius: 0.4rem;
+      padding: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+   }
+
+   .ant-input-number-input {
+      background: $black_primary;
+   }
+
+   .send-search {
+      margin-top: 5rem;
+      padding: 0.5rem 0;
+      width: 100%;
+   }
+
+   .icon-search {
+      display: none;
    }
 }

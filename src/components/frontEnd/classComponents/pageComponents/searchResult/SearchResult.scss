@@ -4,6 +4,10 @@
    background-color: $black_primary;
    padding-bottom: 3rem;
 
+   .home-search {
+      width: 100%;
+   }
+
    .ButtonContainer,
    .searchFormContainer,
    form {
@@ -55,4 +59,11 @@
 
 .filters-modal input[type="submit"] {
    margin-top: 1rem;
+}
+
+
+@media (min-width: 650px) {
+   .home-search {
+      width: auto;
+   }
 }

@@ -42,7 +42,7 @@ const SearchButton = ({ callback, classCustom }) => {
          </button>
 
          :
-         <div className='home-search w100'>
+         <div className='home-search'>
             <SearchForm />
          </div>
    )

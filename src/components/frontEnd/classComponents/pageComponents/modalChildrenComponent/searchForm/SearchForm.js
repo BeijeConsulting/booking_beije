@@ -1,10 +1,12 @@
 // import FullCalendar from '@fullcalendar/react';
 import React, { Component } from 'react';
+import { t } from "i18next";
 
 // api
 import { getStructuresBySearch } from '../../../../../../services/api/search/searchApi';
 
 // components
+import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
 import SearchPlace from '../../../../hookComponents/ui/searchPlace/SearchPlace';
 import { DatePicker, Space, } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -135,6 +137,7 @@ class SearchForm extends Component {
 
                      <InputGuest />
 
+                     <FormButton className="btn-primary m1 cursor send-search" label={t("common.send")} callback={this.handleSubmit} />
                      <div className='icon-search flex'>
                         <FontAwesomeIcon icon={faSearch} onClick={this.handleSubmit} />
                      </div>
