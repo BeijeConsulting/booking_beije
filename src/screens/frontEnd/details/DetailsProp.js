@@ -103,7 +103,7 @@ const DetailsProp = () => {
   }
 
   const addToCheckOut = (temp_id, isSelected, obj) => {
-    console.log('qua', obj)
+
     isSelected ? checkOutArray[temp_id] = {
       ...obj,
       price: obj.price * obj.count,
@@ -144,7 +144,7 @@ const DetailsProp = () => {
   const generateRooms = (item, key) => {
 
     const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
-    console.log('item', item)
+
     return <Rooms
       callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
       stored={isStored}

@@ -25,8 +25,6 @@ function Rooms(props) {
         })
     }, [state.selected])
 
-    console.log(props.temp_id, props.stored);
-
     const goToRoom = () => {
         props.callbackGoToRoom()
     }
