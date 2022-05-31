@@ -1,9 +1,13 @@
 $primary: #2A8BA8;
+$primary_light: lighten($primary, 20%);
+$primary_lighter: lighten($primary, 35%);
+$primary_lightest: lighten($primary, 50%);
 
 $secondary: #B38B57;
 $secondary_light: lighten($secondary, 20%);
 $secondary_lighter: #EADDD4;
 $secondary_dark:#D2B48C;
+
 
 $black_primary: #44403C;
 $black_primary_light: lighten($black_primary, 20%);

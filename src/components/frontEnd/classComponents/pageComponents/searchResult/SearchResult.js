@@ -177,7 +177,7 @@ class SearchResult extends Component {
                <SearchButton
                   callback={this.handleButton("isSearch")}
                />
-               <div className='w100 flex jcSpaceA'>
+               <div className='w100 flex jcSpaceB'>
 
                   <UiButton className="becomeHost"
                      callback={this.handleButton("isFilter")}
