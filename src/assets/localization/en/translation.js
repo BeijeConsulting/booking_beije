@@ -60,13 +60,13 @@ export const TRANSLATIONS_EN = {
       "service": "Service",
       "services": "Services",
       "submit": "Submit",
+      "suggestedApartments": "Suggested apartments",
       "surname": "Surname",
       "termsConditions": "Terms and Agreement",
       "update": "Update",
       "writeMessage": "Write your message here...",
       "you": "You",
       "zipCode": "ZIP code",
-      "suggestedApartaments": "Suggested apartament",
       "bookNow": "Book now!"
    },
    "toasts": {

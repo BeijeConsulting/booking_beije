@@ -60,13 +60,13 @@ export const TRANSLATIONS_IT = {
       "service": "Servizio",
       "services": "Servizi",
       "submit": "Invia",
+      "suggestedApartments": "Appartamenti consigliati",
       "surname": "Cognome",
       "termsConditions": "Termini e condizioni",
       "update": "Aggiorna",
       "writeMessage": "Scrivi qui il tuo messaggio...",
       "you": "Tu",
       "zipCode": "Codice postale",
-      "suggestedApartaments": "Appartamenti consigliati",
       "bookNow": "Prenota adesso!"
    },
    "toasts": {
