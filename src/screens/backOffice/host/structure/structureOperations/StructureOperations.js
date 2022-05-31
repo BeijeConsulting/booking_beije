@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 import {
   disableStrutturaPutApi,
   insertStrutturaPostApi,
+  showAllStruttureGetApi,
   strutturaDetailIdGetApi,
   updateStrutturaPutApi,
 } from "../../../../../services/api/struttura/strutturaApi";
@@ -43,6 +44,7 @@ const StructureOperation = (props) => {
   const { t } = useTranslation();
 
   const [state, setState] = useState(null);
+  const [tipoStrutture, setTipoStrutture] = useState(null);
 
   const { TextArea } = Input;
   const location = useLocation();
@@ -68,6 +70,11 @@ const StructureOperation = (props) => {
   };
 
   useEffect(() => {
+    const getTipoStrutture = async () => {
+      const stuctureArray = await showAllTipoStrutturaGetApi();
+      console.log(stuctureArray.data);
+      setTipoStrutture(stuctureArray.data);
+    };
 
     const getUserInfo = async () => {
       const HEADER = getLocalStorage("token");
@@ -88,13 +95,12 @@ const StructureOperation = (props) => {
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
-      structureValue.images= strutturaDetail?.images;
+      structureValue.images = strutturaDetail?.images;
       structureValue.userId = strutturaDetail?.host?.user?.id;
       setState(structureValue);
     };
 
-    
-
+    getTipoStrutture();
     if (location.state.idStructure !== null) {
       getStructure();
     } else {
@@ -180,7 +186,7 @@ const StructureOperation = (props) => {
 
   return (
     <>
-      {state === null ? (
+      {state === null && tipoStrutture === null ? (
         <Spin />
       ) : (
         <Form
@@ -249,6 +255,7 @@ const StructureOperation = (props) => {
               ]}
             >
               <Radio.Group>
+                {tipoStrutture.map((stu) => console.log(stu))}
                 <Radio value={"Hotel"}>Hotel</Radio>
                 <Radio value={"Apartment"}>Apartment</Radio>
                 <Radio value={"Villa"}>Villa</Radio>
