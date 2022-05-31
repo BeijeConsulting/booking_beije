@@ -48,7 +48,7 @@ export default function tokenDuck(state = INIT_STATE, action) {
             newState.token = encryptItem(action.payload.token); // token get encrypted ans set it as new value
             return newState;
 
-        case INIT_STATE:
+        case INIT_TOKEN:
             newState = Object.assign({}, state);
             newState.token = null;
             return newState;
