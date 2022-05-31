@@ -18,7 +18,7 @@ import { routes } from '../../../../../routes/routes';
 import { randomKey } from '../../../../../utils/generalIteration/generalIteration';
 
 import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-import { messageListHostGetApi } from '../../../../../services/api/messaggi/messaggiApi'
+import { messageListHostGetApi, messageGetAdmin } from '../../../../../services/api/messaggi/messaggiApi'
 
 
 const MessageList = (props) => {
@@ -27,17 +27,18 @@ const MessageList = (props) => {
 
     const [state, setState] = useState({
         listOfMessage: [],
-        elementsTotal: null,
-        loading: true
+        elementsTotal: 1,
+        loading: true,
+        permessionHost: ''
     })
 
+    // console.log(props.userDuck.user.auth[1])
     //TEST SE SEI HOST ALLORA TI FA VEDERE LE MESSAGI CON ADMIN INVECE  SE SEI ADMIN O GUEST NON TI FA VEDERE MESSAGI CON ADMIN
-    let host = true
+
 
     const fetchingMessageHostApi = async () => {
         const HEADER = getLocalStorage("token")
         let responseMessageHostApi = await messageListHostGetApi(1, 3, HEADER)
-        console.log(responseMessageHostApi)
         setState({
             ...state,
             listOfMessage: responseMessageHostApi?.data?.list,
@@ -46,7 +47,6 @@ const MessageList = (props) => {
     }
 
     const switchToPage = async (clickedPage) => {
-        console.log("switch to page", clickedPage);
 
         const HEADER = getLocalStorage("token")
         let responsePaginationMessageApiHost = await messageListHostGetApi(clickedPage, 3, HEADER)
@@ -65,22 +65,31 @@ const MessageList = (props) => {
         paginationCallback: switchToPage
     }
 
-    const goToChat = (idChat = null) => (e) => {
+    const goToChat = (idChat, receverId) => (e) => {
         navigate(`/${routes.DASHBOARD}/${routes.MESSAGE_CHAT}`, {
-            state: idChat
+            state: {
+                idChat,
+                receverId
+            }
         });
     };
+
+    // const goToChatWithAdmin = async () => {
+    //     const HEADER = getLocalStorage("token");
+    //     let responseMessageAdmin = await messageGetAdmin(HEADER);
+    //     console.log(responseMessageAdmin)
+    // }
 
     // RESERVATION NUMBER ?????????
 
     const renderMessages = (message, key) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
-            imageSrc={message.lastMessaggio.sender.url_image}
+            imageSrc={message?.lastMessaggio?.sender.url_image}
             altText={`${key}_${message.title}`}
-            title={message.lastMessaggio.insertion.struttura.nome_struttura}
-            text={`Guest: ${message.lastMessaggio.sender.name}`}
-            callback={goToChat(message.annuncioId)}
+            title={message?.lastMessaggio?.insertion?.struttura.nome_struttura}
+            text={`Guest: ${message?.lastMessaggio?.sender.name}`}
+            callback={goToChat(message?.annuncioId, message?.lastMessaggio?.receiver.id)}
         />
     }
 
@@ -96,10 +105,11 @@ const MessageList = (props) => {
             <GoBackButton />
             <h1 className="title_messages_page">{t("common.messages")}</h1>
             {
-                host ? <div className="admin_message_list">
+                !state.permessionHost ? <div className="admin_message_list">
                     <HorizontalCard
                         title="Admin"
                         upperRightContent={'icon'}
+                    // callback={goToChatWithAdmin()}
                     />
                 </div> : ''
             }
