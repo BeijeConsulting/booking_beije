@@ -68,6 +68,7 @@ export const TRANSLATIONS_EN = {
       "bookNow": "Book now!"
    },
    "toasts": {
+      "favouritesAdded": "\"{{name}}\" has been added to your favourites",
       "favouritesDeleted": "\"{{name}}\" has been deleted from your favourites",
       "formErrorAllFields": "Please, fill in all fields",
       "formErrorEmail": "Please, insert a valid email",

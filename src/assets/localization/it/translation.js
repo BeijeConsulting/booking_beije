@@ -68,6 +68,7 @@ export const TRANSLATIONS_IT = {
       "bookNow": "Prenota adesso!"
    },
    "toasts": {
+      "favouritesAdded": "La struttura \"{{name}}\" è stata aggiunta ai tuoi preferiti",
       "favouritesDeleted": "La struttura \"{{name}}\" è stata eliminata dai tuoi preferiti",
       "formErrorAllFields": "Compila tutti i campi",
       "formErrorEmail": "Inserisci una mail valida",
