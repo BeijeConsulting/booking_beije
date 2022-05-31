@@ -8,11 +8,11 @@ import { useTranslation } from "react-i18next";
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faHotel, faPen, faPlus, faTrashCan, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { Button, Col, Empty, Row, Space } from 'antd';
+import { Button, Carousel, Empty, Input, InputNumber, Modal, Spin } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
@@ -22,11 +22,15 @@ import CardList from "../../../../../components/backOffice/hookComponents/cardLi
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
-import Modal from "../../../../../components/common/modal/Modal";
+// import Modal from "../../../../../components/common/modal/Modal";
 
 //API
 import { showStrutturaById } from "../../../../../services/api/struttura/strutturaApi";
-import { annuncioOnStrutturaGetApi } from "../../../../../services/api/annuncio/annuncioApi";
+import { annuncioOnStrutturaGetApi, pendingAnnunciOnStruttura } from "../../../../../services/api/annuncio/annuncioApi";
+import ChoiceButton from "../../../../../components/backOffice/hookComponents/choiceButton/ChoiceButton";
+
+
+let token = null;
 
 const StructureDetails = (props) => {
 
@@ -34,13 +38,19 @@ const StructureDetails = (props) => {
     const { t } = useTranslation()
     const navigate = useNavigate()
     const params = useParams();
+    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const [state, setState] = useState({
         structure: {},
         structureAnnounces: {},
-        announceDeleteModal: false,
         loading: {
             structures: true,
             structureAnnounces: true,
+            // deleteAnnounces: false, //not implemented
+        },
+        modalDelete: {
+            trigger: false,
         }
     })
 
@@ -48,19 +58,40 @@ const StructureDetails = (props) => {
     useEffect(() => {
         // console.log(props.userDuck.user.auth) //undefined on mount
 
-        // should use redux stored token when ready!!!
         if (localStorage.getItem('token') !== null) {
-            const token = getLocalStorage('token');
+            token = getLocalStorage('token');
 
             fetchOnMount(params.id, token)
+        } else {
+            navigate(routes.LOGIN)
         }
     }, [])
+
+    //fetch announces based on query
+    useEffect(() => {
+
+        if (state.structure.data === undefined) {
+            return
+        }
+        fetchAnnouncesBasedOnQueryParam(state.structure?.data?.id);
+
+    }, [searchParams])
 
     //APIS
     const fetchOnMount = async (id, token) => {
 
         const structure = await showStrutturaById(id, token)
-        const announces = await annuncioOnStrutturaGetApi(structure?.data?.id)
+        // const announces = await annuncioOnStrutturaGetApi(structure?.data?.id)
+        let announces;
+        const announceQuery = searchParams.get("show-announces");
+
+        if (announceQuery === "pending") {
+            console.log("pending!")
+            announces = await pendingAnnunciOnStruttura(id, token)
+        } else {
+            console.log("null!")
+            announces = await annuncioOnStrutturaGetApi(id)
+        }
 
         console.log(structure)
         console.log(announces)
@@ -68,17 +99,71 @@ const StructureDetails = (props) => {
         setState({
             ...state,
             structure: structure,
-            structureAnnounces: announces
+            structureAnnounces: announces,
+            loading: {
+                structures: false,
+                structureAnnounces: false,
+            }
         })
     }
 
-    //CARD LIST
+    const fetchAnnouncesBasedOnQueryParam = async (id) => {
+        const announceQuery = searchParams.get("show-announces");
+
+        let announces;
+
+        if (announceQuery === "pending") {
+            console.log("pending!")
+            announces = await pendingAnnunciOnStruttura(id, token)
+        } else {
+            console.log("null!")
+            announces = await annuncioOnStrutturaGetApi(id)
+        }
+
+        setState({
+            ...state,
+            structureAnnounces: announces,
+            loading: {
+                structureAnnounces: false,
+            }
+        })
+    }
+
+    //NAVIGATION
+    const goToEditStructure = (idStructure) => () => {
+        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idStructure}}`, {
+            state: { idStructure: idStructure },
+        })
+    }
+
     const goToAnnounce = (idAnnounce = null) => () => {
+        //this should take you to frontend page
         navigate(`/${routes.DASHBOARD}/${routes.ANNOUNCE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
     };
 
+
+    const showAcceptedAnnounces = () => {
+        navigate(`${location.pathname}`)
+        setState({
+            ...state,
+            loading: {
+                structureAnnounces: true,
+            }
+        })
+    };
+    const showPendingAnnounces = async () => {
+        navigate(`${location.pathname}?show-announces=pending`)
+        setState({
+            ...state,
+            loading: {
+                structureAnnounces: true,
+            }
+        })
+    };
+
+    //CARD LIST
     const getAnnounceCards = (announce) => {
         return <HorizontalCard
             key={`${announce?.annuncio?.id}-${randomKey()}`}
@@ -95,23 +180,13 @@ const StructureDetails = (props) => {
             text={announce?.annuncio?.descrizione}
             upperRightContent={
                 <>
-                    <Modal
-                        isOpen={state.announceDeleteModal}
-                        callback={handleAnnounceModal}
-                    // classNameCustom={"announce_modal"}
-                    >
-                        <h1>
-                            <FontAwesomeIcon icon={faTriangleExclamation} /> {t("bo.screens.host.reservationList.confirmReservationDelete")}
-                        </h1>
-                        <p>Sei sicuro di voler disativare la strutture, una volta disativata non sara visibile ai clienti di BeijeBnb</p>
-                    </Modal>
-
-                    <Link to={routes.ANNOUNCE_OPERATION}>
+                    <button type="button" className="action_btn edit_btn" onClick={goToAnnounce(announce?.annuncio?.id)}>
                         <FontAwesomeIcon className="icon_edit" icon={faPen} />
-                    </Link>
-                    <button type="button" className="trash_announce_btn" onClick={handleAnnounceModal}>
-                        <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
                     </button>
+
+                    {/* <button type="button" className="action_btn trash_btn" onClick={triggerAnnouceDeleteModal(announce?.annuncio)}>
+                        <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
+                    </button> */}
                 </>
             }
             footerContentLeft={
@@ -128,17 +203,49 @@ const StructureDetails = (props) => {
         />
     }
 
+
+
     //ANNOUNCE DELETE MODAL
-    const handleAnnounceModal = (e) => {
-        setState({
+    const triggerAnnouceDeleteModal = (announceData) => (e) => {
+        console.log(announceData)
+        let modalState = {
             ...state,
-            announceDeleteModal: !state.announceDeleteModal,
-        })
+            modalDelete: {
+                trigger: !state.modalDelete.trigger,
+                announceId: announceData?.id,
+                announceTitle: announceData?.titolo,
+                announceCount: announceData?.count,
+                inputValue: announceData?.count,
+            }
+        }
+
+        if (state.modalDelete.trigger) {
+            modalState = {
+                ...state,
+                modalDelete: {
+                    trigger: !state.modalDelete.trigger,
+                }
+            }
+        }
+        setState(modalState)
     }
 
-    const handleOk = (e) => {
-        console.log("Ok");
+    const onChangeInputDeleteAnnounceCount = (inputValue) => {
+        setState({
+            ...state,
+            modalDelete: {
+                ...state.modalDelete,
+                inputValue: inputValue
+            }
+        })
+
+        console.log(inputValue);
     }
+
+    const onDeleteAnnounces = (e) => {
+        console.log("Delete", "id:" + state.modalDelete.announceId);
+    }
+
 
     //PAGINATION
     const switchToPage = (clickedPage) => {
@@ -156,76 +263,125 @@ const StructureDetails = (props) => {
 
     return (
         <>
-
             <h1 className="page_title">
                 {t("bo.screens.host.structureDetails.structureDetailsTitle")}
             </h1>
 
-            {/* reindirizzare a structureOperations -> edit */}
-            <Button className="edit_button" type="primary" >
-                <span className="structure_details__icon">
-                    <FontAwesomeIcon icon={faPen} />
-                </span>
-                {t("bo.screens.host.structureDetails.editStructure")}
-            </Button>
-
-            <div className="structure_details_container">
-
-                <img className="structure_img" src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
-
-                <div className="structure_information">
-                    <h1>{state.structure?.data?.nome_struttura}</h1>
-                    <p>{state.structure?.data?.indirizzo?.citta}, {state.structure?.data?.indirizzo?.stato}</p>
-                    <p>
+            {state.loading.structures ?
+                <Spin />
+                :
+                <>
+                    <Button className="edit_button" type="primary" onClick={goToEditStructure(state.structure?.data?.id)} >
                         <span className="structure_details__icon">
-                            <FontAwesomeIcon icon={faHotel} />
+                            <FontAwesomeIcon icon={faPen} />
                         </span>
-                        {state.structure?.data?.tipologiaStrutturaId?.tipo}
-                    </p>
-                    <p>{state.structure?.data?.descrizione}</p>
-                </div>
+                        {t("bo.screens.host.structureDetails.editStructure")}
+                    </Button>
 
-            </div>
+                    <div className="structure_details_container">
 
+                        <Carousel>
+                            {state.structure?.data?.images.map(renderCarouselImages)}
+                        </Carousel>
+
+                        <div className="structure_information">
+                            <h1>{state.structure?.data?.nome_struttura}</h1>
+                            <p>{state.structure?.data?.indirizzo?.citta}, {state.structure?.data?.indirizzo?.stato}</p>
+                            <p>
+                                <span className="structure_details__icon">
+                                    <FontAwesomeIcon icon={faHotel} />
+                                </span>
+                                {state.structure?.data?.tipologiaStrutturaId?.tipo}
+                            </p>
+                            <p>{state.structure?.data?.descrizione}</p>
+                        </div>
+
+                    </div>
+                </>
+            }
 
             <CardList
                 sectionTitle="Annunci"
-                actions={<Button type="primary">
-                    <span className="structure_details__icon">
-                        <FontAwesomeIcon icon={faPlus} />
-                    </span>
-                    {t("bo.screens.host.structureDetails.addRoom")}
-                </Button>}
+                actions={
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <div>
+                            <ChoiceButton
+                                callbackFirstButton={showAcceptedAnnounces}
+                                firstButtonName={t("bo.screens.host.reservationList.accepted")}
+                                callbackSecondButton={showPendingAnnounces}
+                                secondButtonName={t("common.pending")}
+                            />
+                        </div>
+                        <div>
+                            <Button type="primary" onClick={goToAnnounce()}>
+                                <span className="structure_details__icon">
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </span>
+                                {t("bo.screens.host.structureDetails.addRoom")}
+                            </Button>
+                        </div>
+                    </div>
+                }
                 {...paginationProps}>
 
-                {(state.structureAnnounces.status === 204 || state.structureAnnounces?.data?.list.length === 0) ?
-                    <Empty
-                        image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                        imageStyle={{
-                            height: 60,
-                        }}
-                        description={
-                            <span>
-                                No announces in this structure yet
-                            </span>
-                        }
-                    >
-                        <Button type="primary">
-                            <span className="structure_details__icon">
-                                <FontAwesomeIcon icon={faPlus} />
-                            </span>
-                            {t("bo.screens.host.structureDetails.addRoom")}
-                        </Button>
-                    </Empty>
+                {state.loading.structureAnnounces ?
+                    <Spin />
                     :
+                    (state.structureAnnounces?.data?.list.length === 0) ?
+                        <Empty
+                            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                            imageStyle={{
+                                height: 60,
+                            }}
+                            description={
+                                <span>
+                                    {t("bo.screens.host.structureDetails.emptyAnnounces")}
+                                </span>
+                            }
+                        >
+                            <Button type="primary" onClick={goToAnnounce()}>
+                                <span className="structure_details__icon">
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </span>
+                                {t("bo.screens.host.structureDetails.addRoom")}
+                            </Button>
+                        </Empty>
+                        :
 
-                    state.structureAnnounces?.data?.list.map(getAnnounceCards)
+                        state.structureAnnounces?.data?.list.map(getAnnounceCards)
+
                 }
-
             </CardList>
+
+            {/* Delete announces modal - NOT IMPLEMENTED IN BACKEND */}
+            {/* <Modal
+                title={`Delete ${state.modalDelete.announceTitle}?`}
+                cancelText={"ANNULLA"}
+                okText={"CANCELLA ANNUNCIO"}
+                visible={state.modalDelete.trigger}
+                onOk={onDeleteAnnounces}
+                confirmLoading={state.loading.deleteAnnounces}
+                onCancel={triggerAnnouceDeleteModal()}
+            >
+                <p>Change with translation</p>
+
+                <InputNumber
+                    min={1}
+                    max={state.modalDelete.announceCount}
+                    value={state.modalDelete.inputValue}
+                    onChange={onChangeInputDeleteAnnounceCount}
+                    keyboard
+                />
+            </Modal> */}
         </>
     )
 }
+const renderCarouselImages = (img, key) => {
+    return <div key={`structure-img-${key}`}>
+        <img src={img.urlImage} className="carousel_img" alt={`structure image n.${key}`} />
+    </div>
+}
+
 
 const mapStateToProps = state => ({
     tokenDuck: state.tokenDuck,
