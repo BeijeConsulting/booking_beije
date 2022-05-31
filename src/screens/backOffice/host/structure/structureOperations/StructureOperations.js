@@ -70,18 +70,15 @@ const StructureOperation = (props) => {
   };
 
   useEffect(() => {
-    const getTipoStrutture = async () => {
-      const stuctureArray = await showAllTipoStrutturaGetApi();
-      console.log(stuctureArray.data);
-      setTipoStrutture(stuctureArray.data);
-    };
-
     const getUserInfo = async () => {
       const HEADER = getLocalStorage("token");
       const res = await myProfilesGetApi(HEADER);
       const userInfo = res.data;
       structureValue.userId = userInfo.utente.id;
+
+      const stuctureArray = await showAllTipoStrutturaGetApi();
       setState(structureValue);
+      setTipoStrutture(stuctureArray.data);
     };
     // Per farlo funzionare usare json-server
     const getStructure = async () => {
@@ -97,10 +94,12 @@ const StructureOperation = (props) => {
       );
       structureValue.images = strutturaDetail?.images;
       structureValue.userId = strutturaDetail?.host?.user?.id;
+
+      const stuctureArray = await showAllTipoStrutturaGetApi();
+      setTipoStrutture(stuctureArray.data);
       setState(structureValue);
     };
 
-    getTipoStrutture();
     if (location.state.idStructure !== null) {
       getStructure();
     } else {
@@ -184,6 +183,14 @@ const StructureOperation = (props) => {
     setState({ ...state, address: objAddressForPost });
   };
 
+  const renderRadio = (stu) => {
+    return (
+      <Radio key={`stru-${stu.tipo}`} value={stu.tipo}>
+        {stu.tipo}
+      </Radio>
+    );
+  };
+
   return (
     <>
       {state === null && tipoStrutture === null ? (
@@ -254,13 +261,7 @@ const StructureOperation = (props) => {
                 },
               ]}
             >
-              <Radio.Group>
-                {tipoStrutture.map((stu) => console.log(stu))}
-                <Radio value={"Hotel"}>Hotel</Radio>
-                <Radio value={"Apartment"}>Apartment</Radio>
-                <Radio value={"Villa"}>Villa</Radio>
-                <Radio value={"Hostel"}>Hostel</Radio>
-              </Radio.Group>
+              <Radio.Group>{tipoStrutture.map(renderRadio)}</Radio.Group>
             </Form.Item>
           </Row>
 
