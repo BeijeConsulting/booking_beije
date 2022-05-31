@@ -54,7 +54,7 @@ const StructureDetails = () => {
     ]
 
     const goToStructure = (idAnnounce = null) => () => {
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
+        navigate(`/${routes.DASHBOARD}/${routes.ANNOUNCE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
 
