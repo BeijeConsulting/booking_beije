@@ -37,6 +37,7 @@ import {
   setLocalStorage,
 } from "../../../../../utils/localStorage/localStorage";
 import { myProfilesGetApi } from "../../../../../services/api/user/userApi";
+import { showAllTipoStrutturaGetApi } from "../../../../../services/api/struttura/tipoStruttura/tipoStruttura";
 
 const StructureOperation = (props) => {
   const { t } = useTranslation();
@@ -67,6 +68,7 @@ const StructureOperation = (props) => {
   };
 
   useEffect(() => {
+
     const getUserInfo = async () => {
       const HEADER = getLocalStorage("token");
       const res = await myProfilesGetApi(HEADER);
@@ -78,7 +80,6 @@ const StructureOperation = (props) => {
     const getStructure = async () => {
       const res = await strutturaDetailIdGetApi(location.state.idStructure);
       const strutturaDetail = res.data;
-
       structureValue.title = strutturaDetail?.nome_struttura;
       structureValue.description = strutturaDetail?.descrizione;
       structureValue.address = strutturaDetail?.indirizzo;
@@ -87,9 +88,12 @@ const StructureOperation = (props) => {
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
+      structureValue.images= strutturaDetail?.images;
       structureValue.userId = strutturaDetail?.host?.user?.id;
       setState(structureValue);
     };
+
+    
 
     if (location.state.idStructure !== null) {
       getStructure();
@@ -108,7 +112,7 @@ const StructureOperation = (props) => {
       upState.category = values.category;
       upState.checkIn = moment(values.checkIn).format("HH:MM");
       upState.checkOut = moment(values.checkOut).format("HH:MM");
-
+      console.log(upState);
       if (location.state.idStructure === null) {
         //nuovo inserimento
         insertStrutturaPostApi(upState, HEADER);
@@ -126,10 +130,12 @@ const StructureOperation = (props) => {
 
   const onFinishFailed = (errorInfo) => {
     message.error("Somthing went wrong, chek if all form are filled");
+    console.log(errorInfo);
   };
 
   // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
+    console.log(value);
     setState({ ...state, images: value });
   };
 
@@ -210,7 +216,10 @@ const StructureOperation = (props) => {
             //   },
             // ]}
           >
-            <UploadFoto addFotoStructure={onChangeFoto} />
+            <UploadFoto
+              addFotoStructure={onChangeFoto}
+              lista_immagini={state.images}
+            />
           </Form.Item>
 
           <Row>

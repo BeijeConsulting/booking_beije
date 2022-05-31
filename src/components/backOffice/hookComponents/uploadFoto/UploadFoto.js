@@ -17,33 +17,12 @@ const UploadFoto = (props) => {
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: [],
-    // fileList: [
-    //     {
-    //         uid: '-1',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-2',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-3',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-4',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     }
-    // ]
+    fileList: props.lista_immagini.map((img, index) => {return {
+      uid: img.uid,
+      imgName: `${index}`,
+      url: img.urlImage,
+      status: 'done'
+    }}),
   });
 
   function getBase64(file) {
