@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //TRANSLATION
@@ -17,47 +17,78 @@ import GoBackButton from '../../../../../components/backOffice/hookComponents/go
 import { routes } from '../../../../../routes/routes';
 import { randomKey } from '../../../../../utils/generalIteration/generalIteration';
 
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
+import { messageListHostGetApi } from '../../../../../services/api/messaggi/messaggiApi'
+
+
 const MessageList = (props) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
+    const [state, setState] = useState({
+        listOfMessage: [],
+        elementsTotal: null,
+        loading: true
+    })
+
     //TEST SE SEI HOST ALLORA TI FA VEDERE LE MESSAGI CON ADMIN INVECE  SE SEI ADMIN O GUEST NON TI FA VEDERE MESSAGI CON ADMIN
     let host = true
 
-    const switchToPage = (clickedPage) => {
-        console.log("switch to page", clickedPage);
-        //set paginationProps.currentPage to clickedPage (with useState)
+    const fetchingMessageHostApi = async () => {
+        const HEADER = getLocalStorage("token")
+        let responseMessageHostApi = await messageListHostGetApi(1, 3, HEADER)
+        console.log(responseMessageHostApi)
+        setState({
+            ...state,
+            listOfMessage: responseMessageHostApi?.data?.list,
+            elementsTotal: responseMessageHostApi?.data?.elementsTotal
+        })
+    }
 
-        //remap new object's array from API
+    const switchToPage = async (clickedPage) => {
+        console.log("switch to page", clickedPage);
+
+        const HEADER = getLocalStorage("token")
+        let responsePaginationMessageApiHost = await messageListHostGetApi(clickedPage, 3, HEADER)
+
+        setState({
+            ...state,
+            listOfMessage: responsePaginationMessageApiHost?.data?.list,
+            elementsTotal: responsePaginationMessageApiHost?.data?.elementsTotal
+        })
+
     }
 
     const paginationProps = {
-        itemsCount: 50,
+        itemsCount: state.elementsTotal,
         pageSize: 10,
         paginationCallback: switchToPage
     }
 
-    const arrTest = [
-        { id: 1, img: 'https://cdn.pixabay.com/photo/2022/05/11/22/17/flowers-7190316_960_720.jpg', title: 'Test 1', text: 'lorem hello world' },
-        { id: 2, img: 'https://cdn.pixabay.com/photo/2022/05/11/22/17/flowers-7190316_960_720.jpg', title: 'Test 2', text: 'lorem bla bla' },
-        { id: 3, img: 'https://cdn.pixabay.com/photo/2022/05/11/22/17/flowers-7190316_960_720.jpg', title: 'Test 3', text: 'lorem how are you?' },
-    ]
-
     const goToChat = (idChat = null) => (e) => {
         navigate(`/${routes.DASHBOARD}/${routes.MESSAGE_CHAT}`, {
-            state: { idChat: idChat },
+            state: idChat
         });
     };
+
+    // RESERVATION NUMBER ?????????
+
     const renderMessages = (message, key) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
-            imageSrc={message.img}
+            imageSrc={message.lastMessaggio.sender.url_image}
             altText={`${key}_${message.title}`}
-            title={message.title}
-            text={message.text}
-            callback={goToChat(key)}
+            title={message.lastMessaggio.insertion.struttura.nome_struttura}
+            text={`Guest: ${message.lastMessaggio.sender.name}`}
+            callback={goToChat(message.annuncioId)}
         />
     }
+
+
+
+    useEffect(() => {
+        fetchingMessageHostApi()
+    }, [])
 
     return (
         <div className="container_message_list">
@@ -77,7 +108,7 @@ const MessageList = (props) => {
                 <CardList
                     {...paginationProps}
                 >
-                    {arrTest.map(renderMessages)}
+                    {state.listOfMessage.map(renderMessages)}
                 </CardList>
             </div>
         </div>
