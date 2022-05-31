@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { routes } from "../../../../../routes/routes";
 
-import { Form, Input, Button, TimePicker, Spin, Radio, Row, Col } from "antd";
+import { Form, Input, Button, TimePicker, Spin, Radio, Row, Col, message } from "antd";
 import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
 import SearchAddress from "../../../../../components/backOffice/hookComponents/searchAddress/SearchAddress";
 
@@ -22,7 +22,10 @@ import {
 import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 import { connect } from "react-redux";
-import { getLocalStorage, setLocalStorage } from "../../../../../utils/localStorage/localStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from "../../../../../utils/localStorage/localStorage";
 import { myProfilesGetApi } from "../../../../../services/api/user/userApi";
 
 const StructureOperation = (props) => {
@@ -55,35 +58,38 @@ const StructureOperation = (props) => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODU0MzUsImV4cCI6MTY1Mzk4OTAzNX0.JJYXoCBrOFE4VrZo3AO3IgIWUoznpRfOQFrwvoV6yU8")
+      setLocalStorage(
+        "token",
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODU0MzUsImV4cCI6MTY1Mzk4OTAzNX0.JJYXoCBrOFE4VrZo3AO3IgIWUoznpRfOQFrwvoV6yU8"
+      );
       const HEADER = getLocalStorage("token");
       const res = await myProfilesGetApi(HEADER);
       const userInfo = res.data;
       structureValue.userId = userInfo.utente.id;
+      setState(structureValue);
     };
     // Per farlo funzionare usare json-server
     const getStructure = async () => {
       const res = await strutturaDetailIdGetApi(location.state.idStructure);
       const strutturaDetail = res.data;
 
-      console.log(strutturaDetail);
-
       structureValue.title = strutturaDetail?.nome_struttura;
       structureValue.description = strutturaDetail?.descrizione;
       structureValue.address = strutturaDetail?.indirizzo;
-      structureValue.category = strutturaDetail?.tipologiaStruttura?.tipo;
+      structureValue.category = strutturaDetail?.tipologiaStrutturaId?.tipo;
       structureValue.checkIn = moment(strutturaDetail?.checkIn).format("HH:MM");
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
+      structureValue.userId = strutturaDetail?.host?.user?.id;
+      setState(structureValue);
     };
-
-    getUserInfo();
 
     if (location.state.idStructure !== null) {
       getStructure();
+    } else {
+      getUserInfo();
     }
-    setState(structureValue);
   }, []);
 
   // PER FORM ANT
@@ -101,15 +107,19 @@ const StructureOperation = (props) => {
         //nuovo inserimento
         insertStrutturaPostApi(upState, HEADER);
       } else {
-        updateStrutturaPutApi(location.state.idStructure, upState, HEADER);
+        console.log(
+          updateStrutturaPutApi(location.state.idStructure, upState, HEADER)
+        );
       }
+      message.success('Operation complete');
+    }else{
+      message.warning('Missing information')
     }
-
     setState(upState);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    message.error('Somthing went wrong, chek if all form are filled')
   };
 
   // PER COMPONENTI DEL FORM
