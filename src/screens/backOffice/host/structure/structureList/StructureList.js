@@ -53,7 +53,7 @@ const StructureList = (props) => {
     const [state, setState] = useState({
         loading: true,
         structureListData: [],
-        elementsTotal: null,
+        elementsTotal: 1,
         isModalVisible: false
     })
 
@@ -114,7 +114,7 @@ const StructureList = (props) => {
             <HorizontalCard
                 key={`${key}-${randomKey()}`}
                 callback={goToStructureDetails(structure.id)}
-                imageSrc={structure.lista_immagini.length > 0 ? structure.lista_immagini[0]['urlImage'] : ''}
+                imageSrc={structure.images.length > 0 ? structure.images[0]['urlImage'] : ''}
                 altText={`${key}_${structure}`}
                 title={structure.nome_struttura}
                 text={

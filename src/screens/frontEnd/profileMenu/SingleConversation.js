@@ -44,6 +44,7 @@ const SingleConversation = (props) => {
       if (localStorage.getItem('token') !== null) {
          messageToSenderIdGetApi(params.id, getLocalStorage("token"))
             .then(res => {
+               console.log(res?.data)
                setState({
                   ...state,
                   msgArray: res?.data,
