@@ -33,7 +33,7 @@ const routes = {
     MESSAGE_CHAT: 'message-chat',
     STRUCTURE_OPERATION: 'structure-operation',
     STRUCTURE_LIST: 'structure-list',
-    STRUCTURE_DETAILS: 'structure-details',
+    STRUCTURE_DETAILS: 'structure-details/:id',
     ANNOUNCE_OPERATION: 'announce-operation',
     RESERVATION_CALENDAR: 'reservation-calendar',
     RESERVATION_LIST: 'reservation-list',
@@ -54,6 +54,11 @@ let routesDetails = {
     },
     detailPropertyRoom: function (params) {
         return `detailsproperty/rooms/${params} `
+    },
+
+    //BO
+    detailStructureHost: function (params) {
+        return `structure-details/${params}`
     }
 }
 

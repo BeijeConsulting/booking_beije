@@ -45,7 +45,7 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 // NOTFOUND 
 import NotFound from "./screens/notFound/NotFound";
 
-import { getLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -164,7 +164,7 @@ function Routing(props) {
                 <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
                 <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-                <Route path={`${routes.STRUCTURE_DETAILS}/:id`} element={<StructureDetails />} />
+                <Route path={`${routes.STRUCTURE_DETAILS}`} element={<StructureDetails />} />
                 <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
                 <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />

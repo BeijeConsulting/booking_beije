@@ -16,7 +16,6 @@ const HorizontalCard = (props) => {
         upperRightContent,
         footerContent,
         footerContentLeft,
-        footerContentRight
     } = props
 
     const handleCardClick = (e) => {
@@ -30,7 +29,9 @@ const HorizontalCard = (props) => {
         <div className={"h_card_container"} >
             {/* Card image */}
             {imageSrc &&
-                <img className={"card_img"} src={imageSrc} alt={imageAlt} onClick={handleCardClick} />
+                <a onClick={handleCardClick} >
+                    <img className={"card_img"} src={imageSrc} alt={imageAlt} />
+                </a>
             }
 
             {/* Card body */}
@@ -103,7 +104,10 @@ HorizontalCard.propTypes = {
     imageSrc: PropTypes.string,
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
+    subtitle: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     text: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
@@ -111,7 +115,7 @@ HorizontalCard.propTypes = {
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
     footerContentLeft: PropTypes.any,
-    footerContentRight: PropTypes.any,
+    footerContent: PropTypes.any,
 
 }
 

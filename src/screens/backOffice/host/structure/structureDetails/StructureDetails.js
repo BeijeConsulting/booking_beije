@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";
@@ -6,71 +7,140 @@ import { useTranslation } from "react-i18next";
 //Style
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHotel, faPen } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'antd';
+import { faBed, faHotel, faPen, faPlus, faTrashCan, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { Button, Col, Empty, Row, Space } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
 
-// import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList"
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
+import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
+import Modal from "../../../../../components/common/modal/Modal";
 
+//API
+import { showStrutturaById } from "../../../../../services/api/struttura/strutturaApi";
+import { annuncioOnStrutturaGetApi } from "../../../../../services/api/annuncio/annuncioApi";
 
-const StructureDetails = () => {
+const StructureDetails = (props) => {
 
-    //header
-    //footer
 
     const { t } = useTranslation()
-
     const navigate = useNavigate()
+    const params = useParams();
+    const [state, setState] = useState({
+        structure: {},
+        structureAnnounces: {},
+        announceDeleteModal: false,
+        loading: {
+            structures: true,
+            structureAnnounces: true,
+        }
+    })
 
-    const obj = [
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        },
-        {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        }, {
-            img: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            title: "Casa bellissima",
-            text: "Casa in riva al mare a Savona"
-        },
-    ]
 
-    const goToStructure = (idAnnounce = null) => () => {
+    useEffect(() => {
+        // console.log(props.userDuck.user.auth) //undefined on mount
+
+        // should use redux stored token when ready!!!
+        if (localStorage.getItem('token') !== null) {
+            const token = getLocalStorage('token');
+
+            fetchOnMount(params.id, token)
+        }
+    }, [])
+
+    //APIS
+    const fetchOnMount = async (id, token) => {
+
+        const structure = await showStrutturaById(id, token)
+        const announces = await annuncioOnStrutturaGetApi(structure?.data?.id)
+
+        console.log(structure)
+        console.log(announces)
+
+        setState({
+            ...state,
+            structure: structure,
+            structureAnnounces: announces
+        })
+    }
+
+    //CARD LIST
+    const goToAnnounce = (idAnnounce = null) => () => {
         navigate(`/${routes.DASHBOARD}/${routes.ANNOUNCE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
-
     };
 
-    const getAnnounceCards = (announce, key) => {
+    const getAnnounceCards = (announce) => {
         return <HorizontalCard
-            key={`${key}-${randomKey()}`}
-            imageSrc={announce.img}
-            imageAlt={`${key}_${announce.title}`}
-            title={announce.title}
-            text={announce.text}
-            callback={goToStructure(key)}
+            key={`${announce?.annuncio?.id}-${randomKey()}`}
+            // imageSrc={announce?.annuncio?.img}
+            imageAlt={announce?.annuncio?.slug}
+            title={announce?.annuncio?.titolo}
+            subtitle={<>
+                <span className="structure_details__icon">
+                    <FontAwesomeIcon icon={faBed} />
+                </span>
+                {announce?.annuncio?.numPostiLetto}
+            </>
+            }
+            text={announce?.annuncio?.descrizione}
+            upperRightContent={
+                <>
+                    <Modal
+                        isOpen={state.announceDeleteModal}
+                        callback={handleAnnounceModal}
+                    // classNameCustom={"announce_modal"}
+                    >
+                        <h1>
+                            <FontAwesomeIcon icon={faTriangleExclamation} /> {t("bo.screens.host.reservationList.confirmReservationDelete")}
+                        </h1>
+                        <p>Sei sicuro di voler disativare la strutture, una volta disativata non sara visibile ai clienti di BeijeBnb</p>
+                    </Modal>
+
+                    <Link to={routes.ANNOUNCE_OPERATION}>
+                        <FontAwesomeIcon className="icon_edit" icon={faPen} />
+                    </Link>
+                    <button type="button" className="trash_announce_btn" onClick={handleAnnounceModal}>
+                        <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
+                    </button>
+                </>
+            }
+            footerContentLeft={
+                <strong>
+                    €{announce?.annuncio?.prezzo}/{t("bo.screens.host.structureDetails.night")}
+                </strong>
+            }
+            footerContent={
+                <span className="announce_count">
+                    x{announce?.annuncio?.count}
+                </span>
+            }
+            callback={goToAnnounce(announce?.annuncio?.id)}
         />
     }
 
+    //ANNOUNCE DELETE MODAL
+    const handleAnnounceModal = (e) => {
+        setState({
+            ...state,
+            announceDeleteModal: !state.announceDeleteModal,
+        })
+    }
+
+    const handleOk = (e) => {
+        console.log("Ok");
+    }
+
+    //PAGINATION
     const switchToPage = (clickedPage) => {
         console.log("switch to page", clickedPage);
         //set paginationProps.currentPage to clickedPage (with useState)
@@ -87,23 +157,32 @@ const StructureDetails = () => {
     return (
         <>
 
-            <h1>{t("bo.screens.host.structureDetails.structureDetailsTitle")}</h1>
-            <Button className="edit_button"><FontAwesomeIcon icon={faPen} />{t("bo.screens.host.structureDetails.editStructure")}</Button>
+            <h1 className="page_title">
+                {t("bo.screens.host.structureDetails.structureDetailsTitle")}
+            </h1>
+
+            {/* reindirizzare a structureOperations -> edit */}
+            <Button className="edit_button" type="primary" >
+                <span className="structure_details__icon">
+                    <FontAwesomeIcon icon={faPen} />
+                </span>
+                {t("bo.screens.host.structureDetails.editStructure")}
+            </Button>
+
             <div className="structure_details_container">
 
-                <img src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
+                <img className="structure_img" src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
 
                 <div className="structure_information">
-                    <h1>Camera bellissima</h1>
-                    <p>Chioggia, Italy</p>
-                    <p><FontAwesomeIcon icon={faHotel} />Hotel</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae sem sagittis, ornare magna vitae, pulvinar augue. Quisque et euismod metus. Nunc blandit orci dui,
-                        quis porttitor urna vestibulum vel.Praesent et turpis justo. Duis sed suscipit justo. Sed mollis, ex vitae vehicula ultrices, metus nibh interdum augue, sed tempus ligula nibh sed neque.
-                        Nam id elit sed velit aliquam porta in sit amet magna.Duis nibh tellus, dictum id ante ac, vestibulum volutpat nibh. Donec finibus libero et purus consequat congue. Maecenas mollis, diam ut varius commodo,
-                        leo nisi lacinia erat, at finibus lorem ex sed velit. Proin sem felis,eleifend eu gravida at, porta non nunc. Sed erat velit, tincidunt vel pellentesque vel, pellentesque eget nisi. Maecenas efficitur arcu faucibus,
-                        blandit libero ut, finibus purus. Duis ut sollicitudin urna. Etiam sit amet imperdiet est. Cras tristique elit a ante suscipit maximus. Sed vulputate lorem nec nunc euismod, quis congue velit porta.
-                        Aliquam sollicitudin ex non dui tempor laoreet. Nulla at varius dolor.
+                    <h1>{state.structure?.data?.nome_struttura}</h1>
+                    <p>{state.structure?.data?.indirizzo?.citta}, {state.structure?.data?.indirizzo?.stato}</p>
+                    <p>
+                        <span className="structure_details__icon">
+                            <FontAwesomeIcon icon={faHotel} />
+                        </span>
+                        {state.structure?.data?.tipologiaStrutturaId?.tipo}
                     </p>
+                    <p>{state.structure?.data?.descrizione}</p>
                 </div>
 
             </div>
@@ -111,14 +190,46 @@ const StructureDetails = () => {
 
             <CardList
                 sectionTitle="Annunci"
-                actions={<Button>{t("bo.screens.host.structureDetails.addRoom")}</Button>}
+                actions={<Button type="primary">
+                    <span className="structure_details__icon">
+                        <FontAwesomeIcon icon={faPlus} />
+                    </span>
+                    {t("bo.screens.host.structureDetails.addRoom")}
+                </Button>}
                 {...paginationProps}>
-                {
-                    obj.map(getAnnounceCards)
+
+                {(state.structureAnnounces.status === 204 || state.structureAnnounces?.data?.list.length === 0) ?
+                    <Empty
+                        image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                        imageStyle={{
+                            height: 60,
+                        }}
+                        description={
+                            <span>
+                                No announces in this structure yet
+                            </span>
+                        }
+                    >
+                        <Button type="primary">
+                            <span className="structure_details__icon">
+                                <FontAwesomeIcon icon={faPlus} />
+                            </span>
+                            {t("bo.screens.host.structureDetails.addRoom")}
+                        </Button>
+                    </Empty>
+                    :
+
+                    state.structureAnnounces?.data?.list.map(getAnnounceCards)
                 }
+
             </CardList>
         </>
     )
 }
 
-export default StructureDetails;
+const mapStateToProps = state => ({
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck
+})
+
+export default connect(mapStateToProps)(StructureDetails);
