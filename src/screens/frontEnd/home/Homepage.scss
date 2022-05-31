@@ -15,8 +15,8 @@
 
       h3 {
          // position: absolute;
-         top: 55%;
-         left: 25%;
+         top: 15%;
+         left: 20%;
          color: $white_primary;
          text-shadow: 1px 1px 4px $black_primary;
       }
@@ -27,5 +27,6 @@
       // padding: 1rem 0;
       width: 80vw;
       height: 60vw;
+      border-radius: 15%;
    }
 }
