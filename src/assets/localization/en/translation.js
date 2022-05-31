@@ -206,6 +206,10 @@ export const TRANSLATIONS_EN = {
          "favourites": {
             "noFavourites": "No favourites to show"
          },
+         "pageNotFound": {
+            "pageTitle": "Page not found",
+            "pageDescription": "Sorry, the page you're looking for was not found."
+         },
          "registration": {
             "acceptTerms": "I accept the terms and conditions"
          },

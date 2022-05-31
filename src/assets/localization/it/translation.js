@@ -206,6 +206,10 @@ export const TRANSLATIONS_IT = {
          "favourites": {
             "noFavourites": "Nessun preferito da mostrare"
          },
+         "pageNotFound": {
+            "pageTitle": "Pagina non trovata",
+            "pageDescription": "Siamo spiacenti, ma la pagina che stai cercando non è stata trovata."
+         },
          "registration": {
             "acceptTerms": "Accetto i termini e le condizioni"
          },
