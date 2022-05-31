@@ -1,12 +1,12 @@
 @import "../../../assets/variables/globalVariables.scss";
 .search_container{
    background-color: $black_primary;
-   height: 60vh;
+   height: 70vh;
    display: flex;
    justify-content: center;
    align-items: center;
-   background-image: url(https://cdn.nogarlicnoonions.com/images/thumbs/image.php?width=2000&height=2000&image=/images/articles/2020-01/travel2020-01-23-01-42-04.jpg);
-   background-position-y: 30%;
+   background-image: url(../../../assets/images/homeImg.jpeg);
+   background-position-y: 40%;
    background-size: cover;
 }
 .container_home{
@@ -21,15 +21,16 @@
       color: $white_primary;
    }
    .travel_talk{
-      background-image: url(https://centralpenn.aaa.com/sites/default/files/styles/large_xl/public/2019-05/lets-talk-travel.jpg?itok=V2NrYzGG);
+      background-image: url(https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg);
       background-size: cover;
       height: 50vh;
       border-radius: 1rem;
       margin-bottom: 3rem;
+      background-position: center;
    }
    .suggested-container {
       position: relative;
-      background-image: url(https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg);
+      background-image: url(https://www.magazine.iraweb.it/wp-content/uploads/2011/08/foto-20.jpg);
       height: 50vh;
       border-radius: 1rem;
       margin-bottom: 3rem;
@@ -40,6 +41,8 @@
          transform: translate(-50%, -50%);
          color: $white_primary;
          text-shadow: 1px 1px 4px $black_primary;
+         margin-top: 0;
+         margin-bottom: 0;
       }
    }
 
@@ -50,4 +53,29 @@
    //    height: 60vw;
    //    border-radius: 15%;
    // }
+}
+
+@media all and (max-width:480px){
+   .search_container{
+      background-color: $black_primary;
+      height:auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: none;
+      background-position-y: none;
+      background-size: none;
+   }
+   .home{
+      padding: 2rem 1rem;
+      .travel_talk{
+         border-radius: 0;
+      }
+      .suggested-container{
+         border-radius: 0;
+         .title_suggested {
+            font-size: 1rem;
+         }
+      }
+   }
 }
