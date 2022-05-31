@@ -4,7 +4,17 @@ import moment from "moment";
 
 import { routes } from "../../../../../routes/routes";
 
-import { Form, Input, Button, TimePicker, Spin, Radio, Row, Col, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  TimePicker,
+  Spin,
+  Radio,
+  Row,
+  Col,
+  message,
+} from "antd";
 import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
 import SearchAddress from "../../../../../components/backOffice/hookComponents/searchAddress/SearchAddress";
 
@@ -58,10 +68,6 @@ const StructureOperation = (props) => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      setLocalStorage(
-        "token",
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODU0MzUsImV4cCI6MTY1Mzk4OTAzNX0.JJYXoCBrOFE4VrZo3AO3IgIWUoznpRfOQFrwvoV6yU8"
-      );
       const HEADER = getLocalStorage("token");
       const res = await myProfilesGetApi(HEADER);
       const userInfo = res.data;
@@ -111,15 +117,15 @@ const StructureOperation = (props) => {
           updateStrutturaPutApi(location.state.idStructure, upState, HEADER)
         );
       }
-      message.success('Operation complete');
-    }else{
-      message.warning('Missing information')
+      message.success("Operation complete");
+    } else {
+      message.warning("Missing information");
     }
     setState(upState);
   };
 
   const onFinishFailed = (errorInfo) => {
-    message.error('Somthing went wrong, chek if all form are filled')
+    message.error("Somthing went wrong, chek if all form are filled");
   };
 
   // PER COMPONENTI DEL FORM
