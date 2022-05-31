@@ -44,7 +44,7 @@ const Homepage = () => {
          <div className="home oX1 w100 flex aiCenter jcCenter column">
             <SearchButton callback={handleClick} />
             <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
-            <div className="suggested-container relative">
+            <div className="suggested-container relative fsXXL">
                <h3 className="absolute">{t("common.suggestedApartaments")}</h3>
                <img onClick={handleNavigation(`/${routes.MRA}`)} className="homeImg ofC py1" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
             </div>
