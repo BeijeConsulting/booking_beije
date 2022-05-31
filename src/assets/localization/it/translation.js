@@ -126,63 +126,38 @@ export const TRANSLATIONS_IT = {
                   "vatNumber": "P.IVA"
                }
             },
-            "sidebar": {
-               "structure": "Strutture",
-               "payments": "Pagamenti"
+            "reservationList": {
+               "title": "Lista prenotazioni",
+               "accepted": "Accettate",
+               "rejected": "Rifiutate",
+               "calendar": "Calendario",
+               "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
+               "confirmReservationDelete": "Conferma eliminazione"
+            },
+            "structure": {
+               "structureListTitle": "Lista strutture",
+               "addStructure": "Aggiungi struttura"
+            },
+            "structureDetails": {
+               "structureDetailsTitle": "Dettagli struttura",
+               "editStructure": "Modifica struttura",
+               "addRoom": "Aggiungi camera",
+               "announce": "Annunci",
+               "night": "notte",
+            },
+            "structureOperation": {
+               "structureName": "Nome struttura"
+            },
+            "announceOperation": {
+               "priceForNight": "Prezzo per notte",
+               "beds": "Letti",
+               "rooms": "Stanze",
+               "rules": "Regole"
             }
          },
-         "modals": {},
-         "screens": {
-            "host": {
-               "hostRegistration": {
-                  "title": "Registrazione Host",
-                  "privateRegistration": "Sono un privato",
-                  "companyRegistration": "Ho un'azienda",
-                  "setUpPrivateAccount": "Configura il tuo account come privato",
-                  "setUpCompanyAccount": "Configura il tuo account aziendale",
-                  "accept": "Accetto",
-                  "termsConditionsForHost": "Termini e condizioni per gli host",
-                  "fields": {
-                     "phoneNumber": "Numero di telefono",
-                     "postcode": "Codice postale",
-                     "billingAddress": "Indirizzo di fatturazione",
-                     "companyName": "Nome azienda",
-                     "vatNumber": "P.IVA"
-                  }
-               },
-               "reservationList": {
-                  "title": "Lista prenotazioni",
-                  "accepted": "Accettate",
-                  "rejected": "Rifiutate",
-                  "calendar": "Calendario",
-                  "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
-                  "confirmReservationDelete": "Conferma eliminazione"
-               },
-               "structure": {
-                  "structureListTitle": "Lista strutture",
-                  "addStructure": "Aggiungi struttura"
-               },
-               "structureDetails": {
-                  "structureDetailsTitle": "Dettagli struttura",
-                  "editStructure": "Modifica struttura",
-                  "addRoom": "Aggiungi camera",
-                  "announce": "Annunci",
-                  "night": "notte",
-               },
-               "structureOperation": {
-                  "structureName": "Nome struttura"
-               },
-               "announceOperation": {
-                  "priceForNight": "Prezzo per notte",
-                  "beds": "Letti",
-                  "rooms": "Stanze",
-                  "rules": "Regole"
-               },
-               "admin": {
-                  "pendingAnnounceListTitle": "Annunci da approvare",
-                  "pendingStructureListTitle": "Strutture da approvare"
-               }
-            }
+         "admin": {
+            "pendingAnnounceListTitle": "Annunci da approvare",
+            "pendingStructureListTitle": "Strutture da approvare"
          }
       }
    },
