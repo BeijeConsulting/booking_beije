@@ -26,9 +26,27 @@
 
 }
 
+.trash_announce_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    transition: color .5s;
+
+    &:hover {
+        color: var.$error_color
+    }
+}
+
 .announce_count {
     font-weight: var.$fw-bold;
     font-size: var.$fs-2;
+}
+
+//modal
+.announce_modal {
+    width: 200px;
+    height: 100px;
 }
 
 @media screen and (max-width: 768px) {

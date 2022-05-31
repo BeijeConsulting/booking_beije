@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 //Style
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBed, faHotel, faPen, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { Button, Col, Row, Space } from 'antd';
+import { faBed, faHotel, faPen, faPlus, faTrashCan, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { Button, Col, Empty, Row, Space } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
@@ -16,18 +16,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
 
-// import Sidebar from "../../../../../components/backOffice/functionalComponent/sidebar/Sidebar";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList"
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
+import Modal from "../../../../../components/common/modal/Modal";
 
 //API
 import { showStrutturaById } from "../../../../../services/api/struttura/strutturaApi";
 import { annuncioOnStrutturaGetApi } from "../../../../../services/api/annuncio/annuncioApi";
+import { connect } from "react-redux";
+import tokenDuck from "../../../../../redux/ducks/tokenDuck";
 
-const StructureDetails = () => {
+const StructureDetails = (props) => {
+
 
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -37,11 +40,15 @@ const StructureDetails = () => {
         structureAnnounces: [],
         announceDeleteModal: false,
         loading: {
-
+            structures: true,
+            structureAnnounces: true,
         }
     })
 
+
     useEffect(() => {
+        // console.log(props.userDuck.user.auth) //undefined on mount
+
         // should use redux stored token when ready!!!
         if (localStorage.getItem('token') !== null) {
             const token = getLocalStorage('token');
@@ -62,7 +69,7 @@ const StructureDetails = () => {
         setState({
             ...state,
             structure: structure?.data,
-            structureAnnounces: announces?.data?.list
+            structureAnnounces: announces
         })
     }
 
@@ -74,54 +81,68 @@ const StructureDetails = () => {
         navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
-
     };
+
 
     const getAnnounceCards = (announce) => {
         return <HorizontalCard
-            key={`${announce.id}-${randomKey()}`}
-            // imageSrc={announce.img}
-            imageAlt={announce?.slug}
-            title={announce?.titolo}
+            key={`${announce?.data?.list?.id}-${randomKey()}`}
+            // imageSrc={announce?.data?.list?.img}
+            imageAlt={announce?.data?.list?.slug}
+            title={announce?.data?.list?.titolo}
             subtitle={<>
                 <span className="structure_details__icon">
                     <FontAwesomeIcon icon={faBed} />
                 </span>
-                {announce?.numPostiLetto}
+                {announce?.data?.list?.numPostiLetto}
             </>
             }
-            text={announce?.descrizione}
+            text={announce?.data?.list?.descrizione}
             upperRightContent={
                 <>
-                    {/* <Modal visible={state.isModalVisible} onOk={handleOk} onCancel={handleCancel} forceRender={true}>
+                    <Modal
+                        isOpen={state.announceDeleteModal}
+                        callback={handleAnnounceModal}
+                    // classNameCustom={"announce_modal"}
+                    >
                         <h1>
                             <FontAwesomeIcon icon={faTriangleExclamation} /> {t("bo.screens.host.reservationList.confirmReservationDelete")}
                         </h1>
                         <p>Sei sicuro di voler disativare la strutture, una volta disativata non sara visibile ai clienti di BeijeBnb</p>
-                    </Modal> */}
+                    </Modal>
+
                     <Link to={routes.ANNOUNCE_OPERATION}>
                         <FontAwesomeIcon className="icon_edit" icon={faPen} />
                     </Link>
-                    <button type="button" className="trash_announce_btn" onClick={announceDeleteModal}>
+                    <button type="button" className="trash_announce_btn" onClick={handleAnnounceModal}>
                         <FontAwesomeIcon className="icon_disable" icon={faTrashCan} />
                     </button>
                 </>
             }
-            footerContentLeft={<strong>€{announce?.prezzo}/night</strong>}
+            footerContentLeft={
+                <strong>
+                    €{announce?.data?.list?.prezzo}/{t("bo.screens.host.structureDetails.night")}
+                </strong>
+            }
             footerContent={
                 <span className="announce_count">
-                    x{announce.count}
+                    x{announce?.data?.list?.count}
                 </span>
             }
-            callback={goToAnnounce(announce.id)}
+            callback={goToAnnounce(announce?.data?.list?.id)}
         />
     }
 
-    const announceDeleteModal = (e) => {
+    //ANNOUNCE DELETE MODAL
+    const handleAnnounceModal = (e) => {
         setState({
             ...state,
-            announceDeleteModal: true,
+            announceDeleteModal: !state.announceDeleteModal,
         })
+    }
+
+    const handleOk = (e) => {
+        console.log("Ok");
     }
 
     //PAGINATION
@@ -138,6 +159,7 @@ const StructureDetails = () => {
         paginationCallback: switchToPage
     }
 
+
     return (
         <>
 
@@ -145,16 +167,13 @@ const StructureDetails = () => {
                 {t("bo.screens.host.structureDetails.structureDetailsTitle")}
             </h1>
 
-            <Row>
-                <Col offset={21}>
-                    <Button className="edit_button" type="primary" >
-                        <span className="structure_details__icon">
-                            <FontAwesomeIcon icon={faPen} />
-                        </span>
-                        {t("bo.screens.host.structureDetails.editStructure")}
-                    </Button>
-                </Col>
-            </Row>
+            {/* reindirizzare a structureOperations -> edit */}
+            <Button className="edit_button" type="primary" >
+                <span className="structure_details__icon">
+                    <FontAwesomeIcon icon={faPen} />
+                </span>
+                {t("bo.screens.host.structureDetails.editStructure")}
+            </Button>
 
             <div className="structure_details_container">
 
@@ -174,6 +193,7 @@ const StructureDetails = () => {
 
             </div>
 
+
             <CardList
                 sectionTitle="Annunci"
                 actions={<Button type="primary">
@@ -183,12 +203,39 @@ const StructureDetails = () => {
                     {t("bo.screens.host.structureDetails.addRoom")}
                 </Button>}
                 {...paginationProps}>
-                {
-                    state.structureAnnounces.map(getAnnounceCards)
+
+                {(state.structureAnnounces.status === 204 || state.structureAnnounces?.data?.list.length === 0) ?
+                    <Empty
+                        image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                        imageStyle={{
+                            height: 60,
+                        }}
+                        description={
+                            <span>
+                                No announces in this structure yet
+                            </span>
+                        }
+                    >
+                        <Button type="primary">
+                            <span className="structure_details__icon">
+                                <FontAwesomeIcon icon={faPlus} />
+                            </span>
+                            {t("bo.screens.host.structureDetails.addRoom")}
+                        </Button>
+                    </Empty>
+                    :
+
+                    state.structureAnnounces?.data?.list.map(getAnnounceCards)
                 }
+
             </CardList>
         </>
     )
 }
 
-export default StructureDetails;
+const mapStateToProps = state => ({
+    tokenDuck: state.tokenDuck,
+    userDuck: state.userDuck
+})
+
+export default connect(mapStateToProps)(StructureDetails);
