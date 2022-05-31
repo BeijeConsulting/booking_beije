@@ -41,12 +41,19 @@ const Homepage = () => {
          <Modal isOpen={state.isOpen} callback={handleClick}  >
             <SearchForm />
          </Modal>
-         <div className="home oY2 oX1 w100 flex aiCenter jcCenter column">
-            <SearchButton callback={handleClick} />
-            <img onClick={handleNavigation(routes.LAYOUT)} className="homeImg ofC py1" src="https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg" />
-            <div className="suggested-container relative">
-               <h3 className="absolute">{t("common.suggestedApartaments")}</h3>
-               <img onClick={handleNavigation(`/${routes.MRA}`)} className="homeImg ofC py1" src="https://www.ourescapeclause.com/wp-content/uploads/2020/09/shutterstock_1037347711-scaled.jpg" />
+
+         <div className="container_home oX1 w100">
+            <div className="search_container">
+               <SearchButton callback={handleClick} />
+            </div>
+            <div className="home">
+               <h3> Travel Talk </h3>
+               <div className="travel_talk" onClick={handleNavigation(routes.LAYOUT)}>
+               </div>
+               <h3> Non sai dove andare? </h3>
+               <div onClick={handleNavigation(`/${routes.MRA}`)} className="suggested-container relative fsXXL">
+                  <h3 className="title_suggested">{t("common.suggestedApartaments")}</h3>
+               </div>
             </div>
          </div>
       </>

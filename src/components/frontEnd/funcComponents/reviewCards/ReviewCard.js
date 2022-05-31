@@ -23,7 +23,7 @@ function ReviewCard(props) {
 ReviewCard.defaultProps = {
     username: t("fe.components.review.username"),
     title: t("fe.components.review.title"),
-    description: t("fe.components.review.description"),
+    description: t("common.description"),
     rating: 3
 }
 

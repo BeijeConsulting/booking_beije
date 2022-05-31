@@ -29,10 +29,12 @@ import { Button, Rate, Spin } from "antd";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import Modal from "antd/lib/modal/Modal";
-import { routes } from "../../../../../routes/routes";
+import { routes, routesDetails } from "../../../../../routes/routes";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 
 import { useNavigate } from "react-router-dom";
+
+import { setLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 
 
@@ -41,12 +43,9 @@ import {
     showHostStruttureGetApi
 } from '../../../../../services/api/struttura/strutturaApi'
 
-
-//TODO: manca get da backend
 //TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
 const StructureList = (props) => {
-
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -96,7 +95,7 @@ const StructureList = (props) => {
 
     //GO TO STRUCTURE DETAILS
     const goToStructureDetails = (idStructure) => () => {
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}/${idStructure}`);
+        navigate(`/${routes.DASHBOARD}/${routesDetails.detailStructureHost(idStructure)}`);
     }
 
     //GO TO ADD STRUCTURE
@@ -115,7 +114,7 @@ const StructureList = (props) => {
             <HorizontalCard
                 key={`${key}-${randomKey()}`}
                 callback={goToStructureDetails(structure.id)}
-                imageSrc={structure.url_image}
+                imageSrc={structure.lista_immagini.length > 0 ? structure.lista_immagini[0]['urlImage'] : ''}
                 altText={`${key}_${structure}`}
                 title={structure.nome_struttura}
                 text={
@@ -152,7 +151,6 @@ const StructureList = (props) => {
 
     //CHANGE PAGE(PAGINATION)
     const switchToPage = async (clickedPage) => {
-        console.log('Curent page', clickedPage);
         // const HEADER = decryptItem(props.tokenDuck.token);
         const HEADER = getLocalStorage("token")
         let dataPaginationStructure = await showHostStruttureGetApi(clickedPage, 3, HEADER)
@@ -164,7 +162,6 @@ const StructureList = (props) => {
             elementsTotal: dataPaginationStructure?.data.elementsTotal
         })
     }
-    console.log(state.elementsTotal)
 
     //PAGINATION PROPS
     const paginationProps = {

@@ -38,7 +38,7 @@ export default function userDuck(state = INIT_STATE, action) {
              newState.user = res.data; */
             return newState;
 
-        case INIT_STATE:
+        case INIT_USER:
             newState = Object.assign({}, state);
             newState.user = {};
             return newState;

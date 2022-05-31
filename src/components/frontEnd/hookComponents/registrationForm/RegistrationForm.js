@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 // styles
 import './RegistrationForm.scss';
 import '../../../../assets/variables/_common.scss';
+import '../../../../assets/commonStyles/toasts.scss';
 
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
