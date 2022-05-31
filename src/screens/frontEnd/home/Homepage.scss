@@ -30,7 +30,8 @@
    }
    .suggested-container {
       position: relative;
-      background-image: url(https://www.magazine.iraweb.it/wp-content/uploads/2011/08/foto-20.jpg);
+      background-image: url(https://theplanetd.com/images/best-travel-blogs-8.jpg);
+      background-repeat: no-repeat;
       height: 50vh;
       border-radius: 1rem;
       margin-bottom: 3rem;
@@ -72,6 +73,7 @@
          border-radius: 0;
       }
       .suggested-container{
+         background-image: url(https://fullsuitcase.com/wp-content/uploads/2016/10/Best-family-travel-destinations-by-travel-bloggers.jpg);
          border-radius: 0;
          .title_suggested {
             font-size: 1rem;
