@@ -22,8 +22,9 @@ function FavouriteCard(props) {
    let thumbnail = propertyPlaceholder;
 
    useEffect(() => {
-      let apiThumbnail = getStructureImage(id).then(res => res?.data?.immagine?.urlImage)
-      if (apiThumbnail !== '') thumbnail = apiThumbnail;
+      getStructureImage(id).then(res => {
+         if (res?.data?.immagine?.urlImage !== '') thumbnail = res?.data?.immagine?.urlImage;
+      })
    }, [])
 
    const handleOnClick = () => {

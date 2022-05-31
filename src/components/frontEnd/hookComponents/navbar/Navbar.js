@@ -191,7 +191,7 @@ function Navbar(props) {
                                     props.userDuck?.user?.auth?.length < 2 ?
                                         <li>
                                             <Link className="link_navbar" to={`${routes.DASHBOARD}/${routes.HOST_REGISTRATION}`} >
-                                                {t('fe.screens.guestAccount.becomeAHost')}
+                                                {t('common.becomeAHost')}
                                             </Link>
                                         </li> :
                                         <li>

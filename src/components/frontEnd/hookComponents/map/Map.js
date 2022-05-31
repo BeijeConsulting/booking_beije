@@ -11,6 +11,9 @@ import { connect } from 'react-redux';
 // components
 import PropertyCards from '../../funcComponents/propertyCards/PropertyCards';
 
+//CSS
+import '../../../../assets/variables/_common.scss'
+
 
 
 function Map(props) {
@@ -51,7 +54,7 @@ function Map(props) {
 
     return (
         <>
-            <MapContainer style={{ width: '100vw', height: '100vh' }} center={[selectPosition[0], selectPosition[1]]} zoom={13} scrollWheelZoom={true}>
+            <MapContainer className='w100' style={{ height: '100vh' }} center={[selectPosition[0], selectPosition[1]]} zoom={13} scrollWheelZoom={true}>
 
                 <ChangeView center={{ lat: selectPosition[0], lon: selectPosition[1] }} zoom={10} />
 

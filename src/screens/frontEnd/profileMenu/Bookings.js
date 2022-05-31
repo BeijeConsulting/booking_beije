@@ -75,7 +75,7 @@ const Bookings = (props) => {
   }
 
   const buttonType =
-    [t("fe.screens.bookings.history"), t("fe.screens.bookings.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
+    [t("fe.screens.bookings.history"), t("common.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
 
    const popolateSwitchButton = ((item, key) => {
       return <UiButton key={key} label={item} callback={filterByButtonType} />
@@ -91,7 +91,7 @@ const Bookings = (props) => {
                return item.statoAccettazione === "ACCETTATO" && item.data_fine < dateCurrent;
             })
             break;
-         case t("fe.screens.bookings.pending"):
+         case t("common.pending"):
             arrayTest = arrayBkp.filter((item) => {
                return item.statoAccettazione === "IN ATTESA";
             })
@@ -200,7 +200,7 @@ const Bookings = (props) => {
 
       //         <div className="display">
       //           <button>{t("bo.screens.host.reservationList.calendar")}</button>
-      //           <button>{t("bo.screens.host.reservationList.pending")}</button>
+      //           <button>{t("common.pending")}</button>
       //           <button>{t("bo.screens.host.reservationList.accepted")}</button>
       //           <button>{t("bo.screens.host.reservationList.rejected")}</button>
       //         </div>

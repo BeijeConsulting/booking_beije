@@ -12,6 +12,8 @@ import { setPosition } from "../../../../../redux/ducks/positionDuck";
 
 // MODULES
 import { useTranslation } from "react-i18next";
+//CSS
+import '../../../../../assets/variables/_common.scss'
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
@@ -100,6 +102,7 @@ function SearchPlace(props) {
                   <input
                      style={{ width: "100%" }}
                      value={state.searchText}
+                     className=" m1 bNone"
                      onChange={handleChange}
                      placeholder={t('common.searchPlaceholder')}
                   />

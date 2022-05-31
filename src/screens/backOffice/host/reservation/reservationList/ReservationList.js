@@ -150,7 +150,7 @@ const ReservationList = () => {
             callbackFirstButton={showAccepted}
             firstButtonName={t("bo.screens.host.reservationList.accepted")}
             callbackSecondButton={showPending}
-            secondButtonName={t("bo.screens.host.reservationList.pending")}
+            secondButtonName={t("common.pending")}
             callbackThirdButton={showRejected}
             thirdButtonName={t("bo.screens.host.reservationList.rejected")}
           />

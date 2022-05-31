@@ -69,7 +69,7 @@ function Settings(props) {
   },
 
   {
-    name: user_type === "USER" ? t("fe.screens.settings.settingsCard.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
+    name: user_type === "USER" ? t("common.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
     path: 'yourProperties',
     icon: faBuilding
   }

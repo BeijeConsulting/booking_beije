@@ -77,7 +77,7 @@ const Favourites = () => {
 
    const handleFavourite = async (favouriteId, propertyName) => {
       await deleteFavourite(favouriteId, getLocalStorage('token'));
-      loadFavourites();
+      onPageChange(1);
       showToast(favouriteId, propertyName);
    }
 

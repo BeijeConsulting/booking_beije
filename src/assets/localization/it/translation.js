@@ -12,19 +12,21 @@ export const TRANSLATIONS_IT = {
         "relativeMonthLong": "{{value, relativetime(range: month; numeric: auto)}}",
         "accept": "Accetto",
         "account": "Account",
-        "selected": "Selezionata",
         "announceTitle": "Annunci",
+        "address": "Indirizzo",
         "backToHome": "Torna alla home",
+        "becomeAHost": "Diventa un host",
         "bookings": "Prenotazioni",
         "category": "Categoria",
-        "change": "Cambia",
         "checkIn": "Check In",
         "checkOut": "Check Out",
+        "city": "Città",
+        "country": "Stato",
         "decline": "Rifiuta",
         "description": "Descrizione",
         "email": "Email",
-        "english": "Inglese",
         "emptyChat": "Chat vuota",
+        "english": "Inglese",
         "home": "Home",
         "insertTitle": "Inserisci titolo",
         "italian": "Italiano",
@@ -38,6 +40,7 @@ export const TRANSLATIONS_IT = {
         "or": "o",
         "password": "Password",
         "passwordConfirm": "Conferma password",
+        "pending": "In attesa",
         "photos": "Foto",
         "price": "Prezzo",
         "properties": "Strutture",
@@ -50,7 +53,9 @@ export const TRANSLATIONS_IT = {
         "save": "Salva",
         "searchPlaceholder": "Cerca...",
         "select": "Seleziona",
+        "selected": "Selezionata",
         "send": "Invia",
+        "service": "Servizio",
         "services": "Servizi",
         "submit": "Invia",
         "surname": "Cognome",
@@ -58,9 +63,6 @@ export const TRANSLATIONS_IT = {
         "update": "Aggiorna",
         "writeMessage": "Scrivi qui il tuo messaggio...",
         "you": "Tu",
-        "address": "Indirizzo",
-        "city": "Città",
-        "country": "Stato",
         "zipCode": "Codice postale",
         "suggestedApartaments": "Appartamenti consigliati",
         "bookNow": "Prenota adesso!"
@@ -76,7 +78,7 @@ export const TRANSLATIONS_IT = {
         "formErrorApi": "Email o password errata, prova di nuovo",
         "loginToPursue": "Registrati o effettua il login per continuare!",
         "messageError": "Nessun messaggio trovato",
-        "messageNotSent": "Errore nell invio del messaggio",
+        "messageNotSent": "Errore nell'invio del messaggio",
         "messageSent": "Message sent !",
         "operationAnnounce": "Titolo annuncio, campo obbligatorio",
         "operationDescription": "Descrizione, campo obbligatorio",
@@ -96,12 +98,12 @@ export const TRANSLATIONS_IT = {
     },
     "bo": {
         "components": {
+            "uploadPhoto": {
+                "upload": "Carica"
+            },
             "sidebar": {
                 "structure": "Strutture",
                 "payments": "Pagamenti"
-            },
-            "uploadPhoto": {
-                "upload": "Carica"
             }
         },
         "modals": {},
@@ -117,18 +119,15 @@ export const TRANSLATIONS_IT = {
                     "termsConditionsForHost": "Termini e condizioni per gli host",
                     "fields": {
                         "phoneNumber": "Numero di telefono",
-                        "city": "Città",
                         "postcode": "Codice postale",
                         "billingAddress": "Indirizzo di fatturazione",
                         "companyName": "Nome azienda",
-                        "vatNumber": "P.IVA",
-                        "registerButton": "Registrati"
+                        "vatNumber": "P.IVA"
                     }
                 },
                 "reservationList": {
                     "title": "Lista prenotazioni",
                     "accepted": "Accettate",
-                    "pending": "In attesa",
                     "rejected": "Rifiutate",
                     "calendar": "Calendario",
                     "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
@@ -143,16 +142,14 @@ export const TRANSLATIONS_IT = {
                     "editStructure": "Modifica struttura",
                     "addRoom": "Aggiungi camera",
                     "announce": "Annunci",
-                    "night": "notte"
+                    "night": "notte",
                 },
                 "structureOperation": {
                     "structureName": "Nome struttura"
                 },
                 "announceOperation": {
-                    "photos": "Foto",
                     "priceForNight": "Prezzo per notte",
                     "beds": "Letti",
-                    "services": "Servizi",
                     "rooms": "Stanze",
                     "rules": "Regole"
                 },
@@ -168,17 +165,14 @@ export const TRANSLATIONS_IT = {
             "rooms": {
                 "person": "Persona",
                 "people": "Persone",
-                "price": "Prezzo per",
-                "nights": "notti",
-                "night": "notte"
+                "priceForNumberOfNights": "Prezzo per {{number}} notte",
+                "priceForNumberOfNights_other": "Prezzo per {{number}} notti"
             },
             "review": {
                 "username": "username",
-                "title": "titolo",
-                "description": "descrizione"
+                "title": "titolo"
             },
             "service": {
-                "service": "Servizio",
                 "wifi": "Wi-Fi",
                 "kitchen": "Cucina",
                 "airConditioning": "Aria condizionata",
@@ -193,18 +187,23 @@ export const TRANSLATIONS_IT = {
         },
         "modals": {
             "contactHostModal": {
-                "contactHost": "Contatta l host"
+                "contactHost": "Contatta l'host"
             },
             "filter": {
                 "apply": "Applica filtri"
             }
         },
         "screens": {
+            "account": {
+                "changeName": "Cambia nome",
+                "changeEmail": "Cambia email",
+                "changePassword": "Cambia password",
+                "changeSurname": "Cambia cognome",
+                "hiUsername": "Ciao, {{name}}!",
+                "typePassword": "Digita la tua password..."
+            },
             "favourites": {
                 "noFavourites": "Nessun preferito da mostrare"
-            },
-            "guestAccount": {
-                "becomeAHost": "Diventa un host"
             },
             "registration": {
                 "acceptTerms": "Accetto i termini e le condizioni"
@@ -212,9 +211,7 @@ export const TRANSLATIONS_IT = {
             "settings": {
                 "title": "Impostazioni",
                 "settingsCard": {
-                    "account": "Account",
                     "favourites": "Preferiti",
-                    "becomeAHost": "Diventa un Host",
                     "yourProperties": "Le tue proprietà"
                 }
             },
@@ -223,14 +220,13 @@ export const TRANSLATIONS_IT = {
                 "roomDetails": "Dettaglio stanza",
                 "noProperty": "Struttura non disponibile."
             },
-            "bookings": {
-                "history": "Storico",
-                "pending": "In attesa",
-                "planned": "Pianificati",
-                "refused": "Rifiutati"
-            },
             "homePage": {
                 "searchButton": "Cerca destinazione"
+            },
+            "bookings": {
+                "history": "Storico",
+                "planned": "Pianificati",
+                "refused": "Rifiutati"
             },
             "searchResult": {
                 "filterButton": "Filtri",
@@ -239,7 +235,6 @@ export const TRANSLATIONS_IT = {
             "checkout": {
                 "total": "Totale",
                 "confirmPayment": "Conferma pagamento",
-                "price": " Prezzo",
                 "qty": "Qta"
             }
         }

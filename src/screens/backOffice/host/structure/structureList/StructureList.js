@@ -34,6 +34,8 @@ import { randomKey } from "../../../../../utils/generalIteration/generalIteratio
 
 import { useNavigate } from "react-router-dom";
 
+import { setLocalStorage } from '../../../../../utils/localStorage/localStorage';
+
 
 
 import {
@@ -41,11 +43,13 @@ import {
     showHostStruttureGetApi
 } from '../../../../../services/api/struttura/strutturaApi'
 
-
-//TODO: manca get da backend
 //TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
 const StructureList = (props) => {
+
+    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODE1NjQsImV4cCI6MTY1Mzk4NTE2NH0.HhYb7UiljEfLq5ldUAPbfwOrvQGsw2adPAAdHGgJPeg")
+    setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
+
 
 
     const { t } = useTranslation();
@@ -115,7 +119,7 @@ const StructureList = (props) => {
             <HorizontalCard
                 key={`${key}-${randomKey()}`}
                 callback={goToStructureDetails(structure.id)}
-                imageSrc={structure.url_image}
+                imageSrc={structure.lista_immagini.length > 0 ? structure.lista_immagini[0]['urlImage'] : ''}
                 altText={`${key}_${structure}`}
                 title={structure.nome_struttura}
                 text={
@@ -152,7 +156,6 @@ const StructureList = (props) => {
 
     //CHANGE PAGE(PAGINATION)
     const switchToPage = async (clickedPage) => {
-        console.log('Curent page', clickedPage);
         // const HEADER = decryptItem(props.tokenDuck.token);
         const HEADER = getLocalStorage("token")
         let dataPaginationStructure = await showHostStruttureGetApi(clickedPage, 3, HEADER)
@@ -164,7 +167,6 @@ const StructureList = (props) => {
             elementsTotal: dataPaginationStructure?.data.elementsTotal
         })
     }
-    console.log(state.elementsTotal)
 
     //PAGINATION PROPS
     const paginationProps = {

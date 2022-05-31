@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // style
 import './Filter.scss';
+import '../../../../assets/variables/_common.scss'
 
 // components
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
@@ -92,7 +93,7 @@ function Filter(props) {
       <form className={props.classNameCustom}>
          <section>
             <h3>{t("common.price")}</h3>
-            <div className='filter-container'>
+            <div className='filter-container br3 p1 w100'>
                <Slider
                   range
                   defaultValue={[0, 1000]} /* check default prices */
@@ -104,7 +105,7 @@ function Filter(props) {
          <section>
 
             <h3>{t('common.properties')}</h3>
-            <div className='filter-container'>
+            <div className='filter-container br3 p1 w100'>
                {
                   state.propertyTypes !== null && state.propertyTypes.map(mapType)
                }
@@ -112,7 +113,7 @@ function Filter(props) {
 
 
             <h3>{t('common.services')}</h3>
-            <div className='filter-container'>
+            <div className='filter-container br3 p1 w100'>
                {
                   state.services !== null && state.services.map(mapService)
                }

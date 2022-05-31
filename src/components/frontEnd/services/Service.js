@@ -20,7 +20,7 @@ function Service(props) {
 
 Service.defaultProps = {
     icon: faGear,
-    iconName: t("fe.components.service.service")
+    iconName: t("common.service")
 }
 Service.propTypes = {
     serviceId: PropTypes.number.isRequired,

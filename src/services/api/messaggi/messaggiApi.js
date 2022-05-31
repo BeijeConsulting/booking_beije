@@ -15,14 +15,14 @@ const messageMultipleGetApi = async () => {
 // const chatMessagesUserGetApi = async (header) =>{
 //     return await getApi(`messages/chat`, header);
 // }
-const chatMessagesUserGetApi = async(header,itemsPerPage = 100, page = 1) => {
-    return await getApi(`messages/chat?itemsPerPage=${itemsPerPage}&page=${page}`,header);
+const chatMessagesUserGetApi = async (header, itemsPerPage = 100, page = 1) => {
+    return await getApi(`messages/chat?itemsPerPage=${itemsPerPage}&page=${page}`, header);
 }
 
 /* AUTH:USER (SINGLECONVERSATIONPAGE)*/
-const messageToSenderIdGetApi = async (sender_id,header) => {
+const messageToSenderIdGetApi = async (sender_id, header) => {
     return await getApi(`messages/chat/${sender_id
-        }`,header);
+        }`, header);
 }
 
 /* AUTH:USER */
@@ -36,6 +36,21 @@ const messageDeleteApi = async (id, header) => {
     return await deleteApi(`message/${id}`, header);
 }
 
+/* AUTH:HOST */
+const messageListHostGetApi = async (page = 1, itemsPerPage = 5, header) => {
+    return await getApi(`messages/chat?page=${page}&itemsPerPage=${itemsPerPage}`, header);
+}
+const messageChatHostGetApi = async (id, header) => {
+    return await getApi(`messages/chat/${id}`, header);
+}
+
 export {
-    chatMessagesUserGetApi,messageInsertPostApi, messageMultipleGetApi, messageToSenderIdGetApi, messageRelativeAnnuncioGetApi, messageDeleteApi
+    chatMessagesUserGetApi,
+    messageInsertPostApi,
+    messageMultipleGetApi,
+    messageToSenderIdGetApi,
+    messageRelativeAnnuncioGetApi,
+    messageDeleteApi,
+    messageListHostGetApi,
+    messageChatHostGetApi
 }

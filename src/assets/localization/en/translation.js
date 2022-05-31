@@ -15,7 +15,7 @@ export const TRANSLATIONS_EN = {
         "announceTitle": "Announce title",
         "address": "Address",
         "backToHome": "Back to home",
-        "selected": "Selezionata",
+        "becomeAHost": "Become a host",
         "bookings": "Bookings",
         "category": "Category",
         "checkIn": "Check In",
@@ -31,6 +31,7 @@ export const TRANSLATIONS_EN = {
         "insertTitle": "Insert title",
         "italian": "Italian",
         "loginLabel": "Login",
+        "logout": "Logout",
         "messages": "Messages",
         "mra": "Most reviewed apartments",
         "name": "Name",
@@ -39,6 +40,7 @@ export const TRANSLATIONS_EN = {
         "or": "or",
         "password": "Password",
         "passwordConfirm": "Confirm password",
+        "pending": "Pending",
         "photos": "Photos",
         "price": "Price",
         "properties": "Properties",
@@ -51,16 +53,19 @@ export const TRANSLATIONS_EN = {
         "save": "Save",
         "searchPlaceholder": "Search...",
         "select": "Select",
+        "selected": "Selezionata",
         "send": "Send",
+        "service": "Service",
         "services": "Services",
         "submit": "Submit",
         "surname": "Surname",
         "termsConditions": "Terms and Agreement",
+        "update": "Update",
         "writeMessage": "Write your message here...",
         "you": "You",
         "zipCode": "ZIP code",
         "suggestedApartaments": "Suggested apartament",
-        "bookNow": "Prenota adesso!"
+        "bookNow": "Book now!"
     },
     "toasts": {
         "favouritesDeleted": "\"{{name}}\" has been deleted from your favourites",
@@ -93,40 +98,12 @@ export const TRANSLATIONS_EN = {
     },
     "bo": {
         "components": {
+            "uploadPhoto": {
+                "upload": "Upload"
+            },
             "sidebar": {
                 "structure": "Structures",
                 "payments": "Payments"
-            },
-            "reservationList": {
-                "title": "Reservation list",
-                "accepted": "Accepted",
-                "pending": "Pending",
-                "rejected": "Rejected",
-                "calendar": "Calendar"
-            },
-            "structure": {
-                "structureListTitle": "Structure list",
-                "addStructure": "Add structure"
-            },
-            "structureDetails": {
-                "structureDetailsTitle": "Structure details",
-                "editStructure": "Edit structure",
-                "addRoom": "Add room",
-                "announce": "Announce"
-            },
-            "structureOperation": {
-                "structureName": "Structure name"
-            },
-            "announceOperation": {
-                "photos": "Photos",
-                "priceForNight": "Price for night",
-                "beds": "Beds",
-                "services": "services",
-                "rooms": "Rooms",
-                "rules": "Rules"
-            },
-            "uploadPhoto": {
-                "upload": "upload"
             }
         },
         "modals": {},
@@ -142,18 +119,15 @@ export const TRANSLATIONS_EN = {
                     "termsConditionsForHost": "Terms and Conditions for Host",
                     "fields": {
                         "phoneNumber": "Phone number",
-                        "city": "City",
                         "postcode": "Postcode",
                         "billingAddress": "Billing address",
                         "companyName": "Company name",
-                        "vatNumber": "VAT",
-                        "registerButton": "Register"
+                        "vatNumber": "VAT"
                     }
                 },
                 "reservationList": {
                     "title": "Reservation list",
                     "accepted": "Accepted",
-                    "pending": "Pending",
                     "rejected": "Rejected",
                     "calendar": "Calendar",
                     "confirmReservationDeleteMessage": "Are you sure you want to delete",
@@ -174,10 +148,8 @@ export const TRANSLATIONS_EN = {
                     "structureName": "Structure name"
                 },
                 "announceOperation": {
-                    "photos": "Photos",
                     "priceForNight": "Price for night",
                     "beds": "Beds",
-                    "services": "services",
                     "rooms": "Rooms",
                     "rules": "Rules"
                 }
@@ -193,17 +165,14 @@ export const TRANSLATIONS_EN = {
             "rooms": {
                 "person": "Person",
                 "people": "People",
-                "price": "Price for",
-                "nights": "nights",
-                "night": "night"
+                "priceForNumberOfNights": "Price for {{number}} night",
+                "priceForNumberOfNights_other": "Price for {{number}} nights"
             },
             "review": {
                 "username": "username",
-                "title": "title",
-                "description": "description"
+                "title": "title"
             },
             "service": {
-                "service": "Service",
                 "wifi": "Wi-Fi",
                 "kitchen": "Kitchen",
                 "airConditioning": "Air conditioning",
@@ -225,11 +194,16 @@ export const TRANSLATIONS_EN = {
             }
         },
         "screens": {
+            "account": {
+                "changeName": "Change name",
+                "changeEmail": "Change email",
+                "changePassword": "Change password",
+                "changeSurname": "Change surname",
+                "hiUsername": "Hi, {{name}}!",
+                "typePassword": "Type your password..."
+            },
             "favourites": {
                 "noFavourites": "No favourites to show"
-            },
-            "guestAccount": {
-                "becomeAHost": "Become a host"
             },
             "registration": {
                 "acceptTerms": "I accept the terms and conditions"
@@ -237,23 +211,20 @@ export const TRANSLATIONS_EN = {
             "settings": {
                 "title": "Settings",
                 "settingsCard": {
-                    "account": "Account",
                     "favourites": "Favourites",
-                    "becomeAHost": "Become a Host",
                     "yourProperties": "Your properties"
                 }
             },
             "propertyDetails": {
                 "details": "Details",
                 "roomDetails": "Room details",
-                "noProperty": "Property unavailable."
+                "noProperty": "Unavailable property."
             },
             "homePage": {
                 "searchButton": "Search your destination"
             },
             "bookings": {
                 "history": "History",
-                "pending": "Pending",
                 "planned": "Planned",
                 "refused": "Rejected"
             },
@@ -264,7 +235,6 @@ export const TRANSLATIONS_EN = {
             "checkout": {
                 "total": "Total",
                 "confirmPayment": "Confirm payment",
-                "price": " Price",
                 "qty": "Qty"
             }
         }
