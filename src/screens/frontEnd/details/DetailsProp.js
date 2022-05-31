@@ -202,7 +202,6 @@ const DetailsProp = () => {
                      }
 
                   </div>
-
                   <div className="padding_page">
                      <div className="property_core_info_container">
                         <div className="location_review">
@@ -224,7 +223,9 @@ const DetailsProp = () => {
                      </div>
                      <div className="total_price_container">
                         <div className="container_price">
-                           <p>Total {state.checkOutPrice}&euro;</p>
+                           <p>
+                              {t('fe.screens.checkout.total')} {t('common.currency', { price: state.checkOutPrice })}
+                           </p>
                            <UiButton
                               className="button_price"
                               callback={goToCheckout}
