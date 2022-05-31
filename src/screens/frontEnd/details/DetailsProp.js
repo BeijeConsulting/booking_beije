@@ -34,10 +34,10 @@ import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annunc
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
-import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+// import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
-import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
+import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
