@@ -233,12 +233,7 @@ const DetailsProp = () => {
                      <div className="total_price_container">
                         <div className="container_price">
                            <p>
-                              {t('fe.screens.checkout.total')} {t('common.currency', {
-                                 price: state.checkOutPrice,
-                                 formatParams: {
-                                    price: { currency: 'EUR', maximumFractionDigits: 0 }
-                                 }
-                              })}
+                              {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state.checkOutPrice })}
                            </p>
                            <UiButton
                               className="button_price"

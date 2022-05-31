@@ -76,23 +76,19 @@ class PropertyCard extends Component {
                <div>
                   <div className='titleContainer'>
                      <span>{this.props?.data?.struttura?.nome}</span>
-
                   </div>
+
                   <small>{this.props?.data?.struttura?.tipologia}</small>
+
                   <div className='mediaRateCard'>
                      <FontAwesomeIcon icon={faStar} />
-                     <small>{this.props?.data?.media_recensioni}</small>
+                     <small>{this.props?.data?.media_recensioni} ({this.props?.data?.numero_recensioni})</small>
                   </div>
                </div>
 
 
                <span className='absolute r0 b0'>
-                  {this.props?.t('common.currency', {
-                     price: this.state?.price,
-                     formatParams: {
-                        price: { currency: 'EUR', maximumFractionDigits: 0 }
-                     }
-                  })}
+                  {this.props?.t('common.currencyTwoFractionDigits', { price: this.state?.price })}
                </span>
             </section>
          </>
