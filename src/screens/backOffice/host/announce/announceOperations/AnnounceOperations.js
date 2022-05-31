@@ -74,39 +74,41 @@ const AnnounceOperation = () => {
     });
   };
 
-  return (
-    <>
-      {state === null ? (
-        <Spin />
-      ) : (
-        <Form
-          name="basic"
-          layout="vertical"
-          initialValues={{
-            announce: state.data.announce,
-            rules: state.data.rules,
-            service: state.data.service,
-            description: state.data.description,
-            priceForNight: state.data.priceForNight,
-            beds: state.data.beds,
-            rooms: state.data.rooms,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label={t("bo.screens.host.announceOperation.photos")}
-            name="photos"
-            rules={[
-              {
-                required: true,
-                message: t("toasts.operationPhotos"),
-              },
-            ]}
-          >
-            <UploadFoto addFotoStructure={onChangeFoto} />
-          </Form.Item>
+    return (
+        <>
+            {state.data === null ? (
+                <Spin />
+            ) : (
+                <Form
+                    name="basic"
+                    layout="vertical"
+                    initialValues={{
+                        announce: state.data.announce,
+                        rules: state.data.rules,
+                        service: state.data.service,
+                        description: state.data.description,
+                        priceForNight: state.data.priceForNight,
+                        beds: state.data.beds,
+                        rooms: state.data.rooms,
+                    }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label={t("common.photos")}
+                        name="photos"
+                        rules={[
+                            {
+                                required: true,
+                                message: t(
+                                    "toasts.operationPhotos"
+                                ),
+                            },
+                        ]}
+                    >
+                        <UploadFoto addFotoStructure={onChangeFoto} />
+                    </Form.Item>
 
           <Row gutter={32}>
             <Col>
@@ -140,44 +142,44 @@ const AnnounceOperation = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Form.Item
-              label={t("bo.screens.host.announceOperation.services")}
-              name="services"
-              rules={[
-                {
-                  required: true,
-                  message: "toasts.operationServices",
-                },
-              ]}
-            >
-              <Checkbox.Group name="service">
-                <Row>
-                  <Col span={8}>
-                    <Checkbox value="servizio-3">servizio-3</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-4">servizio-4</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-5">servizio-5</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-6">servizio-6</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-7">servizio-7</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-8">servizio-8</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="servizio-9">servizio-9</Checkbox>
-                  </Col>
-                </Row>
-              </Checkbox.Group>
-            </Form.Item>
-          </Row>
+                    <Row>
+                        <Form.Item
+                            label={t("common.services")}
+                            name="services"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "toasts.operationServices",
+                                },
+                            ]}
+                        >
+                            <Checkbox.Group name="service">
+                                <Row>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-3">servizio-3</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-4">servizio-4</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-5">servizio-5</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-6">servizio-6</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-7">servizio-7</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-8">servizio-8</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value="servizio-9">servizio-9</Checkbox>
+                                    </Col>
+                                </Row>
+                            </Checkbox.Group>
+                        </Form.Item>
+                    </Row>
 
           <Row>
             <Form.Item
