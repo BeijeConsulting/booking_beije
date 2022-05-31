@@ -10,18 +10,18 @@ const axiosInstance = axios.create({
   timeout: TIMEOUT,
 });
 
-axiosInstance.interceptors.request.use(
-  config => {
-    const token = getLocalStorage("token");
-    if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token;
-    }
-    return config;
-  },
-  error => {
-    Promise.reject(error)
-  }
-);
+// axiosInstance.interceptors.request.use(
+//   config => {
+//     const token = getLocalStorage("token");
+//     if (token) {
+//       config.headers['Authorization'] = 'Bearer ' + token;
+//     }
+//     return config;
+//   },
+//   error => {
+//     Promise.reject(error)
+//   }
+// );
 
 axiosInstance.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
@@ -67,7 +67,7 @@ export function responseApiError(error) {
   };
 }
 
-export function postApi(resource, obj, header = null) {
+export async function postApi(resource, obj, header = null) {
   return axiosInstance
     .post(resource, obj, {
       headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
@@ -76,7 +76,7 @@ export function postApi(resource, obj, header = null) {
     .catch(responseApiError());
 }
 
-export function getApi(resource, header = null) {
+export async function getApi(resource, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
@@ -86,7 +86,7 @@ export function getApi(resource, header = null) {
     .catch(responseApiError());
 }
 
-export function getSearchApi(resource, body, header = null) {
+export async function getSearchApi(resource, body, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
@@ -96,7 +96,7 @@ export function getSearchApi(resource, body, header = null) {
     .catch(responseApiError());
 }
 
-export function putApi(resource, obj, header = null) {
+export async function putApi(resource, obj, header = null) {
   //function for put api call
   return axiosInstance
     .put(resource, obj, {
@@ -106,7 +106,7 @@ export function putApi(resource, obj, header = null) {
     .catch(responseApiError());
 }
 
-export function deleteApi(resource, header = null) {
+export async function deleteApi(resource, header = null) {
   return axiosInstance
     .delete(resource, {
       headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
