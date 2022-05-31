@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";
@@ -26,8 +27,6 @@ import Modal from "../../../../../components/common/modal/Modal";
 //API
 import { showStrutturaById } from "../../../../../services/api/struttura/strutturaApi";
 import { annuncioOnStrutturaGetApi } from "../../../../../services/api/annuncio/annuncioApi";
-import { connect } from "react-redux";
-import tokenDuck from "../../../../../redux/ducks/tokenDuck";
 
 const StructureDetails = (props) => {
 
@@ -37,7 +36,7 @@ const StructureDetails = (props) => {
     const params = useParams();
     const [state, setState] = useState({
         structure: {},
-        structureAnnounces: [],
+        structureAnnounces: {},
         announceDeleteModal: false,
         loading: {
             structures: true,
@@ -68,36 +67,32 @@ const StructureDetails = (props) => {
 
         setState({
             ...state,
-            structure: structure?.data,
+            structure: structure,
             structureAnnounces: announces
         })
     }
 
-
-
-
     //CARD LIST
     const goToAnnounce = (idAnnounce = null) => () => {
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
+        navigate(`/${routes.DASHBOARD}/${routes.ANNOUNCE_OPERATION}/${idAnnounce === null ? "new" : idAnnounce}`, {
             state: { idAnnounce: idAnnounce },
         });
     };
 
-
     const getAnnounceCards = (announce) => {
         return <HorizontalCard
-            key={`${announce?.data?.list?.id}-${randomKey()}`}
-            // imageSrc={announce?.data?.list?.img}
-            imageAlt={announce?.data?.list?.slug}
-            title={announce?.data?.list?.titolo}
+            key={`${announce?.annuncio?.id}-${randomKey()}`}
+            // imageSrc={announce?.annuncio?.img}
+            imageAlt={announce?.annuncio?.slug}
+            title={announce?.annuncio?.titolo}
             subtitle={<>
                 <span className="structure_details__icon">
                     <FontAwesomeIcon icon={faBed} />
                 </span>
-                {announce?.data?.list?.numPostiLetto}
+                {announce?.annuncio?.numPostiLetto}
             </>
             }
-            text={announce?.data?.list?.descrizione}
+            text={announce?.annuncio?.descrizione}
             upperRightContent={
                 <>
                     <Modal
@@ -121,15 +116,15 @@ const StructureDetails = (props) => {
             }
             footerContentLeft={
                 <strong>
-                    €{announce?.data?.list?.prezzo}/{t("bo.screens.host.structureDetails.night")}
+                    €{announce?.annuncio?.prezzo}/{t("bo.screens.host.structureDetails.night")}
                 </strong>
             }
             footerContent={
                 <span className="announce_count">
-                    x{announce?.data?.list?.count}
+                    x{announce?.annuncio?.count}
                 </span>
             }
-            callback={goToAnnounce(announce?.data?.list?.id)}
+            callback={goToAnnounce(announce?.annuncio?.id)}
         />
     }
 
@@ -159,7 +154,6 @@ const StructureDetails = (props) => {
         paginationCallback: switchToPage
     }
 
-
     return (
         <>
 
@@ -180,15 +174,15 @@ const StructureDetails = (props) => {
                 <img className="structure_img" src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
 
                 <div className="structure_information">
-                    <h1>{state.structure?.nome_struttura}</h1>
-                    <p>{state.structure?.indirizzo?.citta}, {state.structure?.indirizzo?.stato}</p>
+                    <h1>{state.structure?.data?.nome_struttura}</h1>
+                    <p>{state.structure?.data?.indirizzo?.citta}, {state.structure?.data?.indirizzo?.stato}</p>
                     <p>
                         <span className="structure_details__icon">
                             <FontAwesomeIcon icon={faHotel} />
                         </span>
-                        {state.structure?.tipologiaStrutturaId?.tipo}
+                        {state.structure?.data?.tipologiaStrutturaId?.tipo}
                     </p>
-                    <p>{state.structure?.descrizione}</p>
+                    <p>{state.structure?.data?.descrizione}</p>
                 </div>
 
             </div>
