@@ -30,6 +30,7 @@ export const TRANSLATIONS_IT = {
       "home": "Home",
       "insertTitle": "Inserisci titolo",
       "italian": "Italiano",
+      "loading": "Caricamento...",
       "loginLabel": "Accedi",
       "logout": "Esci",
       "messages": "Messaggi",
