@@ -35,6 +35,7 @@ const deleteServiceListIdDeleteApi = async (id, header) => {
     return await deleteApi(`del_service_list/${id}`, header);
 }
 
+
 export {
     filterAnnunciServiceIdGetApi, filterStruttureServiceIdGetApi, serviceListGetApi, serviceStruttureIdGetApi, addServiceListPostApi, serviceListModifyPutApi, deleteServiceListIdDeleteApi
 }

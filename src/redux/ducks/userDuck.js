@@ -34,7 +34,8 @@ export default function userDuck(state = INIT_STATE, action) {
         case SET_USER:
             newState = Object.assign({}, state);
             newState.user = action.payload.user;
-            
+            /*  let res = await myProfilesGetApi(getLocalStorage('token'));
+             newState.user = res.data; */
             return newState;
 
         case INIT_USER:
