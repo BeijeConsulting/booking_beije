@@ -2,6 +2,7 @@ export const TRANSLATIONS_EN = {
    "common": {
       "number": "{{value, number(minimumFractionDigits: 2)}}",
       "currency": "{{price, currency(currency: EUR)}}",
+      "currencyTwoFractionDigits": "{{price, currency(currency: EUR; maximumFractionDigits: 2)}}",
       "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
       "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
       "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
@@ -30,6 +31,7 @@ export const TRANSLATIONS_EN = {
       "home": "Home",
       "insertTitle": "Insert title",
       "italian": "Italian",
+      "loading": "Loading...",
       "loginLabel": "Login",
       "logout": "Logout",
       "messages": "Messages",
@@ -48,7 +50,7 @@ export const TRANSLATIONS_EN = {
       "registerLabel": "Register",
       "registration": "Registration",
       "research": "Research",
-      "rooms": "{{count}} room",
+      "rooms_one": "{{count}} room",
       "rooms_other": "{{count}} rooms",
       "save": "Save",
       "searchPlaceholder": "Search...",
@@ -58,13 +60,13 @@ export const TRANSLATIONS_EN = {
       "service": "Service",
       "services": "Services",
       "submit": "Submit",
+      "suggestedApartments": "Suggested apartments",
       "surname": "Surname",
       "termsConditions": "Terms and Agreement",
       "update": "Update",
       "writeMessage": "Write your message here...",
       "you": "You",
       "zipCode": "ZIP code",
-      "suggestedApartaments": "Suggested apartament",
       "bookNow": "Book now!"
    },
    "toasts": {
@@ -164,10 +166,10 @@ export const TRANSLATIONS_EN = {
    "fe": {
       "components": {
          "rooms": {
-            "person": "Person",
-            "people": "People",
-            "priceForNumberOfNights": "Price for {{number}} night",
-            "priceForNumberOfNights_other": "Price for {{number}} nights"
+            "people_one": "{{count}} person",
+            "people_other": "{{count}} people",
+            "priceForNumberOfNights_one": "Price for {{count}} night",
+            "priceForNumberOfNights_other": "Price for {{count}} nights"
          },
          "review": {
             "username": "username",
@@ -206,6 +208,10 @@ export const TRANSLATIONS_EN = {
          "favourites": {
             "noFavourites": "No favourites to show"
          },
+         "pageNotFound": {
+            "pageTitle": "Page not found",
+            "pageDescription": "Sorry, the page you're looking for was not found."
+         },
          "registration": {
             "acceptTerms": "I accept the terms and conditions"
          },
@@ -234,9 +240,11 @@ export const TRANSLATIONS_EN = {
             "mapButton": "Map"
          },
          "checkout": {
-            "total": "Total",
+            "checkoutPageTitle": "Checkout",
             "confirmPayment": "Confirm payment",
-            "qty": "Qty"
+            "paymentSuccessful": "The payment was successful",
+            "qty": "Qty",
+            "total": "Total"
          }
       }
    }
