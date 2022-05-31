@@ -37,6 +37,7 @@ class Like extends Component {
         console.log(FAVOURITES?.data?.list);
         this.favourites = FAVOURITES?.data?.list;
         this.isFavourites = this.favourites?.find(this.find);
+        console.log(this.isFavourites);
     }
 
     handleAdd = (id, name) => async () => {

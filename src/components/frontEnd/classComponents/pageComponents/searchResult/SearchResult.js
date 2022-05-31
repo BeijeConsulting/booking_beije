@@ -48,11 +48,11 @@ class SearchResult extends Component {
 
    componentDidMount() {
       this.getapi();
-      // if(this.props.router.location.state.property !== prevState.property){
+      if(this.props.router.location.state !== null){
       this.setState({
          property: this.props.router.location.state.property
       })
-      // }
+      }
 
 
    }
