@@ -71,7 +71,6 @@ const DetailsProp = () => {
       const rooms = await annuncioOnStrutturaGetApi(id)
       const review = await reviewsOnStrutturaIdGetApi(id)
       const services = await serviceStruttureIdGetApi(id)
-      // console.log(properties, 'stazmne', rooms, review)
       setState({
         ...state,
         property: properties?.data,
@@ -104,6 +103,7 @@ const DetailsProp = () => {
   }
 
   const addToCheckOut = (temp_id, isSelected, obj) => {
+    console.log('qua', obj)
     isSelected ? checkOutArray[temp_id] = {
       ...obj,
       price: obj.price * obj.count,
@@ -122,9 +122,7 @@ const DetailsProp = () => {
     arrayToCheckout = checkOutArray.filter((element) => {
       return element !== undefined;
     })
-
   }
-
   const goToCheckout = () => {
     setLocalStorage('checkout', {
       property: state.property,
@@ -144,18 +142,19 @@ const DetailsProp = () => {
   }
 
   const generateRooms = (item, key) => {
-    let isStored = null
-    isStored = state.storageRooms?.checkOut.find(room => room.id === key);
+
+    const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
+    console.log('item', item)
     return <Rooms
-      callbackGoToRoom={goToSelectedRoom(item?.id)}
+      callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
       stored={isStored}
       key={key}
-      numberOfPeople={4} //da modificare
-      title={item?.titolo}
-      price={item?.prezzo}
-      count={item?.count}
+      numberOfPeople={item?.annuncio.numPostiLetto}
+      title={item?.annuncio.titolo}
+      price={item?.annuncio.prezzo}
+      count={item?.annuncio.count}
       temp_id={key}
-      services={state.serviceList}
+      services={item?.servizi.length > 0 ? item.servizi : state.serviceList}
       callback={addToCheckOut}
     />
   }

@@ -25,7 +25,7 @@ function Rooms(props) {
         })
     }, [state.selected])
 
-
+    console.log(props.temp_id, props.stored);
 
     const goToRoom = () => {
         props.callbackGoToRoom()
@@ -39,7 +39,7 @@ function Rooms(props) {
     /* Generate a N number of User icon, where N is the number passed by props.numberOfPeople */
     const generatePeopleIcon = () => {
         let userIcon = [];
-        for (let index = 0; index < props.numberOfPeople; index++) {
+        for (let index = 0; index < (props.numberOfPeople > 5 ? 5 : props.numberOfPeople); index++) {
             userIcon.push(<span key={index}>
                 <FontAwesomeIcon icon={faUser} />
             </span>);
@@ -48,7 +48,7 @@ function Rooms(props) {
     }
     const generateMaxRooms = () => {
         let arrayData = []
-        for (let index = 1; index <= props.count > 4 ? 4 : props.count; index++) {
+        for (let index = 1; index <= props.count; index++) {
             arrayData.push(index)
         }
         return arrayData;
@@ -74,7 +74,7 @@ function Rooms(props) {
             </div>
             <div className='description_container'>
                 <div className='number_people_container'>
-                    <div className='people_container'>{generatePeopleIcon()}<span>{props.numberOfPeople > 1 ? t("fe.components.rooms.people") : t("fe.components.rooms.person")}</span></div>
+                    <div className='people_container'>{generatePeopleIcon()}<span> {props.numberOfPeople}{" "}{props.numberOfPeople > 1 ? t("fe.components.rooms.people") : t("fe.components.rooms.person")}</span></div>
                 </div>
                 <div className='services_price_container'>
                     <div>

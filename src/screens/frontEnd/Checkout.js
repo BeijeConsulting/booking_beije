@@ -14,7 +14,7 @@ import { getLocalStorage, getLocalStorageCheckout, removeLocalStorage } from "..
 import PropertyCard from "../../components/frontEnd/classComponents/ui/propertyCard/PropertyCard";
 
 const Checkout = () => {
-
+  const navigate = useNavigate();
   let tot = 0
 
   const { t } = useTranslation();
@@ -39,11 +39,11 @@ const Checkout = () => {
   }
 
   const goToPayment = () => {
-
-  }
-  const goToLogin = () => {
+    alert("pagamento effettuato con successo")
     removeLocalStorage('checkout')
+    navigate("/")
   }
+
 
   function renderCheckoutList(item, key) {
     tot += item.price
@@ -101,7 +101,7 @@ const Checkout = () => {
           </div>
         </div>
         <div className="button_container">
-          {getLocalStorage('token') !== null ? <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button> : <button className="button_on" onClick={goToLogin}>{t("common.loginLabel")}</button>}
+          <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button>
         </div>
       </div>
     </>
