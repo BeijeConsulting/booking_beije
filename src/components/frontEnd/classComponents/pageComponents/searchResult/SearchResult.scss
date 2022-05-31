@@ -4,16 +4,24 @@
    background-color: $black_primary;
    padding-bottom: 3rem;
 
+   .home-search {
+      width: 100%;
+   }
+
+   .ButtonContainer,
+   .searchFormContainer,
+   form {
+      width: 100%;
+   }
+
    .ButtonContainer {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
 
-      div {
-         display: flex;
-         justify-content: space-around;
-      }
+      max-width: 80vw;
+      margin: 0 auto;
    }
 }
 
@@ -37,8 +45,6 @@
 
 .filters-modal .filter-container {
    background-color: $white_primary;
-   // border-radius: 1rem;
-   // padding: 1rem;
    color: $black_primary;
 }
 
@@ -53,4 +59,11 @@
 
 .filters-modal input[type="submit"] {
    margin-top: 1rem;
+}
+
+
+@media (min-width: 650px) {
+   .home-search {
+      width: auto;
+   }
 }

@@ -68,13 +68,12 @@ const LayoutBackOffice = () => {
       case "dashboardhost-registration":
         return false;
       default:
-        console.log(location.pathname.replaceAll("/", ""));
         return true;
     }
   };
 
   const goTo =
-    (path = '', obj = null) =>
+    (path = "", obj = null) =>
     () => {
       return navigate(`/${routes.DASHBOARD}/${path}`);
     };
@@ -146,7 +145,7 @@ const LayoutBackOffice = () => {
         >
           {location.pathname.replaceAll("/", "") !== "dashboard" ? (
             <>
-              <div onClick={goTo()} style={{cursor: "pointer"}}>
+              <div onClick={goTo()} style={{ cursor: "pointer" }}>
                 <FontAwesomeIcon icon={faEllipsis} /> back to dashboard
               </div>
               <Outlet />

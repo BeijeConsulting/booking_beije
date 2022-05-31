@@ -47,11 +47,6 @@ import {
 
 const StructureList = (props) => {
 
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODE1NjQsImV4cCI6MTY1Mzk4NTE2NH0.HhYb7UiljEfLq5ldUAPbfwOrvQGsw2adPAAdHGgJPeg")
-    setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
-
-
-
     const { t } = useTranslation();
     const navigate = useNavigate();
 

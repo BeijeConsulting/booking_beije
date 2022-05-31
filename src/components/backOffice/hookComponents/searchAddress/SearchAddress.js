@@ -8,7 +8,7 @@ const FORMAT_RES_URL = "&limit=10&format=jsonv2";
 
 const SearchAddress = (props) => {
   const [state, setState] = useState({
-    value: "",
+    value: props.defValue !== null ? props.defValue : '',
     options: [],
   });
 
@@ -43,12 +43,12 @@ const SearchAddress = (props) => {
     return props.callback(state.options.find((add) => add.value === data));
   };
 
-  //   const onChange = (data) => {
-  //     setState({
-  //       ...state,
-  //       value: data,
-  //     });
-  //   };
+  const onChange = (data) => {
+    setState({
+      ...state,
+      value: data,
+    });
+  };
 
   return (
     <AutoComplete
@@ -58,11 +58,11 @@ const SearchAddress = (props) => {
       }}
       onSelect={onSelect}
       onSearch={onSearch}
-      //   onChange={onChange}
+      onChange={onChange}
       placeholder={props.placeholder}
       allowClear
-      defaultValue={props.defValue}
-      status={`${state.value === '' ? "error" : ""}`}
+      defaultValue={state.value}
+      status={`${state.value === "" ? "error" : ""}`}
     />
   );
 };

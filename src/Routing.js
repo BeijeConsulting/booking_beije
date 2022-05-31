@@ -164,7 +164,7 @@ function Routing(props) {
                 <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
                 <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
                 <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-                <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
+                <Route path={`${routes.STRUCTURE_DETAILS}/:id`} element={<StructureDetails />} />
                 <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
                 <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
                 <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
