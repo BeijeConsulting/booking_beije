@@ -126,63 +126,38 @@ export const TRANSLATIONS_EN = {
                   "vatNumber": "VAT"
                }
             },
-            "sidebar": {
-               "structure": "Structures",
-               "payments": "Payments"
+            "reservationList": {
+               "title": "Reservation list",
+               "accepted": "Accepted",
+               "rejected": "Rejected",
+               "calendar": "Calendar",
+               "confirmReservationDeleteMessage": "Are you sure you want to delete",
+               "confirmReservationDelete": "Confirm removal"
+            },
+            "structure": {
+               "structureListTitle": "Structure list",
+               "addStructure": "Add structure"
+            },
+            "structureDetails": {
+               "structureDetailsTitle": "Structure details",
+               "editStructure": "Edit structure",
+               "addRoom": "Add room",
+               "announce": "Announce",
+               "night": "night"
+            },
+            "structureOperation": {
+               "structureName": "Structure name"
+            },
+            "announceOperation": {
+               "priceForNight": "Price for night",
+               "beds": "Beds",
+               "rooms": "Rooms",
+               "rules": "Rules"
             }
          },
-         "modals": {},
-         "screens": {
-            "host": {
-               "hostRegistration": {
-                  "title": "Host registration",
-                  "privateRegistration": "I'm a private",
-                  "companyRegistration": "I have a company",
-                  "setUpPrivateAccount": "Set up your private account",
-                  "setUpCompanyAccount": "Set up your company account",
-                  "accept": "I accept",
-                  "termsConditionsForHost": "Terms and Conditions for Host",
-                  "fields": {
-                     "phoneNumber": "Phone number",
-                     "postcode": "Postcode",
-                     "billingAddress": "Billing address",
-                     "companyName": "Company name",
-                     "vatNumber": "VAT"
-                  }
-               },
-               "reservationList": {
-                  "title": "Reservation list",
-                  "accepted": "Accepted",
-                  "rejected": "Rejected",
-                  "calendar": "Calendar",
-                  "confirmReservationDeleteMessage": "Are you sure you want to delete",
-                  "confirmReservationDelete": "Confirm removal"
-               },
-               "structure": {
-                  "structureListTitle": "Structure list",
-                  "addStructure": "Add structure"
-               },
-               "structureDetails": {
-                  "structureDetailsTitle": "Structure details",
-                  "editStructure": "Edit structure",
-                  "addRoom": "Add room",
-                  "announce": "Announce",
-                  "night": "night"
-               },
-               "structureOperation": {
-                  "structureName": "Structure name"
-               },
-               "announceOperation": {
-                  "priceForNight": "Price for night",
-                  "beds": "Beds",
-                  "rooms": "Rooms",
-                  "rules": "Rules"
-               }
-            },
-            "admin": {
-               "pendingAnnounceListTitle": "Pending announces",
-               "pendingStructureListTitle": "Pending structures"
-            }
+         "admin": {
+            "pendingAnnounceListTitle": "Pending announces",
+            "pendingStructureListTitle": "Pending structures"
          }
       }
    },
