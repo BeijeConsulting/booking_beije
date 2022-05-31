@@ -12,6 +12,12 @@ const showHostStruttureGetApi = async (page = 1, itemsPerPage = 3, header) => {
         }`, header);
 }
 
+/* AUTH:HOST */
+const showStrutturaById = async (id, header) => {
+    return await getApi(`struttura/${id}`, header);
+}
+
+/* AUTH:HOST */
 const insertStrutturaPostApi = async (obj, header) => {
     return await postApi(`insertStruttura`, obj, header);
 }
@@ -36,5 +42,6 @@ export {
     updateStrutturaPutApi,
     strutturaDetailIdGetApi,
     showAllStruttureGetApi,
-    showHostStruttureGetApi
+    showHostStruttureGetApi,
+    showStrutturaById
 }

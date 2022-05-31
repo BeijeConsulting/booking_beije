@@ -10,48 +10,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import SearchForm from '../../../classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm';
 
-const SearchButton = ({callback, classCustom}) => {
-  
-    const [state, setState] = useState({
-        width: null
-    })
+const SearchButton = ({ callback, classCustom }) => {
 
-    function handleWindowWidth () {
-        setState({
-            ...state,
-            width: window.innerWidth
-        })
-        window.addEventListener('resize', handleWindowWidth)
+   const [state, setState] = useState({
+      width: null
+   })
 
-        return () => { window.removeEventListener('resize', handleWindowWidth) }
-    } 
+   function handleWindowWidth() {
+      setState({
+         ...state,
+         width: window.innerWidth
+      })
+      window.addEventListener('resize', handleWindowWidth)
 
-    useEffect(handleWindowWidth, [])
+      return () => { window.removeEventListener('resize', handleWindowWidth) }
+   }
 
-    return (
+   useEffect(handleWindowWidth, [])
 
-        state.width < 480 ?
-        <button
-            onClick={ callback}
+   return (
+
+      state.width < 480 ?
+         <button
+            onClick={callback}
             className={classCustom}
-        >
+         >
             <span>
-                <FontAwesomeIcon icon={faSearch} />
+               <FontAwesomeIcon icon={faSearch} />
             </span>
             {t('fe.screens.homePage.searchButton')}
-        </button>
+         </button>
 
-        :
-        <SearchForm />
-    )
+         :
+         <div className='home-search'>
+            <SearchForm />
+         </div>
+   )
 }
 
 SearchButton.defaultProps = {
-    classCustom: 'searchButton'
+   classCustom: 'searchButton'
 }
 
 SearchButton.propTypes = {
-    classCustom: PropTypes.string
+   classCustom: PropTypes.string
 }
 
 export default SearchButton

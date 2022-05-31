@@ -1,0 +1,15 @@
+@import "../variables/globalVariables.scss";
+
+.custom-toast {
+   background: $white_primary;
+   color: $error_color;
+}
+
+.custom-toast:hover,
+.info-toast:hover {
+   cursor: pointer;
+}
+
+.info-toast {
+   color: $black_primary;
+}

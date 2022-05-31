@@ -153,7 +153,7 @@ const HostRegistration = (props) => {
                         </Form.Item>
                         <Form.Item
                             name={['user', 'city']}
-                            label={t("bo.screens.host.hostRegistration.fields.city")}
+                            label={t("common.city")}
                             rules={[
                                 {
                                     required: true,
@@ -203,7 +203,7 @@ const HostRegistration = (props) => {
 
                         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                             <Button type="primary" htmlType="submit">
-                                {t("bo.screens.host.hostRegistration.fields.registerButton")}
+                                {t("common.registerLabel")}
                             </Button>
                         </Form.Item>
 
@@ -252,7 +252,7 @@ const HostRegistration = (props) => {
                     </Form.Item>
                     <Form.Item
                         name={['user', 'city']}
-                        label={t("bo.screens.host.hostRegistration.fields.city")}
+                        label={t("common.city")}
                         rules={[
                             {
                                 required: true,
@@ -303,7 +303,7 @@ const HostRegistration = (props) => {
 
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button type="primary" htmlType="submit">
-                            {t("bo.screens.host.hostRegistration.fields.registerButton")}
+                            {t("common.registerLabel")}
                         </Button>
                     </Form.Item>
                 </Form>

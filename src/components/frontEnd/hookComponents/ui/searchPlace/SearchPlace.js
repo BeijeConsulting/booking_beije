@@ -29,7 +29,7 @@ function SearchPlace(props) {
       listPlace: []
    })
 
-   const handleButtonSearch = (item) => () => {              
+   const handleButtonSearch = (item) => () => {
       props.dispatch(setPosition([item.lat, item.lon]))
       props.dispatch(setAddress(item))
       setState({
@@ -96,21 +96,12 @@ function SearchPlace(props) {
          trigger="click"
          content={state.listPlace.map(item)}
       >
-         <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex" }}>
-               <div style={{ flex: 1 }}>
-                  <input
-                     style={{ width: "100%" }}
-                     value={state.searchText}
-                     className=" m1 bNone"
-                     onChange={handleChange}
-                     placeholder={t('common.searchPlaceholder')}
-                  />
-               </div>
-            </div>
-            <div>
-            </div>
-         </div>
+         <input
+            value={state.searchText}
+            className="search-input bNone"
+            onChange={handleChange}
+            placeholder={t('common.searchPlaceholder')}
+         />
       </Popover>
    );
 }
