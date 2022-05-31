@@ -142,7 +142,8 @@ export const TRANSLATIONS_EN = {
                     "editStructure": "Edit structure",
                     "addRoom": "Add room",
                     "announce": "Announce",
-                    "night": "night"
+                    "night": "night",
+                    "emptyAnnounces": "No announces in this structure yet"
                 },
                 "structureOperation": {
                     "structureName": "Structure name"

@@ -143,6 +143,7 @@ export const TRANSLATIONS_IT = {
                     "addRoom": "Aggiungi camera",
                     "announce": "Annunci",
                     "night": "notte",
+                    "emptyAnnounces": "Non vedo nessun annuncio in questa struttura"
                 },
                 "structureOperation": {
                     "structureName": "Nome struttura"
