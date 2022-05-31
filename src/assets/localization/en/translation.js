@@ -126,117 +126,142 @@ export const TRANSLATIONS_EN = {
                   "vatNumber": "VAT"
                }
             },
-            "reservationList": {
-               "title": "Reservation list",
-               "accepted": "Accepted",
-               "rejected": "Rejected",
-               "calendar": "Calendar",
-               "confirmReservationDeleteMessage": "Are you sure you want to delete",
-               "confirmReservationDelete": "Confirm removal"
-            },
-            "structure": {
-               "structureListTitle": "Structure list",
-               "addStructure": "Add structure"
-            },
-            "structureDetails": {
-               "structureDetailsTitle": "Structure details",
-               "editStructure": "Edit structure",
-               "addRoom": "Add room",
-               "announce": "Announce"
-            },
-            "structureOperation": {
-               "structureName": "Structure name"
-            },
-            "announceOperation": {
-               "priceForNight": "Price for night",
-               "beds": "Beds",
-               "rooms": "Rooms",
-               "rules": "Rules"
+            "sidebar": {
+                "structure": "Structures",
+                "payments": "Payments"
             }
-         },
-         "admin": {
-            "pendingAnnounceListTitle": "Pending announces",
-            "pendingStructureListTitle": "Pending structures"
-         }
-      }
-   },
-   "fe": {
-      "components": {
-         "rooms": {
-            "person": "Person",
-            "people": "People",
-            "priceForNumberOfNights": "Price for {{number}} night",
-            "priceForNumberOfNights_other": "Price for {{number}} nights"
-         },
-         "review": {
-            "username": "username",
-            "title": "title"
-         },
-         "service": {
-            "wifi": "Wi-Fi",
-            "kitchen": "Kitchen",
-            "airConditioning": "Air conditioning",
-            "parking": "Parking",
-            "washingMachine": "Washing machine",
-            "iron": "Iron",
-            "workingPlace": "Shared working place",
-            "swimmingPool": "Swimming pool",
-            "allowedSmoking": "Allowed Smoking",
-            "alarm": "Alarm"
-         }
-      },
-      "modals": {
-         "contactHostModal": {
-            "contactHost": "Contact host"
-         },
-         "filter": {
-            "apply": "Apply filters"
-         }
-      },
-      "screens": {
-         "account": {
-            "changeName": "Change name",
-            "changeEmail": "Change email",
-            "changePassword": "Change password",
-            "changeSurname": "Change surname",
-            "hiUsername": "Hi, {{name}}!",
-            "typePassword": "Type your password..."
-         },
-         "favourites": {
-            "noFavourites": "No favourites to show"
-         },
-         "registration": {
-            "acceptTerms": "I accept the terms and conditions"
-         },
-         "settings": {
-            "title": "Settings",
-            "settingsCard": {
-               "favourites": "Favourites",
-               "yourProperties": "Your properties"
+        },
+        "modals": {},
+        "screens": {
+            "host": {
+                "hostRegistration": {
+                    "title": "Host registration",
+                    "privateRegistration": "I'm a private",
+                    "companyRegistration": "I have a company",
+                    "setUpPrivateAccount": "Set up your private account",
+                    "setUpCompanyAccount": "Set up your company account",
+                    "accept": "I accept",
+                    "termsConditionsForHost": "Terms and Conditions for Host",
+                    "fields": {
+                        "phoneNumber": "Phone number",
+                        "postcode": "Postcode",
+                        "billingAddress": "Billing address",
+                        "companyName": "Company name",
+                        "vatNumber": "VAT"
+                    }
+                },
+                "reservationList": {
+                    "title": "Reservation list",
+                    "accepted": "Accepted",
+                    "rejected": "Rejected",
+                    "calendar": "Calendar",
+                    "confirmReservationDeleteMessage": "Are you sure you want to delete",
+                    "confirmReservationDelete": "Confirm removal"
+                },
+                "structure": {
+                    "structureListTitle": "Structure list",
+                    "addStructure": "Add structure"
+                },
+                "structureDetails": {
+                    "structureDetailsTitle": "Structure details",
+                    "editStructure": "Edit structure",
+                    "addRoom": "Add room",
+                    "announce": "Announce",
+                    "night": "night"
+                },
+                "structureOperation": {
+                    "structureName": "Structure name"
+                },
+                "announceOperation": {
+                    "priceForNight": "Price for night",
+                    "beds": "Beds",
+                    "rooms": "Rooms",
+                    "rules": "Rules"
+                }
+            },
+            "admin": {
+                "pendingAnnounceListTitle": "Pending announces",
+                "pendingStructureListTitle": "Pending structures"
             }
-         },
-         "propertyDetails": {
-            "details": "Details",
-            "roomDetails": "Room details",
-            "noProperty": "Unavailable property."
-         },
-         "homePage": {
-            "searchButton": "Search your destination"
-         },
-         "bookings": {
-            "history": "History",
-            "planned": "Planned",
-            "refused": "Rejected"
-         },
-         "searchResult": {
-            "filterButton": "Filters",
-            "mapButton": "Map"
-         },
-         "checkout": {
-            "total": "Total",
-            "confirmPayment": "Confirm payment",
-            "qty": "Qty"
-         }
-      }
-   }
+        }
+    },
+    "fe": {
+        "components": {
+            "rooms": {
+                "person": "Person",
+                "people": "People",
+                "priceForNumberOfNights": "Price for {{number}} night",
+                "priceForNumberOfNights_other": "Price for {{number}} nights"
+            },
+            "review": {
+                "username": "username",
+                "title": "title"
+            },
+            "service": {
+                "wifi": "Wi-Fi",
+                "kitchen": "Kitchen",
+                "airConditioning": "Air conditioning",
+                "parking": "Parking",
+                "washingMachine": "Washing machine",
+                "iron": "Iron",
+                "workingPlace": "Shared working place",
+                "swimmingPool": "Swimming pool",
+                "allowedSmoking": "Allowed Smoking",
+                "alarm": "Alarm"
+            }
+        },
+        "modals": {
+            "contactHostModal": {
+                "contactHost": "Contact host"
+            },
+            "filter": {
+                "apply": "Apply filters"
+            }
+        },
+        "screens": {
+            "account": {
+                "changeName": "Change name",
+                "changeEmail": "Change email",
+                "changePassword": "Change password",
+                "changeSurname": "Change surname",
+                "hiUsername": "Hi, {{name}}!",
+                "typePassword": "Type your password..."
+            },
+            "favourites": {
+                "noFavourites": "No favourites to show"
+            },
+            "registration": {
+                "acceptTerms": "I accept the terms and conditions"
+            },
+            "settings": {
+                "title": "Settings",
+                "settingsCard": {
+                    "favourites": "Favourites",
+                    "yourProperties": "Your properties"
+                }
+            },
+            "propertyDetails": {
+                "details": "Details",
+                "roomDetails": "Room details",
+                "noProperty": "Unavailable property."
+            },
+            "homePage": {
+                "searchButton": "Search your destination"
+            },
+            "bookings": {
+                "history": "History",
+                "planned": "Planned",
+                "refused": "Rejected"
+            },
+            "searchResult": {
+                "filterButton": "Filters",
+                "mapButton": "Map"
+            },
+            "checkout": {
+                "total": "Total",
+                "confirmPayment": "Confirm payment",
+                "qty": "Qty"
+            }
+        }
+    }
 }

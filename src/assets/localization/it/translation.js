@@ -126,117 +126,142 @@ export const TRANSLATIONS_IT = {
                   "vatNumber": "P.IVA"
                }
             },
-            "reservationList": {
-               "title": "Lista prenotazioni",
-               "accepted": "Accettate",
-               "rejected": "Rifiutate",
-               "calendar": "Calendario",
-               "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
-               "confirmReservationDelete": "Conferma eliminazione"
-            },
-            "structure": {
-               "structureListTitle": "Lista strutture",
-               "addStructure": "Aggiungi struttura"
-            },
-            "structureDetails": {
-               "structureDetailsTitle": "Dettagli struttura",
-               "editStructure": "Modifica struttura",
-               "addRoom": "Aggiungi camera",
-               "announce": "Annunci"
-            },
-            "structureOperation": {
-               "structureName": "Nome struttura"
-            },
-            "announceOperation": {
-               "priceForNight": "Prezzo per notte",
-               "beds": "Letti",
-               "rooms": "Stanze",
-               "rules": "Regole"
-            },
-            "admin": {
-               "pendingAnnounceListTitle": "Annunci da approvare",
-               "pendingStructureListTitle": "Strutture da approvare"
+            "sidebar": {
+                "structure": "Strutture",
+                "payments": "Pagamenti"
             }
-         }
-      }
-   },
-   "fe": {
-      "components": {
-         "rooms": {
-            "person": "Persona",
-            "people": "Persone",
-            "priceForNumberOfNights": "Prezzo per {{number}} notte",
-            "priceForNumberOfNights_other": "Prezzo per {{number}} notti"
-         },
-         "review": {
-            "username": "username",
-            "title": "titolo"
-         },
-         "service": {
-            "wifi": "Wi-Fi",
-            "kitchen": "Cucina",
-            "airConditioning": "Aria condizionata",
-            "parking": "Parcheggio",
-            "washingMachine": "Lavatrice",
-            "iron": "Ferro da stiro",
-            "workingPlace": "Spazio di lavoro dedicato",
-            "swimmingPool": "Piscina",
-            "allowedSmoking": "Permesso fumare",
-            "alarm": "Allarme"
-         }
-      },
-      "modals": {
-         "contactHostModal": {
-            "contactHost": "Contatta l'host"
-         },
-         "filter": {
-            "apply": "Applica filtri"
-         }
-      },
-      "screens": {
-         "account": {
-            "changeName": "Cambia nome",
-            "changeEmail": "Cambia email",
-            "changePassword": "Cambia password",
-            "changeSurname": "Cambia cognome",
-            "hiUsername": "Ciao, {{name}}!",
-            "typePassword": "Digita la tua password..."
-         },
-         "favourites": {
-            "noFavourites": "Nessun preferito da mostrare"
-         },
-         "registration": {
-            "acceptTerms": "Accetto i termini e le condizioni"
-         },
-         "settings": {
-            "title": "Impostazioni",
-            "settingsCard": {
-               "favourites": "Preferiti",
-               "yourProperties": "Le tue proprietà"
+        },
+        "modals": {},
+        "screens": {
+            "host": {
+                "hostRegistration": {
+                    "title": "Registrazione Host",
+                    "privateRegistration": "Sono un privato",
+                    "companyRegistration": "Ho un'azienda",
+                    "setUpPrivateAccount": "Configura il tuo account come privato",
+                    "setUpCompanyAccount": "Configura il tuo account aziendale",
+                    "accept": "Accetto",
+                    "termsConditionsForHost": "Termini e condizioni per gli host",
+                    "fields": {
+                        "phoneNumber": "Numero di telefono",
+                        "postcode": "Codice postale",
+                        "billingAddress": "Indirizzo di fatturazione",
+                        "companyName": "Nome azienda",
+                        "vatNumber": "P.IVA"
+                    }
+                },
+                "reservationList": {
+                    "title": "Lista prenotazioni",
+                    "accepted": "Accettate",
+                    "rejected": "Rifiutate",
+                    "calendar": "Calendario",
+                    "confirmReservationDeleteMessage": "Sei sicuro di voler eliminare",
+                    "confirmReservationDelete": "Conferma eliminazione"
+                },
+                "structure": {
+                    "structureListTitle": "Lista strutture",
+                    "addStructure": "Aggiungi struttura"
+                },
+                "structureDetails": {
+                    "structureDetailsTitle": "Dettagli struttura",
+                    "editStructure": "Modifica struttura",
+                    "addRoom": "Aggiungi camera",
+                    "announce": "Annunci",
+                    "night": "notte",
+                },
+                "structureOperation": {
+                    "structureName": "Nome struttura"
+                },
+                "announceOperation": {
+                    "priceForNight": "Prezzo per notte",
+                    "beds": "Letti",
+                    "rooms": "Stanze",
+                    "rules": "Regole"
+                },
+                "admin": {
+                    "pendingAnnounceListTitle": "Annunci da approvare",
+                    "pendingStructureListTitle": "Strutture da approvare"
+                }
             }
-         },
-         "propertyDetails": {
-            "details": "Dettagli",
-            "roomDetails": "Dettaglio stanza",
-            "noProperty": "Struttura non disponibile."
-         },
-         "homePage": {
-            "searchButton": "Cerca destinazione"
-         },
-         "bookings": {
-            "history": "Storico",
-            "planned": "Pianificati",
-            "refused": "Rifiutati"
-         },
-         "searchResult": {
-            "filterButton": "Filtri",
-            "mapButton": "Mappa"
-         },
-         "checkout": {
-            "total": "Totale",
-            "confirmPayment": "Conferma pagamento",
-            "qty": "Qta"
-         }
-      }
-   }
+        }
+    },
+    "fe": {
+        "components": {
+            "rooms": {
+                "person": "Persona",
+                "people": "Persone",
+                "priceForNumberOfNights": "Prezzo per {{number}} notte",
+                "priceForNumberOfNights_other": "Prezzo per {{number}} notti"
+            },
+            "review": {
+                "username": "username",
+                "title": "titolo"
+            },
+            "service": {
+                "wifi": "Wi-Fi",
+                "kitchen": "Cucina",
+                "airConditioning": "Aria condizionata",
+                "parking": "Parcheggio",
+                "washingMachine": "Lavatrice",
+                "iron": "Ferro da stiro",
+                "workingPlace": "Spazio di lavoro dedicato",
+                "swimmingPool": "Piscina",
+                "allowedSmoking": "Permesso fumare",
+                "alarm": "Allarme"
+            }
+        },
+        "modals": {
+            "contactHostModal": {
+                "contactHost": "Contatta l'host"
+            },
+            "filter": {
+                "apply": "Applica filtri"
+            }
+        },
+        "screens": {
+            "account": {
+                "changeName": "Cambia nome",
+                "changeEmail": "Cambia email",
+                "changePassword": "Cambia password",
+                "changeSurname": "Cambia cognome",
+                "hiUsername": "Ciao, {{name}}!",
+                "typePassword": "Digita la tua password..."
+            },
+            "favourites": {
+                "noFavourites": "Nessun preferito da mostrare"
+            },
+            "registration": {
+                "acceptTerms": "Accetto i termini e le condizioni"
+            },
+            "settings": {
+                "title": "Impostazioni",
+                "settingsCard": {
+                    "favourites": "Preferiti",
+                    "yourProperties": "Le tue proprietà"
+                }
+            },
+            "propertyDetails": {
+                "details": "Dettagli",
+                "roomDetails": "Dettaglio stanza",
+                "noProperty": "Struttura non disponibile."
+            },
+            "homePage": {
+                "searchButton": "Cerca destinazione"
+            },
+            "bookings": {
+                "history": "Storico",
+                "planned": "Pianificati",
+                "refused": "Rifiutati"
+            },
+            "searchResult": {
+                "filterButton": "Filtri",
+                "mapButton": "Mappa"
+            },
+            "checkout": {
+                "total": "Totale",
+                "confirmPayment": "Conferma pagamento",
+                "qty": "Qta"
+            }
+        }
+    }
 }

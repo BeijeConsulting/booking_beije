@@ -29,7 +29,7 @@ import { Button, Rate, Spin } from "antd";
 import CardList from "../../../../../components/backOffice/hookComponents/cardList/CardList";
 import HorizontalCard from "../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard";
 import Modal from "antd/lib/modal/Modal";
-import { routes } from "../../../../../routes/routes";
+import { routes, routesDetails } from "../../../../../routes/routes";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 
 import { useNavigate } from "react-router-dom";
@@ -46,11 +46,6 @@ import {
 //TODO: manca navigate che al click sulla singola struttura la passa come oggetto a StructureDetails
 
 const StructureList = (props) => {
-
-    setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODE1NjQsImV4cCI6MTY1Mzk4NTE2NH0.HhYb7UiljEfLq5ldUAPbfwOrvQGsw2adPAAdHGgJPeg")
-    setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
-
-
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -100,7 +95,7 @@ const StructureList = (props) => {
 
     //GO TO STRUCTURE DETAILS
     const goToStructureDetails = (idStructure) => () => {
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_DETAILS}/${idStructure}`);
+        navigate(`/${routes.DASHBOARD}/${routesDetails.detailStructureHost(idStructure)}`);
     }
 
     //GO TO ADD STRUCTURE
