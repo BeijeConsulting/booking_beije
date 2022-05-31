@@ -16,80 +16,91 @@ import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/
 import withRouting from '../../../../../withRouting/withRouting';
 
 class PropertyCard extends Component {
-    constructor(props) {
-        super(props)
+   constructor(props) {
+      super(props)
 
-        this.state = {
-            image: null,
-            price: [],
-            clickedHeart: false
-        }
-        this.listings = [];
-    }
+      this.state = {
+         image: null,
+         price: [],
+         clickedHeart: false
+      }
+      this.listings = [];
+   }
 
-    componentDidMount() {
-        this.handleApi()
-    }
+   componentDidMount() {
+      this.handleApi()
+   }
 
-    handleApi = async () => {
-        const LISTINGS = await annuncioOnStrutturaGetApi(this.props?.data?.struttura?.id);
-        const IMAGE = await getStructureImage(this.props?.data?.struttura?.id);
+   handleApi = async () => {
+      const LISTINGS = await annuncioOnStrutturaGetApi(this.props?.data?.struttura?.id);
+      const IMAGE = await getStructureImage(this.props?.data?.struttura?.id);
 
-        this.setState({
-            image: IMAGE.data?.immagine?.urlImage
-        })
+      this.setState({
+         image: IMAGE.data?.immagine?.urlImage
+      })
 
-        this.listings = LISTINGS?.data?.list;
-        if(this.state?.price?.length !== 0 ){
+      this.listings = LISTINGS?.data?.list;
+      if (this.state?.price?.length !== 0) {
 
-            this.findLowestPrice();
-        }
+         this.findLowestPrice();
+      }
 
-    }
+   }
 
-    findLowestPrice() {
-        let newState = Object.assign({}, this.state);
-        let lowerPrice;
+   findLowestPrice() {
+      let newState = Object.assign({}, this.state);
+      let lowerPrice;
 
-        this.listings.forEach(item => {
-            newState.price.push(item.prezzo);
-        });
-        
-        lowerPrice = newState.price.reduce((previousValue, currentValue) => previousValue < currentValue ? previousValue : currentValue);
+      this.listings.forEach(item => {
+         newState.price.push(item.prezzo);
+      });
 
-        this.setState({
-            price: lowerPrice
-        })
-    }
+      lowerPrice = newState.price.reduce((previousValue, currentValue) => previousValue < currentValue ? previousValue : currentValue);
 
-    render() {
-        return (
-            <>
-                <section className='propertyCardContainer flex relative aiCenter'>
-                    {
-                        this.state?.image !== null ?
-                        <img src={this.state?.image} />
-                        :
-                    <img className='ofC' src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"} /> 
-                    }
-                    <div>
-                        <div className='titleContainer'>
-                            <span>{this.props?.data?.struttura?.nome}</span>
+      this.setState({
+         price: lowerPrice
+      })
+   }
 
-                        </div>
-                        <small>{this.props?.data?.struttura?.tipologia}</small>
-                        <div className='mediaRateCard'>
-                            <FontAwesomeIcon icon={faStar} />
-                            <small>{this.props?.data?.media_recensioni}</small>
-                        </div>
-                    </div>
+   render() {
+      return (
+         <>
+            <section className='propertyCardContainer flex relative aiCenter'>
+               {
+                  this.state?.image !== null ?
+                     <img src={this.state?.image} />
+                     :
+                     <img className='ofC' src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.eupedia.com%2Fimages%2Fcontent%2Fburghley-2.jpg&f=1&nofb=1"} />
+               }
+
+               <div>
+                  <div className='titleContainer'>
+                     <span>{this.props?.data?.struttura?.nome}</span>
+
+                  </div>
+                  <small>{this.props?.data?.struttura?.tipologia}</small>
+                  <div className='mediaRateCard'>
+                     <FontAwesomeIcon icon={faStar} />
+                     <small>{this.props?.data?.media_recensioni}</small>
+                  </div>
+               </div>
 
 
-                    <span className='absolute r0 b0'>{this.props?.t('common.currency', { price: this.state?.price?.length === 0 ? 10 : this.state?.price })}</span>
-                </section>
-            </>
-        )
-    }
+               <span className='absolute r0 b0'>
+                  {this.props?.t('common.currency', {
+                     price: this.state?.price,
+                     formatParams: {
+                        price: { currency: 'EUR', maximumFractionDigits: 0 }
+                     }
+                  })}
+               </span>
+            </section>
+         </>
+      )
+   }
+   find = (item) => {
+      return this.props?.data?.indirizzo?.struttura_id === item?.Struttura?.id
+   }
 }
 
 PropertyCard.propTypes = {

@@ -67,7 +67,7 @@ export function responseApiError(error) {
   };
 }
 
-export async function postApi(resource, obj, header = null) {
+export function postApi(resource, obj, header = null) {
   return axiosInstance
     .post(resource, obj, {
       headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
@@ -76,7 +76,7 @@ export async function postApi(resource, obj, header = null) {
     .catch(responseApiError());
 }
 
-export async function getApi(resource, header = null) {
+export function getApi(resource, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
@@ -86,7 +86,7 @@ export async function getApi(resource, header = null) {
     .catch(responseApiError());
 }
 
-export async function getSearchApi(resource, body, header = null) {
+export function getSearchApi(resource, body, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {
@@ -96,7 +96,7 @@ export async function getSearchApi(resource, body, header = null) {
     .catch(responseApiError());
 }
 
-export async function putApi(resource, obj, header = null) {
+export function putApi(resource, obj, header = null) {
   //function for put api call
   return axiosInstance
     .put(resource, obj, {
@@ -106,7 +106,7 @@ export async function putApi(resource, obj, header = null) {
     .catch(responseApiError());
 }
 
-export async function deleteApi(resource, header = null) {
+export function deleteApi(resource, header = null) {
   return axiosInstance
     .delete(resource, {
       headers: header !== null ? { Authorization: `Bearer ${header}` } : "",

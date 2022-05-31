@@ -137,8 +137,8 @@ const HostAccount = (props) => {
                     </>
                 }
 
-                <Form.Item label={t("bo.screens.host.hostRegistration.fields.city")} name='city'>
-                    <Input placeholder={t("bo.screens.host.hostRegistration.fields.city")} />
+                <Form.Item label={t("common.city")} name='city'>
+                    <Input placeholder={t("common.city")} />
                 </Form.Item>
                 <Form.Item label={t("bo.screens.host.hostRegistration.fields.postcode")} name='postcode'>
                     <Input placeholder={t("bo.screens.host.hostRegistration.fields.postcode")} />
