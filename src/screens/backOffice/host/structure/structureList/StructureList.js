@@ -53,7 +53,7 @@ const StructureList = (props) => {
     const [state, setState] = useState({
         loading: true,
         structureListData: [],
-        elementsTotal: null,
+        elementsTotal: 1,
         isModalVisible: false
     })
 

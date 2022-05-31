@@ -69,8 +69,8 @@ function Settings(props) {
   },
 
   {
-    name: user_type === "USER" ? t("common.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
-    path: 'yourProperties',
+    name: props.userDuck?.user?.auth?.length < 2 ? t("common.becomeAHost") : t("fe.screens.settings.settingsCard.yourProperties"),
+    path: props.userDuck?.user?.auth?.length < 2 ? 'GOTOREGHOST' : 'GOTOMYSTRUCTURE',
     icon: faBuilding
   }
   ]
@@ -100,27 +100,29 @@ function Settings(props) {
             state.windowWidth < 991 &&
             <div className="back-button"><GoBackButton /></div>
           }
-            <div className="cont mxAuto">
-              <div className="title_and_logout_container mx3">
-                <h1>{t("fe.screens.settings.title")}</h1>
-              </div>
-              <div className="settings_card_list_container flex jcCenter aiCenter column w100">
-                {settingsToComponents.map(createCardSettingsComponent)}
-              </div>
-              <div className="setting_disclaimer_container flex column aiCenter">
-                <UiButton
-                  callback={handleLogOut}
-                  className={"logout_button"}
-                  label={"Logout"} />
-                <Disclaimer />
-              </div>
+          <div className="cont mxAuto">
+            <div className="title_and_logout_container mx3">
+              <h1>{t("fe.screens.settings.title")}</h1>
             </div>
-          
+            <div className="settings_card_list_container flex jcCenter aiCenter column w100">
+              {settingsToComponents.map(createCardSettingsComponent)}
+            </div>
+            <div className="setting_disclaimer_container flex column aiCenter">
+              <UiButton
+                callback={handleLogOut}
+                className={"logout_button"}
+                label={"Logout"} />
+              <Disclaimer />
+            </div>
+          </div>
+
         </div>
       </div>
     </>
 
   );
 };
-
-export default connect()(Settings);
+const mapStateToProps = (state) => ({
+  userDuck: state.userDuck,
+})
+export default connect(mapStateToProps)(Settings);

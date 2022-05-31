@@ -195,7 +195,7 @@ function Navbar(props) {
                                  </Link>
                               </li> :
                               <li>
-                                 <Link className="link_navbar" to={`${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`} >
+                                 <Link className="link_navbar" to={`${routes.DASHBOARD}`} >
                                     {t('fe.screens.settings.settingsCard.yourProperties')}
                                  </Link>
                               </li>
