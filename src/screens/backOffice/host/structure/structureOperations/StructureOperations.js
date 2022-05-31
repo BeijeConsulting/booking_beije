@@ -22,7 +22,8 @@ import {
 import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 import { connect } from "react-redux";
-import { getLocalStorage } from "../../../../../utils/localStorage/localStorage";
+import { getLocalStorage, setLocalStorage } from "../../../../../utils/localStorage/localStorage";
+import { myProfilesGetApi } from "../../../../../services/api/user/userApi";
 
 const StructureOperation = (props) => {
   const { t } = useTranslation();
@@ -53,6 +54,13 @@ const StructureOperation = (props) => {
   };
 
   useEffect(() => {
+    const getUserInfo = async () => {
+      setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5ODU0MzUsImV4cCI6MTY1Mzk4OTAzNX0.JJYXoCBrOFE4VrZo3AO3IgIWUoznpRfOQFrwvoV6yU8")
+      const HEADER = getLocalStorage("token");
+      const res = await myProfilesGetApi(HEADER);
+      const userInfo = res.data;
+      structureValue.userId = userInfo.utente.id;
+    };
     // Per farlo funzionare usare json-server
     const getStructure = async () => {
       const res = await strutturaDetailIdGetApi(location.state.idStructure);
@@ -68,17 +76,14 @@ const StructureOperation = (props) => {
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
-      // structureValue.userId = strutturaDetail?.host.user.id;
-      
     };
+
+    getUserInfo();
+
     if (location.state.idStructure !== null) {
       getStructure();
     }
-    structureValue.userId = props.userDuck.user.utente.id
-
-    console.log(structureValue);
     setState(structureValue);
-
   }, []);
 
   // PER FORM ANT
@@ -257,7 +262,6 @@ const StructureOperation = (props) => {
               </Form.Item>
             </Col>
           </Row>
-
 
           <Row gutter={16}>
             <Col className="gutter-row">
