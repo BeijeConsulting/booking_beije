@@ -1,105 +1,118 @@
 @import "../../../../assets/variables/globalVariables.scss";
 
-.navMobile{
-    height: 15%;
-    background-color: #fff9f5;
-    .iconIfLogged{
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50%;
-    }
-    .iconSearch{
-        font-size: 3rem;
-    }
-    .iconNotLogged{
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50%;
-    }
+.navMobile {
+   height: 15%;
+   background-color: #fff9f5;
+   z-index: 9;
+
+   .iconIfLogged {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+   }
+
+   .iconSearch {
+      font-size: 3rem;
+   }
+
+   .iconNotLogged {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+   }
 }
 
 
-.navDesktop{
-    height: 10vh;
-    background-color: $black_primary;
-    padding: 0 7vw;
-    z-index: 2;
-    border-bottom: 2px solid $white_primary;
-    .go_to_login{
-        color: $white_primary;
-        font-weight: 600;
-        font-size: 1.3rem;
-        // cursor: pointer;
-    }
-    .iconIfLogged{
-        width: 2.5rem;
-        height: 2.5rem;
-        // border-radius: 50%;
-        // object-fit: cover;
-    }
-    .hambMenu{
-        // display: flex;
-        padding: 0.3rem 1.8rem;
-        background-color: $white_primary;
-        // border-radius: 8px;
-        // cursor: pointer;
-        .phUser{
-            width: 34px;
-            height: 34px;
-            // border-radius: 50%;
-            // object-fit: cover;
-        }
-        .arrowMenu{
-            transition: .4s;
-            font-size: 1.8rem;
-            margin-right: 2rem;
-            color: #C4C4C4;
-        }
-        .arrowMenuOpen{
-            transition: .4s;
-            transform: rotate(-90deg);
-            font-size: 1.8rem;
-            margin-right: 2rem;
-            color: #C4C4C4;
-        }
-    }
+.navDesktop {
+   height: 10vh;
+   background-color: $black_primary;
+   padding: 0 7vw;
+   z-index: 2;
+   border-bottom: 2px solid $white_primary;
+
+   .go_to_login {
+      color: $white_primary;
+      font-weight: 600;
+      font-size: 1.3rem;
+      // cursor: pointer;
+   }
+
+   .iconIfLogged {
+      width: 2.5rem;
+      height: 2.5rem;
+      // border-radius: 50%;
+      // object-fit: cover;
+   }
+
+   .hambMenu {
+      // display: flex;
+      padding: 0.3rem 1.8rem;
+      background-color: $white_primary;
+
+      // border-radius: 8px;
+      // cursor: pointer;
+      .phUser {
+         width: 34px;
+         height: 34px;
+         // border-radius: 50%;
+         // object-fit: cover;
+      }
+
+      .arrowMenu {
+         transition: .4s;
+         font-size: 1.8rem;
+         margin-right: 2rem;
+         color: #C4C4C4;
+      }
+
+      .arrowMenuOpen {
+         transition: .4s;
+         transform: rotate(-90deg);
+         font-size: 1.8rem;
+         margin-right: 2rem;
+         color: #C4C4C4;
+      }
+   }
 }
-.settingOpen{
-    width: 100%;
-    min-height: 15vh;
-    background: $black_primary;
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-between;
-    // align-items: center;
-    color: #E9E9E9;
-    padding: 0 7vw;
-    animation: settingOpen .4s linear;
-    // position: absolute;
-    top: 10vh;
-    border-bottom: 2px solid $white_primary;
-    backdrop-filter: blur(10px);
-    z-index: 1;
-    li{
-        list-style: none;
-        cursor: pointer;
-        font-size: 1.2rem;
-        padding: 1rem;
-        font-weight: bold;
-    }
-    .link_navbar{
-        list-style: none;
-        color: #E9E9E9;
-    }
+
+.settingOpen {
+   width: 100%;
+   min-height: 15vh;
+   background: $black_primary;
+   // display: flex;
+   // flex-wrap: wrap;
+   // justify-content: space-between;
+   // align-items: center;
+   color: #E9E9E9;
+   padding: 0 7vw;
+   animation: settingOpen .4s linear;
+   // position: absolute;
+   top: 10vh;
+   border-bottom: 2px solid $white_primary;
+   backdrop-filter: blur(10px);
+   z-index: 1;
+
+   li {
+      list-style: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 1rem;
+      font-weight: bold;
+   }
+
+   .link_navbar {
+      list-style: none;
+      color: #E9E9E9;
+   }
 }
 
 @keyframes settingOpen {
-    0%{
-        top : 0;
+   0% {
+      top: 0;
 
-    }
+   }
 
-    100%{
-        top: 10vh;
-    }
+   100% {
+      top: 10vh;
+   }
 }

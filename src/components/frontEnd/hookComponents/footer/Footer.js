@@ -43,7 +43,7 @@ function Footer(props) {
                 {
                     props.userDuck?.user?.auth?.length < 2 &&
                     <div>
-                        <Button className="becomeHost bNone fwB cursor" callback={goToRegistration} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
+                        <Button className="becomeHost bNone fwB cursor" callback={goToRegistration} label={t('common.becomeAHost')}></Button>
                     </div>
                 }
             </div>

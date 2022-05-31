@@ -40,9 +40,9 @@ const Favourites = () => {
       return () => { window.removeEventListener('resize', handleResize) }
    })
 
-   function loadFavourites() {
+   function loadFavourites(page = state.page) {
       if (localStorage.getItem('token') !== null)
-         getFavourites(itemsPerPage, state.page, getLocalStorage('token'))
+         getFavourites(itemsPerPage, page, getLocalStorage('token'))
             .then(res => {
                setState({
                   ...state,
@@ -61,8 +61,8 @@ const Favourites = () => {
       })
    }
 
-   const showToast = (favouriteId, propertyName) => {
-      const key = `${favouriteId}-toast`;
+   const showToast = (propertyId, propertyName) => {
+      const key = `${propertyId}-toast`;
       notification.open({
          description: t('toasts.favouritesDeleted', { name: propertyName }),
          onClick: () => {
@@ -75,10 +75,10 @@ const Favourites = () => {
       });
    };
 
-   const handleFavourite = async (favouriteId, propertyName) => {
-      await deleteFavourite(favouriteId, getLocalStorage('token'));
-      loadFavourites();
-      showToast(favouriteId, propertyName);
+   const handleFavourite = async (propertyId, propertyName) => {
+      await deleteFavourite(propertyId, getLocalStorage('token'));
+      loadFavourites(1);
+      showToast(propertyId, propertyName);
    }
 
    const onPageChange = (nextPage) => {

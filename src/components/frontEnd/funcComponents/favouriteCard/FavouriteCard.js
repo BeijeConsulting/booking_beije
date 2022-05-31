@@ -18,16 +18,16 @@ function FavouriteCard(props) {
 
    const { descrizione, id, nome_struttura } = props.item.Struttura;
    const { tipo } = props.item.Struttura.tipologiaStrutturaId;
-   let favouriteId = props.item.id;
    let thumbnail = propertyPlaceholder;
 
    useEffect(() => {
-      let apiThumbnail = getStructureImage(id).then(res => res?.data?.immagine?.urlImage)
-      if (apiThumbnail !== '') thumbnail = apiThumbnail;
+      getStructureImage(id).then(res => {
+         if (res?.data?.immagine?.urlImage !== '') thumbnail = res?.data?.immagine?.urlImage;
+      })
    }, [])
 
    const handleOnClick = () => {
-      props.callback(favouriteId, nome_struttura);
+      props.callback(id, nome_struttura);
    }
 
    return (

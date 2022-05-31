@@ -13,7 +13,6 @@
 - [react-helmet](https://github.com/nfl/react-helmet#readme)
 - [react-i18next](https://react.i18next.com/)
   - [i18next-browser-languagedetector](https://react.i18next.com/legacy-v9/step-by-step-guide#c-auto-detect-the-user-language)
-  - [i18next-http-backend](https://react.i18next.com/legacy-v9/step-by-step-guide#a-adding-lazy-loading-for-translations)
 - [react-leaflet](https://react-leaflet.js.org/)
 - [react-redux](https://react-redux.js.org/)
 - [react-router-dom](https://reactrouter.com/docs/en/v6)

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom'
 
 //PROP-TYPES
 import PropTypes from 'prop-types';
@@ -9,6 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
+
+import { messageChatHostGetApi } from '../../../../../services/api/messaggi/messaggiApi'
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 //ANT-DESIGN
 import {
@@ -26,6 +30,14 @@ import GoBackButton from '../../../../../components/backOffice/hookComponents/go
 const MessageChat = (props) => {
 
     const { t } = useTranslation()
+    const location = useLocation()
+
+
+    const fetchingChatHost = async () => {
+        const HEADER = getLocalStorage("token")
+        let responseChat = await messageChatHostGetApi(location.state, HEADER)
+        console.log(responseChat?.data)
+    }
 
     //TEST--------
     const messageUser = [
@@ -39,27 +51,6 @@ const MessageChat = (props) => {
         {
             id: 2,
             name: 'You',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 3,
-            name: 'Test',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 4,
-            name: 'You',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 5,
-            name: 'Test',
             body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
             date: '2022/06/03',
             time: '9:00'
@@ -77,6 +68,11 @@ const MessageChat = (props) => {
             />
         )
     }
+
+
+    useEffect(() => {
+        fetchingChatHost()
+    }, [])
 
 
     return (

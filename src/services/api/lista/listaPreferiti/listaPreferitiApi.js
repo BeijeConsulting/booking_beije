@@ -9,7 +9,7 @@ const getFavourites = async (itemsPerPage = 10, page = 1, header) => {
 
 /* AUTH:USER */
 const addFavourite = async (id, header) => {
-   return await postApi(`add_preferiti/${id}`, header);
+   return await postApi(`add_preferiti/${id}`, null, header);
 }
 
 const deleteFavourite = async (id, header) => {

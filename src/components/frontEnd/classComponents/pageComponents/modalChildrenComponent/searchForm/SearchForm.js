@@ -9,6 +9,8 @@ import { getStructuresBySearch } from '../../../../../../services/api/search/sea
 import FormButton from '../../../../funcComponents/ui/buttons/formButton/FormButton';
 import SearchPlace from '../../../../hookComponents/ui/searchPlace/SearchPlace';
 import { DatePicker, Space, } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 // redux
 import { connect } from 'react-redux';
@@ -74,9 +76,9 @@ class SearchForm extends Component {
       this.bookingData.latitudine = latitude;
       this.bookingData.longitudine = longitude;
 
-      if(this.props.router.location.pathname === '/home'){
+      if (this.props.router.location.pathname === '/home') {
 
-         getStructuresBySearch(this.objToString(this.bookingData)).then(res => {   
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => {
             this.props.router.navigate(routes.SEARCH, {
                state: {
                   property: res?.data
@@ -91,7 +93,7 @@ class SearchForm extends Component {
       if (this.props.router.location.pathname === '/search') {
          getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.props.data(res?.data))
          this.props.callback();
-         
+
       }
    }
 
@@ -117,20 +119,29 @@ class SearchForm extends Component {
    render() {
       return (
          <>
-            <section className='searchFormContainer flex aiCenter jcCenter m1 br3 w100'>
+            <section className='searchFormContainer flex aiCenter jcCenter br3'>
                <form className='flex aiCenter jcSpaceE'>
-                  <SearchPlace />
+                  <div className='flex aiCenter location-bar'>
+                     <FontAwesomeIcon color='#fff9f5' icon={faLocationDot} />
+                     <SearchPlace />
+                  </div>
 
-                  <Space direction="vertical" size={12}>
-                     <DatePicker.RangePicker
-                        format={this.dateFormat}
-                        placeholder={['Checkin', 'Checkout']}
-                        onChange={this.handleDateChange} />
-                  </ Space>
+                  <div className='flex aiCenter jcSpaceB w100'>
+                     <Space direction="vertical" size={12}>
+                        <DatePicker.RangePicker
+                           format={this.dateFormat}
+                           placeholder={['Checkin', 'Checkout']}
+                           onChange={this.handleDateChange}
+                        />
+                     </ Space>
 
-                  <InputGuest />
+                     <InputGuest />
 
-                  <FormButton className="btn-primary m1" label={t("common.send")} callback={this.handleSubmit} />
+                     <FormButton className="btn-primary m1 cursor send-search" label={t("common.send")} callback={this.handleSubmit} />
+                     <div className='icon-search flex'>
+                        <FontAwesomeIcon icon={faSearch} onClick={this.handleSubmit} />
+                     </div>
+                  </div>
 
                </form>
             </section>
