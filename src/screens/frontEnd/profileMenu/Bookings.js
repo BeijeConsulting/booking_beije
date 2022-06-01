@@ -165,13 +165,17 @@ const Bookings = (props) => {
                         <div className="card-info flex">
                            <img className="br3 mx1" src="{item.annuncio.url_image}" alt="card-img" />
                            <div className="card-info-info flex column">
-                              <h1>{item.annuncio.titolo}</h1>
+                              <h1 className="titleCard">{item.annuncio.titolo}</h1>
                               <span>{item.annuncio.luogo}</span>
-                              <span>{item.annuncio.struttura.checkin}, {item.annuncio.struttura.checkout}</span>
-                              <button className="rate cursor" onClick={openModal}>{t("common.rate")}</button>
+
+                              <div className="button-container">
+                                 <span>{item.annuncio.struttura.checkin}, {item.annuncio.struttura.checkout}</span>
+                                 <button className="rate cursor" onClick={openModal}>{t("common.rate")}</button>
+                              </div>
+
                            </div>
                         </div>
-                        <span className="price fwB">{item.annuncio.prezzo}</span>
+                        <span className="price fwB">{item.annuncio.prezzo}&euro;</span>
                      </div>
                   </div>
                )
