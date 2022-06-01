@@ -13,7 +13,7 @@ const UploadFoto = (props) => {
 
   const { addFotoStructure } = props;
 
-console.log(props);
+// console.log(props);
 
   const [state, setState] = useState({
     previewVisible: false,
