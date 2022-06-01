@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { routes } from "../../../../../routes/routes"
 
 //API
+import { editProfileModifyPutApi, myProfilesGetApi } from '../../../../../services/api/user/userApi'
 import { hostRequestPost } from '../../../../../services/api/host/hostApi';
 import { decryptItem } from '../../../../../utils/crypto/crypto';
 
@@ -31,7 +32,8 @@ const layout = {
 };
 
 let companyName = null,
-    vat = null
+    vat = null,
+    user = null
 
 const HostRegistration = (props) => {
 
@@ -52,7 +54,7 @@ const HostRegistration = (props) => {
         let userType = props.userDuck.user.auth
         setTimeout(() => {
             if (userType.includes("HOST")) {
-                navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`)
+                navigate(`/${routes.DASHBOARD}`)
             }
             else {
                 setState({
@@ -60,8 +62,9 @@ const HostRegistration = (props) => {
                     loading: false
                 })
             }
-            console.log(userType)
         }, 1000)
+
+
 
     }, [props.userDuck.user.auth])
 
@@ -86,25 +89,27 @@ const HostRegistration = (props) => {
         })
     }
 
-    const onFinish = (values) => {
+
+    const onFinish = async (values) => {
         const HEADER = decryptItem(props.tokenDuck.token);
-        console.log("values", values.user.companyName);
+        console.log("values", values.user);
         companyName = values.user.companyName
         vat = values.user.vatNumber
-        console.log(hostRequestPost({ companyName: companyName, vat: vat }, HEADER,
+        const editProfile = await editProfileModifyPutApi(
             {
-                "utente": {
-                    "telephone_number": values.user.phoneNumber,
-                    "address": {
-                        "city": values.user.city,
-                        "postcode": values.user.postcode,
-                    },
-                    "billingAddress": values.user.billingAddress,
-                    "companyName": companyName,
-                    "iva": vat
+                phoneNumber: values.user.phoneNumber,
+                address: {
+                    city: values.user.city,
+                    postcode: values.user.postcode,
+                    billingAddress: values.user.billingAddress,
                 }
-            }
-        ));
+            },
+            HEADER)/* PUT NEW DATA TO PROFILE */
+        console.log(editProfile)
+
+        const becomeHost = await hostRequestPost({ companyName: companyName, vat: vat }, HEADER, {}); /* POST REQUEST TO BECOME AN HOST */
+        console.log(becomeHost)
+
 
         alert("Utente registrato correttamente")
         navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/new`, { state: { idStructure: null } })
