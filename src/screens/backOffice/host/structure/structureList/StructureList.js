@@ -57,20 +57,30 @@ const StructureList = (props) => {
         isModalVisible: false
     })
 
+    //FETCHING LIST OF STRUCTURE
     const fetchingStructureList = async () => {
-        if (localStorage.getItem('token') !== null) {
-            // const HEADER = decryptItem(props.tokenDuck.token);
-            const HEADER = getLocalStorage("token")
-            let allStructure = await showHostStruttureGetApi(1, 3, HEADER)
 
-            console.log(allStructure)
-            setState({
-                ...state,
-                loading: false,
-                structureListData: allStructure?.data.list,
-                elementsTotal: allStructure?.data.elementsTotal
-            })
+        if (localStorage.getItem('token') !== null) {
+            try {
+                const HEADER = getLocalStorage("token")
+                let allStructure = await showHostStruttureGetApi(1, 3, HEADER)
+
+                setState({
+                    ...state,
+                    loading: false,
+                    structureListData: allStructure?.data.list,
+                    elementsTotal: allStructure?.data.elementsTotal
+                })
+            }
+            catch {
+                setState({
+                    ...state,
+                    loading: false
+                })
+            }
         }
+
+
     }
 
 
@@ -83,9 +93,9 @@ const StructureList = (props) => {
     }
 
     const disableStructure = (id) => async () => {
-        // const HEADER = decryptItem(props.tokenDuck.token);
         const HEADER = getLocalStorage("token")
         let disableStructureApi = await disableStrutturaPutApi(id, { esito: true }, HEADER)
+        console.log(disableStructureApi)
 
         setState({
             ...state,
@@ -106,7 +116,6 @@ const StructureList = (props) => {
                     state: { idStructure: idStructure },
                 });
             };
-
 
     //RENDER FUNCTION OF STRUCTUR LIST
     const getCardStructures = (structure, key) => {
@@ -151,11 +160,8 @@ const StructureList = (props) => {
 
     //CHANGE PAGE(PAGINATION)
     const switchToPage = async (clickedPage) => {
-        // const HEADER = decryptItem(props.tokenDuck.token);
         const HEADER = getLocalStorage("token")
         let dataPaginationStructure = await showHostStruttureGetApi(clickedPage, 3, HEADER)
-
-        console.log(dataPaginationStructure)
         setState({
             ...state,
             structureListData: dataPaginationStructure?.data.list,
@@ -182,7 +188,6 @@ const StructureList = (props) => {
         fetchingStructureList()
     }, [])
 
-
     return (
         <CardList
             sectionTitle={t("bo.screens.host.structure.structureListTitle")}
@@ -193,13 +198,12 @@ const StructureList = (props) => {
             }
             {...paginationProps}
         >
-            {!state.loading ? state.structureListData.map(getCardStructures) : <Spin />}
+            {!state.loading ? state.structureListData.map(getCardStructures) : <><Spin /><p>Non ci sono struture...</p></>}
         </CardList>
     );
 }
 const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck,
-    userDuck: state.userDuck,
+    tokenDuck: state.tokenDuck
 });
 
 
