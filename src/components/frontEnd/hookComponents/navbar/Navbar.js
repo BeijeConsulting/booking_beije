@@ -8,6 +8,7 @@ import './Navbar.scss';
 import '../../../../assets/variables/_common.scss';
 
 import LanguagesSwitch from "../../../common/languagesSwitch/LanguagesSwitch";
+import Logo from '../../funcComponents/logo/Logo';
 
 // profile image 
 import LoggedUser from '../../../../assets/images/LoggedUser.png';
@@ -128,8 +129,7 @@ function Navbar(props) {
                   <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
                   <Modal isOpen={state.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
 
-                  {/* <img src="LOGODEFAULT!!" alt="logo" onClick={goTo('HOME')}/> */}
-                  <img className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" onClick={goTo('HOME')} />
+                  <Logo callback={goTo('HOME')} />
 
                   {
                      state.isLogIn ?
@@ -141,7 +141,7 @@ function Navbar(props) {
                : <>
                   <nav className="navDesktop t0 w100 flex jcSpaceB aiCenter relative">
 
-                     <img onClick={goTo('HOME')} className="iconIfLogged ofC br50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsc4qTZSUQxV6o6T_BX1Ak7PHlXMUBCkMpHN1llt7VWb3sVqXvATJDo03OUwzHLdSw9eY&usqp=CAU" alt="logo" />
+                     <Logo callback={goTo('HOME')} />
 
                      {
                         state.isLogIn ?
