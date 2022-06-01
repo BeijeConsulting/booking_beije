@@ -40,8 +40,7 @@ class PropertyCard extends Component {
       })
 
       this.listings = LISTINGS?.data?.list;
-      if (this.state?.price?.length !== 0) {
-
+      if (this.listings?.length !== 0) {
          this.findLowestPrice();
       }
 
@@ -52,7 +51,7 @@ class PropertyCard extends Component {
       let lowerPrice;
 
       this.listings.forEach(item => {
-         newState.price.push(item.prezzo);
+         newState.price.push(item?.annuncio?.prezzo);
       });
 
       lowerPrice = newState.price.reduce((previousValue, currentValue) => previousValue < currentValue ? previousValue : currentValue);
@@ -88,7 +87,7 @@ class PropertyCard extends Component {
 
 
                <span className='absolute r0 b0'>
-                  {this.props?.t('common.currencyTwoFractionDigits', { price: this.state?.price })}
+                  {this.props?.t('common.currencyTwoFractionDigits', { price: this.state?.price?.length === 0 ? 10 : this.state?.price })}
                </span>
             </section>
          </>

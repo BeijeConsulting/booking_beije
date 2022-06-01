@@ -222,6 +222,7 @@ class SearchResult extends Component {
    }
 
    mapping = (item, key) => {
+      console.log(item);
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
