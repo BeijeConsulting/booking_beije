@@ -39,7 +39,6 @@ const DetailsPropRoom = (props) => {
 
    useEffect(() => {
       annuncioDetailGetApi(id).then(res => {
-         console.log(res?.data)
          setState({
             ...state,
             services: res?.data?.servizi,
@@ -102,7 +101,7 @@ const DetailsPropRoom = (props) => {
          </Helmet>
          <div className="announce_room_container">
             {
-               state.windowWidth < 992 &&
+               state?.windowWidth < 992 &&
 
                <div className="back-button"><GoBackButton /></div>
             }
@@ -116,19 +115,19 @@ const DetailsPropRoom = (props) => {
                <img className="img_carousel" src={defaultImg} alt="img_struttura" />
             }
             <section className="padding_page">
-               <h2>{state.propertyRooms?.titolo}</h2>
+               <h2>{state?.propertyRooms?.titolo}</h2>
                <div className="price_checkout_in_date">
                   <span>
-                     {`${t('common.currencyTwoFractionDigits', { price: state.propertyRooms?.prezzo })}/${t('fe.components.rooms.priceForNumberOfNights', { count: 1 })}`}</span>
+                     {`${t('common.currencyTwoFractionDigits', { price: state?.propertyRooms?.prezzo })}/${t('fe.components.rooms.priceForNumberOfNights', { count: 1 })}`}</span>
                </div>
                <div className="description_container_room">
                   <h3>{t('common.description')}</h3>
-                  <p>{state.propertyRooms?.descrizione}</p>
+                  <p>{state?.propertyRooms?.descrizione}</p>
                </div>
                <div>
                   <h3>numero di posti letto disponibili</h3>
                   {
-                     state.propertyRooms?.numPostiLetto < 5 ?
+                     state?.propertyRooms?.numPostiLetto < 5 ?
                         <>
                            {renderIcon}
                         </>
@@ -136,7 +135,7 @@ const DetailsPropRoom = (props) => {
                         <>
                            <FontAwesomeIcon icon={faUsers} />
                            <span className="number_people">
-                              {t('fe.components.rooms.people', { count: state.propertyRooms?.numPostiLetto })}
+                              {t('fe.components.rooms.people', { count: state?.propertyRooms?.numPostiLetto })}
                            </span>
                         </>
 
@@ -145,14 +144,14 @@ const DetailsPropRoom = (props) => {
                {
                   state?.services?.length > 0 &&
                   <div>
-                     {state.services.map(generateServicesIcon)}
+                     {state?.services.map(generateServicesIcon)}
                   </div>
                }
 
                <div className="contact-host">
                   <button onClick={contactHostModal}>{t('fe.modals.contactHostModal.contactHost')}</button>
                </div>
-               <Modal isOpen={state.isOpen} callback={handleClose}>
+               <Modal isOpen={state?.isOpen} callback={handleClose}>
                   <ContactHost propertyRoomsImage={state?.images} propertyRooms={state?.propertyRooms} />
                </Modal>
             </section>

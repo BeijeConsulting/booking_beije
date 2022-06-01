@@ -18,7 +18,7 @@ import { routes } from '../../../../../routes/routes';
 import { randomKey } from '../../../../../utils/generalIteration/generalIteration';
 
 import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
-import { messageListHostGetApi, messageGetAdmin } from '../../../../../services/api/messaggi/messaggiApi'
+import { messageListHostGetApi } from '../../../../../services/api/messaggi/messaggiApi'
 
 
 const MessageList = (props) => {

@@ -89,7 +89,7 @@ class ContactHost extends Component {
             <section className='contact-host-container'>
                <div className="info_receiver">
                   {
-                     this.props.propertyRoomsImage?.length > 0 ?
+                     this.props?.propertyRoomsImage?.length > 0 ?
                         <img className='rateImg' src={this.props.propertyRoomsImage[0]?.urlImage} /> :
                         <img className='rateImg' src={homeplaceholder} />
                   }

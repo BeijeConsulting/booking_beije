@@ -29,7 +29,7 @@ MessageCard.defaultProps = {
 }
 
 MessageCard.propTypes = {
-    idSender: PropTypes.number,
+    // idSender: PropTypes.number,
     nameMessage: PropTypes.string,
     bodyMessage: PropTypes.string,
     dateMessage: PropTypes.string,
