@@ -186,7 +186,7 @@ const DetailsProp = () => {
         <div>
           <Modal
             callback={handleClose('isContactHost')}
-            isOpen={state?.isContactHost}
+            isOpen={state.isContactHost}
             classNameCustom={'modal contact-host-modal'}
           >
             {/* <ContactHost annuncioId={id} host={id} /> */}
@@ -222,8 +222,8 @@ const DetailsProp = () => {
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
-                  <h2>{state?.property?.nome_struttura}</h2>
-                  <span>{`${state?.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
+                  <h2>{state.property?.nome_struttura}</h2>
+                  <span>{`${state.property?.indirizzo?.citta}, Via ${state.property?.indirizzo.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state?.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
                 <div className="description_container">
@@ -251,7 +251,7 @@ const DetailsProp = () => {
               </div>
               <div className="map_container">
                 <MapContainer style={{ width: '100%', height: '200px' }} center={[state?.property?.indirizzo?.latitudine, state?.property?.indirizzo?.longitudine]} zoom={13} scrollWheelZoom={true}>
-                  <Marker position={[state?.property?.indirizzo?.latitudine, state?.property?.indirizzo?.longitudine]}></Marker>
+                  <Marker position={[state.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]}></Marker>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -11,7 +11,7 @@ import UiSelect from '../ui/uiSelect/UiSelect';
 function Rooms(props) {
    const { t } = useTranslation();
    const [state, setState] = useState({
-      selected: props?.stored !== undefined ? true : false,
+      selected: props.stored !== undefined ? true : false,
       selectValue: 1
    })
 
@@ -79,9 +79,9 @@ function Rooms(props) {
             <div className='services_price_container'>
                <div>
                   {
-                     props?.services &&
+                     props.services &&
                      <>
-                        {props?.services.map(generateServicesIcon)}
+                        {props.services.map(generateServicesIcon)}
                      </>
 
                   }
