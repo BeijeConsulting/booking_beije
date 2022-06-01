@@ -9,7 +9,6 @@ import {
   Spin,
 } from "antd";
 
-import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
 
 import { useState, useEffect } from "react";
 
@@ -30,20 +29,30 @@ const AnnounceOperation = () => {
 
   const announceValue = {
     id: null,
+    titolo: "",
     descrizione: "",
-    numPostiLetto: "",
-    prezzo: 0,
-    slug: "",
-    isStruttura: "",
-    servizi: [],
+    numPostiLetto: null,
+    prezzo: null,
+    count: 1,
+    images: [],
+    servizi: []
   };
 
   useEffect(() => {
     const getAnnounce = async () => {
-      const announce = await annuncioDetailGetApi(location.state.idStructure);
-      console.log(announce);
+      const res = await annuncioDetailGetApi(location.state.idAnnounce);
+      const announce = res.data;
 
+      announceValue.id = announce?.annuncio?.id;
+      announceValue.descrizione = announce?.annuncio?.descrizione;
+      announceValue.numPostiLetto = announce?.annuncio?.numPostiLetto;
+      announceValue.prezzo = announce?.annuncio?.prezzo;
+      announceValue.count = announce?.annuncio?.count
+      announceValue.titolo = announce?.annuncio?.titolo
+      announceValue.images = announce?.immagini
+      announceValue.servizi = announce?.servizi
 
+      setState(announceValue)
     };
     if (location.state.idStructure !== null) {
       //   // futura chiamata a API
@@ -66,14 +75,14 @@ const AnnounceOperation = () => {
     console.log("Failed:", errorInfo);
   };
 
-  const onChangeFoto = (value) => {
+  {/* const onChangeFoto = (value) => {
     setState({
       data: {
         ...state.data,
         fotoStructure: value,
       },
     });
-  };
+  }; */}
 
   return (
     <>
@@ -84,19 +93,19 @@ const AnnounceOperation = () => {
           name="basic"
           layout="vertical"
           initialValues={{
-            announce: state.data.announce,
-            rules: state.data.rules,
-            service: state.data.service,
-            description: state.data.description,
-            priceForNight: state.data.priceForNight,
-            beds: state.data.beds,
-            rooms: state.data.rooms,
+            announce: state.titolo,
+            // rules: state.rules,
+            // service: state.service,
+            description: state.descrizione,
+            priceForNight: state.prezzo,
+            beds: state.numPostiLetto,
+            rooms: state.count,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
+          {/* <Form.Item
             label={t("common.photos")}
             name="photos"
             rules={[
@@ -106,8 +115,8 @@ const AnnounceOperation = () => {
               },
             ]}
           >
-            <UploadFoto addFotoStructure={onChangeFoto} />
-          </Form.Item>
+            <UploadFoto addFotoStructure={onChangeFoto} lista_immagini={state.images}/>
+          </Form.Item> */}
 
           <Row gutter={32}>
             <Col>
@@ -155,34 +164,54 @@ const AnnounceOperation = () => {
               <Checkbox.Group name="service">
                 <Row>
                   <Col span={8}>
-                    <Checkbox value="servizio-3">{t('fe.components.service.wifi')}</Checkbox>
+                    <Checkbox value="servizio-3">
+                      {t("fe.components.service.wifi")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-4">{t('fe.components.service.kitchen')}</Checkbox>
+                    <Checkbox value="servizio-4">
+                      {t("fe.components.service.kitchen")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-5">{t('fe.components.service.airConditioning')}</Checkbox>
+                    <Checkbox value="servizio-5">
+                      {t("fe.components.service.airConditioning")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-6">{t('fe.components.service.parking')}</Checkbox>
+                    <Checkbox value="servizio-6">
+                      {t("fe.components.service.parking")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-7">{t('fe.components.service.washingMachine')}</Checkbox>
+                    <Checkbox value="servizio-7">
+                      {t("fe.components.service.washingMachine")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-8">{t('fe.components.service.iron')}</Checkbox>
+                    <Checkbox value="servizio-8">
+                      {t("fe.components.service.iron")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-9">{t('fe.components.service.workingPlace')}</Checkbox>
+                    <Checkbox value="servizio-9">
+                      {t("fe.components.service.workingPlace")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-9">{t('fe.components.service.swimmingPool')}</Checkbox>
+                    <Checkbox value="servizio-10">
+                      {t("fe.components.service.swimmingPool")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-9">{t('fe.components.service.allowedSmoking')}</Checkbox>
+                    <Checkbox value="servizio-11">
+                      {t("fe.components.service.allowedSmoking")}
+                    </Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-9">{t('fe.components.service.alarm')}</Checkbox>
+                    <Checkbox value="servizio-12">
+                      {t("fe.components.service.alarm")}
+                    </Checkbox>
                   </Col>
                 </Row>
               </Checkbox.Group>
@@ -247,7 +276,7 @@ const AnnounceOperation = () => {
             }}
           >
             <Button type="primary" htmlType="submit">
-              {t('common.submit')}
+              {t("common.submit")}
             </Button>
           </Form.Item>
         </Form>

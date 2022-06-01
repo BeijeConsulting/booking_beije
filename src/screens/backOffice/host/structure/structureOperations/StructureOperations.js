@@ -24,18 +24,17 @@ import { useTranslation } from "react-i18next";
 
 //API
 import {
-  disableStrutturaPutApi,
+  //disableStrutturaPutApi,
   insertStrutturaPostApi,
-  showAllStruttureGetApi,
+  //showAllStruttureGetApi,
   strutturaDetailIdGetApi,
   updateStrutturaPutApi,
 } from "../../../../../services/api/struttura/strutturaApi";
-import { decryptItem } from "../../../../../utils/crypto/crypto";
+//import { decryptItem } from "../../../../../utils/crypto/crypto";
 
 import { connect } from "react-redux";
 import {
-  getLocalStorage,
-  setLocalStorage,
+  getLocalStorage
 } from "../../../../../utils/localStorage/localStorage";
 import { myProfilesGetApi } from "../../../../../services/api/user/userApi";
 import { showAllTipoStrutturaGetApi } from "../../../../../services/api/struttura/tipoStruttura/tipoStruttura";
@@ -214,20 +213,19 @@ const StructureOperation = (props) => {
             <GoBackButton
               route={`/${routes.DASHBOARD}/${routes.STRUCTURE_LIST}`}
             />
-            <h1>{`${
-              location.state.idStructure === null ? "Inserisci" : "Modifica"
-            } Annuncio`}</h1>
+            <h1>{`${location.state.idStructure === null ? "Inserisci" : "Modifica"
+              } Annuncio`}</h1>
           </div>
 
           <Form.Item
             label={t("common.photos")}
             name="photos"
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: t("toasts.operationPhotos"),
-            //   },
-            // ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: t("toasts.operationPhotos"),
+          //   },
+          // ]}
           >
             <UploadFoto
               addFotoStructure={onChangeFoto}
