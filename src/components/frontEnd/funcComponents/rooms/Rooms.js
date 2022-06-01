@@ -52,7 +52,10 @@ function Rooms(props) {
    }
 
    const handleNumberOfRooms = (e) => {
-      state?.selectValue = e;
+      setState({
+         ...state,
+         selectValue : e
+      })
    }
 
 
