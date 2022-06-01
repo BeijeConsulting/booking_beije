@@ -227,7 +227,7 @@ const DetailsProp = () => {
                     {state.property?.nome_struttura}
                     <Like id={id} propertyName={state.property?.nome_struttura} />
                   </h2>
-                  
+
                   <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
