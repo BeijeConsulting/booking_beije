@@ -13,11 +13,13 @@ const UploadFoto = (props) => {
 
   const { addFotoStructure } = props;
 
+console.log(props);
+
   const [state, setState] = useState({
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: props.lista_immagini.map((img, index) => {return {
+    fileList: props.lista_immagini.length===0 ? [] : props.lista_immagini.map((img, index) => {return {
       uid: img.uid,
       imgName: `${index}`,
       url: img.urlImage,
