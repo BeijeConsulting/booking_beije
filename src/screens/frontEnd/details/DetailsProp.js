@@ -82,7 +82,7 @@ const DetailsProp = () => {
         serviceList: services?.data,
         isLoading: false
       })
-      // console.log(state)
+
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
@@ -181,8 +181,8 @@ const DetailsProp = () => {
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
-      {state.isLoading && <h1>{t('common.loading')}</h1>}
-      {!state.isLoading &&
+      {state?.isLoading && <h1>{t('common.loading')}</h1>}
+      {!state?.isLoading &&
         <div>
           <Modal
             callback={handleClose('isContactHost')}
@@ -222,14 +222,14 @@ const DetailsProp = () => {
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
-                  <h2>{state.property?.nome_struttura}</h2>
-                  <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
-                  <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
+                  <h2>{state?.property?.nome_struttura}</h2>
+                  <span>{`${state?.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
+                  <p><FontAwesomeIcon icon={faStar} />{state?.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
                 <div className="description_container">
                   <h3>{t("common.description")}</h3>
                   <p>{state.property?.descrizione}</p>
-                  <span className="checkout_in_date">{`${t('common.checkIn')}: ${state.property?.checkin} - ${t('common.checkOut')}: ${state.property?.checkout}`}</span>
+                  <span className="checkout_in_date">{`${t('common.checkIn')}: ${state?.property?.checkin} - ${t('common.checkOut')}: ${state?.property?.checkout}`}</span>
                 </div>
               </div>
 
@@ -240,7 +240,7 @@ const DetailsProp = () => {
               <div className="total_price_container">
                 <div className="container_price">
                   <p>
-                    {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state.checkOutPrice })}
+                    {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state?.checkOutPrice })}
                   </p>
                   <UiButton
                     className="button_price"
@@ -250,8 +250,8 @@ const DetailsProp = () => {
                 </div>
               </div>
               <div className="map_container">
-                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
-                  <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
+                <MapContainer style={{ width: '100%', height: '200px' }} center={[state?.property?.indirizzo?.latitudine, state?.property?.indirizzo?.longitudine]} zoom={13} scrollWheelZoom={true}>
+                  <Marker position={[state?.property?.indirizzo?.latitudine, state?.property?.indirizzo?.longitudine]}></Marker>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -259,7 +259,7 @@ const DetailsProp = () => {
                 </MapContainer>
               </div>
               <div className="review_container">
-                {state.reviewsList && state.reviewsList.map(generateReviews)}
+                {state?.reviewsList && state?.reviewsList.map(generateReviews)}
               </div>
             </div>
 
