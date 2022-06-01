@@ -52,6 +52,7 @@ import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
 import HostRegistration from "./screens/backOffice/host/registration/hostRegistration/HostRegistration";
 import { setUser } from "./redux/ducks/userDuck";
 import ProtectedRoute from "./components/common/protectedRoute/ProtectedRoute";
+import ProtectedRouteHost from "./components/common/protectedRouteHost/ProtectedRouteHost";
 import { setProperty } from "./redux/ducks/propertyDuck";
 import { showAllStruttureGetApi } from "./services/api/struttura/strutturaApi";
 import useLogout from "./hooks/useLogout";
@@ -59,9 +60,6 @@ import useLogout from "./hooks/useLogout";
 
 
 function Routing(props) {
-
-    // setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5OTMzODAsImV4cCI6MTY1Mzk5Njk4MH0.ji3GyhU076tVmPKCFxG8nrH9v1NWjb995T11IVhSdzY")
-    // setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
 
     const { logoutExpire } = useLogout();
 
@@ -161,16 +159,56 @@ function Routing(props) {
 
             {/* all the routes for backOffice goes inside this one */}
             <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
-                <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
-                <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
-                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
-                <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
-                <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
-                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-                <Route path={`${routes.STRUCTURE_DETAILS}`} element={<StructureDetails />} />
-                <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
-                <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
-                <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
+                <Route path={routes.HOST_ACCOUNT} element={
+                    <ProtectedRouteHost>
+                        <HostAccount />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.MESSAGE_LIST} element={
+                    <ProtectedRouteHost>
+                        <MessageList />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.MESSAGE_CHAT} element={
+                    <ProtectedRouteHost>
+                        <MessageChat />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={
+                    <ProtectedRouteHost>
+                        <StructureOperation />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.STRUCTURE_LIST} element={
+                    <ProtectedRouteHost>
+                        <StructureList />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.RESERVATION_CALENDAR} element={
+                    <ProtectedRouteHost>
+                        <ReservationCalendar />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={`${routes.STRUCTURE_DETAILS}`} element={
+                    <ProtectedRouteHost>
+                        <StructureDetails />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.HOST_REGISTRATION} element={
+                    <ProtectedRouteHost>
+                        <HostRegistration />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.RESERVATION_LIST} element={
+                    <ProtectedRouteHost>
+                        <ReservationList />
+                    </ProtectedRouteHost>
+                } />
+                <Route path={routes.ANNOUNCE_OPERATION} element={
+                    <ProtectedRouteHost>
+                        <AnnounceOperations />
+                    </ProtectedRouteHost>
+                } />
 
                 {/* //to add in admin route */}
                 <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />

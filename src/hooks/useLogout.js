@@ -11,16 +11,18 @@ function useLogout() {
 
     const dispatch = useDispatch();
 
-   const logoutExpire =() => {
+    const logoutExpire = () => {
         if ((getLocalStorage('refreshToken')) !== null) {
-    
+
             const refreshToken = decryptItem(JSON.parse(localStorage.getItem('refreshToken')));
-    
+
             const now = new Date();
-    
+
             if ((now.getTime() - refreshToken?.expire) > 14200000) {
                 removeLocalStorage('token');
                 removeLocalStorage('refreshToken');
+                removeLocalStorage('permission');
+                removeLocalStorage('idUtente');
             } else {
                 return null;
             }
@@ -30,11 +32,13 @@ function useLogout() {
     const logoutUser = () => {
         removeLocalStorage('token');
         removeLocalStorage('refreshToken');
+        removeLocalStorage('permission');
+        removeLocalStorage('idUtente');
         dispatch(initUser());
         dispatch(initToken());
     }
 
-    return { logoutExpire, logoutUser}
+    return { logoutExpire, logoutUser }
 }
 
 export default useLogout;
