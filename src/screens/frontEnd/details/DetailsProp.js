@@ -44,6 +44,7 @@ import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localSt
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
+import Like from "../../../components/frontEnd/hookComponents/like/Like";
 
 let checkOutArray = []
 let arrayToCheckout = []
@@ -208,10 +209,10 @@ const DetailsProp = () => {
               <div className="back-button goBackProperty"><GoBackButton /></div>
             }
 
-            {state?.property?.images?.length > 0 ?
+            {state.property?.images?.length > 0 ?
               <>
                 <Carousel autoplay>
-                  {state?.property?.images.map(renderImage)}
+                  {state.property?.images.map(renderImage)}
                 </Carousel>
               </> :
               <img className="img_carousel" src={defaultImg} alt="img_struttura" />
@@ -222,7 +223,11 @@ const DetailsProp = () => {
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
-                  <h2>{state.property?.nome_struttura}</h2>
+                  <h2>
+                    {state.property?.nome_struttura}
+                    <Like id={id} propertyName={state.property?.nome_struttura} />
+                  </h2>
+                  
                   <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
