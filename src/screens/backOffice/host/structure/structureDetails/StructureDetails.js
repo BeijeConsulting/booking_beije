@@ -150,7 +150,8 @@ const StructureDetails = (props) => {
 
     //NAVIGATION
     const goToEditStructure = (idStructure) => () => {
-        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idStructure}}`, {
+        console.log(idStructure)
+        navigate(`/${routes.DASHBOARD}/${routes.STRUCTURE_OPERATION}/${idStructure}`, {
             state: { idStructure: idStructure },
         })
     }
