@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-// import Logo from '../../../components/frontEnd/funcComponents/logo/Logo'
+import Logo from '../../funcComponents/logo/Logo';
 import FormInput from '../../funcComponents/ui/input/formInput/FormInput';
 import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
@@ -122,9 +122,8 @@ function LoginForm(props) {
       <section className="bg-color">
          <div className="form-container-L container flex column jcSpaceA">
 
-            <div className="flex jcCenter aiCenter column">
-               <div className="w">LOGO</div>
-               {/* <Logo></Logo> */}
+            <div className="flex jcCenter aiCenter column mT1">
+               <Logo imgClass="w50" />
             </div>
 
             <form className="flex column px1 w75 mAuto">
