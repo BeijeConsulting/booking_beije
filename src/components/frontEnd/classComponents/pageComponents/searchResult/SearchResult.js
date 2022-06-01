@@ -9,7 +9,7 @@ import Card from '../../../funcComponents/card/Card';
 import PropertyCard from '../../ui/propertyCard/PropertyCard';
 import Modal from '../../../../common/modal/Modal';
 import Map from '../../../hookComponents/map/Map';
-import { Pagination } from 'antd';
+import { Pagination, Spin } from 'antd';
 
 // modules
 import Helmet from 'react-helmet';
@@ -41,20 +41,20 @@ class SearchResult extends Component {
          isSearch: false,
          isOpen: false,
          data: this.props.data,
-         page: 1
+         page: 1,
+         isLoading: true
       }
       this.searchFilters = {};
    }
 
    componentDidMount() {
-      this.getapi();
-      if(this.props.router.location.state !== null){
-      this.setState({
-         property: this.props.router.location.state.property
-      })
+      // this.getapi();
+      if (this.props.router.location.state !== null) {
+         this.setState({
+            property: this.props.router.location.state.property,
+            isLoading: false
+         })
       }
-
-
    }
 
    componentDidUpdate(prevProps, prevState) {
@@ -78,14 +78,13 @@ class SearchResult extends Component {
    }
 
    async getapi() {
-      // const response = await showAllStruttureGetApi(5, this.state.page);
-      // console.log(response.data.list);
+      // const response = await showAllStruttureGetApi(100, this.state.page);
       // this.setState({
       //    property: response.data.list
       // })
    }
 
-   handleButton = (params) => () => {
+   handleButton = (params) => (data) => {
       let newState = Object.assign({}, this.state);
 
       // case zero
@@ -102,7 +101,9 @@ class SearchResult extends Component {
             newState.isMap = !newState.isMap
             break;
          case "isSearch":
-            newState.isSearch = !newState.isSearch
+            newState.isSearch = !newState.isSearch;
+            newState.property = data;
+            newState.isLoading = false;
             break;
          default:
             break;
@@ -131,7 +132,8 @@ class SearchResult extends Component {
 
    handleData = (data) => {
       this.setState({
-         property: data
+         property: data,
+         isLoading: false
       })
    }
 
@@ -174,6 +176,7 @@ class SearchResult extends Component {
             <section className='ButtonContainer flex column jcCenter aiCenter'>
                <SearchButton
                   callback={this.handleButton("isSearch")}
+                  handleData={this.handleData}
                />
                <div className='w100 flex jcSpaceB'>
 
@@ -189,10 +192,20 @@ class SearchResult extends Component {
                </div>
 
             </section>
-            {
-               this.state.property.length > 0 && this.state.property.map(this.mapping)
-            }
 
+            {
+               this.state.isLoading &&
+               <Spin className='w100' />
+            }
+            
+            {
+               (!this.state.isLoading && this.state.property.length === 0) &&
+               <h4 className='taC w mT1'>{this.props.t('common.noApartments')}</h4>
+            }
+            {
+               this.state.property.length > 0 &&
+               this.state.property.map(this.mapping)
+            }
 
             {this.state.property.length > 5 && <Pagination
                size={"small"}
@@ -209,10 +222,11 @@ class SearchResult extends Component {
    }
 
    mapping = (item, key) => {
+      console.log(item);
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
-         callback={this.handleDetails(item?.indirizzo?.struttura_id)}
+            callback={this.handleDetails(item?.indirizzo?.struttura_id)}
          >
 
             <PropertyCard

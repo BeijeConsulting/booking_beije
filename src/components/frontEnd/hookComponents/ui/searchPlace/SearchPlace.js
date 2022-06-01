@@ -26,7 +26,7 @@ function SearchPlace(props) {
    const [state, setState] = useState({
       selectPosition: null,
       searchText: '',
-      listPlace: []
+      listPlace: [t('common.searchPlaceholder')]
    })
 
    const handleButtonSearch = (item) => () => {
@@ -35,8 +35,7 @@ function SearchPlace(props) {
       setState({
          ...state,
          selectPosition: item,
-         searchText: '',
-         listPlace: []
+         listPlace: [t('common.searchPlaceholder')]
       })
    }
 
@@ -71,17 +70,22 @@ function SearchPlace(props) {
       } else if (state.searchText.length < 3) {
          obj = {
             ...obj,
-            listPlace: [],
+            listPlace: [t('common.searchPlaceholder')],
             searchText: event.target.value
          }
       }
       setState(obj)
    }
 
-   function item(item) {
+   function item(item, key) {
+      if(state.listPlace.length === 1){
+        return  <div key={key}>
+            {item}
+         </div>
+      }
       return (
          <Button
-            key={item?.place_id}
+            key={key}
             onClick={handleButtonSearch(item)}>
 
             {item?.display_name}

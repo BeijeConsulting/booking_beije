@@ -66,6 +66,11 @@ class SearchForm extends Component {
       return finalString;
    }
 
+   handleCallback = (response) => {
+      this.props.data(response);
+      this.props.callback(response);
+   }
+
    handleSubmit = (e) => {
       e.preventDefault();
 
@@ -91,9 +96,7 @@ class SearchForm extends Component {
 
 
       if (this.props.router.location.pathname === '/search') {
-         getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.props.data(res?.data))
-         this.props.callback();
-
+         getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.handleCallback(res?.data));
       }
    }
 

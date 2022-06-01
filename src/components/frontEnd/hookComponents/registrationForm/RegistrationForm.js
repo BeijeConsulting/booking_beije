@@ -9,6 +9,7 @@ import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
 import { notification } from 'antd';
+import Logo from '../../funcComponents/logo/Logo';
 
 // modules
 import { useNavigate } from 'react-router-dom';
@@ -149,9 +150,8 @@ function RegistrationForm(props) {
       <section className="bg-color">
          <div className="container flex column px1">
 
-            <div className="flex jcCenter aiCenter column">
-               <div className="w">LOGO</div>
-               {/* <Logo></Logo> */}
+            <div className="flex jcCenter aiCenter column mT1">
+               <Logo imgClass="w50" />
             </div>
 
             <form className=" form-container flex column myAuto">
