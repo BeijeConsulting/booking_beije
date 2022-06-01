@@ -76,7 +76,7 @@ class Like extends Component {
    render() {
       return (
          <>
-            <FontAwesomeIcon className='cursor' icon={this.state.isFavourite === true ? faHeartFull : faHeart}
+            <FontAwesomeIcon className='cursor px1' icon={this.state.isFavourite === true ? faHeartFull : faHeart}
                onClick={this.state.isFavourite === true ? this.handleDelete(this.props?.id, this.props?.propertyName) : this.handleAdd(this.props?.id, this.props?.propertyName)}
             />
          </>

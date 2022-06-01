@@ -27,10 +27,10 @@ function Filter(props) {
    })
 
    const filtersData = {
-      minPrice: null,
-      maxPrice: null,
-      types: [],
-      services: []
+      min_price: null,
+      max_price: null,
+      lista_id_tipo_strutture: [],
+      lista_id_tipo_servizi: []
    }
 
    const callbackUseEffect = () => {
@@ -59,14 +59,14 @@ function Filter(props) {
 
    const mapType = (item, key) => {
       return <div key={`${key}-${item.tipo}`}>
-         <CheckboxInput callback={handleCheck('types', item.id)} value={item.id} />
+         <CheckboxInput callback={handleCheck('lista_id_tipo_strutture', item.id)} value={item.id} />
          <label>{t(item.tipo)}</label>
       </div>
    };
 
    const mapService = (item, key) => {
       return <div key={`${key}-${item?.nome}`}>
-         <CheckboxInput callback={handleCheck('services', item?.id)} value={item?.id} />
+         <CheckboxInput callback={handleCheck('lista_id_tipo_servizi', item?.id)} value={item?.id} />
          <label>{t(item?.nome)}</label>
       </div>
    };
@@ -85,7 +85,7 @@ function Filter(props) {
    }
 
    const handlePrice = (value) => {
-      [filtersData.minPrice, filtersData.maxPrice] = value;
+      [filtersData.min_price, filtersData.max_price] = value;
    };
 
 
