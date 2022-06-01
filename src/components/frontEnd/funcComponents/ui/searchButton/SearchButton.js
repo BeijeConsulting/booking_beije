@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import SearchForm from '../../../classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm';
 
-const SearchButton = ({ callback, classCustom, handleData }) => {
+const SearchButton = ({ callback, classCustom, handleData, handleParams }) => {
 
    const [state, setState] = useState({
       width: null
@@ -45,6 +45,8 @@ const SearchButton = ({ callback, classCustom, handleData }) => {
          <div className='home-search'>
             <SearchForm
                data={handleData}
+               handleParams={handleParams}
+
             />
          </div>
    )

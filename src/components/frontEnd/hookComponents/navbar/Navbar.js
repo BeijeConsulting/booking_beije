@@ -40,6 +40,8 @@ import PropTypes from "prop-types";
 import { getLocalStorage } from '../../../../utils/localStorage/localStorage';
 import useLogout from "../../../../hooks/useLogout";
 import { Link } from "react-router-dom";
+import SearchForm from "../../classComponents/pageComponents/modalChildrenComponent/searchForm/SearchForm";
+import SearchResult from "../../classComponents/pageComponents/searchResult/SearchResult";
 
 
 function Navbar(props) {
@@ -126,8 +128,7 @@ function Navbar(props) {
             //MOBILE
             props.stateLayout < 480 ?
                <nav className="navMobile fixed b0 w100 flex jcSpaceA aiCenter">
-                  <FontAwesomeIcon className="iconSearch" onClick={openModalSearch} icon={faSearch} />
-                  <Modal isOpen={state.modalSearchIsOpen} callback={closeModalSearch}>Modal search to Build</Modal>
+                  <FontAwesomeIcon className="iconSearch" onClick={goTo('SEARCH')} icon={faSearch} />
 
                   <Logo callback={goTo('HOME')} />
 

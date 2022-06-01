@@ -17,7 +17,21 @@ function renderSelectOptions(name) {
    }
 }
 
+function objToString(obj) {
+
+   let string = "";
+   for (const item in obj) {
+      if (obj[item] !== null) {
+
+         string += `${item}=${obj[item]}&`
+      }
+   }
+   let finalString = string.slice(0, -1);
+   return finalString;
+}
+
 export {
    renderSelectOptions,
-   createPortalNode
+   createPortalNode,
+   objToString
 }
