@@ -137,7 +137,7 @@ class Messages extends Component {
                   this.state.arrayMessagesFiltered.map(this.renderMessages)
                }
                {
-                  this.state.isEmpty && <h2>{this.props.t('common.emptyChat')} </h2>
+                  this.state.isEmpty && <h2 className="w">{this.props.t('common.emptyChat')} </h2>
 
                }
                {

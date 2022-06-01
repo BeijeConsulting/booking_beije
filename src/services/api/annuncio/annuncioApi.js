@@ -19,6 +19,11 @@ const annuncioOnStrutturaGetApi = async (id) => {
 }
 
 /* AUTH:HOST */
+const pendingAnnunciOnStruttura = async (id, header) => {
+    return await getApi(`annuncio/struttura/pending/${id}`, header)
+}
+
+/* AUTH:HOST */
 const annuncioModifyPutApi = async (id, obj, header) => {
     return await putApi(`annuncio/${id}`, obj, header);
 }
@@ -42,5 +47,5 @@ const annuncioDeleteApi = async (id, header) => {
 }
 
 
-export { annunciGetApi, annuncioDetailGetApi, annunciAccettazioneGetApi, annuncioModifyPutApi, annuncioDeleteApi, annuncioInsertMutiplePostApi, annuncioapprovePutAPi, annuncioDeclinePutApi, annuncioOnStrutturaGetApi };
+export { annunciGetApi, annuncioDetailGetApi, annunciAccettazioneGetApi, annuncioModifyPutApi, annuncioDeleteApi, annuncioInsertMutiplePostApi, annuncioapprovePutAPi, annuncioDeclinePutApi, annuncioOnStrutturaGetApi, pendingAnnunciOnStruttura };
 

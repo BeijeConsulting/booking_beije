@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 // module
 import { Helmet } from "react-helmet";
+// img
+import defaultImg from '../../../assets/images/homeplaceholder.png'
 
 
+import { Carousel } from 'antd';
 
 //rrd
 import { useNavigate } from "react-router-dom";
@@ -34,10 +37,10 @@ import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annunc
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
-import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+// import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
-import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
+import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
@@ -103,7 +106,6 @@ const DetailsProp = () => {
   }
 
   const addToCheckOut = (temp_id, isSelected, obj) => {
-    console.log('qua', obj)
     isSelected ? checkOutArray[temp_id] = {
       ...obj,
       price: obj.price * obj.count,
@@ -144,7 +146,7 @@ const DetailsProp = () => {
   const generateRooms = (item, key) => {
 
     const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
-    console.log('item', item)
+
     return <Rooms
       callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
       stored={isStored}
@@ -169,13 +171,17 @@ const DetailsProp = () => {
       rating={item.score}
     />
   }
-
+  const renderImage = (img, key) => {
+    return (
+      <img key={key} className="img_carousel" src={img?.urlImage} alt="img_struttura" />
+    )
+  }
   return (
     <>
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
-      {state.isLoading && <h1>Caricamento...</h1>}
+      {state.isLoading && <h1>{t('common.loading')}</h1>}
       {!state.isLoading &&
         <div>
           <Modal
@@ -194,24 +200,25 @@ const DetailsProp = () => {
             <DetailsPropRoom />
           </Modal>
 
-          {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
-            <div className="container_img">
-              {
-                state.windowWidth < 992 &&
-                <div className="back-button goBackProperty"><GoBackButton /></div>
-              }
-              <img className="structure_img_property first" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
-              {
-                state.windowWidth > 992 &&
-                <div className="img_container_secondary">
-                  <img className="structure_img_property" src="https://fgvacanze.it/custom/fgvacanze/writable/htmlbox/benvenuti-ad-alghero.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://www.viaggi-lowcost.info/wp-content/uploads/2019/08/alghero-spiaggia-maria-pia-e1565758733195.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://www.bellavitainpuglia.it/Content/images/partner/5362/1920x0/f5c258c50945adabce83389016eb479e.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://img.grouponcdn.com/deal/2Dz2zfRjTMjiQUUJgBdB8RswgYX3/2D-2048x1229/v1/t600x362.jpg" alt="img_struttura" />
-                </div>
-              }
 
-            </div>
+          {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
+            {
+              state.windowWidth < 992 &&
+
+              <div className="back-button goBackProperty"><GoBackButton /></div>
+            }
+
+            {state?.property?.images?.length > 0 ?
+              <>
+                <Carousel autoplay>
+                  {state?.property?.images.map(renderImage)}
+                </Carousel>
+              </> :
+              <img className="img_carousel" src={defaultImg} alt="img_struttura" />
+            }
+
+
+
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
@@ -222,7 +229,7 @@ const DetailsProp = () => {
                 <div className="description_container">
                   <h3>{t("common.description")}</h3>
                   <p>{state.property?.descrizione}</p>
-                  <span className="checkout_in_date">{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+                  <span className="checkout_in_date">{`${t('common.checkIn')}: ${state.property?.checkin} - ${t('common.checkOut')}: ${state.property?.checkout}`}</span>
                 </div>
               </div>
 
@@ -232,7 +239,9 @@ const DetailsProp = () => {
               </div>
               <div className="total_price_container">
                 <div className="container_price">
-                  <p>Total {state.checkOutPrice}&euro;</p>
+                  <p>
+                    {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state.checkOutPrice })}
+                  </p>
                   <UiButton
                     className="button_price"
                     callback={goToCheckout}

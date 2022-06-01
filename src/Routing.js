@@ -43,9 +43,9 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 
 
 // NOTFOUND 
-import NotFound from "./screens/notFound/NotFound";
+import NotFound from "./screens/frontEnd/notFound/NotFound";
 
-import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -60,128 +60,128 @@ import useLogout from "./hooks/useLogout";
 
 function Routing(props) {
 
-    // setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5OTMzODAsImV4cCI6MTY1Mzk5Njk4MH0.ji3GyhU076tVmPKCFxG8nrH9v1NWjb995T11IVhSdzY")
-    // setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
+   // setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5OTMzODAsImV4cCI6MTY1Mzk5Njk4MH0.ji3GyhU076tVmPKCFxG8nrH9v1NWjb995T11IVhSdzY")
+   // setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
 
-    const { logoutExpire } = useLogout();
+   const { logoutExpire } = useLogout();
 
-    useEffect(() => {
-        (async () => {
-            if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
+   useEffect(() => {
+      (async () => {
+         if ((localStorage.getItem('token') && localStorage.getItem('refreshToken')) !== null) {
 
-                try {
-                    logoutExpire();
-                    let token = getLocalStorage('token');
-                    props.dispatch(setToken(token));
-                    const PROFILE = await myProfilesGetApi(token);
-                    const PROPERTY = await showAllStruttureGetApi();
-                    props.dispatch(setUser(PROFILE?.data));
-                    props.dispatch(setProperty(PROPERTY?.data?.list));
-                } catch (error) {
-                    return error.message
-                }
+            try {
+               logoutExpire();
+               let token = getLocalStorage('token');
+               props.dispatch(setToken(token));
+               const PROFILE = await myProfilesGetApi(token);
+               const PROPERTY = await showAllStruttureGetApi();
+               props.dispatch(setUser(PROFILE?.data));
+               props.dispatch(setProperty(PROPERTY?.data?.list));
+            } catch (error) {
+               return error.message
             }
-        })()
-    }, []);
+         }
+      })()
+   }, []);
 
 
-    //login, registration, account, messages, favourites, booking
+   //login, registration, account, messages, favourites, booking
 
 
-    return (
-        <Routes>
+   return (
+      <Routes>
 
-            <Route path={routes.DISCLAIMER} element={<Disclaimer />} />
-            <Route path={routes.REGISTRATION} element={<Registration />} />
-            <Route path={routes.LOGIN} element={<Login />} />
+         <Route path={routes.DISCLAIMER} element={<Disclaimer />} />
+         <Route path={routes.REGISTRATION} element={<Registration />} />
+         <Route path={routes.LOGIN} element={<Login />} />
 
-            {/* all the routes for frontEnd goes inside this one */}
+         {/* all the routes for frontEnd go inside this one */}
 
-            <Route path={routes.LAYOUT} element={<Layout />} >
-                {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
-                <Route path={routes.MESSAGES} element={
-                    <ProtectedRoute>
-                        <Messages />
-                    </ProtectedRoute>
-                }
-                />
+         <Route path={routes.LAYOUT} element={<Layout />} >
+            {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
+            <Route path={routes.MESSAGES} element={
+               <ProtectedRoute>
+                  <Messages />
+               </ProtectedRoute>
+            }
+            />
 
-                <Route path={routes.SINGLECONVERSATIONMOBILE} element={
-                    <ProtectedRoute>
-                        <SingleConversation />
-                    </ProtectedRoute>
-                }
-                />
+            <Route path={routes.SINGLECONVERSATIONMOBILE} element={
+               <ProtectedRoute>
+                  <SingleConversation />
+               </ProtectedRoute>
+            }
+            />
 
-                <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
-                    <ProtectedRoute>
-                        <Chat />
-                    </ProtectedRoute>
-                }
-                >
-                    <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
-                </Route>
-
-                <Route path={routes.BOOKINGS} element={
-                    <ProtectedRoute>
-                        <Bookings />
-                    </ProtectedRoute>
-                }
-                />
-
-                <Route path={routes.SETTINGS} element={
-                    <ProtectedRoute>
-                        <Settings />
-                    </ProtectedRoute>
-                }
-                />
-                <Route path={routes.ACCOUNT} element={
-                    <ProtectedRoute>
-                        <Account />
-                    </ProtectedRoute>
-                }
-                />
-
-                <Route path={routes.FAVOURITES} element={
-                    <ProtectedRoute>
-                        <Favourites />
-                    </ProtectedRoute>
-                }
-                />
-
-                <Route path={routes.CHECKOUT} element={<Checkout />} />
-
-                <Route index path={routes.HOME} element={<Home />} />
-                <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
-                <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
-                <Route path={routes.MRA} element={<MostRewApart />} />
-                <Route path={routes.SEARCH} element={<Search />} />
+            <Route path={routes.CHAT} element={  //da vedere perchè non prende la rotta figlia
+               <ProtectedRoute>
+                  <Chat />
+               </ProtectedRoute>
+            }
+            >
+               <Route path={routes.SINGLECONVERSATION} element={<SingleConversation />} />
             </Route>
 
+            <Route path={routes.BOOKINGS} element={
+               <ProtectedRoute>
+                  <Bookings />
+               </ProtectedRoute>
+            }
+            />
 
-            {/* all the routes for backOffice goes inside this one */}
-            <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
-                <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
-                <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
-                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
-                <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
-                <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
-                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
-                <Route path={`${routes.STRUCTURE_DETAILS}`} element={<StructureDetails />} />
-                <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
-                <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
-                <Route path={routes.ANNOUNCE_OPERATION} element={<AnnounceOperations />} />
+            <Route path={routes.SETTINGS} element={
+               <ProtectedRoute>
+                  <Settings />
+               </ProtectedRoute>
+            }
+            />
+            <Route path={routes.ACCOUNT} element={
+               <ProtectedRoute>
+                  <Account />
+               </ProtectedRoute>
+            }
+            />
 
-                {/* //to add in admin route */}
-                <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
-                <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
-            </Route>
+            <Route path={routes.FAVOURITES} element={
+               <ProtectedRoute>
+                  <Favourites />
+               </ProtectedRoute>
+            }
+            />
 
-            {/* !!! we needd to change the element passed to path "*" */}
-            <Route path="*" element={< NotFound />} />
+            <Route path={routes.CHECKOUT} element={<Checkout />} />
 
-        </Routes>
-    )
+            <Route index path={routes.HOME} element={<Home />} />
+            <Route path={routes.DETAILSPROP} element={<DetailsProp />} />
+            <Route path={routes.DETAILSPROPROOM} element={<DetailsPropRoom />} />
+            <Route path={routes.MRA} element={<MostRewApart />} />
+            <Route path={routes.SEARCH} element={<Search />} />
+         </Route>
+
+
+         {/* all the routes for backOffice go inside this one */}
+         <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
+            <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
+            <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
+            <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+            <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
+            <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
+            <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
+            <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
+            <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
+            <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
+            <Route path={`${routes.ANNOUNCE_OPERATION}/:id`} element={<AnnounceOperations />} />
+
+            {/* //to add in admin route */}
+            <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
+            <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
+         </Route>
+
+         {/* !!! we need to change the element passed to path "*" */}
+         <Route path="*" element={< NotFound />} />
+
+      </Routes>
+   )
 
 }
 
