@@ -9,7 +9,6 @@ import {
   Spin,
 } from "antd";
 
-import UploadFoto from "../../../../../components/backOffice/hookComponents/uploadFoto/UploadFoto";
 
 import { useState, useEffect } from "react";
 
@@ -76,14 +75,14 @@ const AnnounceOperation = () => {
     console.log("Failed:", errorInfo);
   };
 
-  const onChangeFoto = (value) => {
+  {/* const onChangeFoto = (value) => {
     setState({
       data: {
         ...state.data,
         fotoStructure: value,
       },
     });
-  };
+  }; */}
 
   return (
     <>
@@ -266,7 +265,7 @@ const AnnounceOperation = () => {
               <InputNumber
                 min={1}
                 max={50}
-                // defaultValue={50}
+              // defaultValue={50}
               />
             </Form.Item>
           </Row>

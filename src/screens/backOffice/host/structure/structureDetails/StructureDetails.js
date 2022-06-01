@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 //Style
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBed, faHotel, faPen, faPlus, faTrashCan, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { Button, Carousel, Empty, Input, InputNumber, Modal, Spin } from 'antd';
+import { faBed, faHotel, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Button, Carousel, Empty, Spin } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
@@ -224,7 +224,7 @@ const StructureDetails = (props) => {
 
 
     //ANNOUNCE DELETE MODAL
-    const triggerAnnouceDeleteModal = (announceData) => (e) => {
+    {/*   const triggerAnnouceDeleteModal = (announceData) => (e) => {
         console.log(announceData)
         let modalState = {
             ...state,
@@ -248,7 +248,7 @@ const StructureDetails = (props) => {
         setState(modalState)
     }
 
-    const onChangeInputDeleteAnnounceCount = (inputValue) => {
+   const onChangeInputDeleteAnnounceCount = (inputValue) => {
         setState({
             ...state,
             modalDelete: {
@@ -260,9 +260,9 @@ const StructureDetails = (props) => {
         console.log(inputValue);
     }
 
-    const onDeleteAnnounces = (e) => {
+      const onDeleteAnnounces = (e) => {
         console.log("Delete", "id:" + state.modalDelete.announceId);
-    }
+    } */}
 
 
     //PAGINATION

@@ -15,10 +15,6 @@ import HorizontalCard from "../../../../../components/backOffice/hookComponents/
 // import Modal from "../../../../../components/common/modal/Modal";
 import Modal from "antd/lib/modal/Modal";
 
-//NAVIGATE
-import { useNavigate } from "react-router-dom";
-import { routes } from "../../../../../routes/routes";
-
 //ICON
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
@@ -27,7 +23,7 @@ import "./ReservationList.scss";
 
 //UTILS
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
-import Routing from "../../../../../Routing";
+//import Routing from "../../../../../Routing";
 
 const ReservationList = () => {
   //   const [state, setState] = useState([]); //state using for display announce categories
