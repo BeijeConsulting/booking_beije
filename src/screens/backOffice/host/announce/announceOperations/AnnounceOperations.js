@@ -155,25 +155,34 @@ const AnnounceOperation = () => {
               <Checkbox.Group name="service">
                 <Row>
                   <Col span={8}>
-                    <Checkbox value="servizio-3">servizio-3</Checkbox>
+                    <Checkbox value="servizio-3">{t('fe.components.service.wifi')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-4">servizio-4</Checkbox>
+                    <Checkbox value="servizio-4">{t('fe.components.service.kitchen')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-5">servizio-5</Checkbox>
+                    <Checkbox value="servizio-5">{t('fe.components.service.airConditioning')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-6">servizio-6</Checkbox>
+                    <Checkbox value="servizio-6">{t('fe.components.service.parking')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-7">servizio-7</Checkbox>
+                    <Checkbox value="servizio-7">{t('fe.components.service.washingMachine')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-8">servizio-8</Checkbox>
+                    <Checkbox value="servizio-8">{t('fe.components.service.iron')}</Checkbox>
                   </Col>
                   <Col span={8}>
-                    <Checkbox value="servizio-9">servizio-9</Checkbox>
+                    <Checkbox value="servizio-9">{t('fe.components.service.workingPlace')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.swimmingPool')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.allowedSmoking')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.alarm')}</Checkbox>
                   </Col>
                 </Row>
               </Checkbox.Group>
@@ -227,7 +236,7 @@ const AnnounceOperation = () => {
               <InputNumber
                 min={1}
                 max={50}
-                // defaultValue={50}
+              // defaultValue={50}
               />
             </Form.Item>
           </Row>
@@ -238,7 +247,7 @@ const AnnounceOperation = () => {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Submit
+              {t('common.submit')}
             </Button>
           </Form.Item>
         </Form>
