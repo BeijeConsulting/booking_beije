@@ -6,9 +6,6 @@ import React, { useState } from 'react'
 //STYLE
 import './ReservationCalendar.scss'
 
-//Transition
-import { useTranslation } from 'react-i18next'
-
 import { arrColor } from '../../../../../utils/color/color'
 
 //FULLCALENDAR
@@ -20,13 +17,16 @@ const ReservationCalendar = (props) => {
 
 
 
-    const randomColor = (max, min) => {
+    {/* 
+   const randomColor = (max, min) => {
         let color = Math.floor(Math.random() * (max - min) + min);
         console.log(color)
         return arrColor[color]
     }
-
+    
     const { t } = useTranslation()
+*/}
+
 
 
     const arrTest = [

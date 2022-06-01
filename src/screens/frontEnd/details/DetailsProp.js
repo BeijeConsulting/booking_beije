@@ -83,7 +83,7 @@ const DetailsProp = () => {
         serviceList: services?.data,
         isLoading: false
       })
-      // console.log(state)
+
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
@@ -255,8 +255,8 @@ const DetailsProp = () => {
                 </div>
               </div>
               <div className="map_container">
-                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
-                  <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
+                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]} zoom={13} scrollWheelZoom={true}>
+                  <Marker position={[state.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]}></Marker>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

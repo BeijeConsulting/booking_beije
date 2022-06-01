@@ -37,7 +37,6 @@ const LayoutBackOffice = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
-
   useEffect(() => {
     // eventBus.onListening('prova', toggleSidebar)
 

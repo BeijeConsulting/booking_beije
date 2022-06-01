@@ -8,10 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPen,
     faTrashCan,
-    faTriangleExclamation,
-    faHotel,
-    faApartment,
-    faHouse
+    faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons'
 
 //TRANSLATION
@@ -33,8 +30,6 @@ import { routes, routesDetails } from "../../../../../routes/routes";
 import { randomKey } from "../../../../../utils/generalIteration/generalIteration";
 
 import { useNavigate } from "react-router-dom";
-
-import { setLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 
 

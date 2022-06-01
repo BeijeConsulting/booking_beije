@@ -11,7 +11,7 @@ import UiSelect from '../ui/uiSelect/UiSelect';
 function Rooms(props) {
    const { t } = useTranslation();
    const [state, setState] = useState({
-      selected: props.stored !== undefined ? true : false,
+      selected: props?.stored !== undefined ? true : false,
       selectValue: 1
    })
 
@@ -75,7 +75,13 @@ function Rooms(props) {
             </div>
             <div className='services_price_container'>
                <div>
-                  {props.services.map(generateServicesIcon)}
+                  {
+                     props?.services &&
+                     <>
+                        {props?.services.map(generateServicesIcon)}
+                     </>
+
+                  }
                </div>
                <div className='price_container'>
                   <p>{t("fe.components.rooms.priceForNumberOfNights", { count: props.numberOfNights })}</p>

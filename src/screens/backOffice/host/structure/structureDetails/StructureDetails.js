@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 //Style
 import "./StructureDetails.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBed, faHotel, faPen, faPlus, faTrashCan, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { Button, Carousel, Empty, Input, InputNumber, Modal, Spin } from 'antd';
+import { faBed, faHotel, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Button, Carousel, Empty, Spin } from 'antd';
 
 //ROUTING
 import { routes } from "../../../../../routes/routes";
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 //Components
 import HorizontalCard from './../../../../../components/backOffice/hookComponents/horizontalCard/HorizontalCard';
@@ -51,6 +51,11 @@ const StructureDetails = (props) => {
         },
         modalDelete: {
             trigger: false,
+        },
+        pagination: {
+            count: 1,
+            itemsPerPage: 3,
+            currentPage: 1,
         }
     })
 
@@ -61,10 +66,12 @@ const StructureDetails = (props) => {
         if (localStorage.getItem('token') !== null) {
             token = getLocalStorage('token');
 
-            fetchOnMount(params.id, token)
+            const currentPage = searchParams.get("page") ?? state.pagination.currentPage
+            fetchOnMount(params.id, currentPage, state.pagination.itemsPerPage, token)
         } else {
             navigate(routes.LOGIN)
         }
+
     }, [])
 
     //fetch announces based on query
@@ -73,24 +80,27 @@ const StructureDetails = (props) => {
         if (state.structure.data === undefined) {
             return
         }
-        fetchAnnouncesBasedOnQueryParam(state.structure?.data?.id);
+
+        console.log('update SearchParams!');
+        const currentPage = searchParams.get("page") ?? state.pagination.currentPage
+        fetchAnnouncesBasedOnQueryParam(state.structure?.data?.id, currentPage, state.pagination.itemsPerPage, token);
 
     }, [searchParams])
 
     //APIS
-    const fetchOnMount = async (id, token) => {
+    const fetchOnMount = async (id, currentPage, itemsPerPage, token) => {
 
         const structure = await showStrutturaById(id, token)
         // const announces = await annuncioOnStrutturaGetApi(structure?.data?.id)
         let announces;
-        const announceQuery = searchParams.get("show-announces");
+        const announceQuery = searchParams.get("show-announces")
 
         if (announceQuery === "pending") {
-            console.log("pending!")
-            announces = await pendingAnnunciOnStruttura(id, token)
+            // console.log("pending!")
+            announces = await pendingAnnunciOnStruttura(id, currentPage, itemsPerPage, token)
         } else {
-            console.log("null!")
-            announces = await annuncioOnStrutturaGetApi(id)
+            // console.log("null!")
+            announces = await annuncioOnStrutturaGetApi(id, currentPage, itemsPerPage)
         }
 
         console.log(structure)
@@ -103,21 +113,25 @@ const StructureDetails = (props) => {
             loading: {
                 structures: false,
                 structureAnnounces: false,
+            },
+            pagination: {
+                ...state.pagination,
+                count: announces?.data?.elementsTotal ?? 1,
+                currentPage: announces?.data?.page,
             }
         })
     }
 
-    const fetchAnnouncesBasedOnQueryParam = async (id) => {
-        const announceQuery = searchParams.get("show-announces");
-
+    const fetchAnnouncesBasedOnQueryParam = async (id, currentPage, itemsPerPage, token) => {
+        const announcePendingQuery = searchParams.get("show-announces");
         let announces;
 
-        if (announceQuery === "pending") {
-            console.log("pending!")
-            announces = await pendingAnnunciOnStruttura(id, token)
+        if (announcePendingQuery === "pending") {
+            // console.log("pending!")
+            announces = await pendingAnnunciOnStruttura(id, currentPage, itemsPerPage, token)
         } else {
-            console.log("null!")
-            announces = await annuncioOnStrutturaGetApi(id)
+            // console.log("null!")
+            announces = await annuncioOnStrutturaGetApi(id, currentPage, itemsPerPage)
         }
 
         setState({
@@ -125,6 +139,11 @@ const StructureDetails = (props) => {
             structureAnnounces: announces,
             loading: {
                 structureAnnounces: false,
+            },
+            pagination: {
+                ...state.pagination,
+                count: announces?.data?.elementsTotal ?? 1,
+                currentPage: announces?.data?.page,
             }
         })
     }
@@ -204,9 +223,8 @@ const StructureDetails = (props) => {
     }
 
 
-
     //ANNOUNCE DELETE MODAL
-    const triggerAnnouceDeleteModal = (announceData) => (e) => {
+    {/*   const triggerAnnouceDeleteModal = (announceData) => (e) => {
         console.log(announceData)
         let modalState = {
             ...state,
@@ -230,7 +248,7 @@ const StructureDetails = (props) => {
         setState(modalState)
     }
 
-    const onChangeInputDeleteAnnounceCount = (inputValue) => {
+   const onChangeInputDeleteAnnounceCount = (inputValue) => {
         setState({
             ...state,
             modalDelete: {
@@ -242,22 +260,29 @@ const StructureDetails = (props) => {
         console.log(inputValue);
     }
 
-    const onDeleteAnnounces = (e) => {
+      const onDeleteAnnounces = (e) => {
         console.log("Delete", "id:" + state.modalDelete.announceId);
-    }
+    } */}
 
 
     //PAGINATION
     const switchToPage = (clickedPage) => {
         console.log("switch to page", clickedPage);
         //set paginationProps.currentPage to clickedPage (with useState)
-
+        setSearchParams({ page: clickedPage })
+        /* setState({
+            ...state,
+            pagination: {
+                ...state.pagination,
+                currentPage: clickedPage,
+            }
+        }) */
         //remap new object's array from API
     }
 
     const paginationProps = {
-        itemsCount: 50,
-        pageSize: 10,
+        itemsCount: state.pagination.count,
+        pageSize: state.pagination.itemsPerPage,
         paginationCallback: switchToPage
     }
 
@@ -327,7 +352,7 @@ const StructureDetails = (props) => {
                 {state.loading.structureAnnounces ?
                     <Spin />
                     :
-                    (state.structureAnnounces?.data?.list.length === 0) ?
+                    (state.structureAnnounces?.status === 204 || state.structureAnnounces?.data?.list.length === 0) ?
                         <Empty
                             image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
                             imageStyle={{
@@ -349,7 +374,6 @@ const StructureDetails = (props) => {
                         :
 
                         state.structureAnnounces?.data?.list.map(getAnnounceCards)
-
                 }
             </CardList>
 
