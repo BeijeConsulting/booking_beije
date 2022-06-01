@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 
 //UTILS
 import { getLocalStorage } from '../../../utils/localStorage/localStorage';
-import { myProfilesGetApi } from '../../../services/api/user/userApi';
-
-
 
 const ProtectedRouteHost = ({ children }) => {
 
