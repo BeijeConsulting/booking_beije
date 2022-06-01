@@ -186,7 +186,7 @@ const DetailsProp = () => {
         <div>
           <Modal
             callback={handleClose('isContactHost')}
-            isOpen={state.isContactHost}
+            isOpen={state?.isContactHost}
             classNameCustom={'modal contact-host-modal'}
           >
             {/* <ContactHost annuncioId={id} host={id} /> */}
