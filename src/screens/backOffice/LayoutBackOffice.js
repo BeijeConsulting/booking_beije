@@ -26,7 +26,6 @@ import Foo from "../../components/frontEnd/hookComponents/footer/Footer";
 //UTILS
 import { LinksFooterHost } from "../../utils/linksFooter/linksFooter";
 import { routes } from "../../routes/routes";
-import { useTranslation } from "react-i18next";
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,7 +37,6 @@ const LayoutBackOffice = () => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
-  const { t } = useTranslation();
   useEffect(() => {
     // eventBus.onListening('prova', toggleSidebar)
 

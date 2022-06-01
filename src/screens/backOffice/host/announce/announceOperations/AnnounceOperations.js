@@ -44,15 +44,14 @@ const AnnounceOperation = () => {
       const res = await annuncioDetailGetApi(location.state.idAnnounce);
       const announce = res.data;
 
-
       announceValue.id = announce?.annuncio?.id;
       announceValue.descrizione = announce?.annuncio?.descrizione;
       announceValue.numPostiLetto = announce?.annuncio?.numPostiLetto;
       announceValue.prezzo = announce?.annuncio?.prezzo;
       announceValue.count = announce?.annuncio?.count
       announceValue.titolo = announce?.annuncio?.titolo
-      announceValue.images = announce.immagini
-      announceValue.servizi = announce.servizi
+      announceValue.images = announce?.immagini
+      announceValue.servizi = announce?.servizi
 
       setState(announceValue)
     };
