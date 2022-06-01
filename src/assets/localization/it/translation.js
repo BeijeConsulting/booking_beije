@@ -2,6 +2,7 @@ export const TRANSLATIONS_IT = {
     "common": {
         "number": "{{value, number(minimumFractionDigits: 2)}}",
         "currency": "{{price, currency(currency: EUR)}}",
+        "currencyTwoFractionDigits": "{{price, currency(currency: EUR; maximumFractionDigits: 2)}}",
         "shortDate": "{{value, datetime(date: value; year: numeric; month: 2-digit; day: 2-digit)}}",
         "extendedDate": "{{value, datetime(date: value; weekday: long; year: numeric; month: long; day: numeric)}}",
         "time": "{{value, datetime(date: value; hour: numeric; minute: numeric)}}",
@@ -30,6 +31,7 @@ export const TRANSLATIONS_IT = {
         "home": "Home",
         "insertTitle": "Inserisci titolo",
         "italian": "Italiano",
+        "loading": "Caricamento...",
         "loginLabel": "Accedi",
         "logout": "Esci",
         "messages": "Messaggi",
@@ -48,7 +50,7 @@ export const TRANSLATIONS_IT = {
         "registerLabel": "Registrati",
         "registration": "Registrazione",
         "research": "Research",
-        "rooms": "{{count}} stanza",
+        "rooms_one": "{{count}} stanza",
         "rooms_other": "{{count}} stanze",
         "save": "Salva",
         "searchPlaceholder": "Cerca...",
@@ -58,16 +60,17 @@ export const TRANSLATIONS_IT = {
         "service": "Servizio",
         "services": "Servizi",
         "submit": "Invia",
+        "suggestedApartments": "Appartamenti consigliati",
         "surname": "Cognome",
         "termsConditions": "Termini e condizioni",
         "update": "Aggiorna",
         "writeMessage": "Scrivi qui il tuo messaggio...",
         "you": "Tu",
         "zipCode": "Codice postale",
-        "suggestedApartaments": "Appartamenti consigliati",
         "bookNow": "Prenota adesso!"
     },
     "toasts": {
+        "favouritesAdded": "La struttura \"{{name}}\" è stata aggiunta ai tuoi preferiti",
         "favouritesDeleted": "La struttura \"{{name}}\" è stata eliminata dai tuoi preferiti",
         "formErrorAllFields": "Compila tutti i campi",
         "formErrorEmail": "Inserisci una mail valida",
@@ -153,21 +156,21 @@ export const TRANSLATIONS_IT = {
                     "beds": "Letti",
                     "rooms": "Stanze",
                     "rules": "Regole"
-                },
-                "admin": {
-                    "pendingAnnounceListTitle": "Annunci da approvare",
-                    "pendingStructureListTitle": "Strutture da approvare"
                 }
+            },
+            "admin": {
+                "pendingAnnounceListTitle": "Annunci da approvare",
+                "pendingStructureListTitle": "Strutture da approvare"
             }
         }
     },
     "fe": {
         "components": {
             "rooms": {
-                "person": "Persona",
-                "people": "Persone",
-                "priceForNumberOfNights": "Prezzo per {{number}} notte",
-                "priceForNumberOfNights_other": "Prezzo per {{number}} notti"
+                "people_one": "{{count}} persona",
+                "people_other": "{{count}} persone",
+                "priceForNumberOfNights_one": "Prezzo per {{count}} notte",
+                "priceForNumberOfNights_other": "Prezzo per {{count}} notti"
             },
             "review": {
                 "username": "username",
@@ -206,6 +209,10 @@ export const TRANSLATIONS_IT = {
             "favourites": {
                 "noFavourites": "Nessun preferito da mostrare"
             },
+            "pageNotFound": {
+                "pageTitle": "Pagina non trovata",
+                "pageDescription": "Siamo spiacenti, ma la pagina che stai cercando non è stata trovata."
+            },
             "registration": {
                 "acceptTerms": "Accetto i termini e le condizioni"
             },
@@ -234,9 +241,11 @@ export const TRANSLATIONS_IT = {
                 "mapButton": "Mappa"
             },
             "checkout": {
-                "total": "Totale",
+                "checkoutPageTitle": "Carrello",
                 "confirmPayment": "Conferma pagamento",
-                "qty": "Qta"
+                "paymentSuccessful": "Pagamento effettuato con successo",
+                "qty": "Qta",
+                "total": "Totale"
             }
         }
     }

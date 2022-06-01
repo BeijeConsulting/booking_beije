@@ -236,6 +236,12 @@ tr>.ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::after,
    border-color: $primary_lighter;
 }
 
+.ant-btn:hover,
+.ant-btn:focus {
+   color: $primary;
+   border-color: $primary;
+}
+
 @media (min-width: 650px) {
 
    .home-search .searchFormContainer {

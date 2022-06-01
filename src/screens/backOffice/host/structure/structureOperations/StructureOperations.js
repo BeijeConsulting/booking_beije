@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 import {
   disableStrutturaPutApi,
   insertStrutturaPostApi,
+  showAllStruttureGetApi,
   strutturaDetailIdGetApi,
   updateStrutturaPutApi,
 } from "../../../../../services/api/struttura/strutturaApi";
@@ -37,11 +38,13 @@ import {
   setLocalStorage,
 } from "../../../../../utils/localStorage/localStorage";
 import { myProfilesGetApi } from "../../../../../services/api/user/userApi";
+import { showAllTipoStrutturaGetApi } from "../../../../../services/api/struttura/tipoStruttura/tipoStruttura";
 
 const StructureOperation = (props) => {
   const { t } = useTranslation();
 
   const [state, setState] = useState(null);
+  const [tipoStrutture, setTipoStrutture] = useState(null);
 
   const { TextArea } = Input;
   const location = useLocation();
@@ -72,13 +75,15 @@ const StructureOperation = (props) => {
       const res = await myProfilesGetApi(HEADER);
       const userInfo = res.data;
       structureValue.userId = userInfo.utente.id;
+
+      const stuctureArray = await showAllTipoStrutturaGetApi();
       setState(structureValue);
+      setTipoStrutture(stuctureArray.data);
     };
     // Per farlo funzionare usare json-server
     const getStructure = async () => {
       const res = await strutturaDetailIdGetApi(location.state.idStructure);
       const strutturaDetail = res.data;
-
       structureValue.title = strutturaDetail?.nome_struttura;
       structureValue.description = strutturaDetail?.descrizione;
       structureValue.address = strutturaDetail?.indirizzo;
@@ -87,7 +92,11 @@ const StructureOperation = (props) => {
       structureValue.checkOut = moment(strutturaDetail?.checkOut).format(
         "HH:MM"
       );
+      structureValue.images = strutturaDetail?.images;
       structureValue.userId = strutturaDetail?.host?.user?.id;
+
+      const stuctureArray = await showAllTipoStrutturaGetApi();
+      setTipoStrutture(stuctureArray.data);
       setState(structureValue);
     };
 
@@ -108,7 +117,7 @@ const StructureOperation = (props) => {
       upState.category = values.category;
       upState.checkIn = moment(values.checkIn).format("HH:MM");
       upState.checkOut = moment(values.checkOut).format("HH:MM");
-
+      console.log(upState);
       if (location.state.idStructure === null) {
         //nuovo inserimento
         insertStrutturaPostApi(upState, HEADER);
@@ -126,10 +135,12 @@ const StructureOperation = (props) => {
 
   const onFinishFailed = (errorInfo) => {
     message.error("Somthing went wrong, chek if all form are filled");
+    console.log(errorInfo);
   };
 
   // PER COMPONENTI DEL FORM
   const onChangeFoto = (value) => {
+    console.log(value);
     setState({ ...state, images: value });
   };
 
@@ -172,9 +183,17 @@ const StructureOperation = (props) => {
     setState({ ...state, address: objAddressForPost });
   };
 
+  const renderRadio = (stu) => {
+    return (
+      <Radio key={`stru-${stu.tipo}`} value={stu.tipo}>
+        {stu.tipo}
+      </Radio>
+    );
+  };
+
   return (
     <>
-      {state === null ? (
+      {state === null && tipoStrutture === null ? (
         <Spin />
       ) : (
         <Form
@@ -210,7 +229,10 @@ const StructureOperation = (props) => {
             //   },
             // ]}
           >
-            <UploadFoto addFotoStructure={onChangeFoto} />
+            <UploadFoto
+              addFotoStructure={onChangeFoto}
+              lista_immagini={state.images}
+            />
           </Form.Item>
 
           <Row>
@@ -239,12 +261,7 @@ const StructureOperation = (props) => {
                 },
               ]}
             >
-              <Radio.Group>
-                <Radio value={"Hotel"}>Hotel</Radio>
-                <Radio value={"Apartment"}>Apartment</Radio>
-                <Radio value={"Villa"}>Villa</Radio>
-                <Radio value={"Hostel"}>Hostel</Radio>
-              </Radio.Group>
+              <Radio.Group>{tipoStrutture.map(renderRadio)}</Radio.Group>
             </Form.Item>
           </Row>
 

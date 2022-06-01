@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from "react";
-
-// modules
+// module
 import { Helmet } from "react-helmet";
-import { useNavigate, useParams } from "react-router-dom";
+
+
+
+//rrd
+import { useNavigate } from "react-router-dom";
 import { routes, routesDetails } from '../../../routes/routes'
-import { useTranslation } from "react-i18next";
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 //css
 import "./DetailsProp.scss";
+// REACT LEAFLET
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+
+
+//hooks
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 //api
 import { strutturaDetailIdGetApi } from "../../../services/api/struttura/strutturaApi";
-// import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
-import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annuncioApi";
-import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 
-// assets
+//icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+// import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
 
-// utils
-import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
+//util
+import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annuncioApi";
 
 //components
 // import Service from '../../../components/frontEnd/services/Service';
@@ -31,8 +37,10 @@ import Modal from '../../../components/common/modal/Modal';
 // import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
+import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
+import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
-import Like from "../../../components/frontEnd/hookComponents/like/Like";
+import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
 
 let checkOutArray = []
 let arrayToCheckout = []
@@ -62,12 +70,13 @@ const DetailsProp = () => {
          const properties = await strutturaDetailIdGetApi(id)
          const rooms = await annuncioOnStrutturaGetApi(id)
          const review = await reviewsOnStrutturaIdGetApi(id)
-         // console.log(properties, 'stazmne', rooms, review)
+         const services = await serviceStruttureIdGetApi(id)
          setState({
             ...state,
             property: properties?.data,
             roomsList: rooms?.data.list,
             reviewsList: review?.data,
+            serviceList: services?.data,
             isLoading: false
          })
          // console.log(state)
@@ -94,6 +103,7 @@ const DetailsProp = () => {
    }
 
    const addToCheckOut = (temp_id, isSelected, obj) => {
+      console.log('qua', obj)
       isSelected ? checkOutArray[temp_id] = {
          ...obj,
          price: obj.price * obj.count,
@@ -112,9 +122,7 @@ const DetailsProp = () => {
       arrayToCheckout = checkOutArray.filter((element) => {
          return element !== undefined;
       })
-
    }
-
    const goToCheckout = () => {
       setLocalStorage('checkout', {
          property: state.property,
@@ -134,17 +142,19 @@ const DetailsProp = () => {
    }
 
    const generateRooms = (item, key) => {
-      let isStored = null
-      isStored = state.storageRooms?.checkOut.find(room => room.id === key);
+
+      const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
+      console.log('item', item)
       return <Rooms
-         callbackGoToRoom={goToSelectedRoom(item?.id)}
+         callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
          stored={isStored}
          key={key}
-         numberOfPeople={4} //da modificare
-         title={item?.titolo}
-         price={item?.prezzo}
-         count={item?.count}
+         numberOfPeople={item?.annuncio.numPostiLetto}
+         title={item?.annuncio.titolo}
+         price={item?.annuncio.prezzo}
+         count={item?.annuncio.count}
          temp_id={key}
+         services={item?.servizi.length > 0 ? item.servizi : state.serviceList}
          callback={addToCheckOut}
       />
    }
@@ -165,7 +175,7 @@ const DetailsProp = () => {
          <Helmet>
             <title>{t("fe.screens.propertyDetails.details")}</title>
          </Helmet>
-         {state.isLoading && <h1>Caricamento...</h1>}
+         {state.isLoading && <h1>{t('common.loading')}</h1>}
          {!state.isLoading &&
             <div>
                <Modal
@@ -208,12 +218,11 @@ const DetailsProp = () => {
                            <h2>{state.property?.nome_struttura}</h2>
                            <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
                            <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
-                           <Like id={id} propertyName={state.property?.nome_struttura} />
                         </div>
                         <div className="description_container">
                            <h3>{t("common.description")}</h3>
                            <p>{state.property?.descrizione}</p>
-                           <span className="checkout_in_date">{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+                           <span className="checkout_in_date">{`${t('common.checkIn')}: ${state.property?.checkin} - ${t('common.checkOut')}: ${state.property?.checkout}`}</span>
                         </div>
                      </div>
 
@@ -224,7 +233,7 @@ const DetailsProp = () => {
                      <div className="total_price_container">
                         <div className="container_price">
                            <p>
-                              {t('fe.screens.checkout.total')} {t('common.currency', { price: state.checkOutPrice })}
+                              {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state.checkOutPrice })}
                            </p>
                            <UiButton
                               className="button_price"
