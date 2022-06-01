@@ -1,52 +1,52 @@
 @import "../../../assets/variables/globalVariables.scss";
 
-.property_room_container{
+.announce_room_container{
     min-height: 85vh;
     background-color:$black_primary;
     color: $white_primary;
-    .container_img{
-        position: relative;
-        display: flex;
-        height: 50vh;
-        .announce_img_property.first{
-            height: 100%;
-        }
-        .go_back_btn{
+    h2,h3{
+        color: $white_primary;
+    }
+    h2{
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+        .back-button{
             position: absolute;
             top: 1rem;
             left: 1rem;
             color: black;
         }
-    
+    .padding_page{
+        padding: 2rem;
+        .price_checkout_in_date{
+            margin-bottom: 2rem;
+        }
+        .description_container_room{
+            margin-bottom: 3rem;
+        }
+        .number_people{
+            margin-left: .5rem;
+        }
+        .contact-host{
+            text-align: center;
+            margin-top: 4rem;
+            button{
+                cursor: pointer;
+                background-color: $primary;
+                border-style: none;
+                padding: .5rem 1rem;
+                border-radius: .5rem;
+                font-weight: bold;
+            }
+        }
     }
-    .img_container_secondary{
-        display: flex;
-        flex-wrap: wrap;
-        width: 50%;
-        height: 100%;
-    }
-    .announce_img_property {
-        width: 50%;
-        height: 50%;
-        object-fit: cover;
-        padding: .3rem;
-        border-radius: 1rem;
-    }
-    .announce_img_property_default {
-        width: 100%;
-        object-fit: cover;
-    }
+   
 }
 
 @media all and (max-width:992px) {
-    .property_room_container{
-        .announce_img_property {
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-            padding: 0;
-            border-radius: 0;
-        }
+    .announce_room_container{
+        
     }
     
 }
