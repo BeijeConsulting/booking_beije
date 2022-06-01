@@ -118,7 +118,7 @@ const MessageList = (props) => {
                 <CardList
                     {...paginationProps}
                 >
-                    {state.listOfMessage.map(renderMessages)}
+                    {state.listOfMessage.length < 0 ? <p>Non ci sono messagi...</p> : state.listOfMessage.map(renderMessages)}
                 </CardList>
             </div>
         </div>
