@@ -74,14 +74,6 @@ const MessageList = (props) => {
         });
     };
 
-    // const goToChatWithAdmin = async () => {
-    //     const HEADER = getLocalStorage("token");
-    //     let responseMessageAdmin = await messageGetAdmin(HEADER);
-    //     console.log(responseMessageAdmin)
-    // }
-
-    // RESERVATION NUMBER ?????????
-
     const renderMessages = (message, key) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
@@ -109,7 +101,6 @@ const MessageList = (props) => {
                     <HorizontalCard
                         title="Admin"
                         upperRightContent={'icon'}
-                    // callback={goToChatWithAdmin()}
                     />
                 </div> : ''
             }
@@ -118,7 +109,7 @@ const MessageList = (props) => {
                 <CardList
                     {...paginationProps}
                 >
-                    {state.listOfMessage.map(renderMessages)}
+                    {state.listOfMessage.length < 0 ? <p>Non ci sono messagi...</p> : state.listOfMessage.map(renderMessages)}
                 </CardList>
             </div>
         </div>

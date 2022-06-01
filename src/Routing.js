@@ -162,9 +162,7 @@ function Routing(props) {
 
             {/* all the routes for backOffice go inside this one */}
             <Route path={routes.DASHBOARD} element={
-                <ProtectedRouteHost>
-                    <LayoutBackOffice />
-                </ProtectedRouteHost>
+                <LayoutBackOffice />
             } >
                 <Route path={routes.HOST_ACCOUNT} element={
                     <ProtectedRouteHost>
@@ -202,9 +200,7 @@ function Routing(props) {
                     </ProtectedRouteHost>
                 } />
                 <Route path={routes.HOST_REGISTRATION} element={
-                    <ProtectedRouteHost>
-                        <HostRegistration />
-                    </ProtectedRouteHost>
+                    <HostRegistration />
                 } />
                 <Route path={routes.RESERVATION_LIST} element={
                     <ProtectedRouteHost>
