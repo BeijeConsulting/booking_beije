@@ -16,11 +16,11 @@ function Rooms(props) {
    })
 
    useEffect(() => {
-      props.callback(props.temp_id, state.selected, {
-         price: props.price,
-         title: props.title,
-         id: props.temp_id,
-         count: props.stored !== undefined ? props.stored.count : state.selectValue
+      props.callback(props?.temp_id, state?.selected, {
+         price: props?.price,
+         title: props?.title,
+         id: props?.temp_id,
+         count: props?.stored !== undefined ? props?.stored?.count : state?.selectValue
       })
    }, [state.selected])
 
@@ -36,7 +36,7 @@ function Rooms(props) {
    /* Generate a N number of User icon, where N is the number passed by props.numberOfPeople */
    const generatePeopleIcon = () => {
       let userIcon = [];
-      for (let index = 0; index < (props.numberOfPeople > 5 ? 5 : props.numberOfPeople); index++) {
+      for (let index = 0; index < (props?.numberOfPeople > 5 ? 5 : props?.numberOfPeople); index++) {
          userIcon.push(<span key={index}>
             <FontAwesomeIcon icon={faUser} />
          </span>);
@@ -45,14 +45,14 @@ function Rooms(props) {
    }
    const generateMaxRooms = () => {
       let arrayData = []
-      for (let index = 1; index <= props.count; index++) {
+      for (let index = 1; index <= props?.count; index++) {
          arrayData.push(index)
       }
       return arrayData;
    }
 
    const handleNumberOfRooms = (e) => {
-      state.selectValue = e;
+      state?.selectValue = e;
    }
 
 
@@ -66,12 +66,12 @@ function Rooms(props) {
    return (
       <div className='rooms_card_container'>
          <div className='title_info'>
-            <h2>{props.title}</h2>
+            <h2>{props?.title}</h2>
             <FontAwesomeIcon onClick={goToRoom} className="info_icon" icon={faInfoCircle} />
          </div>
          <div className='description_container'>
             <div className='number_people_container'>
-               <div className='people_container'>{generatePeopleIcon()}<span> {t("fe.components.rooms.people", { count: props.numberOfPeople })}</span></div>
+               <div className='people_container'>{generatePeopleIcon()}<span> {t("fe.components.rooms.people", { count: props?.numberOfPeople })}</span></div>
             </div>
             <div className='services_price_container'>
                <div>
@@ -84,9 +84,9 @@ function Rooms(props) {
                   }
                </div>
                <div className='price_container'>
-                  <p>{t("fe.components.rooms.priceForNumberOfNights", { count: props.numberOfNights })}</p>
+                  <p>{t("fe.components.rooms.priceForNumberOfNights", { count: props?.numberOfNights })}</p>
                   <p className="price_room">
-                     {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: props.price })}
+                     {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: props?.price })}
                   </p>
                </div>
             </div>
@@ -95,16 +95,16 @@ function Rooms(props) {
          <div className='ui_components_container'>
             <UiButton
                className="button_room"
-               label={(state.selected === true ? 'checked' : '') + ' ' + 'selected'}
+               label={(state?.selected === true ? 'checked' : '') + ' ' + 'selected'}
                callback={selectedButton}
 
             />
             <UiSelect
                cssClass="select_on_roomCard"
-               selected={state.selected}
+               selected={state?.selected}
                data={generateMaxRooms()}
                callback={handleNumberOfRooms}
-               storedNOfRooms={props.stored?.count}
+               storedNOfRooms={props?.stored?.count}
             />
 
          </div>
