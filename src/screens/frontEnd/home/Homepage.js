@@ -52,7 +52,7 @@ const Homepage = () => {
                </div>
                <h3> Non sai dove andare? </h3>
                <div onClick={handleNavigation(`/${routes.MRA}`)} className="suggested-container relative fsXXL">
-                  <h3 className="title_suggested">{t("common.suggestedApartaments")}</h3>
+                  <h3 className="title_suggested">{t("common.suggestedApartments")}</h3>
                </div>
             </div>
          </div>

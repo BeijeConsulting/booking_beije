@@ -37,10 +37,10 @@ import { annuncioOnStrutturaGetApi } from "../../../services/api/annuncio/annunc
 import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
 import Rooms from '../../../components/frontEnd/funcComponents/rooms/Rooms';
 import Modal from '../../../components/common/modal/Modal';
-import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
+// import ContactHost from "../../../components/frontEnd/classComponents/pageComponents/modalChildrenComponent/contactHost/ContactHost";
 import DetailsPropRoom from "./DetailsPropRoom";
 import UiButton from "../../../components/frontEnd/funcComponents/ui/buttons/uiButtons/UiButton";
-import { getLocalStorage, setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
+import { setLocalStorage, getLocalStorageCheckout } from "../../../utils/localStorage/localStorage";
 import { reviewsOnStrutturaIdGetApi } from "../../../services/api/recensioni/recensioniApi";
 import ReviewCard from "../../../components/frontEnd/funcComponents/reviewCards/ReviewCard";
 import { serviceStruttureIdGetApi } from "../../../services/api/lista/listaServizio/listaServizioApi";
@@ -82,6 +82,7 @@ const DetailsProp = () => {
         serviceList: services?.data,
         isLoading: false
       })
+      // console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
@@ -145,6 +146,7 @@ const DetailsProp = () => {
   const generateRooms = (item, key) => {
 
     const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
+
     return <Rooms
       callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
       stored={isStored}
@@ -174,13 +176,12 @@ const DetailsProp = () => {
       <img key={key} className="img_carousel" src={img?.urlImage} alt="img_struttura" />
     )
   }
-
   return (
     <>
       <Helmet>
         <title>{t("fe.screens.propertyDetails.details")}</title>
       </Helmet>
-      {state.isLoading && <h1>Caricamento...</h1>}
+      {state.isLoading && <h1>{t('common.loading')}</h1>}
       {!state.isLoading &&
         <div>
           <Modal
@@ -199,49 +200,36 @@ const DetailsProp = () => {
             <DetailsPropRoom />
           </Modal>
 
+
           {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
             {
               state.windowWidth < 992 &&
-              <>
-                <div className="back-button goBackProperty"><GoBackButton /></div>
-                {state?.property?.images?.length > 0 ?
-                  <>
-                    <Carousel autoplay>
-                      {state?.property?.images.map(renderImage)}
-                    </Carousel>
-                  </> :
-                  <img className="img_carousel" src={defaultImg} alt="img_struttura" />
-                }
-              </>
 
+              <div className="back-button goBackProperty"><GoBackButton /></div>
             }
-            {
-              state.windowWidth > 992 &&
+
+            {state?.property?.images?.length > 0 ?
               <>
-                {state?.property?.images?.length > 0 ?
-                  <>
-                    <Carousel autoplay>
-                      {state?.property?.images.map(renderImage)}
-                    </Carousel>
-                  </> :
-                  <img className="img_carousel" src={defaultImg} alt="img_struttura" />
-                }
-
-              </>
-
-
+                <Carousel autoplay>
+                  {state?.property?.images.map(renderImage)}
+                </Carousel>
+              </> :
+              <img className="img_carousel" src={defaultImg} alt="img_struttura" />
             }
+
+
+
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
                   <h2>{state.property?.nome_struttura}</h2>
-                  <span>{`${state.property?.indirizzo?.citta}, Via ${state.property?.indirizzo?.via}`}</span>
+                  <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
                 <div className="description_container">
                   <h3>{t("common.description")}</h3>
                   <p>{state.property?.descrizione}</p>
-                  <span className="checkout_in_date">{`CheckIn: ${state.property?.checkin} - CheckOut: ${state.property?.checkout}`}</span>
+                  <span className="checkout_in_date">{`${t('common.checkIn')}: ${state.property?.checkin} - ${t('common.checkOut')}: ${state.property?.checkout}`}</span>
                 </div>
               </div>
 
@@ -251,7 +239,9 @@ const DetailsProp = () => {
               </div>
               <div className="total_price_container">
                 <div className="container_price">
-                  <p>Total {state.checkOutPrice}&euro;</p>
+                  <p>
+                    {t('fe.screens.checkout.total')} {t('common.currencyTwoFractionDigits', { price: state.checkOutPrice })}
+                  </p>
                   <UiButton
                     className="button_price"
                     callback={goToCheckout}
@@ -260,8 +250,8 @@ const DetailsProp = () => {
                 </div>
               </div>
               <div className="map_container">
-                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]} zoom={13} scrollWheelZoom={true}>
-                  <Marker position={[state?.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]}></Marker>
+                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
+                  <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
