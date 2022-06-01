@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom'
 
-//PROP-TYPES
-import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux'
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

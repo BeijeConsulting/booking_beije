@@ -3,10 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../../routes/routes";
 
-import { eventBus } from "../../../../eventBus/eventBus";
-
 //ANT Design
-import { Menu, Button } from "antd";
+import { Menu } from "antd";
 
 //TRANSLATION
 import { useTranslation } from "react-i18next";
