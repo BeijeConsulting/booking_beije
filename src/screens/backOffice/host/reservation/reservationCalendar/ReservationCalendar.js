@@ -6,9 +6,6 @@ import React, { useState } from 'react'
 //STYLE
 import './ReservationCalendar.scss'
 
-//Transition
-import { useTranslation } from 'react-i18next'
-
 import { arrColor } from '../../../../../utils/color/color'
 
 //FULLCALENDAR
