@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
 // import { eventBus } from "../../eventBus/eventBus";
 
 import "./LayoutBackOffice.scss";
@@ -31,6 +33,8 @@ const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
   const [state, setState] = useState({ collapsed: false });
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
