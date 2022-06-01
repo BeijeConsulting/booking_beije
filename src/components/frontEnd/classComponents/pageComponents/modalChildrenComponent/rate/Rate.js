@@ -68,7 +68,7 @@ class Rate extends Component {
          title: "",
          message: "",
          rate: 0,
-         propertyId: props?.struttura_id 
+         propertyId: props?.struttura_id
       }
       this.map = [1, 2, 3, 4, 5];
    }
@@ -89,7 +89,7 @@ class Rate extends Component {
    handleChange = (params) => (e) => {
       this.rating[params] = e;
       let newState = Object.assign({}, this.state);
-      if ((this.rating.title && this.rating.message) !== ''){
+      if ((this.rating.title && this.rating.message) !== '') {
          newState.isDisable = false;
       } else {
          newState.isDisable = true;
@@ -120,13 +120,11 @@ class Rate extends Component {
                      <h3>{this.state.property.nome_struttura}</h3>
                      <small>{`${this.state.property.indirizzo.citta}, ${this.state.property.indirizzo.stato}`}</small>
                      <small>{this.props.t('common.extendedDate', { value: this.state.property.checkin })} - {this.props.t('common.extendedDate', { value: this.state.property.checkout })} </small>
-                     {this.state.property.numero_recensioni > 0 &&
-                        <small>
-                           <FontAwesomeIcon icon={faStar} />
-                           {this.state.property.media_recensioni}
-                           ({this.state.property.numero_recensioni})
-                        </small>
-                     }
+                     <small>
+                        <FontAwesomeIcon icon={faStar} />
+                        {this.state.property.media_recensioni}
+                        ({this.state.property.numero_recensioni})
+                     </small>
                   </div>
 
                   <div>

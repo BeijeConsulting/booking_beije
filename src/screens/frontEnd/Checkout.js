@@ -10,11 +10,12 @@ import { Helmet } from "react-helmet";
 //COMPONENTS
 // import LoginForm from '../../components/frontEnd/hookComponents/loginForm/LoginForm'
 import GoBackButton from "../../components/backOffice/hookComponents/goBackButton/GoBackButton";
-import { getLocalStorage, getLocalStorageCheckout, removeLocalStorage } from "../../utils/localStorage/localStorage";
+import { getLocalStorageCheckout, removeLocalStorage } from "../../utils/localStorage/localStorage";
 import PropertyCard from "../../components/frontEnd/classComponents/ui/propertyCard/PropertyCard";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-
+   const navigate = useNavigate();
    let tot = 0
 
    const { t } = useTranslation();
@@ -39,18 +40,18 @@ const Checkout = () => {
    }
 
    const goToPayment = () => {
-
-   }
-   const goToLogin = () => {
+      alert(t('fe.screens.checkout.paymentSuccessful'))
       removeLocalStorage('checkout')
+      navigate("/")
    }
+
 
    function renderCheckoutList(item, key) {
       tot += item.price
       return (
          <div key={key} className="detail-info">
             <p>{`${item.title} n:${item.count}`}</p>
-            <p>{item.price}&euro;</p>
+            <p>{t('common.currencyTwoFractionDigits', { price: item.price })}</p>
          </div>
       )
    }
@@ -58,7 +59,7 @@ const Checkout = () => {
    return (
       <>
          <Helmet>
-            <title>Checkout</title>
+            <title>{t('fe.screens.checkout.checkoutPageTitle')}</title>
          </Helmet>
 
          <div className="checkout-container">
@@ -67,7 +68,7 @@ const Checkout = () => {
                <div className="back-button"><GoBackButton /></div>
             }
 
-            <h1 className="title_checkout_container">Checkout</h1>
+            <h1 className="title_checkout_container">{t('fe.screens.checkout.checkoutPageTitle')}</h1>
 
             <div className="structure-info-container">
                <PropertyCard
@@ -101,7 +102,7 @@ const Checkout = () => {
                </div>
             </div>
             <div className="button_container">
-               {getLocalStorage('token') !== null ? <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button> : <button className="button_on" onClick={goToLogin}>{t("common.loginLabel")}</button>}
+               <button className="button_on" onClick={goToPayment}>{t("fe.screens.checkout.confirmPayment")}</button>
             </div>
          </div>
       </>

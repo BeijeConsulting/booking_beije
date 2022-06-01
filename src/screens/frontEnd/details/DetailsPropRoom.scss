@@ -1,0 +1,52 @@
+@import "../../../assets/variables/globalVariables.scss";
+
+.property_room_container{
+    min-height: 85vh;
+    background-color:$black_primary;
+    color: $white_primary;
+    .container_img{
+        position: relative;
+        display: flex;
+        height: 50vh;
+        .announce_img_property.first{
+            height: 100%;
+        }
+        .go_back_btn{
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: black;
+        }
+    
+    }
+    .img_container_secondary{
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        height: 100%;
+    }
+    .announce_img_property {
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+        padding: .3rem;
+        border-radius: 1rem;
+    }
+    .announce_img_property_default {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+@media all and (max-width:992px) {
+    .property_room_container{
+        .announce_img_property {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            padding: 0;
+            border-radius: 0;
+        }
+    }
+    
+}

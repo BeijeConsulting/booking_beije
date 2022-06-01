@@ -15,9 +15,16 @@
     margin-bottom: 30px;
     margin-top: 20px;
 
-    .structure_img {
+    .ant-carousel {
         width: 40%;
         margin-right: 2rem;
+        background-color: var.$secondary_lighter;
+
+        .carousel_img {
+            width: 100%;
+            object-fit: contain;
+            aspect-ratio: 1/1;
+        }
     }
 
     .structure_information {
@@ -26,16 +33,33 @@
 
 }
 
-.trash_announce_btn {
+.ant-modal-content {
+    .ant-input-number {
+        border: 1px solid var.$black_primary_lighter;
+    }
+
+    .ant-input-number-input {
+        background-color: transparent;
+        color: initial;
+    }
+
+}
+
+.action_btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
 
     transition: color .5s;
 
-    &:hover {
-        color: var.$error_color
-    }
+}
+
+.edit_btn:hover {
+    color: var.$white_primary
+}
+
+.trash_btn:hover {
+    color: var.$error_color
 }
 
 .announce_count {
@@ -43,22 +67,17 @@
     font-size: var.$fs-2;
 }
 
-//modal
-.announce_modal {
-    width: 200px;
-    height: 100px;
-}
 
 @media screen and (max-width: 768px) {
     .structure_details_container {
         flex-direction: column;
 
-        .structure_img {
+        .ant-carousel {
             margin-right: 0;
         }
 
         .structure_information,
-        .structure_img {
+        .ant-carousel {
             width: 100%;
         }
 

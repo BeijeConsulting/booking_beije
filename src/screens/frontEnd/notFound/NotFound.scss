@@ -1,0 +1,19 @@
+@import "../../../assets/variables/globalVariables.scss";
+
+.not-found-page {
+   min-height: 100vh;
+   color: $white_primary;
+   background-color: $black_primary;
+   padding: 5vh 5vw;
+   align-items: flex-start;
+
+   h1 {
+      color: $white_primary;
+      margin: 2rem 0 1rem;
+   }
+
+   .button_go_back {
+      color: $white_primary;
+      padding-left: 0;
+   }
+}

@@ -1,7 +1,7 @@
 /**
  * Check if the mail is valid
  * @param {string} mail 
- * @returns {boolean} true if mail pass the regex test (domain and provider given)
+ * @returns {boolean} true if mail passes the regex test (domain and provider given)
  */
 function checkMail(mail) {
   const reMail =
@@ -12,7 +12,7 @@ function checkMail(mail) {
 /**
  * Check if the password is valid
  * @param {string} password 
- * @returns {boolean} true if password pass the regex test (8 char and 1 special char)
+ * @returns {boolean} true if password passes the regex test (8 chars, 1 capital letter and 1 symbol)
  */
 function checkPassword(password) {
     const rePassword = /^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!^&+=]).*$/;

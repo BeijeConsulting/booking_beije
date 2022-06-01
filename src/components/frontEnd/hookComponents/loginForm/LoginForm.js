@@ -101,6 +101,8 @@ function LoginForm(props) {
 
    const response = res => {
       openNotification(t('toasts.formSuccess'), 'ok', 'info-toast');
+      localStorage.setItem("permission", res.data.permission[1])
+      localStorage.setItem("idUtente", res.data.id);
       setLocalStorage("token", res.data.token);
       setLocalStorage("refreshToken", res.data.refreshToken);
       props.dispatch(setToken(res.data.token));

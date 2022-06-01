@@ -74,7 +74,7 @@ ChoiceButton.propTypes = {
     thirdButtonName: PropTypes.string,
     callbackFirstButton: PropTypes.func.isRequired,
     callbackSecondButton: PropTypes.func.isRequired,
-    callbackThirdButton: PropTypes.func.isRequired
+    callbackThirdButton: PropTypes.func
 
 }
 

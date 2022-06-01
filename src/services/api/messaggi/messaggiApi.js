@@ -40,8 +40,18 @@ const messageDeleteApi = async (id, header) => {
 const messageListHostGetApi = async (page = 1, itemsPerPage = 5, header) => {
     return await getApi(`messages/chat?page=${page}&itemsPerPage=${itemsPerPage}`, header);
 }
+/* AUTH:HOST */
 const messageChatHostGetApi = async (id, header) => {
     return await getApi(`messages/chat/${id}`, header);
+}
+/* AUTH:HOST */
+const messageSendForGuestApi = async (obj, header) => {
+    return await postApi(`message`, obj, header);
+}
+
+/* AUTH:HOST */
+const messageGetAdmin = async (header) => {
+    return await getApi(`messages`, header);
 }
 
 export {
@@ -52,5 +62,7 @@ export {
     messageRelativeAnnuncioGetApi,
     messageDeleteApi,
     messageListHostGetApi,
-    messageChatHostGetApi
+    messageChatHostGetApi,
+    messageSendForGuestApi,
+    messageGetAdmin
 }
