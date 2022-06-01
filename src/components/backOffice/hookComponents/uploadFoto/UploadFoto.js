@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./UploadFoto.less";
+import "./UploadFoto.scss";
 
 //ANT DESIGN
 import { Upload, Modal } from "antd";
@@ -13,37 +13,18 @@ const UploadFoto = (props) => {
 
   const { addFotoStructure } = props;
 
+// console.log(props);
+
   const [state, setState] = useState({
     previewVisible: false,
     previewImage: "",
     previewTitle: "",
-    fileList: [],
-    // fileList: [
-    //     {
-    //         uid: '-1',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-2',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-3',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     },
-    //     {
-    //         uid: '-4',
-    //         name: 'image.png',
-    //         status: 'done',
-    //         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //     }
-    // ]
+    fileList: props.lista_immagini.length===0 ? [] : props.lista_immagini.map((img, index) => {return {
+      uid: img.uid,
+      imgName: `${index}`,
+      url: img.urlImage,
+      status: 'done'
+    }}),
   });
 
   function getBase64(file) {
@@ -81,7 +62,7 @@ const UploadFoto = (props) => {
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>{t("bo.components.uploadFoto.upload")}</div>
+      <div style={{ marginTop: 8 }}>{t("bo.components.uploadPhoto.upload")}</div>
     </div>
   );
 
@@ -99,6 +80,7 @@ const UploadFoto = (props) => {
           onPreview={handlePreview}
           onChange={handleChange}
           beforeUpload={blockAutoPostPhoto}
+          name="photos"
         >
           {fileList.length < 5 && (
             <div className="upload_foto_struture">{uploadButton}</div>

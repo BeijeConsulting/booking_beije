@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLocalStorage } from "../utils/localStorage/localStorage";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage/localStorage";
 
 import { BASEURL, TIMEOUT } from "./config";
 import { updateAuthTokenPostApi } from "./api/auth/authApi";
@@ -10,29 +10,47 @@ const axiosInstance = axios.create({
   timeout: TIMEOUT,
 });
 
+// axiosInstance.interceptors.request.use(
+//   config => {
+//     const token = getLocalStorage("token");
+//     if (token) {
+//       config.headers['Authorization'] = 'Bearer ' + token;
+//     }
+//     return config;
+//   },
+//   error => {
+//     Promise.reject(error)
+//   }
+// );
+
 axiosInstance.interceptors.response.use(function (response) {
   // Any status code that lie within the range of 2xx cause this function to trigger
   // Do something with response data
   return response;
-}, async function (error) {
-  const originalConfig = error.config;
+}, function (error) {
+  const originalRequest = error.config;
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
-  if (error.response.status === 401 && !originalConfig._retry) {
-    originalConfig._retry = true
-    console.log("sono qui");
-    //qui chiamata updateAuthToken
-    /* Token valido fino alle 11,00 del 19/05/2022 */
-    const res = await updateAuthTokenPostApi({
-      refreshToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNvbGFmYXN1bGxpQGdtYWlsLmNvbSIsImV4cCI6MTY1MzAzMjU4OH0.eC_Spoljj7gDID4Q3LKOUpbojHAQW7fW5o9e-CHDPsI"
-      // refreshToken: getLocalStorage('refreshToken')
-    });
-    console.log("res", res)
-    const { token } = res.data;
-
-
-    setLocalStorage('token', token);
+  if (error.response.status === 401 &&
+    originalRequest.url === `${BASEURL}/updateAuthToken`) {
+    return Promise.reject(error);
   }
+
+  if (error.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true
+
+    //api call updateAuthToken
+    if (localStorage.getItem('refreshToken') !== null) {
+
+      updateAuthTokenPostApi().then(res => {
+        const { token, refreshToken } = res.data;
+        setLocalStorage('token', token);
+        setLocalStorage('refreshToken', refreshToken);
+        axios.defaults.headers.common['Authorization'] = 'Bearer' + getLocalStorage("token");
+      });
+    }
+  }
+
   return Promise.reject(error);
 });
 
@@ -52,13 +70,23 @@ export function responseApiError(error) {
 export async function postApi(resource, obj, header = null) {
   return axiosInstance
     .post(resource, obj, {
-      headers: header !== null ? `"Authorization": Bearer ${header}` : "",
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
     })
     .then(responseApi())
     .catch(responseApiError());
 }
 
 export async function getApi(resource, header = null) {
+  //function for get api call
+  return axiosInstance
+    .get(resource, {
+      headers: header !== null ? { Authorization: `Bearer ${header}` } : "",
+    })
+    .then(responseApi())
+    .catch(responseApiError());
+}
+
+export async function getSearchApi(resource, body, header = null) {
   //function for get api call
   return axiosInstance
     .get(resource, {

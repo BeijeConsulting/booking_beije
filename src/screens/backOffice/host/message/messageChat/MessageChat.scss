@@ -1,0 +1,55 @@
+@use '../../../../../assets/variables/globalVariables.scss' as var;
+
+.container_chat {
+    margin: 0 auto;
+    padding: 25px 55px 25px 55px;
+    width: 95%;
+    height: 93vh;
+    background-color: var.$white_primary;
+    border-radius: 10px;
+
+    .title_messages_page {
+        font-weight: bold;
+        font-size: var.$fs-1;
+    }
+
+    .button_go_back {
+        font-size: var.$fs-1;
+        font-weight: bold;
+        margin: 10px 0 30px 0;
+        cursor: pointer;
+    }
+
+    .message_overflow {
+        border-radius: 10px;
+        height: 75%;
+        overflow: auto;
+    }
+
+    .send_message_input {
+        margin-top: 15px;
+        border-radius: 10px 0 0 10px;
+        width: 94%;
+    }
+
+    .button_send_message {
+        margin-top: 15px;
+        border-radius: 0 10px 10px 0;
+        height: 41px;
+    }
+
+    .icon_input_message {
+        color: var.$black_primary_light;
+        padding: 5px 10px 5px 5px;
+    }
+}
+
+@media screen and (max-width: 439px) {
+    .container_chat {
+        padding: 10px 20px 10px 20px;
+
+        .send_message_input {
+            width: 81%;
+        }
+    }
+}

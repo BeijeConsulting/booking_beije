@@ -1,12 +1,11 @@
 import React from 'react'
-import './Service.less'
+import './Service.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index'
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 import { faGear } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types';
 import { servicesToIcons } from '../../../utils/serviceIdToFAIcon/servicesToIcons';
 
-const { t } = useTranslation();
 
 function Service(props) {
     return (
@@ -21,7 +20,7 @@ function Service(props) {
 
 Service.defaultProps = {
     icon: faGear,
-    iconName: t("fe.components.service.service")
+    iconName: t("common.service")
 }
 Service.propTypes = {
     serviceId: PropTypes.number.isRequired,

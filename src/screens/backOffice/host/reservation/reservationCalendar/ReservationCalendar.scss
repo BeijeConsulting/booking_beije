@@ -1,0 +1,31 @@
+@use '../../../../../assets/variables/globalVariables.scss' as var;
+
+.container_calendar {
+    width: 90%;
+    height: 70vh;
+    margin: 0 auto;
+
+    .filter_button_container {
+        display: flex;
+        justify-content: flex-end;
+        margin: 15px 0 15px 0;
+    }
+}
+
+.fc-event-title {
+    color: var.$white_primary;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.background_event .fc-event-main {
+    height: 35px;
+}
+
+.fc-daygrid-day-number {
+    color: var.$white_primary;
+}
+
+.fc-col-header-cell-cushion {
+    color: var.$white_primary;
+}

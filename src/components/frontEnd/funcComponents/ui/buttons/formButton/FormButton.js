@@ -1,5 +1,5 @@
 import React from 'react'
-import './FormButton.less'
+import './FormButton.scss'
 import PropTypes from 'prop-types';
 
 
@@ -17,13 +17,15 @@ function FormButton(props) {
          placeholder={props.label}
          value={props.label}
          type="submit"
+         disabled={props.disabled}
       />
    )
 }
 
 FormButton.defaultProps = {
    className: '',
-   placeholder: 'Press me!'
+   placeholder: 'Press me!',
+   disabled: false
 }
 
 FormButton.propTypes = {

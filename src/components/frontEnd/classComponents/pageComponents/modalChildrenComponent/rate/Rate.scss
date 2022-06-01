@@ -1,0 +1,43 @@
+@import '../../../../../../assets/variables/globalVariables.scss';
+
+.rateContainer {
+
+   div:first-child {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      div:first-child {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+
+      input[type="submit"] {
+         width: auto;
+      }
+
+      input[type="submit"]:hover {
+         cursor: pointer;
+      }
+
+      .fa-star:hover {
+         opacity: 0.7;
+         cursor: pointer;
+      }
+
+   }
+
+   .rateImg {
+      max-width: 2rem;
+      max-height: 2rem;
+   }
+
+   form > * {
+      margin: 0.5rem 0;
+   }
+
+   textarea, input[type="text"] {
+      color: $black_primary;
+   }
+}

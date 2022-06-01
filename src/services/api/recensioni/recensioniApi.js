@@ -7,6 +7,10 @@ const reviewsGetApi = async () => {
     return await getApi(`reviews`);
 }
 
+const reviewsOnStrutturaIdGetApi = async (id) => {
+    return await getApi(`/reviews-by-struttura/${id}`);
+}
+
 /* AUTH:USER */
 const reviewIdGetApi = async (id, header) => {
     return await getApi(`review/${id}`, header);
@@ -28,5 +32,5 @@ const reviewDeleteApi = async (id, header) => {
 }
 
 export {
-    reviewsGetApi, reviewIdGetApi, reviewPostApi, reviewIdModifyPutApi, reviewDeleteApi
+    reviewsGetApi, reviewsOnStrutturaIdGetApi, reviewIdGetApi, reviewPostApi, reviewIdModifyPutApi, reviewDeleteApi
 }

@@ -1,0 +1,113 @@
+@import "../../../../assets/variables/globalVariables.scss";
+.singleConversation-page {
+    background-color: $black_primary;
+    height: 75vh;
+    min-height: 90vh;
+    padding: 0 1rem 1rem;
+    color: $white_primary;
+    width: 100%;
+
+
+    .title {
+        color: $white_primary;
+        margin-bottom: 2rem;
+    }
+    .container_messages{
+        height: 80vh;
+    }
+    .conversation {
+        color: $black_primary;
+        padding: .5rem .8rem;
+        margin: 1rem 0;
+        border-radius: 1rem;
+        width: 80%;
+
+        .dateTimeMessage {
+            text-align: end;
+            // font-size: x-small;
+            // font-style: italic;
+            font-weight: normal !important;
+        }
+    }
+
+    .conversation.conversation-host {
+        background-color: $white_primary;
+
+        div {
+            font-weight: 1000;
+            margin-bottom: .5rem;
+        }
+
+    }
+
+    .conversation.conversation-guest {
+
+        background-color: $secondary_dark;
+        margin-left: 20%;
+
+        div {
+            text-align: end;
+            font-weight: 1000;
+            margin-bottom: .5rem;
+        }
+    }
+
+    .space-input {
+        // position: fixed;
+        // bottom: 0vh;
+        // left: 0;
+        margin-top: 15px;
+        // width: 100%;
+        height: 10vh;
+        background-color: $black_primary;
+    }
+
+    .send_message_input {
+        border-radius: 10px;
+        // width: 100%;
+        height: 7vh;
+        // padding: 1rem;
+        color: $black_primary;
+    }
+
+}
+
+@media all and (min-width :991px) {
+    .singleConversation-page{
+        height: 100%;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        .container_messages {
+            height: 100%;
+            overflow-y: none;
+            flex-grow: 1;
+        }
+        .space-input {
+            position: unset;
+            margin-top: 15px;
+            width: 100%;
+            height: 10vh;
+            background-color: $black_primary;
+        }
+    }
+}
+@media all and (max-width:480px) {
+    .singleConversation-page{
+        .container_messages{
+            height: 75vh;
+            overflow-y: scroll;
+        }
+
+        .space-input{
+            position: fixed;
+            bottom: 15vh;
+            left: 0;
+            margin-top: 15px;
+            width: 100%;
+            height: 10vh;
+            background-color: $black_primary;
+        }
+    }
+}

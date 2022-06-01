@@ -1,11 +1,12 @@
 import React from 'react'
-import './Logo.less'
-import LogoImage from '../../../../assets/logo.jpg'
-function Logo() {
+import './Logo.scss'
+import LogoImage from '../../../../assets/images/logo.png'
+
+function Logo({callback, imgClass}) {
     return (
-        <picture className='logo_container'>
+        <picture className='logo_container flex jcCenter' onClick={callback} >
             <source media="" srcSet={LogoImage}/>
-            <img src={LogoImage} alt =""/>
+            <img className={`iconIfLogged ofC br50 ${imgClass}`} src={LogoImage} alt =""/>
         </picture>
     )
 }

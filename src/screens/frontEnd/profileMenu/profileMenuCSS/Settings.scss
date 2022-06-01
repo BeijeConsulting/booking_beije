@@ -1,0 +1,52 @@
+@import "../../../../assets/variables/globalVariables.scss";
+.settings_container {
+    // display: flex;
+    min-height: 85vh;
+    // justify-content: space-evenly;
+    // flex-direction: column;
+    // align-items: center;
+    background-color: $black_primary;
+.cont{
+    width: 35%;
+}
+    .title_and_logout_container {
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        // width: 100%;
+
+        h1 {
+            color: white;
+            // margin-left: 8.5rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .settings_card_list_container {
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // flex-direction: column;
+        // width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media all and (max-width:480px){
+    .settings_container{
+        padding-bottom: 19vh;
+    }
+
+}
+@media all and (max-width:1024px){
+    .cont{
+        width: 49% !important;
+    }
+    
+    }
+@media all and (max-width:768px){
+.cont{
+    width: 70% !important;
+}
+
+}

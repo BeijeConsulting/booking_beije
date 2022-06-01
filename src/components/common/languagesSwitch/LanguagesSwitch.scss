@@ -1,0 +1,10 @@
+@import "../../../assets/variables/globalVariables.scss";
+
+.select_language {
+   padding: 0.3rem 1rem;
+   border-radius: 0.4rem;
+   background-color: $primary;
+   color: $white_primary;
+   font-weight: bold;
+   border: 0;
+}

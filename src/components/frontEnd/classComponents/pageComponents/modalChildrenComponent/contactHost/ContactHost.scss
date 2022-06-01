@@ -1,0 +1,43 @@
+@import '../../../../../../assets/variables/globalVariables.scss';
+
+.contact-host-container {
+   background-color: $secondary_lighter;
+   padding: 2rem;
+   border-radius: .5rem;
+   height: 60vh;
+   max-height: 60vh;
+   display: flex;
+   flex-direction: column;
+   .info_receiver{
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      .rateImg{
+         width: 4rem;
+         height: 4rem;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-right: 1rem;
+         border: 1px solid $black_primary;
+      }
+   }
+   form{
+      flex: 1;
+     display: flex;
+     flex-direction: column;
+     textarea{
+        flex: 1;
+        margin-bottom: 1rem;
+        border-radius: .5rem;
+        padding: 1rem;
+     }
+   }
+   
+   // form > * {
+   //    margin: 0.5rem 0;
+   // }
+
+   textarea, input[type="text"] {
+      color: $black_primary;
+   }
+}

@@ -1,0 +1,9 @@
+@import "../../../../assets/variables/globalVariables.scss";
+.chat{
+    background-color: $black_primary;
+    .chatContainer{
+        // display: flex;    
+        height: 80vh;
+        // overflow-y: hidden;
+    }
+}

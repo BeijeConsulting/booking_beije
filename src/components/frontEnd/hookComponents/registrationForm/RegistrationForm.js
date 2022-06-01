@@ -9,6 +9,7 @@ import FormButton from '../../funcComponents/ui/buttons/formButton/FormButton';
 import UiButton from '../../funcComponents/ui/buttons/uiButtons/UiButton';
 import CheckboxInput from '../../funcComponents/ui/input/checkboxInput/CheckboxInput';
 import { notification } from 'antd';
+import Logo from '../../funcComponents/logo/Logo';
 
 // modules
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +18,9 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 // styles
-import './RegistrationForm.less';
+import './RegistrationForm.scss';
+import '../../../../assets/variables/_common.scss';
+import '../../../../assets/commonStyles/toasts.scss';
 
 // utils
 import { checkMail, checkPassword } from '../../../../utils/validationForm/validation';
@@ -26,6 +29,7 @@ import { setLocalStorage } from '../../../../utils/localStorage/localStorage';
 //api
 import { registerUserPostApi } from '../../../../services/api/user/userApi'
 import { signInPostApi } from '../../../../services/api/auth/authApi'
+import { setUser } from '../../../../redux/ducks/userDuck';
 
 
 let formObject = {
@@ -33,7 +37,7 @@ let formObject = {
    surname: '',
    email: '',
    password: '',
-   url_immagine: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
+   url_image: 'https://mpng.subpng.com/20180411/rzw/kisspng-user-profile-computer-icons-user-interface-mystique-5aceb0245aa097.2885333015234949483712.jpg'
    //placeholder
 }
 
@@ -96,13 +100,8 @@ function RegistrationForm(props) {
       !value ? errors[name] = true : errors[name] = false;
    }
 
-
-
-
    const handleSubmit = (e) => {
       e.preventDefault();
-
-
 
       notification.destroy();
       if (formObject.name.length === 0 || formObject.surname.length === 0 || formObject.email.length === 0 || formObject.password.length === 0 || formObject.confirmPassword.length === 0) {
@@ -134,24 +133,14 @@ function RegistrationForm(props) {
             registerUserPostApi(formObject).then(signInPostApi({
                email: formObject.email,
                password: formObject.password
-            }).then(res => {
+            })).then(res => {
                setLocalStorage("token", res.data.token);
                setLocalStorage("refreshToken", res.data.refreshToken);
                props.dispatch(setToken(res.data.token));
-            }));
+               props.dispatch(setUser());
+            });
 
-            
-
-
-
-            // delete formObjectCtrl.confirmPassword;
-            // const response = postApi('user', formObject);
-            // console.log(response);
-
-            // set token in localStorage
-            // redux
-
-            // navigate(routes.HOME);
+            navigate(routes.LAYOUT);
          }
       }
 
@@ -159,27 +148,26 @@ function RegistrationForm(props) {
 
    return (
       <section className="bg-color">
-         <div className="form-container container flex column space">
+         <div className="container flex column px1">
 
-            <div className="flex center column">
-               <div className="w">LOGO</div>
-               {/* <Logo></Logo> */}
+            <div className="flex jcCenter aiCenter column mT1">
+               <Logo imgClass="w50" />
             </div>
 
-            <form className="flex column">
-               <h1 className="w title">{t('common.registerLabel')}</h1>
+            <form className=" form-container flex column myAuto">
+               <h1 className="w fsXXL">{t('common.registerLabel')}</h1>
                <FormInput placeholder={t("common.name")} info="name" callback={handleChange("name")} />
                <FormInput placeholder={t("common.surname")} info="surname" callback={handleChange("surname")} />
                <FormInput placeholder={t("common.email")} info="email" callback={handleChange("email")} />
                <FormInput placeholder={t("common.password")} info="password" type="password" callback={handleChange("password")} />
                <FormInput placeholder={t("common.passwordConfirm")} info="confirmPassword" type="password" callback={handleChange("confirmPassword")} />
                <div className="terms-container">
-                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="bottom right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
+                  <CheckboxInput name="terms" callback={handleCheckbox("terms")} className="vaM right-margin" /><span className="w">{t('fe.screens.registration.acceptTerms')}</span>
                </div>
-               <div className="flex center column">
-                  <FormButton className="btn-primary" label={t("common.registerLabel")} callback={handleSubmit} />
+               <div className="flex jcCenter aiCenter column">
+                  <FormButton className="btn-primary m0 bNone br2" label={t("common.registerLabel")} callback={handleSubmit} />
                   <span className="w">{t('common.or')}</span>
-                  <UiButton className="btn-secondary button-link" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
+                  <UiButton className="btn-secondary button-link bNone bgNone" label={t("common.loginLabel")} callback={handleNavigation(routes.LOGIN)} />
                </div>
             </form>
 

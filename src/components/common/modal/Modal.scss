@@ -1,0 +1,41 @@
+@import '../../../assets/variables/globalVariables.scss';
+
+.prevent-scrolling {
+   display: none;
+}
+
+.modal {
+   position: fixed;
+   inset: 0;
+   /* inset sets all 4 values (top right bottom left) much like how we set padding, margin etc., */
+   background-color: $black_primary;
+   transition: all 0.3s ease-in-out;
+   z-index: 999;
+   min-height: 100vh;
+   overflow: auto;
+}
+
+.modal input[type="submit"] {
+   width: auto;
+}
+
+.modal input[type="submit"]:not(.disabled) {
+   cursor: pointer;
+}
+
+.modal-content {
+   color: $white_primary;
+   position: relative;
+   padding: 10vw;
+   padding-top: 8vh;
+}
+
+.close-btn {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+}
+
+.close-btn:hover {
+   cursor: pointer;
+}

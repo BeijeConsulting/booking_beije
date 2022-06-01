@@ -17,7 +17,7 @@ const eventBus = {
     onRemoveEventListener(event, callback = null) {  // method for remove the eventListener, aka DOM
         document.removeEventListener(event, callback)
     }
-    
+
 }
 
 export {

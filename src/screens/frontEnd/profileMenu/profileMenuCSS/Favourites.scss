@@ -1,0 +1,41 @@
+@import "../../../../assets/variables/globalVariables.scss";
+
+.favourites-page {
+   min-height: 100vh;
+   color: $white_primary;
+   background-color: $black_primary;
+   padding: 5vh 5vw;
+
+   h1 {
+      color: $white_primary;
+      margin: 2rem 0 1rem;
+   }
+
+   .button_go_back {
+      margin: 0;
+   }
+}
+
+@media (min-width:481px) {
+   .favourites-page {
+      padding: 5vh 5vw;
+   }
+}
+
+@media (min-width: 576px){
+   .favourites-page {
+      padding: 5vh 10vw;
+   }
+}
+
+@media (min-width: 768px) {
+   .favourites-page {
+      padding: 5vh 15vw;
+   }
+}
+
+@media (min-width: 992px) {
+   .favourites-page {
+      padding: 5vh 20vw;
+   }
+}

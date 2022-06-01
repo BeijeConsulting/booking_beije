@@ -1,0 +1,25 @@
+@import "../../../../../../assets/variables/globalVariables.scss";
+
+
+.logout_button{
+    border: 2px white solid;
+    background-color: $black_primary;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.5rem;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.becomeHost {
+    background-color: $primary;
+    padding: 0.5rem;
+    width: 30%;
+    color: $white_primary;
+    border-radius: 2rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}

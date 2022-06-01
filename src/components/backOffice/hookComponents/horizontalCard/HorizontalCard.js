@@ -2,13 +2,9 @@ import { React } from "react";
 import PropTypes from "prop-types";
 
 //STYLE
-import "./HorizontalCard.less"
+import "./HorizontalCard.scss"
 
 const HorizontalCard = (props) => {
-
-    // IGNORE THIS
-    // needed for generalIteration -> wrapperMap function 
-    // const { img, title, text, href } = props.item;
 
     const {
         callback,
@@ -18,7 +14,8 @@ const HorizontalCard = (props) => {
         subtitle,
         text,
         upperRightContent,
-        footerContent
+        footerContent,
+        footerContentLeft,
     } = props
 
     const handleCardClick = (e) => {
@@ -29,46 +26,72 @@ const HorizontalCard = (props) => {
     }
 
     return (
-        <div className={"h_card_container"} onClick={handleCardClick}>
+        <div className={"h_card_container"} >
             {/* Card image */}
-            <img className={"card_img"} src={imageSrc} alt={imageAlt} />
+            {imageSrc &&
+                <a onClick={handleCardClick} >
+                    <img className={"card_img"} src={imageSrc} alt={imageAlt} />
+                </a>
+            }
 
             {/* Card body */}
             <div className={"card_body"}>
                 <div className={"card_main"}>
+
+                    {/* left part of card body, contains title, subtitle and texts */}
                     <div className={"left_col"}>
                         <h5 className={"card_title"}>
-                            {title}
+                            <a onClick={handleCardClick} >
+                                {title}
+                            </a>
                         </h5>
-                        {subtitle &&
 
+                        {subtitle &&
                             <p className="card_subtitle">{subtitle}</p>
                         }
 
-                        {/* text overflows in mobile viewport. It should be truncated in CSS. Needs to be fixed!!*/}
-                        <p className="card_text">
+                        <div className="card_text">
                             {text}
-                        </p>
+                        </div>
                     </div>
 
                     {/* Upper right corner (typically used for action buttons or badge-like icons) */}
                     {upperRightContent &&
 
-                        <div className={"right_col"}>
+                        <aside className={"right_col"}>
                             {upperRightContent}
-                        </div>
+                        </aside>
                     }
                 </div>
 
-                {/* Card Footer, typically contains primary/secondary buttons */}
-                {footerContent &&
 
-                    <div className={"card_footer"}>
+                {/* Card Footer, typically contains primary/secondary buttons */}
+                {
+                    (footerContentLeft && footerContent) &&
+                    <div className={"card_footer_right_and_left"}>
+                        <div className={"left_col"}>
+                            {footerContentLeft}
+                        </div>
+                        <div className={"right_col"}>
+                            {footerContent}
+                        </div>
+                    </div>
+                }
+
+                {
+                    (!footerContentLeft && footerContent) &&
+                    < div className={"card_footer_right"}>
                         {footerContent}
                     </div>
                 }
             </div>
+
+
+
+
+
         </div>
+
     )
 }
 
@@ -81,10 +104,17 @@ HorizontalCard.propTypes = {
     imageSrc: PropTypes.string,
     imageAlt: PropTypes.string,
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
-    text: PropTypes.string,
+    subtitle: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
+    text: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     callback: PropTypes.func,
     upperRightContent: PropTypes.any,
+    footerContentLeft: PropTypes.any,
     footerContent: PropTypes.any,
 
 }

@@ -1,18 +1,18 @@
 import React from 'react'
-import './ReviewCard.less';
+import './ReviewCard.scss';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
+import userImg from '../../../../assets/images/LoggedUser.png'
 
-const { t } = useTranslation();
-
-function ReviewCard() {
+function ReviewCard(props) {
 
     return (
         <div className='review_card_container0'>
             <div className='user_info'>
-                <img src=""></img>
+                <img src={userImg}alt="img"></img>
                 <h3>{props.username}</h3>
             </div>
+            <span>{`${props.rating}/5`}</span>
             <h2>{props.userTitle}</h2>
             <p>{props.reviewDescription}</p>
         </div>
@@ -23,12 +23,12 @@ function ReviewCard() {
 ReviewCard.defaultProps = {
     username: t("fe.components.review.username"),
     title: t("fe.components.review.title"),
-    description: t("fe.components.review.description")
+    description: t("common.description"),
+    rating: 3
 }
 
-PropertyCards.propTypes = {
+ReviewCard.propTypes = {
     username: PropTypes.string,
-    title: PropTypes.string,
 }
 
 export default ReviewCard;

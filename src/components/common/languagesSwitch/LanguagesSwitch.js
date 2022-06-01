@@ -2,15 +2,14 @@ import React from 'react';
 
 
 // Localization
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 import i18n from '../../../i18n';
 
 //Style
+import './LanguagesSwitch.scss'
 
 
 function LanguagesSwitch() {
-
-    const { t } = useTranslation();
 
     const languagesArray = [
         {
@@ -36,7 +35,7 @@ function LanguagesSwitch() {
 
     return (
         <>
-            <select onChange={setLanguage} value={i18n.resolvedLanguage}>
+            <select className="select_language" onChange={setLanguage} value={i18n.resolvedLanguage}>
                 {languagesArray.map(renderLanguagesOptions)}
             </select>
         </>

@@ -7,14 +7,12 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 // routes 
 import { routes } from "../../../../routes/routes";
-import './Footer.less';
+import './Footer.scss';
+import '../../../../assets/variables/_common.scss';
 
 import Button from '../../funcComponents/ui/buttons/uiButtons/UiButton'
 
 import LanguagesSwitch from '../../../common/languagesSwitch/LanguagesSwitch'
-
-//da cancellare quando implementato duck user
-let permission = 'guest';
 
 function Footer(props) {
     const { t } = useTranslation();
@@ -33,28 +31,27 @@ function Footer(props) {
     const goTo = (params) => () => {
         vector(routes[params])
     }
+    const goToRegistration = () =>{
+        vector(`/${routes.DASHBOARD}/${routes.HOST_REGISTRATION}`)
+    }
     return (
         <footer>
-            <div className="container_links_footer">
+            <div className="container_links_footer flex jcSpaceB">
                 <ul>
                     {props.link.map(mapLinks)}
                 </ul>
                 {
-                    permission === 'guest' &&
+                    props.userDuck?.user?.auth?.length < 2 &&
                     <div>
-                        <Button className="becomeHost" callback={goTo('DASHBOARD')} label={t('fe.screens.guestAccount.becomeAHost')}></Button>
+                        <Button className="becomeHost bNone fwB cursor" callback={goToRegistration} label={t('common.becomeAHost')}></Button>
                     </div>
                 }
-                {/* {
-                props.userDuck.user.permission[0] === 'guest' &&
-                <button onClick={goTo('HOME')}>{t('fe.screens.guestAccount.becomeAHost')}</button>
-                } */}
             </div>
 
             <LanguagesSwitch />
 
-            <div className='disclaimer_container_footer'>
-                <span className='first'>&copy;BeijeBnb, Inc.</span><span className="cursorOnLink" onClick={goTo('DISCLAIMER')}>{t('common.termsConditions')}</span>
+            <div className='disclaimer_container_footer fsI'>
+                <span className='mR1 fsXS'>&copy;BeijeBnb, Inc.</span><span className="cursor fsXS" onClick={goTo('DISCLAIMER')}>{t('common.termsConditions')}</span>
             </div>
 
 
@@ -65,7 +62,6 @@ function Footer(props) {
 }
 
 const mapStateToProps = (state) => ({
-    tokenDuck: state.tokenDuck,
-    // userDuck : state.userDuck
+    userDuck : state.userDuck
 })
 export default connect(mapStateToProps)(Footer);

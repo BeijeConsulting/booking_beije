@@ -1,0 +1,11 @@
+@import "../../../assets/variables/globalVariables.scss";
+
+.disclaimer_container{
+    color: $white_primary;
+    margin-top: 2rem;
+    // font-size: x-small;
+    span{
+        // font-style: italic;
+        color:$lightgray
+    }
+}

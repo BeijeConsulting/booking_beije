@@ -1,0 +1,92 @@
+@import "../../../assets/variables/globalVariables.scss";
+.search_container{
+   background-color: $black_primary;
+   height: 70vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-image: url(../../../assets/images/homeImg.png);
+   background-position-y: 40%;
+   background-size: cover;
+}
+.container_home{
+   background-color: $black_primary;
+}
+.home {
+   padding: 2rem 4rem;
+   background-color: $black_primary;
+   h3{
+      font-size: 1.4rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: $white_primary;
+   }
+   .travel_talk{
+      // background-image: url(https://i.ytimg.com/vi/69NY0fqd5Q0/maxresdefault.jpg);
+      background-image: url(../../../assets/images/travel.jpg);
+      cursor: pointer;
+      background-size: cover;
+      height: 50vh;
+      border-radius: 1rem;
+      margin-bottom: 3rem;
+      background-position: center;
+   }
+   .suggested-container {
+      cursor: pointer;
+      position: relative;
+      background-image: url(../../../assets/images/most.png);
+      background-repeat: no-repeat;
+      height: 50vh;
+      border-radius: 1rem;
+      margin-bottom: 3rem;
+      background-size: cover;
+      background-position: center;
+      .title_suggested {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         color: $white_primary;
+         text-shadow: 1px 1px 4px $black_primary;
+         margin-top: 0;
+         margin-bottom: 0;
+         font-size: 2rem;
+         text-align: center;
+      }
+
+   }
+
+   // img {
+   //    // object-fit: cover;
+   //    margin: 0 auto;
+   //    width: 80vw;
+   //    height: 60vw;
+   //    border-radius: 15%;
+   // }
+}
+
+@media all and (max-width:480px){
+   .search_container{
+      background-color: $black_primary;
+      height:auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: none;
+      background-position-y: none;
+      background-size: none;
+   }
+   .home{
+      padding: 2rem 1rem;
+      .travel_talk{
+         border-radius: 0;
+      }
+      .suggested-container{
+         background-image: url(https://fullsuitcase.com/wp-content/uploads/2016/10/Best-family-travel-destinations-by-travel-bloggers.jpg);
+         border-radius: 0;
+         .title_suggested {
+            font-size: 1.5rem;
+         }
+      }
+   }
+}

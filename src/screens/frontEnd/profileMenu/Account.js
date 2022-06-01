@@ -1,165 +1,225 @@
-import React, { useEffect, useState } from "react";
-//icon
-import { t } from "i18next";
-import { Helmet } from "react-helmet";
+import React, { useState, useEffect, useRef } from "react";
+
+// api
+import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
+
+// components
+import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
+import GoBackButton from "../../../components/backOffice/hookComponents/goBackButton/GoBackButton";
+
+// assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
-import { checkPassword, checkMail } from '../../../utils/validationForm/validation'
-import { editProfileModifyPutApi } from '../../../services/api/user/userApi'
-import { getLocalStorage } from "../../../utils/localStorage/localStorage";
-import { connect } from "react-redux";
-//css
-import './profileMenuCSS/Account.less'
-import FormInput from "../../../components/frontEnd/funcComponents/ui/input/formInput/FormInput";
 
-let uName
-let uSurname
-let mail
-let psw
+// modules
+import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
+import { connect } from "react-redux";
+import { routes } from '../../../routes/routes'
+
+// utils
+import { checkPassword, checkMail } from '../../../utils/validationForm/validation'
+import { getLocalStorage } from "../../../utils/localStorage/localStorage";
+
+// style
+import './profileMenuCSS/Account.scss'
+import '../../../assets/variables/_common.scss'
+
+let userEdit = {
+   name: null,
+   surname: null,
+   email: null,
+   password: null
+}
 
 const Account = (props) => {
 
-  const [state, setState] = useState({
-    id:null,
-    name: null,
-    surname: null,
-    email: null,
-    password: null,
-    user: []
-  });
+   const { t } = useTranslation();
+   const vector = useNavigate()
+   const imgRef = useRef()
+   const [state, setState] = useState({
+      userInfo: {
+         name: null,
+         surname: null,
+         email: null
+      },
+      imgChanged: false,
+      passwordConfirmed: false,
+      windowWidth: window.innerWidth
+   });
 
-
-  let objToValue = {
-    id:1,
-    name: "paolo",
-    surname: "Pascucci",
-    email: "pp@gmail.com",
-    password: "password"
-  }
-  /* useEffect(() => {
-    objToValue =  props.userDuck;*/
-  // editProfileModifyPutApi(state.id, getLocalStorage("token"))
-  // .then(res=>{
-  //   setState({
-  //     ...state,
-  //     user:res?.data
-  //   })
-  // })
-
-  /*}, []) */
-
-
-  const editProfile = () => {
-    // console.log("cambiate credenziali");
-    let credentialToChange = [1,"name", "surname", "email", "password"];
-
-    for (let index = 0; index < 5; index++) {
-
-      if (state[credentialToChange[index]] !== null || '') {
-        objToValue[credentialToChange[index]] = state[credentialToChange[index]]
+   useEffect(() => {
+      let userFromDuck = {
+         name: props.userDuck?.user?.utente?.name,
+         surname: props.userDuck?.user?.utente?.surname,
+         email: props.userDuck?.user?.utente?.email
       }
-    }
-    console.log(objToValue);
-    objToValue.name = uName
-    objToValue.surname = uSurname
-    objToValue.email = mail
-    objToValue.password = psw
-  }
+      userEdit.name = props.userDuck?.user?.utente?.name;
+      userEdit.surname = props.userDuck?.user?.utente?.surname;
+      userEdit.email = props.userDuck?.user?.utente?.email
+      setState({
+         ...state,
+         userInfo: userFromDuck
+      })
 
-  const accName = (e) => {
-    console.log("e", e);
-    uName = e.target.value
-    
-  }
-  const accSurname = (e) => {
-    console.log("e", e);
-    uSurname = e.target.value
-    
-  }
-  
-  const Controllmail = (e) => {
-    mail = e.target.value
-    checkMail(mail)
-    console.log(checkMail(mail), mail);
-  }
 
-  const checkpass1 = (e) => {
-    psw = e.target.value
-    checkPassword(psw)
-    console.log(checkPassword(psw), psw);
+   }, [props.userDuck?.user])
+   useEffect(() => {
+      window.addEventListener('resize', handleResize)
+      return () => { window.removeEventListener('resize', handleResize) }
+   })
 
-  }
+   function handleResize() {
+      setState({
+         ...state,
+         windowWidth: window.innerWidth
+      })
+   }
 
-  const checkpass2 = (e) => {
-    console.log(e.target.value);
-    if (e.target.value !== psw)
-      console.log("error");
-    else {
-      console.log("va bene");
-    }
-  }
+   const editProfile = () => {
+      if (!state.passwordConfirmed) {
+         return alert(t('toasts.formErrorConfirmPassword'))
+      }
 
-  return (
-    <div className="Account_container">
-      <Helmet>
-        <title>{t("common.account")}</title>
-      </Helmet>
+      // chiamata api 
+      editProfileModifyPutApi(userEdit, getLocalStorage("token")).then((res) => {
+         vector(routes.LAYOUT)
+      })
+   }
 
-      <div className="header_container">
-        <h1>Ciao, {objToValue.name}!</h1>
-        <div>
-          <button className="acc_logout">logout</button>
-        </div>
+   // function to change name input
+   const accName = (e) => {
+      userEdit.name = e
+   }
+   // function to change surname input
+   const accSurname = (e) => {
+      userEdit.surname = e
+   }
+
+   // function to control mail and set mail 
+   const Controllmail = (e) => {
+      if (checkMail(e)) {
+         userEdit.email = e;
+      }
+   }
+
+   // function to check password and set it 
+   const checkpass1 = (e) => {
+      if (checkPassword(e)) {
+         userEdit.password = e
+      }
+   }
+
+   // function to check password confirm is the same to psw 
+   const checkpass2 = (e) => {
+      if (e !== userEdit.password) {
+         setState({
+            ...state,
+            passwordConfirmed: false
+         })
+      }
+      else {
+         setState({
+            ...state,
+            passwordConfirmed: true
+         })
+      }
+   }
+
+
+   // function to set imgChanged to true 
+   const selectImage = () => {
+      setState({
+         ...state,
+         imgChanged: true
+      })
+   }
+
+   return (
+      <div className="bg_account">
+         <div className="Account_container flex column jcSpaceB">
+            <Helmet>
+               <title>{t("common.account")}</title>
+            </Helmet>
+            {
+               state.windowWidth < 991 &&
+               <div><GoBackButton cssCustom="back-button" /></div>
+            }
+            {/* greating */}
+            <div className="header_container flex jcSpaceB mx1">
+               <h1>{t('fe.screens.account.hiUsername', {name: state.userInfo?.name})}</h1>
+            </div>
+
+            <div className="edit flex jcSpaceA">
+
+               <div>
+                  {/* input file  */}
+                  <label className="penIcon bNone br50">
+                     <FontAwesomeIcon className="pencil_icon" icon={faPencil} />
+                     <input
+                        ref={imgRef}
+                        onChange={selectImage}
+                        className="edit_image"
+                        accept="image/png, image/gif, image/jpeg"
+                        type="file">
+                     </input>
+                  </label>
+
+                  {//if fileimg is selected
+                     state.imgChanged &&
+                     <div className="path_img">{imgRef.current.value}</div>
+                  }
+
+               </div>
+
+               {/* button to edit profile !!  */}
+               <div className="update_cont flex aiCenter jcCenter">
+                  <button className="update cursor fwB bNone" onClick={editProfile} type="submit">{t("common.update")}</button>
+               </div>
+            </div>
+
+            <form>
+               {/* name */}
+               <div className="i flex column my2">
+                  <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("fe.screens.account.changeName")}</label>
+                  <FormInput className="br2" type="text" placeholder={state.userInfo?.name} info="name" callback={accName} />
+               </div>
+
+               {/* surname  */}
+               <div className="i flex column my2">
+                  <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("fe.screens.account.changeSurname")}</label>
+                  <FormInput className="br2" type="text" info="surname" placeholder={state.userInfo?.surname} callback={accSurname} />
+               </div>
+
+               {/* email  */}
+               <div className="i flex column my2">
+                  <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("fe.screens.account.changeEmail")}</label>
+                  <FormInput className="br2" type="email" info="email" placeholder={state.userInfo?.email} callback={Controllmail} />
+               </div>
+
+               {/* password  */}
+               <div className="i flex column my2">
+                  <label className="L"><FontAwesomeIcon icon={faPencil} /> {t("fe.screens.account.changePassword")}</label>
+                  <FormInput className="br2" type="password" callback={checkpass1} info="password" placeholder={t("fe.screens.account.typePassword")} />
+               </div>
+
+               {/* password confirm  */}
+               <div className="i flex column my2">
+                  <label className="L" ><FontAwesomeIcon icon={faPencil} /> {t("common.passwordConfirm")}</label>
+                  <FormInput className="br2" type="password" callback={checkpass2} info="confPassword" placeholder={t("fe.screens.account.typePassword")} />
+               </div>
+
+            </form>
+         </div>
       </div>
 
-      <div className="edit">
-        <div>
-          <button className="penIcon"><FontAwesomeIcon icon={faPencil} /></button>
-        </div>
-        <div className="update_cont">
-          <button className="update" onClick={editProfile} type="submit">Update</button>
-        </div>
-      </div>
 
-      <form>
-        <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Name</label>
-          {/*<input type="text" onChange={accName} id="name" />*/}
-          <FormInput type="text" placeholder={objToValue.name} info="name" callback={accName} />
-        </div>
-
-        <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Surname</label>
-          {/* <input type="text" id="surname" /> */}
-          <FormInput type="text" info="surname" placeholder={objToValue.surname} callback={accSurname} />
-        </div>
-
-        <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Mail</label>
-          {/* <input type="email" id="email" /> */}
-          <FormInput type="email" info="email" placeholder={objToValue.email} callback={Controllmail} />
-        </div>
-
-        <div className="i">
-          <label className="L"><FontAwesomeIcon icon={faPencil} /> Change Password</label>
-          <input type="password" id="password" onChange={checkpass1} />
-          {/* <FormInput type="password" onChange={checkpass1} info="password" /> */}
-        </div>
-
-        <div className="i">
-          <label className="L" ><FontAwesomeIcon icon={faPencil} /> Confirm Password</label>
-          <input type="password" id="confirmPassword" onChange={checkpass2} />
-          {/* <FormInput type="password" onChange={checkpass2}  info="confPassword"/> */}
-        </div>
-
-      </form>
-    </div>
-
-  );
+   );
 };
 
 const mapStateToProps = (state) => ({
-  userDuck: state.userDuck
+   userDuck: state.userDuck
 })
 
 export default connect(mapStateToProps)(Account)

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom'
 
-//PROP-TYPES
-import PropTypes from 'prop-types';
 
 //FONT-AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
+
+
+import { messageChatHostGetApi, messageSendForGuestApi } from '../../../../../services/api/messaggi/messaggiApi'
+import { getLocalStorage } from '../../../../../utils/localStorage/localStorage';
 
 //ANT-DESIGN
 import {
@@ -17,7 +20,7 @@ import {
 } from 'antd';
 
 //STYLE
-import './MessageChat.less';
+import './MessageChat.scss';
 
 //COMPONENTS
 import MessageCard from '../../../../../components/backOffice/hookComponents/messageCard/MessageCard';
@@ -25,58 +28,65 @@ import GoBackButton from '../../../../../components/backOffice/hookComponents/go
 
 const MessageChat = (props) => {
 
-    const { t } = useTranslation()
+    const [state, setState] = useState({
+        listOfMessageChat: [],
+        inputValue: ''
+    })
 
-    //TEST--------
-    const messageUser = [
-        {
-            id: 1,
-            name: 'Test',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/05/30',
-            time: '13:00'
-        },
-        {
-            id: 2,
-            name: 'You',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 3,
-            name: 'Test',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 4,
-            name: 'You',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        },
-        {
-            id: 5,
-            name: 'Test',
-            body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, harum iste ab earum tempora, recusandae debitis mollitia eos ea esse eaque culpa quis dicta? Laudantium voluptas velit officia rerum eos.',
-            date: '2022/06/03',
-            time: '9:00'
-        }
-    ]
+    const { t } = useTranslation()
+    const location = useLocation()
+
+    //FETCHING MESSAGE CHAT
+    const fetchingChatHost = async () => {
+        const HEADER = getLocalStorage("token")
+        let responseChat = await messageChatHostGetApi(location.state.idChat, HEADER)
+        setState({
+            ...state,
+            listOfMessageChat: responseChat?.data
+        })
+    }
+
+    //POST MESSAGE FROM HOST TO GUEST
+    const sendMessageGestApi = async () => {
+        const HEADER = getLocalStorage("token")
+        let messageSendForGuest = await messageSendForGuestApi({
+            annuncioId: location.state.idChat,
+            contenuto: state.inputValue,
+            receiverId: location.state.receverId
+        }, HEADER)
+
+        let responseChat = await messageChatHostGetApi(location.state.idChat, HEADER)
+        setState({
+            ...state,
+            listOfMessageChat: responseChat?.data,
+            inputValue: ''
+        })
+    }
+
+    //VALUE INPUT
+    const handlerInputValue = (event) => {
+        setState({
+            ...state,
+            inputValue: event.target.value
+        })
+    }
 
     const renderSingleMessage = (item, key) => {
         return (
             <MessageCard
                 key={key}
-                nameMessage={item.name}
-                bodyMessage={item.body}
-                dateMessage={item.date}
-                timeMessage={item.time}
+                classControll={localStorage.getItem('idUtente') == item.sender.id ? 'single_message_card_you' : 'single_message_card_response'}
+                nameMessage={localStorage.getItem('idUtente') == item.sender.id ? 'Tu' : item.sender.name}
+                bodyMessage={item.text}
+                dateMessage={item.date_and_time}
             />
         )
     }
+
+    useEffect(() => {
+        fetchingChatHost()
+    }, [])
+
 
 
     return (
@@ -84,19 +94,15 @@ const MessageChat = (props) => {
             <GoBackButton />
             <h1 className="title_messages_page">{t('common.messages')}</h1>
             <div className="message_overflow">
-                {!props.dataUser ? messageUser.map(renderSingleMessage) : <p>{t("common.noMessages")}</p>}
+                {state.listOfMessageChat.length > 0 ? state.listOfMessageChat.map(renderSingleMessage) : <p>{t("common.noMessages")}</p>}
+
             </div>
-            <Input className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} />
-            <Button className="button_send_message" type="primary">{t('common.send')}</Button>
+            <Input value={state.inputValue} className="send_message_input" size="large" placeholder={t('common.writeMessage')} prefix={<FontAwesomeIcon className="icon_input_message" icon={faPaperPlane} />} onChange={handlerInputValue} />
+            <Button className="button_send_message" type="primary" onClick={sendMessageGestApi}>{t('common.send')}</Button>
 
         </div>
     )
 }
-
-
-MessageChat.propTypes = {
-    dataUser: PropTypes.array
-};
 
 
 export default MessageChat;

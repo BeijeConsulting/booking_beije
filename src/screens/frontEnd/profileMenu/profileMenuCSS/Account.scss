@@ -1,0 +1,97 @@
+@import "../../../../assets/variables/globalVariables.scss";
+.bg_account{
+    background-color: $black_primary;
+    padding: 10rem 0;
+    .Account_container {
+        background-color: $secondary_lighter;
+        width: 60%;
+        margin: 0 auto;
+        padding: 3rem 6rem;
+        border-radius: 1.5rem;
+    }
+}
+
+.back-button{
+    color: $black_primary;
+}
+.header_container {
+    .acc_logout {
+        background-color: $black_primary;
+        color: $black_primary;
+    }
+
+    h1 {
+        color: $black_primary;
+    }
+
+    button {
+        margin: 10px 0 0 0;
+    }
+}
+
+.edit {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .update_cont {
+        .update {
+            background-color: $primary;
+            padding: .7rem 4rem;
+            color: $white_primary;
+            border-radius: .5rem;
+            font-size: 1.2rem;
+        }
+    }
+    .path_img{
+        color: $black_primary;
+        margin-top: 1rem;
+    }
+    .penIcon {
+        font-size: 20px;
+        background-color:$secondary_dark;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        height: 7rem;
+        width: 7rem;
+        vertical-align: middle;
+        line-height: 7rem;
+        margin-bottom: 1.5rem;
+        .pencil_icon{
+            color: white;
+        }
+        .edit_image{
+            display: none;
+        }
+        
+    }
+
+}
+
+.L {
+    color:$black_primary ;
+    margin-bottom: .7rem;
+}
+
+
+
+.i {
+    input {
+        border: 1px solid black;
+        padding: 1rem .5rem;
+    }
+}
+@media all and (max-width:991px){
+    .bg_account{
+        padding: 0;
+        .Account_container {
+            width: 100%;
+            padding: 3rem;
+            border-radius: 0;
+        }
+    }
+}
+@media all and (max-width:480px){
+    .bg_account{
+        padding: 0 0 15vh 0;
+    }
+}

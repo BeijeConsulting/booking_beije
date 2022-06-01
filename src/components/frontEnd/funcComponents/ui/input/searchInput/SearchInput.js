@@ -1,10 +1,7 @@
 import React from 'react'
-import './SearchInput.less'
+import './SearchInput.scss'
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 
-
-const { t } = useTranslation();
 
 function SearchInput(props) {
     return (
@@ -15,9 +12,8 @@ function SearchInput(props) {
     )
 }
 
-
 SearchInput.defaultProps = {
-    placeholder: t('fe.components.input.insert'),
+   placeholder: 'Insert...'
 }
 
 SearchInput.propTypes = {
@@ -25,6 +21,5 @@ SearchInput.propTypes = {
     className: PropTypes.string,
     placeholder: PropTypes.string,
 }
-
 
 export default SearchInput;
