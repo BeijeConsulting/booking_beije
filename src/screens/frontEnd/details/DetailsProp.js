@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 // module
 import { Helmet } from "react-helmet";
+// img
+import defaultImg from '../../../assets/images/homeplaceholder.png'
 
 
+import { Carousel } from 'antd';
 
 //rrd
 import { useNavigate } from "react-router-dom";
@@ -79,7 +82,6 @@ const DetailsProp = () => {
         serviceList: services?.data,
         isLoading: false
       })
-      // console.log(state)
       checkOutArray = Array.apply(null, Array(rooms?.data.length));
     })()
   }, [])
@@ -103,7 +105,6 @@ const DetailsProp = () => {
   }
 
   const addToCheckOut = (temp_id, isSelected, obj) => {
-    console.log('qua', obj)
     isSelected ? checkOutArray[temp_id] = {
       ...obj,
       price: obj.price * obj.count,
@@ -144,7 +145,6 @@ const DetailsProp = () => {
   const generateRooms = (item, key) => {
 
     const isStored = state.storageRooms?.checkOut.find(room => room.id === key);
-    console.log('item', item)
     return <Rooms
       callbackGoToRoom={goToSelectedRoom(item?.annuncio.id)}
       stored={isStored}
@@ -168,6 +168,11 @@ const DetailsProp = () => {
       reviewDescription={item.text}
       rating={item.score}
     />
+  }
+  const renderImage = (img, key) => {
+    return (
+      <img key={key} className="img_carousel" src={img?.urlImage} alt="img_struttura" />
+    )
   }
 
   return (
@@ -195,28 +200,42 @@ const DetailsProp = () => {
           </Modal>
 
           {state.property === null || '' ? <p>{t("fe.screens.propertyDetails.noProperty")}</p> : <div className="property_container">
-            <div className="container_img">
-              {
-                state.windowWidth < 992 &&
+            {
+              state.windowWidth < 992 &&
+              <>
                 <div className="back-button goBackProperty"><GoBackButton /></div>
-              }
-              <img className="structure_img_property first" src="https://p.bookcdn.com/data/Photos/380x250/8758/875870/875870843/Beb-Ampelea-photos-Exterior-Beb-Ampelea.JPEG" alt="img_struttura" />
-              {
-                state.windowWidth > 992 &&
-                <div className="img_container_secondary">
-                  <img className="structure_img_property" src="https://fgvacanze.it/custom/fgvacanze/writable/htmlbox/benvenuti-ad-alghero.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://www.viaggi-lowcost.info/wp-content/uploads/2019/08/alghero-spiaggia-maria-pia-e1565758733195.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://www.bellavitainpuglia.it/Content/images/partner/5362/1920x0/f5c258c50945adabce83389016eb479e.jpg" alt="img_struttura" />
-                  <img className="structure_img_property" src="https://img.grouponcdn.com/deal/2Dz2zfRjTMjiQUUJgBdB8RswgYX3/2D-2048x1229/v1/t600x362.jpg" alt="img_struttura" />
-                </div>
-              }
+                {state?.property?.images?.length > 0 ?
+                  <>
+                    <Carousel autoplay>
+                      {state?.property?.images.map(renderImage)}
+                    </Carousel>
+                  </> :
+                  <img className="img_carousel" src={defaultImg} alt="img_struttura" />
+                }
+              </>
 
-            </div>
+            }
+            {
+              state.windowWidth > 992 &&
+              <>
+                {state?.property?.images?.length > 0 ?
+                  <>
+                    <Carousel autoplay>
+                      {state?.property?.images.map(renderImage)}
+                    </Carousel>
+                  </> :
+                  <img className="img_carousel" src={defaultImg} alt="img_struttura" />
+                }
+
+              </>
+
+
+            }
             <div className="padding_page">
               <div className="property_core_info_container">
                 <div className="location_review">
                   <h2>{state.property?.nome_struttura}</h2>
-                  <span>{`${state.property?.indirizzo.citta}, Via ${state.property?.indirizzo.via}`}</span>
+                  <span>{`${state.property?.indirizzo?.citta}, Via ${state.property?.indirizzo?.via}`}</span>
                   <p><FontAwesomeIcon icon={faStar} />{state.property?.media_recensioni}<span>{`(${state.property?.numero_recensioni})`}</span></p>
                 </div>
                 <div className="description_container">
@@ -241,8 +260,8 @@ const DetailsProp = () => {
                 </div>
               </div>
               <div className="map_container">
-                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]} zoom={13} scrollWheelZoom={true}>
-                  <Marker position={[state.property.indirizzo.latitudine, state.property.indirizzo.longitudine]}></Marker>
+                <MapContainer style={{ width: '100%', height: '200px' }} center={[state.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]} zoom={13} scrollWheelZoom={true}>
+                  <Marker position={[state?.property?.indirizzo?.latitudine, state.property?.indirizzo?.longitudine]}></Marker>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
