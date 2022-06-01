@@ -37,26 +37,27 @@ let arrayBkp = [];
 const Bookings = (props) => {
    const { t } = useTranslation();
 
-  const [state, setState] = useState({
-    PeriodListStructure: [],
-    isOpen: false,
-    windowWidth: window.innerWidth,
-    page: 1
-  })
+   const [state, setState] = useState({
+      PeriodListStructure: [],
+      isOpen: false,
+      windowWidth: window.innerWidth,
+      page: 1
+   })
 
    const dateCurrent = CurrentDate();
 
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => { window.removeEventListener('resize', handleResize) }
-  })
+   useEffect(() => {
+      window.addEventListener('resize', handleResize)
+      return () => { window.removeEventListener('resize', handleResize) }
+   })
 
    useEffect(() => {
       periodiPrenotatiUserGetApi(
          props.tokenDuck?.token === null ? getLocalStorage('token') :
             decryptItem(props.tokenDuck?.token)).then(res => {
-               arrayBkp = res.data.length > 0 ? res.data : [];
+               arrayBkp = res.data.list.length > 0 ? res.data.list : [];
+
                setState({
                   ...state,
                   PeriodListStructure: arrayBkp.filter((item) => {
@@ -67,15 +68,15 @@ const Bookings = (props) => {
    }, [])
 
 
-  function handleResize() {
-    setState({
-      ...state,
-      windowWidth: window.innerWidth
-    })
-  }
+   function handleResize() {
+      setState({
+         ...state,
+         windowWidth: window.innerWidth
+      })
+   }
 
-  const buttonType =
-    [t("fe.screens.bookings.history"), t("common.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
+   const buttonType =
+      [t("fe.screens.bookings.history"), t("common.pending"), t("fe.screens.bookings.planned"), t("fe.screens.bookings.refused")];
 
    const popolateSwitchButton = ((item, key) => {
       return <UiButton key={key} label={item} callback={filterByButtonType} />
@@ -115,42 +116,42 @@ const Bookings = (props) => {
       })
    }
 
-  const handleClose = () => {
-    setState({
-      ...state,
-      isOpen: !state.isOpen
-    })
-  }
+   const handleClose = () => {
+      setState({
+         ...state,
+         isOpen: !state.isOpen
+      })
+   }
 
-  const onPageChange = (page) => {
-    setState({
-       ...state,
-       page: page
-    })
- }
- 
-  const openModal = () => {
-    console.log("click");
-  }
-  return (
-    <div className="bookings-page flex column">
-      <Helmet>
-        <title>{t("common.bookings")}</title>
-      </Helmet>
-      {
-        state.windowWidth < 991 &&
-        <div className="back-button"><GoBackButton /></div>
-      }
-      {/* <button onClick={() => setState({
+   const onPageChange = (page) => {
+      setState({
+         ...state,
+         page: page
+      })
+   }
+
+   const openModal = () => {
+      console.log("click");
+   }
+   return (
+      <div className="bookings-page flex column">
+         <Helmet>
+            <title>{t("common.bookings")}</title>
+         </Helmet>
+         {
+            state.windowWidth < 991 &&
+            <div className="back-button"><GoBackButton /></div>
+         }
+         {/* <button onClick={() => setState({
         ...state,
         isOpen: !state.isOpen
       })}>bau</button> */}
-      <Modal
-        callback={handleClose}
-        isOpen={state.isOpen}>
-        <Rate /> {/* prop for property id */}
-      </Modal>
-      <h1 className="bookings-title">{t("common.bookings")}</h1>
+         <Modal
+            callback={handleClose}
+            isOpen={state.isOpen}>
+            <Rate /> {/* prop for property id */}
+         </Modal>
+         <h1 className="bookings-title">{t("common.bookings")}</h1>
 
          <div className="button_switch_container display">
             {buttonType.map(popolateSwitchButton)}
