@@ -43,9 +43,9 @@ import PendingAnnounceList from "./screens/backOffice/admin/announce/pendingAnno
 
 
 // NOTFOUND 
-import NotFound from "./screens/notFound/NotFound";
+import NotFound from "./screens/frontEnd/notFound/NotFound";
 
-import { getLocalStorage, setLocalStorage } from './utils/localStorage/localStorage'
+import { getLocalStorage } from './utils/localStorage/localStorage'
 
 // COMMON 
 import Disclaimer from "./screens/frontEnd/disclaimer/Disclaimer";
@@ -60,6 +60,9 @@ import useLogout from "./hooks/useLogout";
 
 
 function Routing(props) {
+
+    // setLocalStorage('token', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiSE9TVCJdLCJpYXQiOjE2NTM5OTMzODAsImV4cCI6MTY1Mzk5Njk4MH0.ji3GyhU076tVmPKCFxG8nrH9v1NWjb995T11IVhSdzY")
+    // setLocalStorage('refreshToken', "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLmdub2dub0BnbWFpbC5jb20iLCJleHAiOjE2NTQwMzE3OTB9.G1M-QvYWhkDGbQdoNYgtOz7hvflIkR0Iw9BieNB3brI")
 
     const { logoutExpire } = useLogout();
 
@@ -93,7 +96,7 @@ function Routing(props) {
             <Route path={routes.REGISTRATION} element={<Registration />} />
             <Route path={routes.LOGIN} element={<Login />} />
 
-            {/* all the routes for frontEnd goes inside this one */}
+            {/* all the routes for frontEnd go inside this one */}
 
             <Route path={routes.LAYOUT} element={<Layout />} >
                 {/* NICE TO HAVE: <Route path:"travelTalks" element <TravelTalks> /> */}
@@ -157,65 +160,25 @@ function Routing(props) {
             </Route>
 
 
-            {/* all the routes for backOffice goes inside this one */}
+            {/* all the routes for backOffice go inside this one */}
             <Route path={routes.DASHBOARD} element={<LayoutBackOffice />} >
-                <Route path={routes.HOST_ACCOUNT} element={
-                    <ProtectedRouteHost>
-                        <HostAccount />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.MESSAGE_LIST} element={
-                    <ProtectedRouteHost>
-                        <MessageList />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.MESSAGE_CHAT} element={
-                    <ProtectedRouteHost>
-                        <MessageChat />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={
-                    <ProtectedRouteHost>
-                        <StructureOperation />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.STRUCTURE_LIST} element={
-                    <ProtectedRouteHost>
-                        <StructureList />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.RESERVATION_CALENDAR} element={
-                    <ProtectedRouteHost>
-                        <ReservationCalendar />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={`${routes.STRUCTURE_DETAILS}`} element={
-                    <ProtectedRouteHost>
-                        <StructureDetails />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.HOST_REGISTRATION} element={
-                    <ProtectedRouteHost>
-                        <HostRegistration />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.RESERVATION_LIST} element={
-                    <ProtectedRouteHost>
-                        <ReservationList />
-                    </ProtectedRouteHost>
-                } />
-                <Route path={routes.ANNOUNCE_OPERATION} element={
-                    <ProtectedRouteHost>
-                        <AnnounceOperations />
-                    </ProtectedRouteHost>
-                } />
+                <Route path={routes.HOST_ACCOUNT} element={<HostAccount />} />
+                <Route path={routes.MESSAGE_LIST} element={<MessageList />} />
+                <Route path={routes.MESSAGE_CHAT} element={<MessageChat />} />
+                <Route path={`${routes.STRUCTURE_OPERATION}/:id`} element={<StructureOperation />} />
+                <Route path={routes.STRUCTURE_LIST} element={<StructureList />} />
+                <Route path={routes.RESERVATION_CALENDAR} element={<ReservationCalendar />} />
+                <Route path={routes.STRUCTURE_DETAILS} element={<StructureDetails />} />
+                <Route path={routes.HOST_REGISTRATION} element={<HostRegistration />} />
+                <Route path={routes.RESERVATION_LIST} element={<ReservationList />} />
+                <Route path={`${routes.ANNOUNCE_OPERATION}/:id`} element={<AnnounceOperations />} />
 
                 {/* //to add in admin route */}
                 <Route path={routes.PENDING_STRUCTURE_LIST} element={<PendingStructuresList />} />
                 <Route path={routes.PENDING_ANNOUNCE_LIST} element={<PendingAnnounceList />} />
             </Route>
 
-            {/* !!! we needd to change the element passed to path "*" */}
+            {/* !!! we need to change the element passed to path "*" */}
             <Route path="*" element={< NotFound />} />
 
         </Routes>

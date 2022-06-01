@@ -19,13 +19,14 @@ import { useState, useEffect } from "react";
 import "./AnnounceOperations.scss";
 import { useTranslation } from "react-i18next";
 import { annuncioDetailGetApi } from "../../../../../services/api/annuncio/annuncioApi";
+import { useLocation } from "react-router-dom";
 
 const AnnounceOperation = () => {
   const [state, setState] = useState(null);
 
   const { t } = useTranslation();
 
-  //const location = useLocation();
+  const location = useLocation();
 
   const announceValue = {
     id: null,
@@ -39,17 +40,17 @@ const AnnounceOperation = () => {
 
   useEffect(() => {
     const getAnnounce = async () => {
-      const res = await annuncioDetailGetApi(83);
-      const announce = await res.data;
-      setState({announceValue});
-    };
+      const announce = await annuncioDetailGetApi(location.state.idStructure);
+      console.log(announce);
 
-    // if (location.state.idStructure !== null) {
-    //   // futura chiamata a API
-    getAnnounce();
-    // } else {
-    setState(null);
-    // }
+
+    };
+    if (location.state.idStructure !== null) {
+      //   // futura chiamata a API
+      getAnnounce();
+    } else {
+      setState(null);
+    }
   }, []);
 
   const { TextArea } = Input;
@@ -74,41 +75,39 @@ const AnnounceOperation = () => {
     });
   };
 
-    return (
-        <>
-            {state.data === null ? (
-                <Spin />
-            ) : (
-                <Form
-                    name="basic"
-                    layout="vertical"
-                    initialValues={{
-                        announce: state.data.announce,
-                        rules: state.data.rules,
-                        service: state.data.service,
-                        description: state.data.description,
-                        priceForNight: state.data.priceForNight,
-                        beds: state.data.beds,
-                        rooms: state.data.rooms,
-                    }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label={t("common.photos")}
-                        name="photos"
-                        rules={[
-                            {
-                                required: true,
-                                message: t(
-                                    "toasts.operationPhotos"
-                                ),
-                            },
-                        ]}
-                    >
-                        <UploadFoto addFotoStructure={onChangeFoto} />
-                    </Form.Item>
+  return (
+    <>
+      {state === null ? (
+        <Spin />
+      ) : (
+        <Form
+          name="basic"
+          layout="vertical"
+          initialValues={{
+            announce: state.data.announce,
+            rules: state.data.rules,
+            service: state.data.service,
+            description: state.data.description,
+            priceForNight: state.data.priceForNight,
+            beds: state.data.beds,
+            rooms: state.data.rooms,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label={t("common.photos")}
+            name="photos"
+            rules={[
+              {
+                required: true,
+                message: t("toasts.operationPhotos"),
+              },
+            ]}
+          >
+            <UploadFoto addFotoStructure={onChangeFoto} />
+          </Form.Item>
 
           <Row gutter={32}>
             <Col>
@@ -142,44 +141,53 @@ const AnnounceOperation = () => {
             </Col>
           </Row>
 
-                    <Row>
-                        <Form.Item
-                            label={t("common.services")}
-                            name="services"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "toasts.operationServices",
-                                },
-                            ]}
-                        >
-                            <Checkbox.Group name="service">
-                                <Row>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-3">servizio-3</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-4">servizio-4</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-5">servizio-5</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-6">servizio-6</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-7">servizio-7</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-8">servizio-8</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value="servizio-9">servizio-9</Checkbox>
-                                    </Col>
-                                </Row>
-                            </Checkbox.Group>
-                        </Form.Item>
-                    </Row>
+          <Row>
+            <Form.Item
+              label={t("common.services")}
+              name="services"
+              rules={[
+                {
+                  required: true,
+                  message: "toasts.operationServices",
+                },
+              ]}
+            >
+              <Checkbox.Group name="service">
+                <Row>
+                  <Col span={8}>
+                    <Checkbox value="servizio-3">{t('fe.components.service.wifi')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-4">{t('fe.components.service.kitchen')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-5">{t('fe.components.service.airConditioning')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-6">{t('fe.components.service.parking')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-7">{t('fe.components.service.washingMachine')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-8">{t('fe.components.service.iron')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.workingPlace')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.swimmingPool')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.allowedSmoking')}</Checkbox>
+                  </Col>
+                  <Col span={8}>
+                    <Checkbox value="servizio-9">{t('fe.components.service.alarm')}</Checkbox>
+                  </Col>
+                </Row>
+              </Checkbox.Group>
+            </Form.Item>
+          </Row>
 
           <Row>
             <Form.Item
@@ -228,7 +236,7 @@ const AnnounceOperation = () => {
               <InputNumber
                 min={1}
                 max={50}
-                // defaultValue={50}
+              // defaultValue={50}
               />
             </Form.Item>
           </Row>
@@ -239,7 +247,7 @@ const AnnounceOperation = () => {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Submit
+              {t('common.submit')}
             </Button>
           </Form.Item>
         </Form>
