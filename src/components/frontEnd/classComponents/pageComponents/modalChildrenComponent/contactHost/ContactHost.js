@@ -1,6 +1,9 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+// default img 
+import homeplaceholder from '../../../../../../assets/images/homeplaceholder.png'
+
 // modules
 import withRouting from '../../../../../../withRouting/withRouting';
 import { withTranslation } from 'react-i18next';
@@ -30,23 +33,11 @@ class ContactHost extends Component {
       super(props)
       this.state = {
          isDisable: true,
-         property: {
-            host: {
-               id: 0,
-               user: {
-                  name: "hotel bau",
-                  url_image: "string"
-               }
-            },
-            id: 0,
-            nome_struttura: "string",
-            numero_recensioni: 0,
-         }
       }
       this.contactForm = {
          annuncioId: props.router.params.id,
          contenuto: "",
-         receiverId: props.hostId
+         receiverId: props.propertyRooms?.struttura?.host?.user?.id
       }
    }
    openNotification = (toastDescription, name, additionalCss = '') => {
@@ -74,7 +65,7 @@ class ContactHost extends Component {
          this.props.router.navigate(routes.LAYOUT);
 
       }
-      catch (error){
+      catch (error) {
          this.openNotification(this.props.t('toasts.messageNotSent'))
       }
 
@@ -96,12 +87,16 @@ class ContactHost extends Component {
       return (
          <>
             <section className='contact-host-container'>
-               <div>
-                  <img className='rateImg' src={this.state.property.host.user.url_image} />
-                  <h4>{this.state.property.host.user.name}</h4>
+               <div className="info_receiver">
+                  {
+                     this.props.propertyRoomsImage?.length > 0 ?
+                        <img className='rateImg' src={this.props.propertyRoomsImage[0]?.urlImage} /> :
+                        <img className='rateImg' src={homeplaceholder} />
+                  }
+                  <h4>{this.props?.propertyRooms?.descrizione}</h4>
                </div>
 
-               <form className='flex column jcCenter'>
+               <form>
                   <TextArea
                      callback={this.handleChange("contenuto")}
                   />
