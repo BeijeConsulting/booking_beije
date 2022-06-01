@@ -13,7 +13,7 @@ const LinksFooterHost = [
     },
     {
         route: 'DASHBOARD',
-        nameLink: 'inserire traduzione'
+        nameLink: 'common.dashboard'
     }
 
 ]

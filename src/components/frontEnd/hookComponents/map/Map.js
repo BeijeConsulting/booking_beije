@@ -12,12 +12,12 @@ import { connect } from 'react-redux';
 import PropertyCards from '../../funcComponents/propertyCards/PropertyCards';
 
 //CSS
-import '../../../../assets/variables/_common.scss'
+import '../../../../assets/variables/_common.scss';
+import './Map.scss';
 
 
 
 function Map(props) {
-    console.log('list', props.propertyList)
     const [selectPosition, setSelectPosition] = useState(props.positionDuck?.coordinates)
 
     const navigate = useNavigate();
@@ -32,16 +32,19 @@ function Map(props) {
 
     function markers(marker, key) {
         console.log(marker);
-        return <Marker key={key} position={[marker?.indirizzo.latitudine, marker?.indirizzo.longitudine]}>
+        return <Marker 
+        key={key} 
+        position={[marker?.indirizzo.latitudine, marker?.indirizzo.longitudine]}
+        >
             <Popup >
                 <div onClick={
-                    goToProperty(marker?.id)
+                    goToProperty(parseInt(marker?.struttura?.id))
                 }>
+                    <img className='imagePopup' src={marker?.url_image} />
                     <PropertyCards
-                        title={marker?.nome_struttura}
+                        title={marker?.struttura?.nome}
                     >
                         <h4>{`${marker?.indirizzo.citta} ${marker?.indirizzo.via} `}</h4>
-                        <h5>{`${marker?.checkin} ${marker?.checkout}`}</h5>
                         <p>{marker?.descrizione}</p>
                     </PropertyCards>
                 </div>

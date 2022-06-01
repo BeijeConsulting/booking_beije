@@ -1,10 +1,23 @@
 import React from "react";
-import './Registration.scss';
+
+// components
 import RegistrationForm from '../../../components/frontEnd/hookComponents/registrationForm/RegistrationForm';
+
+// modules
+import { Helmet } from "react-helmet";
+import { t } from "i18next";
+
+// style
+import './Registration.scss';
 
 const Registration = () => {
    return (
-      <RegistrationForm />
+      <>
+         <Helmet>
+            <title>{t("common.registration")}</title>
+         </Helmet>
+         <RegistrationForm />
+      </>
    );
 };
 

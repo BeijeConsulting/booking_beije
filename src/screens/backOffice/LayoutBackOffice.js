@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useTranslation } from "react-i18next";
+
 // import { eventBus } from "../../eventBus/eventBus";
 
 import "./LayoutBackOffice.scss";
@@ -31,6 +33,8 @@ const { useBreakpoint } = Grid;
 
 const LayoutBackOffice = () => {
   const [state, setState] = useState({ collapsed: false });
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -74,9 +78,9 @@ const LayoutBackOffice = () => {
 
   const goTo =
     (path = "", obj = null) =>
-    () => {
-      return navigate(`${path}`);
-    };
+      () => {
+        return navigate(`${path}`);
+      };
 
   return (
     <Layout>
@@ -124,9 +128,8 @@ const LayoutBackOffice = () => {
             >
               <FontAwesomeIcon icon={faUser} className={"trigger"} inverse />
               <span
-                className={`logoutButton ${
-                  !state.collapsed ? "visible" : "hide"
-                }`}
+                className={`logoutButton ${!state.collapsed ? "visible" : "hide"
+                  }`}
               >
                 Account settings
               </span>
@@ -146,7 +149,7 @@ const LayoutBackOffice = () => {
           {location.pathname.replaceAll("/", "") !== "dashboard" ? (
             <>
               <div onClick={goTo(`/${routes.DASHBOARD}`)} style={{ cursor: "pointer" }}>
-                <FontAwesomeIcon icon={faEllipsis} /> back to dashboard
+                <FontAwesomeIcon icon={faEllipsis} /> {t('common.backToDashboard')}
               </div>
               <Outlet />
             </>
