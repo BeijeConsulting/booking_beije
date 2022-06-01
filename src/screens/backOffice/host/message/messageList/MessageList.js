@@ -78,9 +78,9 @@ const MessageList = (props) => {
         return <HorizontalCard
             key={`${key}-${randomKey()}`}
             imageSrc={message?.lastMessaggio?.sender.url_image}
-            altText={`${key}_${message.title}`}
-            title={message?.lastMessaggio?.insertion?.struttura.nome_struttura}
-            text={`Guest: ${message?.lastMessaggio?.sender.name}`}
+            altText={`${key}_${message?.title}`}
+            title={message?.lastMessaggio?.insertion?.struttura?.nome_struttura}
+            text={`Guest: ${message?.lastMessaggio?.sender?.name}`}
             callback={goToChat(message?.annuncioId, message?.lastMessaggio?.receiver.id)}
         />
     }

@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { routes } from "../../../../../routes/routes"
 
 //API
-import { editProfileModifyPutApi, myProfilesGetApi } from '../../../../../services/api/user/userApi'
+import { editProfileModifyPutApi } from '../../../../../services/api/user/userApi'
 import { hostRequestPost } from '../../../../../services/api/host/hostApi';
 import { decryptItem } from '../../../../../utils/crypto/crypto';
 
