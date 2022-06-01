@@ -66,9 +66,9 @@ class SearchForm extends Component {
       return finalString;
    }
 
-   handleCallback = (response) => () => {
+   handleCallback = (response) => {
       this.props.data(response);
-      this.props.callback();
+      this.props.callback(response);
    }
 
    handleSubmit = (e) => {
