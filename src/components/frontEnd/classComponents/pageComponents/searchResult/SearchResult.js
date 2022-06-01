@@ -26,6 +26,8 @@ import SearchForm from '../modalChildrenComponent/searchForm/SearchForm';
 // utils
 import { paginationArrowsRender } from "../../../../../utils/pagination/pagination";
 import withRouting from '../../../../../withRouting/withRouting';
+import { getStructuresBySearch } from '../../../../../services/api/search/searchApi';
+import { objToString } from '../../../../../utils/Utils';
 // import { annuncioOnStrutturaGetApi } from '../../../../../services/api/annuncio/annuncioApi';
 
 
@@ -44,44 +46,17 @@ class SearchResult extends Component {
          page: 1,
          isLoading: true
       }
-      this.searchFilters = {};
+      this.searchFilters = null;
+      this.searchParams = null;
    }
 
    componentDidMount() {
-      // this.getapi();
       if (this.props.router.location.state !== null) {
          this.setState({
             property: this.props.router.location.state.property,
             isLoading: false
          })
       }
-   }
-
-   componentDidUpdate(prevProps, prevState) {
-
-      // if(this.props.router.location.state.property !== prevState.property){
-      // this.setState({
-      //    property: this.props.router.location.state.property
-      // })
-      // console.log('property',this.props.router.location.state.property);
-      // console.log('state',this.state);
-      // console.log('prev',prevState);
-      // }
-
-      // if (this.state.page !== prevState.page) {
-      //    showAllStruttureGetApi(5, this.state.page).then(res =>
-      //       this.setState({
-      //          property: res?.data?.list
-      //       }))
-
-      // }
-   }
-
-   async getapi() {
-      // const response = await showAllStruttureGetApi(100, this.state.page);
-      // this.setState({
-      //    property: response.data.list
-      // })
    }
 
    handleButton = (params) => (data) => {
@@ -95,7 +70,7 @@ class SearchResult extends Component {
 
       switch (params) {
          case "isFilter":
-            newState.isFilter = !newState.isFilter
+            newState.isFilter = !newState.isFilter;
             break;
          case "isMap":
             newState.isMap = !newState.isMap
@@ -125,9 +100,13 @@ class SearchResult extends Component {
       })
    }
 
-   getFilters = (data) => {
+   getFilters = async (data) => {
+      const RESPONSE = await getStructuresBySearch(this.searchParams.concat('&', objToString(data)));
+      this.setState({
+         property: RESPONSE?.data
+      })
+
       this.searchFilters = data;
-      console.log(this.searchFilters);
    }
 
    handleData = (data) => {
@@ -135,6 +114,11 @@ class SearchResult extends Component {
          property: data,
          isLoading: false
       })
+   }
+
+   handleParams = (data) => {
+      console.log(data);
+      this.searchParams = data;
    }
 
    render() {
@@ -155,7 +139,9 @@ class SearchResult extends Component {
                   this.state.isFilter && <Filter
                      classNameCustom={'filters-modal'}
                      closeModal={this.handleButton('isFilter')}
-                     callback={this.getFilters} />
+                     callback={this.getFilters}
+                  // data={}
+                  />
                }
                {
                   this.state.isMap && <Map
@@ -167,6 +153,7 @@ class SearchResult extends Component {
                   this.state.isSearch && <SearchForm
                      callback={this.handleButton("isSearch")}
                      data={this.handleData}
+                     handleParams={this.handleParams}
                   />
                }
             </Modal>
@@ -176,6 +163,7 @@ class SearchResult extends Component {
             <section className='ButtonContainer flex column jcCenter aiCenter'>
                <SearchButton
                   callback={this.handleButton("isSearch")}
+                  handleParams={this.handleParams}
                   handleData={this.handleData}
                />
                <div className='w100 flex jcSpaceB'>
@@ -197,7 +185,7 @@ class SearchResult extends Component {
                this.state.isLoading &&
                <Spin className='w100' />
             }
-            
+
             {
                (!this.state.isLoading && this.state.property.length === 0) &&
                <h4 className='taC w mT1'>{this.props.t('common.noApartments')}</h4>
@@ -222,7 +210,6 @@ class SearchResult extends Component {
    }
 
    mapping = (item, key) => {
-      console.log(item);
       return (
          <Card
             key={`${key}- ${item?.indirizzo?.citta}`}
