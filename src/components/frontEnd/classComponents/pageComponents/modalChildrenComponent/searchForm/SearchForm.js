@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { t } from "i18next";
 
+// utils
+import { objToString } from '../../../../../../utils/Utils';
+
 // api
 import { getStructuresBySearch } from '../../../../../../services/api/search/searchApi';
 
@@ -24,24 +27,11 @@ import './SearchForm.scss';
 import '../../../../../../assets/variables/_common.scss';
 import InputGuest from '../../../../hookComponents/ui/inputGuest/InputGuest';
 
-const arrTest = [
-   { id: 1, name: 'Hotel XO', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'accettato' },
-   { id: 2, name: 'Hotel Hilton', room: 'luxury', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'rifiutato' },
-   { id: 3, name: 'Villa Firenze', from: '2022-05-13', to: '2022-05-17', acceptedStatus: 'attesa' },
-   { id: 4, name: 'Bella vita', room: 'luxury', from: '2022-05-20', to: '2022-05-23', acceptedStatus: 'rifiutato' },
-   { id: 5, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
-   { id: 6, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
-   { id: 7, name: 'Hello world', room: 'luxury', from: '2022-05-25', to: '2022-05-30', acceptedStatus: 'attesa' },
-]
-
-
 class SearchForm extends Component {
 
    constructor(props) {
       super(props)
-      this.state = {
-         dataInfo: arrTest,
-      }
+
       this.bookingData = {
          checkin: null,
          checkout: null,
@@ -53,18 +43,6 @@ class SearchForm extends Component {
       this.dateFormat = 'YYYY-MM-DD';
    }
 
-   objToString(obj) {
-
-      let string = "";
-      for (const item in obj) {
-         if (obj[item] !== null) {
-
-            string += `${item}=${obj[item]}&`
-         }
-      }
-      let finalString = string.slice(0, -1);
-      return finalString;
-   }
 
    handleCallback = (response) => {
       this.props.data(response);
@@ -83,7 +61,7 @@ class SearchForm extends Component {
 
       if (this.props.router.location.pathname === '/home') {
 
-         getStructuresBySearch(this.objToString(this.bookingData)).then(res => {
+         getStructuresBySearch(objToString(this.bookingData)).then(res => {
             this.props.router.navigate(routes.SEARCH, {
                state: {
                   property: res?.data
@@ -96,7 +74,9 @@ class SearchForm extends Component {
 
 
       if (this.props.router.location.pathname === '/search') {
-         getStructuresBySearch(this.objToString(this.bookingData)).then(res => this.handleCallback(res?.data));
+         getStructuresBySearch(objToString(this.bookingData)).then(res => this.handleCallback(res?.data));
+         this.props.handleParams(objToString(this.bookingData));
+
       }
    }
 
